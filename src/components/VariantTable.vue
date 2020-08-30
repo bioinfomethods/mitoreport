@@ -1,6 +1,6 @@
 <template>
-  <div class="ma-3">
-    <h1>Variants</h1>
+<v-card>
+    <v-card-text>
       <v-data-table
         :headers="headers"
         :items="variants"
@@ -9,12 +9,13 @@
         multi-sort
        dense 
       >
-      <template v-slot:item.Allele='{ item }'>
+      <template v-slot:item.alt='{ item }'>
           <td>{{item.ref}}/{{item.alt}}</td>
       </template>      
 
       </v-data-table>
-  </div>
+    </v-card-text>
+  </v-card>
 </template>
 
 <script>
