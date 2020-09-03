@@ -5,8 +5,8 @@
 Clone submodules:
 
 ```
-git submodule init --recursive
-git submodule update --recursive
+git submodule init 
+git submodule update --init --recursive
 ```
 
 Build submodules:
