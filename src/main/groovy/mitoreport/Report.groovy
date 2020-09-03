@@ -6,6 +6,15 @@ import groovy.json.JsonOutput
 import groovy.json.JsonSlurper
 import groovy.util.logging.Log
 
+/**
+ * Creates a comprehensive report for interpreting Mitochondrial variants based on:
+ * 
+ * - output VCF from Broad Mitochondrial analysis pipeline
+ * - annotations from VEP
+ * - coverage plot computed by DeletionPlot tool
+ * 
+ * @author Simon Sadedin
+ */
 @Log
 class Report extends ToolBase {
     
@@ -53,6 +62,15 @@ class Report extends ToolBase {
                 dosages: v.getDosages()
             ]
             
+            Map vep = v.maxVep
+            
+            Map vepInfo = [
+                symbol: vep.SYMBOL,
+                consequence: vep.Consequence,
+                hgvsp: URLDecoder.decode(vep.HGVSp?.replaceAll('^.*:',''), "UTF-8"),
+                hgvsc: vep.HGVSc?.replaceAll('^.*:','')
+            ]
+            
             Map variantAnnotations = 
                 annotations.getOrDefault(compactAllele, [:]).collectEntries { key, value ->
                     def result = value
@@ -61,9 +79,11 @@ class Report extends ToolBase {
 
                     [key, result]
                 }
-
+                
+            Map infoField = v.parsedInfo
+            infoField.remove('ANN')
             
-            results << variantInfo + variantAnnotations + v.parsedInfo + [genotypes: v.parsedGenotypes]
+            results << variantInfo + vepInfo + variantAnnotations + infoField + [genotypes: v.parsedGenotypes]
         }
         
         String json = JsonOutput.prettyPrint(JsonOutput.toJson(results))

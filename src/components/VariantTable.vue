@@ -13,6 +13,11 @@
           <td>{{item.ref}}/{{item.alt}}</td>
       </template>      
 
+      <template v-slot:item.hgvsc='{ item }'>
+          <td v-html='item.hgvsc'></td>
+      </template>      
+
+
       </v-data-table>
     </v-card-text>
   </v-card>
@@ -30,12 +35,16 @@ export default {
           { text: 'Position', align: 'start', value: 'pos', },
           { text: 'Allele', value: 'alt' },
           { text: 'Type', value: 'type' },
+          { text: 'Gene', value: 'symbol' },
+          { text: 'Consequence', value: 'consequence' },
           { text: 'VAF', value: 'genotypes[0].AF' },
           { text: 'Depth', value: 'genotypes[0].DP' },
           { text: 'Disease', value: 'Disease' },
           { text: 'MitoMap', value: 'Status_MitoMap' },
           { text: 'Curated Refs', value: 'Curated References' },
-          { text: 'Effect', value: 'Effect' },
+          { text: 'HGVS.p', value: 'hgvsp'},
+          { text: 'HGVS.c', value: 'hgvsc'},
+          // { text: 'Effect', value: 'Effect' },
           { text: 'HGVS', value: 'HGVS' },
     ]
   }}
