@@ -14,6 +14,7 @@ Build submodules:
 ```
 cd gngs
 ./gradlew jar
+```
 
 ## Run DeletionPlot to Create Deletion Data
 
