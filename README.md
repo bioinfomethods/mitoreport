@@ -5,7 +5,7 @@
 Clone submodules:
 
 ```
-git submodule init 
+git submodule init
 git submodule update --init --recursive
 ```
 
@@ -31,11 +31,14 @@ groovy -cp gngs/build/libs/groovy-ngs-utils.jar src/main/groovy/Report.groovy \
            -vcf sample1.vcf \
            -del deletion.json \
            -ann resources/mtDNAanalysis_annotations_20170501.csv \
-           -o public 
+           -o public
 ```
 
 
 ## Install / Build Front End
+
+In ./ui path.
+
 ```
 npm install
 ```
