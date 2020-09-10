@@ -1,0 +1,33 @@
+plugins {
+  id "com.github.node-gradle.node" version "2.2.4"
+}
+
+description = "Mito Report UI"
+
+node {
+  version = '12.18.3'
+  yarnVersion = ''
+  npmVersion = ''
+}
+
+task serve(type: NpmTask) {
+  group = 'development'
+  description = 'Run the client app'
+  args = ['run', 'serve']
+}
+
+//task buildClient(type: NpmTask, dependsOn: ':generateVariants') {
+task buildClient(type: NpmTask) {
+  group = 'build'
+  description = 'Build UI'
+  args = ['run', 'build']
+}
+
+task testClient(type: NpmTask) {
+  group = 'build'
+  description = 'Run UI unit tests'
+  args = ['run', 'test:unit']
+}
+
+buildClient.dependsOn(['testClient'])
+buildClient.mustRunAfter(rootProject.generateVariants)

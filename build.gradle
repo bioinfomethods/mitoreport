@@ -1,0 +1,64 @@
+plugins {
+  id 'groovy'
+}
+
+ext {
+  sampleId = project.property('mito.sampleId')
+  assert sampleId != 'sampleIdNotSet', "mito.sampleId property must be set, set this using gradle -Pmito.sampleId= option"
+  resourcesPath = 'resources'
+}
+
+description = "Mito Report (${sampleId})"
+
+defaultTasks 'build'
+
+allprojects {
+  group = 'au.edu.mcri'
+}
+
+dependencies {
+  implementation "org.codehaus.groovy:groovy-all:$GROOVY_VERSION"
+  implementation files('gngs/build/libs/groovy-ngs-utils.jar')
+}
+
+task buildGngs(type: Exec) {
+  group = 'build'
+  workingDir './gngs'
+  commandLine './gradlew', 'jar'
+}
+
+task generateDeletionsPlot(type: JavaExec) {
+  group = 'build'
+  dependsOn 'buildGngs'
+  classpath = sourceSets.main.runtimeClasspath
+  main = 'gngs.tools.Toolbase9'
+  args = [
+    'DeletionPlot',
+    '-covo', 'build/cov.tsv',
+    '-region', 'chrM:200-16300',
+    '-sample', "$sampleId",
+    '-covplot', 'build/cov.png',
+    '-srplot', 'build/sr.png',
+    '-json', 'build/deletions.json',
+    "resources/${sampleId}.unshifted.bam",
+  ] +
+    new File('resources').listFiles()
+      .findAll { !it.name.contains(sampleId) && it.name.endsWith('.bam') }
+      .collect { it.absolutePath }
+}
+
+task generateVariants(type: JavaExec) {
+  group = 'build'
+  dependsOn 'generateDeletionsPlot'
+  classpath = sourceSets.main.runtimeClasspath
+  main = 'mitoreport.Report'
+  args = [
+    '-vcf', 'resources/15G002035.unshifted.contamination.filtering.intermediatefilter.norm.dedup.mito_vep.vcf.gz',
+    '-del', 'build/deletions.json',
+    '-ann', 'resources/mtDNAanalysis_annotations_20170501.csv',
+    '-o', 'build',
+  ]
+}
+
+test.dependsOn = ['ui:testClient']
+build.dependsOn = ['test', 'ui:buildClient', 'generateVariants']
