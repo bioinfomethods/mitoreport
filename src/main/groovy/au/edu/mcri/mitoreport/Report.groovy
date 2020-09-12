@@ -1,4 +1,4 @@
-package mitoreport
+package au.edu.mcri.mitoreport
 
 import gngs.*
 import graxxia.CSV

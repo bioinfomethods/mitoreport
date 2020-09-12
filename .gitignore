@@ -25,5 +25,10 @@ pnpm-debug.log*
 
 # Build
 build
-resources
+out
+mitoreport
+tmp
+logs
 .gradle
+src/main/resources/mitoreport/*
+!src/main/resources/mitoreport/README.md

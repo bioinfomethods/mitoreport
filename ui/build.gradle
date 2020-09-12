@@ -4,30 +4,35 @@ plugins {
 
 description = "Mito Report UI"
 
+defaultTasks 'runTestUnit', 'runLint', 'runBuild'
+
 node {
   version = '12.18.3'
-  yarnVersion = ''
-  npmVersion = ''
+  yarnVersion = '1.22.5'
+  npmVersion = '6.14.8'
+  download = true
 }
 
-task serve(type: NpmTask) {
+task runServe(type: NpmTask, dependsOn: 'npm_install') {
   group = 'development'
-  description = 'Run the client app'
+  description = 'Same as npm run serve'
   args = ['run', 'serve']
 }
 
-//task buildClient(type: NpmTask, dependsOn: ':generateVariants') {
-task buildClient(type: NpmTask) {
+task runBuild(type: NpmTask, dependsOn: 'npm_install') {
   group = 'build'
-  description = 'Build UI'
+  description = 'Same as npm run build'
   args = ['run', 'build']
 }
 
-task testClient(type: NpmTask) {
-  group = 'build'
-  description = 'Run UI unit tests'
+task runTestUnit(type: NpmTask, dependsOn: 'npm_install') {
+  group = 'verification'
+  description = 'Same as npm run test:unit'
   args = ['run', 'test:unit']
 }
 
-buildClient.dependsOn(['testClient'])
-buildClient.mustRunAfter(rootProject.generateVariants)
+task runLint(type: NpmTask, dependsOn: 'npm_install') {
+  group = 'verification'
+  description = 'Same as npm run lint'
+  args = ['run', 'lint']
+}

@@ -1,0 +1,6 @@
+applicationType: cli
+defaultPackage: au.edu.mcri.mitoreport
+testFramework: spock
+sourceLanguage: groovy
+buildTool: gradle
+features: [app-name, docker, file-watch, file-watch-osx, gradle, groovy, logback, picocli, picocli-groovy-application, picocli-spock, readme, shade, spock, yaml]

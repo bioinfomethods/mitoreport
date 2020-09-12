@@ -1,64 +1,105 @@
 plugins {
-  id 'groovy'
+  id "groovy"
+  id "com.github.johnrengelman.shadow" version "6.0.0"
+  id "application"
 }
 
-ext {
-  sampleId = project.property('mito.sampleId')
-  assert sampleId != 'sampleIdNotSet', "mito.sampleId property must be set, set this using gradle -Pmito.sampleId= option"
-  resourcesPath = 'resources'
+version "0.1"
+group "au.edu.mcri.mitoreport"
+defaultTasks 'test', 'build'
+
+repositories {
+  mavenCentral()
+  jcenter()
 }
 
-description = "Mito Report (${sampleId})"
-
-defaultTasks 'build'
-
-allprojects {
-  group = 'au.edu.mcri'
+configurations {
+  // for dependencies that are needed for development only
+  developmentOnly
 }
 
 dependencies {
-  implementation "org.codehaus.groovy:groovy-all:$GROOVY_VERSION"
+  compileOnly(platform("io.micronaut:micronaut-bom:$micronautVersion"))
+  compileOnly("io.micronaut:micronaut-inject-groovy")
+  compileOnly("info.picocli:picocli-codegen:4.2.0")
+  implementation(platform("io.micronaut:micronaut-bom:$micronautVersion"))
+  implementation("io.micronaut:micronaut-inject")
+  implementation("io.micronaut:micronaut-validation")
+  implementation("io.micronaut.groovy:micronaut-runtime-groovy")
+  implementation("info.picocli:picocli")
+  implementation("io.micronaut.picocli:micronaut-picocli")
+  developmentOnly("io.micronaut:micronaut-runtime-osx:$micronautVersion")
+  runtimeOnly("ch.qos.logback:logback-classic")
+  testImplementation(enforcedPlatform("io.micronaut:micronaut-bom:$micronautVersion"))
+  testImplementation("io.micronaut:micronaut-inject-groovy")
+  testImplementation("org.spockframework:spock-core") {
+    exclude group: "org.codehaus.groovy", module: "groovy-all"
+  }
+  testImplementation("io.micronaut.test:micronaut-test-spock")
+
   implementation files('gngs/build/libs/groovy-ngs-utils.jar')
+  implementation "org.codehaus.groovy:groovy-all:$groovyVersion"
+  implementation "commons-io:commons-io:$commonsIoVersion"
+}
+
+test.classpath += configurations.developmentOnly
+
+mainClassName = "au.edu.mcri.mitoreport.MitoReport"
+
+// use JUnit 5 platform
+test {
+  useJUnitPlatform()
+}
+
+java {
+  sourceCompatibility = JavaVersion.toVersion('1.8')
+  targetCompatibility = JavaVersion.toVersion('1.8')
+}
+
+tasks.withType(GroovyCompile) {
+  groovyOptions.forkOptions.jvmArgs.add('-Dgroovy.parameters=true')
+}
+
+shadowJar {
+  mergeServiceFiles()
+}
+
+tasks.withType(JavaExec) {
+  classpath += configurations.developmentOnly
+  jvmArgs('-XX:TieredStopAtLevel=1', '-Dcom.sun.management.jmxremote')
+  if (gradle.startParameter.continuous) {
+    systemProperties(
+      'micronaut.io.watch.restart': 'true',
+      'micronaut.io.watch.enabled': 'true',
+      "micronaut.io.watch.paths": "src/main"
+    )
+  }
+}
+
+String mitoOut = "${projectDir}/src/main/resources/mitoreport"
+task cleanMitoOut(type: Delete) {
+  delete mitoOut
+}
+
+task copyUiBuildToMitoOut(dependsOn: ['cleanMitoOut', ':ui:runBuild']) {
+  group = 'build'
+  description 'Copy UI build output into application resources'
+  doLast {
+    copy {
+      from "${project(':ui').projectDir}/dist"
+      into mitoOut
+    }
+  }
 }
 
 task buildGngs(type: Exec) {
   group = 'build'
+  description 'Build groovy-ngs-utils module dependency'
   workingDir './gngs'
   commandLine './gradlew', 'jar'
 }
 
-task generateDeletionsPlot(type: JavaExec) {
-  group = 'build'
-  dependsOn 'buildGngs'
-  classpath = sourceSets.main.runtimeClasspath
-  main = 'gngs.tools.Toolbase9'
-  args = [
-    'DeletionPlot',
-    '-covo', 'build/cov.tsv',
-    '-region', 'chrM:200-16300',
-    '-sample', "$sampleId",
-    '-covplot', 'build/cov.png',
-    '-srplot', 'build/sr.png',
-    '-json', 'build/deletions.json',
-    "resources/${sampleId}.unshifted.bam",
-  ] +
-    new File('resources').listFiles()
-      .findAll { !it.name.contains(sampleId) && it.name.endsWith('.bam') }
-      .collect { it.absolutePath }
-}
-
-task generateVariants(type: JavaExec) {
-  group = 'build'
-  dependsOn 'generateDeletionsPlot'
-  classpath = sourceSets.main.runtimeClasspath
-  main = 'mitoreport.Report'
-  args = [
-    '-vcf', 'resources/15G002035.unshifted.contamination.filtering.intermediatefilter.norm.dedup.mito_vep.vcf.gz',
-    '-del', 'build/deletions.json',
-    '-ann', 'resources/mtDNAanalysis_annotations_20170501.csv',
-    '-o', 'build',
-  ]
-}
-
-test.dependsOn = ['ui:testClient']
-build.dependsOn = ['test', 'ui:buildClient', 'generateVariants']
+test.dependsOn 'ui:runTestUnit'
+assemble.dependsOn = ['buildGngs', 'copyUiBuildToMitoOut']
+assemble.mustRunAfter 'test'
+build.dependsOn 'assemble'
