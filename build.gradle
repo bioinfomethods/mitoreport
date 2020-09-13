@@ -6,7 +6,7 @@ plugins {
 
 version "0.1"
 group "au.edu.mcri.mitoreport"
-defaultTasks 'test', 'build'
+defaultTasks 'build'
 
 repositories {
   mavenCentral()
@@ -99,7 +99,5 @@ task buildGngs(type: Exec) {
   commandLine './gradlew', 'jar'
 }
 
-test.dependsOn 'ui:runTestUnit'
-assemble.dependsOn = ['buildGngs', 'copyUiBuildToMitoOut']
-assemble.mustRunAfter 'test'
-build.dependsOn 'assemble'
+test.dependsOn += ['ui:runTestUnit']
+assemble.dependsOn += ['buildGngs', 'copyUiBuildToMitoOut']

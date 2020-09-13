@@ -32,3 +32,5 @@ logs
 .gradle
 src/main/resources/mitoreport/*
 !src/main/resources/mitoreport/README.md
+ui/public/deletions.js
+ui/public/variants.js
