@@ -36,3 +36,5 @@ task runLint(type: NpmTask, dependsOn: 'npm_install') {
   description = 'Same as npm run lint'
   args = ['run', 'lint']
 }
+
+runBuild.dependsOn 'runLint'

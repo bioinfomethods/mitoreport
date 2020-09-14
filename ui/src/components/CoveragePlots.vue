@@ -31,7 +31,7 @@ import '@/assets/css/nv.d3.min.css'
 export default {
   name: 'CoveragePlots',
   props: {},
-  mounted: function () {
+  mounted: function() {
     console.log('mounted')
 
     let covData = [
@@ -44,14 +44,16 @@ export default {
     var coverageChart = nv.models
       .stackedAreaChart()
       .margin({ right: 100 })
-      .x(function (d) {
+      .x(function(d) {
         return d.pos
       })
-      .y(function (d) {
+      .y(function(d) {
         return d.cov
       })
 
-    d3.select('#coveragePlot').datum(covData).call(coverageChart)
+    d3.select('#coveragePlot')
+      .datum(covData)
+      .call(coverageChart)
 
     let splitReadData = [
       {
@@ -63,14 +65,16 @@ export default {
     var splitReadChart = nv.models
       .multiBarChart()
       .margin({ right: 100 })
-      .x(function (d) {
+      .x(function(d) {
         return d.pos
       })
-      .y(function (d) {
+      .y(function(d) {
         return d.count
       })
 
-    d3.select('#splitReadPlot').datum(splitReadData).call(splitReadChart)
+    d3.select('#splitReadPlot')
+      .datum(splitReadData)
+      .call(splitReadChart)
   },
 
   computed: {
