@@ -1,29 +1,30 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
+import Variants from '@/views/Variants.vue'
+import Deletions from '@/views/Deletions.vue'
 
 Vue.use(VueRouter)
 
 const routes = [
   {
     path: '/',
-    name: 'Home',
-    component: Home,
+    redirect: { name: 'variants' },
   },
   {
     path: '/variants',
-    name: 'Variants',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () =>
-      import(
-        /* webpackChunkName: "variants" */ '../components/VariantTable.vue'
-      ),
+    name: 'variants',
+    component: Variants,
+  },
+  {
+    path: '/deletions',
+    name: 'deletions',
+    component: Deletions,
   },
 ]
 
 const router = new VueRouter({
+  mode: 'history',
+  base: process.env.BASE_URL,
   routes,
 })
 

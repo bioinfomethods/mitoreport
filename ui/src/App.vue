@@ -1,47 +1,39 @@
 <template>
-  <v-app>
+  <v-app mitoreport>
     <v-main>
-      <v-tabs v-model="tab" background-color="primary" dark>
-        <v-tab>Variants</v-tab>
-        <v-tab>Deletions</v-tab>
-        <v-spacer />
-        <div class="pt-3 pr-2">Mito Report for {{ sample }}</div>
-      </v-tabs>
+      <v-app-bar dense color="primary">
+        <v-toolbar-title>Mito Report for {{ sample }}</v-toolbar-title>
+      </v-app-bar>
+      <v-container fluid>
+        <v-row align="end" justify="center">
+          <v-col class="text-center pt-0">
+            <v-tabs>
+              <v-tab to="/variants">Variants</v-tab>
+              <v-tab to="/deletions">Deletions</v-tab>
+              <v-spacer />
+            </v-tabs>
+          </v-col>
+        </v-row>
 
-      <v-tabs-items v-model="tab">
-        <v-tab-item>
-          <VariantTable />
-        </v-tab-item>
-
-        <v-tab-item>
-          <CoveragePlots />
-        </v-tab-item>
-      </v-tabs-items>
+        <router-view> </router-view>
+      </v-container>
     </v-main>
   </v-app>
 </template>
 
 <script>
-import VariantTable from './components/VariantTable'
-import CoveragePlots from './components/CoveragePlots'
 export default {
   name: 'App',
 
-  components: {
-    VariantTable,
-    CoveragePlots,
-  },
-
   computed: {
     sample() {
-      return Object.keys(this.deletions)[0]
+      return this.deletions && Object.keys(this.deletions)[0]
     },
   },
 
   data: () => {
     return {
       deletions: window.deletions,
-      tab: null,
     }
   },
 }

@@ -1,16 +1,12 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png" />
-    <VariantTable />
-  </div>
+  <VariantTable />
 </template>
 
 <script>
-// @ is an alias to /src
 import VariantTable from '@/components/VariantTable.vue'
 
 export default {
-  name: 'Home',
+  name: 'variants',
   components: {
     VariantTable,
   },

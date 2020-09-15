@@ -1,10 +1,10 @@
 import { shallowMount } from '@vue/test-utils'
-import Home from '@/views/Home.vue'
 import VariantTable from '@/components/VariantTable.vue'
+import Variants from '@/views/Variants.vue'
 
-describe('Home.vue', () => {
+describe('Variants.vue', () => {
   it('renders VariantTable', () => {
-    const wrapper = shallowMount(Home)
+    const wrapper = shallowMount(Variants)
     const variantTable = wrapper.findComponent(VariantTable)
     expect(variantTable.exists()).toBe(true)
   })

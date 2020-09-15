@@ -1,24 +1,20 @@
 <template>
-  <v-card>
-    <v-card-text>
-      <v-data-table
-        :headers="headers"
-        :items="variants"
-        :items-per-page="20"
-        class="elevation-1"
-        multi-sort
-        dense
-      >
-        <template v-slot:item.alt="{ item }">
-          <td>{{ item.ref }}/{{ item.alt }}</td>
-        </template>
+  <v-data-table
+    :headers="headers"
+    :items="variants"
+    :items-per-page="20"
+    class="elevation-1"
+    multi-sort
+    dense
+  >
+    <template v-slot:item.alt="{ item }">
+      <td>{{ item.ref }}/{{ item.alt }}</td>
+    </template>
 
-        <template v-slot:item.hgvsc="{ item }">
-          <td v-html="item.hgvsc"></td>
-        </template>
-      </v-data-table>
-    </v-card-text>
-  </v-card>
+    <template v-slot:item.hgvsc="{ item }">
+      <td v-html="item.hgvsc"></td>
+    </template>
+  </v-data-table>
 </template>
 
 <script>
@@ -50,20 +46,4 @@ export default {
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-h3 {
-  margin: 40px 0 0;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
-}
-</style>
+<style scoped></style>
