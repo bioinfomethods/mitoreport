@@ -15,26 +15,26 @@ node {
 
 task runServe(type: NpmTask, dependsOn: 'npm_install') {
   group = 'development'
-  description = 'Same as npm run serve'
+  description = 'npm run serve'
   args = ['run', 'serve']
 }
 
 task runBuild(type: NpmTask, dependsOn: 'npm_install') {
   group = 'build'
-  description = 'Same as npm run build'
+  description = 'npm run build'
   args = ['run', 'build']
 }
 
 task runTestUnit(type: NpmTask, dependsOn: 'npm_install') {
   group = 'verification'
-  description = 'Same as npm run test:unit'
+  description = 'npm run test:unit'
   args = ['run', 'test:unit']
 }
 
 task runLint(type: NpmTask, dependsOn: 'npm_install') {
   group = 'verification'
-  description = 'Same as npm run lint'
+  description = 'npm run lint'
   args = ['run', 'lint']
 }
 
-runBuild.dependsOn 'runLint'
+runBuild.dependsOn = ['runLint', 'runTestUnit']

@@ -5,7 +5,7 @@
         <v-toolbar-title>Mito Report for {{ sample }}</v-toolbar-title>
       </v-app-bar>
       <v-container fluid>
-        <v-row align="end" justify="center">
+        <v-row align="center" justify="center">
           <v-col class="text-center pt-0">
             <v-tabs>
               <v-tab to="/variants">Variants</v-tab>
@@ -22,19 +22,17 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
   name: 'App',
 
-  computed: {
-    sample() {
-      return this.deletions && Object.keys(this.deletions)[0]
-    },
+  created() {
+    this.$store.dispatch('fetchData')
   },
 
-  data: () => {
-    return {
-      deletions: window.deletions,
-    }
+  computed: {
+    ...mapGetters(['sample']),
   },
 }
 </script>

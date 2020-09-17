@@ -27,67 +27,75 @@
 import nv from 'nvd3'
 import d3 from 'd3'
 import '@/assets/css/nv.d3.min.css'
+import { mapGetters, mapState } from 'vuex'
 
 export default {
   name: 'CoveragePlots',
   props: {},
+
   mounted: function() {
-    console.log('mounted')
-
-    let covData = [
-      {
-        key: this.sample,
-        values: this.deletions[this.sample].coverage,
-      },
-    ]
-
-    var coverageChart = nv.models
-      .stackedAreaChart()
-      .margin({ right: 100 })
-      .x(function(d) {
-        return d.pos
-      })
-      .y(function(d) {
-        return d.cov
-      })
-
-    d3.select('#coveragePlot')
-      .datum(covData)
-      .call(coverageChart)
-
-    let splitReadData = [
-      {
-        key: this.sample,
-        values: this.deletions[this.sample].splitReads,
-      },
-    ]
-
-    var splitReadChart = nv.models
-      .multiBarChart()
-      .margin({ right: 100 })
-      .x(function(d) {
-        return d.pos
-      })
-      .y(function(d) {
-        return d.count
-      })
-
-    d3.select('#splitReadPlot')
-      .datum(splitReadData)
-      .call(splitReadChart)
+    if (this.sample && this.deletions[this.sample]) {
+      this.plotCoverage()
+      this.plotSplitReads()
+    }
   },
 
   computed: {
-    sample() {
-      return Object.keys(this.deletions)[0]
+    ...mapGetters(['sample']),
+    ...mapState(['deletions']),
+  },
+
+  methods: {
+    plotCoverage() {
+      const covData = [
+        {
+          key: this.sample,
+          values: this.deletions[this.sample].coverage,
+        },
+      ]
+      const coverageChart = nv.models
+        .stackedAreaChart()
+        .margin({ right: 100 })
+        .x(function(d) {
+          return d.pos
+        })
+        .y(function(d) {
+          return d.cov
+        })
+      d3.select('#coveragePlot')
+        .datum(covData)
+        .call(coverageChart)
+    },
+
+    plotSplitReads() {
+      const splitReadData = [
+        {
+          key: this.sample,
+          values: this.deletions[this.sample].splitReads,
+        },
+      ]
+
+      const splitReadChart = nv.models
+        .multiBarChart()
+        .margin({ right: 100 })
+        .x(function(d) {
+          return d.pos
+        })
+        .y(function(d) {
+          return d.count
+        })
+
+      d3.select('#splitReadPlot')
+        .datum(splitReadData)
+        .call(splitReadChart)
     },
   },
 
-  data: () => {
-    return {
-      deletions: window.deletions,
-      testdata: [],
-    }
+  watch: {
+    sample: function() {
+      this.plotCoverage()
+      this.plotSplitReads()
+    },
   },
 }
 </script>

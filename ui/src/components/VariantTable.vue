@@ -18,13 +18,14 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
+
 export default {
   name: 'VariantTable',
   props: {},
+
   data: () => {
     return {
-      variants: window.variants,
-
       headers: [
         { text: 'Position', align: 'start', value: 'pos' },
         { text: 'Allele', value: 'alt' },
@@ -38,10 +39,12 @@ export default {
         { text: 'Curated Refs', value: 'Curated References' },
         { text: 'HGVS.p', value: 'hgvsp' },
         { text: 'HGVS.c', value: 'hgvsc' },
-        // { text: 'Effect', value: 'Effect' },
         { text: 'HGVS', value: 'HGVS' },
       ],
     }
+  },
+  computed: {
+    ...mapState(['variants']),
   },
 }
 </script>
