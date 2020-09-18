@@ -2,9 +2,9 @@
   <v-data-table
     :headers="headers"
     :items="variants"
-    :items-per-page="20"
+    :options="tableOptions"
+    :footer-props="tableFooterProps"
     class="elevation-1"
-    multi-sort
     dense
   >
     <template v-slot:item.alt="{ item }">
@@ -41,6 +41,15 @@ export default {
         { text: 'HGVS.c', value: 'hgvsc' },
         { text: 'HGVS', value: 'HGVS' },
       ],
+      tableOptions: {
+        page: 1,
+        itemsPerPage: 20,
+        sortBy: ['pos'],
+        multiSort: true,
+      },
+      tableFooterProps: {
+        itemsPerPageOptions: [5, 10, 20, 50, -1],
+      },
     }
   },
   computed: {
