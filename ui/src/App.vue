@@ -2,7 +2,14 @@
   <v-app mitoreport>
     <v-main>
       <v-app-bar dense color="primary">
-        <v-toolbar-title>Mito Report for {{ sample }}</v-toolbar-title>
+        <v-row align="start" justify="start">
+          <v-col md="auto">
+            <v-toolbar-title>Mito Report for {{ sample }}</v-toolbar-title>
+          </v-col>
+          <v-col md="auto">
+            <v-progress-circular v-if="loading" indeterminate />
+          </v-col>
+        </v-row>
       </v-app-bar>
       <v-container fluid>
         <v-row align="center" justify="center">
@@ -22,7 +29,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapState, mapGetters } from 'vuex'
 
 export default {
   name: 'App',
@@ -32,6 +39,7 @@ export default {
   },
 
   computed: {
+    ...mapState(['loading']),
     ...mapGetters(['sample']),
   },
 }

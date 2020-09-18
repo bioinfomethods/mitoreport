@@ -6,10 +6,17 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
+    loading: false,
     variants: [],
     deletions: {},
   },
   mutations: {
+    SET_LOADING(state) {
+      state.loading = true
+    },
+    UNSET_LOADING(state) {
+      state.loading = false
+    },
     SET_VARIANTS(state, variants) {
       state.variants = variants
     },
@@ -19,6 +26,7 @@ export default new Vuex.Store({
   },
   actions: {
     fetchData({ commit }) {
+      commit('SET_LOADING')
       Promise.all([getVariants(), getDeletions()])
         .then(responses => {
           let varResp, delResp
@@ -28,6 +36,9 @@ export default new Vuex.Store({
         })
         .catch(error => {
           console.error(`There was a problem fetching data ${error.message}`)
+        })
+        .finally(() => {
+          commit('UNSET_LOADING')
         })
     },
   },
