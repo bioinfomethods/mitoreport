@@ -1,7 +1,7 @@
+import Deletions from '@/views/Deletions.vue'
+import Variants from '@/views/Variants.vue'
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Variants from '@/views/Variants.vue'
-import Deletions from '@/views/Deletions.vue'
 
 Vue.use(VueRouter)
 
