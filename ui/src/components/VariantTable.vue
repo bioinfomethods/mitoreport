@@ -1,14 +1,6 @@
 <template>
   <v-card>
-    <v-card-title>
-      <v-text-field
-        v-model="search"
-        append-icon="search"
-        label="Search"
-        single-line
-        hide-details
-      ></v-text-field>
-    </v-card-title>
+    <v-card-title></v-card-title>
     <v-data-table
       :headers="headers"
       :items="variants"
@@ -21,28 +13,175 @@
       <template v-slot:body.prepend>
         <tr>
           <td>
-            <v-text-field
+            <!-- <v-text-field
               v-model="pos"
-              type="string"
-              label="lower:upper"
-            ></v-text-field>
+              type="text"
+              label="lower-upper"
+            ></v-text-field> -->
+            <v-row class="px-4 justify-space-between">
+              <span>{{ posRange[0] }}</span>
+              <span>{{ posRange[1] }}</span>
+            </v-row>
+            <v-range-slider
+              v-model="posRange"
+              :min="0"
+              :max="16500"
+              hide-details
+            >
+            </v-range-slider>
           </td>
           <td>
             <v-text-field
               v-model="allele"
-              type="string"
+              type="text"
+              label="Contains"
+            ></v-text-field>
+          </td>
+          <td>
+            <v-select
+              v-model="selectedTypes"
+              :items="types"
+              type="text"
+              chips
+              label="Select"
+              multiple
+              deletable-chips
+              small-chips
+            ></v-select>
+          </td>
+          <td>
+            <v-select
+              v-model="selectedGenes"
+              :items="genes"
+              type="text"
+              label="Select"
+              multiple
+            >
+              <template v-slot:selection="{ item, index }">
+                <v-chip
+                  v-if="index <= 3"
+                  close
+                  @click:close="removeSelectedGene(item)"
+                  x-small
+                >
+                  <span>{{ item }}</span>
+                </v-chip>
+                <span v-if="index === 4" class="grey--text caption"
+                  >(+{{ selectedGenes.length - 4 }} others)</span
+                >
+              </template>
+            </v-select>
+          </td>
+          <td>
+            <v-select
+              v-model="selectedConsequences"
+              :items="consequences"
+              item-text=".name"
+              item-value=".name"
+              return-object
+              type="text"
+              label="Select"
+              multiple
+            >
+              <template v-slot:selection="{ item, index }">
+                <v-chip
+                  v-if="index <= 3"
+                  close
+                  @click:close="removeSelectedConsequence(item)"
+                  x-small
+                >
+                  <span>{{ item.name }}</span>
+                </v-chip>
+                <span v-if="index === 4" class="grey--text caption"
+                  >(+{{ selectedConsequences.length - 4 }} others)</span
+                >
+              </template>
+            </v-select>
+          </td>
+          <td>
+            <v-row class="px-4 justify-space-between">
+              <span>{{ vafRange[0] }}</span>
+              <span>{{ vafRange[1] }}</span>
+            </v-row>
+            <v-range-slider
+              v-model="vafRange"
+              :min="0"
+              :max="1"
+              step="0.01"
+              hide-details
+            >
+            </v-range-slider>
+          </td>
+          <td>
+            <v-row class="px-4 justify-space-between">
+              <span>{{ depthRange[0] }}</span>
+              <span>{{ depthRange[1] }}</span>
+            </v-row>
+            <v-range-slider
+              v-model="depthRange"
+              :min="0"
+              :max="10000"
+              hide-details
+            >
+            </v-range-slider>
+          </td>
+          <td>
+            <v-text-field
+              v-model="disease"
+              type="text"
+              label="Contains"
+            ></v-text-field>
+          </td>
+          <td>
+            <v-text-field
+              v-model="mitoMap"
+              type="text"
+              label="Contains"
+            ></v-text-field>
+          </td>
+          <td>
+            <v-text-field
+              v-model="curatedRefs"
+              type="text"
+              label="Contains"
+            ></v-text-field>
+          </td>
+          <td>
+            <v-text-field
+              v-model="hgvsp"
+              type="text"
+              label="Contains"
+            ></v-text-field>
+          </td>
+          <td>
+            <v-text-field
+              v-model="hgvsc"
+              type="text"
+              label="Contains"
+            ></v-text-field>
+          </td>
+          <td>
+            <v-text-field
+              v-model="hgvs"
+              type="text"
               label="Contains"
             ></v-text-field>
           </td>
         </tr>
       </template>
+      <template v-slot:item.consequence="{ item }">
+        <td>{{ item.consequence.name }}</td>
+      </template>
+      <template v-slot:item.hgvsc="{ item }">
+        <td v-html="item.hgvsc"></td>
+      </template>
     </v-data-table>
   </v-card>
 </template>
-Ø
+
 <script>
 import { mapState } from 'vuex'
-import * as _ from 'lodash'
+import * as filters from '@/shared/variantFilters'
 
 export default {
   name: 'VariantTable',
@@ -52,11 +191,22 @@ export default {
     return {
       search: '',
       pos: '',
+      posRange: [0, 16500],
       allele: '',
+      selectedTypes: [],
+      selectedGenes: [],
+      selectedConsequences: [],
+      vafRange: [0, 1],
+      depthRange: [0, 10000],
+      disease: '',
+      mitoMap: '',
+      curatedRefs: '',
+      hgvsp: '',
+      hgvsc: '',
+      hgvs: '',
       tableOptions: {
         page: 1,
         itemsPerPage: 20,
-        sortBy: ['pos'],
         multiSort: true,
       },
       tableFooterProps: {
@@ -74,35 +224,109 @@ export default {
           text: 'Position',
           align: 'start',
           value: 'pos',
+          width: '150',
           filter: this.posFilter,
         },
-        { text: 'Allele', value: 'alt', filter: this.alleleFilter },
-        { text: 'Type', value: 'type' },
-        { text: 'Gene', value: 'symbol' },
-        { text: 'Consequence', value: 'consequence' },
-        { text: 'VAF', value: 'genotypes[0].AF' },
-        { text: 'Depth', value: 'genotypes[0].DP' },
-        { text: 'Disease', value: 'Disease' },
-        { text: 'MitoMap', value: 'Status_MitoMap' },
-        { text: 'Curated Refs', value: 'Curated References' },
-        { text: 'HGVS.p', value: 'hgvsp' },
-        { text: 'HGVS.c', value: 'hgvsc' },
-        { text: 'HGVS', value: 'HGVS' },
+        {
+          text: 'Allele',
+          value: 'ref_alt',
+          width: '180',
+          filter: this.alleleFilter,
+        },
+        { text: 'Type', value: 'type', width: '200', filter: this.typesFilter },
+        {
+          text: 'Gene',
+          value: 'symbol',
+          width: '250',
+          filter: this.genesFilter,
+        },
+        {
+          text: 'Consequence',
+          value: 'consequence',
+          width: '250',
+          sort: this.consequenceSort,
+          filter: this.consequencesFilter,
+        },
+        {
+          text: 'VAF',
+          value: 'genotypes[0].AF',
+          width: '120',
+          filter: this.vafFilter,
+        },
+        {
+          text: 'Depth',
+          value: 'genotypes[0].DP',
+          width: '120',
+          filter: this.depthFilter,
+        },
+        { text: 'Disease', value: 'Disease', width: '150' },
+        { text: 'MitoMap', value: 'Status_MitoMap', width: '150' },
+        { text: 'Curated Refs', value: 'Curated References', width: '100' },
+        { text: 'HGVS.p', value: 'hgvsp', width: '100' },
+        { text: 'HGVS.c', value: 'hgvsc', width: '100' },
+        { text: 'HGVS', value: 'HGVS', width: '100' },
       ]
+    },
+
+    types() {
+      return [...new Set(this.variants.map(row => row.type))]
+    },
+
+    genes() {
+      return [...new Set(this.variants.map(row => row.symbol))]
+    },
+
+    consequences() {
+      return [...new Set(this.variants.map(row => row.consequence))]
     },
   },
 
   methods: {
     posFilter: function(value) {
-      if (!this.pos) return true
+      return filters.posFilter(`${this.posRange[0]}-${this.posRange[1]}`, value)
+    },
 
-      return value < parseInt(this.pos)
+    vafFilter: function(value) {
+      return filters.posFilter(`${this.vafRange[0]}-${this.vafRange[1]}`, value)
+    },
+
+    depthFilter: function(value) {
+      return filters.posFilter(
+        `${this.depthRange[0]}-${this.depthRange[1]}`,
+        value
+      )
     },
 
     alleleFilter: function(value) {
-      if (!this.allele) return true
+      return filters.iContainsFilter(this.allele, value)
+    },
 
-      return _.upperCase(value).includes(_.upperCase(this.allele))
+    typesFilter: function(value) {
+      return filters.inSetFilter(this.selectedTypes, value)
+    },
+
+    genesFilter: function(value) {
+      return filters.inSetFilter(this.selectedGenes, value)
+    },
+
+    removeSelectedGene: function(toRemove) {
+      this.selectedGenes = this.selectedGenes.filter(
+        selected => selected !== toRemove
+      )
+    },
+
+    consequencesFilter: function(value) {
+      return filters.inSetFilter(this.selectedConsequences, value)
+    },
+
+    removeSelectedConsequence: function(toRemove) {
+      this.selectedConsequences = this.selectedConsequences.filter(
+        selected => selected !== toRemove
+      )
+    },
+
+    consequenceSort: function(l, r) {
+      return l.rank - r.rank
     },
   },
 }
