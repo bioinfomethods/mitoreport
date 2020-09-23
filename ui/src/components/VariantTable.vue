@@ -13,11 +13,6 @@
       <template v-slot:body.prepend>
         <tr>
           <td>
-            <!-- <v-text-field
-              v-model="pos"
-              type="text"
-              label="lower-upper"
-            ></v-text-field> -->
             <v-row class="px-4 justify-space-between">
               <span>{{ posRange[0] }}</span>
               <span>{{ posRange[1] }}</span>
@@ -310,15 +305,21 @@ export default {
 
   methods: {
     posFilter: function(value) {
-      return filters.posFilter(`${this.posRange[0]}-${this.posRange[1]}`, value)
+      return filters.rangeTextFilter(
+        `${this.posRange[0]}-${this.posRange[1]}`,
+        value
+      )
     },
 
     vafFilter: function(value) {
-      return filters.posFilter(`${this.vafRange[0]}-${this.vafRange[1]}`, value)
+      return filters.rangeTextFilter(
+        `${this.vafRange[0]}-${this.vafRange[1]}`,
+        value
+      )
     },
 
     depthFilter: function(value) {
-      return filters.posFilter(
+      return filters.rangeTextFilter(
         `${this.depthRange[0]}-${this.depthRange[1]}`,
         value
       )

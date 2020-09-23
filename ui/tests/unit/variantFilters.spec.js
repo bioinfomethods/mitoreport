@@ -1,9 +1,9 @@
 import * as filters from '@/shared/variantFilters'
 
 describe('variantFilters', () => {
-  describe('posFilter', () => {
+  describe('rangeTextFilter, e.g. 156-173', () => {
     it.each`
-      input        | pos          | expResult
+      input        | value        | expResult
       ${null}      | ${152}       | ${true}
       ${undefined} | ${152}       | ${true}
       ${'152'}     | ${152}       | ${true}
@@ -17,9 +17,12 @@ describe('variantFilters', () => {
       ${'151'}     | ${152}       | ${false}
       ${'152'}     | ${null}      | ${false}
       ${'152'}     | ${undefined} | ${false}
-    `('posFilter($input, $pos) is $expResult', ({ input, pos, expResult }) => {
-      expect(filters.posFilter(input, pos)).toBe(expResult)
-    })
+    `(
+      'rangeTextFilter($input, $value) is $expResult',
+      ({ input, value, expResult }) => {
+        expect(filters.rangeTextFilter(input, value)).toBe(expResult)
+      }
+    )
   })
 
   describe('iContainsFilter', () => {

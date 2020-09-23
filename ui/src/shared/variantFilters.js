@@ -1,6 +1,6 @@
 import * as _ from 'lodash'
 
-export function posFilter(input, pos) {
+export function rangeTextFilter(input, value) {
   if (!input) {
     return true
   }
@@ -10,14 +10,14 @@ export function posFilter(input, pos) {
   if (range.length === 0) {
     return true
   } else if (range.length === 1) {
-    return parseInt(range[0]) === pos
+    return parseInt(range[0]) === value
   } else {
     let lower = range[0] || 0
     let upper = range[1] || 99999999
     // console.debug(
     //   `range=${range},range[0]=${range[0]},range[1]=${range[1]},lower=${lower},upper=${upper}`
     // )
-    return _.inRange(pos, parseInt(lower), parseInt(upper) + 1)
+    return _.inRange(value, parseInt(lower), parseInt(upper) + 1)
   }
 }
 
