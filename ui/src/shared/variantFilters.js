@@ -10,14 +10,16 @@ export function rangeTextFilter(input, value) {
   if (range.length === 0) {
     return true
   } else if (range.length === 1) {
-    return parseInt(range[0]) === value
+    return _.toNumber(range[0]) === value
   } else {
-    let lower = range[0] || 0
-    let upper = range[1] || 99999999
-    // console.debug(
-    //   `range=${range},range[0]=${range[0]},range[1]=${range[1]},lower=${lower},upper=${upper}`
-    // )
-    return _.inRange(value, parseInt(lower), parseInt(upper) + 1)
+    let lower = range[0] || Number.MIN_SAFE_INTEGER
+    let upper = range[1] || Number.MAX_SAFE_INTEGER
+
+    return _.inRange(
+      value,
+      _.toNumber(lower),
+      _.toNumber(upper) + 0.0000000000001 // ensure end is inclusive because _.inRange end is exclusive
+    )
   }
 }
 

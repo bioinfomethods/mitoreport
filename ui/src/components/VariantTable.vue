@@ -96,14 +96,14 @@
           </td>
           <td>
             <v-row class="px-4 justify-space-between">
-              <span>{{ vafRange[0] }}</span>
-              <span>{{ vafRange[1] }}</span>
+              <span>{{ vafTicks[vafRange[0]] }}</span>
+              <span>{{ vafTicks[vafRange[1]] }}</span>
             </v-row>
             <v-range-slider
               v-model="vafRange"
-              :min="0"
-              :max="1"
-              step="0.01"
+              :value="vafTicks"
+              min="0"
+              :max="vafLastTickIndex"
               hide-details
             >
             </v-range-slider>
@@ -179,6 +179,7 @@
 <script>
 import { mapState } from 'vuex'
 import * as filters from '@/shared/variantFilters'
+// import * as _ from 'lodash'
 
 export default {
   name: 'VariantTable',
@@ -193,7 +194,21 @@ export default {
       selectedTypes: [],
       selectedGenes: [],
       selectedConsequences: [],
-      vafRange: [0, 1],
+      vafTicks: [
+        0,
+        0.00001,
+        0.0005,
+        0.0001,
+        0.005,
+        0.01,
+        0.02,
+        0.03,
+        0.04,
+        0.05,
+        0.1,
+        1,
+      ],
+      vafRange: [0, 11],
       depthRange: [0, 10000],
       disease: '',
       mitoMap: '',
@@ -247,13 +262,13 @@ export default {
         {
           text: 'VAF',
           value: 'genotypes[0].AF',
-          width: '120',
+          width: '130',
           filter: this.vafFilter,
         },
         {
           text: 'Depth',
           value: 'genotypes[0].DP',
-          width: '120',
+          width: '130',
           filter: this.depthFilter,
         },
         {
@@ -301,6 +316,10 @@ export default {
     consequences() {
       return [...new Set(this.variants.map(row => row.consequence))]
     },
+
+    vafLastTickIndex() {
+      return this.vafTicks.length - 1
+    },
   },
 
   methods: {
@@ -312,10 +331,9 @@ export default {
     },
 
     vafFilter: function(value) {
-      return filters.rangeTextFilter(
-        `${this.vafRange[0]}-${this.vafRange[1]}`,
-        value
-      )
+      let lower = this.vafTicks[this.vafRange[0]]
+      let upper = this.vafTicks[this.vafRange[1]]
+      return filters.rangeTextFilter(`${lower - upper}`, value)
     },
 
     depthFilter: function(value) {
