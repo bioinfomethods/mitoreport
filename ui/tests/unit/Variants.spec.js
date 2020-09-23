@@ -5,20 +5,20 @@ import { createLocalVue, shallowMount } from '@vue/test-utils'
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Vuetify from 'vuetify'
-import Vuex from 'vuex'
 
 describe('Variants.vue', () => {
   let underTest
+  let vuetify
 
   beforeEach(() => {
-    const LOCAL_VUE = createLocalVue()
     Vue.use(Vuetify)
-    Vue.use(Vuex)
-    Vue.use(VueRouter)
+    const LOCAL_VUE = createLocalVue()
+    LOCAL_VUE.use(VueRouter)
 
     underTest = shallowMount(Variants, {
       LOCAL_VUE,
       router,
+      vuetify,
     })
   })
 

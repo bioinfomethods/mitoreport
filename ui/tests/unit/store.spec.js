@@ -1,7 +1,7 @@
 import * as dataService from '@/services/LocalDataService.js'
-import * as _ from 'lodash'
 import { actions, mutations } from '@/store'
 import flushPromises from 'flush-promises'
+import * as _ from 'lodash'
 
 const VARIANTS = [
   {

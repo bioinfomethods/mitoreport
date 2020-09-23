@@ -26,6 +26,7 @@
               v-model="posRange"
               :min="0"
               :max="16500"
+              step="100"
               hide-details
             >
             </v-range-slider>
@@ -121,6 +122,7 @@
               v-model="depthRange"
               :min="0"
               :max="10000"
+              step="100"
               hide-details
             >
             </v-range-slider>
@@ -259,12 +261,37 @@ export default {
           width: '120',
           filter: this.depthFilter,
         },
-        { text: 'Disease', value: 'Disease', width: '150' },
-        { text: 'MitoMap', value: 'Status_MitoMap', width: '150' },
-        { text: 'Curated Refs', value: 'Curated References', width: '100' },
-        { text: 'HGVS.p', value: 'hgvsp', width: '100' },
-        { text: 'HGVS.c', value: 'hgvsc', width: '100' },
-        { text: 'HGVS', value: 'HGVS', width: '100' },
+        {
+          text: 'Disease',
+          value: 'Disease',
+          width: '150',
+          filter: this.diseaseFilter,
+        },
+        {
+          text: 'MitoMap',
+          value: 'Status_MitoMap',
+          width: '150',
+          filter: this.mitoMapFilter,
+        },
+        {
+          text: 'Curated Refs',
+          value: 'Curated References',
+          width: '100',
+          filter: this.curatedRefsFilter,
+        },
+        {
+          text: 'HGVS.p',
+          value: 'hgvsp',
+          width: '100',
+          filter: this.hgvspFilter,
+        },
+        {
+          text: 'HGVS.c',
+          value: 'hgvsc',
+          width: '100',
+          filter: this.hgvscFilter,
+        },
+        { text: 'HGVS', value: 'HGVS', width: '100', filter: this.hgvsFilter },
       ]
     },
 
@@ -327,6 +354,30 @@ export default {
 
     consequenceSort: function(l, r) {
       return l.rank - r.rank
+    },
+
+    diseaseFilter: function(value) {
+      return filters.iContainsFilter(this.disease, value)
+    },
+
+    mitoMapFilter: function(value) {
+      return filters.iContainsFilter(this.mitoMap, value)
+    },
+
+    curatedRefsFilter: function(value) {
+      return filters.iContainsFilter(this.curatedRefs, value)
+    },
+
+    hgvspFilter: function(value) {
+      return filters.iContainsFilter(this.hgvsp, value)
+    },
+
+    hgvscFilter: function(value) {
+      return filters.iContainsFilter(this.hgvsc, value)
+    },
+
+    hgvsFilter: function(value) {
+      return filters.iContainsFilter(this.hgvs, value)
     },
   },
 }

@@ -8,15 +8,19 @@ import VueRouter from 'vue-router'
 import Vuetify from 'vuetify'
 import store from './TestStore'
 
-Vue.use(Vuetify)
-const LOCAL_VUE = createLocalVue()
-LOCAL_VUE.use(VueRouter)
+const app = document.createElement('div')
+app.setAttribute('data-app', true)
+document.body.append(app)
 
 describe('App.vue', () => {
   let underTest
   let vuetify
 
   beforeEach(() => {
+    Vue.use(Vuetify)
+    const LOCAL_VUE = createLocalVue()
+    LOCAL_VUE.use(VueRouter)
+
     vuetify = new Vuetify()
     underTest = mount(App, {
       LOCAL_VUE,

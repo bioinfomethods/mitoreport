@@ -14,9 +14,9 @@ export function posFilter(input, pos) {
   } else {
     let lower = range[0] || 0
     let upper = range[1] || 99999999
-    console.debug(
-      `range=${range},range[0]=${range[0]},range[1]=${range[1]},lower=${lower},upper=${upper}`
-    )
+    // console.debug(
+    //   `range=${range},range[0]=${range[0]},range[1]=${range[1]},lower=${lower},upper=${upper}`
+    // )
     return _.inRange(pos, parseInt(lower), parseInt(upper) + 1)
   }
 }
@@ -24,7 +24,10 @@ export function posFilter(input, pos) {
 export function iContainsFilter(input, value) {
   if (!input || !value) return true
 
-  return value.toUpperCase().includes(input.toUpperCase())
+  return value
+    .toString()
+    .toUpperCase()
+    .includes(input.toString().toUpperCase())
 }
 
 export function inSetFilter(set, value) {

@@ -5,24 +5,24 @@ import { createLocalVue, shallowMount } from '@vue/test-utils'
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Vuetify from 'vuetify'
-import Vuex from 'vuex'
 
 describe('Deletions.vue', () => {
   let underTest
+  let vuetify
 
   beforeEach(() => {
-    const LOCAL_VUE = createLocalVue()
     Vue.use(Vuetify)
-    Vue.use(Vuex)
-    Vue.use(VueRouter)
+    const LOCAL_VUE = createLocalVue()
+    LOCAL_VUE.use(VueRouter)
 
     underTest = shallowMount(Deletions, {
       LOCAL_VUE,
       router,
+      vuetify,
     })
   })
 
-  it('renders VariantTable', () => {
+  it('renders CoveragePlots', () => {
     router.push('/deletions')
     const coveragePlots = underTest.findComponent(CoveragePlots)
 
