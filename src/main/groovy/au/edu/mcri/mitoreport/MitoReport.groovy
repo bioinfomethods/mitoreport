@@ -146,6 +146,7 @@ class MitoReport implements Runnable {
     String sampleVcfFileName = FilenameUtils.getName(vcfFile.absolutePath)
 
     def settings = [
+      'igvHost'            : 'http://localhost:60151',
       'sampleBamDir'       : bamDir,
       'sampleBamFilename'  : bamFileName,
       'sampleVcfDir'       : sampleVcfDir,
