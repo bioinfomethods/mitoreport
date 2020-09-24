@@ -2,6 +2,7 @@ import * as dataService from '@/services/LocalDataService.js'
 import { actions, mutations } from '@/store'
 import flushPromises from 'flush-promises'
 import * as _ from 'lodash'
+import DEFAULT_SETTINGS from '../fixtures/defaultSettings.json'
 
 const VARIANTS = [
   {
@@ -104,6 +105,9 @@ describe('root store mutations', () => {
 
 describe('root store actions', () => {
   beforeEach(() => {
+    dataService.getDefaultSettings = jest.fn(() => {
+      return Promise.resolve({ data: DEFAULT_SETTINGS })
+    })
     dataService.getDeletions = jest.fn(() => {
       return Promise.resolve({ data: DELETIONS })
     })
@@ -118,11 +122,16 @@ describe('root store actions', () => {
     await actions.fetchData({ commit })
     await flushPromises()
 
-    expect(commit).toHaveBeenCalledTimes(4)
+    expect(commit).toHaveBeenCalledTimes(5)
     expect(commit).toHaveBeenNthCalledWith(1, 'SET_LOADING')
-    expect(commit).toHaveBeenNthCalledWith(2, 'SET_VARIANTS', VARIANTS)
-    expect(commit).toHaveBeenNthCalledWith(3, 'SET_DELETIONS', DELETIONS)
-    expect(commit).toHaveBeenNthCalledWith(4, 'UNSET_LOADING')
+    expect(commit).toHaveBeenNthCalledWith(
+      2,
+      'SET_DEFAULT_SETTINGS',
+      DEFAULT_SETTINGS
+    )
+    expect(commit).toHaveBeenNthCalledWith(3, 'SET_VARIANTS', VARIANTS)
+    expect(commit).toHaveBeenNthCalledWith(4, 'SET_DELETIONS', DELETIONS)
+    expect(commit).toHaveBeenNthCalledWith(5, 'UNSET_LOADING')
   })
 })
 

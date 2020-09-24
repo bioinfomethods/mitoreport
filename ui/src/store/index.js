@@ -1,4 +1,8 @@
-import { getDeletions, getVariants } from '@/services/LocalDataService.js'
+import {
+  getDefaultSettings,
+  getDeletions,
+  getVariants,
+} from '@/services/LocalDataService.js'
 import Vue from 'vue'
 import Vuex from 'vuex'
 
@@ -14,6 +18,7 @@ const CONSEQUENCES = [
 ]
 
 export const state = {
+  defaultSettings: {},
   loading: false,
   variants: [],
   deletions: {},
@@ -32,9 +37,23 @@ export const getters = {
       return 'No Sample'
     }
   },
+
+  bamFile: state => {
+    const sampleBamDir = state.defaultSettings.sampleBamDir
+    const sampleBamFilename = state.defaultSettings.sampleBamFilename
+    if (!sampleBamDir || !sampleBamFilename) {
+      return ''
+    }
+
+    return `${sampleBamDir}${sampleBamFilename}`
+  },
 }
 
 export const mutations = {
+  SET_DEFAULT_SETTINGS(state, defaultSettings) {
+    state.defaultSettings = defaultSettings
+  },
+
   SET_LOADING(state) {
     state.loading = true
   },
@@ -71,10 +90,11 @@ export const mutations = {
 export const actions = {
   fetchData({ commit }) {
     commit('SET_LOADING')
-    Promise.all([getVariants(), getDeletions()])
+    Promise.all([getDefaultSettings(), getVariants(), getDeletions()])
       .then(responses => {
-        let varResp, delResp
-        ;[varResp, delResp] = responses
+        let defSettingsResp, varResp, delResp
+        ;[defSettingsResp, varResp, delResp] = responses
+        commit('SET_DEFAULT_SETTINGS', defSettingsResp.data)
         commit('SET_VARIANTS', varResp.data)
         commit('SET_DELETIONS', delResp.data)
       })

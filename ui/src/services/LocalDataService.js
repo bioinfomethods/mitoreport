@@ -13,3 +13,11 @@ export function getDeletions() {
     data: window.deletions,
   })
 }
+
+export function getDefaultSettings() {
+  return Promise.resolve({
+    status: 200,
+    statusText: 'OK',
+    data: window.defaultSettings,
+  })
+}

@@ -166,6 +166,15 @@
           </td>
         </tr>
       </template>
+      <template v-slot:item.pos="{ item }">
+        <td>
+          <IgvLink
+            :igvHost="defaultSettings.igvHost"
+            :bamFile="bamFile"
+            :position="item.pos"
+          ></IgvLink>
+        </td>
+      </template>
       <template v-slot:item.consequence="{ item }">
         <td>{{ item.consequence.name }}</td>
       </template>
@@ -177,13 +186,18 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapState, mapGetters } from 'vuex'
+import IgvLink from '@/components/IgvLink'
 import * as filters from '@/shared/variantFilters'
 // import * as _ from 'lodash'
 
 export default {
   name: 'VariantTable',
   props: {},
+
+  components: {
+    IgvLink,
+  },
 
   data: () => {
     return {
@@ -228,7 +242,8 @@ export default {
   },
 
   computed: {
-    ...mapState(['variants']),
+    ...mapState(['variants', 'defaultSettings']),
+    ...mapGetters(['bamFile']),
 
     headers() {
       return [
