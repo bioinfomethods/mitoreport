@@ -3,6 +3,7 @@ import { actions, mutations } from '@/store'
 import flushPromises from 'flush-promises'
 import * as _ from 'lodash'
 import DEFAULT_SETTINGS from '../fixtures/defaultSettings.json'
+import SETTINGS from '../fixtures/mitoSettings.json'
 
 const VARIANTS = [
   {
@@ -53,6 +54,8 @@ const DELETIONS = {
     ],
   },
 }
+
+const expSettings = _.merge(DEFAULT_SETTINGS, SETTINGS)
 
 describe('root store mutations', () => {
   it('SET_LOADING', () => {
@@ -105,7 +108,7 @@ describe('root store mutations', () => {
 
 describe('root store actions', () => {
   beforeEach(() => {
-    dataService.getDefaultSettings = jest.fn(() => {
+    dataService.loadSettings = jest.fn(() => {
       return Promise.resolve({ data: DEFAULT_SETTINGS })
     })
     dataService.getDeletions = jest.fn(() => {
@@ -124,11 +127,7 @@ describe('root store actions', () => {
 
     expect(commit).toHaveBeenCalledTimes(5)
     expect(commit).toHaveBeenNthCalledWith(1, 'SET_LOADING')
-    expect(commit).toHaveBeenNthCalledWith(
-      2,
-      'SET_DEFAULT_SETTINGS',
-      DEFAULT_SETTINGS
-    )
+    expect(commit).toHaveBeenNthCalledWith(2, 'SET_SETTINGS', expSettings)
     expect(commit).toHaveBeenNthCalledWith(3, 'SET_VARIANTS', VARIANTS)
     expect(commit).toHaveBeenNthCalledWith(4, 'SET_DELETIONS', DELETIONS)
     expect(commit).toHaveBeenNthCalledWith(5, 'UNSET_LOADING')

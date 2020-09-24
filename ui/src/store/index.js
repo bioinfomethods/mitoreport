@@ -1,25 +1,21 @@
 import {
-  getDefaultSettings,
   getDeletions,
   getVariants,
+  saveSettingsToLocal,
 } from '@/services/LocalDataService.js'
+import { CONSEQUENCES, DEFAULT_SNACKBAR_OPTS } from '@/shared/constants'
+import { saveAs } from 'file-saver'
+import * as _ from 'lodash'
 import Vue from 'vue'
 import Vuex from 'vuex'
+import { loadSettings } from '../services/LocalDataService'
 
 Vue.use(Vuex)
 
-const CONSEQUENCES = [
-  { id: 'frameshift_variant', name: 'frameshift_variant' },
-  { id: 'inframe_deletion', name: 'inframe_deletion' },
-  { id: 'missense_variant', name: 'missense_variant' },
-  { id: 'stop_gained', name: 'stop_gained' },
-  { id: 'synonymous_variant', name: 'synonymous_variant' },
-  { id: 'upstream_gene_variant', name: 'upstream_gene_variant' },
-]
-
 export const state = {
-  defaultSettings: {},
+  settings: {},
   loading: false,
+  snackbar: DEFAULT_SNACKBAR_OPTS,
   variants: [],
   deletions: {},
 }
@@ -38,11 +34,22 @@ export const getters = {
     }
   },
 
+  igvHost: state => {
+    return state.settings.igvHost
+  },
+
+  sampleSettings: state => {
+    const result = state.settings.samples.find(
+      sample => sample.id === getters.sample(state)
+    )
+    return result || {}
+  },
+
   bamFile: state => {
-    const sampleBamDir = state.defaultSettings.sampleBamDir
-    const sampleBamFilename = state.defaultSettings.sampleBamFilename
+    const sampleBamDir = getters.sampleSettings(state).bamDir
+    const sampleBamFilename = getters.sampleSettings(state).bamFilename
     if (!sampleBamDir || !sampleBamFilename) {
-      return ''
+      return null
     }
 
     return `${sampleBamDir}${sampleBamFilename}`
@@ -50,8 +57,8 @@ export const getters = {
 }
 
 export const mutations = {
-  SET_DEFAULT_SETTINGS(state, defaultSettings) {
-    state.defaultSettings = defaultSettings
+  SET_SETTINGS(state, settings) {
+    state.settings = settings
   },
 
   SET_LOADING(state) {
@@ -85,25 +92,63 @@ export const mutations = {
   SET_DELETIONS(state, deletions) {
     state.deletions = deletions
   },
+
+  ACTIVATE_SNACKBAR(state, options) {
+    state.snackbar = _.merge(DEFAULT_SNACKBAR_OPTS, { active: true }, options)
+  },
+
+  DEACTIVATE_SNACKBAR(state) {
+    state.snackbar.active = false
+  },
 }
 
 export const actions = {
   fetchData({ commit }) {
     commit('SET_LOADING')
-    Promise.all([getDefaultSettings(), getVariants(), getDeletions()])
+
+    Promise.all([loadSettings(), getVariants(), getDeletions()])
       .then(responses => {
-        let defSettingsResp, varResp, delResp
-        ;[defSettingsResp, varResp, delResp] = responses
-        commit('SET_DEFAULT_SETTINGS', defSettingsResp.data)
+        let settingsResp, varResp, delResp
+        ;[settingsResp, varResp, delResp] = responses
+        commit('SET_SETTINGS', settingsResp.data)
         commit('SET_VARIANTS', varResp.data)
         commit('SET_DELETIONS', delResp.data)
       })
       .catch(error => {
-        console.error(`There was a problem fetching data ${error.message}`)
+        commit('ACTIVATE_SNACKBAR', {
+          color: 'red',
+          message: `There was a problem fetching data: ${error.message}`,
+        })
       })
       .finally(() => {
         commit('UNSET_LOADING')
       })
+  },
+
+  saveSettings({ commit, state }) {
+    commit('SET_LOADING')
+
+    saveSettingsToLocal(state.settings)
+      .catch(error => {
+        commit('ACTIVATE_SNACKBAR', {
+          color: 'red',
+          message: `There was a problem saving settings: ${error.message}`,
+        })
+      })
+      .finally(() => {
+        commit('UNSET_LOADING')
+      })
+  },
+
+  downloadSettings({ state }) {
+    var blob = new Blob([JSON.stringify(state.settings, null, 2)], {
+      type: 'text/json;charset=utf-8',
+    })
+    saveAs(blob, 'mitoSettings.json')
+  },
+
+  closeSnackbar({ commit }) {
+    commit('DEACTIVATE_SNACKBAR')
   },
 }
 

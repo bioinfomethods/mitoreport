@@ -1,5 +1,5 @@
 <template>
-  <span>
+  <span v-if="igvUrl">
     <a :href="igvUrl" @click.prevent="loadIGV" target="igv">{{ position }}</a>
     <sup><v-icon class="pa-1" size="small">mdi-open-in-new</v-icon></sup>
     <iframe
@@ -9,6 +9,7 @@
       style="display:none"
     ></iframe>
   </span>
+  <span v-else>{{ position }}</span>
 </template>
 
 <script>
@@ -17,11 +18,11 @@ export default {
   props: {
     igvHost: {
       type: String,
-      required: true,
+      required: false,
     },
     bamFile: {
       type: String,
-      required: true,
+      required: false,
     },
     position: {
       type: Number,
@@ -31,7 +32,14 @@ export default {
 
   computed: {
     igvUrl() {
-      return `${this.igvHost}/load?file=${this.bamFile}&locus=chrM:${this.position}`
+      if (!this.igvHost || !this.bamFile) {
+        return null
+      }
+
+      const result = `${this.igvHost}/load?file=file://${encodeURIComponent(
+        this.bamFile
+      )}&locus=chrM:${this.position}`
+      return result
     },
   },
   methods: {

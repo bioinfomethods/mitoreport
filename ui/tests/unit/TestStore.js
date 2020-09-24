@@ -1,3 +1,4 @@
+import { DEFAULT_SNACKBAR_OPTS } from '@/shared/constants'
 import Vue from 'vue'
 import Vuex from 'vuex'
 import defaultSettings from '../fixtures/defaultSettings.json'
@@ -6,28 +7,44 @@ import variants from '../fixtures/variants.json'
 
 Vue.use(Vuex)
 
-const store = new Vuex.Store({
-  state: {
-    defaultSettings: defaultSettings,
-    loading: false,
-    variants: variants,
-    deletions: deletions,
+export const state = {
+  settings: defaultSettings,
+  loading: false,
+  snackbar: DEFAULT_SNACKBAR_OPTS,
+  variants: variants,
+  deletions: deletions,
+}
+
+export const mutations = {}
+
+export const actions = {
+  fetchData() {},
+}
+
+export const getters = {
+  sample: () => {
+    return 'TestSample'
   },
 
-  mutations: {},
-
-  actions: {
-    fetchData() {},
+  igvHost: () => {
+    return 'http://localhost:60151'
   },
 
-  getters: {
-    sample: () => {
-      return 'TestSample'
-    },
-    bamFile: () => {
-      return `${defaultSettings.sampleBamDir}${defaultSettings.sampleBamFilename}`
-    },
+  sampleSettings: state => {
+    return defaultSettings.samples.find(
+      sample => sample.id === getters.sample(state)
+    )
   },
+
+  bamFile: () => {
+    return `${defaultSettings.sampleBamDir}${defaultSettings.sampleBamFilename}`
+  },
+}
+
+export default new Vuex.Store({
+  state,
+  getters,
+  mutations,
+  actions,
+  strict: process.env.NODE_ENV !== 'production',
 })
-
-export default store

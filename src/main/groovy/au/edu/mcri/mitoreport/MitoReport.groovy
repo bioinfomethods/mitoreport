@@ -24,6 +24,7 @@ import picocli.CommandLine.Parameters
 class MitoReport implements Runnable {
 
   private static final String MITO_REPORT_PATH_NAME = 'mitoreport'
+  private static final String DEFAULT_IGV_HOST = 'http://localhost:60151'
 
   @Option(names = ['-s', '-sample', '--sample'], required = true, description = 'Sample ID')
   String sample
@@ -145,19 +146,27 @@ class MitoReport implements Runnable {
     String sampleVcfDir = FilenameUtils.getFullPath(vcfFile.absolutePath)
     String sampleVcfFileName = FilenameUtils.getName(vcfFile.absolutePath)
 
-    def settings = [
-      'igvHost'            : 'http://localhost:60151',
-      'sampleBamDir'       : bamDir,
-      'sampleBamFilename'  : bamFileName,
-      'sampleVcfDir'       : sampleVcfDir,
-      'sampleVcfFilename'  : sampleVcfFileName,
-      'maternalVcfDir'     : null,
-      'maternalVcfFilename': null,
+    def defaultSettings = [
+      'igvHost': DEFAULT_IGV_HOST,
+      'samples': [
+        [
+          'id'                 : sample,
+          'bamDir'             : bamDir,
+          'bamFilename'        : bamFileName,
+          'vcfDir'             : sampleVcfDir,
+          'vcfFilename'        : sampleVcfFileName,
+          'maternalVcfDir'     : null,
+          'maternalVcfFilename': null,
+        ]
+      ]
     ]
 
-    String settingsJson = JsonOutput.prettyPrint(JsonOutput.toJson(settings))
+    String defaultSettingsJson = JsonOutput.prettyPrint(JsonOutput.toJson(defaultSettings))
+    String settingsJson = JsonOutput.prettyPrint(JsonOutput.toJson([:]))
 
     new File(Paths.get(MITO_REPORT_PATH_NAME, 'defaultSettings.js').toUri())
-      .withWriter { it << 'window.defaultSettings = ' + settingsJson }
+      .withWriter { it << 'window.defaultSettings = ' + defaultSettingsJson }
+    new File(Paths.get(MITO_REPORT_PATH_NAME, 'mitoSettings.js').toUri())
+      .withWriter { it << 'window.settings = ' + settingsJson }
   }
 }

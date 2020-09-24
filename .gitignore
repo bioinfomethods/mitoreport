@@ -35,3 +35,4 @@ src/main/resources/mitoreport/*
 ui/public/deletions.js
 ui/public/variants.js
 ui/public/defaultSettings.js
+ui/public/mitoSettings.js

@@ -20,7 +20,7 @@
             <v-range-slider
               v-model="posRange"
               :min="0"
-              :max="16500"
+              :max="MAX_POS"
               step="100"
               hide-details
             >
@@ -116,7 +116,7 @@
             <v-range-slider
               v-model="depthRange"
               :min="0"
-              :max="10000"
+              :max="MAX_READ_DEPTH"
               step="100"
               hide-details
             >
@@ -169,7 +169,7 @@
       <template v-slot:item.pos="{ item }">
         <td>
           <IgvLink
-            :igvHost="defaultSettings.igvHost"
+            :igvHost="igvHost"
             :bamFile="bamFile"
             :position="item.pos"
           ></IgvLink>
@@ -189,6 +189,7 @@
 import { mapState, mapGetters } from 'vuex'
 import IgvLink from '@/components/IgvLink'
 import * as filters from '@/shared/variantFilters'
+import { MIN_POS, MAX_POS, MAX_READ_DEPTH } from '@/shared/constants'
 // import * as _ from 'lodash'
 
 export default {
@@ -203,7 +204,7 @@ export default {
     return {
       search: '',
       pos: '',
-      posRange: [0, 16500],
+      posRange: [0, MAX_POS],
       allele: '',
       selectedTypes: [],
       selectedGenes: [],
@@ -223,7 +224,7 @@ export default {
         1,
       ],
       vafRange: [0, 11],
-      depthRange: [0, 10000],
+      depthRange: [0, MAX_READ_DEPTH],
       disease: '',
       mitoMap: '',
       curatedRefs: '',
@@ -242,8 +243,20 @@ export default {
   },
 
   computed: {
-    ...mapState(['variants', 'defaultSettings']),
-    ...mapGetters(['bamFile']),
+    ...mapState(['variants']),
+    ...mapGetters(['igvHost', 'bamFile', 'sampleSettings']),
+
+    MIN_POS() {
+      return MIN_POS
+    },
+
+    MAX_POS() {
+      return MAX_POS
+    },
+
+    MAX_READ_DEPTH() {
+      return MAX_READ_DEPTH
+    },
 
     headers() {
       return [

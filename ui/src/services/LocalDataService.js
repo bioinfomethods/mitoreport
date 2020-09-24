@@ -1,23 +1,40 @@
+import * as _ from 'lodash'
+
 export function getVariants() {
-  return Promise.resolve({
+  return {
     status: 200,
     statusText: 'OK',
     data: window.variants,
-  })
+  }
 }
 
-export function getDeletions() {
-  return Promise.resolve({
+export async function getDeletions() {
+  return {
     status: 200,
     statusText: 'OK',
     data: window.deletions,
-  })
+  }
 }
 
-export function getDefaultSettings() {
-  return Promise.resolve({
+export async function loadSettings() {
+  const defaultSettings = window.defaultSettings
+  const fileSettings = window.settings
+  const localStorageSettings = JSON.parse(localStorage.getItem('mitoreport'))
+
+  const result = _.merge(defaultSettings, fileSettings, localStorageSettings)
+
+  return {
     status: 200,
     statusText: 'OK',
-    data: window.defaultSettings,
-  })
+    data: result,
+  }
+}
+
+export async function saveSettingsToLocal(settings) {
+  localStorage.setItem('mitoSettings', JSON.stringify(settings))
+
+  return {
+    status: 200,
+    statusText: 'OK',
+  }
 }
