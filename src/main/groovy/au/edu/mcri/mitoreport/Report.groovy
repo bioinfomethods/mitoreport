@@ -28,6 +28,8 @@ class Report extends ToolBase {
 
     Map deletion
 
+    File variantsResultJson
+
     @Override
     public void run() {
 
@@ -101,10 +103,10 @@ class Report extends ToolBase {
             dirFile.mkdirs()
         }
 
-        def outputPath = "$dir/variants.js"
-        Utils.writer(outputPath).withWriter {  it << "window.variants = " + json; it << '\n' }
+        variantsResultJson = new File("$dir/variants.json")
+        Utils.writer(variantsResultJson).withWriter {  it << json; it << '\n' }
 
-        log.info "Wrote annotated variants to $outputPath"
+        log.info "Wrote annotated variants to $variantsResultJson"
     }
 
 

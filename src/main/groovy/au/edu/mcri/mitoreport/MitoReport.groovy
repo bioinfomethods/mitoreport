@@ -11,6 +11,7 @@ import javax.inject.Inject
 
 import gngs.CliOptions
 import gngs.tools.DeletionPlot
+import groovy.json.JsonOutput
 import io.micronaut.configuration.picocli.PicocliRunner
 import io.micronaut.core.io.ResourceLoader
 import org.apache.commons.io.FileUtils
@@ -51,9 +52,47 @@ class MitoReport implements Runnable {
 
     writeOutUi()
 
-    File deletionsJson = createDeletionsPlot()
+    Map<String, File> deletionsResult = createDeletionsPlot()
+    File deletionsJson = deletionsResult.deletionsJsonFile
+    File variantsJson = runReport(deletionsJson)
 
-    runReport(deletionsJson)
+    writeOutUiDataAndSettings(deletionsJson, deletionsResult.bamFile, variantsJson)
+  }
+
+  Map<String, File> createDeletionsPlot() {
+    File result = new File(Paths.get(MITO_REPORT_PATH_NAME, 'deletions.json').toUri())
+
+    CliOptions dpOpts = new CliOptions(overrides: [
+      'region'   : region,
+      'covo'     : Paths.get(MITO_REPORT_PATH_NAME, 'covo.tsv').toString(),
+      'sample'   : sample,
+      'covplot'  : Paths.get(MITO_REPORT_PATH_NAME, 'covo.png').toString(),
+      'srplot'   : Paths.get(MITO_REPORT_PATH_NAME, 'sr.png').toString(),
+      'json'     : result.absolutePath,
+      'arguments': bamFiles.collect { it.absolutePath }
+    ])
+
+    DeletionPlot deletionPlot = new DeletionPlot(opts: dpOpts)
+    deletionPlot.run()
+
+    // TODO - This bamFile location is required to generate IGV links in the UI
+    File bamFile = deletionPlot.getBam().samFile
+
+    return ['bamFile': bamFile, 'deletionsJsonFile': result]
+  }
+
+  File runReport(File deletionsJson) {
+    CliOptions reportOpts = new CliOptions(overrides: [
+      'vcf': vcfFile.absolutePath,
+      'del': deletionsJson.absolutePath,
+      'ann': annotations,
+      'o'  : MITO_REPORT_PATH_NAME,
+    ])
+
+    Report mitoReport = new Report(opts: reportOpts)
+    mitoReport.run()
+
+    return mitoReport.variantsResultJson
   }
 
   void writeOutUi() {
@@ -94,40 +133,30 @@ class MitoReport implements Runnable {
     }
   }
 
-  File createDeletionsPlot() {
-    File result = new File(Paths.get(MITO_REPORT_PATH_NAME, 'deletions.json').toUri())
-
-    CliOptions dpOpts = new CliOptions(overrides: [
-      'region'   : region,
-      'covo'     : Paths.get(MITO_REPORT_PATH_NAME, 'covo.tsv').toString(),
-      'sample'   : sample,
-      'covplot'  : Paths.get(MITO_REPORT_PATH_NAME, 'covo.png').toString(),
-      'srplot'   : Paths.get(MITO_REPORT_PATH_NAME, 'sr.png').toString(),
-      'json'     : result.absolutePath,
-      'arguments': bamFiles.collect { it.absolutePath }
-    ])
-
-    DeletionPlot deletionPlot = new DeletionPlot(opts: dpOpts)
-    deletionPlot.run()
-
-    // TODO - This bamFile location is required to generate IGV links in the UI
-    File bamFile = deletionPlot.getBam().samFile
-
+  void writeOutUiDataAndSettings(File deletionsJson, File sampleBamFile, File variantsJson) {
     new File(Paths.get(MITO_REPORT_PATH_NAME, 'deletions.js').toUri())
-      .withWriter { it << 'window.deletions = ' + result.text }
+      .withWriter { it << 'window.deletions = ' + deletionsJson.text }
 
-    return result
-  }
+    new File(Paths.get(MITO_REPORT_PATH_NAME, 'variants.js').toUri())
+      .withWriter { it << 'window.variants = ' + variantsJson.text }
 
-  void runReport(File deletionsJson) {
-    CliOptions reportOpts = new CliOptions(overrides: [
-      'vcf': vcfFile.absolutePath,
-      'del': deletionsJson.absolutePath,
-      'ann': annotations,
-      'o'  : MITO_REPORT_PATH_NAME,
-    ])
+    String bamDir = FilenameUtils.getFullPath(sampleBamFile.absolutePath)
+    String bamFileName = FilenameUtils.getName(sampleBamFile.absolutePath)
+    String sampleVcfDir = FilenameUtils.getFullPath(vcfFile.absolutePath)
+    String sampleVcfFileName = FilenameUtils.getName(vcfFile.absolutePath)
 
-    Report mitoReport = new Report(opts: reportOpts)
-    mitoReport.run()
+    def settings = [
+      'sampleBamDir'       : bamDir,
+      'sampleBamFilename'  : bamFileName,
+      'sampleVcfDir'       : sampleVcfDir,
+      'sampleVcfFilename'  : sampleVcfFileName,
+      'maternalVcfDir'     : null,
+      'maternalVcfFilename': null,
+    ]
+
+    String settingsJson = JsonOutput.prettyPrint(JsonOutput.toJson(settings))
+
+    new File(Paths.get(MITO_REPORT_PATH_NAME, 'defaultSettings.js').toUri())
+      .withWriter { it << 'window.defaultSettings = ' + settingsJson }
   }
 }
