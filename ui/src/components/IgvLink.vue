@@ -13,17 +13,12 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
   name: 'IgvLink',
+
   props: {
-    igvHost: {
-      type: String,
-      required: false,
-    },
-    bamFile: {
-      type: String,
-      required: false,
-    },
     position: {
       type: Number,
       required: true,
@@ -31,6 +26,8 @@ export default {
   },
 
   computed: {
+    ...mapGetters(['igvHost', 'bamFile']),
+
     igvUrl() {
       if (!this.igvHost || !this.bamFile) {
         return null

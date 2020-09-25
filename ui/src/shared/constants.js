@@ -13,7 +13,7 @@ export const DEFAULT_SNACKBAR_OPTS = {
   timeout: 3000,
 }
 
-export const CONSEQUENCES = [
+export const CONSEQUENCE_NAMES = [
   { id: 'frameshift_variant', name: 'frameshift_variant' },
   { id: 'inframe_deletion', name: 'inframe_deletion' },
   { id: 'missense_variant', name: 'missense_variant' },

@@ -3,7 +3,7 @@ import {
   getVariants,
   saveSettingsToLocal,
 } from '@/services/LocalDataService.js'
-import { CONSEQUENCES, DEFAULT_SNACKBAR_OPTS } from '@/shared/constants'
+import { CONSEQUENCE_NAMES, DEFAULT_SNACKBAR_OPTS } from '@/shared/constants'
 import { saveAs } from 'file-saver'
 import * as _ from 'lodash'
 import Vue from 'vue'
@@ -76,7 +76,8 @@ export const mutations = {
       for (const [key, value] of Object.entries(variant)) {
         if (key === 'consequence') {
           const consequenceName =
-            CONSEQUENCES.find(item => item.id === value.id)?.name || value.id
+            CONSEQUENCE_NAMES.find(item => item.id === value.id)?.name ||
+            value.id
           result[key] = { ...value, name: consequenceName }
         } else {
           result[key] = value

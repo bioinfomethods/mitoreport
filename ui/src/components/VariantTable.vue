@@ -6,7 +6,6 @@
       :items="variants"
       :options="tableOptions"
       :footer-props="tableFooterProps"
-      :search="search"
       class="elevation-1"
       dense
     >
@@ -96,11 +95,11 @@
           </td>
           <td>
             <v-row class="px-4 justify-space-between">
-              <span>{{ vafTicks[vafRange[0]] }}</span>
-              <span>{{ vafTicks[vafRange[1]] }}</span>
+              <span>{{ vafTicks[vafIndexRange[0]] }}</span>
+              <span>{{ vafTicks[vafIndexRange[1]] }}</span>
             </v-row>
             <v-range-slider
-              v-model="vafRange"
+              v-model="vafIndexRange"
               :value="vafTicks"
               min="0"
               :max="vafLastTickIndex"
@@ -189,6 +188,7 @@
 import { mapState, mapGetters } from 'vuex'
 import IgvLink from '@/components/IgvLink'
 import * as filters from '@/shared/variantFilters'
+import * as _ from 'lodash'
 import { MIN_POS, MAX_POS, MAX_READ_DEPTH } from '@/shared/constants'
 // import * as _ from 'lodash'
 
@@ -202,8 +202,6 @@ export default {
 
   data: () => {
     return {
-      search: '',
-      pos: '',
       posRange: [0, MAX_POS],
       allele: '',
       selectedTypes: [],
@@ -223,7 +221,7 @@ export default {
         0.1,
         1,
       ],
-      vafRange: [0, 11],
+      vafIndexRange: [0, 11],
       depthRange: [0, MAX_READ_DEPTH],
       disease: '',
       mitoMap: '',
@@ -342,7 +340,14 @@ export default {
     },
 
     consequences() {
-      return [...new Set(this.variants.map(row => row.consequence))]
+      return [
+        ...new Set(
+          _.sortBy(
+            this.variants.map(row => row.consequence),
+            ['rank']
+          )
+        ),
+      ]
     },
 
     vafLastTickIndex() {
@@ -359,8 +364,8 @@ export default {
     },
 
     vafFilter: function(value) {
-      let lower = this.vafTicks[this.vafRange[0]]
-      let upper = this.vafTicks[this.vafRange[1]]
+      let lower = this.vafTicks[this.vafIndexRange[0]]
+      let upper = this.vafTicks[this.vafIndexRange[1]]
       return filters.rangeTextFilter(`${lower - upper}`, value)
     },
 
