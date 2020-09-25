@@ -4,6 +4,7 @@
       <v-toolbar-title>
         <span>Mito Report for {{ sample }}</span>
       </v-toolbar-title>
+      <v-progress-circular class="ml-4" v-if="loading" indeterminate />
       <v-spacer></v-spacer>
       <v-btn @click.prevent="downloadSettings" icon large>
         <v-icon large>mdi-download</v-icon>

@@ -15,7 +15,7 @@ Vue.use(Vuex)
 export const state = {
   settings: {},
   loading: false,
-  snackbar: DEFAULT_SNACKBAR_OPTS,
+  snackbar: { ...DEFAULT_SNACKBAR_OPTS },
   variants: [],
   deletions: {},
 }
@@ -39,7 +39,7 @@ export const getters = {
   },
 
   sampleSettings: state => {
-    const result = state.settings.samples.find(
+    const result = (state.settings.samples || []).find(
       sample => sample.id === getters.sample(state)
     )
     return result || {}
@@ -99,7 +99,7 @@ export const mutations = {
   },
 
   DEACTIVATE_SNACKBAR(state) {
-    state.snackbar.active = false
+    state.snackbar = _.merge(DEFAULT_SNACKBAR_OPTS, { active: false })
   },
 }
 
@@ -123,22 +123,20 @@ export const actions = {
       })
       .finally(() => {
         commit('UNSET_LOADING')
+        // commit('ACTIVATE_SNACKBAR', {
+        //   color: 'red',
+        //   message: `There was a problem fetching data:`,
+        // })
       })
   },
 
   saveSettings({ commit, state }) {
-    commit('SET_LOADING')
-
-    saveSettingsToLocal(state.settings)
-      .catch(error => {
-        commit('ACTIVATE_SNACKBAR', {
-          color: 'red',
-          message: `There was a problem saving settings: ${error.message}`,
-        })
+    saveSettingsToLocal(state.settings).catch(error => {
+      commit('ACTIVATE_SNACKBAR', {
+        color: 'red',
+        message: `There was a problem saving settings: ${error.message}`,
       })
-      .finally(() => {
-        commit('UNSET_LOADING')
-      })
+    })
   },
 
   downloadSettings({ state }) {

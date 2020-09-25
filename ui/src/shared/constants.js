@@ -21,3 +21,24 @@ export const CONSEQUENCE_NAMES = [
   { id: 'synonymous_variant', name: 'synonymous_variant' },
   { id: 'upstream_gene_variant', name: 'upstream_gene_variant' },
 ]
+
+export const DEFAULT_VARIANT_SEARCH = {
+  name: 'None',
+  description: 'No filters applied',
+  custom: false,
+  filterConfig: {
+    posRange: [0, 16300],
+    allele: '',
+    selectedTypes: [],
+    selectedGenes: [],
+    selectedConsequences: [],
+    vafRange: [0, 1],
+    depthRange: [0, 10000],
+    disease: '',
+    mitoMap: '',
+    curatedRefs: '',
+    hgvsp: '',
+    hgvsc: '',
+    hgvs: '',
+  },
+}
