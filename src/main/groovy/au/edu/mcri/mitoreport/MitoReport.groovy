@@ -157,6 +157,32 @@ class MitoReport implements Runnable {
           'vcfFilename'        : sampleVcfFileName,
           'maternalVcfDir'     : null,
           'maternalVcfFilename': null,
+          'variantSearches'    : [
+            [
+              'name'        : 'Preset Filter 1',
+              'description' : 'Filter 1 description',
+              'custom'      : false,
+              'filterConfig': [
+                'posRange'            : [200, 16300],
+                'allele'              : 'A/C',
+                'selectedTypes'       : ['SNP', 'INS', 'DEL'],
+                'selectedConsequences': [],
+                'vafRange'            : [0.00001, 0.1],
+              ]
+            ],
+            [
+              'name'        : 'Preset Filter 2',
+              'description' : 'Filter 2 description',
+              'custom'      : false,
+              'filterConfig': [
+                'posRange'            : [0, 16500],
+                'selectedTypes'       : ['SNP', 'DEL'],
+                'selectedConsequences': [],
+                'vafRange'            : [0.00001, 0.05],
+                'depthRange'          : [500, 12000],
+              ],
+            ]
+          ],
         ]
       ]
     ]

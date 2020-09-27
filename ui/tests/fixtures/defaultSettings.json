@@ -3,12 +3,38 @@
   "samples": [
     {
       "id": "TestSample",
-      "bamDir": "/Users/tommyli/Development/mcri/mitoreport/tmp/",
-      "bamFilename": "15G002035-GM12878K_20pc_10kb_200.unshifted.bam",
-      "vcfDir": "/Users/tommyli/Development/mcri/mitoreport/tmp/",
-      "vcfFilename": "15G002035.unshifted.contamination.filtering.intermediatefilter.norm.dedup.mito_vep.vcf.gz",
+      "bamDir": "/tmp/bamDir/",
+      "bamFilename": "TestSample.bam",
+      "vcfDir": "/tmp/vcfDir/",
+      "vcfFilename": "TestSample.vcf.gz",
       "maternalVcfDir": null,
-      "maternalVcfFilename": null
+      "maternalVcfFilename": null,
+      "variantSearches": [
+        {
+          "name": "Preset Filter 1",
+          "description": "Filter 1 description",
+          "custom": false,
+          "filterConfig": {
+            "posRange": [200, 16300],
+            "allele": "A/C",
+            "selectedTypes": ["SNP", "INS", "DEL"],
+            "selectedConsequences": [],
+            "vafRange": [0.00001, 0.1]
+          }
+        },
+        {
+          "name": "Preset Filter 2",
+          "description": "Filter 2 description",
+          "custom": false,
+          "filterConfig": {
+            "posRange": [0, 16500],
+            "selectedTypes": ["SNP", "DEL"],
+            "selectedConsequences": [],
+            "vafRange": [0.00001, 0.05],
+            "depthRange": [500, 12000]
+          }
+        }
+      ]
     }
   ]
 }

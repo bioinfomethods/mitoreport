@@ -16,12 +16,25 @@ export async function getDeletions() {
   }
 }
 
+function concatSearches(objValue, srcValue, key) {
+  if (key === 'variantSearches') {
+    return _.unionBy((objValue || []).concat(srcValue || []), 'name')
+  } else {
+    return undefined
+  }
+}
+
 export async function loadSettings() {
   const defaultSettings = window.defaultSettings
   const fileSettings = window.settings
   const localStorageSettings = JSON.parse(localStorage.getItem('mitoSettings'))
 
-  const result = _.merge(defaultSettings, fileSettings, localStorageSettings)
+  const result = _.mergeWith(
+    defaultSettings,
+    fileSettings,
+    localStorageSettings,
+    concatSearches
+  )
 
   return {
     status: 200,

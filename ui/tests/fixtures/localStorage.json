@@ -23,8 +23,8 @@
           }
         },
         {
-          "name": "Custom Filter 2",
-          "description": "Custom 2 description",
+          "name": "Local Filter 2",
+          "description": "Local 2 description",
           "custom": true,
           "filterConfig": {
             "posRange": [200, 16300],
