@@ -22,19 +22,32 @@
         </template>
 
         <v-card>
-          <v-form id="save-settings-form" @submit.prevent="onSaveSettings">
+          <v-form
+            id="save-settings-form"
+            v-model="settingsForm.valid"
+            @submit.prevent="onSaveSettings"
+          >
             <v-card-title>Settings</v-card-title>
             <v-divider></v-divider>
             <v-text-field
-              name="inputBamDir"
-              :value="settingsBamDir"
-              :hint="bamDirInputHint"
-              @input="onBamDirChange"
+              name="inputNewBamDir"
+              v-model="settingsForm.newBamDir"
+              :rules="[rules.required]"
               label="BAM File Directory"
+              hint="replaced by message slot"
               persistent-hint
               class="px-4 py-8"
               maxlength="1000"
-            ></v-text-field>
+            >
+              <template v-slot:message>
+                <span
+                  >Directory to BAM File
+                  <span class="font-weight-bold">{{
+                    settingsBamFilename
+                  }}</span>
+                </span>
+              </template>
+            </v-text-field>
             <v-card-actions>
               <v-spacer></v-spacer>
               <v-btn text @click="settingsMenu = false">Cancel</v-btn>
@@ -91,16 +104,23 @@ import { SAVE_INTERVAL_MS } from '@/shared/constants'
 export default {
   name: 'App',
 
-  created() {
-    this.$store.dispatch('fetchData')
+  async mounted() {
+    await this.$store.dispatch('fetchData')
     this.saveInterval = setInterval(this.saveSettings, SAVE_INTERVAL_MS)
+    this.settingsForm.newBamDir = this.settingsBamDir
   },
 
   data: () => {
     return {
       saveInterval: null,
       settingsMenu: true,
-      newBamDir: 'not set',
+      settingsForm: {
+        valid: true,
+        newBamDir: '',
+      },
+      rules: {
+        required: value => !!value || 'Required.',
+      },
     }
   },
 
@@ -111,11 +131,11 @@ export default {
       return `Directory to BAM File ${this.settingsBamFilename}`
     },
     settingsSubmitDisabled() {
-      if (!this.settingsBamDir || this.newBamDir === 'not set') {
+      if (!this.settingsBamDir || !this.settingsForm.valid) {
         return true
       }
 
-      return this.newBamDir === this.settingsBamDir
+      return this.settingsForm.newBamDir === this.settingsBamDir
     },
   },
 
@@ -133,12 +153,12 @@ export default {
     },
 
     onBamDirChange: function(newBamDir) {
-      this.newBamDir = newBamDir
+      this.settingsForm.newBamDir = newBamDir
     },
 
     onSaveSettings: function() {
       // Keep form submission simple for now as there is only one input.
-      this.$store.dispatch('saveBamDir', this.newBamDir)
+      this.$store.dispatch('saveBamDir', this.settingsForm.newBamDir)
       this.settingsMenu = false
     },
   },

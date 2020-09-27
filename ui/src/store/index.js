@@ -116,7 +116,7 @@ export const mutations = {
 }
 
 export const actions = {
-  fetchData({ commit }) {
+  async fetchData({ commit }) {
     commit('SET_LOADING')
 
     Promise.all([loadSettings(), getVariants(), getDeletions()])

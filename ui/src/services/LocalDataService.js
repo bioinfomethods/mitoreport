@@ -1,6 +1,6 @@
 import * as _ from 'lodash'
 
-export function getVariants() {
+export async function getVariants() {
   return {
     status: 200,
     statusText: 'OK',
