@@ -195,7 +195,7 @@
           <td>
             <IgvLink
               :igvHost="igvHost"
-              :bamFile="bamFile"
+              :bamFile="settingsBamFile"
               :position="item.pos"
             ></IgvLink>
           </td>
@@ -277,7 +277,7 @@ export default {
 
   computed: {
     ...mapState(['variants', 'settings']),
-    ...mapGetters(['igvHost', 'bamFile', 'sampleSettings']),
+    ...mapGetters(['igvHost', 'settingsBamFile', 'sampleSettings']),
 
     allSavedSearches() {
       const result = [DEFAULT_VARIANT_SEARCH.name].concat(

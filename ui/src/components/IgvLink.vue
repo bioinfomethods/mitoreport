@@ -26,15 +26,15 @@ export default {
   },
 
   computed: {
-    ...mapGetters(['igvHost', 'bamFile']),
+    ...mapGetters(['igvHost', 'settingsBamFile']),
 
     igvUrl() {
-      if (!this.igvHost || !this.bamFile) {
+      if (!this.igvHost || !this.settingsBamFile) {
         return null
       }
 
       const result = `${this.igvHost}/load?file=file://${encodeURIComponent(
-        this.bamFile
+        this.settingsBamFile
       )}&locus=chrM:${this.position}`
       return result
     },

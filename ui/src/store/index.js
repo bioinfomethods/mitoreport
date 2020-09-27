@@ -45,9 +45,17 @@ export const getters = {
     return result || {}
   },
 
-  bamFile: state => {
-    const sampleBamDir = getters.sampleSettings(state).bamDir
-    const sampleBamFilename = getters.sampleSettings(state).bamFilename
+  settingsBamDir: state => {
+    return getters.sampleSettings(state).bamDir
+  },
+
+  settingsBamFilename: state => {
+    return getters.sampleSettings(state).bamFilename
+  },
+
+  settingsBamFile: state => {
+    const sampleBamDir = getters.settingsBamDir(state)
+    const sampleBamFilename = getters.settingsBamFilename(state)
     if (!sampleBamDir || !sampleBamFilename) {
       return null
     }
@@ -94,6 +102,10 @@ export const mutations = {
     state.deletions = deletions
   },
 
+  SET_BAM_DIR(state, newBamDir) {
+    getters.sampleSettings(state).bamDir = newBamDir
+  },
+
   ACTIVATE_SNACKBAR(state, options) {
     state.snackbar = _.merge(DEFAULT_SNACKBAR_OPTS, { active: true }, options)
   },
@@ -128,6 +140,10 @@ export const actions = {
         //   message: `There was a problem fetching data:`,
         // })
       })
+  },
+
+  saveBamDir({ commit }, newBamDir) {
+    commit('SET_BAM_DIR', newBamDir)
   },
 
   saveSettings({ commit, state }) {

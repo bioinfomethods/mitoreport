@@ -19,7 +19,7 @@ export async function getDeletions() {
 export async function loadSettings() {
   const defaultSettings = window.defaultSettings
   const fileSettings = window.settings
-  const localStorageSettings = JSON.parse(localStorage.getItem('mitoreport'))
+  const localStorageSettings = JSON.parse(localStorage.getItem('mitoSettings'))
 
   const result = _.merge(defaultSettings, fileSettings, localStorageSettings)
 
