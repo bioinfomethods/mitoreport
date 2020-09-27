@@ -36,7 +36,15 @@ export const getters = {
     )
   },
 
-  bamFile: () => {
+  settingsBamDir: () => {
+    return defaultSettings.sampleBamDir
+  },
+
+  settingsBamFilename: () => {
+    return defaultSettings.bamFilename
+  },
+
+  settingsBamFile: () => {
     return `${defaultSettings.sampleBamDir}${defaultSettings.sampleBamFilename}`
   },
 }
