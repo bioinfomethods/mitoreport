@@ -1,10 +1,9 @@
-import flushPromises from 'flush-promises'
-import * as _ from 'lodash'
 import { loadSettings } from '@/services/LocalDataService'
+import flushPromises from 'flush-promises'
 import DEFAULT_SETTINGS from '../fixtures/defaultSettings.json'
-import SETTINGS from '../fixtures/mitoSettings.json'
-import LOCAL_SETTINGS from '../fixtures/localStorage.json'
 import EXP_SETTINGS from '../fixtures/LocalDataService.spec.expected.json'
+import LOCAL_SETTINGS from '../fixtures/localStorage.json'
+import SETTINGS from '../fixtures/mitoSettings.json'
 
 describe('LocalDataService', () => {
   it('loadSettings()', async () => {
