@@ -113,6 +113,34 @@ export const mutations = {
   DEACTIVATE_SNACKBAR(state) {
     state.snackbar = _.merge(DEFAULT_SNACKBAR_OPTS, { active: false })
   },
+
+  SET_SAVED_SEARCH(state, searchConfig) {
+    const allCustomSearches = getters
+      .sampleSettings(state)
+      .variantSearches.filter(vs => {
+        return vs.custom
+      })
+    const existingSearch = allCustomSearches.find(vs => {
+      return vs.name === searchConfig.name
+    })
+    if (!existingSearch) {
+      getters.sampleSettings(state).variantSearches.push(searchConfig)
+    } else {
+      existingSearch.filterConfig = Object.assign(
+        {},
+        existingSearch.filterConfig,
+        searchConfig.filterConfig
+      )
+    }
+  },
+
+  DELETE_SAVED_SEARCH(state, searchToDelete) {
+    getters.sampleSettings(state).variantSearches = getters
+      .sampleSettings(state)
+      .variantSearches.filter(vs => {
+        return vs.name !== searchToDelete.name
+      })
+  },
 }
 
 export const actions = {
@@ -144,6 +172,16 @@ export const actions = {
 
   saveBamDir({ commit }, newBamDir) {
     commit('SET_BAM_DIR', newBamDir)
+  },
+
+  saveSearch({ commit }, searchConfig) {
+    commit('SET_SAVED_SEARCH', searchConfig)
+  },
+
+  deleteSearch({ commit }, searchToDelete) {
+    if (searchToDelete.custom) {
+      commit('DELETE_SAVED_SEARCH', searchToDelete)
+    }
   },
 
   saveSettings({ commit, state }) {

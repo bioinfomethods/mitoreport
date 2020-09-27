@@ -13,14 +13,12 @@
         v-model="settingsMenu"
         :close-on-content-click="false"
         :nudge-width="500"
-        offset-x
       >
         <template v-slot:activator="{ on, attrs }">
-          <v-btn icon large v-bind="attrs" v-on="on">
+          <v-btn icon large v-on="on" v-bind="attrs">
             <v-icon large>mdi-cog</v-icon>
           </v-btn>
         </template>
-
         <v-card>
           <v-form
             id="save-settings-form"
@@ -30,7 +28,6 @@
             <v-card-title>Settings</v-card-title>
             <v-divider></v-divider>
             <v-text-field
-              name="inputNewBamDir"
               v-model="settingsForm.newBamDir"
               :rules="[rules.required]"
               label="BAM File Directory"
@@ -104,7 +101,7 @@ import { SAVE_INTERVAL_MS } from '@/shared/constants'
 export default {
   name: 'App',
 
-  async mounted() {
+  async created() {
     await this.$store.dispatch('fetchData')
     this.saveInterval = setInterval(this.saveSettings, SAVE_INTERVAL_MS)
     this.settingsForm.newBamDir = this.settingsBamDir
@@ -113,7 +110,7 @@ export default {
   data: () => {
     return {
       saveInterval: null,
-      settingsMenu: true,
+      settingsMenu: false,
       settingsForm: {
         valid: true,
         newBamDir: '',

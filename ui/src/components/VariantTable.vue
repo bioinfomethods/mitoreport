@@ -1,14 +1,84 @@
 <template>
   <div>
     <v-card>
-      <v-card-title>Saved Search</v-card-title>
-      <v-select
-        v-model="selectedSavedSearch"
-        :items="allSavedSearches"
-        type="text"
-        label="Presets"
-        @change="onSavedSearchChange"
-      ></v-select>
+      <v-card-text>
+        <v-row align="start" justify="start">
+          <v-col md="1">
+            <span class="text-subtitle-1">Saved Search:</span>
+          </v-col>
+          <v-col md="2">
+            <v-select
+              v-model="selectedSavedSearch"
+              :items="allSavedSearches"
+              item-text=".name"
+              item-value=".name"
+              @change="onSavedSearchChange"
+              type="text"
+              label="Presets"
+              return-object
+              dense
+            >
+              <template v-slot:selection="{ item }">
+                <span>{{ item.name }}</span>
+              </template>
+            </v-select>
+          </v-col>
+          <v-col md="1">
+            <v-menu
+              v-model="searchFormMenu"
+              :close-on-content-click="false"
+              :nudge-width="500"
+            >
+              <template v-slot:activator="{ on, attrs }">
+                <v-btn icon v-on="on" v-bind="attrs">
+                  <v-icon>mdi-content-save</v-icon>
+                </v-btn>
+              </template>
+              <v-card>
+                <v-form
+                  id="save-search-form"
+                  v-model="searchForm.valid"
+                  @submit.prevent="onSaveSearch"
+                >
+                  <v-text-field
+                    v-model="searchForm.name"
+                    label="Name"
+                    class="px-4 pt-8 pb-4"
+                    maxlength="50"
+                    persistent-hint
+                    :hint="searchFormNameHint"
+                  ></v-text-field>
+                  <v-text-field
+                    v-model="searchForm.description"
+                    label="Description"
+                    class="px-4"
+                    maxlength="500"
+                  ></v-text-field>
+                  <v-card-actions>
+                    <v-spacer></v-spacer>
+                    <v-btn text @click="searchFormMenu = false">Cancel</v-btn>
+                    <v-btn
+                      type="submit"
+                      form="save-search-form"
+                      color="primary"
+                      text
+                      :disabled="saveSearchDisabled"
+                      >Save</v-btn
+                    >
+                  </v-card-actions>
+                </v-form>
+              </v-card>
+            </v-menu>
+            <v-btn
+              v-if="selectedSavedSearch.custom"
+              icon
+              @click.prevent="onDeleteSearch"
+            >
+              <v-icon>mdi-delete</v-icon>
+            </v-btn>
+          </v-col>
+        </v-row>
+      </v-card-text>
     </v-card>
     <v-card>
       <v-card-title></v-card-title>
@@ -248,7 +318,13 @@ export default {
         hgvsc: '',
         hgvs: '',
       },
-      selectedSavedSearch: DEFAULT_VARIANT_SEARCH.name,
+      searchForm: {
+        valid: true,
+        name: '',
+        description: '',
+      },
+      searchFormMenu: false,
+      selectedSavedSearch: DEFAULT_VARIANT_SEARCH,
       vafTicks: [
         0,
         0.00001,
@@ -279,12 +355,25 @@ export default {
     ...mapState(['variants', 'settings']),
     ...mapGetters(['igvHost', 'settingsBamFile', 'sampleSettings']),
 
+    saveSearchDisabled() {
+      return !this.searchForm.valid
+    },
+
     allSavedSearches() {
-      const result = [DEFAULT_VARIANT_SEARCH.name].concat(
-        (this.sampleSettings.variantSearches || []).map(vs => vs.name)
+      const all = [DEFAULT_VARIANT_SEARCH].concat(
+        this.sampleSettings.variantSearches
       )
+      const result = _.sortBy(all, ['custom', 'name'])
 
       return result
+    },
+
+    searchFormNameHint() {
+      if (this.selectedSavedSearch.custom) {
+        return 'Enter new name to save as new search'
+      }
+
+      return ''
     },
 
     MIN_POS() {
@@ -402,8 +491,8 @@ export default {
     onSavedSearchChange: function(value) {
       let savedSearch =
         (this.sampleSettings.variantSearches || []).find(vs => {
-          return vs.name === value
-        }) || DEFAULT_VARIANT_SEARCH
+          return vs.name === value.name
+        }) || DEFAULT_VARIANT_SEARCH.name
 
       let newFilterConfig = Object.assign(
         {},
@@ -418,6 +507,38 @@ export default {
         lowerIndex === -1 ? 0 : lowerIndex,
         upperIndex === -1 ? this.vafLastTickIndex : upperIndex,
       ])
+      if (this.selectedSavedSearch.custom) {
+        this.searchForm.name = this.selectedSavedSearch.name
+        this.searchForm.description = this.selectedSavedSearch.description
+      } else {
+        this.searchForm.name = ''
+        this.searchForm.description = ''
+      }
+    },
+
+    onSaveSearch: function() {
+      const toSave = {
+        name: this.searchForm.name,
+        description: this.searchForm.description,
+        custom: true,
+        filterConfig: this.filterConfig,
+      }
+      toSave.filterConfig.vafRange = [
+        this.vafTicks[this.vafIndexRange[0]],
+        this.vafTicks[this.vafIndexRange[1]],
+      ]
+      this.$store.dispatch('saveSearch', toSave)
+      this.selectedSavedSearch = this.allSavedSearches.find(ss => {
+        return ss.name === this.searchForm.name
+      })
+      this.searchFormMenu = false
+    },
+
+    onDeleteSearch: function() {
+      this.$store.dispatch('deleteSearch', this.selectedSavedSearch)
+      this.selectedSavedSearch = this.allSavedSearches.find(ss => {
+        return ss.name === DEFAULT_VARIANT_SEARCH.name
+      })
     },
 
     posFilter: function(value) {
