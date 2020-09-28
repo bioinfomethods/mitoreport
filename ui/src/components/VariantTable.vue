@@ -45,6 +45,7 @@
                     label="Name"
                     class="px-4 pt-8 pb-4"
                     maxlength="50"
+                    :rules="[rules.required]"
                     persistent-hint
                     :hint="searchFormNameHint"
                   ></v-text-field>
@@ -348,6 +349,9 @@ export default {
       tableFooterProps: {
         itemsPerPageOptions: [5, 10, 20, 50, -1],
       },
+      rules: {
+        required: value => !!value || 'Required.',
+      },
     }
   },
 
@@ -370,7 +374,7 @@ export default {
 
     searchFormNameHint() {
       if (this.selectedSavedSearch.custom) {
-        return 'Enter new name to save as new search'
+        return 'Enter a new name to save as new search'
       }
 
       return ''
@@ -539,6 +543,7 @@ export default {
       this.selectedSavedSearch = this.allSavedSearches.find(ss => {
         return ss.name === DEFAULT_VARIANT_SEARCH.name
       })
+      this.onSavedSearchChange(this.selectedSavedSearch)
     },
 
     posFilter: function(value) {
@@ -574,7 +579,7 @@ export default {
     },
 
     removeSelectedGene: function(toRemove) {
-      this.selectedGenes = this.filterConfig.selectedGenes.filter(
+      this.filterConfig.selectedGenes = this.filterConfig.selectedGenes.filter(
         selected => selected !== toRemove
       )
     },
@@ -585,7 +590,7 @@ export default {
 
     removeSelectedConsequence: function(toRemove) {
       this.filterConfig.selectedConsequences = this.filterConfig.selectedConsequences.filter(
-        selected => selected !== toRemove
+        selected => selected.id !== toRemove.id
       )
     },
 
