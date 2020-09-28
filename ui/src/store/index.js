@@ -39,18 +39,18 @@ export const getters = {
   },
 
   sampleSettings: state => {
-    const result = (state.settings.samples || []).find(
+    const result = (state.settings?.samples || []).find(
       sample => sample.id === getters.sample(state)
     )
     return result || {}
   },
 
   settingsBamDir: state => {
-    return getters.sampleSettings(state).bamDir
+    return getters.sampleSettings(state)?.bamDir
   },
 
   settingsBamFilename: state => {
-    return getters.sampleSettings(state).bamFilename
+    return getters.sampleSettings(state)?.bamFilename
   },
 
   settingsBamFile: state => {
@@ -115,22 +115,22 @@ export const mutations = {
   },
 
   SET_SAVED_SEARCH(state, searchConfig) {
+    if (!searchConfig || !searchConfig.name || !searchConfig.filterConfig) {
+      return
+    }
     const allCustomSearches = getters
       .sampleSettings(state)
       .variantSearches.filter(vs => {
         return vs.custom
       })
-    const existingSearch = allCustomSearches.find(vs => {
-      return vs.name === searchConfig.name
-    })
+    const existingSearch = allCustomSearches.find(
+      vs => vs.name === searchConfig.name
+    )
     if (!existingSearch) {
       getters.sampleSettings(state).variantSearches.push(searchConfig)
     } else {
-      existingSearch.filterConfig = Object.assign(
-        {},
-        existingSearch.filterConfig,
-        searchConfig.filterConfig
-      )
+      existingSearch.description = searchConfig.description
+      existingSearch.filterConfig = Object.assign({}, searchConfig.filterConfig)
     }
   },
 
@@ -163,10 +163,6 @@ export const actions = {
       })
       .finally(() => {
         commit('UNSET_LOADING')
-        // commit('ACTIVATE_SNACKBAR', {
-        //   color: 'red',
-        //   message: `There was a problem fetching data:`,
-        // })
       })
   },
 

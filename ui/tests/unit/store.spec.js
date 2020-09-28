@@ -1,5 +1,5 @@
 import * as dataService from '@/services/LocalDataService.js'
-import { actions, mutations } from '@/store'
+import { actions, mutations, getters } from '@/store'
 import flushPromises from 'flush-promises'
 import * as _ from 'lodash'
 import DEFAULT_SETTINGS from '../fixtures/defaultSettings.json'
@@ -57,6 +57,67 @@ const DELETIONS = {
 
 const expSettings = _.merge(DEFAULT_SETTINGS, SETTINGS)
 
+describe('root store getters', () => {
+  describe('sample', () => {
+    it.each`
+      deletions                                                                                           | expResult
+      ${null}                                                                                             | ${'No Sample'}
+      ${undefined}                                                                                        | ${'No Sample'}
+      ${{}}                                                                                               | ${'No Sample'}
+      ${[]}                                                                                               | ${'No Sample'}
+      ${{ TestSample: { coverage: [], splitReads: [] } }}                                                 | ${'TestSample'}
+      ${{ TestSample1: { coverage: [], splitReads: [] }, TestSample2: { coverage: [], splitReads: [] } }} | ${'TestSample1'}
+    `(
+      'Given deletions is $deletions, expect sample is $expResult',
+      ({ deletions, expResult }) => {
+        const state = {
+          deletions: deletions,
+        }
+        expect(getters.sample(state)).toEqual(expResult)
+      }
+    )
+  })
+
+  describe('sampleSettings', () => {
+    it.each`
+      settings                                                      | expResult
+      ${null}                                                       | ${{}}
+      ${undefined}                                                  | ${{}}
+      ${{ samples: [] }}                                            | ${{}}
+      ${{ samples: [{ id: 'TestSample' }] }}                        | ${{ id: 'TestSample' }}
+      ${{ samples: [{ id: 'TestSample' }, { id: 'TestSample2' }] }} | ${{ id: 'TestSample' }}
+    `(
+      'Given settings is $settings, expect sampleSettings is $expResult',
+      ({ settings, expResult }) => {
+        const state = {
+          settings: settings,
+        }
+        const mockSample = (getters.sample = jest.fn())
+        mockSample.mockReturnValue('TestSample')
+        expect(getters.sampleSettings(state)).toEqual(expResult)
+      }
+    )
+  })
+
+  describe('settingsBamFile', () => {
+    it.each`
+      sampleSettings                                  | expResult
+      ${null}                                         | ${null}
+      ${undefined}                                    | ${null}
+      ${{ bamDir: '', bamFilename: 'test.bam' }}      | ${null}
+      ${{ bamDir: '/tmp/', bamFilename: '' }}         | ${null}
+      ${{ bamDir: '/tmp/', bamFilename: 'test.bam' }} | ${'/tmp/test.bam'}
+    `(
+      'Given sampleSettings is $sampleSettings, expect settingsBamFile is $expResult',
+      ({ sampleSettings, expResult }) => {
+        const mockSampleSettings = (getters.sampleSettings = jest.fn())
+        mockSampleSettings.mockReturnValue(sampleSettings)
+        expect(getters.settingsBamFile({})).toEqual(expResult)
+      }
+    )
+  })
+})
+
 describe('root store mutations', () => {
   it('SET_LOADING', () => {
     const state = {
@@ -103,6 +164,90 @@ describe('root store mutations', () => {
       variants: [],
       deletions: DELETIONS,
     })
+  })
+
+  it('SET_SAVED_SEARCH skips invalid search config', () => {
+    const searchTest1 = {
+      name: 'Test1',
+      description: 'Test1 Desc',
+      custom: true,
+      filterConfig: {
+        posRange: [200, 16300],
+        allele: 'A',
+        selectedTypes: ['SNP', 'DEL'],
+      },
+    }
+
+    const currentSearches = [searchTest1]
+    const mockSampleSettings = (getters.sampleSettings = jest.fn())
+    mockSampleSettings.mockReturnValue({
+      id: 'TestSample',
+      variantSearches: currentSearches,
+    })
+
+    mutations.SET_SAVED_SEARCH({}, {})
+
+    expect(currentSearches).toEqual(currentSearches)
+  })
+
+  it('SET_SAVED_SEARCH creates new search when given new name', () => {
+    const searchTest1 = {
+      name: 'Test1',
+      description: 'Test1 Desc',
+      custom: true,
+      filterConfig: {
+        posRange: [200, 16300],
+        allele: 'A',
+        selectedTypes: ['SNP', 'DEL'],
+      },
+    }
+
+    const currentSearches = []
+    const mockSampleSettings = (getters.sampleSettings = jest.fn())
+    mockSampleSettings.mockReturnValue({
+      id: 'TestSample',
+      variantSearches: currentSearches,
+    })
+
+    mutations.SET_SAVED_SEARCH({}, searchTest1)
+
+    expect(currentSearches).toEqual([searchTest1])
+  })
+
+  it('SET_SAVED_SEARCH replaces existing search when given existing name', () => {
+    const searchTest1 = {
+      name: 'Test1',
+      description: 'Test1 Desc',
+      custom: true,
+      filterConfig: {
+        posRange: [200, 16300],
+        allele: 'A',
+        selectedTypes: ['SNP', 'DEL'],
+      },
+    }
+
+    const searchTest1b = {
+      name: 'Test1',
+      description: 'Test1b Desc',
+      custom: true,
+      filterConfig: {
+        posRange: [2000, 16300],
+        allele: 'T',
+        selectedTypes: ['SNP', 'INS'],
+        vafRange: [0.00001, 0.05],
+      },
+    }
+
+    const currentSearches = [searchTest1]
+    const mockSampleSettings = (getters.sampleSettings = jest.fn())
+    mockSampleSettings.mockReturnValue({
+      id: 'TestSample',
+      variantSearches: currentSearches,
+    })
+
+    mutations.SET_SAVED_SEARCH({}, searchTest1b)
+
+    expect(currentSearches).toEqual([searchTest1b])
   })
 })
 
