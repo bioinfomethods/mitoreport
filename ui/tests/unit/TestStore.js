@@ -1,14 +1,16 @@
+import { concatSearches } from '@/services/LocalDataService'
 import { DEFAULT_SNACKBAR_OPTS } from '@/shared/constants'
+import * as _ from 'lodash'
 import Vue from 'vue'
 import Vuex from 'vuex'
 import defaultSettings from '../fixtures/defaultSettings.json'
 import deletions from '../fixtures/deletions.json'
+import mitoSettings from '../fixtures/mitoSettings.json'
 import variants from '../fixtures/variants.json'
-
 Vue.use(Vuex)
 
 export const state = {
-  settings: defaultSettings,
+  settings: _.mergeWith(defaultSettings, mitoSettings, concatSearches),
   loading: false,
   snackbar: DEFAULT_SNACKBAR_OPTS,
   variants: variants,

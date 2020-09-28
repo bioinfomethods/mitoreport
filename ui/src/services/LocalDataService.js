@@ -16,7 +16,7 @@ export async function getDeletions() {
   }
 }
 
-function concatSearches(objValue, srcValue, key) {
+export function concatSearches(objValue, srcValue, key) {
   if (key === 'variantSearches') {
     return _.unionBy((objValue || []).concat(srcValue || []), 'name')
   } else {

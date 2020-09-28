@@ -88,7 +88,6 @@ describe('App.vue', () => {
         expect.anything(),
         '/tmp/newBamDir/'
       )
-      expect(true).toBe(true)
     })
   })
 })

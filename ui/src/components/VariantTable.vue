@@ -8,6 +8,7 @@
           </v-col>
           <v-col md="2">
             <v-select
+              id="inputSelectSavedSearch"
               v-model="selectedSavedSearch"
               :items="allSavedSearches"
               item-text=".name"
@@ -373,7 +374,7 @@ export default {
     },
 
     searchFormNameHint() {
-      if (this.selectedSavedSearch.custom) {
+      if (this.selectedSavedSearch?.custom) {
         return 'Enter a new name to save as new search'
       }
 
@@ -511,9 +512,9 @@ export default {
         lowerIndex === -1 ? 0 : lowerIndex,
         upperIndex === -1 ? this.vafLastTickIndex : upperIndex,
       ])
-      if (this.selectedSavedSearch.custom) {
-        this.searchForm.name = this.selectedSavedSearch.name
-        this.searchForm.description = this.selectedSavedSearch.description
+      if (value?.custom) {
+        this.searchForm.name = value.name
+        this.searchForm.description = value.description
       } else {
         this.searchForm.name = ''
         this.searchForm.description = ''
@@ -532,9 +533,10 @@ export default {
         this.vafTicks[this.vafIndexRange[1]],
       ]
       this.$store.dispatch('saveSearch', toSave)
-      this.selectedSavedSearch = this.allSavedSearches.find(ss => {
-        return ss.name === this.searchForm.name
-      })
+      this.selectedSavedSearch =
+        this.allSavedSearches.find(ss => {
+          return ss.name === this.searchForm.name
+        }) || DEFAULT_VARIANT_SEARCH
       this.searchFormMenu = false
     },
 
