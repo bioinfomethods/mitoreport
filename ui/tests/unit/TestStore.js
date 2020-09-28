@@ -19,6 +19,12 @@ export const mutations = {}
 
 export const actions = {
   fetchData() {},
+  saveBamDir() {},
+  saveSearch() {},
+  deleteSearch() {},
+  saveSettings() {},
+  downloadSettings() {},
+  closeSnackbar() {},
 }
 
 export const getters = {
@@ -36,16 +42,18 @@ export const getters = {
     )
   },
 
-  settingsBamDir: () => {
-    return defaultSettings.sampleBamDir
+  settingsBamDir: state => {
+    return getters.sampleSettings(state).bamDir
   },
 
   settingsBamFilename: () => {
-    return defaultSettings.bamFilename
+    return getters.sampleSettings(state).bamFilename
   },
 
-  settingsBamFile: () => {
-    return `${defaultSettings.sampleBamDir}${defaultSettings.sampleBamFilename}`
+  settingsBamFile: state => {
+    return `${getters.settingsBamDir(state)}${getters.settingsBamFilename(
+      state
+    )}`
   },
 }
 

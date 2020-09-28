@@ -6,7 +6,8 @@ import { createLocalVue, mount } from '@vue/test-utils'
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Vuetify from 'vuetify'
-import store from './TestStore'
+import Vuex from 'vuex'
+import store, { getters, mutations, state } from './TestStore'
 
 const app = document.createElement('div')
 app.setAttribute('data-app', true)
@@ -44,6 +45,50 @@ describe('App.vue', () => {
       expect(router.currentRoute.fullPath).toBe('/deletions')
       const deletionsView = underTest.findComponent(Deletions)
       expect(deletionsView.exists()).toBe(true)
+    })
+  })
+
+  describe('save settings', () => {
+    it('dispatches action to save', async () => {
+      const mockSaveBamDir = jest.fn()
+      const mockActions = {
+        saveBamDir: mockSaveBamDir,
+        fetchData: jest.fn(),
+      }
+
+      const LOCAL_VUE = createLocalVue()
+      LOCAL_VUE.use(VueRouter)
+      LOCAL_VUE.use(Vuex)
+
+      const store = new Vuex.Store({
+        state,
+        getters,
+        mutations,
+        actions: mockActions,
+        strict: process.env.NODE_ENV !== 'production',
+      })
+
+      let underTest = mount(App, {
+        LOCAL_VUE,
+        store,
+        router,
+        vuetify,
+      })
+
+      const btnSettingsMenu = underTest.find('#btnSettingsMenu')
+      await btnSettingsMenu.trigger('click')
+      const btnSubmitSaveSettings = underTest.find('#btnSubmitSaveSettings')
+      const inputNewBamDir = underTest.find('#inputNewBamDir')
+      await inputNewBamDir.setValue('/tmp/newBamDir/')
+      await btnSubmitSaveSettings.trigger('click')
+
+      expect(mockSaveBamDir).toHaveBeenCalledTimes(1)
+      expect(mockSaveBamDir).toHaveBeenNthCalledWith(
+        1,
+        expect.anything(),
+        '/tmp/newBamDir/'
+      )
+      expect(true).toBe(true)
     })
   })
 })

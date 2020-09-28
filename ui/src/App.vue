@@ -15,7 +15,7 @@
         :nudge-width="500"
       >
         <template v-slot:activator="{ on, attrs }">
-          <v-btn icon large v-on="on" v-bind="attrs">
+          <v-btn id="btnSettingsMenu" icon large v-on="on" v-bind="attrs">
             <v-icon large>mdi-cog</v-icon>
           </v-btn>
         </template>
@@ -28,6 +28,8 @@
             <v-card-title>Settings</v-card-title>
             <v-divider></v-divider>
             <v-text-field
+              id="inputNewBamDir"
+              name="inputNewBamDir"
               v-model="settingsForm.newBamDir"
               :rules="[rules.required]"
               label="BAM File Directory"
@@ -49,6 +51,7 @@
               <v-spacer></v-spacer>
               <v-btn text @click="settingsMenu = false">Cancel</v-btn>
               <v-btn
+                id="btnSubmitSaveSettings"
                 type="submit"
                 form="save-settings-form"
                 color="primary"
