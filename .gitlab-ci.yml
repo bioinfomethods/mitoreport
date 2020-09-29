@@ -1,12 +1,16 @@
-image: java:8
+image: gradle:alpine
 
 stages:
   - build
   - test
 
+variables:
+  GRADLE_OPTS: "-Dorg.gradle.daemon=false"
+
 before_script:
   - git submodule sync --recursive
   - git submodule update --init --recursive
+  - export GRADLE_USER_HOME=`pwd`/.gradle
 
 build:
   stage: build
