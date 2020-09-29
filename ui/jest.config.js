@@ -3,4 +3,6 @@ module.exports = {
   transform: {
     '^.+\\.vue$': 'vue-jest',
   },
+  collectCoverage: true,
+  coverageReporters: ['lcov', 'text-summary'],
 }

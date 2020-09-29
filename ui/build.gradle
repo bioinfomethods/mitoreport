@@ -36,5 +36,3 @@ task runLint(type: NpmTask, dependsOn: 'npm_install') {
   description = 'npm run lint'
   args = ['run', 'lint']
 }
-
-runBuild.dependsOn = ['runLint', 'runTestUnit']
