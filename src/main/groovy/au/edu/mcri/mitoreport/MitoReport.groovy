@@ -107,16 +107,21 @@ class MitoReport implements Runnable {
     if (runningContextPath.endsWith('jar')) {
       List<Path> mitoReportPaths = Collections.emptyList()
       URI jarFsUri = URI.create("jar:file:" + runningContextPath)
-      try (FileSystem fs = FileSystems.newFileSystem(jarFsUri, Collections.emptyMap())) {
+      FileSystem fs = null
+      try {
+        fs = FileSystems.newFileSystem(jarFsUri, Collections.emptyMap())
         mitoReportPaths = Files.walk(fs.getPath(MITO_REPORT_PATH_NAME))
-          .filter(Files::isRegularFile)
           .collect(Collectors.toList())
+          .findAll { Files.isRegularFile(it) }
+      }
+      finally {
+        fs.close()
       }
 
       // Each reportFilePath should already be in 'mitoreport' directory
       mitoReportPaths.each { Path reportFilePath ->
         String reportFilePathStr = reportFilePath.toString()
-        String jarResourcePath = reportFilePathStr.startsWith('/') ? reportFilePathStr.takeAfter('/') : reportFilePathStr
+        String jarResourcePath = reportFilePathStr.startsWith('/') ? reportFilePathStr[1..-1] : reportFilePathStr
         String outFileName = Paths.get('.', jarResourcePath)
         String containingDir = FilenameUtils.getFullPathNoEndSeparator(outFileName)
         FileUtils.forceMkdir(new File(containingDir))

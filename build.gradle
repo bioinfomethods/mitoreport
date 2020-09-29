@@ -19,26 +19,41 @@ configurations {
 }
 
 dependencies {
-  compileOnly(platform("io.micronaut:micronaut-bom:$micronautVersion"))
-  compileOnly("io.micronaut:micronaut-inject-groovy")
-  compileOnly("info.picocli:picocli-codegen:4.2.0")
-  implementation(platform("io.micronaut:micronaut-bom:$micronautVersion"))
-  implementation("io.micronaut:micronaut-inject")
-  implementation("io.micronaut:micronaut-validation")
-  implementation("io.micronaut.groovy:micronaut-runtime-groovy")
-  implementation("info.picocli:picocli")
-  implementation("io.micronaut.picocli:micronaut-picocli")
-  developmentOnly("io.micronaut:micronaut-runtime-osx:$micronautVersion")
-  runtimeOnly("ch.qos.logback:logback-classic")
-  testImplementation(enforcedPlatform("io.micronaut:micronaut-bom:$micronautVersion"))
-  testImplementation("io.micronaut:micronaut-inject-groovy")
+  annotationProcessor platform("io.micronaut:micronaut-bom:$micronautVersion")
+  annotationProcessor "io.micronaut.configuration:micronaut-picocli"
+  compileOnly platform("io.micronaut:micronaut-bom:$micronautVersion")
+  compileOnly "io.micronaut:micronaut-inject-groovy"
+  implementation platform("io.micronaut:micronaut-bom:$micronautVersion")
+  implementation "io.micronaut:micronaut-runtime"
+  implementation "io.micronaut:micronaut-runtime-groovy"
+  implementation "io.micronaut:micronaut-validation"
+  implementation "info.picocli:picocli"
+  implementation "io.micronaut.configuration:micronaut-picocli"
+  runtimeOnly "ch.qos.logback:logback-classic:1.2.3"
+  testCompileOnly platform("io.micronaut:micronaut-bom:$micronautVersion")
+  testImplementation platform("io.micronaut:micronaut-bom:$micronautVersion")
   testImplementation("org.spockframework:spock-core") {
     exclude group: "org.codehaus.groovy", module: "groovy-all"
   }
-  testImplementation("io.micronaut.test:micronaut-test-spock")
+  testImplementation "io.micronaut:micronaut-inject-groovy"
+  testImplementation "io.micronaut.test:micronaut-test-spock"
+  testImplementation "io.micronaut.test:micronaut-test-junit5"
 
   implementation files('gngs/build/libs/groovy-ngs-utils.jar')
+
+  // groovy-ngs-utils.jar is an uber jar with the following groovy modules.
+  // Here we force upgrade the version.
   implementation "org.codehaus.groovy:groovy-all:$groovyVersion"
+  implementation "org.codehaus.groovy:groovy-ant:$groovyVersion"
+  implementation "org.codehaus.groovy:groovy-cli-commons:$groovyVersion"
+  implementation "org.codehaus.groovy:groovy-cli-picocli:$groovyVersion"
+  implementation "org.codehaus.groovy:groovy-groovydoc:$groovyVersion"
+  implementation "org.codehaus.groovy:groovy-json:$groovyVersion"
+  implementation "org.codehaus.groovy:groovy-sql:$groovyVersion"
+  implementation "org.codehaus.groovy:groovy-templates:$groovyVersion"
+  implementation "org.codehaus.groovy:groovy-xml:$groovyVersion"
+  implementation "org.codehaus.groovy:groovy:$groovyVersion"
+
   implementation "commons-io:commons-io:$commonsIoVersion"
 }
 
@@ -58,6 +73,12 @@ java {
 
 tasks.withType(GroovyCompile) {
   groovyOptions.forkOptions.jvmArgs.add('-Dgroovy.parameters=true')
+}
+
+jar {
+  manifest {
+    attributes 'Main-Class': mainClassName
+  }
 }
 
 shadowJar {
@@ -101,4 +122,5 @@ task buildGngs(type: Exec) {
 
 test.dependsOn += ['ui:runTestUnit']
 check.dependsOn += ['ui:runLint']
-assemble.dependsOn += ['buildGngs', 'copyUiBuildToMitoOut']
+assemble.dependsOn += ['buildGngs']
+//assemble.dependsOn += ['buildGngs', 'copyUiBuildToMitoOut']
