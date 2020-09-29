@@ -123,3 +123,4 @@ task buildGngs(type: Exec) {
 test.dependsOn += ['ui:runTestUnit']
 check.dependsOn += ['ui:runLint']
 assemble.dependsOn += ['buildGngs', 'copyUiBuildToMitoOut']
+assemble.mustRunAfter 'check'

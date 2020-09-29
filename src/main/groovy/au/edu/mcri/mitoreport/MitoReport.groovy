@@ -29,7 +29,7 @@ class MitoReport implements Runnable {
   @Option(names = ['-s', '-sample', '--sample'], required = true, description = 'Sample ID')
   String sample
 
-  @Option(names = ['-r', '-region', '--region'], required = true, description = 'Chromosome region')
+  @Option(names = ['-r', '-region', '--region'], defaultValue = 'chrM:200-16300', required = true, description = 'Chromosome region')
   String region
 
   @Option(names = ['-ann', '-annotations', '--annotations'], required = true, description = 'Annotation file to apply to VCF')

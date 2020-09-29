@@ -34,15 +34,10 @@ Run build, i.e. everything
 
 ```bash
 java -jar build/libs/mitoreport-0.1-all.jar \
-  -region chrM:200-16300 \
   -sample 15G002035-GM12878K_20pc_10kb_200 \
   -vcf tmp/15G002035.unshifted.contamination.filtering.intermediatefilter.norm.dedup.mito_vep.vcf.gz \
   -ann tmp/mtDNAanalysis_annotations_20170501.csv \
-  tmp/15G002035-GM12878K_20pc_10kb_200.unshifted.bam \
-  tmp/190131_A00692_0007_ML182322_15G002033-GM12877_Man-20180711_NexteraDNAFLEX.unshifted.bam \
-  tmp/190131_A00692_0007_ML182323_15G002035-GM12878K_Man-20180711_NexteraDNAFLEX.unshifted.bam \
-  tmp/190131_A00692_0007_ML182324_15G002038-GM12879A_Man-20180711_NexteraDNAFLEX.unshifted.bam \
-  tmp/190131_A00692_0007_ML182326_16G007898-NA12892_Man-20180711_NexteraDNAFLEX.unshifted.bam
+  tmp/*.bam
 ```
 
 ## UI Development Only
