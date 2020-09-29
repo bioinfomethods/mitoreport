@@ -1,4 +1,4 @@
-image: gradle:alpine
+image: openjdk:8u191-jdk-alpine
 
 stages:
   - build
@@ -10,24 +10,14 @@ variables:
 before_script:
   - git submodule sync --recursive
   - git submodule update --init --recursive
-  - export GRADLE_USER_HOME=`pwd`/.gradle
 
 build:
   stage: build
-  script: gradle --build-cache assemble
-  cache:
-    key: "$CI_COMMIT_REF_NAME"
-    policy: push
+  script: ./gradlew assemble
+  artifacts:
     paths:
-      - build
-      - .gradle
+      - build/libs/*.jar
 
 test:
   stage: test
-  script: gradle --build-cache check
-  cache:
-    key: "$CI_COMMIT_REF_NAME"
-    policy: pull
-    paths:
-      - build
-      - .gradle
+  script: ./gradlew check
