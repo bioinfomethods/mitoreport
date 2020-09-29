@@ -1,4 +1,4 @@
-image: openjdk:8u191-jdk-alpine
+image: openjdk:11-stretch
 
 stages:
   - build
