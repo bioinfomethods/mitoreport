@@ -23,8 +23,7 @@ import picocli.CommandLine.Parameters
 @Command(name = 'mito-report', description = 'Mito Report', mixinStandardHelpOptions = true)
 class MitoReport implements Runnable {
 
-  private String mitoReportPathName = null
-
+  private static final String MITO_REPORT_PATH_NAME = 'mitoreport'
   private static final String DEFAULT_IGV_HOST = 'http://localhost:60151'
 
   @Option(names = ['-s', '-sample', '--sample'], required = true, description = 'Sample ID')
@@ -39,9 +38,6 @@ class MitoReport implements Runnable {
   @Option(names = ['-vcf'], required = true, description = 'VCF file for sample')
   File vcfFile
 
-  @Option(names = ['-o', '--output-dir'], required = false, description = 'Directory to write output to')
-  File outputDir
-
   @Parameters(paramLabel = "BAMS", arity = '1..*', description = "One or more BAM files")
   List<File> bamFiles
 
@@ -54,12 +50,6 @@ class MitoReport implements Runnable {
 
   void run() {
     (bamFiles + [vcfFile]).each { assert it.exists(), "${it.absolutePath} does not exist." }
-    
-    // Default to a directory named after the sample
-    if(!this.outputDir) 
-        this.outputDir = new File("mitoreport-$sample").absolutePath
-
-    this.mitoReportPathName = this.outputDir.absolutePath
 
     writeOutUi()
 
@@ -71,14 +61,14 @@ class MitoReport implements Runnable {
   }
 
   Map<String, File> createDeletionsPlot() {
-    File result = new File(Paths.get(mitoReportPathName, 'deletions.json').toUri())
+    File result = new File(Paths.get(MITO_REPORT_PATH_NAME, 'deletions.json').toUri())
 
     CliOptions dpOpts = new CliOptions(overrides: [
       'region'   : region,
-      'covo'     : Paths.get(mitoReportPathName, 'covo.tsv').toString(),
+      'covo'     : Paths.get(MITO_REPORT_PATH_NAME, 'covo.tsv').toString(),
       'sample'   : sample,
-      'covplot'  : Paths.get(mitoReportPathName, 'covo.png').toString(),
-      'srplot'   : Paths.get(mitoReportPathName, 'sr.png').toString(),
+      'covplot'  : Paths.get(MITO_REPORT_PATH_NAME, 'covo.png').toString(),
+      'srplot'   : Paths.get(MITO_REPORT_PATH_NAME, 'sr.png').toString(),
       'json'     : result.absolutePath,
       'arguments': bamFiles.collect { it.absolutePath }
     ])
@@ -97,7 +87,7 @@ class MitoReport implements Runnable {
       'vcf': vcfFile.absolutePath,
       'del': deletionsJson.absolutePath,
       'ann': annotations,
-      'o'  : mitoReportPathName,
+      'o'  : MITO_REPORT_PATH_NAME,
     ])
 
     Report mitoReport = new Report(opts: reportOpts)
@@ -107,7 +97,7 @@ class MitoReport implements Runnable {
   }
 
   void writeOutUi() {
-    File mitoreport = new File(Paths.get(mitoReportPathName).toUri())
+    File mitoreport = new File(Paths.get(MITO_REPORT_PATH_NAME).toUri())
     FileUtils.deleteQuietly(mitoreport)
     FileUtils.forceMkdir(mitoreport)
 
@@ -120,7 +110,7 @@ class MitoReport implements Runnable {
       FileSystem fs = null
       try {
         fs = FileSystems.newFileSystem(jarFsUri, Collections.emptyMap())
-        mitoReportPaths = Files.walk(fs.getPath(mitoReportPathName))
+        mitoReportPaths = Files.walk(fs.getPath(MITO_REPORT_PATH_NAME))
           .collect(Collectors.toList())
           .findAll { Files.isRegularFile(it) }
       }
@@ -143,17 +133,17 @@ class MitoReport implements Runnable {
       }
     }
     else {
-      resourceLoader.getResources("classpath:$mitoReportPathName").collect(Collectors.toList()).each { URL reportDir ->
+      resourceLoader.getResources("classpath:$MITO_REPORT_PATH_NAME").collect(Collectors.toList()).each { URL reportDir ->
         FileUtils.copyDirectory(new File(reportDir.toURI()), new File(mitoreport.toURI()))
       }
     }
   }
 
   void writeOutUiDataAndSettings(File deletionsJson, File sampleBamFile, File variantsJson) {
-    new File(Paths.get(mitoReportPathName, 'deletions.js').toUri())
+    new File(Paths.get(MITO_REPORT_PATH_NAME, 'deletions.js').toUri())
       .withWriter { it << 'window.deletions = ' + deletionsJson.text }
 
-    new File(Paths.get(mitoReportPathName, 'variants.js').toUri())
+    new File(Paths.get(MITO_REPORT_PATH_NAME, 'variants.js').toUri())
       .withWriter { it << 'window.variants = ' + variantsJson.text }
 
     String bamDir = FilenameUtils.getFullPath(sampleBamFile.absolutePath)
@@ -205,9 +195,9 @@ class MitoReport implements Runnable {
     String defaultSettingsJson = JsonOutput.prettyPrint(JsonOutput.toJson(defaultSettings))
     String settingsJson = JsonOutput.prettyPrint(JsonOutput.toJson([:]))
 
-    new File(Paths.get(mitoReportPathName, 'defaultSettings.js').toUri())
+    new File(Paths.get(MITO_REPORT_PATH_NAME, 'defaultSettings.js').toUri())
       .withWriter { it << 'window.defaultSettings = ' + defaultSettingsJson }
-    new File(Paths.get(mitoReportPathName, 'mitoSettings.js').toUri())
+    new File(Paths.get(MITO_REPORT_PATH_NAME, 'mitoSettings.js').toUri())
       .withWriter { it << 'window.settings = ' + settingsJson }
   }
 }
