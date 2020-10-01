@@ -35,6 +35,12 @@ export function iContainsFilter(input, value, showBlank = true) {
     .includes(safeInput.toString().toUpperCase())
 }
 
+export function predicateFilter(predicate, value) {
+  const safeValue = value || ''
+
+  return _.isFunction(predicate) && predicate(safeValue)
+}
+
 export function inSetFilter(set, value) {
   if (!set || set.length === 0) {
     return true

@@ -57,6 +57,19 @@ describe('variantFilters', () => {
     )
   })
 
+  describe('predicateFilter', () => {
+    it.each`
+      predicate    | value      | expResult
+      ${null}      | ${'hello'} | ${false}
+      ${undefined} | ${'hello'} | ${false}
+    `(
+      'predicateFilter($predicate, $value) is $expResult',
+      ({ predicate, value, expResult }) => {
+        expect(filters.predicateFilter(predicate, value)).toBe(expResult)
+      }
+    )
+  })
+
   describe('inSetFilter', () => {
     it.each`
       input             | value    | expResult

@@ -264,12 +264,17 @@
               ></v-text-field>
             </td>
             <td>
-              <v-text-field
-                v-model="filterConfig.curatedRefs"
+              <v-select
+                v-model="filterConfig.selectedCuratedRef"
+                :items="curatedRefs"
+                item-text=".name"
+                item-value=".name"
+                return-object
                 type="text"
-                label="Contains"
+                label="Select"
                 dense
-              ></v-text-field>
+              >
+              </v-select>
             </td>
             <td>
               <v-checkbox
@@ -350,6 +355,10 @@ export default {
     IgvLink,
   },
 
+  mounted() {
+    this.filterConfig.selectedCuratedRef = this.curatedRefs[0]
+  },
+
   data: () => {
     return {
       filterConfig: {
@@ -364,7 +373,7 @@ export default {
         diseaseShowBlank: false,
         mitoMap: '',
         mitoMapShowBlank: false,
-        curatedRefs: '',
+        selectedCuratedRef: {},
         hgvsp: '',
         hgvspShowBlank: false,
         hgvsc: '',
@@ -538,6 +547,23 @@ export default {
     vafLastTickIndex() {
       return this.vafTicks.length - 1
     },
+
+    curatedRefs() {
+      return [
+        {
+          name: 'All',
+          predicate: () => true,
+        },
+        {
+          name: '0',
+          predicate: value => value === 0,
+        },
+        {
+          name: '> 0',
+          predicate: value => value > 0,
+        },
+      ]
+    },
   },
 
   methods: {
@@ -671,7 +697,10 @@ export default {
     },
 
     curatedRefsFilter: function(value) {
-      return filters.iContainsFilter(this.filterConfig.curatedRefs, value)
+      return filters.predicateFilter(
+        this.filterConfig.selectedCuratedRef.predicate,
+        value
+      )
     },
 
     hgvspFilter: function(value) {

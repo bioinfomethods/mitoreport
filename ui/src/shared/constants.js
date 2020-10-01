@@ -34,7 +34,7 @@ export const DEFAULT_VARIANT_SEARCH = {
     depthRange: [0, 10000],
     disease: '',
     mitoMap: '',
-    curatedRefs: '',
+    selectedCuratedRef: {},
     hgvsp: '',
     hgvsc: '',
     hgvs: '',
