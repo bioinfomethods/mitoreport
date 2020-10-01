@@ -265,11 +265,10 @@
             </td>
             <td>
               <v-select
-                v-model="filterConfig.selectedCuratedRef"
+                v-model="filterConfig.selectedCuratedRefName"
                 :items="curatedRefs"
                 item-text=".name"
                 item-value=".name"
-                return-object
                 type="text"
                 label="Select"
                 dense
@@ -356,7 +355,7 @@ export default {
   },
 
   mounted() {
-    this.filterConfig.selectedCuratedRef = this.curatedRefs[0]
+    this.filterConfig.selectedCuratedRefName = this.curatedRefs[0].name
   },
 
   data: () => {
@@ -368,12 +367,12 @@ export default {
         selectedGenes: [],
         selectedConsequences: [],
         vafRange: [0, 1],
-        depthRange: [0, this?.maxReadDepth || 10000],
+        depthRange: [0, 0],
         disease: '',
         diseaseShowBlank: false,
         mitoMap: '',
         mitoMapShowBlank: false,
-        selectedCuratedRef: {},
+        selectedCuratedRefName: 'All',
         hgvsp: '',
         hgvspShowBlank: false,
         hgvsc: '',
@@ -600,7 +599,7 @@ export default {
         name: this.searchForm.name,
         description: this.searchForm.description,
         custom: true,
-        filterConfig: this.filterConfig,
+        filterConfig: { ...this.filterConfig },
       }
       toSave.filterConfig.vafRange = [
         this.vafTicks[this.vafIndexRange[0]],
@@ -697,10 +696,11 @@ export default {
     },
 
     curatedRefsFilter: function(value) {
-      return filters.predicateFilter(
-        this.filterConfig.selectedCuratedRef.predicate,
-        value
-      )
+      const selectedCuratedRef =
+        this.curatedRefs.find(
+          cr => cr.name === this.filterConfig.selectedCuratedRefName
+        ) || this.curatedRefs[0]
+      return filters.predicateFilter(selectedCuratedRef.predicate, value)
     },
 
     hgvspFilter: function(value) {

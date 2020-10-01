@@ -68,12 +68,12 @@ describe('VariantTable.vue', () => {
         selectedGenes: [],
         selectedConsequences: [],
         vafRange: [0.00001, 0.1],
-        depthRange: [0, 10000],
+        depthRange: [0, 999999],
         disease: '',
         diseaseShowBlank: false,
         mitoMap: '',
         mitoMapShowBlank: false,
-        selectedCuratedRef: {},
+        selectedCuratedRefName: 'All',
         hgvsp: '',
         hgvspShowBlank: false,
         hgvsc: '',
@@ -108,7 +108,7 @@ describe('VariantTable.vue', () => {
         diseaseShowBlank: false,
         mitoMap: '',
         mitoMapShowBlank: false,
-        selectedCuratedRef: {},
+        selectedCuratedRefName: 'All',
         hgvsp: '',
         hgvspShowBlank: false,
         hgvsc: '',
@@ -169,7 +169,7 @@ describe('VariantTable.vue', () => {
           diseaseShowBlank: false,
           mitoMap: '',
           mitoMapShowBlank: false,
-          selectedCuratedRef: {},
+          selectedCuratedRefName: 'All',
           hgvsp: '',
           hgvspShowBlank: false,
           hgvsc: '',
@@ -184,10 +184,6 @@ describe('VariantTable.vue', () => {
       underTest.vm.onSaveSearch()
 
       expect(mockSaveSearch).toHaveBeenCalledTimes(1)
-
-      console.log(
-        `filterConfig=${JSON.stringify(underTest.vm.$data.filterConfig)}`
-      )
 
       expect(mockSaveSearch).toHaveBeenNthCalledWith(1, expect.anything(), {
         name: 'Preset Filter 1',
@@ -205,10 +201,7 @@ describe('VariantTable.vue', () => {
           diseaseShowBlank: false,
           mitoMap: '',
           mitoMapShowBlank: false,
-          selectedCuratedRef: {
-            name: 'All',
-            predicate: expect.any(Function),
-          },
+          selectedCuratedRefName: 'All',
           hgvsp: '',
           hgvspShowBlank: false,
           hgvsc: '',

@@ -97,7 +97,8 @@ export const mutations = {
 
       return result
     })
-    state.maxReadDepth = _.maxBy(state.variants, ['DP'])?.DP || 0
+    const uniqReadDepths = _.union(state.variants.map(v => _.toNumber(v.DP)))
+    state.maxReadDepth = _.max(uniqReadDepths)
   },
 
   SET_DELETIONS(state, deletions) {
