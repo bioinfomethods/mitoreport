@@ -367,7 +367,7 @@ export default {
         selectedGenes: [],
         selectedConsequences: [],
         vafRange: [0, 1],
-        depthRange: [0, 0],
+        depthRange: [0, 999999],
         disease: '',
         diseaseShowBlank: false,
         mitoMap: '',
@@ -493,13 +493,11 @@ export default {
         {
           text: 'Disease',
           value: 'Disease',
-          width: '150',
           filter: this.diseaseFilter,
         },
         {
           text: 'MitoMap',
           value: 'Status_MitoMap',
-          width: '150',
           filter: this.mitoMapFilter,
         },
         {
