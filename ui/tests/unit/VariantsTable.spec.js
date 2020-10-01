@@ -70,11 +70,16 @@ describe('VariantTable.vue', () => {
         vafRange: [0.00001, 0.1],
         depthRange: [0, 10000],
         disease: '',
+        diseaseShowBlank: false,
         mitoMap: '',
+        mitoMapShowBlank: false,
         curatedRefs: '',
         hgvsp: '',
+        hgvspShowBlank: false,
         hgvsc: '',
+        hgvscShowBlank: false,
         hgvs: '',
+        hgvsShowBlank: false,
       })
       expect(underTest.vm.$data.vafIndexRange).toEqual([1, 10])
       expect(underTest.vm.$data.searchForm).toEqual({
@@ -100,11 +105,16 @@ describe('VariantTable.vue', () => {
         vafRange: [0.00001, 0.05],
         depthRange: [500, 12000],
         disease: '',
+        diseaseShowBlank: false,
         mitoMap: '',
+        mitoMapShowBlank: false,
         curatedRefs: '',
         hgvsp: '',
+        hgvspShowBlank: false,
         hgvsc: '',
+        hgvscShowBlank: false,
         hgvs: '',
+        hgvsShowBlank: false,
       })
       expect(underTest.vm.$data.vafIndexRange).toEqual([1, 9])
       expect(underTest.vm.$data.searchForm).toEqual({
@@ -182,11 +192,16 @@ describe('VariantTable.vue', () => {
           vafRange: [0.0001, 0.03],
           depthRange: [0, 10000],
           disease: '',
+          diseaseShowBlank: false,
           mitoMap: '',
+          mitoMapShowBlank: false,
           curatedRefs: '',
           hgvsp: '',
+          hgvspShowBlank: false,
           hgvsc: '',
+          hgvscShowBlank: false,
           hgvs: '',
+          hgvsShowBlank: false,
         },
       })
     })

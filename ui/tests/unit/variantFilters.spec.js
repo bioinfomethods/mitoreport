@@ -32,19 +32,27 @@ describe('variantFilters', () => {
 
   describe('iContainsFilter', () => {
     it.each`
-      input        | value        | expResult
-      ${null}      | ${'hello'}   | ${true}
-      ${undefined} | ${'hello'}   | ${true}
-      ${'hello'}   | ${'hello'}   | ${true}
-      ${'hello'}   | ${null}      | ${true}
-      ${'hello'}   | ${undefined} | ${true}
-      ${'hello'}   | ${''}        | ${true}
-      ${'ElL'}     | ${'hello'}   | ${true}
-      ${'hello'}   | ${'ElL'}     | ${false}
+      input        | value        | showBlank | expResult
+      ${null}      | ${'hello'}   | ${true}   | ${true}
+      ${undefined} | ${'hello'}   | ${true}   | ${true}
+      ${'hello'}   | ${'hello'}   | ${true}   | ${true}
+      ${'hello'}   | ${null}      | ${true}   | ${true}
+      ${'hello'}   | ${undefined} | ${true}   | ${true}
+      ${'hello'}   | ${''}        | ${true}   | ${true}
+      ${'ElL'}     | ${'hello'}   | ${true}   | ${true}
+      ${'hello'}   | ${'ElL'}     | ${true}   | ${false}
+      ${null}      | ${'hello'}   | ${false}  | ${true}
+      ${undefined} | ${'hello'}   | ${false}  | ${true}
+      ${'hello'}   | ${'hello'}   | ${false}  | ${true}
+      ${'hello'}   | ${null}      | ${false}  | ${false}
+      ${'hello'}   | ${undefined} | ${false}  | ${false}
+      ${'hello'}   | ${''}        | ${false}  | ${false}
+      ${'ElL'}     | ${'hello'}   | ${false}  | ${true}
+      ${'hello'}   | ${'ElL'}     | ${false}  | ${false}
     `(
-      'iContainsFilter($input, $value) is $expResult',
-      ({ input, value, expResult }) => {
-        expect(filters.iContainsFilter(input, value)).toBe(expResult)
+      'iContainsFilter($input, $value, $showBlank) is $expResult',
+      ({ input, value, showBlank, expResult }) => {
+        expect(filters.iContainsFilter(input, value, showBlank)).toBe(expResult)
       }
     )
   })

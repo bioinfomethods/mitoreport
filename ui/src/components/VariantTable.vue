@@ -117,6 +117,7 @@
                 v-model="filterConfig.allele"
                 type="text"
                 label="Contains"
+                dense
               ></v-text-field>
             </td>
             <td>
@@ -126,6 +127,7 @@
                 type="text"
                 label="Select"
                 multiple
+                dense
               >
                 <template v-slot:selection="{ item, index }">
                   <v-chip
@@ -149,6 +151,7 @@
                 type="text"
                 label="Select"
                 multiple
+                dense
               >
                 <template v-slot:selection="{ item, index }">
                   <v-chip
@@ -175,6 +178,7 @@
                 type="text"
                 label="Select"
                 multiple
+                dense
               >
                 <template v-slot:selection="{ item, index }">
                   <v-chip
@@ -231,17 +235,32 @@
               </v-range-slider>
             </td>
             <td>
+              <v-checkbox
+                v-model="filterConfig.diseaseShowBlank"
+                label="blanks"
+                :disabled="!filterConfig.disease"
+                small
+                dense
+              ></v-checkbox>
               <v-text-field
                 v-model="filterConfig.disease"
                 type="text"
                 label="Contains"
+                dense
               ></v-text-field>
             </td>
             <td>
+              <v-checkbox
+                v-model="filterConfig.mitoMapShowBlank"
+                :disabled="!filterConfig.mitoMap"
+                label="blanks"
+                dense
+              ></v-checkbox>
               <v-text-field
                 v-model="filterConfig.mitoMap"
                 type="text"
                 label="Contains"
+                dense
               ></v-text-field>
             </td>
             <td>
@@ -249,27 +268,49 @@
                 v-model="filterConfig.curatedRefs"
                 type="text"
                 label="Contains"
+                dense
               ></v-text-field>
             </td>
             <td>
+              <v-checkbox
+                v-model="filterConfig.hgvspShowBlank"
+                :disabled="!filterConfig.hgvsp"
+                label="blanks"
+                dense
+              ></v-checkbox>
               <v-text-field
                 v-model="filterConfig.hgvsp"
                 type="text"
                 label="Contains"
+                dense
               ></v-text-field>
             </td>
             <td>
+              <v-checkbox
+                v-model="filterConfig.hgvscShowBlank"
+                label="blanks"
+                :disabled="!filterConfig.hgvsc"
+                dense
+              ></v-checkbox>
               <v-text-field
                 v-model="filterConfig.hgvsc"
                 type="text"
                 label="Contains"
+                dense
               ></v-text-field>
             </td>
             <td>
+              <v-checkbox
+                v-model="filterConfig.hgvsShowBlank"
+                label="blanks"
+                :disabled="!filterConfig.hgvs"
+                dense
+              ></v-checkbox>
               <v-text-field
                 v-model="filterConfig.hgvs"
                 type="text"
                 label="Contains"
+                dense
               ></v-text-field>
             </td>
           </tr>
@@ -325,11 +366,16 @@ export default {
         vafRange: [0, 1],
         depthRange: [0, MAX_READ_DEPTH],
         disease: '',
+        diseaseShowBlank: false,
         mitoMap: '',
+        mitoMapShowBlank: false,
         curatedRefs: '',
         hgvsp: '',
+        hgvspShowBlank: false,
         hgvsc: '',
+        hgvscShowBlank: false,
         hgvs: '',
+        hgvsShowBlank: false,
       },
       searchForm: {
         valid: true,
@@ -460,7 +506,7 @@ export default {
         {
           text: 'Curated Refs',
           value: 'Curated References',
-          width: '100',
+          width: '120',
           filter: this.curatedRefsFilter,
         },
         {
@@ -618,11 +664,19 @@ export default {
     },
 
     diseaseFilter: function(value) {
-      return filters.iContainsFilter(this.filterConfig.disease, value)
+      return filters.iContainsFilter(
+        this.filterConfig.disease,
+        value,
+        this.filterConfig.diseaseShowBlank
+      )
     },
 
     mitoMapFilter: function(value) {
-      return filters.iContainsFilter(this.filterConfig.mitoMap, value)
+      return filters.iContainsFilter(
+        this.filterConfig.mitoMap,
+        value,
+        this.filterConfig.mitoMapShowBlank
+      )
     },
 
     curatedRefsFilter: function(value) {
@@ -630,15 +684,27 @@ export default {
     },
 
     hgvspFilter: function(value) {
-      return filters.iContainsFilter(this.filterConfig.hgvsp, value)
+      return filters.iContainsFilter(
+        this.filterConfig.hgvsp,
+        value,
+        this.filterConfig.hgvspShowBlank
+      )
     },
 
     hgvscFilter: function(value) {
-      return filters.iContainsFilter(this.filterConfig.hgvsc, value)
+      return filters.iContainsFilter(
+        this.filterConfig.hgvsc,
+        value,
+        this.filterConfig.hgvscShowBlank
+      )
     },
 
     hgvsFilter: function(value) {
-      return filters.iContainsFilter(this.filterConfig.hgvs, value)
+      return filters.iContainsFilter(
+        this.filterConfig.hgvs,
+        value,
+        this.filterConfig.hgvsShowBlank
+      )
     },
   },
 }

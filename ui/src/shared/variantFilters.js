@@ -23,13 +23,16 @@ export function rangeTextFilter(input, value) {
   }
 }
 
-export function iContainsFilter(input, value) {
-  if (!input || !value) return true
+export function iContainsFilter(input, value, showBlank = true) {
+  const safeInput = input || ''
+  const safeValue = value || ''
 
-  return value
+  if (showBlank && !safeValue) return true
+
+  return safeValue
     .toString()
     .toUpperCase()
-    .includes(input.toString().toUpperCase())
+    .includes(safeInput.toString().toUpperCase())
 }
 
 export function inSetFilter(set, value) {
