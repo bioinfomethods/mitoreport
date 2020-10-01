@@ -124,12 +124,23 @@
                 v-model="filterConfig.selectedTypes"
                 :items="types"
                 type="text"
-                chips
                 label="Select"
                 multiple
-                deletable-chips
-                small-chips
-              ></v-select>
+              >
+                <template v-slot:selection="{ item, index }">
+                  <v-chip
+                    v-if="index <= 3"
+                    close
+                    @click:close="removeSelectedType(item)"
+                    x-small
+                  >
+                    <span>{{ item }}</span>
+                  </v-chip>
+                  <span v-if="index === 4" class="grey--text caption"
+                    >(+{{ filterConfig.selectedTypes.length - 4 }} others)</span
+                  >
+                </template>
+              </v-select>
             </td>
             <td>
               <v-select
@@ -399,7 +410,7 @@ export default {
           text: 'Position',
           align: 'start',
           value: 'pos',
-          width: '150',
+          width: '120',
           filter: this.posFilter,
         },
         {
@@ -408,30 +419,30 @@ export default {
           width: '180',
           filter: this.alleleFilter,
         },
-        { text: 'Type', value: 'type', width: '200', filter: this.typesFilter },
+        { text: 'Type', value: 'type', width: '100', filter: this.typesFilter },
         {
           text: 'Gene',
           value: 'symbol',
-          width: '250',
+          width: '150',
           filter: this.genesFilter,
         },
         {
           text: 'Consequence',
           value: 'consequence',
-          width: '250',
+          width: '180',
           sort: this.consequenceSort,
           filter: this.consequencesFilter,
         },
         {
           text: 'VAF',
           value: 'genotypes[0].AF',
-          width: '130',
+          width: '120',
           filter: this.vafFilter,
         },
         {
           text: 'Depth',
           value: 'genotypes[0].DP',
-          width: '130',
+          width: '120',
           filter: this.depthFilter,
         },
         {
@@ -578,6 +589,12 @@ export default {
 
     genesFilter: function(value) {
       return filters.inSetFilter(this.filterConfig.selectedGenes, value)
+    },
+
+    removeSelectedType: function(toRemove) {
+      this.filterConfig.selectedTypes = this.filterConfig.selectedTypes.filter(
+        selected => selected !== toRemove
+      )
     },
 
     removeSelectedGene: function(toRemove) {
