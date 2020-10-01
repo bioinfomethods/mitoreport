@@ -228,7 +228,7 @@
               <v-range-slider
                 v-model="filterConfig.depthRange"
                 :min="0"
-                :max="MAX_READ_DEPTH"
+                :max="maxReadDepth"
                 step="100"
                 hide-details
               >
@@ -340,12 +340,7 @@ import { mapState, mapGetters } from 'vuex'
 import IgvLink from '@/components/IgvLink'
 import * as filters from '@/shared/variantFilters'
 import * as _ from 'lodash'
-import {
-  MIN_POS,
-  MAX_POS,
-  MAX_READ_DEPTH,
-  DEFAULT_VARIANT_SEARCH,
-} from '@/shared/constants'
+import { MIN_POS, MAX_POS, DEFAULT_VARIANT_SEARCH } from '@/shared/constants'
 
 export default {
   name: 'VariantTable',
@@ -364,7 +359,7 @@ export default {
         selectedGenes: [],
         selectedConsequences: [],
         vafRange: [0, 1],
-        depthRange: [0, MAX_READ_DEPTH],
+        depthRange: [0, this?.maxReadDepth || 10000],
         disease: '',
         diseaseShowBlank: false,
         mitoMap: '',
@@ -414,7 +409,7 @@ export default {
   },
 
   computed: {
-    ...mapState(['variants', 'settings']),
+    ...mapState(['variants', 'maxReadDepth', 'settings']),
     ...mapGetters(['igvHost', 'settingsBamFile', 'sampleSettings']),
 
     saveSearchDisabled() {
@@ -444,10 +439,6 @@ export default {
 
     MAX_POS() {
       return MAX_POS
-    },
-
-    MAX_READ_DEPTH() {
-      return MAX_READ_DEPTH
     },
 
     headers() {
@@ -705,6 +696,12 @@ export default {
         value,
         this.filterConfig.hgvsShowBlank
       )
+    },
+  },
+
+  watch: {
+    maxReadDepth: function() {
+      this.filterConfig.depthRange = [0, this.maxReadDepth]
     },
   },
 }

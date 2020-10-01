@@ -17,6 +17,7 @@ export const state = {
   loading: false,
   snackbar: { ...DEFAULT_SNACKBAR_OPTS },
   variants: [],
+  maxReadDepth: 0,
   deletions: {},
 }
 
@@ -96,6 +97,7 @@ export const mutations = {
 
       return result
     })
+    state.maxReadDepth = _.maxBy(state.variants, ['DP'])?.DP || 0
   },
 
   SET_DELETIONS(state, deletions) {

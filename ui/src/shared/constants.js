@@ -2,8 +2,6 @@ export const MIN_POS = 200
 
 export const MAX_POS = 16300
 
-export const MAX_READ_DEPTH = 10000
-
 export const SAVE_INTERVAL_MS = 5000
 
 export const DEFAULT_SNACKBAR_OPTS = {

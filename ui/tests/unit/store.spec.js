@@ -16,6 +16,7 @@ const VARIANTS = [
       id: 'missense_variant',
       rank: 10,
     },
+    DP: 4858,
   },
   {
     chr: 'chrM',
@@ -27,6 +28,7 @@ const VARIANTS = [
       id: 'inframe_deletion',
       rank: 9,
     },
+    DP: 3858,
   },
 ]
 
@@ -146,6 +148,7 @@ describe('root store mutations', () => {
     expect(state).toEqual({
       loading: false,
       variants: expVariants,
+      maxReadDepth: 4858,
       deletions: {},
     })
   })
