@@ -1,4 +1,4 @@
-image: adoptopenjdk:8-hotspot-bionic
+image: ubuntu:bionic
 
 stages:
   - build
