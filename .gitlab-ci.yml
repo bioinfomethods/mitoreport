@@ -13,7 +13,7 @@ build:
     - gradle:jdk8
     - docker
   script:
-    - ./gradlew --build-cache
+    - ./gradlew --build-cache -g /cache --info
   cache:
     key: "$CI_COMMIT_REF_NAME"
     paths:
