@@ -2,29 +2,24 @@ image: gradle:jdk8
 
 stages:
   - build
-  - test
 
 variables:
+  GIT_STRATEGY: recursive
   GRADLE_OPTS: "-Dorg.gradle.daemon=false"
-
-before_script:
-  - git submodule sync --recursive
-  - git submodule update --init --recursive
 
 build:
   stage: build
   tags:
     - gradle:jdk8
+    - docker
   script:
-    - command -v java
-    - ./gradlew assemble
-
-  artifacts:
+    - ./gradlew --build-cache
+  cache:
+    key: "$CI_COMMIT_REF_NAME"
+    paths:
+      - build
+      - .gradle
+      - ui/node_modules
+    artifacts:
     paths:
       - build/libs/*.jar
-
-test:
-  stage: test
-  tags:
-    - docker
-  script: ./gradlew check
