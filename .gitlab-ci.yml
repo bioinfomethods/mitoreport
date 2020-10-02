@@ -14,12 +14,9 @@ before_script:
 build:
   stage: build
   tags:
-    - docker
+    - gradle:jdk8
   script:
-    - java -version
     - command -v java
-    - whereis java
-    - which java
     - ./gradlew assemble
 
   artifacts:
