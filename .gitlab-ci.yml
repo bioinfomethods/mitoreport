@@ -10,14 +10,16 @@ variables:
 before_script:
   - git submodule sync --recursive
   - git submodule update --init --recursive
-  - java -version
-  - command -v java
-  - whereis java
-  - which java
 
 build:
   stage: build
-  script: ./gradlew assemble
+  script:
+    - java -version
+    - command -v java
+    - whereis java
+    - which java
+    - ./gradlew assemble
+
   artifacts:
     paths:
       - build/libs/*.jar
