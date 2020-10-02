@@ -1,5 +1,8 @@
 image: adoptopenjdk:8-hotspot-bionic
 
+tags:
+  - docker
+
 stages:
   - build
   - test
