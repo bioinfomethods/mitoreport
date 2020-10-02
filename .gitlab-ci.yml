@@ -20,6 +20,6 @@ build:
       - build
       - .gradle
       - ui/node_modules
-    artifacts:
+  artifacts:
     paths:
       - build/libs/*.jar
