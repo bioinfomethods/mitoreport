@@ -13,20 +13,20 @@ node {
   download = true
 }
 
-npm_install.configure {
+npmInstall.configure {
   inputs.files('package.json', 'package-lock.json').withPropertyName('packageFiles')
 
   outputs.cacheIf { true }
   outputs.dir('node_modules').withPropertyName('nodeModules')
 }
 
-task runServe(type: NpmTask, dependsOn: 'npm_install') {
+task runServe(type: NpmTask, dependsOn: 'npmInstall') {
   group = 'development'
   description = 'npm run serve'
   args = ['run', 'serve']
 }
 
-task runBuild(type: NpmTask, dependsOn: 'npm_install') {
+task runBuild(type: NpmTask, dependsOn: 'npmInstall') {
   group = 'build'
   description = 'npm run build'
   args = ['run', 'build']
@@ -39,13 +39,13 @@ task runBuild(type: NpmTask, dependsOn: 'npm_install') {
   outputs.dir('dist').withPropertyName('dist')
 }
 
-task runTestUnit(type: NpmTask, dependsOn: 'npm_install') {
+task runTestUnit(type: NpmTask, dependsOn: 'npmInstall') {
   group = 'verification'
   description = 'npm run test:unit'
   args = ['run', 'test:unit']
 }
 
-task runLint(type: NpmTask, dependsOn: 'npm_install') {
+task runLint(type: NpmTask, dependsOn: 'npmInstall') {
   group = 'verification'
   description = 'npm run lint'
   args = ['run', 'lint']
