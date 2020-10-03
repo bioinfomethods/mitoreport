@@ -13,6 +13,15 @@ node {
   download = true
 }
 
+npm_install.configure {
+  inputs.files('package.json', 'package-lock.json')
+    .withPropertyName("packageFiles")
+    .withPathSensitivity(PathSensitivity.RELATIVE)
+  outputs.cacheIf { true }
+  outputs.dir("node_modules")
+    .withPropertyName("nodeModules")
+}
+
 task runServe(type: NpmTask, dependsOn: 'npm_install') {
   group = 'development'
   description = 'npm run serve'
@@ -23,6 +32,14 @@ task runBuild(type: NpmTask, dependsOn: 'npm_install') {
   group = 'build'
   description = 'npm run build'
   args = ['run', 'build']
+
+  inputs.dir('public')
+    .withPropertyName("public")
+  inputs.dir('src')
+    .withPropertyName("src")
+  outputs.cacheIf { true }
+  outputs.dir("$buildDir/dist")
+    .withPropertyName("dist")
 }
 
 task runTestUnit(type: NpmTask, dependsOn: 'npm_install') {
