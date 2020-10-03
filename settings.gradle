@@ -4,7 +4,6 @@ include "ui"
 
 buildCache {
   local {
-    directory = new File('/cache')
     removeUnusedEntriesAfterDays = 30
   }
 }
