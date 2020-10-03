@@ -102,15 +102,16 @@ task cleanMitoOut(type: Delete) {
   delete mitoOut
 }
 
-task copyUiBuildToMitoOut(dependsOn: ['cleanMitoOut', ':ui:runBuild']) {
+task copyUiBuildToMitoOut(type: Copy, dependsOn: ['cleanMitoOut', ':ui:runBuild']) {
   group = 'build'
   description 'Copy UI build output into application resources'
-  doLast {
-    copy {
-      from "${project(':ui').projectDir}/dist"
-      into mitoOut
-    }
-  }
+
+  from project(':ui').getTasksByName('runBuild', false).first().outputs
+  into mitoOut
+}
+
+shadowJar.configure {
+  inputs.dir(mitoOut).withPropertyName('mitoOut')
 }
 
 task buildGngs(type: Exec) {

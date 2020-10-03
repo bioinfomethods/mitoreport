@@ -1,8 +1,8 @@
 plugins {
-  id "com.github.node-gradle.node" version "2.2.4"
+  id 'com.github.node-gradle.node' version '2.2.4'
 }
 
-description = "Mito Report UI"
+description = 'Mito Report UI'
 
 defaultTasks 'runTestUnit', 'runLint', 'runBuild'
 
@@ -13,13 +13,14 @@ node {
   download = true
 }
 
+FileTree uiFt = fileTree('.') {
+  include '**/*'
+  excludes = ['.*', 'node_modules', 'coverage', 'dist']
+}
+
 npm_install.configure {
-  inputs.files('package.json', 'package-lock.json')
-    .withPropertyName("packageFiles")
-    .withPathSensitivity(PathSensitivity.RELATIVE)
-  outputs.cacheIf { true }
-  outputs.dir("node_modules")
-    .withPropertyName("nodeModules")
+  inputs.files('package.json', 'package-lock.json').withPropertyName('packageFiles')
+  outputs.dir('node_modules').withPropertyName('nodeModules')
 }
 
 task runServe(type: NpmTask, dependsOn: 'npm_install') {
@@ -33,23 +34,22 @@ task runBuild(type: NpmTask, dependsOn: 'npm_install') {
   description = 'npm run build'
   args = ['run', 'build']
 
-  inputs.dir('public')
-    .withPropertyName("public")
-  inputs.dir('src')
-    .withPropertyName("src")
-  outputs.cacheIf { true }
-  outputs.dir("$buildDir/dist")
-    .withPropertyName("dist")
+  inputs.files(uiFt).withPropertyName('ui')
+  outputs.dir('dist').withPropertyName('dist')
 }
 
 task runTestUnit(type: NpmTask, dependsOn: 'npm_install') {
   group = 'verification'
   description = 'npm run test:unit'
   args = ['run', 'test:unit']
+
+  inputs.files(uiFt).withPropertyName('ui')
 }
 
 task runLint(type: NpmTask, dependsOn: 'npm_install') {
   group = 'verification'
   description = 'npm run lint'
   args = ['run', 'lint']
+
+  inputs.files(uiFt).withPropertyName('ui')
 }
