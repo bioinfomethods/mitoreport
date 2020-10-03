@@ -5,7 +5,8 @@ stages:
 
 variables:
   GIT_STRATEGY: recursive
-  GRADLE_OPTS: "-Dorg.gradle.daemon=false"
+  GRADLE_OPTS: '-Dorg.gradle.daemon=false'
+  GRADLE_USER_HOME: /cache
 
 build:
   stage: build
@@ -13,13 +14,7 @@ build:
     - gradle:jdk8
     - docker
   script:
-    - ./gradlew --build-cache -g /cache --info
-  cache:
-    key: "$CI_COMMIT_REF_NAME"
-    paths:
-      - build
-      - .gradle
-      - ui/node_modules
+    - ./gradlew --build-cache --info
   artifacts:
     paths:
       - build/libs/*.jar
