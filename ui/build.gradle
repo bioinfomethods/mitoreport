@@ -13,13 +13,10 @@ node {
   download = true
 }
 
-FileTree uiFt = fileTree('.') {
-  include '**/*'
-  excludes = ['.*', 'node_modules', 'coverage', 'dist']
-}
-
 npm_install.configure {
   inputs.files('package.json', 'package-lock.json').withPropertyName('packageFiles')
+
+  outputs.cacheIf { true }
   outputs.dir('node_modules').withPropertyName('nodeModules')
 }
 
@@ -34,6 +31,10 @@ task runBuild(type: NpmTask, dependsOn: 'npm_install') {
   description = 'npm run build'
   args = ['run', 'build']
 
+  FileTree uiFt = fileTree('.') {
+    include '**/*'
+    excludes = ['.*', 'node_modules', 'coverage', 'dist']
+  }
   inputs.files(uiFt).withPropertyName('ui')
   outputs.dir('dist').withPropertyName('dist')
 }
@@ -42,14 +43,10 @@ task runTestUnit(type: NpmTask, dependsOn: 'npm_install') {
   group = 'verification'
   description = 'npm run test:unit'
   args = ['run', 'test:unit']
-
-  inputs.files(uiFt).withPropertyName('ui')
 }
 
 task runLint(type: NpmTask, dependsOn: 'npm_install') {
   group = 'verification'
   description = 'npm run lint'
   args = ['run', 'lint']
-
-  inputs.files(uiFt).withPropertyName('ui')
 }
