@@ -119,6 +119,9 @@ task buildGngs(type: Exec) {
   description 'Build groovy-ngs-utils module dependency'
   workingDir './gngs'
   commandLine './gradlew', 'jar'
+
+  inputs.dir('gngs').withPropertyName('gngs')
+  outputs.file('gngs/build/libs/groovy-ngs-utils.jar').withPropertyName('gngsJar')
 }
 
 test.dependsOn += ['ui:runTestUnit']
