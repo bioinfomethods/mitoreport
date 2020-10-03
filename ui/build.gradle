@@ -13,13 +13,6 @@ node {
   download = true
 }
 
-npmInstall.configure {
-  inputs.files('package.json', 'package-lock.json').withPropertyName('packageFiles')
-
-  outputs.cacheIf { true }
-  outputs.dir('node_modules').withPropertyName('nodeModules')
-}
-
 task runServe(type: NpmTask, dependsOn: 'npmInstall') {
   group = 'development'
   description = 'npm run serve'
@@ -31,11 +24,6 @@ task runBuild(type: NpmTask, dependsOn: 'npmInstall') {
   description = 'npm run build'
   args = ['run', 'build']
 
-  FileTree uiFt = fileTree('.') {
-    include '**/*'
-    excludes = ['.*', 'node_modules', 'coverage', 'dist']
-  }
-  inputs.files(uiFt).withPropertyName('ui')
   outputs.dir('dist').withPropertyName('dist')
 }
 
