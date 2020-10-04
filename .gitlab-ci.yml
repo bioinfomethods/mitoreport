@@ -14,7 +14,7 @@ build:
     - gradle:jdk8
     - docker
   script:
-    - ./gradlew --build-cache --info
+    - ./gradlew clean --build-cache --info
   artifacts:
     paths:
       - build/libs/*.jar
