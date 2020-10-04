@@ -4,7 +4,7 @@ stages:
   - build
 
 variables:
-  GIT_STRATEGY: recursive
+  GIT_SUBMODULE_STRATEGY: recursive
   GRADLE_OPTS: '-Dorg.gradle.daemon=false'
   GRADLE_USER_HOME: /cache
 
