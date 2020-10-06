@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-card>
-      <v-card-text>
+      <v-card-text class='py-0 my-0'>
         <v-row align="start" justify="start">
           <v-col md="1">
             <span class="text-subtitle-1">Saved Search:</span>
@@ -93,13 +93,13 @@
         dense
       >
         <template v-slot:body.prepend>
-          <tr>
+          <tr class='paddedrow'>
             <td>
               <v-row class="px-4 justify-space-between">
-                <span class="grey--text text--darken-1">{{
+                <span class="grey--text text--darken-1 text-caption" >{{
                   filterConfig.posRange[0]
                 }}</span>
-                <span class="grey--text text--darken-1">{{
+                <span class="grey--text text--darken-1 text-caption">{{
                   filterConfig.posRange[1]
                 }}</span>
               </v-row>
@@ -235,13 +235,6 @@
               </v-range-slider>
             </td>
             <td>
-              <v-checkbox
-                v-model="filterConfig.diseaseShowBlank"
-                label="blanks"
-                :disabled="!filterConfig.disease"
-                small
-                dense
-              ></v-checkbox>
               <v-text-field
                 v-model="filterConfig.disease"
                 type="text"
@@ -250,12 +243,6 @@
               ></v-text-field>
             </td>
             <td>
-              <v-checkbox
-                v-model="filterConfig.mitoMapShowBlank"
-                :disabled="!filterConfig.mitoMap"
-                label="blanks"
-                dense
-              ></v-checkbox>
               <v-text-field
                 v-model="filterConfig.mitoMap"
                 type="text"
@@ -270,32 +257,21 @@
                 item-text=".name"
                 item-value=".name"
                 type="text"
-                label="Select"
+                no-data-text="Select"
                 dense
               >
               </v-select>
             </td>
             <td>
-              <v-checkbox
-                v-model="filterConfig.hgvspShowBlank"
-                :disabled="!filterConfig.hgvsp"
-                label="blanks"
-                dense
-              ></v-checkbox>
               <v-text-field
                 v-model="filterConfig.hgvsp"
                 type="text"
                 label="Contains"
+                single-line
                 dense
               ></v-text-field>
             </td>
             <td>
-              <v-checkbox
-                v-model="filterConfig.hgvscShowBlank"
-                label="blanks"
-                :disabled="!filterConfig.hgvsc"
-                dense
-              ></v-checkbox>
               <v-text-field
                 v-model="filterConfig.hgvsc"
                 type="text"
@@ -304,16 +280,11 @@
               ></v-text-field>
             </td>
             <td>
-              <v-checkbox
-                v-model="filterConfig.hgvsShowBlank"
-                label="blanks"
-                :disabled="!filterConfig.hgvs"
-                dense
-              ></v-checkbox>
               <v-text-field
                 v-model="filterConfig.hgvs"
                 type="text"
                 label="Contains"
+                style='font-size: 5px;'
                 dense
               ></v-text-field>
             </td>
@@ -503,7 +474,7 @@ export default {
         {
           text: 'Curated Refs',
           value: 'Curated References',
-          width: '120',
+          width: '130',
           filter: this.curatedRefsFilter,
         },
         {
