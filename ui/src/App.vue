@@ -1,13 +1,13 @@
 <template>
   <v-app mitoreport>
     <v-app-bar app color="primary">
-      <v-toolbar-title color="secondary">
-        <span class="titletext">Mito Report for {{ sample }}</span>
+      <v-toolbar-title>
+        <span class="white--text text-h6">Mito Report for {{ sample }}</span>
       </v-toolbar-title>
       <v-progress-circular class="ml-4" v-if="loading" indeterminate />
       <v-spacer></v-spacer>
       <v-btn @click.prevent="downloadSettings" icon large>
-        <v-icon class="titletext" large>mdi-download</v-icon>
+        <v-icon class="white--text" large>mdi-download</v-icon>
       </v-btn>
       <v-menu
         v-model="settingsMenu"
@@ -16,7 +16,7 @@
       >
         <template v-slot:activator="{ on, attrs }">
           <v-btn id="btnSettingsMenu" icon large v-on="on" v-bind="attrs">
-            <v-icon class="titletext" large>mdi-cog</v-icon>
+            <v-icon class="white--text" large>mdi-cog</v-icon>
           </v-btn>
         </template>
         <v-card>
