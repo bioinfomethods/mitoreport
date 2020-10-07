@@ -1,5 +1,13 @@
 import * as _ from 'lodash'
 
+export function consequenceFilter(selectedConsequence, consequenceValue) {
+  if (!selectedConsequence || !consequenceValue) {
+    return true
+  }
+
+  return consequenceValue.rank <= selectedConsequence.rank
+}
+
 export function rangeTextFilter(input, value) {
   if (!input) {
     return true

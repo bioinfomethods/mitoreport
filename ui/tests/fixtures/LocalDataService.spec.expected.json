@@ -18,7 +18,7 @@
             "posRange": [200, 16300],
             "allele": "A/C",
             "selectedTypes": ["SNP", "INS", "DEL"],
-            "selectedConsequences": [],
+            "selectedConsequence": {},
             "vafRange": [0.00001, 0.1]
           }
         },
@@ -29,7 +29,7 @@
           "filterConfig": {
             "posRange": [0, 16500],
             "selectedTypes": ["SNP", "DEL"],
-            "selectedConsequences": [],
+            "selectedConsequence": {},
             "vafRange": [0.00001, 0.05],
             "depthRange": [500, 12000]
           }
@@ -41,7 +41,7 @@
           "filterConfig": {
             "posRange": [0, 16500],
             "selectedTypes": ["SNP", "DEL"],
-            "selectedConsequences": [],
+            "selectedConsequence": {},
             "vafRange": [0.00001, 0.05],
             "depthRange": [500, 12000]
           }
@@ -54,7 +54,7 @@
             "posRange": [200, 16300],
             "allele": "A/C",
             "selectedTypes": ["SNP", "INS", "DEL"],
-            "selectedConsequences": [],
+            "selectedConsequence": {},
             "vafRange": [0.00001, 0.1]
           }
         },
@@ -66,7 +66,7 @@
             "posRange": [200, 16300],
             "allele": "A/C",
             "selectedTypes": ["SNP", "INS", "DEL"],
-            "selectedConsequences": [],
+            "selectedConsequence": {},
             "vafRange": [0.00001, 0.1]
           }
         }
@@ -88,7 +88,7 @@
           "filterConfig": {
             "posRange": [0, 16500],
             "selectedTypes": ["SNP", "DEL"],
-            "selectedConsequences": [],
+            "selectedConsequence": {},
             "vafRange": [0.00001, 0.05],
             "depthRange": [500, 12000]
           }
@@ -101,7 +101,7 @@
             "posRange": [200, 16300],
             "allele": "A/C",
             "selectedTypes": ["SNP", "INS", "DEL"],
-            "selectedConsequences": [],
+            "selectedConsequence": {},
             "vafRange": [0.00001, 0.1]
           }
         }

@@ -170,32 +170,16 @@
             </td>
             <td>
               <v-select
-                v-model="filterConfig.selectedConsequences"
+                v-model="filterConfig.selectedConsequence"
                 :items="consequences"
                 item-text=".name"
                 item-value=".name"
                 return-object
                 type="text"
-                label="Select"
-                multiple
+                label="Select up to severity"
                 dense
+                class="variant-table-v-select"
               >
-                <template v-slot:selection="{ item, index }">
-                  <v-chip
-                    v-if="index <= 3"
-                    close
-                    @click:close="removeSelectedConsequence(item)"
-                    x-small
-                  >
-                    <span>{{ item.name }}</span>
-                  </v-chip>
-                  <span v-if="index === 4" class="grey--text caption"
-                    >(+{{
-                      filterConfig.selectedConsequences.length - 4
-                    }}
-                    others)</span
-                  >
-                </template>
               </v-select>
             </td>
             <td>
@@ -342,7 +326,7 @@ export default {
         allele: '',
         selectedTypes: [],
         selectedGenes: [],
-        selectedConsequences: [],
+        selectedConsequence: {},
         vafRange: [0, 1],
         gbFreqMax: 1.0,
         depthRange: [0, 999999],
@@ -350,7 +334,7 @@ export default {
         diseaseShowBlank: false,
         mitoMap: '',
         mitoMapShowBlank: false,
-        selectedCuratedRefName: 'All',
+        selectedCuratedRefName: '',
         hgvsp: '',
         hgvspShowBlank: false,
         hgvsc: '',
@@ -516,14 +500,11 @@ export default {
     },
 
     consequences() {
-      return [
-        ...new Set(
-          _.sortBy(
-            this.variants.map(row => row.consequence),
-            ['rank']
-          )
-        ),
-      ]
+      const allUniqConsequences = _.uniqWith(
+        this.variants.map(row => row.consequence),
+        _.isEqual
+      )
+      return _.sortBy(allUniqConsequences, ['rank'])
     },
 
     vafLastTickIndex() {
@@ -655,12 +636,9 @@ export default {
     },
 
     consequencesFilter: function(value) {
-      return filters.inSetFilter(this.filterConfig.selectedConsequences, value)
-    },
-
-    removeSelectedConsequence: function(toRemove) {
-      this.filterConfig.selectedConsequences = this.filterConfig.selectedConsequences.filter(
-        selected => selected.id !== toRemove.id
+      return filters.consequenceFilter(
+        this.filterConfig.selectedConsequence,
+        value
       )
     },
 
@@ -721,8 +699,15 @@ export default {
     maxReadDepth: function() {
       this.filterConfig.depthRange = [0, this.maxReadDepth]
     },
+    consequences: function() {
+      this.filterConfig.selectedConsequence = this.consequences.slice(-1)[0]
+    },
   },
 }
 </script>
 
-<style scoped></style>
+<style scoped>
+.variant-table-v-select {
+  font-size: 0.8em;
+}
+</style>

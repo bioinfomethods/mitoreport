@@ -1,6 +1,27 @@
-import * as filters from '@/shared/variantFilters'
+import * as underTest from '@/shared/variantFilters'
 
 describe('variantFilters', () => {
+  describe('consequenceFilter', () => {
+    it.each`
+      selectedConsequence | consequenceValue | expResult
+      ${null}             | ${{ rank: 1 }}   | ${true}
+      ${undefined}        | ${{ rank: 1 }}   | ${true}
+      ${{ rank: 1 }}      | ${null}          | ${true}
+      ${{ rank: 1 }}      | ${undefined}     | ${true}
+      ${{ rank: 1 }}      | ${{ rank: 1 }}   | ${true}
+      ${{ rank: 2 }}      | ${{ rank: 1 }}   | ${true}
+      ${{ rank: 2 }}      | ${{ rank: 2 }}   | ${true}
+      ${{ rank: 2 }}      | ${{ rank: 3 }}   | ${false}
+    `(
+      'consequenceFilter($selectedConsequence, $consequenceValue) is $expResult',
+      ({ selectedConsequence, consequenceValue, expResult }) => {
+        expect(
+          underTest.consequenceFilter(selectedConsequence, consequenceValue)
+        ).toBe(expResult)
+      }
+    )
+  })
+
   describe('rangeTextFilter, e.g. 156-173', () => {
     it.each`
       input          | value        | expResult
@@ -25,7 +46,7 @@ describe('variantFilters', () => {
     `(
       'rangeTextFilter($input, $value) is $expResult',
       ({ input, value, expResult }) => {
-        expect(filters.rangeTextFilter(input, value)).toBe(expResult)
+        expect(underTest.rangeTextFilter(input, value)).toBe(expResult)
       }
     )
   })
@@ -52,7 +73,9 @@ describe('variantFilters', () => {
     `(
       'iContainsFilter($input, $value, $showBlank) is $expResult',
       ({ input, value, showBlank, expResult }) => {
-        expect(filters.iContainsFilter(input, value, showBlank)).toBe(expResult)
+        expect(underTest.iContainsFilter(input, value, showBlank)).toBe(
+          expResult
+        )
       }
     )
   })
@@ -65,7 +88,7 @@ describe('variantFilters', () => {
     `(
       'predicateFilter($predicate, $value) is $expResult',
       ({ predicate, value, expResult }) => {
-        expect(filters.predicateFilter(predicate, value)).toBe(expResult)
+        expect(underTest.predicateFilter(predicate, value)).toBe(expResult)
       }
     )
   })
@@ -82,7 +105,7 @@ describe('variantFilters', () => {
     `(
       'inSetFilter($input, $value) is $expResult',
       ({ input, value, expResult }) => {
-        expect(filters.inSetFilter(input, value)).toBe(expResult)
+        expect(underTest.inSetFilter(input, value)).toBe(expResult)
       }
     )
   })

@@ -21,7 +21,7 @@ export const CONSEQUENCE_NAMES = [
 ]
 
 export const DEFAULT_VARIANT_SEARCH = {
-  name: 'None',
+  name: 'All',
   description: 'No filters applied',
   custom: false,
   filterConfig: {
@@ -29,7 +29,7 @@ export const DEFAULT_VARIANT_SEARCH = {
     allele: '',
     selectedTypes: [],
     selectedGenes: [],
-    selectedConsequences: [],
+    selectedConsequence: {},
     vafRange: [0, 1],
     depthRange: [0, 999999],
     disease: '',
