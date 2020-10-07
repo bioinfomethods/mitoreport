@@ -92,6 +92,8 @@ npm run test:unit --verbose -- --watch
 npm run lint
 ```
 
+Watch for auto fixed linting errors and commit such style changes as a separate commit.
+
 ### Customize configuration
 
 See [Configuration Reference](https://cli.vuejs.org/config/).

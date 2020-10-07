@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-card>
-      <v-card-text class='py-0 my-0'>
+      <v-card-text class="py-0 my-0">
         <v-row align="start" justify="start">
           <v-col md="1">
             <span class="text-subtitle-1">Saved Search:</span>
@@ -93,10 +93,10 @@
         dense
       >
         <template v-slot:body.prepend>
-          <tr class='paddedrow'>
+          <tr class="paddedrow">
             <td>
               <v-row class="px-4 justify-space-between">
-                <span class="grey--text text--darken-1 text-caption" >{{
+                <span class="grey--text text--darken-1 text-caption">{{
                   filterConfig.posRange[0]
                 }}</span>
                 <span class="grey--text text--darken-1 text-caption">{{
@@ -284,7 +284,7 @@
                 v-model="filterConfig.hgvs"
                 type="text"
                 label="Contains"
-                style='font-size: 5px;'
+                style="font-size: 5px;"
                 dense
               ></v-text-field>
             </td>
@@ -311,11 +311,11 @@
 </template>
 
 <script>
-import { mapState, mapGetters } from 'vuex'
+import { mapGetters, mapState } from 'vuex'
 import IgvLink from '@/components/IgvLink'
 import * as filters from '@/shared/variantFilters'
 import * as _ from 'lodash'
-import { MIN_POS, MAX_POS, DEFAULT_VARIANT_SEARCH } from '@/shared/constants'
+import { DEFAULT_VARIANT_SEARCH, MAX_POS, MIN_POS } from '@/shared/constants'
 
 export default {
   name: 'VariantTable',
