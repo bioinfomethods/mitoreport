@@ -217,7 +217,10 @@
               </v-range-slider>
             </td>
             <td>
-              <v-text-field label='Max GB Freq' v-model='gbFreqMax'></v-text-field>
+              <v-text-field
+                label="Max GB Freq"
+                v-model="gbFreqMax"
+              ></v-text-field>
             </td>
             <td>
               <v-row class="px-4 justify-space-between">
@@ -377,7 +380,7 @@ export default {
         1,
       ],
       vafIndexRange: [0, 11],
-      gbFreqMax: 1.0, 
+      gbFreqMax: 1.0,
       tableOptions: {
         page: 1,
         itemsPerPage: 20,
