@@ -217,6 +217,9 @@
               </v-range-slider>
             </td>
             <td>
+              <v-text-field label='Max GB Freq' v-model='gbFreqMax'></v-text-field>
+            </td>
+            <td>
               <v-row class="px-4 justify-space-between">
                 <span class="grey--text text--darken-1">{{
                   filterConfig.depthRange[0]
@@ -338,6 +341,7 @@ export default {
         selectedGenes: [],
         selectedConsequences: [],
         vafRange: [0, 1],
+        gbFreqMax: 1.0,
         depthRange: [0, 999999],
         disease: '',
         diseaseShowBlank: false,
@@ -373,6 +377,7 @@ export default {
         1,
       ],
       vafIndexRange: [0, 11],
+      gbFreqMax: 1.0, 
       tableOptions: {
         page: 1,
         itemsPerPage: 20,
@@ -454,6 +459,12 @@ export default {
           value: 'genotypes[0].AF',
           width: '120',
           filter: this.vafFilter,
+        },
+        {
+          text: 'GBFreq',
+          value: 'GBFreq',
+          width: '120',
+          filter: this.gbFreqFilter,
         },
         {
           text: 'Depth',
@@ -600,6 +611,12 @@ export default {
     vafFilter: function(value) {
       let lower = this.vafTicks[this.vafIndexRange[0]]
       let upper = this.vafTicks[this.vafIndexRange[1]]
+      return filters.rangeTextFilter(`${lower - upper}`, value)
+    },
+
+    gbFreqFilter: function(value) {
+      let lower = 0
+      let upper = this.gbFreqMax
       return filters.rangeTextFilter(`${lower - upper}`, value)
     },
 

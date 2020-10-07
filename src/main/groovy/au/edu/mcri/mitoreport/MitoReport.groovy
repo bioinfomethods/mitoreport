@@ -10,9 +10,11 @@ import java.util.stream.Collectors
 import javax.inject.Inject
 
 import gngs.CliOptions
+import gngs.Utils
 import gngs.tools.DeletionPlot
 import groovy.json.JsonOutput
 import io.micronaut.configuration.picocli.PicocliRunner
+import io.micronaut.context.ApplicationContext
 import io.micronaut.core.io.ResourceLoader
 import org.apache.commons.io.FileUtils
 import org.apache.commons.io.FilenameUtils
@@ -33,6 +35,9 @@ class MitoReport implements Runnable {
 
   @Option(names = ['-ann', '-annotations', '--annotations'], required = true, description = 'Annotation file to apply to VCF')
   String annotations
+  
+  @Option(names = ['-freq', '-frequencies', '--frequencies'], required = true, description = 'File containing frequency information')
+  File frequencies
 
   @Option(names = ['-vcf'], required = true, description = 'VCF file for sample')
   File vcfFile
@@ -98,6 +103,7 @@ class MitoReport implements Runnable {
     CliOptions reportOpts = new CliOptions(overrides: [
       'vcf': vcfFile.absolutePath,
       'del': deletionsJson.absolutePath,
+      'freq': frequencies.absolutePath,
       'ann': annotations,
       'o'  : mitoReportPathName,
     ])

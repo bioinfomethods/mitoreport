@@ -6,6 +6,7 @@ import gngs.Utils
 import gngs.VCF
 import gngs.Variant
 import graxxia.CSV
+import graxxia.TSV
 import groovy.json.JsonOutput
 import groovy.json.JsonSlurper
 import groovy.util.logging.Log
@@ -51,6 +52,13 @@ class Report extends ToolBase {
 
         log.info "Loading annotations from $opts.ann"
         Map<String,Map> annotations = new CSV(opts.ann).toListMap().collectEntries { [it.Allele, it ] }
+        log.info "Loaded ${annotations.size()} functional annotations"
+        
+        Map<String,Map> freqInfo = new TSV(opts.freq).toListMap().collectEntries { line ->
+            def (ref,alt) = line.Change.tokenize('-')
+            [ ref + line.Position + alt,  line] 
+        }
+        log.info "Loaded ${freqInfo.size()} frequency annotations"
 
         List results = []
 
@@ -59,6 +67,7 @@ class Report extends ToolBase {
             int sampleIndex = 0
 
             String compactAllele = v.ref.toUpperCase() + v.pos + v.alt.toUpperCase()
+            String change = v.ref.toUpperCase() + '-' + v.alt.toUpperCase()
 
             Map variantInfo = [
                 chr : v.chr,
@@ -89,6 +98,8 @@ class Report extends ToolBase {
                     [key, result]
                 }
 
+            variantAnnotations.GBFreq = freqInfo[compactAllele]?.GBFreq?:0.0d
+
             Map infoField = v.parsedInfo
             infoField.remove('ANN')
 
@@ -116,6 +127,7 @@ class Report extends ToolBase {
             vcf 'VCF file for sample', args: Cli.UNLIMITED, required: true
             del 'Deletion analysis for sample', args: Cli.UNLIMITED, required: true
             ann 'Annotation file to apply to VCF', args: 1, required: true
+            freq 'File containing mitomap genbank frequencies in the GBFreq column', args: 1, required: true
         }
     }
 }
