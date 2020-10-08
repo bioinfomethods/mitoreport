@@ -24,6 +24,7 @@ task runBuild(type: NpmTask, dependsOn: 'npmInstall') {
   description = 'npm run build'
   args = ['run', 'build']
 
+  inputs.dir('.').withPropertyName('ui')
   outputs.dir('dist').withPropertyName('dist')
 }
 
