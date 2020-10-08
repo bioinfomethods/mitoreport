@@ -1,7 +1,11 @@
 import * as _ from 'lodash'
 
 export function consequenceFilter(selectedConsequence, consequenceValue) {
-  if (!selectedConsequence || !consequenceValue) {
+  if (
+    !selectedConsequence ||
+    _.isEmpty(selectedConsequence) ||
+    !consequenceValue
+  ) {
     return true
   }
 

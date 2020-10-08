@@ -206,7 +206,11 @@
                   {{ filterConfig.gbFreqMax }}
                 </span>
               </v-row>
-              <v-slider v-model="filterConfig.gbFreqMax" step="1" hide-details>
+              <v-slider
+                v-model="filterConfig.gbFreqMax"
+                step="1.0"
+                hide-details
+              >
               </v-slider>
             </td>
             <td>
@@ -441,7 +445,7 @@ export default {
           value: 'consequence',
           width: '180',
           sort: this.consequenceSort,
-          filter: this.consequencesFilter,
+          filter: this.consequenceFilter,
         },
         {
           text: 'VAF',
@@ -639,7 +643,7 @@ export default {
       )
     },
 
-    consequencesFilter: function(value) {
+    consequenceFilter: function(value) {
       return filters.consequenceFilter(
         this.filterConfig.selectedConsequence,
         value

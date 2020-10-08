@@ -12,6 +12,10 @@ describe('variantFilters', () => {
       ${{ rank: 2 }}      | ${{ rank: 1 }}   | ${true}
       ${{ rank: 2 }}      | ${{ rank: 2 }}   | ${true}
       ${{ rank: 2 }}      | ${{ rank: 3 }}   | ${false}
+      ${{}}               | ${{ rank: 1 }}   | ${true}
+      ${{}}               | ${{ rank: 3 }}   | ${true}
+      ${{}}               | ${null}          | ${true}
+      ${{}}               | ${undefined}     | ${true}
     `(
       'consequenceFilter($selectedConsequence, $consequenceValue) is $expResult',
       ({ selectedConsequence, consequenceValue, expResult }) => {
