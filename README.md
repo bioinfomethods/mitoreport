@@ -48,6 +48,7 @@ java -jar build/libs/mitoreport-0.1-all.jar \
   -sample 15G002035-GM12878K_20pc_10kb_200 \
   -vcf tmp/15G002035.unshifted.contamination.filtering.intermediatefilter.norm.dedup.mito_vep.vcf.gz \
   -ann tmp/mtDNAanalysis_annotations_20170501.csv \
+  -freq tmp/mitomap_polymorphisms_coding_and_rna_20201004.tsv \
   tmp/*.bam
 
 # Open generated report in default browser
