@@ -22,6 +22,9 @@ pnpm-debug.log*
 *.sw?
 /eclipse-build/
 *.iml
+.classpath
+.project
+.settings
 
 # Build
 build
