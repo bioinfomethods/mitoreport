@@ -53,8 +53,11 @@ class MitoReport implements Runnable {
 
   @Inject
   ResourceLoader resourceLoader
-
+  
   static void main(String[] args) throws Exception {
+      
+    Utils.configureSimpleLogging()
+      
     PicocliRunner.run(MitoReport.class, args)
   }
 
