@@ -34,6 +34,7 @@ export const DEFAULT_VARIANT_SEARCH = {
     depthRange: [0, 999999],
     disease: '',
     diseaseShowBlank: false,
+    gbFreqMax: 1,
     mitoMap: '',
     mitoMapShowBlank: false,
     selectedCuratedRefName: 'All',
