@@ -11,6 +11,9 @@ export const DEFAULT_SNACKBAR_OPTS = {
   timeout: 3000,
 }
 
+export const DEFAULT_GENECARDS_URL_PREFIX =
+  'https://www.genecards.org/cgi-bin/carddisp.pl'
+
 export const CONSEQUENCE_NAMES = [
   { id: 'frameshift_variant', name: 'frameshift_variant' },
   { id: 'inframe_deletion', name: 'inframe_deletion' },

@@ -9,6 +9,7 @@ import * as _ from 'lodash'
 import Vue from 'vue'
 import Vuex from 'vuex'
 import { loadSettings } from '../services/LocalDataService'
+import { DEFAULT_GENECARDS_URL_PREFIX } from '../shared/constants'
 
 Vue.use(Vuex)
 
@@ -37,6 +38,10 @@ export const getters = {
 
   igvHost: state => {
     return state.settings.igvHost
+  },
+
+  geneCardsUrlPrefix: state => {
+    return state.settings.geneCardsUrlPrefix || DEFAULT_GENECARDS_URL_PREFIX
   },
 
   sampleSettings: state => {

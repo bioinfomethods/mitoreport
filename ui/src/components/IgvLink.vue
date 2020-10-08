@@ -1,6 +1,8 @@
 <template>
   <span v-if="igvUrl">
-    <a :href="igvUrl" @click.prevent="loadIGV" target="igv">{{ position }}</a>
+    <a id="igvUrlLink" :href="igvUrl" @click.prevent="loadIGV" target="igv">{{
+      position
+    }}</a>
     <sup><v-icon class="pa-1" size="small">mdi-open-in-new</v-icon></sup>
     <iframe
       ref="igvIframe"
@@ -14,6 +16,7 @@
 
 <script>
 import { mapGetters } from 'vuex'
+import { stringifyUrl } from 'query-string'
 
 export default {
   name: 'IgvLink',
@@ -33,12 +36,18 @@ export default {
         return null
       }
 
-      const result = `${this.igvHost}/load?file=file://${encodeURIComponent(
-        this.settingsBamFile
-      )}&locus=chrM:${this.position}`
+      const result = stringifyUrl({
+        url: `${this.igvHost}/load`,
+        query: {
+          file: `file://${this.settingsBamFile}`,
+          locus: `chrM:${this.position}`,
+        },
+      })
+
       return result
     },
   },
+
   methods: {
     loadIGV() {
       this.$refs.igvIframe.src = this.igvUrl
