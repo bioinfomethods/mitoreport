@@ -1,5 +1,7 @@
 {
   "igvHost": "http://localhost:60151",
+  "geneCardsUrlPrefix": "https://www.genecards.org/cgi-bin/carddisp.pl",
+  "hmtVarUrlPrefix": "https://www.hmtvar.uniba.it/results",
   "samples": [
     {
       "id": "TestSample",

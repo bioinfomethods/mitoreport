@@ -12,6 +12,7 @@ import { loadSettings } from '../services/LocalDataService'
 import {
   DEFAULT_GENECARDS_URL_PREFIX,
   DEFAULT_HMT_VAR_URL_PREFIX,
+  DEFAULT_IGV_HOST,
 } from '../shared/constants'
 
 Vue.use(Vuex)
@@ -40,7 +41,7 @@ export const getters = {
   },
 
   igvHost: state => {
-    return state.settings.igvHost
+    return state.settings.igvHost || DEFAULT_IGV_HOST
   },
 
   geneCardsUrlPrefix: state => {

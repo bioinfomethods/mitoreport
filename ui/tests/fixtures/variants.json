@@ -1,3703 +1,3753 @@
 [
-  {
-      "chr": "chrM",
-      "pos": 152,
-      "ref": "T",
-      "alt": "C",
-      "type": "SNP",
-      "qual": -1.0,
-      "dosages": [
-          1
-      ],
-      "symbol": "MT-ND1",
-      "consequence": {
-          "id": "upstream_gene_variant",
-          "rank": 25
-      },
-      "hgvsp": "",
-      "hgvsc": "",
-      "Allele": "T152C",
-      "Locus": "MT-HV2, MT-OHR",
-      "Position": 152,
-      "Disease": "",
-      "Homoplasmy": "",
-      "Heteroplasmy": "",
-      "Status_MitoMap": "",
-      "GB Frequency": 8284,
-      "References": "",
-      "InfoSource": "MitoMapPolymorphismsControl",
-      "Curated References": 112,
-      "MSeqDR-LSDB.ID": "chrM_001246",
-      "Chr": "M",
-      "dbSNP.ID": "rs117135796",
-      "Effect": "?/?",
-      "Type": "subst",
-      "HGVS": "m.152T>C",
-      "GERP": "0.000",
-      "Sources": ";",
-      "PubMedID": "-",
-      "AS_FilterStatus": "SITE",
-      "AS_SB_TABLE": "0,0|3780,2434",
-      "DP": 6393,
-      "ECNT": 1,
-      "MBQ": [
-          0,
-          38
-      ],
-      "MFRL": [
-          0,
-          234
-      ],
-      "MMQ": [
-          60,
-          60
-      ],
-      "MPOS": 38,
-      "OCM": 0,
-      "POPAF": 2.4,
-      "TLOD": 23870,
-      "genotypes": [
-          {
-              "GT": "0/1",
-              "AD": [
-                  0,
-                  6214
-              ],
-              "AF": 1,
-              "DP": 6214,
-              "F1R2": [
-                  0,
-                  3119
-              ],
-              "F2R1": [
-                  0,
-                  3005
-              ],
-              "SB": [
-                  0,
-                  0,
-                  3780,
-                  2434
-              ]
-          }
-      ]
-  },
-  {
-      "chr": "chrM",
-      "pos": 263,
-      "ref": "A",
-      "alt": "G",
-      "type": "SNP",
-      "qual": -1.0,
-      "dosages": [
-          1
-      ],
-      "symbol": "MT-ND1",
-      "consequence": {
-          "id": "upstream_gene_variant",
-          "rank": 25
-      },
-      "hgvsp": "",
-      "hgvsc": "",
-      "Allele": "A263G",
-      "Locus": "MT-HV2, MT-OHR",
-      "Position": 263,
-      "Disease": "",
-      "Homoplasmy": "",
-      "Heteroplasmy": "",
-      "Status_MitoMap": "",
-      "GB Frequency": 29979,
-      "References": "",
-      "InfoSource": "MitoMapPolymorphismsControl",
-      "Curated References": 145,
-      "MSeqDR-LSDB.ID": "chrM_000413",
-      "Chr": "M",
-      "dbSNP.ID": "rs2853515",
-      "Effect": "?/?",
-      "Type": "subst",
-      "HGVS": "m.263A>G",
-      "GERP": "0.000",
-      "Sources": ";",
-      "PubMedID": "-",
-      "AS_FilterStatus": "SITE",
-      "AS_SB_TABLE": "0,2|1441,2857",
-      "DP": 4465,
-      "ECNT": 3,
-      "MBQ": [
-          26,
-          37
-      ],
-      "MFRL": [
-          148,
-          259
-      ],
-      "MMQ": [
-          60,
-          60
-      ],
-      "MPOS": 40,
-      "OCM": 0,
-      "POPAF": 2.4,
-      "TLOD": 16457.2,
-      "genotypes": [
-          {
-              "GT": "0/1",
-              "AD": [
-                  2,
-                  4298
-              ],
-              "AF": 1,
-              "DP": 4300,
-              "F1R2": [
-                  1,
-                  2029
-              ],
-              "F2R1": [
-                  0,
-                  1994
-              ],
-              "SB": [
-                  0,
-                  2,
-                  1441,
-                  2857
-              ]
-          }
-      ]
-  },
-  {
-      "chr": "chrM",
-      "pos": 302,
-      "ref": "A",
-      "alt": "AC",
-      "type": "INS",
-      "qual": -1.0,
-      "dosages": [
-          1
-      ],
-      "symbol": "MT-ND1",
-      "consequence": {
-          "id": "upstream_gene_variant",
-          "rank": 25
-      },
-      "hgvsp": "",
-      "hgvsc": "",
-      "AS_FilterStatus": "strand_bias|strand_bias|SITE|SITE",
-      "AS_SB_TABLE": "196,83|47,2083|4,461|3,29|47,0",
-      "DP": 3701,
-      "ECNT": 3,
-      "MBQ": [
-          33,
-          28
-      ],
-      "MFRL": [
-          278,
-          269
-      ],
-      "MMQ": [
-          60,
-          60
-      ],
-      "MPOS": 30,
-      "OCM": 0,
-      "POPAF": 2.4,
-      "RPA": [
-          7,
-          8
-      ],
-      "RU": "C",
-      "STR": true,
-      "TLOD": 4152.61,
-      "genotypes": [
-          {
-              "GT": "0/1/0/0/0",
-              "AD": [
-                  279,
-                  2130
-              ],
-              "AF": 0.724,
-              "DP": 2953,
-              "F1R2": [
-                  142,
-                  680
-              ],
-              "F2R1": [
-                  93,
-                  1003
-              ],
-              "SB": [
-                  196,
-                  83,
-                  101,
-                  2573
-              ]
-          }
-      ]
-  },
-  {
-      "chr": "chrM",
-      "pos": 302,
-      "ref": "A",
-      "alt": "ACC",
-      "type": "INS",
-      "qual": -1.0,
-      "dosages": [
-          1
-      ],
-      "symbol": "MT-ND1",
-      "consequence": {
-          "id": "upstream_gene_variant",
-          "rank": 25
-      },
-      "hgvsp": "",
-      "hgvsc": "",
-      "Allele": "A302ACC",
-      "Locus": "MT-CR, MT-HV2, MT-OHR, MT-TFY, MT-CSB2",
-      "Position": 302,
-      "Disease": "Higher in melanoma patient group",
-      "Homoplasmy": ".",
-      "Heteroplasmy": ".",
-      "Status_MitoMap": "Reported",
-      "GB Frequency": 66,
-      "References": "1",
-      "InfoSource": "MitoMapCodingControl, MitoMapPolymorphismsControl",
-      "Curated References": null,
-      "MSeqDR-LSDB.ID": "",
-      "Chr": "",
-      "dbSNP.ID": "",
-      "Effect": "",
-      "Type": "",
-      "HGVS": "",
-      "GERP": "",
-      "Sources": "",
-      "PubMedID": "",
-      "AS_SB_TABLE": "150,78|46,2078|10,467|0,21|27,0|15,0",
-      "DP": 3664,
-      "ECNT": 3,
-      "MBQ": [
-          31,
-          26
-      ],
-      "MFRL": [
-          271,
-          269
-      ],
-      "MMQ": [
-          60,
-          60
-      ],
-      "MPOS": 26,
-      "OCM": 0,
-      "POPAF": 2.4,
-      "RPA": [
-          7,
-          9
-      ],
-      "RU": "C",
-      "STR": true,
-      "TLOD": 751.8,
-      "genotypes": [
-          {
-              "GT": "0/0/1/0/0/0",
-              "AD": [
-                  228,
-                  477
-              ],
-              "AF": 0.183,
-              "DP": 2892,
-              "F1R2": [
-                  114,
-                  166
-              ],
-              "F2R1": [
-                  68,
-                  197
-              ],
-              "SB": [
-                  150,
-                  78,
-                  98,
-                  2566
-              ]
-          }
-      ]
-  },
-  {
-      "chr": "chrM",
-      "pos": 302,
-      "ref": "A",
-      "alt": "ACCC",
-      "type": "INS",
-      "qual": -1.0,
-      "dosages": [
-          1
-      ],
-      "symbol": "MT-ND1",
-      "consequence": {
-          "id": "upstream_gene_variant",
-          "rank": 25
-      },
-      "hgvsp": "",
-      "hgvsc": "",
-      "Allele": "A302ACCC",
-      "Locus": "MT-HV2, MT-OHR, MT-TFY, MT-CSB2",
-      "Position": 302,
-      "Disease": "",
-      "Homoplasmy": "",
-      "Heteroplasmy": "",
-      "Status_MitoMap": "",
-      "GB Frequency": 6,
-      "References": "",
-      "InfoSource": "MitoMapPolymorphismsControl",
-      "Curated References": 1,
-      "MSeqDR-LSDB.ID": "",
-      "Chr": "",
-      "dbSNP.ID": "",
-      "Effect": "",
-      "Type": "",
-      "HGVS": "",
-      "GERP": "",
-      "Sources": "",
-      "PubMedID": "",
-      "AS_SB_TABLE": "196,83|47,2083|4,461|3,29|47,0",
-      "DP": 3701,
-      "ECNT": 3,
-      "MBQ": [
-          33,
-          30
-      ],
-      "MFRL": [
-          278,
-          274
-      ],
-      "MMQ": [
-          60,
-          60
-      ],
-      "MPOS": 27,
-      "OCM": 0,
-      "POPAF": 2.4,
-      "RPA": [
-          7,
-          10
-      ],
-      "RU": "C",
-      "STR": true,
-      "TLOD": 12.37,
-      "genotypes": [
-          {
-              "GT": "0/0/0/1/0",
-              "AD": [
-                  279,
-                  32
-              ],
-              "AF": 0.006261,
-              "DP": 2953,
-              "F1R2": [
-                  142,
-                  8
-              ],
-              "F2R1": [
-                  93,
-                  14
-              ],
-              "SB": [
-                  196,
-                  83,
-                  101,
-                  2573
-              ]
-          }
-      ]
-  },
-  {
-      "chr": "chrM",
-      "pos": 302,
-      "ref": "A",
-      "alt": "ACCCCCCCCCCC",
-      "type": "INS",
-      "qual": -1.0,
-      "dosages": [
-          1
-      ],
-      "symbol": "MT-ND1",
-      "consequence": {
-          "id": "upstream_gene_variant",
-          "rank": 25
-      },
-      "hgvsp": "",
-      "hgvsc": "",
-      "AS_SB_TABLE": "196,83|47,2083|4,461|3,29|47,0",
-      "DP": 3701,
-      "ECNT": 3,
-      "MBQ": [
-          33,
-          37
-      ],
-      "MFRL": [
-          278,
-          306
-      ],
-      "MMQ": [
-          60,
-          60
-      ],
-      "MPOS": 23,
-      "OCM": 0,
-      "POPAF": 2.4,
-      "RPA": [
-          7,
-          18
-      ],
-      "RU": "C",
-      "STR": true,
-      "TLOD": 9.43,
-      "genotypes": [
-          {
-              "GT": "0/0/0/0/1",
-              "AD": [
-                  279,
-                  47
-              ],
-              "AF": 0.01,
-              "DP": 2953,
-              "F1R2": [
-                  142,
-                  12
-              ],
-              "F2R1": [
-                  93,
-                  30
-              ],
-              "SB": [
-                  196,
-                  83,
-                  101,
-                  2573
-              ]
-          }
-      ]
-  },
-  {
-      "chr": "chrM",
-      "pos": 302,
-      "ref": "A",
-      "alt": "ACCCCCCCCCCCCCC",
-      "type": "INS",
-      "qual": -1.0,
-      "dosages": [
-          1
-      ],
-      "symbol": "MT-ND1",
-      "consequence": {
-          "id": "upstream_gene_variant",
-          "rank": 25
-      },
-      "hgvsp": "",
-      "hgvsc": "",
-      "AS_SB_TABLE": "150,78|46,2078|10,467|0,21|27,0|15,0",
-      "DP": 3664,
-      "ECNT": 3,
-      "MBQ": [
-          31,
-          37
-      ],
-      "MFRL": [
-          271,
-          321
-      ],
-      "MMQ": [
-          60,
-          60
-      ],
-      "MPOS": 29,
-      "OCM": 0,
-      "POPAF": 2.4,
-      "RPA": [
-          7,
-          21
-      ],
-      "RU": "C",
-      "STR": true,
-      "TLOD": 0.483,
-      "genotypes": [
-          {
-              "GT": "0/0/0/0/0/1",
-              "AD": [
-                  228,
-                  15
-              ],
-              "AF": 0.002614,
-              "DP": 2892,
-              "F1R2": [
-                  114,
-                  6
-              ],
-              "F2R1": [
-                  68,
-                  7
-              ],
-              "SB": [
-                  150,
-                  78,
-                  98,
-                  2566
-              ]
-          }
-      ]
-  },
-  {
-      "chr": "chrM",
-      "pos": 310,
-      "ref": "T",
-      "alt": "C",
-      "type": "SNP",
-      "qual": -1.0,
-      "dosages": [
-          1
-      ],
-      "symbol": "MT-ND1",
-      "consequence": {
-          "id": "upstream_gene_variant",
-          "rank": 25
-      },
-      "hgvsp": "",
-      "hgvsc": "",
-      "Allele": "T310C",
-      "Locus": "MT-HV2, MT-OHR, MT-CSB2",
-      "Position": 310,
-      "Disease": "",
-      "Homoplasmy": "",
-      "Heteroplasmy": "",
-      "Status_MitoMap": "",
-      "GB Frequency": 14812,
-      "References": "",
-      "InfoSource": "MitoMapPolymorphismsControl",
-      "Curated References": 30,
-      "MSeqDR-LSDB.ID": "",
-      "Chr": "",
-      "dbSNP.ID": "",
-      "Effect": "",
-      "Type": "",
-      "HGVS": "",
-      "GERP": "",
-      "Sources": "",
-      "PubMedID": "",
-      "AS_FilterStatus": "strand_bias|SITE|weak_evidence",
-      "AS_SB_TABLE": "3,4|142,48|212,2826|33,0",
-      "DP": 3858,
-      "ECNT": 3,
-      "MBQ": [
-          24,
-          29
-      ],
-      "MFRL": [
-          280,
-          283
-      ],
-      "MMQ": [
-          60,
-          60
-      ],
-      "MPOS": 17,
-      "OCM": 0,
-      "POPAF": 2.4,
-      "TLOD": 92.15,
-      "genotypes": [
-          {
-              "GT": "0/1/0/0",
-              "AD": [
-                  7,
-                  190
-              ],
-              "AF": 0.074,
-              "DP": 3268,
-              "F1R2": [
-                  3,
-                  83
-              ],
-              "F2R1": [
-                  1,
-                  36
-              ],
-              "SB": [
-                  3,
-                  4,
-                  387,
-                  2874
-              ]
-          }
-      ]
-  },
-  {
-      "chr": "chrM",
-      "pos": 310,
-      "ref": "T",
-      "alt": "TC",
-      "type": "INS",
-      "qual": -1.0,
-      "dosages": [
-          1
-      ],
-      "symbol": "MT-ND1",
-      "consequence": {
-          "id": "upstream_gene_variant",
-          "rank": 25
-      },
-      "hgvsp": "",
-      "hgvsc": "",
-      "Allele": "T310TC",
-      "Locus": "MT-CR, MT-HV2, MT-OHR, MT-CSB2",
-      "Position": 310,
-      "Disease": "Melanoma patients",
-      "Homoplasmy": ".",
-      "Heteroplasmy": ".",
-      "Status_MitoMap": "Reported",
-      "GB Frequency": 0,
-      "References": "1",
-      "InfoSource": "MitoMapCodingControl, MitoMapPolymorphismsControl",
-      "Curated References": null,
-      "MSeqDR-LSDB.ID": "",
-      "Chr": "",
-      "dbSNP.ID": "",
-      "Effect": "",
-      "Type": "",
-      "HGVS": "",
-      "GERP": "",
-      "Sources": "",
-      "PubMedID": "",
-      "AS_FilterStatus": "base_qual",
-      "AS_SB_TABLE": "16,2|141,47|204,2822|9,0",
-      "DP": 3828,
-      "ECNT": 3,
-      "MBQ": [
-          12,
-          31
-      ],
-      "MFRL": [
-          271,
-          268
-      ],
-      "MMQ": [
-          60,
-          60
-      ],
-      "MPOS": 28,
-      "OCM": 0,
-      "POPAF": 2.4,
-      "TLOD": 8443.03,
-      "genotypes": [
-          {
-              "GT": "0/0/1/0",
-              "AD": [
-                  18,
-                  3026
-              ],
-              "AF": 0.916,
-              "DP": 3241,
-              "F1R2": [
-                  1,
-                  963
-              ],
-              "F2R1": [
-                  4,
-                  1319
-              ],
-              "SB": [
-                  16,
-                  2,
-                  354,
-                  2869
-              ]
-          }
-      ]
-  },
-  {
-      "chr": "chrM",
-      "pos": 310,
-      "ref": "T",
-      "alt": "TCCCCCCA",
-      "type": "INS",
-      "qual": -1.0,
-      "dosages": [
-          1
-      ],
-      "symbol": "MT-ND1",
-      "consequence": {
-          "id": "upstream_gene_variant",
-          "rank": 25
-      },
-      "hgvsp": "",
-      "hgvsc": "",
-      "AS_SB_TABLE": "16,2|141,47|204,2822|9,0",
-      "DP": 3828,
-      "ECNT": 3,
-      "MBQ": [
-          12,
-          12
-      ],
-      "MFRL": [
-          271,
-          324
-      ],
-      "MMQ": [
-          60,
-          60
-      ],
-      "MPOS": 8,
-      "OCM": 0,
-      "POPAF": 2.4,
-      "TLOD": 0.493,
-      "genotypes": [
-          {
-              "GT": "0/0/0/1",
-              "AD": [
-                  18,
-                  9
-              ],
-              "AF": 0.005326,
-              "DP": 3241,
-              "F1R2": [
-                  1,
-                  0
-              ],
-              "F2R1": [
-                  4,
-                  1
-              ],
-              "SB": [
-                  16,
-                  2,
-                  354,
-                  2869
-              ]
-          }
-      ]
-  },
-  {
-      "chr": "chrM",
-      "pos": 310,
-      "ref": "T",
-      "alt": "TCCCCCCAC",
-      "type": "INS",
-      "qual": -1.0,
-      "dosages": [
-          1
-      ],
-      "symbol": "MT-ND1",
-      "consequence": {
-          "id": "upstream_gene_variant",
-          "rank": 25
-      },
-      "hgvsp": "",
-      "hgvsc": "",
-      "AS_SB_TABLE": "3,4|142,48|212,2826|33,0",
-      "DP": 3858,
-      "ECNT": 3,
-      "MBQ": [
-          24,
-          12
-      ],
-      "MFRL": [
-          280,
-          298
-      ],
-      "MMQ": [
-          60,
-          60
-      ],
-      "MPOS": 5,
-      "OCM": 0,
-      "POPAF": 2.4,
-      "TLOD": 1.62,
-      "genotypes": [
-          {
-              "GT": "0/0/0/1",
-              "AD": [
-                  7,
-                  33
-              ],
-              "AF": 0.013,
-              "DP": 3268,
-              "F1R2": [
-                  3,
-                  0
-              ],
-              "F2R1": [
-                  1,
-                  3
-              ],
-              "SB": [
-                  3,
-                  4,
-                  387,
-                  2874
-              ]
-          }
-      ]
-  },
-  {
-      "chr": "chrM",
-      "pos": 750,
-      "ref": "A",
-      "alt": "G",
-      "type": "SNP",
-      "qual": -1.0,
-      "dosages": [
-          1
-      ],
-      "symbol": "MT-ND1",
-      "consequence": {
-          "id": "upstream_gene_variant",
-          "rank": 25
-      },
-      "hgvsp": "",
-      "hgvsc": "",
-      "Allele": "A750G",
-      "Locus": "MT-RNR1",
-      "Position": 750,
-      "Disease": "",
-      "Homoplasmy": "",
-      "Heteroplasmy": "",
-      "Status_MitoMap": "",
-      "GB Frequency": 31410,
-      "References": "",
-      "InfoSource": "MitoMapPolymorphismsCoding",
-      "Curated References": 108,
-      "MSeqDR-LSDB.ID": "chrM_000404",
-      "Chr": "M",
-      "dbSNP.ID": "rs2853518",
-      "Effect": "?/, ?",
-      "Type": "subst",
-      "HGVS": "m.750A>G",
-      "GERP": "1.580",
-      "Sources": "; Mitomap;",
-      "PubMedID": "-",
-      "AS_FilterStatus": "SITE",
-      "AS_SB_TABLE": "0,0|2887,2619",
-      "DP": 5780,
-      "ECNT": 2,
-      "MBQ": [
-          0,
-          38
-      ],
-      "MFRL": [
-          0,
-          278
-      ],
-      "MMQ": [
-          60,
-          60
-      ],
-      "MPOS": 36,
-      "OCM": 0,
-      "POPAF": 2.4,
-      "TLOD": 21290.6,
-      "genotypes": [
-          {
-              "GT": "0/1",
-              "AD": [
-                  0,
-                  5506
-              ],
-              "AF": 1,
-              "DP": 5506,
-              "F1R2": [
-                  0,
-                  2658
-              ],
-              "F2R1": [
-                  0,
-                  2556
-              ],
-              "SB": [
-                  0,
-                  0,
-                  2887,
-                  2619
-              ]
-          }
-      ]
-  },
-  {
-      "chr": "chrM",
-      "pos": 776,
-      "ref": "A",
-      "alt": "G",
-      "type": "SNP",
-      "qual": -1.0,
-      "dosages": [
-          1
-      ],
-      "symbol": "MT-ND1",
-      "consequence": {
-          "id": "upstream_gene_variant",
-          "rank": 25
-      },
-      "hgvsp": "",
-      "hgvsc": "",
-      "AS_FilterStatus": "weak_evidence",
-      "AS_SB_TABLE": "2994,2345|3,2",
-      "DP": 5597,
-      "ECNT": 2,
-      "MBQ": [
-          39,
-          38
-      ],
-      "MFRL": [
-          287,
-          300
-      ],
-      "MMQ": [
-          60,
-          60
-      ],
-      "MPOS": 25,
-      "OCM": 0,
-      "POPAF": 2.4,
-      "TLOD": 0.009718,
-      "genotypes": [
-          {
-              "GT": "0/1",
-              "AD": [
-                  5339,
-                  5
-              ],
-              "AF": 9.423E-4,
-              "DP": 5344,
-              "F1R2": [
-                  2672,
-                  2
-              ],
-              "F2R1": [
-                  2504,
-                  2
-              ],
-              "SB": [
-                  2994,
-                  2345,
-                  3,
-                  2
-              ]
-          }
-      ]
-  },
-  {
-      "chr": "chrM",
-      "pos": 1419,
-      "ref": "G",
-      "alt": "A",
-      "type": "SNP",
-      "qual": -1.0,
-      "dosages": [
-          1
-      ],
-      "symbol": "MT-ND1",
-      "consequence": {
-          "id": "upstream_gene_variant",
-          "rank": 25
-      },
-      "hgvsp": "",
-      "hgvsc": "",
-      "AS_FilterStatus": "SITE",
-      "AS_SB_TABLE": "2996,3087|12,11",
-      "DP": 6336,
-      "ECNT": 2,
-      "MBQ": [
-          38,
-          38
-      ],
-      "MFRL": [
-          279,
-          230
-      ],
-      "MMQ": [
-          60,
-          60
-      ],
-      "MPOS": 39,
-      "OCM": 0,
-      "POPAF": 2.4,
-      "TLOD": 25.52,
-      "genotypes": [
-          {
-              "GT": "0/1",
-              "AD": [
-                  6083,
-                  23
-              ],
-              "AF": 0.003455,
-              "DP": 6106,
-              "F1R2": [
-                  2982,
-                  11
-              ],
-              "F2R1": [
-                  2928,
-                  11
-              ],
-              "SB": [
-                  2996,
-                  3087,
-                  12,
-                  11
-              ]
-          }
-      ]
-  },
-  {
-      "chr": "chrM",
-      "pos": 1438,
-      "ref": "A",
-      "alt": "G",
-      "type": "SNP",
-      "qual": -1.0,
-      "dosages": [
-          1
-      ],
-      "symbol": "MT-ND1",
-      "consequence": {
-          "id": "upstream_gene_variant",
-          "rank": 25
-      },
-      "hgvsp": "",
-      "hgvsc": "",
-      "Allele": "A1438G",
-      "Locus": "MT-RNR1",
-      "Position": 1438,
-      "Disease": "",
-      "Homoplasmy": "",
-      "Heteroplasmy": "",
-      "Status_MitoMap": "",
-      "GB Frequency": 30179,
-      "References": "",
-      "InfoSource": "MitoMapPolymorphismsCoding",
-      "Curated References": 117,
-      "MSeqDR-LSDB.ID": "chrM_000234",
-      "Chr": "M",
-      "dbSNP.ID": "rs2001030",
-      "Effect": "-/-",
-      "Type": "subst",
-      "HGVS": "m.1438A>G",
-      "GERP": "1.910",
-      "Sources": "; clinVar; Mitomap; ensembl;",
-      "PubMedID": "-",
-      "AS_FilterStatus": "SITE",
-      "AS_SB_TABLE": "1,1|2877,3177",
-      "DP": 6346,
-      "ECNT": 2,
-      "MBQ": [
-          18,
-          39
-      ],
-      "MFRL": [
-          792,
-          279
-      ],
-      "MMQ": [
-          60,
-          60
-      ],
-      "MPOS": 36,
-      "OCM": 0,
-      "POPAF": 2.4,
-      "TLOD": 24167.8,
-      "genotypes": [
-          {
-              "GT": "0/1",
-              "AD": [
-                  2,
-                  6054
-              ],
-              "AF": 1,
-              "DP": 6056,
-              "F1R2": [
-                  1,
-                  3009
-              ],
-              "F2R1": [
-                  0,
-                  2898
-              ],
-              "SB": [
-                  1,
-                  1,
-                  2877,
-                  3177
-              ]
-          }
-      ]
-  },
-  {
-      "chr": "chrM",
-      "pos": 2224,
-      "ref": "C",
-      "alt": "T",
-      "type": "SNP",
-      "qual": -1.0,
-      "dosages": [
-          1
-      ],
-      "symbol": "MT-ND1",
-      "consequence": {
-          "id": "upstream_gene_variant",
-          "rank": 25
-      },
-      "hgvsp": "",
-      "hgvsc": "",
-      "Allele": "C2224T",
-      "Locus": "MT-RNR2",
-      "Position": 2224,
-      "Disease": "",
-      "Homoplasmy": "",
-      "Heteroplasmy": "",
-      "Status_MitoMap": "",
-      "GB Frequency": 1,
-      "References": "",
-      "InfoSource": "MitoMapPolymorphismsCoding",
-      "Curated References": 1,
-      "MSeqDR-LSDB.ID": "",
-      "Chr": "",
-      "dbSNP.ID": "",
-      "Effect": "",
-      "Type": "",
-      "HGVS": "",
-      "GERP": "",
-      "Sources": "",
-      "PubMedID": "",
-      "AS_FilterStatus": "weak_evidence",
-      "AS_SB_TABLE": "2764,2630|3,3",
-      "DP": 5615,
-      "ECNT": 2,
-      "MBQ": [
-          39,
-          20
-      ],
-      "MFRL": [
-          287,
-          222
-      ],
-      "MMQ": [
-          60,
-          60
-      ],
-      "MPOS": 46,
-      "OCM": 0,
-      "POPAF": 2.4,
-      "TLOD": 0.561,
-      "genotypes": [
-          {
-              "GT": "0|1",
-              "AD": [
-                  5394,
-                  6
-              ],
-              "AF": 9.345E-4,
-              "DP": 5400,
-              "F1R2": [
-                  2733,
-                  2
-              ],
-              "F2R1": [
-                  2520,
-                  2
-              ],
-              "PGT": "0|1",
-              "PID": "2224_C_T",
-              "PS": 2224,
-              "SB": [
-                  2764,
-                  2630,
-                  3,
-                  3
-              ]
-          }
-      ]
-  },
-  {
-      "chr": "chrM",
-      "pos": 2259,
-      "ref": "C",
-      "alt": "T",
-      "type": "SNP",
-      "qual": -1.0,
-      "dosages": [
-          1
-      ],
-      "symbol": "MT-ND1",
-      "consequence": {
-          "id": "upstream_gene_variant",
-          "rank": 25
-      },
-      "hgvsp": "",
-      "hgvsc": "",
-      "Allele": "C2259T",
-      "Locus": "MT-RNR2",
-      "Position": 2259,
-      "Disease": "",
-      "Homoplasmy": "",
-      "Heteroplasmy": "",
-      "Status_MitoMap": "",
-      "GB Frequency": 201,
-      "References": "",
-      "InfoSource": "MitoMapPolymorphismsCoding",
-      "Curated References": 11,
-      "MSeqDR-LSDB.ID": "chrM_001260",
-      "Chr": "M",
-      "dbSNP.ID": "rs201336470",
-      "Effect": "?/?",
-      "Type": "subst",
-      "HGVS": "m.2259C>T",
-      "GERP": "-4.150",
-      "Sources": ";",
-      "PubMedID": "-",
-      "AS_FilterStatus": "SITE",
-      "AS_SB_TABLE": "4,0|2828,2697",
-      "DP": 5749,
-      "ECNT": 1,
-      "MBQ": [
-          16,
-          38
-      ],
-      "MFRL": [
-          280,
-          291
-      ],
-      "MMQ": [
-          60,
-          60
-      ],
-      "MPOS": 33,
-      "OCM": 0,
-      "POPAF": 2.4,
-      "TLOD": 21960.4,
-      "genotypes": [
-          {
-              "GT": "0/1",
-              "AD": [
-                  4,
-                  5525
-              ],
-              "AF": 1,
-              "DP": 5529,
-              "F1R2": [
-                  0,
-                  2778
-              ],
-              "F2R1": [
-                  1,
-                  2592
-              ],
-              "SB": [
-                  4,
-                  0,
-                  2828,
-                  2697
-              ]
-          }
-      ]
-  },
-  {
-      "chr": "chrM",
-      "pos": 2465,
-      "ref": "T",
-      "alt": "A",
-      "type": "SNP",
-      "qual": -1.0,
-      "dosages": [
-          1
-      ],
-      "symbol": "MT-ND1",
-      "consequence": {
-          "id": "upstream_gene_variant",
-          "rank": 25
-      },
-      "hgvsp": "",
-      "hgvsc": "",
-      "AS_FilterStatus": "base_qual,strand_bias",
-      "AS_SB_TABLE": "2741,1587|7,308",
-      "DP": 4793,
-      "ECNT": 3,
-      "MBQ": [
-          37,
-          15
-      ],
-      "MFRL": [
-          280,
-          269
-      ],
-      "MMQ": [
-          60,
-          60
-      ],
-      "MPOS": 16,
-      "OCM": 0,
-      "POPAF": 2.4,
-      "TLOD": 22.67,
-      "genotypes": [
-          {
-              "GT": "0/1",
-              "AD": [
-                  4328,
-                  315
-              ],
-              "AF": 0.018,
-              "DP": 4643,
-              "F1R2": [
-                  1520,
-                  11
-              ],
-              "F2R1": [
-                  1638,
-                  0
-              ],
-              "SB": [
-                  2741,
-                  1587,
-                  7,
-                  308
-              ]
-          }
-      ]
-  },
-  {
-      "chr": "chrM",
-      "pos": 2479,
-      "ref": "C",
-      "alt": "A",
-      "type": "SNP",
-      "qual": -1.0,
-      "dosages": [
-          1
-      ],
-      "symbol": "MT-ND1",
-      "consequence": {
-          "id": "upstream_gene_variant",
-          "rank": 25
-      },
-      "hgvsp": "",
-      "hgvsc": "",
-      "AS_FilterStatus": "base_qual,strand_bias",
-      "AS_SB_TABLE": "2625,1793|0,317",
-      "DP": 4977,
-      "ECNT": 3,
-      "MBQ": [
-          37,
-          15
-      ],
-      "MFRL": [
-          282,
-          279
-      ],
-      "MMQ": [
-          60,
-          60
-      ],
-      "MPOS": 25,
-      "OCM": 0,
-      "POPAF": 2.4,
-      "TLOD": 20.29,
-      "genotypes": [
-          {
-              "GT": "0/1",
-              "AD": [
-                  4418,
-                  317
-              ],
-              "AF": 0.019,
-              "DP": 4735,
-              "F1R2": [
-                  1499,
-                  15
-              ],
-              "F2R1": [
-                  1752,
-                  5
-              ],
-              "SB": [
-                  2625,
-                  1793,
-                  0,
-                  317
-              ]
-          }
-      ]
-  },
-  {
-      "chr": "chrM",
-      "pos": 2487,
-      "ref": "A",
-      "alt": "C",
-      "type": "SNP",
-      "qual": -1.0,
-      "dosages": [
-          1
-      ],
-      "symbol": "MT-ND1",
-      "consequence": {
-          "id": "upstream_gene_variant",
-          "rank": 25
-      },
-      "hgvsp": "",
-      "hgvsc": "",
-      "AS_FilterStatus": "base_qual,strand_bias",
-      "AS_SB_TABLE": "2572,1225|2,1052",
-      "DP": 4994,
-      "ECNT": 3,
-      "MBQ": [
-          38,
-          12
-      ],
-      "MFRL": [
-          281,
-          282
-      ],
-      "MMQ": [
-          60,
-          60
-      ],
-      "MPOS": 32,
-      "OCM": 0,
-      "POPAF": 2.4,
-      "TLOD": 219.66,
-      "genotypes": [
-          {
-              "GT": "0/1",
-              "AD": [
-                  3797,
-                  1054
-              ],
-              "AF": 0.121,
-              "DP": 4851,
-              "F1R2": [
-                  1451,
-                  49
-              ],
-              "F2R1": [
-                  1448,
-                  25
-              ],
-              "SB": [
-                  2572,
-                  1225,
-                  2,
-                  1052
-              ]
-          }
-      ]
-  },
-  {
-      "chr": "chrM",
-      "pos": 2645,
-      "ref": "G",
-      "alt": "A",
-      "type": "SNP",
-      "qual": -1.0,
-      "dosages": [
-          1
-      ],
-      "symbol": "MT-ND1",
-      "consequence": {
-          "id": "upstream_gene_variant",
-          "rank": 25
-      },
-      "hgvsp": "",
-      "hgvsc": "",
-      "AS_FilterStatus": "SITE",
-      "AS_SB_TABLE": "3146,2749|28,27",
-      "DP": 6340,
-      "ECNT": 1,
-      "MBQ": [
-          38,
-          38
-      ],
-      "MFRL": [
-          289,
-          289
-      ],
-      "MMQ": [
-          60,
-          60
-      ],
-      "MPOS": 36,
-      "OCM": 0,
-      "POPAF": 2.4,
-      "TLOD": 89.48,
-      "genotypes": [
-          {
-              "GT": "0/1",
-              "AD": [
-                  5895,
-                  55
-              ],
-              "AF": 0.009421,
-              "DP": 5950,
-              "F1R2": [
-                  2973,
-                  22
-              ],
-              "F2R1": [
-                  2744,
-                  32
-              ],
-              "SB": [
-                  3146,
-                  2749,
-                  28,
-                  27
-              ]
-          }
-      ]
-  },
-  {
-      "chr": "chrM",
-      "pos": 2982,
-      "ref": "C",
-      "alt": "T",
-      "type": "SNP",
-      "qual": -1.0,
-      "dosages": [
-          1
-      ],
-      "symbol": "MT-ND1",
-      "consequence": {
-          "id": "upstream_gene_variant",
-          "rank": 25
-      },
-      "hgvsp": "",
-      "hgvsc": "",
-      "AS_FilterStatus": "weak_evidence",
-      "AS_SB_TABLE": "2910,2746|3,3",
-      "DP": 5826,
-      "ECNT": 1,
-      "MBQ": [
-          38,
-          38
-      ],
-      "MFRL": [
-          288,
-          226
-      ],
-      "MMQ": [
-          60,
-          60
-      ],
-      "MPOS": 7,
-      "OCM": 0,
-      "POPAF": 2.4,
-      "TLOD": 0.922,
-      "genotypes": [
-          {
-              "GT": "0/1",
-              "AD": [
-                  5656,
-                  6
-              ],
-              "AF": 0.001057,
-              "DP": 5662,
-              "F1R2": [
-                  2735,
-                  5
-              ],
-              "F2R1": [
-                  2762,
-                  0
-              ],
-              "SB": [
-                  2910,
-                  2746,
-                  3,
-                  3
-              ]
-          }
-      ]
-  },
-  {
-      "chr": "chrM",
-      "pos": 3447,
-      "ref": "A",
-      "alt": "C",
-      "type": "SNP",
-      "qual": -1.0,
-      "dosages": [
-          1
-      ],
-      "symbol": "MT-ND1",
-      "consequence": {
-          "id": "missense_variant",
-          "rank": 10
-      },
-      "hgvsp": "p.Gln47His",
-      "hgvsc": "c.141A>C",
-      "AS_FilterStatus": "base_qual,strand_bias",
-      "AS_SB_TABLE": "3057,779|1,55",
-      "DP": 4081,
-      "ECNT": 8,
-      "MBQ": [
-          38,
-          14
-      ],
-      "MFRL": [
-          278,
-          273
-      ],
-      "MMQ": [
-          60,
-          60
-      ],
-      "MPOS": 67,
-      "OCM": 0,
-      "POPAF": 2.4,
-      "TLOD": 10.94,
-      "genotypes": [
-          {
-              "GT": "0/1",
-              "AD": [
-                  3836,
-                  56
-              ],
-              "AF": 0.004345,
-              "DP": 3892,
-              "F1R2": [
-                  2006,
-                  0
-              ],
-              "F2R1": [
-                  1627,
-                  4
-              ],
-              "SB": [
-                  3057,
-                  779,
-                  1,
-                  55
-              ]
-          }
-      ]
-  },
-  {
-      "chr": "chrM",
-      "pos": 3464,
-      "ref": "T",
-      "alt": "A",
-      "type": "SNP",
-      "qual": -1.0,
-      "dosages": [
-          1
-      ],
-      "symbol": "MT-ND1",
-      "consequence": {
-          "id": "missense_variant",
-          "rank": 10
-      },
-      "hgvsp": "p.Met53Lys",
-      "hgvsc": "c.158T>A",
-      "AS_FilterStatus": "base_qual,strand_bias",
-      "AS_SB_TABLE": "2923,560|0,33",
-      "DP": 3533,
-      "ECNT": 8,
-      "MBQ": [
-          38,
-          13
-      ],
-      "MFRL": [
-          280,
-          291
-      ],
-      "MMQ": [
-          60,
-          60
-      ],
-      "MPOS": 9,
-      "OCM": 0,
-      "POPAF": 2.4,
-      "TLOD": 39.87,
-      "genotypes": [
-          {
-              "GT": "0/1",
-              "AD": [
-                  3483,
-                  33
-              ],
-              "AF": 0.007918,
-              "DP": 3516,
-              "F1R2": [
-                  1879,
-                  0
-              ],
-              "F2R1": [
-                  1534,
-                  1
-              ],
-              "SB": [
-                  2923,
-                  560,
-                  0,
-                  33
-              ]
-          }
-      ]
-  },
-  {
-      "chr": "chrM",
-      "pos": 3468,
-      "ref": "A",
-      "alt": "C",
-      "type": "SNP",
-      "qual": -1.0,
-      "dosages": [
-          1
-      ],
-      "symbol": "MT-ND1",
-      "consequence": {
-          "id": "missense_variant",
-          "rank": 10
-      },
-      "hgvsp": "p.Lys54Asn",
-      "hgvsc": "c.162A>C",
-      "AS_FilterStatus": "base_qual,strand_bias",
-      "AS_SB_TABLE": "2824,533|1,50",
-      "DP": 3518,
-      "ECNT": 8,
-      "MBQ": [
-          38,
-          13
-      ],
-      "MFRL": [
-          280,
-          277
-      ],
-      "MMQ": [
-          60,
-          60
-      ],
-      "MPOS": 13,
-      "OCM": 0,
-      "POPAF": 2.4,
-      "TLOD": 48.98,
-      "genotypes": [
-          {
-              "GT": "0/1",
-              "AD": [
-                  3357,
-                  51
-              ],
-              "AF": 0.009926,
-              "DP": 3408,
-              "F1R2": [
-                  1802,
-                  0
-              ],
-              "F2R1": [
-                  1475,
-                  1
-              ],
-              "SB": [
-                  2824,
-                  533,
-                  1,
-                  50
-              ]
-          }
-      ]
-  },
-  {
-      "chr": "chrM",
-      "pos": 3473,
-      "ref": "T",
-      "alt": "C",
-      "type": "SNP",
-      "qual": -1.0,
-      "dosages": [
-          1
-      ],
-      "symbol": "MT-ND1",
-      "consequence": {
-          "id": "missense_variant",
-          "rank": 10
-      },
-      "hgvsp": "p.Phe56Ser",
-      "hgvsc": "c.167T>C",
-      "Allele": "T3473C",
-      "Locus": "MT-ND1",
-      "Position": 3473,
-      "Disease": "",
-      "Homoplasmy": "",
-      "Heteroplasmy": "",
-      "Status_MitoMap": "",
-      "GB Frequency": 1,
-      "References": "",
-      "InfoSource": "MitoMapPolymorphismsCoding",
-      "Curated References": 1,
-      "MSeqDR-LSDB.ID": "",
-      "Chr": "",
-      "dbSNP.ID": "",
-      "Effect": "",
-      "Type": "",
-      "HGVS": "",
-      "GERP": "",
-      "Sources": "",
-      "PubMedID": "",
-      "AS_FilterStatus": "weak_evidence,base_qual,strand_bias",
-      "AS_SB_TABLE": "2786,435|0,39",
-      "DP": 3319,
-      "ECNT": 8,
-      "MBQ": [
-          39,
-          12
-      ],
-      "MFRL": [
-          279,
-          287
-      ],
-      "MMQ": [
-          60,
-          60
-      ],
-      "MPOS": 13,
-      "OCM": 0,
-      "POPAF": 2.4,
-      "TLOD": 0.591,
-      "genotypes": [
-          {
-              "GT": "0/1",
-              "AD": [
-                  3221,
-                  39
-              ],
-              "AF": 0.00342,
-              "DP": 3260,
-              "F1R2": [
-                  1730,
-                  0
-              ],
-              "F2R1": [
-                  1385,
-                  3
-              ],
-              "SB": [
-                  2786,
-                  435,
-                  0,
-                  39
-              ]
-          }
-      ]
-  },
-  {
-      "chr": "chrM",
-      "pos": 3475,
-      "ref": "A",
-      "alt": "C",
-      "type": "SNP",
-      "qual": -1.0,
-      "dosages": [
-          1
-      ],
-      "symbol": "MT-ND1",
-      "consequence": {
-          "id": "missense_variant",
-          "rank": 10
-      },
-      "hgvsp": "p.Thr57Pro",
-      "hgvsc": "c.169A>C",
-      "AS_FilterStatus": "base_qual,strand_bias",
-      "AS_SB_TABLE": "2713,402|0,87",
-      "DP": 3332,
-      "ECNT": 8,
-      "MBQ": [
-          39,
-          13
-      ],
-      "MFRL": [
-          279,
-          284
-      ],
-      "MMQ": [
-          60,
-          60
-      ],
-      "MPOS": 15,
-      "OCM": 0,
-      "POPAF": 2.4,
-      "TLOD": 77.68,
-      "genotypes": [
-          {
-              "GT": "0/1",
-              "AD": [
-                  3115,
-                  87
-              ],
-              "AF": 0.019,
-              "DP": 3202,
-              "F1R2": [
-                  1663,
-                  1
-              ],
-              "F2R1": [
-                  1298,
-                  0
-              ],
-              "SB": [
-                  2713,
-                  402,
-                  0,
-                  87
-              ]
-          }
-      ]
-  },
-  {
-      "chr": "chrM",
-      "pos": 3483,
-      "ref": "G",
-      "alt": "C",
-      "type": "SNP",
-      "qual": -1.0,
-      "dosages": [
-          1
-      ],
-      "symbol": "MT-ND1",
-      "consequence": {
-          "id": "missense_variant",
-          "rank": 10
-      },
-      "hgvsp": "p.Glu59Asp",
-      "hgvsc": "c.177G>C",
-      "AS_FilterStatus": "base_qual,strand_bias",
-      "AS_SB_TABLE": "2569,333|0,86",
-      "DP": 3074,
-      "ECNT": 8,
-      "MBQ": [
-          38,
-          12
-      ],
-      "MFRL": [
-          281,
-          284
-      ],
-      "MMQ": [
-          60,
-          60
-      ],
-      "MPOS": 11,
-      "OCM": 0,
-      "POPAF": 2.4,
-      "TLOD": 91.2,
-      "genotypes": [
-          {
-              "GT": "0/1",
-              "AD": [
-                  2902,
-                  86
-              ],
-              "AF": 0.02,
-              "DP": 2988,
-              "F1R2": [
-                  1429,
-                  8
-              ],
-              "F2R1": [
-                  1120,
-                  15
-              ],
-              "SB": [
-                  2569,
-                  333,
-                  0,
-                  86
-              ]
-          }
-      ]
-  },
-  {
-      "chr": "chrM",
-      "pos": 3488,
-      "ref": "T",
-      "alt": "A",
-      "type": "SNP",
-      "qual": -1.0,
-      "dosages": [
-          1
-      ],
-      "symbol": "MT-ND1",
-      "consequence": {
-          "id": "missense_variant",
-          "rank": 10
-      },
-      "hgvsp": "p.Leu61Gln",
-      "hgvsc": "c.182T>A",
-      "Allele": "T3488A",
-      "Locus": "MT-ND1",
-      "Position": 3488,
-      "Disease": "",
-      "Homoplasmy": "",
-      "Heteroplasmy": "",
-      "Status_MitoMap": "",
-      "GB Frequency": 1,
-      "References": "",
-      "InfoSource": "MitoMapPolymorphismsCoding",
-      "Curated References": 1,
-      "MSeqDR-LSDB.ID": "",
-      "Chr": "",
-      "dbSNP.ID": "",
-      "Effect": "",
-      "Type": "",
-      "HGVS": "",
-      "GERP": "",
-      "Sources": "",
-      "PubMedID": "",
-      "AS_FilterStatus": "base_qual,strand_bias",
-      "AS_SB_TABLE": "2458,226|0,189",
-      "DP": 2975,
-      "ECNT": 8,
-      "MBQ": [
-          39,
-          13
-      ],
-      "MFRL": [
-          282,
-          277
-      ],
-      "MMQ": [
-          60,
-          60
-      ],
-      "MPOS": 1,
-      "OCM": 0,
-      "POPAF": 2.4,
-      "TLOD": 121.91,
-      "genotypes": [
-          {
-              "GT": "0/1",
-              "AD": [
-                  2684,
-                  189
-              ],
-              "AF": 0.035,
-              "DP": 2873,
-              "F1R2": [
-                  1456,
-                  26
-              ],
-              "F2R1": [
-                  1166,
-                  29
-              ],
-              "SB": [
-                  2458,
-                  226,
-                  0,
-                  189
-              ]
-          }
-      ]
-  },
-  {
-      "chr": "chrM",
-      "pos": 3492,
-      "ref": "A",
-      "alt": "C",
-      "type": "SNP",
-      "qual": -1.0,
-      "dosages": [
-          1
-      ],
-      "symbol": "MT-ND1",
-      "consequence": {
-          "id": "missense_variant",
-          "rank": 10
-      },
-      "hgvsp": "p.Lys62Asn",
-      "hgvsc": "c.186A>C",
-      "AS_FilterStatus": "base_qual,strand_bias",
-      "AS_SB_TABLE": "2448,203|4,229",
-      "DP": 2926,
-      "ECNT": 8,
-      "MBQ": [
-          38,
-          12
-      ],
-      "MFRL": [
-          282,
-          278
-      ],
-      "MMQ": [
-          60,
-          60
-      ],
-      "MPOS": 5,
-      "OCM": 0,
-      "POPAF": 2.4,
-      "TLOD": 198.44,
-      "genotypes": [
-          {
-              "GT": "0/1",
-              "AD": [
-                  2651,
-                  233
-              ],
-              "AF": 0.051,
-              "DP": 2884,
-              "F1R2": [
-                  1418,
-                  32
-              ],
-              "F2R1": [
-                  1050,
-                  36
-              ],
-              "SB": [
-                  2448,
-                  203,
-                  4,
-                  229
-              ]
-          }
-      ]
-  },
-  {
-      "chr": "chrM",
-      "pos": 4745,
-      "ref": "A",
-      "alt": "G",
-      "type": "SNP",
-      "qual": -1.0,
-      "dosages": [
-          1
-      ],
-      "symbol": "MT-ND2",
-      "consequence": {
-          "id": "synonymous_variant",
-          "rank": 16
-      },
-      "hgvsp": "p.Gln92=",
-      "hgvsc": "c.276A>G",
-      "Allele": "A4745G",
-      "Locus": "MT-ND2",
-      "Position": 4745,
-      "Disease": "",
-      "Homoplasmy": "",
-      "Heteroplasmy": "",
-      "Status_MitoMap": "",
-      "GB Frequency": 142,
-      "References": "",
-      "InfoSource": "MitoMapPolymorphismsCoding",
-      "Curated References": 13,
-      "MSeqDR-LSDB.ID": "",
-      "Chr": "",
-      "dbSNP.ID": "",
-      "Effect": "",
-      "Type": "",
-      "HGVS": "",
-      "GERP": "",
-      "Sources": "",
-      "PubMedID": "",
-      "AS_FilterStatus": "SITE",
-      "AS_SB_TABLE": "0,0|3019,3081",
-      "DP": 6194,
-      "ECNT": 2,
-      "MBQ": [
-          0,
-          38
-      ],
-      "MFRL": [
-          0,
-          294
-      ],
-      "MMQ": [
-          60,
-          60
-      ],
-      "MPOS": 38,
-      "OCM": 0,
-      "POPAF": 2.4,
-      "TLOD": 26896.2,
-      "genotypes": [
-          {
-              "GT": "0/1",
-              "AD": [
-                  0,
-                  6100
-              ],
-              "AF": 1,
-              "DP": 6100,
-              "F1R2": [
-                  0,
-                  2918
-              ],
-              "F2R1": [
-                  0,
-                  2769
-              ],
-              "SB": [
-                  0,
-                  0,
-                  3019,
-                  3081
-              ]
-          }
-      ]
-  },
-  {
-      "chr": "chrM",
-      "pos": 4769,
-      "ref": "A",
-      "alt": "G",
-      "type": "SNP",
-      "qual": -1.0,
-      "dosages": [
-          1
-      ],
-      "symbol": "MT-ND2",
-      "consequence": {
-          "id": "synonymous_variant",
-          "rank": 16
-      },
-      "hgvsp": "p.Met100=",
-      "hgvsc": "c.300A>G",
-      "Allele": "A4769G",
-      "Locus": "MT-ND2",
-      "Position": 4769,
-      "Disease": "",
-      "Homoplasmy": "",
-      "Heteroplasmy": "",
-      "Status_MitoMap": "",
-      "GB Frequency": 31182,
-      "References": "",
-      "InfoSource": "MitoMapPolymorphismsCoding",
-      "Curated References": 124,
-      "MSeqDR-LSDB.ID": "chrM_001074",
-      "Chr": "M",
-      "dbSNP.ID": "rs3021086",
-      "Effect": "?/, ?",
-      "Type": "subst",
-      "HGVS": "m.4769A>G",
-      "GERP": "-8.800",
-      "Sources": "; Mitomap;",
-      "PubMedID": "-",
-      "AS_FilterStatus": "SITE",
-      "AS_SB_TABLE": "0,0|3150,3028",
-      "DP": 6340,
-      "ECNT": 2,
-      "MBQ": [
-          0,
-          38
-      ],
-      "MFRL": [
-          0,
-          294
-      ],
-      "MMQ": [
-          60,
-          60
-      ],
-      "MPOS": 38,
-      "OCM": 0,
-      "POPAF": 2.4,
-      "TLOD": 24279.5,
-      "genotypes": [
-          {
-              "GT": "0/1",
-              "AD": [
-                  0,
-                  6178
-              ],
-              "AF": 1,
-              "DP": 6178,
-              "F1R2": [
-                  0,
-                  3077
-              ],
-              "F2R1": [
-                  0,
-                  2877
-              ],
-              "SB": [
-                  0,
-                  0,
-                  3150,
-                  3028
-              ]
-          }
-      ]
-  },
-  {
-      "chr": "chrM",
-      "pos": 7212,
-      "ref": "C",
-      "alt": "T",
-      "type": "SNP",
-      "qual": -1.0,
-      "dosages": [
-          1
-      ],
-      "symbol": "MT-CO1",
-      "consequence": {
-          "id": "missense_variant",
-          "rank": 10
-      },
-      "hgvsp": "p.Pro437Ser",
-      "hgvsc": "c.1309C>T",
-      "AS_FilterStatus": "SITE",
-      "AS_SB_TABLE": "2611,3242|6,4",
-      "DP": 6047,
-      "ECNT": 1,
-      "MBQ": [
-          38,
-          37
-      ],
-      "MFRL": [
-          279,
-          285
-      ],
-      "MMQ": [
-          60,
-          60
-      ],
-      "MPOS": 33,
-      "OCM": 0,
-      "POPAF": 2.4,
-      "TLOD": 4.33,
-      "genotypes": [
-          {
-              "GT": "0/1",
-              "AD": [
-                  5853,
-                  10
-              ],
-              "AF": 0.001669,
-              "DP": 5863,
-              "F1R2": [
-                  2871,
-                  3
-              ],
-              "F2R1": [
-                  2800,
-                  6
-              ],
-              "SB": [
-                  2611,
-                  3242,
-                  6,
-                  4
-              ]
-          }
-      ]
-  },
-  {
-      "chr": "chrM",
-      "pos": 7337,
-      "ref": "G",
-      "alt": "A",
-      "type": "SNP",
-      "qual": -1.0,
-      "dosages": [
-          1
-      ],
-      "symbol": "MT-CO1",
-      "consequence": {
-          "id": "synonymous_variant",
-          "rank": 16
-      },
-      "hgvsp": "p.Ser478=",
-      "hgvsc": "c.1434G>A",
-      "Allele": "G7337A",
-      "Locus": "MT-CO1",
-      "Position": 7337,
-      "Disease": "",
-      "Homoplasmy": "",
-      "Heteroplasmy": "",
-      "Status_MitoMap": "",
-      "GB Frequency": 406,
-      "References": "",
-      "InfoSource": "MitoMapPolymorphismsCoding",
-      "Curated References": 18,
-      "MSeqDR-LSDB.ID": "",
-      "Chr": "",
-      "dbSNP.ID": "",
-      "Effect": "",
-      "Type": "",
-      "HGVS": "",
-      "GERP": "",
-      "Sources": "",
-      "PubMedID": "",
-      "AS_FilterStatus": "SITE",
-      "AS_SB_TABLE": "1,0|2858,2867",
-      "DP": 5905,
-      "ECNT": 1,
-      "MBQ": [
-          14,
-          38
-      ],
-      "MFRL": [
-          159,
-          285
-      ],
-      "MMQ": [
-          60,
-          60
-      ],
-      "MPOS": 40,
-      "OCM": 0,
-      "POPAF": 2.4,
-      "TLOD": 22631.8,
-      "genotypes": [
-          {
-              "GT": "0/1",
-              "AD": [
-                  1,
-                  5725
-              ],
-              "AF": 1,
-              "DP": 5726,
-              "F1R2": [
-                  0,
-                  2772
-              ],
-              "F2R1": [
-                  0,
-                  2827
-              ],
-              "SB": [
-                  1,
-                  0,
-                  2858,
-                  2867
-              ]
-          }
-      ]
-  },
-  {
-      "chr": "chrM",
-      "pos": 8512,
-      "ref": "A",
-      "alt": "C",
-      "type": "SNP",
-      "qual": -1.0,
-      "dosages": [
-          1
-      ],
-      "symbol": "MT-ATP8",
-      "consequence": {
-          "id": "missense_variant",
-          "rank": 10
-      },
-      "hgvsp": "p.Lys49Asn",
-      "hgvsc": "c.147A>C",
-      "AS_FilterStatus": "weak_evidence,base_qual,strand_bias",
-      "AS_SB_TABLE": "3101,1314|1,212",
-      "DP": 4847,
-      "ECNT": 4,
-      "MBQ": [
-          38,
-          12
-      ],
-      "MFRL": [
-          278,
-          266
-      ],
-      "MMQ": [
-          60,
-          60
-      ],
-      "MPOS": 19,
-      "OCM": 0,
-      "POPAF": 2.4,
-      "TLOD": 0.684,
-      "genotypes": [
-          {
-              "GT": "0/1",
-              "AD": [
-                  4415,
-                  213
-              ],
-              "AF": 0.006362,
-              "DP": 4628,
-              "F1R2": [
-                  2226,
-                  1
-              ],
-              "F2R1": [
-                  1939,
-                  6
-              ],
-              "SB": [
-                  3101,
-                  1314,
-                  1,
-                  212
-              ]
-          }
-      ]
-  },
-  {
-      "chr": "chrM",
-      "pos": 8557,
-      "ref": "G",
-      "alt": "C",
-      "type": "SNP",
-      "qual": -1.0,
-      "dosages": [
-          1
-      ],
-      "symbol": "MT-ATP8",
-      "consequence": {
-          "id": "missense_variant",
-          "rank": 10
-      },
-      "hgvsp": "p.Leu64Phe",
-      "hgvsc": "c.192G>C",
-      "Allele": "G8557C",
-      "Locus": "MT-ATP8, MT-ATP6",
-      "Position": 8557,
-      "Disease": "",
-      "Homoplasmy": "",
-      "Heteroplasmy": "",
-      "Status_MitoMap": "",
-      "GB Frequency": 18,
-      "References": "",
-      "InfoSource": "MitoMapPolymorphismsCoding",
-      "Curated References": 2,
-      "MSeqDR-LSDB.ID": "",
-      "Chr": "",
-      "dbSNP.ID": "",
-      "Effect": "",
-      "Type": "",
-      "HGVS": "",
-      "GERP": "",
-      "Sources": "",
-      "PubMedID": "",
-      "AS_FilterStatus": "base_qual,strand_bias",
-      "AS_SB_TABLE": "2615,1097|0,241",
-      "DP": 4143,
-      "ECNT": 4,
-      "MBQ": [
-          38,
-          12
-      ],
-      "MFRL": [
-          279,
-          289
-      ],
-      "MMQ": [
-          60,
-          60
-      ],
-      "MPOS": 22,
-      "OCM": 0,
-      "POPAF": 2.4,
-      "TLOD": 9.89,
-      "genotypes": [
-          {
-              "GT": "0/1",
-              "AD": [
-                  3712,
-                  241
-              ],
-              "AF": 0.009326,
-              "DP": 3953,
-              "F1R2": [
-                  1640,
-                  14
-              ],
-              "F2R1": [
-                  1455,
-                  1
-              ],
-              "SB": [
-                  2615,
-                  1097,
-                  0,
-                  241
-              ]
-          }
-      ]
-  },
-  {
-      "chr": "chrM",
-      "pos": 8567,
-      "ref": "T",
-      "alt": "C",
-      "type": "SNP",
-      "qual": -1.0,
-      "dosages": [
-          1
-      ],
-      "symbol": "MT-ATP8",
-      "consequence": {
-          "id": "missense_variant",
-          "rank": 10
-      },
-      "hgvsp": "p.Ser68Pro",
-      "hgvsc": "c.202T>C",
-      "Allele": "T8567C",
-      "Locus": "MT-ATP8, MT-ATP6",
-      "Position": 8567,
-      "Disease": "",
-      "Homoplasmy": "",
-      "Heteroplasmy": "",
-      "Status_MitoMap": "",
-      "GB Frequency": 73,
-      "References": "",
-      "InfoSource": "MitoMapPolymorphismsCoding",
-      "Curated References": 8,
-      "MSeqDR-LSDB.ID": "",
-      "Chr": "",
-      "dbSNP.ID": "",
-      "Effect": "",
-      "Type": "",
-      "HGVS": "",
-      "GERP": "",
-      "Sources": "",
-      "PubMedID": "",
-      "AS_FilterStatus": "base_qual,strand_bias",
-      "AS_SB_TABLE": "2508,1131|0,309",
-      "DP": 4199,
-      "ECNT": 4,
-      "MBQ": [
-          37,
-          13
-      ],
-      "MFRL": [
-          278,
-          292
-      ],
-      "MMQ": [
-          60,
-          60
-      ],
-      "MPOS": 24,
-      "OCM": 0,
-      "POPAF": 2.4,
-      "TLOD": 9.02,
-      "genotypes": [
-          {
-              "GT": "0/1",
-              "AD": [
-                  3639,
-                  309
-              ],
-              "AF": 0.014,
-              "DP": 3948,
-              "F1R2": [
-                  1521,
-                  5
-              ],
-              "F2R1": [
-                  1347,
-                  2
-              ],
-              "SB": [
-                  2508,
-                  1131,
-                  0,
-                  309
-              ]
-          }
-      ]
-  },
-  {
-      "chr": "chrM",
-      "pos": 8577,
-      "ref": "A",
-      "alt": "C",
-      "type": "SNP",
-      "qual": -1.0,
-      "dosages": [
-          1
-      ],
-      "symbol": "MT-ATP6",
-      "consequence": {
-          "id": "synonymous_variant",
-          "rank": 16
-      },
-      "hgvsp": "p.Leu17=",
-      "hgvsc": "c.51A>C",
-      "AS_FilterStatus": "base_qual,strand_bias",
-      "AS_SB_TABLE": "2302,1123|1,279",
-      "DP": 3801,
-      "ECNT": 3,
-      "MBQ": [
-          37,
-          12
-      ],
-      "MFRL": [
-          282,
-          302
-      ],
-      "MMQ": [
-          60,
-          60
-      ],
-      "MPOS": 18,
-      "OCM": 0,
-      "POPAF": 2.4,
-      "TLOD": 11.51,
-      "genotypes": [
-          {
-              "GT": "0/1",
-              "AD": [
-                  3425,
-                  280
-              ],
-              "AF": 0.013,
-              "DP": 3705,
-              "F1R2": [
-                  1339,
-                  12
-              ],
-              "F2R1": [
-                  1396,
-                  0
-              ],
-              "SB": [
-                  2302,
-                  1123,
-                  1,
-                  279
-              ]
-          }
-      ]
-  },
-  {
-      "chr": "chrM",
-      "pos": 8860,
-      "ref": "A",
-      "alt": "G",
-      "type": "SNP",
-      "qual": -1.0,
-      "dosages": [
-          1
-      ],
-      "symbol": "MT-ATP6",
-      "consequence": {
-          "id": "missense_variant",
-          "rank": 10
-      },
-      "hgvsp": "p.Thr112Ala",
-      "hgvsc": "c.334A>G",
-      "Allele": "A8860G",
-      "Locus": "MT-ATP6",
-      "Position": 8860,
-      "Disease": "",
-      "Homoplasmy": "",
-      "Heteroplasmy": "",
-      "Status_MitoMap": "",
-      "GB Frequency": 31527,
-      "References": "",
-      "InfoSource": "MitoMapPolymorphismsCoding",
-      "Curated References": 125,
-      "MSeqDR-LSDB.ID": "chrM_001386",
-      "Chr": "M",
-      "dbSNP.ID": "rs2001031",
-      "Effect": "?/?",
-      "Type": "subst",
-      "HGVS": "m.8860A>G",
-      "GERP": "-7.800",
-      "Sources": ";",
-      "PubMedID": "-",
-      "AS_FilterStatus": "SITE",
-      "AS_SB_TABLE": "1,1|2628,2865",
-      "DP": 5556,
-      "ECNT": 1,
-      "MBQ": [
-          39,
-          38
-      ],
-      "MFRL": [
-          248,
-          288
-      ],
-      "MMQ": [
-          60,
-          60
-      ],
-      "MPOS": 36,
-      "OCM": 0,
-      "POPAF": 2.4,
-      "TLOD": 21659.9,
-      "genotypes": [
-          {
-              "GT": "0/1",
-              "AD": [
-                  2,
-                  5493
-              ],
-              "AF": 0.999,
-              "DP": 5495,
-              "F1R2": [
-                  1,
-                  2808
-              ],
-              "F2R1": [
-                  1,
-                  2478
-              ],
-              "SB": [
-                  1,
-                  1,
-                  2628,
-                  2865
-              ]
-          }
-      ]
-  },
-  {
-      "chr": "chrM",
-      "pos": 12417,
-      "ref": "C",
-      "alt": "CA",
-      "type": "INS",
-      "qual": -1.0,
-      "dosages": [
-          1
-      ],
-      "symbol": "MT-ND5",
-      "consequence": {
-          "id": "frameshift_variant",
-          "rank": 5
-      },
-      "hgvsp": "p.Asn30LysfsTer86",
-      "hgvsc": "c.89dup",
-      "AS_FilterStatus": "SITE",
-      "AS_SB_TABLE": "2174,2609|10,23",
-      "DP": 5178,
-      "ECNT": 1,
-      "MBQ": [
-          38,
-          38
-      ],
-      "MFRL": [
-          278,
-          273
-      ],
-      "MMQ": [
-          60,
-          60
-      ],
-      "MPOS": 41,
-      "OCM": 0,
-      "POPAF": 2.4,
-      "RPA": [
-          8,
-          9
-      ],
-      "RU": "A",
-      "STR": true,
-      "TLOD": 9.88,
-      "genotypes": [
-          {
-              "GT": "0/1",
-              "AD": [
-                  4783,
-                  33
-              ],
-              "AF": 0.005716,
-              "DP": 4816,
-              "F1R2": [
-                  2415,
-                  10
-              ],
-              "F2R1": [
-                  2291,
-                  20
-              ],
-              "SB": [
-                  2174,
-                  2609,
-                  10,
-                  23
-              ]
-          }
-      ]
-  },
-  {
-      "chr": "chrM",
-      "pos": 12989,
-      "ref": "TAGC",
-      "alt": "T",
-      "type": "DEL",
-      "qual": -1.0,
-      "dosages": [
-          1
-      ],
-      "symbol": "MT-ND5",
-      "consequence": {
-          "id": "inframe_deletion",
-          "rank": 9
-      },
-      "hgvsp": "p.Ala221del",
-      "hgvsc": "c.662_664del",
-      "AS_FilterStatus": "weak_evidence",
-      "AS_SB_TABLE": "2404,2655|3,5",
-      "DP": 5503,
-      "ECNT": 1,
-      "MBQ": [
-          39,
-          38
-      ],
-      "MFRL": [
-          281,
-          292
-      ],
-      "MMQ": [
-          60,
-          60
-      ],
-      "MPOS": 55,
-      "OCM": 0,
-      "POPAF": 2.4,
-      "RPA": [
-          3,
-          2
-      ],
-      "RU": "AGC",
-      "STR": true,
-      "TLOD": 3.89,
-      "genotypes": [
-          {
-              "GT": "0/1",
-              "AD": [
-                  5059,
-                  8
-              ],
-              "AF": 0.001615,
-              "DP": 5067,
-              "F1R2": [
-                  2227,
-                  4
-              ],
-              "F2R1": [
-                  2688,
-                  3
-              ],
-              "SB": [
-                  2404,
-                  2655,
-                  3,
-                  5
-              ]
-          }
-      ]
-  },
-  {
-      "chr": "chrM",
-      "pos": 13289,
-      "ref": "G",
-      "alt": "A",
-      "type": "SNP",
-      "qual": -1.0,
-      "dosages": [
-          1
-      ],
-      "symbol": "MT-ND5",
-      "consequence": {
-          "id": "missense_variant",
-          "rank": 10
-      },
-      "hgvsp": "p.Gly318Asp",
-      "hgvsc": "c.953G>A",
-      "AS_FilterStatus": "weak_evidence",
-      "AS_SB_TABLE": "2851,2969|4,4",
-      "DP": 6006,
-      "ECNT": 2,
-      "MBQ": [
-          38,
-          39
-      ],
-      "MFRL": [
-          282,
-          379
-      ],
-      "MMQ": [
-          60,
-          60
-      ],
-      "MPOS": 44,
-      "OCM": 0,
-      "POPAF": 2.4,
-      "TLOD": 2.8,
-      "genotypes": [
-          {
-              "GT": "0|1",
-              "AD": [
-                  5820,
-                  8
-              ],
-              "AF": 0.001237,
-              "DP": 5828,
-              "F1R2": [
-                  2842,
-                  2
-              ],
-              "F2R1": [
-                  2757,
-                  4
-              ],
-              "PGT": "0|1",
-              "PID": "13289_G_A",
-              "PS": 13289,
-              "SB": [
-                  2851,
-                  2969,
-                  4,
-                  4
-              ]
-          }
-      ]
-  },
-  {
-      "chr": "chrM",
-      "pos": 13326,
-      "ref": "T",
-      "alt": "C",
-      "type": "SNP",
-      "qual": -1.0,
-      "dosages": [
-          1
-      ],
-      "symbol": "MT-ND5",
-      "consequence": {
-          "id": "synonymous_variant",
-          "rank": 16
-      },
-      "hgvsp": "p.Cys330=",
-      "hgvsc": "c.990T>C",
-      "Allele": "T13326C",
-      "Locus": "MT-ND5",
-      "Position": 13326,
-      "Disease": "",
-      "Homoplasmy": "",
-      "Heteroplasmy": "",
-      "Status_MitoMap": "",
-      "GB Frequency": 124,
-      "References": "",
-      "InfoSource": "MitoMapPolymorphismsCoding",
-      "Curated References": 11,
-      "MSeqDR-LSDB.ID": "",
-      "Chr": "",
-      "dbSNP.ID": "",
-      "Effect": "",
-      "Type": "",
-      "HGVS": "",
-      "GERP": "",
-      "Sources": "",
-      "PubMedID": "",
-      "AS_FilterStatus": "SITE",
-      "AS_SB_TABLE": "2,0|3027,2817",
-      "DP": 5963,
-      "ECNT": 2,
-      "MBQ": [
-          28,
-          37
-      ],
-      "MFRL": [
-          360,
-          285
-      ],
-      "MMQ": [
-          60,
-          60
-      ],
-      "MPOS": 33,
-      "OCM": 0,
-      "POPAF": 2.4,
-      "TLOD": 22878.2,
-      "genotypes": [
-          {
-              "GT": "0|1",
-              "AD": [
-                  2,
-                  5844
-              ],
-              "AF": 1,
-              "DP": 5846,
-              "F1R2": [
-                  1,
-                  2817
-              ],
-              "F2R1": [
-                  0,
-                  2855
-              ],
-              "PGT": "0|1",
-              "PID": "5289_G_A",
-              "PS": 5289,
-              "SB": [
-                  2,
-                  0,
-                  3027,
-                  2817
-              ]
-          }
-      ]
-  },
-  {
-      "chr": "chrM",
-      "pos": 13680,
-      "ref": "C",
-      "alt": "T",
-      "type": "SNP",
-      "qual": -1.0,
-      "dosages": [
-          1
-      ],
-      "symbol": "MT-ND5",
-      "consequence": {
-          "id": "synonymous_variant",
-          "rank": 16
-      },
-      "hgvsp": "p.Pro448=",
-      "hgvsc": "c.1344C>T",
-      "Allele": "C13680T",
-      "Locus": "MT-ND5",
-      "Position": 13680,
-      "Disease": "",
-      "Homoplasmy": "",
-      "Heteroplasmy": "",
-      "Status_MitoMap": "",
-      "GB Frequency": 195,
-      "References": "",
-      "InfoSource": "MitoMapPolymorphismsCoding",
-      "Curated References": 12,
-      "MSeqDR-LSDB.ID": "",
-      "Chr": "",
-      "dbSNP.ID": "",
-      "Effect": "",
-      "Type": "",
-      "HGVS": "",
-      "GERP": "",
-      "Sources": "",
-      "PubMedID": "",
-      "AS_FilterStatus": "SITE",
-      "AS_SB_TABLE": "3,1|2768,2856",
-      "DP": 5876,
-      "ECNT": 2,
-      "MBQ": [
-          18,
-          37
-      ],
-      "MFRL": [
-          201,
-          283
-      ],
-      "MMQ": [
-          60,
-          60
-      ],
-      "MPOS": 36,
-      "OCM": 0,
-      "POPAF": 2.4,
-      "TLOD": 21361.9,
-      "genotypes": [
-          {
-              "GT": "0|1",
-              "AD": [
-                  4,
-                  5624
-              ],
-              "AF": 1,
-              "DP": 5628,
-              "F1R2": [
-                  2,
-                  2661
-              ],
-              "F2R1": [
-                  0,
-                  2611
-              ],
-              "PGT": "0|1",
-              "PID": "13680_C_T",
-              "PS": 13680,
-              "SB": [
-                  3,
-                  1,
-                  2768,
-                  2856
-              ]
-          }
-      ]
-  },
-  {
-      "chr": "chrM",
-      "pos": 13714,
-      "ref": "G",
-      "alt": "A",
-      "type": "SNP",
-      "qual": -1.0,
-      "dosages": [
-          1
-      ],
-      "symbol": "MT-ND5",
-      "consequence": {
-          "id": "stop_gained",
-          "rank": 4
-      },
-      "hgvsp": "p.Gly460Ter",
-      "hgvsc": "c.1378G>A",
-      "AS_FilterStatus": "weak_evidence",
-      "AS_SB_TABLE": "2709,2754|4,5",
-      "DP": 5580,
-      "ECNT": 2,
-      "MBQ": [
-          38,
-          20
-      ],
-      "MFRL": [
-          280,
-          273
-      ],
-      "MMQ": [
-          60,
-          60
-      ],
-      "MPOS": 39,
-      "OCM": 0,
-      "POPAF": 2.4,
-      "TLOD": 0.233,
-      "genotypes": [
-          {
-              "GT": "0|1",
-              "AD": [
-                  5463,
-                  9
-              ],
-              "AF": 0.001065,
-              "DP": 5472,
-              "F1R2": [
-                  2622,
-                  3
-              ],
-              "F2R1": [
-                  2524,
-                  4
-              ],
-              "PGT": "0|1",
-              "PID": "13680_C_T",
-              "PS": 13680,
-              "SB": [
-                  2709,
-                  2754,
-                  4,
-                  5
-              ]
-          }
-      ]
-  },
-  {
-      "chr": "chrM",
-      "pos": 14831,
-      "ref": "G",
-      "alt": "A",
-      "type": "SNP",
-      "qual": -1.0,
-      "dosages": [
-          1
-      ],
-      "symbol": "MT-CYB",
-      "consequence": {
-          "id": "missense_variant",
-          "rank": 10
-      },
-      "hgvsp": "p.Ala29Thr",
-      "hgvsc": "c.85G>A",
-      "Allele": "G14831A",
-      "Locus": "MT-CYB, MT-CYB",
-      "Position": 14831,
-      "Disease": "LHON",
-      "Homoplasmy": "",
-      "Heteroplasmy": "-",
-      "Status_MitoMap": "Reported",
-      "GB Frequency": 81,
-      "References": "1",
-      "InfoSource": "MitoMapCodingControl, MitoMapPolymorphismsCoding",
-      "Curated References": null,
-      "MSeqDR-LSDB.ID": "chrM_000042",
-      "Chr": "M",
-      "dbSNP.ID": "rs199795644",
-      "Effect": "/",
-      "Type": "subst",
-      "HGVS": "m.14831G>A",
-      "GERP": "-8.300",
-      "Sources": "; clinVar; Mitomap; ensembl;",
-      "PubMedID": "20301353",
-      "AS_FilterStatus": "SITE",
-      "AS_SB_TABLE": "0,0|2639,2749",
-      "DP": 5503,
-      "ECNT": 3,
-      "MBQ": [
-          0,
-          38
-      ],
-      "MFRL": [
-          0,
-          279
-      ],
-      "MMQ": [
-          60,
-          60
-      ],
-      "MPOS": 31,
-      "OCM": 0,
-      "POPAF": 2.4,
-      "TLOD": 21178.1,
-      "genotypes": [
-          {
-              "GT": "0/1",
-              "AD": [
-                  0,
-                  5388
-              ],
-              "AF": 1,
-              "DP": 5388,
-              "F1R2": [
-                  0,
-                  2679
-              ],
-              "F2R1": [
-                  0,
-                  2506
-              ],
-              "SB": [
-                  0,
-                  0,
-                  2639,
-                  2749
-              ]
-          }
-      ]
-  },
-  {
-      "chr": "chrM",
-      "pos": 14872,
-      "ref": "C",
-      "alt": "T",
-      "type": "SNP",
-      "qual": -1.0,
-      "dosages": [
-          1
-      ],
-      "symbol": "MT-CYB",
-      "consequence": {
-          "id": "synonymous_variant",
-          "rank": 16
-      },
-      "hgvsp": "p.Ile42=",
-      "hgvsc": "c.126C>T",
-      "Allele": "C14872T",
-      "Locus": "MT-CYB",
-      "Position": 14872,
-      "Disease": "",
-      "Homoplasmy": "",
-      "Heteroplasmy": "",
-      "Status_MitoMap": "",
-      "GB Frequency": 223,
-      "References": "",
-      "InfoSource": "MitoMapPolymorphismsCoding",
-      "Curated References": 11,
-      "MSeqDR-LSDB.ID": "",
-      "Chr": "",
-      "dbSNP.ID": "",
-      "Effect": "",
-      "Type": "",
-      "HGVS": "",
-      "GERP": "",
-      "Sources": "",
-      "PubMedID": "",
-      "AS_FilterStatus": "SITE",
-      "AS_SB_TABLE": "0,0|2584,2701",
-      "DP": 5419,
-      "ECNT": 3,
-      "MBQ": [
-          0,
-          38
-      ],
-      "MFRL": [
-          0,
-          285
-      ],
-      "MMQ": [
-          60,
-          60
-      ],
-      "MPOS": 39,
-      "OCM": 0,
-      "POPAF": 2.4,
-      "TLOD": 20830.3,
-      "genotypes": [
-          {
-              "GT": "0/1",
-              "AD": [
-                  0,
-                  5285
-              ],
-              "AF": 1,
-              "DP": 5285,
-              "F1R2": [
-                  0,
-                  2584
-              ],
-              "F2R1": [
-                  0,
-                  2508
-              ],
-              "SB": [
-                  0,
-                  0,
-                  2584,
-                  2701
-              ]
-          }
-      ]
-  },
-  {
-      "chr": "chrM",
-      "pos": 14918,
-      "ref": "G",
-      "alt": "A",
-      "type": "SNP",
-      "qual": -1.0,
-      "dosages": [
-          1
-      ],
-      "symbol": "MT-CYB",
-      "consequence": {
-          "id": "missense_variant",
-          "rank": 10
-      },
-      "hgvsp": "p.Asp58Asn",
-      "hgvsc": "c.172G>A",
-      "Allele": "G14918A",
-      "Locus": "MT-CYB",
-      "Position": 14918,
-      "Disease": "",
-      "Homoplasmy": "",
-      "Heteroplasmy": "",
-      "Status_MitoMap": "",
-      "GB Frequency": 1,
-      "References": "",
-      "InfoSource": "MitoMapPolymorphismsCoding",
-      "Curated References": 1,
-      "MSeqDR-LSDB.ID": "",
-      "Chr": "",
-      "dbSNP.ID": "",
-      "Effect": "",
-      "Type": "",
-      "HGVS": "",
-      "GERP": "",
-      "Sources": "",
-      "PubMedID": "",
-      "AS_FilterStatus": "SITE",
-      "AS_SB_TABLE": "2698,2459|89,66",
-      "DP": 5543,
-      "ECNT": 3,
-      "MBQ": [
-          38,
-          36
-      ],
-      "MFRL": [
-          288,
-          294
-      ],
-      "MMQ": [
-          60,
-          60
-      ],
-      "MPOS": 33,
-      "OCM": 0,
-      "POPAF": 2.4,
-      "TLOD": 278.05,
-      "genotypes": [
-          {
-              "GT": "0/1",
-              "AD": [
-                  5157,
-                  155
-              ],
-              "AF": 0.027,
-              "DP": 5312,
-              "F1R2": [
-                  2467,
-                  79
-              ],
-              "F2R1": [
-                  2508,
-                  63
-              ],
-              "SB": [
-                  2698,
-                  2459,
-                  89,
-                  66
-              ]
-          }
-      ]
-  },
-  {
-      "chr": "chrM",
-      "pos": 15326,
-      "ref": "A",
-      "alt": "G",
-      "type": "SNP",
-      "qual": -1.0,
-      "dosages": [
-          1
-      ],
-      "symbol": "MT-CYB",
-      "consequence": {
-          "id": "missense_variant",
-          "rank": 10
-      },
-      "hgvsp": "p.Thr194Ala",
-      "hgvsc": "c.580A>G",
-      "Allele": "A15326G",
-      "Locus": "MT-CYB",
-      "Position": 15326,
-      "Disease": "",
-      "Homoplasmy": "",
-      "Heteroplasmy": "",
-      "Status_MitoMap": "",
-      "GB Frequency": 31512,
-      "References": "",
-      "InfoSource": "MitoMapPolymorphismsCoding",
-      "Curated References": 115,
-      "MSeqDR-LSDB.ID": "chrM_001066",
-      "Chr": "M",
-      "dbSNP.ID": "rs2853508, rs2853508",
-      "Effect": "?/, ?, ?/, ?",
-      "Type": "subst, subst",
-      "HGVS": "m.15326A>G",
-      "GERP": "-8.040, -8.040",
-      "Sources": ";, ; clinvar;",
-      "PubMedID": "-, -",
-      "AS_FilterStatus": "SITE",
-      "AS_SB_TABLE": "0,2|3104,2661",
-      "DP": 6095,
-      "ECNT": 1,
-      "MBQ": [
-          26,
-          38
-      ],
-      "MFRL": [
-          376,
-          283
-      ],
-      "MMQ": [
-          60,
-          60
-      ],
-      "MPOS": 38,
-      "OCM": 0,
-      "POPAF": 2.4,
-      "TLOD": 22855.6,
-      "genotypes": [
-          {
-              "GT": "0/1",
-              "AD": [
-                  2,
-                  5765
-              ],
-              "AF": 1,
-              "DP": 5767,
-              "F1R2": [
-                  1,
-                  2996
-              ],
-              "F2R1": [
-                  0,
-                  2514
-              ],
-              "SB": [
-                  0,
-                  2,
-                  3104,
-                  2661
-              ]
-          }
-      ]
-  },
-  {
-      "chr": "chrM",
-      "pos": 16023,
-      "ref": "G",
-      "alt": "A",
-      "type": "SNP",
-      "qual": -1.0,
-      "dosages": [
-          1
-      ],
-      "symbol": "MT-ND6",
-      "consequence": {
-          "id": "upstream_gene_variant",
-          "rank": 25
-      },
-      "hgvsp": "",
-      "hgvsc": "",
-      "Allele": "G16023A",
-      "Locus": "MT-TP",
-      "Position": 16023,
-      "Disease": "Migraine, pigmentary retinopathy, deafness, leukariosis",
-      "Homoplasmy": "-",
-      "Heteroplasmy": "",
-      "Status_MitoMap": "Reported",
-      "GB Frequency": 0,
-      "References": "1",
-      "InfoSource": "MitoMapRNAControl",
-      "Curated References": null,
-      "MSeqDR-LSDB.ID": "chrM_000615",
-      "Chr": "M",
-      "dbSNP.ID": "rs55934780",
-      "Effect": "?/, ?",
-      "Type": "subst",
-      "HGVS": "m.16023G>A",
-      "GERP": "3.200",
-      "Sources": "; Mitomap;",
-      "PubMedID": "-",
-      "AS_FilterStatus": "SITE",
-      "AS_SB_TABLE": "1238,1766|1543,1879",
-      "DP": 6614,
-      "ECNT": 1,
-      "MBQ": [
-          39,
-          38
-      ],
-      "MFRL": [
-          279,
-          281
-      ],
-      "MMQ": [
-          60,
-          60
-      ],
-      "MPOS": 34,
-      "OCM": 0,
-      "POPAF": 2.4,
-      "TLOD": 11795.3,
-      "genotypes": [
-          {
-              "GT": "0/1",
-              "AD": [
-                  3004,
-                  3422
-              ],
-              "AF": 0.532,
-              "DP": 6426,
-              "F1R2": [
-                  1473,
-                  1730
-              ],
-              "F2R1": [
-                  1458,
-                  1613
-              ],
-              "SB": [
-                  1238,
-                  1766,
-                  1543,
-                  1879
-              ]
-          }
-      ]
-  }
+    {
+        "chr": "chrM",
+        "pos": 152,
+        "ref": "T",
+        "alt": "C",
+        "type": "SNP",
+        "qual": -1.0,
+        "dosages": [
+            1
+        ],
+        "symbol": "MT-ND1",
+        "consequence": {
+            "id": "upstream_gene_variant",
+            "rank": 25
+        },
+        "hgvsp": "",
+        "hgvsc": "",
+        "Allele": "T152C",
+        "Locus": "MT-HV2, MT-OHR",
+        "Position": 152,
+        "Disease": "",
+        "Homoplasmy": "",
+        "Heteroplasmy": "",
+        "Status_MitoMap": "",
+        "GB Frequency": 8284,
+        "References": "",
+        "InfoSource": "MitoMapPolymorphismsControl",
+        "Curated References": 112,
+        "MSeqDR-LSDB.ID": "chrM_001246",
+        "Chr": "M",
+        "dbSNP.ID": "rs117135796",
+        "Effect": "?/?",
+        "Type": "subst",
+        "HGVS": "m.152T>C",
+        "GERP": "0.000",
+        "Sources": ";",
+        "PubMedID": "-",
+        "GBFreq": 0.0,
+        "AS_FilterStatus": "SITE",
+        "AS_SB_TABLE": "0,0|3780,2434",
+        "DP": 6393,
+        "ECNT": 1,
+        "MBQ": [
+            0,
+            38
+        ],
+        "MFRL": [
+            0,
+            234
+        ],
+        "MMQ": [
+            60,
+            60
+        ],
+        "MPOS": 38,
+        "OCM": 0,
+        "POPAF": 2.4,
+        "TLOD": 23870,
+        "genotypes": [
+            {
+                "GT": "0/1",
+                "AD": [
+                    0,
+                    6214
+                ],
+                "AF": 1,
+                "DP": 6214,
+                "F1R2": [
+                    0,
+                    3119
+                ],
+                "F2R1": [
+                    0,
+                    3005
+                ],
+                "SB": [
+                    0,
+                    0,
+                    3780,
+                    2434
+                ]
+            }
+        ]
+    },
+    {
+        "chr": "chrM",
+        "pos": 263,
+        "ref": "A",
+        "alt": "G",
+        "type": "SNP",
+        "qual": -1.0,
+        "dosages": [
+            1
+        ],
+        "symbol": "MT-ND1",
+        "consequence": {
+            "id": "upstream_gene_variant",
+            "rank": 25
+        },
+        "hgvsp": "",
+        "hgvsc": "",
+        "Allele": "A263G",
+        "Locus": "MT-HV2, MT-OHR",
+        "Position": 263,
+        "Disease": "",
+        "Homoplasmy": "",
+        "Heteroplasmy": "",
+        "Status_MitoMap": "",
+        "GB Frequency": 29979,
+        "References": "",
+        "InfoSource": "MitoMapPolymorphismsControl",
+        "Curated References": 145,
+        "MSeqDR-LSDB.ID": "chrM_000413",
+        "Chr": "M",
+        "dbSNP.ID": "rs2853515",
+        "Effect": "?/?",
+        "Type": "subst",
+        "HGVS": "m.263A>G",
+        "GERP": "0.000",
+        "Sources": ";",
+        "PubMedID": "-",
+        "GBFreq": 0.0,
+        "AS_FilterStatus": "SITE",
+        "AS_SB_TABLE": "0,2|1441,2857",
+        "DP": 4465,
+        "ECNT": 3,
+        "MBQ": [
+            26,
+            37
+        ],
+        "MFRL": [
+            148,
+            259
+        ],
+        "MMQ": [
+            60,
+            60
+        ],
+        "MPOS": 40,
+        "OCM": 0,
+        "POPAF": 2.4,
+        "TLOD": 16457.2,
+        "genotypes": [
+            {
+                "GT": "0/1",
+                "AD": [
+                    2,
+                    4298
+                ],
+                "AF": 1,
+                "DP": 4300,
+                "F1R2": [
+                    1,
+                    2029
+                ],
+                "F2R1": [
+                    0,
+                    1994
+                ],
+                "SB": [
+                    0,
+                    2,
+                    1441,
+                    2857
+                ]
+            }
+        ]
+    },
+    {
+        "chr": "chrM",
+        "pos": 302,
+        "ref": "A",
+        "alt": "AC",
+        "type": "INS",
+        "qual": -1.0,
+        "dosages": [
+            1
+        ],
+        "symbol": "MT-ND1",
+        "consequence": {
+            "id": "upstream_gene_variant",
+            "rank": 25
+        },
+        "hgvsp": "",
+        "hgvsc": "",
+        "GBFreq": 0.0,
+        "AS_FilterStatus": "strand_bias|strand_bias|SITE|SITE",
+        "AS_SB_TABLE": "196,83|47,2083|4,461|3,29|47,0",
+        "DP": 3701,
+        "ECNT": 3,
+        "MBQ": [
+            33,
+            28
+        ],
+        "MFRL": [
+            278,
+            269
+        ],
+        "MMQ": [
+            60,
+            60
+        ],
+        "MPOS": 30,
+        "OCM": 0,
+        "POPAF": 2.4,
+        "RPA": [
+            7,
+            8
+        ],
+        "RU": "C",
+        "STR": true,
+        "TLOD": 4152.61,
+        "genotypes": [
+            {
+                "GT": "0/1/0/0/0",
+                "AD": [
+                    279,
+                    2130
+                ],
+                "AF": 0.724,
+                "DP": 2953,
+                "F1R2": [
+                    142,
+                    680
+                ],
+                "F2R1": [
+                    93,
+                    1003
+                ],
+                "SB": [
+                    196,
+                    83,
+                    101,
+                    2573
+                ]
+            }
+        ]
+    },
+    {
+        "chr": "chrM",
+        "pos": 302,
+        "ref": "A",
+        "alt": "ACC",
+        "type": "INS",
+        "qual": -1.0,
+        "dosages": [
+            1
+        ],
+        "symbol": "MT-ND1",
+        "consequence": {
+            "id": "upstream_gene_variant",
+            "rank": 25
+        },
+        "hgvsp": "",
+        "hgvsc": "",
+        "Allele": "A302ACC",
+        "Locus": "MT-CR, MT-HV2, MT-OHR, MT-TFY, MT-CSB2",
+        "Position": 302,
+        "Disease": "Higher in melanoma patient group",
+        "Homoplasmy": ".",
+        "Heteroplasmy": ".",
+        "Status_MitoMap": "Reported",
+        "GB Frequency": 66,
+        "References": "1",
+        "InfoSource": "MitoMapCodingControl, MitoMapPolymorphismsControl",
+        "Curated References": null,
+        "MSeqDR-LSDB.ID": "",
+        "Chr": "",
+        "dbSNP.ID": "",
+        "Effect": "",
+        "Type": "",
+        "HGVS": "",
+        "GERP": "",
+        "Sources": "",
+        "PubMedID": "",
+        "GBFreq": 0.0,
+        "AS_SB_TABLE": "150,78|46,2078|10,467|0,21|27,0|15,0",
+        "DP": 3664,
+        "ECNT": 3,
+        "MBQ": [
+            31,
+            26
+        ],
+        "MFRL": [
+            271,
+            269
+        ],
+        "MMQ": [
+            60,
+            60
+        ],
+        "MPOS": 26,
+        "OCM": 0,
+        "POPAF": 2.4,
+        "RPA": [
+            7,
+            9
+        ],
+        "RU": "C",
+        "STR": true,
+        "TLOD": 751.8,
+        "genotypes": [
+            {
+                "GT": "0/0/1/0/0/0",
+                "AD": [
+                    228,
+                    477
+                ],
+                "AF": 0.183,
+                "DP": 2892,
+                "F1R2": [
+                    114,
+                    166
+                ],
+                "F2R1": [
+                    68,
+                    197
+                ],
+                "SB": [
+                    150,
+                    78,
+                    98,
+                    2566
+                ]
+            }
+        ]
+    },
+    {
+        "chr": "chrM",
+        "pos": 302,
+        "ref": "A",
+        "alt": "ACCC",
+        "type": "INS",
+        "qual": -1.0,
+        "dosages": [
+            1
+        ],
+        "symbol": "MT-ND1",
+        "consequence": {
+            "id": "upstream_gene_variant",
+            "rank": 25
+        },
+        "hgvsp": "",
+        "hgvsc": "",
+        "Allele": "A302ACCC",
+        "Locus": "MT-HV2, MT-OHR, MT-TFY, MT-CSB2",
+        "Position": 302,
+        "Disease": "",
+        "Homoplasmy": "",
+        "Heteroplasmy": "",
+        "Status_MitoMap": "",
+        "GB Frequency": 6,
+        "References": "",
+        "InfoSource": "MitoMapPolymorphismsControl",
+        "Curated References": 1,
+        "MSeqDR-LSDB.ID": "",
+        "Chr": "",
+        "dbSNP.ID": "",
+        "Effect": "",
+        "Type": "",
+        "HGVS": "",
+        "GERP": "",
+        "Sources": "",
+        "PubMedID": "",
+        "GBFreq": 0.0,
+        "AS_SB_TABLE": "196,83|47,2083|4,461|3,29|47,0",
+        "DP": 3701,
+        "ECNT": 3,
+        "MBQ": [
+            33,
+            30
+        ],
+        "MFRL": [
+            278,
+            274
+        ],
+        "MMQ": [
+            60,
+            60
+        ],
+        "MPOS": 27,
+        "OCM": 0,
+        "POPAF": 2.4,
+        "RPA": [
+            7,
+            10
+        ],
+        "RU": "C",
+        "STR": true,
+        "TLOD": 12.37,
+        "genotypes": [
+            {
+                "GT": "0/0/0/1/0",
+                "AD": [
+                    279,
+                    32
+                ],
+                "AF": 0.006261,
+                "DP": 2953,
+                "F1R2": [
+                    142,
+                    8
+                ],
+                "F2R1": [
+                    93,
+                    14
+                ],
+                "SB": [
+                    196,
+                    83,
+                    101,
+                    2573
+                ]
+            }
+        ]
+    },
+    {
+        "chr": "chrM",
+        "pos": 302,
+        "ref": "A",
+        "alt": "ACCCCCCCCCCC",
+        "type": "INS",
+        "qual": -1.0,
+        "dosages": [
+            1
+        ],
+        "symbol": "MT-ND1",
+        "consequence": {
+            "id": "upstream_gene_variant",
+            "rank": 25
+        },
+        "hgvsp": "",
+        "hgvsc": "",
+        "GBFreq": 0.0,
+        "AS_SB_TABLE": "196,83|47,2083|4,461|3,29|47,0",
+        "DP": 3701,
+        "ECNT": 3,
+        "MBQ": [
+            33,
+            37
+        ],
+        "MFRL": [
+            278,
+            306
+        ],
+        "MMQ": [
+            60,
+            60
+        ],
+        "MPOS": 23,
+        "OCM": 0,
+        "POPAF": 2.4,
+        "RPA": [
+            7,
+            18
+        ],
+        "RU": "C",
+        "STR": true,
+        "TLOD": 9.43,
+        "genotypes": [
+            {
+                "GT": "0/0/0/0/1",
+                "AD": [
+                    279,
+                    47
+                ],
+                "AF": 0.01,
+                "DP": 2953,
+                "F1R2": [
+                    142,
+                    12
+                ],
+                "F2R1": [
+                    93,
+                    30
+                ],
+                "SB": [
+                    196,
+                    83,
+                    101,
+                    2573
+                ]
+            }
+        ]
+    },
+    {
+        "chr": "chrM",
+        "pos": 302,
+        "ref": "A",
+        "alt": "ACCCCCCCCCCCCCC",
+        "type": "INS",
+        "qual": -1.0,
+        "dosages": [
+            1
+        ],
+        "symbol": "MT-ND1",
+        "consequence": {
+            "id": "upstream_gene_variant",
+            "rank": 25
+        },
+        "hgvsp": "",
+        "hgvsc": "",
+        "GBFreq": 0.0,
+        "AS_SB_TABLE": "150,78|46,2078|10,467|0,21|27,0|15,0",
+        "DP": 3664,
+        "ECNT": 3,
+        "MBQ": [
+            31,
+            37
+        ],
+        "MFRL": [
+            271,
+            321
+        ],
+        "MMQ": [
+            60,
+            60
+        ],
+        "MPOS": 29,
+        "OCM": 0,
+        "POPAF": 2.4,
+        "RPA": [
+            7,
+            21
+        ],
+        "RU": "C",
+        "STR": true,
+        "TLOD": 0.483,
+        "genotypes": [
+            {
+                "GT": "0/0/0/0/0/1",
+                "AD": [
+                    228,
+                    15
+                ],
+                "AF": 0.002614,
+                "DP": 2892,
+                "F1R2": [
+                    114,
+                    6
+                ],
+                "F2R1": [
+                    68,
+                    7
+                ],
+                "SB": [
+                    150,
+                    78,
+                    98,
+                    2566
+                ]
+            }
+        ]
+    },
+    {
+        "chr": "chrM",
+        "pos": 310,
+        "ref": "T",
+        "alt": "C",
+        "type": "SNP",
+        "qual": -1.0,
+        "dosages": [
+            1
+        ],
+        "symbol": "MT-ND1",
+        "consequence": {
+            "id": "upstream_gene_variant",
+            "rank": 25
+        },
+        "hgvsp": "",
+        "hgvsc": "",
+        "Allele": "T310C",
+        "Locus": "MT-HV2, MT-OHR, MT-CSB2",
+        "Position": 310,
+        "Disease": "",
+        "Homoplasmy": "",
+        "Heteroplasmy": "",
+        "Status_MitoMap": "",
+        "GB Frequency": 14812,
+        "References": "",
+        "InfoSource": "MitoMapPolymorphismsControl",
+        "Curated References": 30,
+        "MSeqDR-LSDB.ID": "",
+        "Chr": "",
+        "dbSNP.ID": "",
+        "Effect": "",
+        "Type": "",
+        "HGVS": "",
+        "GERP": "",
+        "Sources": "",
+        "PubMedID": "",
+        "GBFreq": 0.0,
+        "AS_FilterStatus": "strand_bias|SITE|weak_evidence",
+        "AS_SB_TABLE": "3,4|142,48|212,2826|33,0",
+        "DP": 3858,
+        "ECNT": 3,
+        "MBQ": [
+            24,
+            29
+        ],
+        "MFRL": [
+            280,
+            283
+        ],
+        "MMQ": [
+            60,
+            60
+        ],
+        "MPOS": 17,
+        "OCM": 0,
+        "POPAF": 2.4,
+        "TLOD": 92.15,
+        "genotypes": [
+            {
+                "GT": "0/1/0/0",
+                "AD": [
+                    7,
+                    190
+                ],
+                "AF": 0.074,
+                "DP": 3268,
+                "F1R2": [
+                    3,
+                    83
+                ],
+                "F2R1": [
+                    1,
+                    36
+                ],
+                "SB": [
+                    3,
+                    4,
+                    387,
+                    2874
+                ]
+            }
+        ]
+    },
+    {
+        "chr": "chrM",
+        "pos": 310,
+        "ref": "T",
+        "alt": "TC",
+        "type": "INS",
+        "qual": -1.0,
+        "dosages": [
+            1
+        ],
+        "symbol": "MT-ND1",
+        "consequence": {
+            "id": "upstream_gene_variant",
+            "rank": 25
+        },
+        "hgvsp": "",
+        "hgvsc": "",
+        "Allele": "T310TC",
+        "Locus": "MT-CR, MT-HV2, MT-OHR, MT-CSB2",
+        "Position": 310,
+        "Disease": "Melanoma patients",
+        "Homoplasmy": ".",
+        "Heteroplasmy": ".",
+        "Status_MitoMap": "Reported",
+        "GB Frequency": 0,
+        "References": "1",
+        "InfoSource": "MitoMapCodingControl, MitoMapPolymorphismsControl",
+        "Curated References": null,
+        "MSeqDR-LSDB.ID": "",
+        "Chr": "",
+        "dbSNP.ID": "",
+        "Effect": "",
+        "Type": "",
+        "HGVS": "",
+        "GERP": "",
+        "Sources": "",
+        "PubMedID": "",
+        "GBFreq": 0.0,
+        "AS_FilterStatus": "base_qual",
+        "AS_SB_TABLE": "16,2|141,47|204,2822|9,0",
+        "DP": 3828,
+        "ECNT": 3,
+        "MBQ": [
+            12,
+            31
+        ],
+        "MFRL": [
+            271,
+            268
+        ],
+        "MMQ": [
+            60,
+            60
+        ],
+        "MPOS": 28,
+        "OCM": 0,
+        "POPAF": 2.4,
+        "TLOD": 8443.03,
+        "genotypes": [
+            {
+                "GT": "0/0/1/0",
+                "AD": [
+                    18,
+                    3026
+                ],
+                "AF": 0.916,
+                "DP": 3241,
+                "F1R2": [
+                    1,
+                    963
+                ],
+                "F2R1": [
+                    4,
+                    1319
+                ],
+                "SB": [
+                    16,
+                    2,
+                    354,
+                    2869
+                ]
+            }
+        ]
+    },
+    {
+        "chr": "chrM",
+        "pos": 310,
+        "ref": "T",
+        "alt": "TCCCCCCA",
+        "type": "INS",
+        "qual": -1.0,
+        "dosages": [
+            1
+        ],
+        "symbol": "MT-ND1",
+        "consequence": {
+            "id": "upstream_gene_variant",
+            "rank": 25
+        },
+        "hgvsp": "",
+        "hgvsc": "",
+        "GBFreq": 0.0,
+        "AS_SB_TABLE": "16,2|141,47|204,2822|9,0",
+        "DP": 3828,
+        "ECNT": 3,
+        "MBQ": [
+            12,
+            12
+        ],
+        "MFRL": [
+            271,
+            324
+        ],
+        "MMQ": [
+            60,
+            60
+        ],
+        "MPOS": 8,
+        "OCM": 0,
+        "POPAF": 2.4,
+        "TLOD": 0.493,
+        "genotypes": [
+            {
+                "GT": "0/0/0/1",
+                "AD": [
+                    18,
+                    9
+                ],
+                "AF": 0.005326,
+                "DP": 3241,
+                "F1R2": [
+                    1,
+                    0
+                ],
+                "F2R1": [
+                    4,
+                    1
+                ],
+                "SB": [
+                    16,
+                    2,
+                    354,
+                    2869
+                ]
+            }
+        ]
+    },
+    {
+        "chr": "chrM",
+        "pos": 310,
+        "ref": "T",
+        "alt": "TCCCCCCAC",
+        "type": "INS",
+        "qual": -1.0,
+        "dosages": [
+            1
+        ],
+        "symbol": "MT-ND1",
+        "consequence": {
+            "id": "upstream_gene_variant",
+            "rank": 25
+        },
+        "hgvsp": "",
+        "hgvsc": "",
+        "GBFreq": 0.0,
+        "AS_SB_TABLE": "3,4|142,48|212,2826|33,0",
+        "DP": 3858,
+        "ECNT": 3,
+        "MBQ": [
+            24,
+            12
+        ],
+        "MFRL": [
+            280,
+            298
+        ],
+        "MMQ": [
+            60,
+            60
+        ],
+        "MPOS": 5,
+        "OCM": 0,
+        "POPAF": 2.4,
+        "TLOD": 1.62,
+        "genotypes": [
+            {
+                "GT": "0/0/0/1",
+                "AD": [
+                    7,
+                    33
+                ],
+                "AF": 0.013,
+                "DP": 3268,
+                "F1R2": [
+                    3,
+                    0
+                ],
+                "F2R1": [
+                    1,
+                    3
+                ],
+                "SB": [
+                    3,
+                    4,
+                    387,
+                    2874
+                ]
+            }
+        ]
+    },
+    {
+        "chr": "chrM",
+        "pos": 750,
+        "ref": "A",
+        "alt": "G",
+        "type": "SNP",
+        "qual": -1.0,
+        "dosages": [
+            1
+        ],
+        "symbol": "MT-ND1",
+        "consequence": {
+            "id": "upstream_gene_variant",
+            "rank": 25
+        },
+        "hgvsp": "",
+        "hgvsc": "",
+        "Allele": "A750G",
+        "Locus": "MT-RNR1",
+        "Position": 750,
+        "Disease": "",
+        "Homoplasmy": "",
+        "Heteroplasmy": "",
+        "Status_MitoMap": "",
+        "GB Frequency": 31410,
+        "References": "",
+        "InfoSource": "MitoMapPolymorphismsCoding",
+        "Curated References": 108,
+        "MSeqDR-LSDB.ID": "chrM_000404",
+        "Chr": "M",
+        "dbSNP.ID": "rs2853518",
+        "Effect": "?/, ?",
+        "Type": "subst",
+        "HGVS": "m.750A>G",
+        "GERP": "1.580",
+        "Sources": "; Mitomap;",
+        "PubMedID": "-",
+        "GBFreq": 98.28,
+        "AS_FilterStatus": "SITE",
+        "AS_SB_TABLE": "0,0|2887,2619",
+        "DP": 5780,
+        "ECNT": 2,
+        "MBQ": [
+            0,
+            38
+        ],
+        "MFRL": [
+            0,
+            278
+        ],
+        "MMQ": [
+            60,
+            60
+        ],
+        "MPOS": 36,
+        "OCM": 0,
+        "POPAF": 2.4,
+        "TLOD": 21290.6,
+        "genotypes": [
+            {
+                "GT": "0/1",
+                "AD": [
+                    0,
+                    5506
+                ],
+                "AF": 1,
+                "DP": 5506,
+                "F1R2": [
+                    0,
+                    2658
+                ],
+                "F2R1": [
+                    0,
+                    2556
+                ],
+                "SB": [
+                    0,
+                    0,
+                    2887,
+                    2619
+                ]
+            }
+        ]
+    },
+    {
+        "chr": "chrM",
+        "pos": 776,
+        "ref": "A",
+        "alt": "G",
+        "type": "SNP",
+        "qual": -1.0,
+        "dosages": [
+            1
+        ],
+        "symbol": "MT-ND1",
+        "consequence": {
+            "id": "upstream_gene_variant",
+            "rank": 25
+        },
+        "hgvsp": "",
+        "hgvsc": "",
+        "GBFreq": 0.0,
+        "AS_FilterStatus": "weak_evidence",
+        "AS_SB_TABLE": "2994,2345|3,2",
+        "DP": 5597,
+        "ECNT": 2,
+        "MBQ": [
+            39,
+            38
+        ],
+        "MFRL": [
+            287,
+            300
+        ],
+        "MMQ": [
+            60,
+            60
+        ],
+        "MPOS": 25,
+        "OCM": 0,
+        "POPAF": 2.4,
+        "TLOD": 0.009718,
+        "genotypes": [
+            {
+                "GT": "0/1",
+                "AD": [
+                    5339,
+                    5
+                ],
+                "AF": 9.423E-4,
+                "DP": 5344,
+                "F1R2": [
+                    2672,
+                    2
+                ],
+                "F2R1": [
+                    2504,
+                    2
+                ],
+                "SB": [
+                    2994,
+                    2345,
+                    3,
+                    2
+                ]
+            }
+        ]
+    },
+    {
+        "chr": "chrM",
+        "pos": 1419,
+        "ref": "G",
+        "alt": "A",
+        "type": "SNP",
+        "qual": -1.0,
+        "dosages": [
+            1
+        ],
+        "symbol": "MT-ND1",
+        "consequence": {
+            "id": "upstream_gene_variant",
+            "rank": 25
+        },
+        "hgvsp": "",
+        "hgvsc": "",
+        "GBFreq": 0.0,
+        "AS_FilterStatus": "SITE",
+        "AS_SB_TABLE": "2996,3087|12,11",
+        "DP": 6336,
+        "ECNT": 2,
+        "MBQ": [
+            38,
+            38
+        ],
+        "MFRL": [
+            279,
+            230
+        ],
+        "MMQ": [
+            60,
+            60
+        ],
+        "MPOS": 39,
+        "OCM": 0,
+        "POPAF": 2.4,
+        "TLOD": 25.52,
+        "genotypes": [
+            {
+                "GT": "0/1",
+                "AD": [
+                    6083,
+                    23
+                ],
+                "AF": 0.003455,
+                "DP": 6106,
+                "F1R2": [
+                    2982,
+                    11
+                ],
+                "F2R1": [
+                    2928,
+                    11
+                ],
+                "SB": [
+                    2996,
+                    3087,
+                    12,
+                    11
+                ]
+            }
+        ]
+    },
+    {
+        "chr": "chrM",
+        "pos": 1438,
+        "ref": "A",
+        "alt": "G",
+        "type": "SNP",
+        "qual": -1.0,
+        "dosages": [
+            1
+        ],
+        "symbol": "MT-ND1",
+        "consequence": {
+            "id": "upstream_gene_variant",
+            "rank": 25
+        },
+        "hgvsp": "",
+        "hgvsc": "",
+        "Allele": "A1438G",
+        "Locus": "MT-RNR1",
+        "Position": 1438,
+        "Disease": "",
+        "Homoplasmy": "",
+        "Heteroplasmy": "",
+        "Status_MitoMap": "",
+        "GB Frequency": 30179,
+        "References": "",
+        "InfoSource": "MitoMapPolymorphismsCoding",
+        "Curated References": 117,
+        "MSeqDR-LSDB.ID": "chrM_000234",
+        "Chr": "M",
+        "dbSNP.ID": "rs2001030",
+        "Effect": "-/-",
+        "Type": "subst",
+        "HGVS": "m.1438A>G",
+        "GERP": "1.910",
+        "Sources": "; clinVar; Mitomap; ensembl;",
+        "PubMedID": "-",
+        "GBFreq": 94.85,
+        "AS_FilterStatus": "SITE",
+        "AS_SB_TABLE": "1,1|2877,3177",
+        "DP": 6346,
+        "ECNT": 2,
+        "MBQ": [
+            18,
+            39
+        ],
+        "MFRL": [
+            792,
+            279
+        ],
+        "MMQ": [
+            60,
+            60
+        ],
+        "MPOS": 36,
+        "OCM": 0,
+        "POPAF": 2.4,
+        "TLOD": 24167.8,
+        "genotypes": [
+            {
+                "GT": "0/1",
+                "AD": [
+                    2,
+                    6054
+                ],
+                "AF": 1,
+                "DP": 6056,
+                "F1R2": [
+                    1,
+                    3009
+                ],
+                "F2R1": [
+                    0,
+                    2898
+                ],
+                "SB": [
+                    1,
+                    1,
+                    2877,
+                    3177
+                ]
+            }
+        ]
+    },
+    {
+        "chr": "chrM",
+        "pos": 2224,
+        "ref": "C",
+        "alt": "T",
+        "type": "SNP",
+        "qual": -1.0,
+        "dosages": [
+            1
+        ],
+        "symbol": "MT-ND1",
+        "consequence": {
+            "id": "upstream_gene_variant",
+            "rank": 25
+        },
+        "hgvsp": "",
+        "hgvsc": "",
+        "Allele": "C2224T",
+        "Locus": "MT-RNR2",
+        "Position": 2224,
+        "Disease": "",
+        "Homoplasmy": "",
+        "Heteroplasmy": "",
+        "Status_MitoMap": "",
+        "GB Frequency": 1,
+        "References": "",
+        "InfoSource": "MitoMapPolymorphismsCoding",
+        "Curated References": 1,
+        "MSeqDR-LSDB.ID": "",
+        "Chr": "",
+        "dbSNP.ID": "",
+        "Effect": "",
+        "Type": "",
+        "HGVS": "",
+        "GERP": "",
+        "Sources": "",
+        "PubMedID": "",
+        "GBFreq": 0.0,
+        "AS_FilterStatus": "weak_evidence",
+        "AS_SB_TABLE": "2764,2630|3,3",
+        "DP": 5615,
+        "ECNT": 2,
+        "MBQ": [
+            39,
+            20
+        ],
+        "MFRL": [
+            287,
+            222
+        ],
+        "MMQ": [
+            60,
+            60
+        ],
+        "MPOS": 46,
+        "OCM": 0,
+        "POPAF": 2.4,
+        "TLOD": 0.561,
+        "genotypes": [
+            {
+                "GT": "0|1",
+                "AD": [
+                    5394,
+                    6
+                ],
+                "AF": 9.345E-4,
+                "DP": 5400,
+                "F1R2": [
+                    2733,
+                    2
+                ],
+                "F2R1": [
+                    2520,
+                    2
+                ],
+                "PGT": "0|1",
+                "PID": "2224_C_T",
+                "PS": 2224,
+                "SB": [
+                    2764,
+                    2630,
+                    3,
+                    3
+                ]
+            }
+        ]
+    },
+    {
+        "chr": "chrM",
+        "pos": 2259,
+        "ref": "C",
+        "alt": "T",
+        "type": "SNP",
+        "qual": -1.0,
+        "dosages": [
+            1
+        ],
+        "symbol": "MT-ND1",
+        "consequence": {
+            "id": "upstream_gene_variant",
+            "rank": 25
+        },
+        "hgvsp": "",
+        "hgvsc": "",
+        "Allele": "C2259T",
+        "Locus": "MT-RNR2",
+        "Position": 2259,
+        "Disease": "",
+        "Homoplasmy": "",
+        "Heteroplasmy": "",
+        "Status_MitoMap": "",
+        "GB Frequency": 201,
+        "References": "",
+        "InfoSource": "MitoMapPolymorphismsCoding",
+        "Curated References": 11,
+        "MSeqDR-LSDB.ID": "chrM_001260",
+        "Chr": "M",
+        "dbSNP.ID": "rs201336470",
+        "Effect": "?/?",
+        "Type": "subst",
+        "HGVS": "m.2259C>T",
+        "GERP": "-4.150",
+        "Sources": ";",
+        "PubMedID": "-",
+        "GBFreq": 0.54,
+        "AS_FilterStatus": "SITE",
+        "AS_SB_TABLE": "4,0|2828,2697",
+        "DP": 5749,
+        "ECNT": 1,
+        "MBQ": [
+            16,
+            38
+        ],
+        "MFRL": [
+            280,
+            291
+        ],
+        "MMQ": [
+            60,
+            60
+        ],
+        "MPOS": 33,
+        "OCM": 0,
+        "POPAF": 2.4,
+        "TLOD": 21960.4,
+        "genotypes": [
+            {
+                "GT": "0/1",
+                "AD": [
+                    4,
+                    5525
+                ],
+                "AF": 1,
+                "DP": 5529,
+                "F1R2": [
+                    0,
+                    2778
+                ],
+                "F2R1": [
+                    1,
+                    2592
+                ],
+                "SB": [
+                    4,
+                    0,
+                    2828,
+                    2697
+                ]
+            }
+        ]
+    },
+    {
+        "chr": "chrM",
+        "pos": 2465,
+        "ref": "T",
+        "alt": "A",
+        "type": "SNP",
+        "qual": -1.0,
+        "dosages": [
+            1
+        ],
+        "symbol": "MT-ND1",
+        "consequence": {
+            "id": "upstream_gene_variant",
+            "rank": 25
+        },
+        "hgvsp": "",
+        "hgvsc": "",
+        "GBFreq": 0.0,
+        "AS_FilterStatus": "base_qual,strand_bias",
+        "AS_SB_TABLE": "2741,1587|7,308",
+        "DP": 4793,
+        "ECNT": 3,
+        "MBQ": [
+            37,
+            15
+        ],
+        "MFRL": [
+            280,
+            269
+        ],
+        "MMQ": [
+            60,
+            60
+        ],
+        "MPOS": 16,
+        "OCM": 0,
+        "POPAF": 2.4,
+        "TLOD": 22.67,
+        "genotypes": [
+            {
+                "GT": "0/1",
+                "AD": [
+                    4328,
+                    315
+                ],
+                "AF": 0.018,
+                "DP": 4643,
+                "F1R2": [
+                    1520,
+                    11
+                ],
+                "F2R1": [
+                    1638,
+                    0
+                ],
+                "SB": [
+                    2741,
+                    1587,
+                    7,
+                    308
+                ]
+            }
+        ]
+    },
+    {
+        "chr": "chrM",
+        "pos": 2479,
+        "ref": "C",
+        "alt": "A",
+        "type": "SNP",
+        "qual": -1.0,
+        "dosages": [
+            1
+        ],
+        "symbol": "MT-ND1",
+        "consequence": {
+            "id": "upstream_gene_variant",
+            "rank": 25
+        },
+        "hgvsp": "",
+        "hgvsc": "",
+        "GBFreq": 0.0,
+        "AS_FilterStatus": "base_qual,strand_bias",
+        "AS_SB_TABLE": "2625,1793|0,317",
+        "DP": 4977,
+        "ECNT": 3,
+        "MBQ": [
+            37,
+            15
+        ],
+        "MFRL": [
+            282,
+            279
+        ],
+        "MMQ": [
+            60,
+            60
+        ],
+        "MPOS": 25,
+        "OCM": 0,
+        "POPAF": 2.4,
+        "TLOD": 20.29,
+        "genotypes": [
+            {
+                "GT": "0/1",
+                "AD": [
+                    4418,
+                    317
+                ],
+                "AF": 0.019,
+                "DP": 4735,
+                "F1R2": [
+                    1499,
+                    15
+                ],
+                "F2R1": [
+                    1752,
+                    5
+                ],
+                "SB": [
+                    2625,
+                    1793,
+                    0,
+                    317
+                ]
+            }
+        ]
+    },
+    {
+        "chr": "chrM",
+        "pos": 2487,
+        "ref": "A",
+        "alt": "C",
+        "type": "SNP",
+        "qual": -1.0,
+        "dosages": [
+            1
+        ],
+        "symbol": "MT-ND1",
+        "consequence": {
+            "id": "upstream_gene_variant",
+            "rank": 25
+        },
+        "hgvsp": "",
+        "hgvsc": "",
+        "GBFreq": 0.0,
+        "AS_FilterStatus": "base_qual,strand_bias",
+        "AS_SB_TABLE": "2572,1225|2,1052",
+        "DP": 4994,
+        "ECNT": 3,
+        "MBQ": [
+            38,
+            12
+        ],
+        "MFRL": [
+            281,
+            282
+        ],
+        "MMQ": [
+            60,
+            60
+        ],
+        "MPOS": 32,
+        "OCM": 0,
+        "POPAF": 2.4,
+        "TLOD": 219.66,
+        "genotypes": [
+            {
+                "GT": "0/1",
+                "AD": [
+                    3797,
+                    1054
+                ],
+                "AF": 0.121,
+                "DP": 4851,
+                "F1R2": [
+                    1451,
+                    49
+                ],
+                "F2R1": [
+                    1448,
+                    25
+                ],
+                "SB": [
+                    2572,
+                    1225,
+                    2,
+                    1052
+                ]
+            }
+        ]
+    },
+    {
+        "chr": "chrM",
+        "pos": 2645,
+        "ref": "G",
+        "alt": "A",
+        "type": "SNP",
+        "qual": -1.0,
+        "dosages": [
+            1
+        ],
+        "symbol": "MT-ND1",
+        "consequence": {
+            "id": "upstream_gene_variant",
+            "rank": 25
+        },
+        "hgvsp": "",
+        "hgvsc": "",
+        "GBFreq": 0.0,
+        "AS_FilterStatus": "SITE",
+        "AS_SB_TABLE": "3146,2749|28,27",
+        "DP": 6340,
+        "ECNT": 1,
+        "MBQ": [
+            38,
+            38
+        ],
+        "MFRL": [
+            289,
+            289
+        ],
+        "MMQ": [
+            60,
+            60
+        ],
+        "MPOS": 36,
+        "OCM": 0,
+        "POPAF": 2.4,
+        "TLOD": 89.48,
+        "genotypes": [
+            {
+                "GT": "0/1",
+                "AD": [
+                    5895,
+                    55
+                ],
+                "AF": 0.009421,
+                "DP": 5950,
+                "F1R2": [
+                    2973,
+                    22
+                ],
+                "F2R1": [
+                    2744,
+                    32
+                ],
+                "SB": [
+                    3146,
+                    2749,
+                    28,
+                    27
+                ]
+            }
+        ]
+    },
+    {
+        "chr": "chrM",
+        "pos": 2982,
+        "ref": "C",
+        "alt": "T",
+        "type": "SNP",
+        "qual": -1.0,
+        "dosages": [
+            1
+        ],
+        "symbol": "MT-ND1",
+        "consequence": {
+            "id": "upstream_gene_variant",
+            "rank": 25
+        },
+        "hgvsp": "",
+        "hgvsc": "",
+        "GBFreq": 0.0,
+        "AS_FilterStatus": "weak_evidence",
+        "AS_SB_TABLE": "2910,2746|3,3",
+        "DP": 5826,
+        "ECNT": 1,
+        "MBQ": [
+            38,
+            38
+        ],
+        "MFRL": [
+            288,
+            226
+        ],
+        "MMQ": [
+            60,
+            60
+        ],
+        "MPOS": 7,
+        "OCM": 0,
+        "POPAF": 2.4,
+        "TLOD": 0.922,
+        "genotypes": [
+            {
+                "GT": "0/1",
+                "AD": [
+                    5656,
+                    6
+                ],
+                "AF": 0.001057,
+                "DP": 5662,
+                "F1R2": [
+                    2735,
+                    5
+                ],
+                "F2R1": [
+                    2762,
+                    0
+                ],
+                "SB": [
+                    2910,
+                    2746,
+                    3,
+                    3
+                ]
+            }
+        ]
+    },
+    {
+        "chr": "chrM",
+        "pos": 3447,
+        "ref": "A",
+        "alt": "C",
+        "type": "SNP",
+        "qual": -1.0,
+        "dosages": [
+            1
+        ],
+        "symbol": "MT-ND1",
+        "consequence": {
+            "id": "missense_variant",
+            "rank": 10
+        },
+        "hgvsp": "p.Gln47His",
+        "hgvsc": "c.141A>C",
+        "GBFreq": 0.0,
+        "AS_FilterStatus": "base_qual,strand_bias",
+        "AS_SB_TABLE": "3057,779|1,55",
+        "DP": 4081,
+        "ECNT": 8,
+        "MBQ": [
+            38,
+            14
+        ],
+        "MFRL": [
+            278,
+            273
+        ],
+        "MMQ": [
+            60,
+            60
+        ],
+        "MPOS": 67,
+        "OCM": 0,
+        "POPAF": 2.4,
+        "TLOD": 10.94,
+        "genotypes": [
+            {
+                "GT": "0/1",
+                "AD": [
+                    3836,
+                    56
+                ],
+                "AF": 0.004345,
+                "DP": 3892,
+                "F1R2": [
+                    2006,
+                    0
+                ],
+                "F2R1": [
+                    1627,
+                    4
+                ],
+                "SB": [
+                    3057,
+                    779,
+                    1,
+                    55
+                ]
+            }
+        ]
+    },
+    {
+        "chr": "chrM",
+        "pos": 3464,
+        "ref": "T",
+        "alt": "A",
+        "type": "SNP",
+        "qual": -1.0,
+        "dosages": [
+            1
+        ],
+        "symbol": "MT-ND1",
+        "consequence": {
+            "id": "missense_variant",
+            "rank": 10
+        },
+        "hgvsp": "p.Met53Lys",
+        "hgvsc": "c.158T>A",
+        "GBFreq": 0.0,
+        "AS_FilterStatus": "base_qual,strand_bias",
+        "AS_SB_TABLE": "2923,560|0,33",
+        "DP": 3533,
+        "ECNT": 8,
+        "MBQ": [
+            38,
+            13
+        ],
+        "MFRL": [
+            280,
+            291
+        ],
+        "MMQ": [
+            60,
+            60
+        ],
+        "MPOS": 9,
+        "OCM": 0,
+        "POPAF": 2.4,
+        "TLOD": 39.87,
+        "genotypes": [
+            {
+                "GT": "0/1",
+                "AD": [
+                    3483,
+                    33
+                ],
+                "AF": 0.007918,
+                "DP": 3516,
+                "F1R2": [
+                    1879,
+                    0
+                ],
+                "F2R1": [
+                    1534,
+                    1
+                ],
+                "SB": [
+                    2923,
+                    560,
+                    0,
+                    33
+                ]
+            }
+        ]
+    },
+    {
+        "chr": "chrM",
+        "pos": 3468,
+        "ref": "A",
+        "alt": "C",
+        "type": "SNP",
+        "qual": -1.0,
+        "dosages": [
+            1
+        ],
+        "symbol": "MT-ND1",
+        "consequence": {
+            "id": "missense_variant",
+            "rank": 10
+        },
+        "hgvsp": "p.Lys54Asn",
+        "hgvsc": "c.162A>C",
+        "GBFreq": 0.0,
+        "AS_FilterStatus": "base_qual,strand_bias",
+        "AS_SB_TABLE": "2824,533|1,50",
+        "DP": 3518,
+        "ECNT": 8,
+        "MBQ": [
+            38,
+            13
+        ],
+        "MFRL": [
+            280,
+            277
+        ],
+        "MMQ": [
+            60,
+            60
+        ],
+        "MPOS": 13,
+        "OCM": 0,
+        "POPAF": 2.4,
+        "TLOD": 48.98,
+        "genotypes": [
+            {
+                "GT": "0/1",
+                "AD": [
+                    3357,
+                    51
+                ],
+                "AF": 0.009926,
+                "DP": 3408,
+                "F1R2": [
+                    1802,
+                    0
+                ],
+                "F2R1": [
+                    1475,
+                    1
+                ],
+                "SB": [
+                    2824,
+                    533,
+                    1,
+                    50
+                ]
+            }
+        ]
+    },
+    {
+        "chr": "chrM",
+        "pos": 3473,
+        "ref": "T",
+        "alt": "C",
+        "type": "SNP",
+        "qual": -1.0,
+        "dosages": [
+            1
+        ],
+        "symbol": "MT-ND1",
+        "consequence": {
+            "id": "missense_variant",
+            "rank": 10
+        },
+        "hgvsp": "p.Phe56Ser",
+        "hgvsc": "c.167T>C",
+        "Allele": "T3473C",
+        "Locus": "MT-ND1",
+        "Position": 3473,
+        "Disease": "",
+        "Homoplasmy": "",
+        "Heteroplasmy": "",
+        "Status_MitoMap": "",
+        "GB Frequency": 1,
+        "References": "",
+        "InfoSource": "MitoMapPolymorphismsCoding",
+        "Curated References": 1,
+        "MSeqDR-LSDB.ID": "",
+        "Chr": "",
+        "dbSNP.ID": "",
+        "Effect": "",
+        "Type": "",
+        "HGVS": "",
+        "GERP": "",
+        "Sources": "",
+        "PubMedID": "",
+        "GBFreq": 0.0,
+        "AS_FilterStatus": "weak_evidence,base_qual,strand_bias",
+        "AS_SB_TABLE": "2786,435|0,39",
+        "DP": 3319,
+        "ECNT": 8,
+        "MBQ": [
+            39,
+            12
+        ],
+        "MFRL": [
+            279,
+            287
+        ],
+        "MMQ": [
+            60,
+            60
+        ],
+        "MPOS": 13,
+        "OCM": 0,
+        "POPAF": 2.4,
+        "TLOD": 0.591,
+        "genotypes": [
+            {
+                "GT": "0/1",
+                "AD": [
+                    3221,
+                    39
+                ],
+                "AF": 0.00342,
+                "DP": 3260,
+                "F1R2": [
+                    1730,
+                    0
+                ],
+                "F2R1": [
+                    1385,
+                    3
+                ],
+                "SB": [
+                    2786,
+                    435,
+                    0,
+                    39
+                ]
+            }
+        ]
+    },
+    {
+        "chr": "chrM",
+        "pos": 3475,
+        "ref": "A",
+        "alt": "C",
+        "type": "SNP",
+        "qual": -1.0,
+        "dosages": [
+            1
+        ],
+        "symbol": "MT-ND1",
+        "consequence": {
+            "id": "missense_variant",
+            "rank": 10
+        },
+        "hgvsp": "p.Thr57Pro",
+        "hgvsc": "c.169A>C",
+        "GBFreq": 0.0,
+        "AS_FilterStatus": "base_qual,strand_bias",
+        "AS_SB_TABLE": "2713,402|0,87",
+        "DP": 3332,
+        "ECNT": 8,
+        "MBQ": [
+            39,
+            13
+        ],
+        "MFRL": [
+            279,
+            284
+        ],
+        "MMQ": [
+            60,
+            60
+        ],
+        "MPOS": 15,
+        "OCM": 0,
+        "POPAF": 2.4,
+        "TLOD": 77.68,
+        "genotypes": [
+            {
+                "GT": "0/1",
+                "AD": [
+                    3115,
+                    87
+                ],
+                "AF": 0.019,
+                "DP": 3202,
+                "F1R2": [
+                    1663,
+                    1
+                ],
+                "F2R1": [
+                    1298,
+                    0
+                ],
+                "SB": [
+                    2713,
+                    402,
+                    0,
+                    87
+                ]
+            }
+        ]
+    },
+    {
+        "chr": "chrM",
+        "pos": 3483,
+        "ref": "G",
+        "alt": "C",
+        "type": "SNP",
+        "qual": -1.0,
+        "dosages": [
+            1
+        ],
+        "symbol": "MT-ND1",
+        "consequence": {
+            "id": "missense_variant",
+            "rank": 10
+        },
+        "hgvsp": "p.Glu59Asp",
+        "hgvsc": "c.177G>C",
+        "GBFreq": 0.0,
+        "AS_FilterStatus": "base_qual,strand_bias",
+        "AS_SB_TABLE": "2569,333|0,86",
+        "DP": 3074,
+        "ECNT": 8,
+        "MBQ": [
+            38,
+            12
+        ],
+        "MFRL": [
+            281,
+            284
+        ],
+        "MMQ": [
+            60,
+            60
+        ],
+        "MPOS": 11,
+        "OCM": 0,
+        "POPAF": 2.4,
+        "TLOD": 91.2,
+        "genotypes": [
+            {
+                "GT": "0/1",
+                "AD": [
+                    2902,
+                    86
+                ],
+                "AF": 0.02,
+                "DP": 2988,
+                "F1R2": [
+                    1429,
+                    8
+                ],
+                "F2R1": [
+                    1120,
+                    15
+                ],
+                "SB": [
+                    2569,
+                    333,
+                    0,
+                    86
+                ]
+            }
+        ]
+    },
+    {
+        "chr": "chrM",
+        "pos": 3488,
+        "ref": "T",
+        "alt": "A",
+        "type": "SNP",
+        "qual": -1.0,
+        "dosages": [
+            1
+        ],
+        "symbol": "MT-ND1",
+        "consequence": {
+            "id": "missense_variant",
+            "rank": 10
+        },
+        "hgvsp": "p.Leu61Gln",
+        "hgvsc": "c.182T>A",
+        "Allele": "T3488A",
+        "Locus": "MT-ND1",
+        "Position": 3488,
+        "Disease": "",
+        "Homoplasmy": "",
+        "Heteroplasmy": "",
+        "Status_MitoMap": "",
+        "GB Frequency": 1,
+        "References": "",
+        "InfoSource": "MitoMapPolymorphismsCoding",
+        "Curated References": 1,
+        "MSeqDR-LSDB.ID": "",
+        "Chr": "",
+        "dbSNP.ID": "",
+        "Effect": "",
+        "Type": "",
+        "HGVS": "",
+        "GERP": "",
+        "Sources": "",
+        "PubMedID": "",
+        "GBFreq": 0.0,
+        "AS_FilterStatus": "base_qual,strand_bias",
+        "AS_SB_TABLE": "2458,226|0,189",
+        "DP": 2975,
+        "ECNT": 8,
+        "MBQ": [
+            39,
+            13
+        ],
+        "MFRL": [
+            282,
+            277
+        ],
+        "MMQ": [
+            60,
+            60
+        ],
+        "MPOS": 1,
+        "OCM": 0,
+        "POPAF": 2.4,
+        "TLOD": 121.91,
+        "genotypes": [
+            {
+                "GT": "0/1",
+                "AD": [
+                    2684,
+                    189
+                ],
+                "AF": 0.035,
+                "DP": 2873,
+                "F1R2": [
+                    1456,
+                    26
+                ],
+                "F2R1": [
+                    1166,
+                    29
+                ],
+                "SB": [
+                    2458,
+                    226,
+                    0,
+                    189
+                ]
+            }
+        ]
+    },
+    {
+        "chr": "chrM",
+        "pos": 3492,
+        "ref": "A",
+        "alt": "C",
+        "type": "SNP",
+        "qual": -1.0,
+        "dosages": [
+            1
+        ],
+        "symbol": "MT-ND1",
+        "consequence": {
+            "id": "missense_variant",
+            "rank": 10
+        },
+        "hgvsp": "p.Lys62Asn",
+        "hgvsc": "c.186A>C",
+        "GBFreq": 0.0,
+        "AS_FilterStatus": "base_qual,strand_bias",
+        "AS_SB_TABLE": "2448,203|4,229",
+        "DP": 2926,
+        "ECNT": 8,
+        "MBQ": [
+            38,
+            12
+        ],
+        "MFRL": [
+            282,
+            278
+        ],
+        "MMQ": [
+            60,
+            60
+        ],
+        "MPOS": 5,
+        "OCM": 0,
+        "POPAF": 2.4,
+        "TLOD": 198.44,
+        "genotypes": [
+            {
+                "GT": "0/1",
+                "AD": [
+                    2651,
+                    233
+                ],
+                "AF": 0.051,
+                "DP": 2884,
+                "F1R2": [
+                    1418,
+                    32
+                ],
+                "F2R1": [
+                    1050,
+                    36
+                ],
+                "SB": [
+                    2448,
+                    203,
+                    4,
+                    229
+                ]
+            }
+        ]
+    },
+    {
+        "chr": "chrM",
+        "pos": 4745,
+        "ref": "A",
+        "alt": "G",
+        "type": "SNP",
+        "qual": -1.0,
+        "dosages": [
+            1
+        ],
+        "symbol": "MT-ND2",
+        "consequence": {
+            "id": "synonymous_variant",
+            "rank": 16
+        },
+        "hgvsp": "p.Gln92=",
+        "hgvsc": "c.276A>G",
+        "Allele": "A4745G",
+        "Locus": "MT-ND2",
+        "Position": 4745,
+        "Disease": "",
+        "Homoplasmy": "",
+        "Heteroplasmy": "",
+        "Status_MitoMap": "",
+        "GB Frequency": 142,
+        "References": "",
+        "InfoSource": "MitoMapPolymorphismsCoding",
+        "Curated References": 13,
+        "MSeqDR-LSDB.ID": "",
+        "Chr": "",
+        "dbSNP.ID": "",
+        "Effect": "",
+        "Type": "",
+        "HGVS": "",
+        "GERP": "",
+        "Sources": "",
+        "PubMedID": "",
+        "GBFreq": 0.39,
+        "AS_FilterStatus": "SITE",
+        "AS_SB_TABLE": "0,0|3019,3081",
+        "DP": 6194,
+        "ECNT": 2,
+        "MBQ": [
+            0,
+            38
+        ],
+        "MFRL": [
+            0,
+            294
+        ],
+        "MMQ": [
+            60,
+            60
+        ],
+        "MPOS": 38,
+        "OCM": 0,
+        "POPAF": 2.4,
+        "TLOD": 26896.2,
+        "genotypes": [
+            {
+                "GT": "0/1",
+                "AD": [
+                    0,
+                    6100
+                ],
+                "AF": 1,
+                "DP": 6100,
+                "F1R2": [
+                    0,
+                    2918
+                ],
+                "F2R1": [
+                    0,
+                    2769
+                ],
+                "SB": [
+                    0,
+                    0,
+                    3019,
+                    3081
+                ]
+            }
+        ]
+    },
+    {
+        "chr": "chrM",
+        "pos": 4769,
+        "ref": "A",
+        "alt": "G",
+        "type": "SNP",
+        "qual": -1.0,
+        "dosages": [
+            1
+        ],
+        "symbol": "MT-ND2",
+        "consequence": {
+            "id": "synonymous_variant",
+            "rank": 16
+        },
+        "hgvsp": "p.Met100=",
+        "hgvsc": "c.300A>G",
+        "Allele": "A4769G",
+        "Locus": "MT-ND2",
+        "Position": 4769,
+        "Disease": "",
+        "Homoplasmy": "",
+        "Heteroplasmy": "",
+        "Status_MitoMap": "",
+        "GB Frequency": 31182,
+        "References": "",
+        "InfoSource": "MitoMapPolymorphismsCoding",
+        "Curated References": 124,
+        "MSeqDR-LSDB.ID": "chrM_001074",
+        "Chr": "M",
+        "dbSNP.ID": "rs3021086",
+        "Effect": "?/, ?",
+        "Type": "subst",
+        "HGVS": "m.4769A>G",
+        "GERP": "-8.800",
+        "Sources": "; Mitomap;",
+        "PubMedID": "-",
+        "GBFreq": 97.6,
+        "AS_FilterStatus": "SITE",
+        "AS_SB_TABLE": "0,0|3150,3028",
+        "DP": 6340,
+        "ECNT": 2,
+        "MBQ": [
+            0,
+            38
+        ],
+        "MFRL": [
+            0,
+            294
+        ],
+        "MMQ": [
+            60,
+            60
+        ],
+        "MPOS": 38,
+        "OCM": 0,
+        "POPAF": 2.4,
+        "TLOD": 24279.5,
+        "genotypes": [
+            {
+                "GT": "0/1",
+                "AD": [
+                    0,
+                    6178
+                ],
+                "AF": 1,
+                "DP": 6178,
+                "F1R2": [
+                    0,
+                    3077
+                ],
+                "F2R1": [
+                    0,
+                    2877
+                ],
+                "SB": [
+                    0,
+                    0,
+                    3150,
+                    3028
+                ]
+            }
+        ]
+    },
+    {
+        "chr": "chrM",
+        "pos": 7212,
+        "ref": "C",
+        "alt": "T",
+        "type": "SNP",
+        "qual": -1.0,
+        "dosages": [
+            1
+        ],
+        "symbol": "MT-CO1",
+        "consequence": {
+            "id": "missense_variant",
+            "rank": 10
+        },
+        "hgvsp": "p.Pro437Ser",
+        "hgvsc": "c.1309C>T",
+        "GBFreq": 0.0,
+        "AS_FilterStatus": "SITE",
+        "AS_SB_TABLE": "2611,3242|6,4",
+        "DP": 6047,
+        "ECNT": 1,
+        "MBQ": [
+            38,
+            37
+        ],
+        "MFRL": [
+            279,
+            285
+        ],
+        "MMQ": [
+            60,
+            60
+        ],
+        "MPOS": 33,
+        "OCM": 0,
+        "POPAF": 2.4,
+        "TLOD": 4.33,
+        "genotypes": [
+            {
+                "GT": "0/1",
+                "AD": [
+                    5853,
+                    10
+                ],
+                "AF": 0.001669,
+                "DP": 5863,
+                "F1R2": [
+                    2871,
+                    3
+                ],
+                "F2R1": [
+                    2800,
+                    6
+                ],
+                "SB": [
+                    2611,
+                    3242,
+                    6,
+                    4
+                ]
+            }
+        ]
+    },
+    {
+        "chr": "chrM",
+        "pos": 7337,
+        "ref": "G",
+        "alt": "A",
+        "type": "SNP",
+        "qual": -1.0,
+        "dosages": [
+            1
+        ],
+        "symbol": "MT-CO1",
+        "consequence": {
+            "id": "synonymous_variant",
+            "rank": 16
+        },
+        "hgvsp": "p.Ser478=",
+        "hgvsc": "c.1434G>A",
+        "Allele": "G7337A",
+        "Locus": "MT-CO1",
+        "Position": 7337,
+        "Disease": "",
+        "Homoplasmy": "",
+        "Heteroplasmy": "",
+        "Status_MitoMap": "",
+        "GB Frequency": 406,
+        "References": "",
+        "InfoSource": "MitoMapPolymorphismsCoding",
+        "Curated References": 18,
+        "MSeqDR-LSDB.ID": "",
+        "Chr": "",
+        "dbSNP.ID": "",
+        "Effect": "",
+        "Type": "",
+        "HGVS": "",
+        "GERP": "",
+        "Sources": "",
+        "PubMedID": "",
+        "GBFreq": 1.15,
+        "AS_FilterStatus": "SITE",
+        "AS_SB_TABLE": "1,0|2858,2867",
+        "DP": 5905,
+        "ECNT": 1,
+        "MBQ": [
+            14,
+            38
+        ],
+        "MFRL": [
+            159,
+            285
+        ],
+        "MMQ": [
+            60,
+            60
+        ],
+        "MPOS": 40,
+        "OCM": 0,
+        "POPAF": 2.4,
+        "TLOD": 22631.8,
+        "genotypes": [
+            {
+                "GT": "0/1",
+                "AD": [
+                    1,
+                    5725
+                ],
+                "AF": 1,
+                "DP": 5726,
+                "F1R2": [
+                    0,
+                    2772
+                ],
+                "F2R1": [
+                    0,
+                    2827
+                ],
+                "SB": [
+                    1,
+                    0,
+                    2858,
+                    2867
+                ]
+            }
+        ]
+    },
+    {
+        "chr": "chrM",
+        "pos": 8512,
+        "ref": "A",
+        "alt": "C",
+        "type": "SNP",
+        "qual": -1.0,
+        "dosages": [
+            1
+        ],
+        "symbol": "MT-ATP8",
+        "consequence": {
+            "id": "missense_variant",
+            "rank": 10
+        },
+        "hgvsp": "p.Lys49Asn",
+        "hgvsc": "c.147A>C",
+        "GBFreq": 0.0,
+        "AS_FilterStatus": "weak_evidence,base_qual,strand_bias",
+        "AS_SB_TABLE": "3101,1314|1,212",
+        "DP": 4847,
+        "ECNT": 4,
+        "MBQ": [
+            38,
+            12
+        ],
+        "MFRL": [
+            278,
+            266
+        ],
+        "MMQ": [
+            60,
+            60
+        ],
+        "MPOS": 19,
+        "OCM": 0,
+        "POPAF": 2.4,
+        "TLOD": 0.684,
+        "genotypes": [
+            {
+                "GT": "0/1",
+                "AD": [
+                    4415,
+                    213
+                ],
+                "AF": 0.006362,
+                "DP": 4628,
+                "F1R2": [
+                    2226,
+                    1
+                ],
+                "F2R1": [
+                    1939,
+                    6
+                ],
+                "SB": [
+                    3101,
+                    1314,
+                    1,
+                    212
+                ]
+            }
+        ]
+    },
+    {
+        "chr": "chrM",
+        "pos": 8557,
+        "ref": "G",
+        "alt": "C",
+        "type": "SNP",
+        "qual": -1.0,
+        "dosages": [
+            1
+        ],
+        "symbol": "MT-ATP8",
+        "consequence": {
+            "id": "missense_variant",
+            "rank": 10
+        },
+        "hgvsp": "p.Leu64Phe",
+        "hgvsc": "c.192G>C",
+        "Allele": "G8557C",
+        "Locus": "MT-ATP8, MT-ATP6",
+        "Position": 8557,
+        "Disease": "",
+        "Homoplasmy": "",
+        "Heteroplasmy": "",
+        "Status_MitoMap": "",
+        "GB Frequency": 18,
+        "References": "",
+        "InfoSource": "MitoMapPolymorphismsCoding",
+        "Curated References": 2,
+        "MSeqDR-LSDB.ID": "",
+        "Chr": "",
+        "dbSNP.ID": "",
+        "Effect": "",
+        "Type": "",
+        "HGVS": "",
+        "GERP": "",
+        "Sources": "",
+        "PubMedID": "",
+        "GBFreq": 0.04,
+        "AS_FilterStatus": "base_qual,strand_bias",
+        "AS_SB_TABLE": "2615,1097|0,241",
+        "DP": 4143,
+        "ECNT": 4,
+        "MBQ": [
+            38,
+            12
+        ],
+        "MFRL": [
+            279,
+            289
+        ],
+        "MMQ": [
+            60,
+            60
+        ],
+        "MPOS": 22,
+        "OCM": 0,
+        "POPAF": 2.4,
+        "TLOD": 9.89,
+        "genotypes": [
+            {
+                "GT": "0/1",
+                "AD": [
+                    3712,
+                    241
+                ],
+                "AF": 0.009326,
+                "DP": 3953,
+                "F1R2": [
+                    1640,
+                    14
+                ],
+                "F2R1": [
+                    1455,
+                    1
+                ],
+                "SB": [
+                    2615,
+                    1097,
+                    0,
+                    241
+                ]
+            }
+        ]
+    },
+    {
+        "chr": "chrM",
+        "pos": 8567,
+        "ref": "T",
+        "alt": "C",
+        "type": "SNP",
+        "qual": -1.0,
+        "dosages": [
+            1
+        ],
+        "symbol": "MT-ATP8",
+        "consequence": {
+            "id": "missense_variant",
+            "rank": 10
+        },
+        "hgvsp": "p.Ser68Pro",
+        "hgvsc": "c.202T>C",
+        "Allele": "T8567C",
+        "Locus": "MT-ATP8, MT-ATP6",
+        "Position": 8567,
+        "Disease": "",
+        "Homoplasmy": "",
+        "Heteroplasmy": "",
+        "Status_MitoMap": "",
+        "GB Frequency": 73,
+        "References": "",
+        "InfoSource": "MitoMapPolymorphismsCoding",
+        "Curated References": 8,
+        "MSeqDR-LSDB.ID": "",
+        "Chr": "",
+        "dbSNP.ID": "",
+        "Effect": "",
+        "Type": "",
+        "HGVS": "",
+        "GERP": "",
+        "Sources": "",
+        "PubMedID": "",
+        "GBFreq": 0.21,
+        "AS_FilterStatus": "base_qual,strand_bias",
+        "AS_SB_TABLE": "2508,1131|0,309",
+        "DP": 4199,
+        "ECNT": 4,
+        "MBQ": [
+            37,
+            13
+        ],
+        "MFRL": [
+            278,
+            292
+        ],
+        "MMQ": [
+            60,
+            60
+        ],
+        "MPOS": 24,
+        "OCM": 0,
+        "POPAF": 2.4,
+        "TLOD": 9.02,
+        "genotypes": [
+            {
+                "GT": "0/1",
+                "AD": [
+                    3639,
+                    309
+                ],
+                "AF": 0.014,
+                "DP": 3948,
+                "F1R2": [
+                    1521,
+                    5
+                ],
+                "F2R1": [
+                    1347,
+                    2
+                ],
+                "SB": [
+                    2508,
+                    1131,
+                    0,
+                    309
+                ]
+            }
+        ]
+    },
+    {
+        "chr": "chrM",
+        "pos": 8577,
+        "ref": "A",
+        "alt": "C",
+        "type": "SNP",
+        "qual": -1.0,
+        "dosages": [
+            1
+        ],
+        "symbol": "MT-ATP6",
+        "consequence": {
+            "id": "synonymous_variant",
+            "rank": 16
+        },
+        "hgvsp": "p.Leu17=",
+        "hgvsc": "c.51A>C",
+        "GBFreq": 0.0,
+        "AS_FilterStatus": "base_qual,strand_bias",
+        "AS_SB_TABLE": "2302,1123|1,279",
+        "DP": 3801,
+        "ECNT": 3,
+        "MBQ": [
+            37,
+            12
+        ],
+        "MFRL": [
+            282,
+            302
+        ],
+        "MMQ": [
+            60,
+            60
+        ],
+        "MPOS": 18,
+        "OCM": 0,
+        "POPAF": 2.4,
+        "TLOD": 11.51,
+        "genotypes": [
+            {
+                "GT": "0/1",
+                "AD": [
+                    3425,
+                    280
+                ],
+                "AF": 0.013,
+                "DP": 3705,
+                "F1R2": [
+                    1339,
+                    12
+                ],
+                "F2R1": [
+                    1396,
+                    0
+                ],
+                "SB": [
+                    2302,
+                    1123,
+                    1,
+                    279
+                ]
+            }
+        ]
+    },
+    {
+        "chr": "chrM",
+        "pos": 8860,
+        "ref": "A",
+        "alt": "G",
+        "type": "SNP",
+        "qual": -1.0,
+        "dosages": [
+            1
+        ],
+        "symbol": "MT-ATP6",
+        "consequence": {
+            "id": "missense_variant",
+            "rank": 10
+        },
+        "hgvsp": "p.Thr112Ala",
+        "hgvsc": "c.334A>G",
+        "Allele": "A8860G",
+        "Locus": "MT-ATP6",
+        "Position": 8860,
+        "Disease": "",
+        "Homoplasmy": "",
+        "Heteroplasmy": "",
+        "Status_MitoMap": "",
+        "GB Frequency": 31527,
+        "References": "",
+        "InfoSource": "MitoMapPolymorphismsCoding",
+        "Curated References": 125,
+        "MSeqDR-LSDB.ID": "chrM_001386",
+        "Chr": "M",
+        "dbSNP.ID": "rs2001031",
+        "Effect": "?/?",
+        "Type": "subst",
+        "HGVS": "m.8860A>G",
+        "GERP": "-7.800",
+        "Sources": ";",
+        "PubMedID": "-",
+        "GBFreq": 98.48,
+        "AS_FilterStatus": "SITE",
+        "AS_SB_TABLE": "1,1|2628,2865",
+        "DP": 5556,
+        "ECNT": 1,
+        "MBQ": [
+            39,
+            38
+        ],
+        "MFRL": [
+            248,
+            288
+        ],
+        "MMQ": [
+            60,
+            60
+        ],
+        "MPOS": 36,
+        "OCM": 0,
+        "POPAF": 2.4,
+        "TLOD": 21659.9,
+        "genotypes": [
+            {
+                "GT": "0/1",
+                "AD": [
+                    2,
+                    5493
+                ],
+                "AF": 0.999,
+                "DP": 5495,
+                "F1R2": [
+                    1,
+                    2808
+                ],
+                "F2R1": [
+                    1,
+                    2478
+                ],
+                "SB": [
+                    1,
+                    1,
+                    2628,
+                    2865
+                ]
+            }
+        ]
+    },
+    {
+        "chr": "chrM",
+        "pos": 12417,
+        "ref": "C",
+        "alt": "CA",
+        "type": "INS",
+        "qual": -1.0,
+        "dosages": [
+            1
+        ],
+        "symbol": "MT-ND5",
+        "consequence": {
+            "id": "frameshift_variant",
+            "rank": 5
+        },
+        "hgvsp": "p.Asn30LysfsTer86",
+        "hgvsc": "c.89dup",
+        "GBFreq": 0.0,
+        "AS_FilterStatus": "SITE",
+        "AS_SB_TABLE": "2174,2609|10,23",
+        "DP": 5178,
+        "ECNT": 1,
+        "MBQ": [
+            38,
+            38
+        ],
+        "MFRL": [
+            278,
+            273
+        ],
+        "MMQ": [
+            60,
+            60
+        ],
+        "MPOS": 41,
+        "OCM": 0,
+        "POPAF": 2.4,
+        "RPA": [
+            8,
+            9
+        ],
+        "RU": "A",
+        "STR": true,
+        "TLOD": 9.88,
+        "genotypes": [
+            {
+                "GT": "0/1",
+                "AD": [
+                    4783,
+                    33
+                ],
+                "AF": 0.005716,
+                "DP": 4816,
+                "F1R2": [
+                    2415,
+                    10
+                ],
+                "F2R1": [
+                    2291,
+                    20
+                ],
+                "SB": [
+                    2174,
+                    2609,
+                    10,
+                    23
+                ]
+            }
+        ]
+    },
+    {
+        "chr": "chrM",
+        "pos": 12989,
+        "ref": "TAGC",
+        "alt": "T",
+        "type": "DEL",
+        "qual": -1.0,
+        "dosages": [
+            1
+        ],
+        "symbol": "MT-ND5",
+        "consequence": {
+            "id": "inframe_deletion",
+            "rank": 9
+        },
+        "hgvsp": "p.Ala221del",
+        "hgvsc": "c.662_664del",
+        "GBFreq": 0.0,
+        "AS_FilterStatus": "weak_evidence",
+        "AS_SB_TABLE": "2404,2655|3,5",
+        "DP": 5503,
+        "ECNT": 1,
+        "MBQ": [
+            39,
+            38
+        ],
+        "MFRL": [
+            281,
+            292
+        ],
+        "MMQ": [
+            60,
+            60
+        ],
+        "MPOS": 55,
+        "OCM": 0,
+        "POPAF": 2.4,
+        "RPA": [
+            3,
+            2
+        ],
+        "RU": "AGC",
+        "STR": true,
+        "TLOD": 3.89,
+        "genotypes": [
+            {
+                "GT": "0/1",
+                "AD": [
+                    5059,
+                    8
+                ],
+                "AF": 0.001615,
+                "DP": 5067,
+                "F1R2": [
+                    2227,
+                    4
+                ],
+                "F2R1": [
+                    2688,
+                    3
+                ],
+                "SB": [
+                    2404,
+                    2655,
+                    3,
+                    5
+                ]
+            }
+        ]
+    },
+    {
+        "chr": "chrM",
+        "pos": 13289,
+        "ref": "G",
+        "alt": "A",
+        "type": "SNP",
+        "qual": -1.0,
+        "dosages": [
+            1
+        ],
+        "symbol": "MT-ND5",
+        "consequence": {
+            "id": "missense_variant",
+            "rank": 10
+        },
+        "hgvsp": "p.Gly318Asp",
+        "hgvsc": "c.953G>A",
+        "GBFreq": 0.0,
+        "AS_FilterStatus": "weak_evidence",
+        "AS_SB_TABLE": "2851,2969|4,4",
+        "DP": 6006,
+        "ECNT": 2,
+        "MBQ": [
+            38,
+            39
+        ],
+        "MFRL": [
+            282,
+            379
+        ],
+        "MMQ": [
+            60,
+            60
+        ],
+        "MPOS": 44,
+        "OCM": 0,
+        "POPAF": 2.4,
+        "TLOD": 2.8,
+        "genotypes": [
+            {
+                "GT": "0|1",
+                "AD": [
+                    5820,
+                    8
+                ],
+                "AF": 0.001237,
+                "DP": 5828,
+                "F1R2": [
+                    2842,
+                    2
+                ],
+                "F2R1": [
+                    2757,
+                    4
+                ],
+                "PGT": "0|1",
+                "PID": "13289_G_A",
+                "PS": 13289,
+                "SB": [
+                    2851,
+                    2969,
+                    4,
+                    4
+                ]
+            }
+        ]
+    },
+    {
+        "chr": "chrM",
+        "pos": 13326,
+        "ref": "T",
+        "alt": "C",
+        "type": "SNP",
+        "qual": -1.0,
+        "dosages": [
+            1
+        ],
+        "symbol": "MT-ND5",
+        "consequence": {
+            "id": "synonymous_variant",
+            "rank": 16
+        },
+        "hgvsp": "p.Cys330=",
+        "hgvsc": "c.990T>C",
+        "Allele": "T13326C",
+        "Locus": "MT-ND5",
+        "Position": 13326,
+        "Disease": "",
+        "Homoplasmy": "",
+        "Heteroplasmy": "",
+        "Status_MitoMap": "",
+        "GB Frequency": 124,
+        "References": "",
+        "InfoSource": "MitoMapPolymorphismsCoding",
+        "Curated References": 11,
+        "MSeqDR-LSDB.ID": "",
+        "Chr": "",
+        "dbSNP.ID": "",
+        "Effect": "",
+        "Type": "",
+        "HGVS": "",
+        "GERP": "",
+        "Sources": "",
+        "PubMedID": "",
+        "GBFreq": 0.34,
+        "AS_FilterStatus": "SITE",
+        "AS_SB_TABLE": "2,0|3027,2817",
+        "DP": 5963,
+        "ECNT": 2,
+        "MBQ": [
+            28,
+            37
+        ],
+        "MFRL": [
+            360,
+            285
+        ],
+        "MMQ": [
+            60,
+            60
+        ],
+        "MPOS": 33,
+        "OCM": 0,
+        "POPAF": 2.4,
+        "TLOD": 22878.2,
+        "genotypes": [
+            {
+                "GT": "0|1",
+                "AD": [
+                    2,
+                    5844
+                ],
+                "AF": 1,
+                "DP": 5846,
+                "F1R2": [
+                    1,
+                    2817
+                ],
+                "F2R1": [
+                    0,
+                    2855
+                ],
+                "PGT": "0|1",
+                "PID": "5289_G_A",
+                "PS": 5289,
+                "SB": [
+                    2,
+                    0,
+                    3027,
+                    2817
+                ]
+            }
+        ]
+    },
+    {
+        "chr": "chrM",
+        "pos": 13680,
+        "ref": "C",
+        "alt": "T",
+        "type": "SNP",
+        "qual": -1.0,
+        "dosages": [
+            1
+        ],
+        "symbol": "MT-ND5",
+        "consequence": {
+            "id": "synonymous_variant",
+            "rank": 16
+        },
+        "hgvsp": "p.Pro448=",
+        "hgvsc": "c.1344C>T",
+        "Allele": "C13680T",
+        "Locus": "MT-ND5",
+        "Position": 13680,
+        "Disease": "",
+        "Homoplasmy": "",
+        "Heteroplasmy": "",
+        "Status_MitoMap": "",
+        "GB Frequency": 195,
+        "References": "",
+        "InfoSource": "MitoMapPolymorphismsCoding",
+        "Curated References": 12,
+        "MSeqDR-LSDB.ID": "",
+        "Chr": "",
+        "dbSNP.ID": "",
+        "Effect": "",
+        "Type": "",
+        "HGVS": "",
+        "GERP": "",
+        "Sources": "",
+        "PubMedID": "",
+        "GBFreq": 0.49,
+        "AS_FilterStatus": "SITE",
+        "AS_SB_TABLE": "3,1|2768,2856",
+        "DP": 5876,
+        "ECNT": 2,
+        "MBQ": [
+            18,
+            37
+        ],
+        "MFRL": [
+            201,
+            283
+        ],
+        "MMQ": [
+            60,
+            60
+        ],
+        "MPOS": 36,
+        "OCM": 0,
+        "POPAF": 2.4,
+        "TLOD": 21361.9,
+        "genotypes": [
+            {
+                "GT": "0|1",
+                "AD": [
+                    4,
+                    5624
+                ],
+                "AF": 1,
+                "DP": 5628,
+                "F1R2": [
+                    2,
+                    2661
+                ],
+                "F2R1": [
+                    0,
+                    2611
+                ],
+                "PGT": "0|1",
+                "PID": "13680_C_T",
+                "PS": 13680,
+                "SB": [
+                    3,
+                    1,
+                    2768,
+                    2856
+                ]
+            }
+        ]
+    },
+    {
+        "chr": "chrM",
+        "pos": 13714,
+        "ref": "G",
+        "alt": "A",
+        "type": "SNP",
+        "qual": -1.0,
+        "dosages": [
+            1
+        ],
+        "symbol": "MT-ND5",
+        "consequence": {
+            "id": "stop_gained",
+            "rank": 4
+        },
+        "hgvsp": "p.Gly460Ter",
+        "hgvsc": "c.1378G>A",
+        "GBFreq": 0.0,
+        "AS_FilterStatus": "weak_evidence",
+        "AS_SB_TABLE": "2709,2754|4,5",
+        "DP": 5580,
+        "ECNT": 2,
+        "MBQ": [
+            38,
+            20
+        ],
+        "MFRL": [
+            280,
+            273
+        ],
+        "MMQ": [
+            60,
+            60
+        ],
+        "MPOS": 39,
+        "OCM": 0,
+        "POPAF": 2.4,
+        "TLOD": 0.233,
+        "genotypes": [
+            {
+                "GT": "0|1",
+                "AD": [
+                    5463,
+                    9
+                ],
+                "AF": 0.001065,
+                "DP": 5472,
+                "F1R2": [
+                    2622,
+                    3
+                ],
+                "F2R1": [
+                    2524,
+                    4
+                ],
+                "PGT": "0|1",
+                "PID": "13680_C_T",
+                "PS": 13680,
+                "SB": [
+                    2709,
+                    2754,
+                    4,
+                    5
+                ]
+            }
+        ]
+    },
+    {
+        "chr": "chrM",
+        "pos": 14831,
+        "ref": "G",
+        "alt": "A",
+        "type": "SNP",
+        "qual": -1.0,
+        "dosages": [
+            1
+        ],
+        "symbol": "MT-CYB",
+        "consequence": {
+            "id": "missense_variant",
+            "rank": 10
+        },
+        "hgvsp": "p.Ala29Thr",
+        "hgvsc": "c.85G>A",
+        "Allele": "G14831A",
+        "Locus": "MT-CYB, MT-CYB",
+        "Position": 14831,
+        "Disease": "LHON",
+        "Homoplasmy": "",
+        "Heteroplasmy": "-",
+        "Status_MitoMap": "Reported",
+        "GB Frequency": 81,
+        "References": "1",
+        "InfoSource": "MitoMapCodingControl, MitoMapPolymorphismsCoding",
+        "Curated References": null,
+        "MSeqDR-LSDB.ID": "chrM_000042",
+        "Chr": "M",
+        "dbSNP.ID": "rs199795644",
+        "Effect": "/",
+        "Type": "subst",
+        "HGVS": "m.14831G>A",
+        "GERP": "-8.300",
+        "Sources": "; clinVar; Mitomap; ensembl;",
+        "PubMedID": "20301353",
+        "GBFreq": 0.2,
+        "AS_FilterStatus": "SITE",
+        "AS_SB_TABLE": "0,0|2639,2749",
+        "DP": 5503,
+        "ECNT": 3,
+        "MBQ": [
+            0,
+            38
+        ],
+        "MFRL": [
+            0,
+            279
+        ],
+        "MMQ": [
+            60,
+            60
+        ],
+        "MPOS": 31,
+        "OCM": 0,
+        "POPAF": 2.4,
+        "TLOD": 21178.1,
+        "genotypes": [
+            {
+                "GT": "0/1",
+                "AD": [
+                    0,
+                    5388
+                ],
+                "AF": 1,
+                "DP": 5388,
+                "F1R2": [
+                    0,
+                    2679
+                ],
+                "F2R1": [
+                    0,
+                    2506
+                ],
+                "SB": [
+                    0,
+                    0,
+                    2639,
+                    2749
+                ]
+            }
+        ]
+    },
+    {
+        "chr": "chrM",
+        "pos": 14872,
+        "ref": "C",
+        "alt": "T",
+        "type": "SNP",
+        "qual": -1.0,
+        "dosages": [
+            1
+        ],
+        "symbol": "MT-CYB",
+        "consequence": {
+            "id": "synonymous_variant",
+            "rank": 16
+        },
+        "hgvsp": "p.Ile42=",
+        "hgvsc": "c.126C>T",
+        "Allele": "C14872T",
+        "Locus": "MT-CYB",
+        "Position": 14872,
+        "Disease": "",
+        "Homoplasmy": "",
+        "Heteroplasmy": "",
+        "Status_MitoMap": "",
+        "GB Frequency": 223,
+        "References": "",
+        "InfoSource": "MitoMapPolymorphismsCoding",
+        "Curated References": 11,
+        "MSeqDR-LSDB.ID": "",
+        "Chr": "",
+        "dbSNP.ID": "",
+        "Effect": "",
+        "Type": "",
+        "HGVS": "",
+        "GERP": "",
+        "Sources": "",
+        "PubMedID": "",
+        "GBFreq": 0.63,
+        "AS_FilterStatus": "SITE",
+        "AS_SB_TABLE": "0,0|2584,2701",
+        "DP": 5419,
+        "ECNT": 3,
+        "MBQ": [
+            0,
+            38
+        ],
+        "MFRL": [
+            0,
+            285
+        ],
+        "MMQ": [
+            60,
+            60
+        ],
+        "MPOS": 39,
+        "OCM": 0,
+        "POPAF": 2.4,
+        "TLOD": 20830.3,
+        "genotypes": [
+            {
+                "GT": "0/1",
+                "AD": [
+                    0,
+                    5285
+                ],
+                "AF": 1,
+                "DP": 5285,
+                "F1R2": [
+                    0,
+                    2584
+                ],
+                "F2R1": [
+                    0,
+                    2508
+                ],
+                "SB": [
+                    0,
+                    0,
+                    2584,
+                    2701
+                ]
+            }
+        ]
+    },
+    {
+        "chr": "chrM",
+        "pos": 14918,
+        "ref": "G",
+        "alt": "A",
+        "type": "SNP",
+        "qual": -1.0,
+        "dosages": [
+            1
+        ],
+        "symbol": "MT-CYB",
+        "consequence": {
+            "id": "missense_variant",
+            "rank": 10
+        },
+        "hgvsp": "p.Asp58Asn",
+        "hgvsc": "c.172G>A",
+        "Allele": "G14918A",
+        "Locus": "MT-CYB",
+        "Position": 14918,
+        "Disease": "",
+        "Homoplasmy": "",
+        "Heteroplasmy": "",
+        "Status_MitoMap": "",
+        "GB Frequency": 1,
+        "References": "",
+        "InfoSource": "MitoMapPolymorphismsCoding",
+        "Curated References": 1,
+        "MSeqDR-LSDB.ID": "",
+        "Chr": "",
+        "dbSNP.ID": "",
+        "Effect": "",
+        "Type": "",
+        "HGVS": "",
+        "GERP": "",
+        "Sources": "",
+        "PubMedID": "",
+        "GBFreq": 0.0,
+        "AS_FilterStatus": "SITE",
+        "AS_SB_TABLE": "2698,2459|89,66",
+        "DP": 5543,
+        "ECNT": 3,
+        "MBQ": [
+            38,
+            36
+        ],
+        "MFRL": [
+            288,
+            294
+        ],
+        "MMQ": [
+            60,
+            60
+        ],
+        "MPOS": 33,
+        "OCM": 0,
+        "POPAF": 2.4,
+        "TLOD": 278.05,
+        "genotypes": [
+            {
+                "GT": "0/1",
+                "AD": [
+                    5157,
+                    155
+                ],
+                "AF": 0.027,
+                "DP": 5312,
+                "F1R2": [
+                    2467,
+                    79
+                ],
+                "F2R1": [
+                    2508,
+                    63
+                ],
+                "SB": [
+                    2698,
+                    2459,
+                    89,
+                    66
+                ]
+            }
+        ]
+    },
+    {
+        "chr": "chrM",
+        "pos": 15326,
+        "ref": "A",
+        "alt": "G",
+        "type": "SNP",
+        "qual": -1.0,
+        "dosages": [
+            1
+        ],
+        "symbol": "MT-CYB",
+        "consequence": {
+            "id": "missense_variant",
+            "rank": 10
+        },
+        "hgvsp": "p.Thr194Ala",
+        "hgvsc": "c.580A>G",
+        "Allele": "A15326G",
+        "Locus": "MT-CYB",
+        "Position": 15326,
+        "Disease": "",
+        "Homoplasmy": "",
+        "Heteroplasmy": "",
+        "Status_MitoMap": "",
+        "GB Frequency": 31512,
+        "References": "",
+        "InfoSource": "MitoMapPolymorphismsCoding",
+        "Curated References": 115,
+        "MSeqDR-LSDB.ID": "chrM_001066",
+        "Chr": "M",
+        "dbSNP.ID": "rs2853508, rs2853508",
+        "Effect": "?/, ?, ?/, ?",
+        "Type": "subst, subst",
+        "HGVS": "m.15326A>G",
+        "GERP": "-8.040, -8.040",
+        "Sources": ";, ; clinvar;",
+        "PubMedID": "-, -",
+        "GBFreq": 98.67,
+        "AS_FilterStatus": "SITE",
+        "AS_SB_TABLE": "0,2|3104,2661",
+        "DP": 6095,
+        "ECNT": 1,
+        "MBQ": [
+            26,
+            38
+        ],
+        "MFRL": [
+            376,
+            283
+        ],
+        "MMQ": [
+            60,
+            60
+        ],
+        "MPOS": 38,
+        "OCM": 0,
+        "POPAF": 2.4,
+        "TLOD": 22855.6,
+        "genotypes": [
+            {
+                "GT": "0/1",
+                "AD": [
+                    2,
+                    5765
+                ],
+                "AF": 1,
+                "DP": 5767,
+                "F1R2": [
+                    1,
+                    2996
+                ],
+                "F2R1": [
+                    0,
+                    2514
+                ],
+                "SB": [
+                    0,
+                    2,
+                    3104,
+                    2661
+                ]
+            }
+        ]
+    },
+    {
+        "chr": "chrM",
+        "pos": 16023,
+        "ref": "G",
+        "alt": "A",
+        "type": "SNP",
+        "qual": -1.0,
+        "dosages": [
+            1
+        ],
+        "symbol": "MT-ND6",
+        "consequence": {
+            "id": "upstream_gene_variant",
+            "rank": 25
+        },
+        "hgvsp": "",
+        "hgvsc": "",
+        "Allele": "G16023A",
+        "Locus": "MT-TP",
+        "Position": 16023,
+        "Disease": "Migraine, pigmentary retinopathy, deafness, leukariosis",
+        "Homoplasmy": "-",
+        "Heteroplasmy": "",
+        "Status_MitoMap": "Reported",
+        "GB Frequency": 0,
+        "References": "1",
+        "InfoSource": "MitoMapRNAControl",
+        "Curated References": null,
+        "MSeqDR-LSDB.ID": "chrM_000615",
+        "Chr": "M",
+        "dbSNP.ID": "rs55934780",
+        "Effect": "?/, ?",
+        "Type": "subst",
+        "HGVS": "m.16023G>A",
+        "GERP": "3.200",
+        "Sources": "; Mitomap;",
+        "PubMedID": "-",
+        "GBFreq": 0.0,
+        "AS_FilterStatus": "SITE",
+        "AS_SB_TABLE": "1238,1766|1543,1879",
+        "DP": 6614,
+        "ECNT": 1,
+        "MBQ": [
+            39,
+            38
+        ],
+        "MFRL": [
+            279,
+            281
+        ],
+        "MMQ": [
+            60,
+            60
+        ],
+        "MPOS": 34,
+        "OCM": 0,
+        "POPAF": 2.4,
+        "TLOD": 11795.3,
+        "genotypes": [
+            {
+                "GT": "0/1",
+                "AD": [
+                    3004,
+                    3422
+                ],
+                "AF": 0.532,
+                "DP": 6426,
+                "F1R2": [
+                    1473,
+                    1730
+                ],
+                "F2R1": [
+                    1458,
+                    1613
+                ],
+                "SB": [
+                    1238,
+                    1766,
+                    1543,
+                    1879
+                ]
+            }
+        ]
+    }
 ]

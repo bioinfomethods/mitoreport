@@ -3,6 +3,11 @@ import { DEFAULT_SNACKBAR_OPTS } from '@/shared/constants'
 import * as _ from 'lodash'
 import Vue from 'vue'
 import Vuex from 'vuex'
+import {
+  DEFAULT_GENECARDS_URL_PREFIX,
+  DEFAULT_HMT_VAR_URL_PREFIX,
+  DEFAULT_IGV_HOST,
+} from '../../src/shared/constants'
 import defaultSettings from '../fixtures/defaultSettings.json'
 import deletions from '../fixtures/deletions.json'
 import mitoSettings from '../fixtures/mitoSettings.json'
@@ -35,7 +40,15 @@ export const getters = {
   },
 
   igvHost: () => {
-    return 'http://localhost:60151'
+    return DEFAULT_IGV_HOST
+  },
+
+  geneCardsUrlPrefix: () => {
+    return DEFAULT_GENECARDS_URL_PREFIX
+  },
+
+  hmtVarUrlPrefix: () => {
+    return DEFAULT_HMT_VAR_URL_PREFIX
   },
 
   sampleSettings: state => {

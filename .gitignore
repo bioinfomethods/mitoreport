@@ -29,7 +29,7 @@ pnpm-debug.log*
 # Build
 build
 out
-mitoreport*
+mitoreport-*
 tmp
 logs
 .gradle

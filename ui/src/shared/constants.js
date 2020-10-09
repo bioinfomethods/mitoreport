@@ -11,6 +11,8 @@ export const DEFAULT_SNACKBAR_OPTS = {
   timeout: 3000,
 }
 
+export const DEFAULT_IGV_HOST = 'http://localhost:60151'
+
 export const DEFAULT_GENECARDS_URL_PREFIX =
   'https://www.genecards.org/cgi-bin/carddisp.pl'
 
