@@ -185,8 +185,9 @@ export const actions = {
     commit('SET_BAM_DIR', newBamDir)
   },
 
-  saveSearch({ commit }, searchConfig) {
+  saveSearch({ commit, dispatch }, searchConfig) {
     commit('SET_SAVED_SEARCH', searchConfig)
+    dispatch('saveSettings')
   },
 
   deleteSearch({ commit }, searchToDelete) {
