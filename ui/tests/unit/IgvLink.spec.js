@@ -5,16 +5,19 @@ import Vuetify from 'vuetify'
 import Vuex from 'vuex'
 
 describe('IgvLink.vue', () => {
+  let underTest
   let vuetify
-  Vue.use(Vuetify)
-  vuetify = new Vuetify()
-
-  Vue.use(Vuex)
+  let getters
+  let store
   const LOCAL_VUE = createLocalVue()
-  LOCAL_VUE.use(Vuex)
 
-  it('renders correct IGV URL', () => {
-    const getters = {
+  beforeEach(() => {
+    Vue.use(Vuetify)
+    Vue.use(Vuex)
+    LOCAL_VUE.use(Vuex)
+    vuetify = new Vuetify()
+
+    getters = {
       igvHost: () => {
         return 'http://localhost:60151'
       },
@@ -23,12 +26,14 @@ describe('IgvLink.vue', () => {
       },
     }
 
-    const store = new Vuex.Store({
+    store = new Vuex.Store({
       getters,
       strict: process.env.NODE_ENV !== 'production',
     })
+  })
 
-    let underTest = mount(IgvLink, {
+  it('renders correct IGV URL', () => {
+    underTest = mount(IgvLink, {
       LOCAL_VUE,
       store,
       vuetify,

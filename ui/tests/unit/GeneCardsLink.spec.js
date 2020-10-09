@@ -5,27 +5,32 @@ import Vuetify from 'vuetify'
 import Vuex from 'vuex'
 
 describe('GeneCardsLink.vue', () => {
+  let underTest
   let vuetify
-  Vue.use(Vuetify)
-  vuetify = new Vuetify()
-
-  Vue.use(Vuex)
+  let getters
+  let store
   const LOCAL_VUE = createLocalVue()
-  LOCAL_VUE.use(Vuex)
 
-  it('renders correct GeneCards URL', () => {
-    const getters = {
+  beforeEach(() => {
+    Vue.use(Vuetify)
+    Vue.use(Vuex)
+    LOCAL_VUE.use(Vuex)
+    vuetify = new Vuetify()
+
+    getters = {
       geneCardsUrlPrefix: () => {
         return 'http://genecards.host:12345/carddisp.pl'
       },
     }
 
-    const store = new Vuex.Store({
+    store = new Vuex.Store({
       getters,
       strict: process.env.NODE_ENV !== 'production',
     })
+  })
 
-    let underTest = mount(GeneCardsLink, {
+  it('renders correct GeneCards URL', () => {
+    underTest = mount(GeneCardsLink, {
       LOCAL_VUE,
       store,
       vuetify,
