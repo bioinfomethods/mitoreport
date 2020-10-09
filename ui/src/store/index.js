@@ -9,7 +9,10 @@ import * as _ from 'lodash'
 import Vue from 'vue'
 import Vuex from 'vuex'
 import { loadSettings } from '../services/LocalDataService'
-import { DEFAULT_GENECARDS_URL_PREFIX } from '../shared/constants'
+import {
+  DEFAULT_GENECARDS_URL_PREFIX,
+  DEFAULT_HMT_VAR_URL_PREFIX,
+} from '../shared/constants'
 
 Vue.use(Vuex)
 
@@ -42,6 +45,10 @@ export const getters = {
 
   geneCardsUrlPrefix: state => {
     return state.settings.geneCardsUrlPrefix || DEFAULT_GENECARDS_URL_PREFIX
+  },
+
+  hmtVarUrlPrefix: state => {
+    return state.settings.hmtVarUrlPrefix || DEFAULT_HMT_VAR_URL_PREFIX
   },
 
   sampleSettings: state => {

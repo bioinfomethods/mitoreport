@@ -14,6 +14,8 @@ export const DEFAULT_SNACKBAR_OPTS = {
 export const DEFAULT_GENECARDS_URL_PREFIX =
   'https://www.genecards.org/cgi-bin/carddisp.pl'
 
+export const DEFAULT_HMT_VAR_URL_PREFIX = 'https://www.hmtvar.uniba.it/results'
+
 export const CONSEQUENCE_NAMES = [
   { id: 'frameshift_variant', name: 'frameshift_variant' },
   { id: 'inframe_deletion', name: 'inframe_deletion' },

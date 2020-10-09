@@ -292,6 +292,15 @@
             <IgvLink :position="item.pos"></IgvLink>
           </td>
         </template>
+        <template v-slot:item.ref_alt="{ item }">
+          <td>
+            <HmtVarLink
+              :position="item.pos"
+              :refAllele="item.ref"
+              :altAllele="item.alt"
+            ></HmtVarLink>
+          </td>
+        </template>
         <template v-slot:item.symbol="{ item }">
           <td>
             <GeneCardsLink :gene="item.symbol"></GeneCardsLink>
@@ -311,6 +320,7 @@
 <script>
 import { mapGetters, mapState } from 'vuex'
 import GeneCardsLink from '@/components/GeneCardsLink'
+import HmtVarLink from '@/components/HmtVarLink'
 import IgvLink from '@/components/IgvLink'
 import * as filters from '@/shared/variantFilters'
 import * as _ from 'lodash'
@@ -322,6 +332,7 @@ export default {
 
   components: {
     GeneCardsLink,
+    HmtVarLink,
     IgvLink,
   },
 

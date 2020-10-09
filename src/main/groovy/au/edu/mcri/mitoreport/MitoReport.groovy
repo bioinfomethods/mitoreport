@@ -29,6 +29,7 @@ class MitoReport implements Runnable {
 
   private static final String DEFAULT_IGV_HOST = 'http://localhost:60151'
   private static final String DEFAULT_GENE_CARDS_URL_PREFIX = 'https://www.genecards.org/cgi-bin/carddisp.pl'
+  private static final String DEFAULT_HMT_VAR_URL_PREFIX = 'https://www.hmtvar.uniba.it/results'
   private static final String JAR_UI_DIR = 'mitoreport'
 
   @Option(names = ['-s', '-sample', '--sample'], required = true, description = 'Sample ID')
@@ -176,6 +177,7 @@ class MitoReport implements Runnable {
     def defaultSettings = [
       'igvHost': DEFAULT_IGV_HOST,
       'geneCardsUrlPrefix': DEFAULT_GENE_CARDS_URL_PREFIX,
+      'hmtVarUrlPrefix': DEFAULT_HMT_VAR_URL_PREFIX,
       'samples': [
         [
           'id'                 : sample,
