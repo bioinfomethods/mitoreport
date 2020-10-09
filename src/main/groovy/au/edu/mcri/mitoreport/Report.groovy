@@ -1,10 +1,6 @@
 package au.edu.mcri.mitoreport
 
-import gngs.Cli
-import gngs.ToolBase
-import gngs.Utils
-import gngs.VCF
-import gngs.Variant
+import gngs.*
 import graxxia.CSV
 import graxxia.TSV
 import groovy.json.JsonOutput
@@ -53,10 +49,10 @@ class Report extends ToolBase {
         log.info "Loading annotations from $opts.ann"
         Map<String,Map> annotations = new CSV(opts.ann).toListMap().collectEntries { [it.Allele, it ] }
         log.info "Loaded ${annotations.size()} functional annotations"
-        
-        Map<String,Map> freqInfo = new TSV(opts.freq).toListMap().collectEntries { line ->
-            def (ref,alt) = line.Change.tokenize('-')
-            [ ref + line.Position + alt,  line] 
+
+        Map<String, Map> freqInfo = new TSV(opts.freq).toListMap().collectEntries { line ->
+            String compactAllele = getCompactAlleleFrom(line.Change as String, line.Position as Integer)
+            [compactAllele, line]
         }
         log.info "Loaded ${freqInfo.size()} frequency annotations"
 
@@ -66,8 +62,8 @@ class Report extends ToolBase {
 
             int sampleIndex = 0
 
-            String compactAllele = v.ref.toUpperCase() + v.pos + v.alt.toUpperCase()
-            String change = v.ref.toUpperCase() + '-' + v.alt.toUpperCase()
+            Map<String,String> compacted = getCompactVariantRepresentation(v)
+            String compactAllele = compacted.compactAllele
 
             Map variantInfo = [
                 chr : v.chr,
@@ -129,5 +125,33 @@ class Report extends ToolBase {
             ann 'Annotation file to apply to VCF', args: 1, required: true
             freq 'File containing mitomap genbank frequencies in the GBFreq column', args: 1, required: true
         }
+    }
+
+    static Map<String, String> getCompactVariantRepresentation(Variant variant) {
+        if (!variant) {
+            return Collections.emptyMap()
+        }
+
+        if ('DEL' == variant?.type?.toUpperCase()) {
+            return [
+                    'compactAllele': "${variant.ref.toUpperCase()}${variant.pos}del",
+                    'change'       : "${variant.ref.toUpperCase()}-del"
+            ]
+        } else {
+            return [
+                    'compactAllele': "${variant.ref.toUpperCase()}${variant.pos}${variant.alt.toUpperCase()}",
+                    'change'       : "${variant.ref.toUpperCase()}-${variant.alt.toUpperCase()}"
+            ]
+        }
+    }
+
+    static String getCompactAlleleFrom(String change, Integer position) {
+        if (!change || !position) {
+            return 'NA'
+        }
+
+        def (ref, alt) = change.tokenize('-')
+
+        return "$ref$position$alt"
     }
 }
