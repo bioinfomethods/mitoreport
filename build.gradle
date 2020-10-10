@@ -38,6 +38,7 @@ dependencies {
   testImplementation "io.micronaut:micronaut-inject-groovy"
   testImplementation "io.micronaut.test:micronaut-test-spock"
   testImplementation "io.micronaut.test:micronaut-test-junit5"
+  testRuntime "cglib:cglib-nodep:$cglibNoDepVersion"
 
   implementation files('gngs/build/libs/groovy-ngs-utils.jar')
 
@@ -54,17 +55,13 @@ dependencies {
   implementation "org.codehaus.groovy:groovy-xml:$groovyVersion"
   implementation "org.codehaus.groovy:groovy:$groovyVersion"
 
+  implementation "io.github.http-builder-ng:http-builder-ng-core:$httpBuilderNgVersion"
   implementation "commons-io:commons-io:$commonsIoVersion"
 }
 
 test.classpath += configurations.developmentOnly
 
 mainClassName = "au.edu.mcri.mitoreport.MitoReport"
-
-// use JUnit 5 platform
-test {
-  useJUnitPlatform()
-}
 
 java {
   sourceCompatibility = JavaVersion.toVersion('1.8')
