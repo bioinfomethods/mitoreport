@@ -11,6 +11,9 @@ import java.nio.file.Path
 import java.nio.file.Paths
 import java.util.regex.Pattern
 
+import static java.nio.file.StandardCopyOption.ATOMIC_MOVE
+import static java.nio.file.StandardCopyOption.REPLACE_EXISTING
+
 @Slf4j
 @TupleConstructor(includes = 'mitoMapHost, pagePath')
 @MapConstructor
@@ -64,6 +67,8 @@ class MitoMapPolymorphismsLoader {
         Path annotationsFilePath = Paths.get(workingDir, fileName)
         if (!Files.exists(annotationsFilePath)) {
             String pageUrl = "$mitoMapHost$pagePath"
+            log.info("No MitoMap Polymorphisms downloaded HTML found, downloading $pageUrl")
+
             def respBytes = HttpBuilder.configure {
                 request.uri = pageUrl
                 request.headers['User-Agent'] = 'https://www.mcri.edu.au'
@@ -75,13 +80,21 @@ class MitoMapPolymorphismsLoader {
             }
 
             String resultHtml = new String(respBytes as byte[])
-            annotationsFilePath.toFile().withWriter { BufferedWriter w ->
-                w.write(resultHtml)
-            }
+            writeToFile(annotationsFilePath, resultHtml)
 
             return resultHtml
         } else {
+            log.info("Found MitoMap Polymorphisms at ${annotationsFilePath.toString()}")
             return annotationsFilePath.toFile().text
         }
+    }
+
+    private static void writeToFile(Path annotationsFilePath, String fileContents) {
+        Path temp = Files.createTempFile('mitoreport', null)
+        temp.toFile().withWriter { BufferedWriter w ->
+            w.write(fileContents)
+        }
+
+        Files.move(temp, annotationsFilePath, ATOMIC_MOVE, REPLACE_EXISTING)
     }
 }

@@ -5,7 +5,7 @@ import graxxia.CSV
 import graxxia.TSV
 import groovy.json.JsonOutput
 import groovy.json.JsonSlurper
-import groovy.util.logging.Log
+import groovy.util.logging.Slf4j
 
 import static gngs.VEPConsequences.RANKED_CONSEQUENCES
 
@@ -18,7 +18,7 @@ import static gngs.VEPConsequences.RANKED_CONSEQUENCES
  *
  * @author Simon Sadedin
  */
-@Log
+@Slf4j
 class Report extends ToolBase {
 
     VCF vcf
@@ -55,6 +55,9 @@ class Report extends ToolBase {
             [compactAllele, line]
         }
         log.info "Loaded ${freqInfo.size()} frequency annotations"
+
+        List<MitoMapPolymorphismAnnotation> mitoGbFreqAnnotations = new MitoMapPolymorphismsLoader().getAnnotations()
+        log.info "Loaded ${mitoGbFreqAnnotations.size()} MitoMap annotations"
 
         List results = []
 
@@ -94,7 +97,13 @@ class Report extends ToolBase {
                     [key, result]
                 }
 
-            variantAnnotations.GBFreq = freqInfo[compactAllele]?.GBFreq?:0.0d
+            variantAnnotations.GBFreq = freqInfo[compactAllele]?.GBFreq ?: 0.0d
+            MitoMapPolymorphismAnnotation mitoAnnotation = mitoGbFreqAnnotations.find { it.compactAllele == compactAllele }
+            variantAnnotations.gbFreqPct = mitoAnnotation?.gbFreqPct ?: 0.0
+            variantAnnotations.curatedRef = mitoAnnotation ? [
+                    'count': mitoAnnotation?.curatedRefsCount ?: 0,
+                    'url'  : mitoAnnotation?.curatedRefsUrl,
+            ] : Collections.emptyMap()
 
             Map infoField = v.parsedInfo
             infoField.remove('ANN')
