@@ -23,7 +23,7 @@ class MitoMapPolymorphismsLoader {
             'Codon Number'                             : 'codonNumber',
             'Codon Position'                           : 'codonPosition',
             'Amino Acid Change'                        : 'aminoAcidChange',
-            "GB Freq<span class='mark'>&Dagger;</span>": 'gbFreqPctStr',
+            "GB Freq<span class='mark'>&Dagger;</span>": 'gbFreqStr',
             'GB Seqs'                                  : 'gbSeqsAnchor',
             'Curated References'                       : 'curatedRefsAnchor',
     ])
@@ -46,7 +46,7 @@ class MitoMapPolymorphismsLoader {
         def columns = new JsonSlurper().parse(columnsJson.bytes)
 
         List<MitoMapPolymorphismAnnotation> result = data.collect { def row ->
-            Map<String, String> transformedRow = [:]
+            Map<String, String> transformedRow = ['mitoMapHost': mitoMapHost]
             columns.eachWithIndex { def column, int index ->
                 String title = column.title?.trim() ?: ''
                 String propertyName = TITLE_TO_PROPERTY_NAMES.get(title)
