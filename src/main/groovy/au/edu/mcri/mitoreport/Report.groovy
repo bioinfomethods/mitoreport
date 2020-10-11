@@ -47,7 +47,7 @@ class Report extends ToolBase {
     void writeAnnotations(String dir) {
 
         log.info "Loading annotations from $opts.ann"
-        Map<String,Map> annotations = new CSV(opts.ann).toListMap().collectEntries { [it.Allele, it ] }
+        Map<String, Map> annotations = new CSV(opts.ann).toListMap().collectEntries { [it.Allele, it] }
         log.info "Loaded ${annotations.size()} functional annotations"
 
         Map<String, Map> freqInfo = new TSV(opts.freq).toListMap().collectEntries { line ->
@@ -65,37 +65,37 @@ class Report extends ToolBase {
 
             int sampleIndex = 0
 
-            Map<String,String> compacted = getCompactVariantRepresentation(v)
+            Map<String, String> compacted = getCompactVariantRepresentation(v)
             String compactAllele = compacted.compactAllele
 
             Map variantInfo = [
-                chr : v.chr,
-                pos: v.pos,
-                ref: v.ref,
-                alt : v.alt,
-                type: v.type,
-                qual: v.qual,
-                dosages: v.getDosages()
+                    chr    : v.chr,
+                    pos    : v.pos,
+                    ref    : v.ref,
+                    alt    : v.alt,
+                    type   : v.type,
+                    qual   : v.qual,
+                    dosages: v.getDosages()
             ]
 
             Map vep = v.maxVep
 
             def consequencesWithRank = RANKED_CONSEQUENCES.withIndex(1).collect { String consequence, Integer index -> [id: consequence, rank: index] }
             Map vepInfo = [
-                symbol: vep.SYMBOL,
-                consequence: consequencesWithRank.find { it.id == vep.Consequence },
-                hgvsp: URLDecoder.decode(vep.HGVSp?.replaceAll('^.*:',''), "UTF-8"),
-                hgvsc: vep.HGVSc?.replaceAll('^.*:','')
+                    symbol     : vep.SYMBOL,
+                    consequence: consequencesWithRank.find { it.id == vep.Consequence },
+                    hgvsp      : URLDecoder.decode(vep.HGVSp?.replaceAll('^.*:', ''), "UTF-8"),
+                    hgvsc      : vep.HGVSc?.replaceAll('^.*:', '')
             ]
 
             Map variantAnnotations =
-                annotations.getOrDefault(compactAllele, [:]).collectEntries { key, value ->
-                    def result = value
-                    if(value instanceof String)
-                        result = value.tokenize('|+').grep { it != 'NA' }*.trim().join(', ')
+                    annotations.getOrDefault(compactAllele, [:]).collectEntries { key, value ->
+                        def result = value
+                        if (value instanceof String)
+                            result = value.tokenize('|+').grep { it != 'NA' }*.trim().join(', ')
 
-                    [key, result]
-                }
+                        [key, result]
+                    }
 
             variantAnnotations.GBFreq = freqInfo[compactAllele]?.GBFreq ?: 0.0d
             MitoMapPolymorphismAnnotation mitoAnnotation = mitoGbFreqAnnotations.find { it.compactAllele == compactAllele }
@@ -114,13 +114,13 @@ class Report extends ToolBase {
         String json = JsonOutput.prettyPrint(JsonOutput.toJson(results))
 
         File dirFile = new File(dir)
-        if(!dirFile.exists()) {
+        if (!dirFile.exists()) {
             log.info "Creating directory $dir"
             dirFile.mkdirs()
         }
 
         variantsResultJson = new File("$dir/variants.json")
-        Utils.writer(variantsResultJson).withWriter {  it << json; it << '\n' }
+        Utils.writer(variantsResultJson).withWriter { it << json; it << '\n' }
 
         log.info "Wrote annotated variants to $variantsResultJson"
     }
@@ -128,7 +128,7 @@ class Report extends ToolBase {
 
     static void main(String[] args) {
         cli('Report -o <report dir> -vcf <vcf> [-vcf <vcf2>]... -del <del> [-del <del2>]...', 'Mitochondrial Analysis Report', args) {
-            o 'Directory to save report assets to', args:1, required: true
+            o 'Directory to save report assets to', args: 1, required: true
             vcf 'VCF file for sample', args: Cli.UNLIMITED, required: true
             del 'Deletion analysis for sample', args: Cli.UNLIMITED, required: true
             ann 'Annotation file to apply to VCF', args: 1, required: true
