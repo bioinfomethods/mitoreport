@@ -32,9 +32,6 @@ class MitoReport implements Runnable {
     @Option(names = ['-ann', '-annotations', '--annotations'], required = true, description = 'Annotation file to apply to VCF')
     String annotations
 
-    @Option(names = ['-freq', '-frequencies', '--frequencies'], required = true, description = 'File containing frequency information')
-    File frequencies
-
     @Option(names = ['-vcf'], required = true, description = 'VCF file for sample')
     File vcfFile
 
@@ -100,11 +97,10 @@ class MitoReport implements Runnable {
 
     File runReport(File deletionsJson) {
         CliOptions reportOpts = new CliOptions(overrides: [
-                'vcf' : vcfFile.absolutePath,
-                'del' : deletionsJson.absolutePath,
-                'freq': frequencies.absolutePath,
-                'ann' : annotations,
-                'o'   : mitoReportPathName,
+                'vcf': vcfFile.absolutePath,
+                'del': deletionsJson.absolutePath,
+                'ann': annotations,
+                'o'  : mitoReportPathName,
         ])
 
         Report mitoReport = new Report(opts: reportOpts)

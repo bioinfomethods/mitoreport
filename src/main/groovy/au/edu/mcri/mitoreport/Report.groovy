@@ -2,7 +2,6 @@ package au.edu.mcri.mitoreport
 
 import gngs.*
 import graxxia.CSV
-import graxxia.TSV
 import groovy.json.JsonOutput
 import groovy.json.JsonSlurper
 import groovy.util.logging.Slf4j
@@ -50,14 +49,8 @@ class Report extends ToolBase {
         Map<String, Map> annotations = new CSV(opts.ann).toListMap().collectEntries { [it.Allele, it] }
         log.info "Loaded ${annotations.size()} functional annotations"
 
-        Map<String, Map> freqInfo = new TSV(opts.freq).toListMap().collectEntries { line ->
-            String compactAllele = getCompactAlleleFrom(line.Change as String, line.Position as Integer)
-            [compactAllele, line]
-        }
-        log.info "Loaded ${freqInfo.size()} frequency annotations"
-
-        List<MitoMapPolymorphismAnnotation> mitoGbFreqAnnotations = new MitoMapPolymorphismsLoader().getAnnotations()
-        log.info "Loaded ${mitoGbFreqAnnotations.size()} MitoMap annotations"
+        List<MitoMapPolymorphismAnnotation> mitoMapAnnotations = new MitoMapPolymorphismsLoader().getAnnotations()
+        log.info "Loaded ${mitoMapAnnotations.size()} MitoMap annotations"
 
         List results = []
 
@@ -97,8 +90,7 @@ class Report extends ToolBase {
                         [key, result]
                     }
 
-            variantAnnotations.GBFreq = freqInfo[compactAllele]?.GBFreq ?: 0.0d
-            MitoMapPolymorphismAnnotation mitoAnnotation = mitoGbFreqAnnotations.find { it.compactAllele == compactAllele }
+            MitoMapPolymorphismAnnotation mitoAnnotation = mitoMapAnnotations.find { it.compactAllele == compactAllele }
             variantAnnotations.gbFreqPct = mitoAnnotation?.gbFreqPct ?: 0.0
             variantAnnotations.curatedRef = mitoAnnotation ? [
                     'count': mitoAnnotation?.curatedRefsCount ?: 0,
@@ -132,7 +124,6 @@ class Report extends ToolBase {
             vcf 'VCF file for sample', args: Cli.UNLIMITED, required: true
             del 'Deletion analysis for sample', args: Cli.UNLIMITED, required: true
             ann 'Annotation file to apply to VCF', args: 1, required: true
-            freq 'File containing mitomap genbank frequencies in the GBFreq column', args: 1, required: true
         }
     }
 
