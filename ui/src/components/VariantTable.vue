@@ -309,6 +309,14 @@
         <template v-slot:item.consequence="{ item }">
           <td>{{ item.consequence.name }}</td>
         </template>
+        <template v-slot:item.curatedRef="{ item }">
+          <td>
+            <CuratedRefLink
+              :href="item.curatedRef.url"
+              :count="item.curatedRef.count"
+            ></CuratedRefLink>
+          </td>
+        </template>
         <template v-slot:item.hgvsc="{ item }">
           <td v-html="item.hgvsc"></td>
         </template>
@@ -319,6 +327,7 @@
 
 <script>
 import { mapGetters, mapState } from 'vuex'
+import CuratedRefLink from '@/components/CuratedRefLink'
 import GeneCardsLink from '@/components/GeneCardsLink'
 import HmtVarLink from '@/components/HmtVarLink'
 import IgvLink from '@/components/IgvLink'
@@ -331,6 +340,7 @@ export default {
   props: {},
 
   components: {
+    CuratedRefLink,
     GeneCardsLink,
     HmtVarLink,
     IgvLink,
@@ -491,7 +501,7 @@ export default {
         },
         {
           text: 'Curated Refs',
-          value: 'Curated References',
+          value: 'curatedRef',
           width: '130',
           filter: this.curatedRefsFilter,
         },
@@ -539,7 +549,7 @@ export default {
         },
         {
           name: '0',
-          predicate: value => value === 0,
+          predicate: value => !value || value === 0,
         },
         {
           name: '> 0',
@@ -689,7 +699,10 @@ export default {
         this.curatedRefs.find(
           cr => cr.name === this.filterConfig.selectedCuratedRefName
         ) || this.curatedRefs[0]
-      return filters.predicateFilter(selectedCuratedRef.predicate, value)
+      return filters.predicateFilter(
+        selectedCuratedRef.predicate,
+        value?.count || 0
+      )
     },
 
     hgvspFilter: function(value) {
