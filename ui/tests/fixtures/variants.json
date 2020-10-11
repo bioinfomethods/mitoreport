@@ -37,6 +37,10 @@
         "Sources": ";",
         "PubMedID": "-",
         "GBFreq": 0.0,
+        "gbFreqPct": 0.0,
+        "curatedRef": {
+            
+        },
         "AS_FilterStatus": "SITE",
         "AS_SB_TABLE": "0,0|3780,2434",
         "DP": 6393,
@@ -121,6 +125,10 @@
         "Sources": ";",
         "PubMedID": "-",
         "GBFreq": 0.0,
+        "gbFreqPct": 0.0,
+        "curatedRef": {
+            
+        },
         "AS_FilterStatus": "SITE",
         "AS_SB_TABLE": "0,2|1441,2857",
         "DP": 4465,
@@ -185,6 +193,10 @@
         "hgvsp": "",
         "hgvsc": "",
         "GBFreq": 0.0,
+        "gbFreqPct": 0.0,
+        "curatedRef": {
+            
+        },
         "AS_FilterStatus": "strand_bias|strand_bias|SITE|SITE",
         "AS_SB_TABLE": "196,83|47,2083|4,461|3,29|47,0",
         "DP": 3701,
@@ -275,6 +287,10 @@
         "Sources": "",
         "PubMedID": "",
         "GBFreq": 0.0,
+        "gbFreqPct": 0.0,
+        "curatedRef": {
+            
+        },
         "AS_SB_TABLE": "150,78|46,2078|10,467|0,21|27,0|15,0",
         "DP": 3664,
         "ECNT": 3,
@@ -364,6 +380,10 @@
         "Sources": "",
         "PubMedID": "",
         "GBFreq": 0.0,
+        "gbFreqPct": 0.0,
+        "curatedRef": {
+            
+        },
         "AS_SB_TABLE": "196,83|47,2083|4,461|3,29|47,0",
         "DP": 3701,
         "ECNT": 3,
@@ -433,6 +453,10 @@
         "hgvsp": "",
         "hgvsc": "",
         "GBFreq": 0.0,
+        "gbFreqPct": 0.0,
+        "curatedRef": {
+            
+        },
         "AS_SB_TABLE": "196,83|47,2083|4,461|3,29|47,0",
         "DP": 3701,
         "ECNT": 3,
@@ -502,6 +526,10 @@
         "hgvsp": "",
         "hgvsc": "",
         "GBFreq": 0.0,
+        "gbFreqPct": 0.0,
+        "curatedRef": {
+            
+        },
         "AS_SB_TABLE": "150,78|46,2078|10,467|0,21|27,0|15,0",
         "DP": 3664,
         "ECNT": 3,
@@ -591,6 +619,10 @@
         "Sources": "",
         "PubMedID": "",
         "GBFreq": 0.0,
+        "gbFreqPct": 0.0,
+        "curatedRef": {
+            
+        },
         "AS_FilterStatus": "strand_bias|SITE|weak_evidence",
         "AS_SB_TABLE": "3,4|142,48|212,2826|33,0",
         "DP": 3858,
@@ -675,6 +707,10 @@
         "Sources": "",
         "PubMedID": "",
         "GBFreq": 0.0,
+        "gbFreqPct": 0.0,
+        "curatedRef": {
+            
+        },
         "AS_FilterStatus": "base_qual",
         "AS_SB_TABLE": "16,2|141,47|204,2822|9,0",
         "DP": 3828,
@@ -739,6 +775,10 @@
         "hgvsp": "",
         "hgvsc": "",
         "GBFreq": 0.0,
+        "gbFreqPct": 0.0,
+        "curatedRef": {
+            
+        },
         "AS_SB_TABLE": "16,2|141,47|204,2822|9,0",
         "DP": 3828,
         "ECNT": 3,
@@ -802,6 +842,10 @@
         "hgvsp": "",
         "hgvsc": "",
         "GBFreq": 0.0,
+        "gbFreqPct": 0.0,
+        "curatedRef": {
+            
+        },
         "AS_SB_TABLE": "3,4|142,48|212,2826|33,0",
         "DP": 3858,
         "ECNT": 3,
@@ -885,6 +929,11 @@
         "Sources": "; Mitomap;",
         "PubMedID": "-",
         "GBFreq": 98.28,
+        "gbFreqPct": 98.276,
+        "curatedRef": {
+            "count": 113,
+            "url": "https://mitomap.org/cgi-bin/print_ref_list?refs=10433,92286,45,247,262,278,330,332,370,396,428,436,493,541,610,925,1289,2711,2743,3370,3427,3502,3972,4022,4422,4786,5348,5452,90296,90297,90302,90303,90333,90377,90468,90483,90534,90572,90607,90625,90629,90630,90809,90812,90814,90835,90907,90962,90965,90966,90983,91014,91015,91026,91030,91041,91049,91052,91054,91064,91066,91070,91091,3311,90260,4946,5329,90477,90941,6432,91081,91210,6625,91227,91312,91420,91431,6535,6603,91068,91078,91097,91098,91099,91215,91425,91293,6605,6623,91256,91269,91283,91284,91307,91343,91394,91422,91423,6687,91612,7867,91658,99016,91737,91755,8492,91775,91687,91789,91806,92031,92063,91056&title=Coding+Polymorphism+A-G+at+750"
+        },
         "AS_FilterStatus": "SITE",
         "AS_SB_TABLE": "0,0|2887,2619",
         "DP": 5780,
@@ -949,6 +998,11 @@
         "hgvsp": "",
         "hgvsc": "",
         "GBFreq": 0.0,
+        "gbFreqPct": 0.0,
+        "curatedRef": {
+            "count": 1,
+            "url": "https://mitomap.org/cgi-bin/print_ref_list?refs=10433&title=Coding+Polymorphism+A-G+at+776"
+        },
         "AS_FilterStatus": "weak_evidence",
         "AS_SB_TABLE": "2994,2345|3,2",
         "DP": 5597,
@@ -1013,6 +1067,11 @@
         "hgvsp": "",
         "hgvsc": "",
         "GBFreq": 0.0,
+        "gbFreqPct": 0.0,
+        "curatedRef": {
+            "count": 1,
+            "url": "https://mitomap.org/cgi-bin/print_ref_list?refs=10433&title=Coding+Polymorphism+G-A+at+1419"
+        },
         "AS_FilterStatus": "SITE",
         "AS_SB_TABLE": "2996,3087|12,11",
         "DP": 6336,
@@ -1097,6 +1156,11 @@
         "Sources": "; clinVar; Mitomap; ensembl;",
         "PubMedID": "-",
         "GBFreq": 94.85,
+        "gbFreqPct": 94.845,
+        "curatedRef": {
+            "count": 122,
+            "url": "https://mitomap.org/cgi-bin/print_ref_list?refs=10433,92286,262,278,302,303,330,332,370,396,427,428,436,541,593,610,1289,1748,1979,2711,2743,3370,3427,3502,3732,3945,3972,4022,4422,4786,5348,5414,5452,6221,20330,90237,90296,90297,90302,90303,90377,90455,90464,90468,90534,90572,90607,90625,90628,90629,90630,90631,90791,90809,90812,90814,90835,90907,90983,91014,91015,91026,91030,91041,91052,91054,91064,91077,91091,3311,90260,4946,5329,90477,90941,6432,91081,91210,91401,6625,91227,91312,91420,91431,6535,6603,91068,91078,91097,91098,91099,91206,91215,91259,91425,91293,6605,6623,91256,91257,91269,91284,91307,91318,91343,91394,91422,91423,91612,91658,99016,91737,91755,8492,91775,91687,91789,91806,4287,92031,92063,91056&title=Coding+Polymorphism+A-G+at+1438"
+        },
         "AS_FilterStatus": "SITE",
         "AS_SB_TABLE": "1,1|2877,3177",
         "DP": 6346,
@@ -1181,6 +1245,11 @@
         "Sources": "",
         "PubMedID": "",
         "GBFreq": 0.0,
+        "gbFreqPct": 0.002,
+        "curatedRef": {
+            "count": 2,
+            "url": "https://mitomap.org/cgi-bin/print_ref_list?refs=10433,20140325&title=Coding+Polymorphism+C-T+at+2224"
+        },
         "AS_FilterStatus": "weak_evidence",
         "AS_SB_TABLE": "2764,2630|3,3",
         "DP": 5615,
@@ -1268,6 +1337,11 @@
         "Sources": ";",
         "PubMedID": "-",
         "GBFreq": 0.54,
+        "gbFreqPct": 0.544,
+        "curatedRef": {
+            "count": 13,
+            "url": "https://mitomap.org/cgi-bin/print_ref_list?refs=3311,3898,3943,6623,10433,90264,90572,91030,91206,91511,91587,92286,99016&title=Coding+Polymorphism+C-T+at+2259"
+        },
         "AS_FilterStatus": "SITE",
         "AS_SB_TABLE": "4,0|2828,2697",
         "DP": 5749,
@@ -1332,6 +1406,10 @@
         "hgvsp": "",
         "hgvsc": "",
         "GBFreq": 0.0,
+        "gbFreqPct": 0.0,
+        "curatedRef": {
+            
+        },
         "AS_FilterStatus": "base_qual,strand_bias",
         "AS_SB_TABLE": "2741,1587|7,308",
         "DP": 4793,
@@ -1396,6 +1474,10 @@
         "hgvsp": "",
         "hgvsc": "",
         "GBFreq": 0.0,
+        "gbFreqPct": 0.0,
+        "curatedRef": {
+            
+        },
         "AS_FilterStatus": "base_qual,strand_bias",
         "AS_SB_TABLE": "2625,1793|0,317",
         "DP": 4977,
@@ -1460,6 +1542,11 @@
         "hgvsp": "",
         "hgvsc": "",
         "GBFreq": 0.0,
+        "gbFreqPct": 0.002,
+        "curatedRef": {
+            "count": 1,
+            "url": "https://mitomap.org/cgi-bin/print_ref_list?refs=20180502&title=Coding+Polymorphism+A-C+at+2487"
+        },
         "AS_FilterStatus": "base_qual,strand_bias",
         "AS_SB_TABLE": "2572,1225|2,1052",
         "DP": 4994,
@@ -1524,6 +1611,10 @@
         "hgvsp": "",
         "hgvsc": "",
         "GBFreq": 0.0,
+        "gbFreqPct": 0.0,
+        "curatedRef": {
+            
+        },
         "AS_FilterStatus": "SITE",
         "AS_SB_TABLE": "3146,2749|28,27",
         "DP": 6340,
@@ -1588,6 +1679,11 @@
         "hgvsp": "",
         "hgvsc": "",
         "GBFreq": 0.0,
+        "gbFreqPct": 0.002,
+        "curatedRef": {
+            "count": 1,
+            "url": "https://mitomap.org/cgi-bin/print_ref_list?refs=20200501&title=Coding+Polymorphism+C-T+at+2982"
+        },
         "AS_FilterStatus": "weak_evidence",
         "AS_SB_TABLE": "2910,2746|3,3",
         "DP": 5826,
@@ -1652,6 +1748,11 @@
         "hgvsp": "p.Gln47His",
         "hgvsc": "c.141A>C",
         "GBFreq": 0.0,
+        "gbFreqPct": 0.002,
+        "curatedRef": {
+            "count": 1,
+            "url": "https://mitomap.org/cgi-bin/print_ref_list?refs=20190903&title=Coding+Polymorphism+A-C+at+3447"
+        },
         "AS_FilterStatus": "base_qual,strand_bias",
         "AS_SB_TABLE": "3057,779|1,55",
         "DP": 4081,
@@ -1716,6 +1817,10 @@
         "hgvsp": "p.Met53Lys",
         "hgvsc": "c.158T>A",
         "GBFreq": 0.0,
+        "gbFreqPct": 0.0,
+        "curatedRef": {
+            
+        },
         "AS_FilterStatus": "base_qual,strand_bias",
         "AS_SB_TABLE": "2923,560|0,33",
         "DP": 3533,
@@ -1780,6 +1885,11 @@
         "hgvsp": "p.Lys54Asn",
         "hgvsc": "c.162A>C",
         "GBFreq": 0.0,
+        "gbFreqPct": 0.002,
+        "curatedRef": {
+            "count": 1,
+            "url": "https://mitomap.org/cgi-bin/print_ref_list?refs=20190903&title=Coding+Polymorphism+A-C+at+3468"
+        },
         "AS_FilterStatus": "base_qual,strand_bias",
         "AS_SB_TABLE": "2824,533|1,50",
         "DP": 3518,
@@ -1864,6 +1974,11 @@
         "Sources": "",
         "PubMedID": "",
         "GBFreq": 0.0,
+        "gbFreqPct": 0.002,
+        "curatedRef": {
+            "count": 1,
+            "url": "https://mitomap.org/cgi-bin/print_ref_list?refs=20130222&title=Coding+Polymorphism+T-C+at+3473"
+        },
         "AS_FilterStatus": "weak_evidence,base_qual,strand_bias",
         "AS_SB_TABLE": "2786,435|0,39",
         "DP": 3319,
@@ -1928,6 +2043,10 @@
         "hgvsp": "p.Thr57Pro",
         "hgvsc": "c.169A>C",
         "GBFreq": 0.0,
+        "gbFreqPct": 0.0,
+        "curatedRef": {
+            
+        },
         "AS_FilterStatus": "base_qual,strand_bias",
         "AS_SB_TABLE": "2713,402|0,87",
         "DP": 3332,
@@ -1992,6 +2111,11 @@
         "hgvsp": "p.Glu59Asp",
         "hgvsc": "c.177G>C",
         "GBFreq": 0.0,
+        "gbFreqPct": 0.004,
+        "curatedRef": {
+            "count": 1,
+            "url": "https://mitomap.org/cgi-bin/print_ref_list?refs=20180104&title=Coding+Polymorphism+G-C+at+3483"
+        },
         "AS_FilterStatus": "base_qual,strand_bias",
         "AS_SB_TABLE": "2569,333|0,86",
         "DP": 3074,
@@ -2076,6 +2200,11 @@
         "Sources": "",
         "PubMedID": "",
         "GBFreq": 0.0,
+        "gbFreqPct": 0.004,
+        "curatedRef": {
+            "count": 1,
+            "url": "https://mitomap.org/cgi-bin/print_ref_list?refs=91658&title=Coding+Polymorphism+T-A+at+3488"
+        },
         "AS_FilterStatus": "base_qual,strand_bias",
         "AS_SB_TABLE": "2458,226|0,189",
         "DP": 2975,
@@ -2140,6 +2269,11 @@
         "hgvsp": "p.Lys62Asn",
         "hgvsc": "c.186A>C",
         "GBFreq": 0.0,
+        "gbFreqPct": 0.002,
+        "curatedRef": {
+            "count": 1,
+            "url": "https://mitomap.org/cgi-bin/print_ref_list?refs=20180502&title=Coding+Polymorphism+A-C+at+3492"
+        },
         "AS_FilterStatus": "base_qual,strand_bias",
         "AS_SB_TABLE": "2448,203|4,229",
         "DP": 2926,
@@ -2224,6 +2358,11 @@
         "Sources": "",
         "PubMedID": "",
         "GBFreq": 0.39,
+        "gbFreqPct": 0.393,
+        "curatedRef": {
+            "count": 15,
+            "url": "https://mitomap.org/cgi-bin/print_ref_list?refs=3311,3427,6623,10433,90264,90311,90435,90453,90483,90572,91030,91511,91587,92286,99016&title=Coding+Polymorphism+A-G+at+4745"
+        },
         "AS_FilterStatus": "SITE",
         "AS_SB_TABLE": "0,0|3019,3081",
         "DP": 6194,
@@ -2308,6 +2447,11 @@
         "Sources": "; Mitomap;",
         "PubMedID": "-",
         "GBFreq": 97.6,
+        "gbFreqPct": 97.598,
+        "curatedRef": {
+            "count": 130,
+            "url": "https://mitomap.org/cgi-bin/print_ref_list?refs=10433,92286,11,44,45,54,196,200,202,208,247,262,278,302,370,396,405,490,493,555,556,557,558,559,560,562,593,610,924,925,1289,2711,2743,2751,3370,3427,3502,3612,3945,4022,4422,4786,5348,6221,20144,20330,90296,90297,90302,90303,90333,90377,90454,90455,90464,90468,90483,90534,90561,90572,90607,90625,90628,90629,90630,90631,90809,90812,90814,90821,90835,90907,90965,90983,91015,91026,91030,91041,91054,91064,91066,91077,91091,3311,90260,4946,90477,90941,6432,91081,91210,91401,6625,91227,91312,91420,91431,6535,6603,91068,91078,91097,91098,91099,91206,91259,91425,6605,6623,91256,91284,91343,91394,91422,91423,91483,6687,91612,91658,99016,91737,91755,8492,91775,91687,91806,92031,92063,91056,8512&title=Coding+Polymorphism+A-G+at+4769"
+        },
         "AS_FilterStatus": "SITE",
         "AS_SB_TABLE": "0,0|3150,3028",
         "DP": 6340,
@@ -2372,6 +2516,10 @@
         "hgvsp": "p.Pro437Ser",
         "hgvsc": "c.1309C>T",
         "GBFreq": 0.0,
+        "gbFreqPct": 0.0,
+        "curatedRef": {
+            
+        },
         "AS_FilterStatus": "SITE",
         "AS_SB_TABLE": "2611,3242|6,4",
         "DP": 6047,
@@ -2456,6 +2604,11 @@
         "Sources": "",
         "PubMedID": "",
         "GBFreq": 1.15,
+        "gbFreqPct": 1.148,
+        "curatedRef": {
+            "count": 21,
+            "url": "https://mitomap.org/cgi-bin/print_ref_list?refs=1289,3311,3427,3943,8380,10433,90264,90483,90572,91030,91206,91423,91483,91511,91517,91568,91587,91635,92031,92047,99016&title=Coding+Polymorphism+G-A+at+7337"
+        },
         "AS_FilterStatus": "SITE",
         "AS_SB_TABLE": "1,0|2858,2867",
         "DP": 5905,
@@ -2520,6 +2673,10 @@
         "hgvsp": "p.Lys49Asn",
         "hgvsc": "c.147A>C",
         "GBFreq": 0.0,
+        "gbFreqPct": 0.0,
+        "curatedRef": {
+            
+        },
         "AS_FilterStatus": "weak_evidence,base_qual,strand_bias",
         "AS_SB_TABLE": "3101,1314|1,212",
         "DP": 4847,
@@ -2604,6 +2761,11 @@
         "Sources": "",
         "PubMedID": "",
         "GBFreq": 0.04,
+        "gbFreqPct": 0.035,
+        "curatedRef": {
+            "count": 3,
+            "url": "https://mitomap.org/cgi-bin/print_ref_list?refs=10433,91343,99016&title=Coding+Polymorphism+G-C+at+8557"
+        },
         "AS_FilterStatus": "base_qual,strand_bias",
         "AS_SB_TABLE": "2615,1097|0,241",
         "DP": 4143,
@@ -2688,6 +2850,11 @@
         "Sources": "",
         "PubMedID": "",
         "GBFreq": 0.21,
+        "gbFreqPct": 0.209,
+        "curatedRef": {
+            "count": 10,
+            "url": "https://mitomap.org/cgi-bin/print_ref_list?refs=3311,6221,8380,10433,90254,91609,91635,91687,92043,99016&title=Coding+Polymorphism+T-C+at+8567"
+        },
         "AS_FilterStatus": "base_qual,strand_bias",
         "AS_SB_TABLE": "2508,1131|0,309",
         "DP": 4199,
@@ -2752,6 +2919,10 @@
         "hgvsp": "p.Leu17=",
         "hgvsc": "c.51A>C",
         "GBFreq": 0.0,
+        "gbFreqPct": 0.0,
+        "curatedRef": {
+            
+        },
         "AS_FilterStatus": "base_qual,strand_bias",
         "AS_SB_TABLE": "2302,1123|1,279",
         "DP": 3801,
@@ -2836,6 +3007,11 @@
         "Sources": ";",
         "PubMedID": "-",
         "GBFreq": 98.48,
+        "gbFreqPct": 98.479,
+        "curatedRef": {
+            "count": 130,
+            "url": "https://mitomap.org/cgi-bin/print_ref_list?refs=10433,11,44,45,54,247,262,278,302,396,427,490,493,520,522,541,555,556,557,558,559,560,562,593,610,925,942,1289,2066,2711,2743,2751,2885,3370,3427,3502,3711,3714,3945,3972,4022,4422,4786,5348,5452,20330,90101,90254,90290,90297,90302,90303,90333,90377,90455,90464,90468,90531,90562,90607,90625,90628,90629,90630,90631,90809,90814,90835,90907,90983,91015,91026,91030,91054,91064,91066,91077,91091,3311,90260,4946,5329,90477,90941,6432,91081,91210,91401,6625,91227,91312,91420,91431,6535,6603,91068,91078,91097,91098,91099,91206,91215,91259,91425,6605,6623,91256,91269,91284,91343,91394,91422,91423,91483,6687,91612,91658,99016,91737,91752,91755,8492,91775,91687,91787,91806,92031,92063,91056,92136&title=Coding+Polymorphism+A-G+at+8860"
+        },
         "AS_FilterStatus": "SITE",
         "AS_SB_TABLE": "1,1|2628,2865",
         "DP": 5556,
@@ -2900,6 +3076,11 @@
         "hgvsp": "p.Asn30LysfsTer86",
         "hgvsc": "c.89dup",
         "GBFreq": 0.0,
+        "gbFreqPct": 0.0,
+        "curatedRef": {
+            "count": 1,
+            "url": "https://mitomap.org/cgi-bin/print_ref_list?refs=10433&title=Coding+Polymorphism+C-CA+at+12417"
+        },
         "AS_FilterStatus": "SITE",
         "AS_SB_TABLE": "2174,2609|10,23",
         "DP": 5178,
@@ -2970,6 +3151,10 @@
         "hgvsp": "p.Ala221del",
         "hgvsc": "c.662_664del",
         "GBFreq": 0.0,
+        "gbFreqPct": 0.0,
+        "curatedRef": {
+            
+        },
         "AS_FilterStatus": "weak_evidence",
         "AS_SB_TABLE": "2404,2655|3,5",
         "DP": 5503,
@@ -3040,6 +3225,10 @@
         "hgvsp": "p.Gly318Asp",
         "hgvsc": "c.953G>A",
         "GBFreq": 0.0,
+        "gbFreqPct": 0.0,
+        "curatedRef": {
+            
+        },
         "AS_FilterStatus": "weak_evidence",
         "AS_SB_TABLE": "2851,2969|4,4",
         "DP": 6006,
@@ -3127,6 +3316,11 @@
         "Sources": "",
         "PubMedID": "",
         "GBFreq": 0.34,
+        "gbFreqPct": 0.339,
+        "curatedRef": {
+            "count": 13,
+            "url": "https://mitomap.org/cgi-bin/print_ref_list?refs=3311,3711,3714,10433,90264,90435,91030,91206,91343,91511,91587,92286,99016&title=Coding+Polymorphism+T-C+at+13326"
+        },
         "AS_FilterStatus": "SITE",
         "AS_SB_TABLE": "2,0|3027,2817",
         "DP": 5963,
@@ -3214,6 +3408,11 @@
         "Sources": "",
         "PubMedID": "",
         "GBFreq": 0.49,
+        "gbFreqPct": 0.490,
+        "curatedRef": {
+            "count": 14,
+            "url": "https://mitomap.org/cgi-bin/print_ref_list?refs=3311,3427,3943,10433,90264,90305,90572,91030,91041,91206,91511,91587,92286,99016&title=Coding+Polymorphism+C-T+at+13680"
+        },
         "AS_FilterStatus": "SITE",
         "AS_SB_TABLE": "3,1|2768,2856",
         "DP": 5876,
@@ -3281,6 +3480,10 @@
         "hgvsp": "p.Gly460Ter",
         "hgvsc": "c.1378G>A",
         "GBFreq": 0.0,
+        "gbFreqPct": 0.0,
+        "curatedRef": {
+            
+        },
         "AS_FilterStatus": "weak_evidence",
         "AS_SB_TABLE": "2709,2754|4,5",
         "DP": 5580,
@@ -3368,6 +3571,11 @@
         "Sources": "; clinVar; Mitomap; ensembl;",
         "PubMedID": "20301353",
         "GBFreq": 0.2,
+        "gbFreqPct": 0.201,
+        "curatedRef": {
+            "count": 8,
+            "url": "https://mitomap.org/cgi-bin/print_ref_list?refs=3311,10433,90435,90626,91206,91343,91511,99016&title=Coding+Polymorphism+G-A+at+14831"
+        },
         "AS_FilterStatus": "SITE",
         "AS_SB_TABLE": "0,0|2639,2749",
         "DP": 5503,
@@ -3452,6 +3660,11 @@
         "Sources": "",
         "PubMedID": "",
         "GBFreq": 0.63,
+        "gbFreqPct": 0.631,
+        "curatedRef": {
+            "count": 13,
+            "url": "https://mitomap.org/cgi-bin/print_ref_list?refs=3311,3427,3580,6623,10433,90264,90572,91030,91206,91511,91587,92191,99016&title=Coding+Polymorphism+C-T+at+14872"
+        },
         "AS_FilterStatus": "SITE",
         "AS_SB_TABLE": "0,0|2584,2701",
         "DP": 5419,
@@ -3536,6 +3749,11 @@
         "Sources": "",
         "PubMedID": "",
         "GBFreq": 0.0,
+        "gbFreqPct": 0.002,
+        "curatedRef": {
+            "count": 1,
+            "url": "https://mitomap.org/cgi-bin/print_ref_list?refs=20130222&title=Coding+Polymorphism+G-A+at+14918"
+        },
         "AS_FilterStatus": "SITE",
         "AS_SB_TABLE": "2698,2459|89,66",
         "DP": 5543,
@@ -3620,6 +3838,11 @@
         "Sources": ";, ; clinvar;",
         "PubMedID": "-, -",
         "GBFreq": 98.67,
+        "gbFreqPct": 98.665,
+        "curatedRef": {
+            "count": 119,
+            "url": "https://mitomap.org/cgi-bin/print_ref_list?refs=10433,44,45,202,247,262,278,302,370,396,427,541,593,610,612,924,925,942,1289,1739,2573,2711,2743,2751,3349,3352,3370,3427,3502,3508,3683,3688,3691,3714,3806,3945,4022,4422,4786,5348,5452,20334,90101,90290,90296,90297,90302,90303,90333,90377,90455,90464,90531,90534,90607,90625,90628,90629,90630,90631,90755,90809,90814,90835,90907,90983,91015,91026,91030,91054,91064,91066,91077,91091,3311,90260,4946,5329,90477,90941,6432,91081,91210,91401,6625,91227,91312,91420,91431,6535,6603,91068,91078,91097,91098,91099,91215,91425,6605,6623,91256,91284,91343,91394,91422,91423,91574,91612,91658,91737,91755,8492,91775,91687,91787,91806,92031,92063,91056&title=Coding+Polymorphism+A-G+at+15326"
+        },
         "AS_FilterStatus": "SITE",
         "AS_SB_TABLE": "0,2|3104,2661",
         "DP": 6095,
@@ -3704,6 +3927,11 @@
         "Sources": "; Mitomap;",
         "PubMedID": "-",
         "GBFreq": 0.0,
+        "gbFreqPct": 0.0,
+        "curatedRef": {
+            "count": 2,
+            "url": "https://mitomap.org/cgi-bin/print_ref_list?refs=10433,92047&title=Coding+Polymorphism+G-A+at+16023"
+        },
         "AS_FilterStatus": "SITE",
         "AS_SB_TABLE": "1238,1766|1543,1879",
         "DP": 6614,

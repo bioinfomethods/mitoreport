@@ -469,7 +469,7 @@ export default {
         },
         {
           text: 'GBFreq',
-          value: 'GBFreq',
+          value: 'gbFreqPct',
           width: '120',
           filter: this.gbFreqFilter,
         },
