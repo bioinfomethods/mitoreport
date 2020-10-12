@@ -1,5 +1,6 @@
 [
     {
+        "id": "chrM-152-T-C",
         "chr": "chrM",
         "pos": 152,
         "ref": "T",
@@ -36,7 +37,6 @@
         "GERP": "0.000",
         "Sources": ";",
         "PubMedID": "-",
-        "GBFreq": 0.0,
         "gbFreqPct": 0.0,
         "curatedRef": {
             
@@ -88,6 +88,7 @@
         ]
     },
     {
+        "id": "chrM-263-A-G",
         "chr": "chrM",
         "pos": 263,
         "ref": "A",
@@ -124,7 +125,6 @@
         "GERP": "0.000",
         "Sources": ";",
         "PubMedID": "-",
-        "GBFreq": 0.0,
         "gbFreqPct": 0.0,
         "curatedRef": {
             
@@ -176,6 +176,7 @@
         ]
     },
     {
+        "id": "chrM-302-A-AC",
         "chr": "chrM",
         "pos": 302,
         "ref": "A",
@@ -192,7 +193,6 @@
         },
         "hgvsp": "",
         "hgvsc": "",
-        "GBFreq": 0.0,
         "gbFreqPct": 0.0,
         "curatedRef": {
             
@@ -250,6 +250,7 @@
         ]
     },
     {
+        "id": "chrM-302-A-ACC",
         "chr": "chrM",
         "pos": 302,
         "ref": "A",
@@ -286,7 +287,6 @@
         "GERP": "",
         "Sources": "",
         "PubMedID": "",
-        "GBFreq": 0.0,
         "gbFreqPct": 0.0,
         "curatedRef": {
             
@@ -343,6 +343,7 @@
         ]
     },
     {
+        "id": "chrM-302-A-ACCC",
         "chr": "chrM",
         "pos": 302,
         "ref": "A",
@@ -379,7 +380,6 @@
         "GERP": "",
         "Sources": "",
         "PubMedID": "",
-        "GBFreq": 0.0,
         "gbFreqPct": 0.0,
         "curatedRef": {
             
@@ -436,6 +436,7 @@
         ]
     },
     {
+        "id": "chrM-302-A-ACCCCCCCCCCC",
         "chr": "chrM",
         "pos": 302,
         "ref": "A",
@@ -452,7 +453,6 @@
         },
         "hgvsp": "",
         "hgvsc": "",
-        "GBFreq": 0.0,
         "gbFreqPct": 0.0,
         "curatedRef": {
             
@@ -509,6 +509,7 @@
         ]
     },
     {
+        "id": "chrM-302-A-ACCCCCCCCCCCCCC",
         "chr": "chrM",
         "pos": 302,
         "ref": "A",
@@ -525,7 +526,6 @@
         },
         "hgvsp": "",
         "hgvsc": "",
-        "GBFreq": 0.0,
         "gbFreqPct": 0.0,
         "curatedRef": {
             
@@ -582,6 +582,7 @@
         ]
     },
     {
+        "id": "chrM-310-T-C",
         "chr": "chrM",
         "pos": 310,
         "ref": "T",
@@ -618,7 +619,6 @@
         "GERP": "",
         "Sources": "",
         "PubMedID": "",
-        "GBFreq": 0.0,
         "gbFreqPct": 0.0,
         "curatedRef": {
             
@@ -670,6 +670,7 @@
         ]
     },
     {
+        "id": "chrM-310-T-TC",
         "chr": "chrM",
         "pos": 310,
         "ref": "T",
@@ -706,7 +707,6 @@
         "GERP": "",
         "Sources": "",
         "PubMedID": "",
-        "GBFreq": 0.0,
         "gbFreqPct": 0.0,
         "curatedRef": {
             
@@ -758,6 +758,7 @@
         ]
     },
     {
+        "id": "chrM-310-T-TCCCCCCA",
         "chr": "chrM",
         "pos": 310,
         "ref": "T",
@@ -774,7 +775,6 @@
         },
         "hgvsp": "",
         "hgvsc": "",
-        "GBFreq": 0.0,
         "gbFreqPct": 0.0,
         "curatedRef": {
             
@@ -825,6 +825,7 @@
         ]
     },
     {
+        "id": "chrM-310-T-TCCCCCCAC",
         "chr": "chrM",
         "pos": 310,
         "ref": "T",
@@ -841,7 +842,6 @@
         },
         "hgvsp": "",
         "hgvsc": "",
-        "GBFreq": 0.0,
         "gbFreqPct": 0.0,
         "curatedRef": {
             
@@ -892,6 +892,7 @@
         ]
     },
     {
+        "id": "chrM-750-A-G",
         "chr": "chrM",
         "pos": 750,
         "ref": "A",
@@ -928,7 +929,6 @@
         "GERP": "1.580",
         "Sources": "; Mitomap;",
         "PubMedID": "-",
-        "GBFreq": 98.28,
         "gbFreqPct": 98.276,
         "curatedRef": {
             "count": 113,
@@ -981,6 +981,7 @@
         ]
     },
     {
+        "id": "chrM-776-A-G",
         "chr": "chrM",
         "pos": 776,
         "ref": "A",
@@ -997,7 +998,6 @@
         },
         "hgvsp": "",
         "hgvsc": "",
-        "GBFreq": 0.0,
         "gbFreqPct": 0.0,
         "curatedRef": {
             "count": 1,
@@ -1050,6 +1050,7 @@
         ]
     },
     {
+        "id": "chrM-1419-G-A",
         "chr": "chrM",
         "pos": 1419,
         "ref": "G",
@@ -1066,7 +1067,6 @@
         },
         "hgvsp": "",
         "hgvsc": "",
-        "GBFreq": 0.0,
         "gbFreqPct": 0.0,
         "curatedRef": {
             "count": 1,
@@ -1119,6 +1119,7 @@
         ]
     },
     {
+        "id": "chrM-1438-A-G",
         "chr": "chrM",
         "pos": 1438,
         "ref": "A",
@@ -1155,7 +1156,6 @@
         "GERP": "1.910",
         "Sources": "; clinVar; Mitomap; ensembl;",
         "PubMedID": "-",
-        "GBFreq": 94.85,
         "gbFreqPct": 94.845,
         "curatedRef": {
             "count": 122,
@@ -1208,6 +1208,7 @@
         ]
     },
     {
+        "id": "chrM-2224-C-T",
         "chr": "chrM",
         "pos": 2224,
         "ref": "C",
@@ -1244,7 +1245,6 @@
         "GERP": "",
         "Sources": "",
         "PubMedID": "",
-        "GBFreq": 0.0,
         "gbFreqPct": 0.002,
         "curatedRef": {
             "count": 2,
@@ -1300,6 +1300,7 @@
         ]
     },
     {
+        "id": "chrM-2259-C-T",
         "chr": "chrM",
         "pos": 2259,
         "ref": "C",
@@ -1336,7 +1337,6 @@
         "GERP": "-4.150",
         "Sources": ";",
         "PubMedID": "-",
-        "GBFreq": 0.54,
         "gbFreqPct": 0.544,
         "curatedRef": {
             "count": 13,
@@ -1389,6 +1389,7 @@
         ]
     },
     {
+        "id": "chrM-2465-T-A",
         "chr": "chrM",
         "pos": 2465,
         "ref": "T",
@@ -1405,7 +1406,6 @@
         },
         "hgvsp": "",
         "hgvsc": "",
-        "GBFreq": 0.0,
         "gbFreqPct": 0.0,
         "curatedRef": {
             
@@ -1457,6 +1457,7 @@
         ]
     },
     {
+        "id": "chrM-2479-C-A",
         "chr": "chrM",
         "pos": 2479,
         "ref": "C",
@@ -1473,7 +1474,6 @@
         },
         "hgvsp": "",
         "hgvsc": "",
-        "GBFreq": 0.0,
         "gbFreqPct": 0.0,
         "curatedRef": {
             
@@ -1525,6 +1525,7 @@
         ]
     },
     {
+        "id": "chrM-2487-A-C",
         "chr": "chrM",
         "pos": 2487,
         "ref": "A",
@@ -1541,7 +1542,6 @@
         },
         "hgvsp": "",
         "hgvsc": "",
-        "GBFreq": 0.0,
         "gbFreqPct": 0.002,
         "curatedRef": {
             "count": 1,
@@ -1594,6 +1594,7 @@
         ]
     },
     {
+        "id": "chrM-2645-G-A",
         "chr": "chrM",
         "pos": 2645,
         "ref": "G",
@@ -1610,7 +1611,6 @@
         },
         "hgvsp": "",
         "hgvsc": "",
-        "GBFreq": 0.0,
         "gbFreqPct": 0.0,
         "curatedRef": {
             
@@ -1662,6 +1662,7 @@
         ]
     },
     {
+        "id": "chrM-2982-C-T",
         "chr": "chrM",
         "pos": 2982,
         "ref": "C",
@@ -1678,7 +1679,6 @@
         },
         "hgvsp": "",
         "hgvsc": "",
-        "GBFreq": 0.0,
         "gbFreqPct": 0.002,
         "curatedRef": {
             "count": 1,
@@ -1731,6 +1731,7 @@
         ]
     },
     {
+        "id": "chrM-3447-A-C",
         "chr": "chrM",
         "pos": 3447,
         "ref": "A",
@@ -1747,7 +1748,6 @@
         },
         "hgvsp": "p.Gln47His",
         "hgvsc": "c.141A>C",
-        "GBFreq": 0.0,
         "gbFreqPct": 0.002,
         "curatedRef": {
             "count": 1,
@@ -1800,6 +1800,7 @@
         ]
     },
     {
+        "id": "chrM-3464-T-A",
         "chr": "chrM",
         "pos": 3464,
         "ref": "T",
@@ -1816,7 +1817,6 @@
         },
         "hgvsp": "p.Met53Lys",
         "hgvsc": "c.158T>A",
-        "GBFreq": 0.0,
         "gbFreqPct": 0.0,
         "curatedRef": {
             
@@ -1868,6 +1868,7 @@
         ]
     },
     {
+        "id": "chrM-3468-A-C",
         "chr": "chrM",
         "pos": 3468,
         "ref": "A",
@@ -1884,7 +1885,6 @@
         },
         "hgvsp": "p.Lys54Asn",
         "hgvsc": "c.162A>C",
-        "GBFreq": 0.0,
         "gbFreqPct": 0.002,
         "curatedRef": {
             "count": 1,
@@ -1937,6 +1937,7 @@
         ]
     },
     {
+        "id": "chrM-3473-T-C",
         "chr": "chrM",
         "pos": 3473,
         "ref": "T",
@@ -1973,7 +1974,6 @@
         "GERP": "",
         "Sources": "",
         "PubMedID": "",
-        "GBFreq": 0.0,
         "gbFreqPct": 0.002,
         "curatedRef": {
             "count": 1,
@@ -2026,6 +2026,7 @@
         ]
     },
     {
+        "id": "chrM-3475-A-C",
         "chr": "chrM",
         "pos": 3475,
         "ref": "A",
@@ -2042,7 +2043,6 @@
         },
         "hgvsp": "p.Thr57Pro",
         "hgvsc": "c.169A>C",
-        "GBFreq": 0.0,
         "gbFreqPct": 0.0,
         "curatedRef": {
             
@@ -2094,6 +2094,7 @@
         ]
     },
     {
+        "id": "chrM-3483-G-C",
         "chr": "chrM",
         "pos": 3483,
         "ref": "G",
@@ -2110,7 +2111,6 @@
         },
         "hgvsp": "p.Glu59Asp",
         "hgvsc": "c.177G>C",
-        "GBFreq": 0.0,
         "gbFreqPct": 0.004,
         "curatedRef": {
             "count": 1,
@@ -2163,6 +2163,7 @@
         ]
     },
     {
+        "id": "chrM-3488-T-A",
         "chr": "chrM",
         "pos": 3488,
         "ref": "T",
@@ -2199,7 +2200,6 @@
         "GERP": "",
         "Sources": "",
         "PubMedID": "",
-        "GBFreq": 0.0,
         "gbFreqPct": 0.004,
         "curatedRef": {
             "count": 1,
@@ -2252,6 +2252,7 @@
         ]
     },
     {
+        "id": "chrM-3492-A-C",
         "chr": "chrM",
         "pos": 3492,
         "ref": "A",
@@ -2268,7 +2269,6 @@
         },
         "hgvsp": "p.Lys62Asn",
         "hgvsc": "c.186A>C",
-        "GBFreq": 0.0,
         "gbFreqPct": 0.002,
         "curatedRef": {
             "count": 1,
@@ -2321,6 +2321,7 @@
         ]
     },
     {
+        "id": "chrM-4745-A-G",
         "chr": "chrM",
         "pos": 4745,
         "ref": "A",
@@ -2357,7 +2358,6 @@
         "GERP": "",
         "Sources": "",
         "PubMedID": "",
-        "GBFreq": 0.39,
         "gbFreqPct": 0.393,
         "curatedRef": {
             "count": 15,
@@ -2410,6 +2410,7 @@
         ]
     },
     {
+        "id": "chrM-4769-A-G",
         "chr": "chrM",
         "pos": 4769,
         "ref": "A",
@@ -2446,7 +2447,6 @@
         "GERP": "-8.800",
         "Sources": "; Mitomap;",
         "PubMedID": "-",
-        "GBFreq": 97.6,
         "gbFreqPct": 97.598,
         "curatedRef": {
             "count": 130,
@@ -2499,6 +2499,7 @@
         ]
     },
     {
+        "id": "chrM-7212-C-T",
         "chr": "chrM",
         "pos": 7212,
         "ref": "C",
@@ -2515,7 +2516,6 @@
         },
         "hgvsp": "p.Pro437Ser",
         "hgvsc": "c.1309C>T",
-        "GBFreq": 0.0,
         "gbFreqPct": 0.0,
         "curatedRef": {
             
@@ -2567,6 +2567,7 @@
         ]
     },
     {
+        "id": "chrM-7337-G-A",
         "chr": "chrM",
         "pos": 7337,
         "ref": "G",
@@ -2603,7 +2604,6 @@
         "GERP": "",
         "Sources": "",
         "PubMedID": "",
-        "GBFreq": 1.15,
         "gbFreqPct": 1.148,
         "curatedRef": {
             "count": 21,
@@ -2656,6 +2656,7 @@
         ]
     },
     {
+        "id": "chrM-8512-A-C",
         "chr": "chrM",
         "pos": 8512,
         "ref": "A",
@@ -2672,7 +2673,6 @@
         },
         "hgvsp": "p.Lys49Asn",
         "hgvsc": "c.147A>C",
-        "GBFreq": 0.0,
         "gbFreqPct": 0.0,
         "curatedRef": {
             
@@ -2724,6 +2724,7 @@
         ]
     },
     {
+        "id": "chrM-8557-G-C",
         "chr": "chrM",
         "pos": 8557,
         "ref": "G",
@@ -2760,7 +2761,6 @@
         "GERP": "",
         "Sources": "",
         "PubMedID": "",
-        "GBFreq": 0.04,
         "gbFreqPct": 0.035,
         "curatedRef": {
             "count": 3,
@@ -2813,6 +2813,7 @@
         ]
     },
     {
+        "id": "chrM-8567-T-C",
         "chr": "chrM",
         "pos": 8567,
         "ref": "T",
@@ -2849,7 +2850,6 @@
         "GERP": "",
         "Sources": "",
         "PubMedID": "",
-        "GBFreq": 0.21,
         "gbFreqPct": 0.209,
         "curatedRef": {
             "count": 10,
@@ -2902,6 +2902,7 @@
         ]
     },
     {
+        "id": "chrM-8577-A-C",
         "chr": "chrM",
         "pos": 8577,
         "ref": "A",
@@ -2918,7 +2919,6 @@
         },
         "hgvsp": "p.Leu17=",
         "hgvsc": "c.51A>C",
-        "GBFreq": 0.0,
         "gbFreqPct": 0.0,
         "curatedRef": {
             
@@ -2970,6 +2970,7 @@
         ]
     },
     {
+        "id": "chrM-8860-A-G",
         "chr": "chrM",
         "pos": 8860,
         "ref": "A",
@@ -3006,7 +3007,6 @@
         "GERP": "-7.800",
         "Sources": ";",
         "PubMedID": "-",
-        "GBFreq": 98.48,
         "gbFreqPct": 98.479,
         "curatedRef": {
             "count": 130,
@@ -3059,6 +3059,7 @@
         ]
     },
     {
+        "id": "chrM-12417-C-CA",
         "chr": "chrM",
         "pos": 12417,
         "ref": "C",
@@ -3075,7 +3076,6 @@
         },
         "hgvsp": "p.Asn30LysfsTer86",
         "hgvsc": "c.89dup",
-        "GBFreq": 0.0,
         "gbFreqPct": 0.0,
         "curatedRef": {
             "count": 1,
@@ -3134,6 +3134,7 @@
         ]
     },
     {
+        "id": "chrM-12989-TAGC-T",
         "chr": "chrM",
         "pos": 12989,
         "ref": "TAGC",
@@ -3150,7 +3151,6 @@
         },
         "hgvsp": "p.Ala221del",
         "hgvsc": "c.662_664del",
-        "GBFreq": 0.0,
         "gbFreqPct": 0.0,
         "curatedRef": {
             
@@ -3208,6 +3208,7 @@
         ]
     },
     {
+        "id": "chrM-13289-G-A",
         "chr": "chrM",
         "pos": 13289,
         "ref": "G",
@@ -3224,7 +3225,6 @@
         },
         "hgvsp": "p.Gly318Asp",
         "hgvsc": "c.953G>A",
-        "GBFreq": 0.0,
         "gbFreqPct": 0.0,
         "curatedRef": {
             
@@ -3279,6 +3279,7 @@
         ]
     },
     {
+        "id": "chrM-13326-T-C",
         "chr": "chrM",
         "pos": 13326,
         "ref": "T",
@@ -3315,7 +3316,6 @@
         "GERP": "",
         "Sources": "",
         "PubMedID": "",
-        "GBFreq": 0.34,
         "gbFreqPct": 0.339,
         "curatedRef": {
             "count": 13,
@@ -3371,6 +3371,7 @@
         ]
     },
     {
+        "id": "chrM-13680-C-T",
         "chr": "chrM",
         "pos": 13680,
         "ref": "C",
@@ -3407,7 +3408,6 @@
         "GERP": "",
         "Sources": "",
         "PubMedID": "",
-        "GBFreq": 0.49,
         "gbFreqPct": 0.490,
         "curatedRef": {
             "count": 14,
@@ -3463,6 +3463,7 @@
         ]
     },
     {
+        "id": "chrM-13714-G-A",
         "chr": "chrM",
         "pos": 13714,
         "ref": "G",
@@ -3479,7 +3480,6 @@
         },
         "hgvsp": "p.Gly460Ter",
         "hgvsc": "c.1378G>A",
-        "GBFreq": 0.0,
         "gbFreqPct": 0.0,
         "curatedRef": {
             
@@ -3534,6 +3534,7 @@
         ]
     },
     {
+        "id": "chrM-14831-G-A",
         "chr": "chrM",
         "pos": 14831,
         "ref": "G",
@@ -3570,7 +3571,6 @@
         "GERP": "-8.300",
         "Sources": "; clinVar; Mitomap; ensembl;",
         "PubMedID": "20301353",
-        "GBFreq": 0.2,
         "gbFreqPct": 0.201,
         "curatedRef": {
             "count": 8,
@@ -3623,6 +3623,7 @@
         ]
     },
     {
+        "id": "chrM-14872-C-T",
         "chr": "chrM",
         "pos": 14872,
         "ref": "C",
@@ -3659,7 +3660,6 @@
         "GERP": "",
         "Sources": "",
         "PubMedID": "",
-        "GBFreq": 0.63,
         "gbFreqPct": 0.631,
         "curatedRef": {
             "count": 13,
@@ -3712,6 +3712,7 @@
         ]
     },
     {
+        "id": "chrM-14918-G-A",
         "chr": "chrM",
         "pos": 14918,
         "ref": "G",
@@ -3748,7 +3749,6 @@
         "GERP": "",
         "Sources": "",
         "PubMedID": "",
-        "GBFreq": 0.0,
         "gbFreqPct": 0.002,
         "curatedRef": {
             "count": 1,
@@ -3801,6 +3801,7 @@
         ]
     },
     {
+        "id": "chrM-15326-A-G",
         "chr": "chrM",
         "pos": 15326,
         "ref": "A",
@@ -3837,7 +3838,6 @@
         "GERP": "-8.040, -8.040",
         "Sources": ";, ; clinvar;",
         "PubMedID": "-, -",
-        "GBFreq": 98.67,
         "gbFreqPct": 98.665,
         "curatedRef": {
             "count": 119,
@@ -3890,6 +3890,7 @@
         ]
     },
     {
+        "id": "chrM-16023-G-A",
         "chr": "chrM",
         "pos": 16023,
         "ref": "G",
@@ -3926,7 +3927,6 @@
         "GERP": "3.200",
         "Sources": "; Mitomap;",
         "PubMedID": "-",
-        "GBFreq": 0.0,
         "gbFreqPct": 0.0,
         "curatedRef": {
             "count": 2,

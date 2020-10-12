@@ -85,10 +85,14 @@
     <v-card>
       <v-card-title></v-card-title>
       <v-data-table
+        ref="variantTable"
         :headers="headers"
         :items="variants"
         :options="tableOptions"
         :footer-props="tableFooterProps"
+        :expanded.sync="expandedVariants"
+        item-key="id"
+        @click:row="toggleVariantExpansion"
         class="elevation-1"
         dense
       >
@@ -320,6 +324,22 @@
         <template v-slot:item.hgvsc="{ item }">
           <td v-html="item.hgvsc"></td>
         </template>
+        <template v-slot:expanded-item="{ headers, item }">
+          <td
+            :colspan="headers.length - 1"
+            :class="{
+              'ma-0 pa-0': true,
+              'expanded-closing': !transitioned[item.id],
+            }"
+            style="height: auto;"
+          >
+            <v-expand-transition>
+              <div v-show="transitioned[item.id]">
+                TODO - Variant Details
+              </div>
+            </v-expand-transition>
+          </td>
+        </template>
       </v-data-table>
     </v-card>
   </div>
@@ -406,6 +426,9 @@ export default {
       rules: {
         required: value => !!value || 'Required.',
       },
+      expandedVariants: [],
+      transitioned: [],
+      closeTimeouts: {},
     }
   },
 
@@ -560,6 +583,32 @@ export default {
   },
 
   methods: {
+    toggleVariantExpansion: function(variant) {
+      const id = variant.id
+      const isExpanded = this.$refs.variantTable.isExpanded
+      if (isExpanded && this.transitioned[id]) {
+        this.closeVariantExpansion(variant)
+      } else {
+        clearTimeout(this.closeTimeouts[id])
+        this.$refs.variantTable.expand(variant, true)
+        this.$nextTick(() => this.$set(this.transitioned, id, true))
+        this.$nextTick(() =>
+          this.expandedVariants.forEach(
+            ev => ev !== variant && this.closeVariantExpansion(ev)
+          )
+        )
+      }
+    },
+
+    closeVariantExpansion: function(variant) {
+      const id = variant.id
+      this.$set(this.transitioned, id, false)
+      this.closeTimeouts[id] = setTimeout(
+        () => this.$refs.variantTable.expand(variant, false),
+        300
+      )
+    },
+
     onSavedSearchChange: function(value) {
       let savedSearch =
         (this.sampleSettings.variantSearches || []).find(vs => {
