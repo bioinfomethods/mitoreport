@@ -62,6 +62,7 @@ class Report extends ToolBase {
             String compactAllele = compacted.compactAllele
 
             Map variantInfo = [
+                    id     : "${v.chr}-${v.pos}-${v.ref}-${v.alt}",
                     chr    : v.chr,
                     pos    : v.pos,
                     ref    : v.ref,
