@@ -6,8 +6,6 @@ import groovy.json.JsonOutput
 import groovy.json.JsonSlurper
 import groovy.util.logging.Slf4j
 
-import java.math.RoundingMode
-
 import static gngs.VEPConsequences.RANKED_CONSEQUENCES
 
 /**
@@ -147,17 +145,6 @@ class Report extends ToolBase {
                     'compactAllele': "${variant.ref.toUpperCase()}${variant.pos}${variant.alt.toUpperCase()}",
                     'change'       : "${variant.ref.toUpperCase()}-${variant.alt.toUpperCase()}"
             ]
-        }
-    }
-
-    static BigDecimal toPrecision(BigDecimal number, Integer precision) {
-        if (number == null) {
-            return 0.0
-        } else {
-            Integer newScale = number.scale() + precision - number.precision()
-            BigDecimal result = number.setScale(newScale, RoundingMode.HALF_UP)
-
-            return result
         }
     }
 }
