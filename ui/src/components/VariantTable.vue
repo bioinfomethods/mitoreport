@@ -313,6 +313,9 @@
         <template v-slot:item.consequence="{ item }">
           <td>{{ item.consequence.name }}</td>
         </template>
+        <template v-slot:item.gbFreqPct="{ item }">
+          <td>{{ item.gbFreqPct | precisionTo }}</td>
+        </template>
         <template v-slot:item.curatedRef="{ item }">
           <td>
             <CuratedRefLink
@@ -352,6 +355,7 @@ import GeneCardsLink from '@/components/GeneCardsLink'
 import HmtVarLink from '@/components/HmtVarLink'
 import IgvLink from '@/components/IgvLink'
 import * as filters from '@/shared/variantFilters'
+import * as vueFilters from '@/shared/vueFilters'
 import * as _ from 'lodash'
 import { DEFAULT_VARIANT_SEARCH, MAX_POS, MIN_POS } from '@/shared/constants'
 
@@ -501,9 +505,9 @@ export default {
           filter: this.vafFilter,
         },
         {
-          text: 'GBFreq',
+          text: 'Genbank Freq (%)',
           value: 'gbFreqPct',
-          width: '120',
+          width: '130',
           filter: this.gbFreqFilter,
         },
         {
@@ -682,7 +686,7 @@ export default {
       let lower = 0
       let upper = this.filterConfig.gbFreqMax
 
-      return filters.rangeTextFilter(`${lower}-${upper}`, value)
+      return filters.rangeTextFilter(`${lower}-${upper}`, value || 0.0)
     },
 
     depthFilter: function(value) {
@@ -786,6 +790,10 @@ export default {
     consequences: function() {
       this.filterConfig.selectedConsequence = this.consequences.slice(-1)[0]
     },
+  },
+
+  filters: {
+    precisionTo: vueFilters.precisionTo,
   },
 }
 </script>
