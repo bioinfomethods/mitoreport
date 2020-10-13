@@ -29,7 +29,6 @@ dependencies {
   implementation "io.micronaut:micronaut-validation"
   implementation "info.picocli:picocli"
   implementation "io.micronaut.configuration:micronaut-picocli"
-  runtimeOnly "ch.qos.logback:logback-classic:1.2.3"
   testCompileOnly platform("io.micronaut:micronaut-bom:$micronautVersion")
   testImplementation platform("io.micronaut:micronaut-bom:$micronautVersion")
   testImplementation("org.spockframework:spock-core") {
@@ -61,7 +60,7 @@ dependencies {
 
 test.classpath += configurations.developmentOnly
 
-mainClassName = "au.edu.mcri.mitoreport.MitoReport"
+mainClassName = "au.edu.mcri.mitoreport.MitoCli"
 
 java {
   sourceCompatibility = JavaVersion.toVersion('1.8')

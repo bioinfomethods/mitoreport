@@ -1,10 +1,9 @@
 package au.edu.mcri.mitoreport
 
 import gngs.CliOptions
-import gngs.Utils
 import gngs.tools.DeletionPlot
 import groovy.json.JsonOutput
-import io.micronaut.configuration.picocli.PicocliRunner
+import groovy.util.logging.Slf4j
 import io.micronaut.core.io.ResourceLoader
 import org.apache.commons.io.FileUtils
 import org.apache.commons.io.FilenameUtils
@@ -16,8 +15,9 @@ import javax.inject.Inject
 import java.nio.file.*
 import java.util.stream.Collectors
 
+@Slf4j
 @Command(name = 'mito-report', description = 'Mito Report', mixinStandardHelpOptions = true)
-class MitoReport implements Runnable {
+class MitoReportCommand implements Runnable {
 
     private String mitoReportPathName = null
 
@@ -31,6 +31,9 @@ class MitoReport implements Runnable {
 
     @Option(names = ['-ann', '-annotations', '--annotations'], required = true, description = 'Annotation file to apply to VCF')
     String annotations
+
+    @Option(names = ['-mann', '--mito-annotations'], required = true, description = 'Annotations from MitoMap to apply to VCF')
+    Path mitoMapAnnotations
 
     @Option(names = ['-vcf'], required = true, description = 'VCF file for sample')
     File vcfFile
@@ -47,12 +50,8 @@ class MitoReport implements Runnable {
     @Inject
     ResourceLoader resourceLoader
 
-    static void main(String[] args) throws Exception {
-
-        Utils.configureSimpleLogging()
-
-        PicocliRunner.run(MitoReport.class, args)
-    }
+    @Inject
+    MitoMapPolymorphismsLoader mitoMapLoader
 
     void run() {
         (bamFiles + [vcfFile]).each { assert it.exists(), "${it.absolutePath} does not exist." }
@@ -97,13 +96,14 @@ class MitoReport implements Runnable {
 
     File runReport(File deletionsJson) {
         CliOptions reportOpts = new CliOptions(overrides: [
-                'vcf': vcfFile.absolutePath,
-                'del': deletionsJson.absolutePath,
-                'ann': annotations,
-                'o'  : mitoReportPathName,
+                'vcf' : vcfFile.absolutePath,
+                'del' : deletionsJson.absolutePath,
+                'ann' : annotations,
+                'mann': mitoMapAnnotations,
+                'o'   : mitoReportPathName,
         ])
 
-        Report mitoReport = new Report(opts: reportOpts)
+        Report mitoReport = new Report(opts: reportOpts, mitoMapLoader: mitoMapLoader)
         mitoReport.run()
 
         return mitoReport.variantsResultJson

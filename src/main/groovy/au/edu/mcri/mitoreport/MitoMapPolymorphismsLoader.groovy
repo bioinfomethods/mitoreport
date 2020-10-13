@@ -6,17 +6,20 @@ import groovy.transform.TupleConstructor
 import groovy.util.logging.Slf4j
 import groovyx.net.http.HttpBuilder
 
+import javax.inject.Singleton
 import java.nio.file.Files
 import java.nio.file.Path
 import java.nio.file.Paths
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 import java.util.regex.Pattern
 
-import static java.nio.file.StandardCopyOption.ATOMIC_MOVE
 import static java.nio.file.StandardCopyOption.REPLACE_EXISTING
 
 @Slf4j
 @TupleConstructor(includes = 'mitoMapHost, pagePath')
 @MapConstructor
+@Singleton
 class MitoMapPolymorphismsLoader {
 
     static final Map<String, String> TITLE_TO_PROPERTY_NAMES = Collections.unmodifiableMap([
@@ -34,9 +37,14 @@ class MitoMapPolymorphismsLoader {
     String mitoMapHost = 'https://mitomap.org'
     String pagePath = '/foswiki/bin/view/MITOMAP/PolymorphismsCoding'
 
-    List<MitoMapPolymorphismAnnotation> getAnnotations() {
-        String fileName = 'mito_map_polymorphisms.html'
-        String htmlText = downloadPolymorphismsCoding(fileName)
+    List<MitoMapPolymorphismAnnotation> getAnnotations(Path annotationsFilePath = Paths.get(System.getProperty('user.dir'), "mito_map_annotations_${LocalDate.now().format(DateTimeFormatter.BASIC_ISO_DATE)}.html")) {
+        if (annotationsFilePath == null || !Files.exists(annotationsFilePath)) {
+            log.warn("Annotations file ${annotationsFilePath?.toString()} does not exist.")
+
+            return Collections.emptyList()
+        }
+
+        String htmlText = annotationsFilePath.toFile().text
 
         Pattern matchData = Pattern.compile(/"data":(\[\s*?\[.*?\]\])/, Pattern.DOTALL)
         Pattern matchColumns = Pattern.compile(/"columns": (.*?}])/, Pattern.DOTALL)
@@ -63,11 +71,10 @@ class MitoMapPolymorphismsLoader {
         return result
     }
 
-    String downloadPolymorphismsCoding(String fileName, String workingDir = System.getProperty('user.dir')) {
-        Path annotationsFilePath = Paths.get(workingDir, fileName)
-        if (!Files.exists(annotationsFilePath)) {
+    String downloadPolymorphismsCoding(Path outputPath) {
+        if (!Files.exists(outputPath)) {
             String pageUrl = "$mitoMapHost$pagePath"
-            log.info("No MitoMap Polymorphisms downloaded HTML found, downloading $pageUrl")
+            log.info("Downloading MitoMap Polymorphisms HTML page from $pageUrl")
 
             def respBytes = HttpBuilder.configure {
                 request.uri = pageUrl
@@ -80,21 +87,21 @@ class MitoMapPolymorphismsLoader {
             }
 
             String resultHtml = new String(respBytes as byte[])
-            writeToFile(annotationsFilePath, resultHtml)
+            writeToFile(outputPath, resultHtml)
 
             return resultHtml
         } else {
-            log.info("Found MitoMap Polymorphisms at ${annotationsFilePath.toString()}")
-            return annotationsFilePath.toFile().text
+            log.info("Skipping download, MitoMap Polymorphisms already exists at ${outputPath.toString()}")
+            return outputPath.toFile().text
         }
     }
 
-    private static void writeToFile(Path annotationsFilePath, String fileContents) {
+    private static void writeToFile(Path outputPath, String fileContents) {
         Path temp = Files.createTempFile('mitoreport', null)
         temp.toFile().withWriter { BufferedWriter w ->
             w.write(fileContents)
         }
 
-        Files.move(temp, annotationsFilePath, ATOMIC_MOVE, REPLACE_EXISTING)
+        Files.move(temp, outputPath, REPLACE_EXISTING)
     }
 }

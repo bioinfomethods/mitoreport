@@ -26,6 +26,8 @@ class Report extends ToolBase {
 
     File variantsResultJson
 
+    MitoMapPolymorphismsLoader mitoMapLoader
+
     @Override
     public void run() {
 
@@ -49,7 +51,7 @@ class Report extends ToolBase {
         Map<String, Map> annotations = new CSV(opts.ann).toListMap().collectEntries { [it.Allele, it] }
         log.info "Loaded ${annotations.size()} functional annotations"
 
-        List<MitoMapPolymorphismAnnotation> mitoMapAnnotations = new MitoMapPolymorphismsLoader().getAnnotations()
+        List<MitoMapPolymorphismAnnotation> mitoMapAnnotations = mitoMapLoader.getAnnotations(opts.mann)
         log.info "Loaded ${mitoMapAnnotations.size()} MitoMap annotations"
 
         List results = []

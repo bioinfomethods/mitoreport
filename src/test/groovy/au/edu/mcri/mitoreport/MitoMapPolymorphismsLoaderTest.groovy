@@ -5,6 +5,8 @@ import io.micronaut.test.annotation.MicronautTest
 import spock.lang.Specification
 
 import javax.inject.Inject
+import java.nio.file.Files
+import java.nio.file.Path
 
 @MicronautTest
 class MitoMapPolymorphismsLoaderTest extends Specification {
@@ -12,18 +14,17 @@ class MitoMapPolymorphismsLoaderTest extends Specification {
     @Inject
     ResourceLoader resourceLoader
 
+    @Inject
     MitoMapPolymorphismsLoader underTest
 
     def 'getAnnotations() parses HTML and returns correct results'() {
         given: 'Downloaded Polymorphisms from MitoMap'
-
-        underTest = Spy(class: MitoMapPolymorphismsLoader, constructorArgs: ['https://mitomap.org', '/foswiki/bin/view/MITOMAP/PolymorphismsCoding']) {
-            String htmlTest = resourceLoader.getResourceAsStream('classpath:mito_map_polymorphisms_small.html').get().text
-            downloadPolymorphismsCoding(_) >> htmlTest
-        }
+        String htmlTest = resourceLoader.getResourceAsStream('classpath:mito_map_polymorphisms_small.html').get().text
+        Path testMitoMapHtml = Files.createTempFile('MitoMapPolymorphismsLoaderTest', null)
+        testMitoMapHtml.toFile().withWriter { Writer w -> w.write(htmlTest) }
 
         when:
-        List<MitoMapPolymorphismAnnotation> actualResult = underTest.getAnnotations()
+        List<MitoMapPolymorphismAnnotation> actualResult = underTest.getAnnotations(testMitoMapHtml)
 
         then:
         actualResult.size() == 2

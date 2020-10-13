@@ -37,17 +37,26 @@ Run build, i.e. everything
 ./gradlew
 ```
 
-## Run Reports and Generate Mitoreport
+## Using mito-cli
 
-Mitoreport is a standalone CLI application intented to be run by administrators.  The below
-command will generate deletions and variants data including writing out the Single Page Application
+Mitoreport is a standalone CLI application intended to be run by administrators.
+
+To download annotations from MitoMap (this is required to run the actual report).
+
+```bash
+java -jar build/libs/mitoreport-0.1-all.jar mito-map-download \
+  --output tmp/mito_map_annotations_20201013.html
+```
+
+Below command will generate deletions and variants data including writing out the Single Page Application
 UI into a `mitoreport` directory ready for distribution.
 
 ```bash
-java -jar build/libs/mitoreport-0.1-all.jar \
+java -jar build/libs/mitoreport-0.1-all.jar mito-report \
   -sample 15G002035-GM12878K_20pc_10kb_200 \
   -vcf tmp/15G002035.unshifted.contamination.filtering.intermediatefilter.norm.dedup.mito_vep.vcf.gz \
   -ann tmp/mtDNAanalysis_annotations_20170501.csv \
+  -mann tmp/mito_map_annotations_20201013b.html \
   tmp/*.bam
 
 # Open generated report in default browser
