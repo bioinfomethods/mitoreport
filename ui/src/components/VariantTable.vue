@@ -338,7 +338,7 @@
           >
             <v-expand-transition>
               <div v-show="transitioned[item.id]">
-                TODO - Variant Details
+                <VariantDetails :variantId="item.id"></VariantDetails>
               </div>
             </v-expand-transition>
           </td>
@@ -354,6 +354,7 @@ import CuratedRefLink from '@/components/CuratedRefLink'
 import GeneCardsLink from '@/components/GeneCardsLink'
 import HmtVarLink from '@/components/HmtVarLink'
 import IgvLink from '@/components/IgvLink'
+import VariantDetails from '@/components/VariantDetails'
 import * as filters from '@/shared/variantFilters'
 import * as vueFilters from '@/shared/vueFilters'
 import * as _ from 'lodash'
@@ -361,17 +362,23 @@ import { DEFAULT_VARIANT_SEARCH, MAX_POS, MIN_POS } from '@/shared/constants'
 
 export default {
   name: 'VariantTable',
-  props: {},
+  props: {
+    variantId: {
+      type: String,
+      required: false,
+    },
+  },
 
   components: {
     CuratedRefLink,
     GeneCardsLink,
     HmtVarLink,
     IgvLink,
+    VariantDetails,
   },
 
   mounted() {
-    this.filterConfig.selectedCuratedRefName = this.curatedRefs[0].name
+    this.toggleVariantById(this.variantId)
   },
 
   data: () => {
@@ -587,6 +594,17 @@ export default {
   },
 
   methods: {
+    toggleVariantById: function(variantId) {
+      const variant = this.getVariantById(variantId)
+      if (variant) {
+        this.toggleVariantExpansion(variant)
+      }
+    },
+
+    getVariantById(variantId) {
+      return this.variants.find(v => v.id === variantId)
+    },
+
     toggleVariantExpansion: function(variant) {
       const id = variant.id
       const isExpanded = this.$refs.variantTable.isExpanded
@@ -601,6 +619,10 @@ export default {
             ev => ev !== variant && this.closeVariantExpansion(ev)
           )
         )
+        this.$router.push({
+          name: 'variantDetails',
+          params: { variantId: variant.id },
+        })
       }
     },
 
@@ -789,6 +811,12 @@ export default {
     },
     consequences: function() {
       this.filterConfig.selectedConsequence = this.consequences.slice(-1)[0]
+    },
+    variants: function() {
+      this.toggleVariantById(this.variantId)
+    },
+    $route: function() {
+      this.toggleVariantById(this.variantId)
     },
   },
 

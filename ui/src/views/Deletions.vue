@@ -6,7 +6,7 @@
 import CoveragePlots from '@/components/CoveragePlots.vue'
 
 export default {
-  name: 'deletions',
+  name: 'Deletions',
   components: {
     CoveragePlots,
   },
