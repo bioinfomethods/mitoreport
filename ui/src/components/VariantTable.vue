@@ -606,6 +606,8 @@ export default {
     },
 
     toggleVariantExpansion: function(variant) {
+      if (process.env.VUE_APP_ENABLE_VARIANT_DETAILS === 'false') return
+
       const id = variant.id
       const isExpanded = this.$refs.variantTable.isExpanded
       if (isExpanded && this.transitioned[id]) {
