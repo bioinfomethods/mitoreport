@@ -18,7 +18,7 @@ describe('GeneCardsLink.vue', () => {
     vuetify = new Vuetify()
 
     getters = {
-      geneCardsUrlPrefix: () => {
+      getGeneCardsUrlPrefix: () => {
         return 'http://genecards.host:12345/carddisp.pl'
       },
     }

@@ -35,40 +35,44 @@ export const actions = {
 }
 
 export const getters = {
-  sample: () => {
+  getSample: () => {
     return 'TestSample'
   },
 
-  igvHost: () => {
+  getIgvHost: () => {
     return DEFAULT_IGV_HOST
   },
 
-  geneCardsUrlPrefix: () => {
+  getGeneCardsUrlPrefix: () => {
     return DEFAULT_GENECARDS_URL_PREFIX
   },
 
-  hmtVarUrlPrefix: () => {
+  getHmtVarUrlPrefix: () => {
     return DEFAULT_HMT_VAR_URL_PREFIX
   },
 
-  sampleSettings: state => {
+  getSampleSettings: state => {
     return defaultSettings.samples.find(
-      sample => sample.id === getters.sample(state)
+      sample => sample.id === getters.getSample(state)
     )
   },
 
-  settingsBamDir: state => {
-    return getters.sampleSettings(state).bamDir
+  getSettingsBamDir: state => {
+    return getters.getSampleSettings(state).bamDir
   },
 
-  settingsBamFilename: () => {
-    return getters.sampleSettings(state).bamFilename
+  getSettingsBamFilename: () => {
+    return getters.getSampleSettings(state).bamFilename
   },
 
-  settingsBamFile: state => {
-    return `${getters.settingsBamDir(state)}${getters.settingsBamFilename(
+  getSettingsBamFile: state => {
+    return `${getters.getSettingsBamDir(state)}${getters.getSettingsBamFilename(
       state
     )}`
+  },
+
+  getVariantById: state => id => {
+    return state.variants.find(v => v.id === id)
   },
 }
 

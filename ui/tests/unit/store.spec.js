@@ -75,7 +75,7 @@ describe('root store getters', () => {
         const state = {
           deletions: deletions,
         }
-        expect(getters.sample(state)).toEqual(expResult)
+        expect(getters.getSample(state)).toEqual(expResult)
       }
     )
   })
@@ -94,9 +94,9 @@ describe('root store getters', () => {
         const state = {
           settings: settings,
         }
-        const mockSample = (getters.sample = jest.fn())
+        const mockSample = (getters.getSample = jest.fn())
         mockSample.mockReturnValue('TestSample')
-        expect(getters.sampleSettings(state)).toEqual(expResult)
+        expect(getters.getSampleSettings(state)).toEqual(expResult)
       }
     )
   })
@@ -112,9 +112,9 @@ describe('root store getters', () => {
     `(
       'Given sampleSettings is $sampleSettings, expect settingsBamFile is $expResult',
       ({ sampleSettings, expResult }) => {
-        const mockSampleSettings = (getters.sampleSettings = jest.fn())
+        const mockSampleSettings = (getters.getSampleSettings = jest.fn())
         mockSampleSettings.mockReturnValue(sampleSettings)
-        expect(getters.settingsBamFile({})).toEqual(expResult)
+        expect(getters.getSettingsBamFile({})).toEqual(expResult)
       }
     )
   })
@@ -182,7 +182,7 @@ describe('root store mutations', () => {
     }
 
     const currentSearches = [searchTest1]
-    const mockSampleSettings = (getters.sampleSettings = jest.fn())
+    const mockSampleSettings = (getters.getSampleSettings = jest.fn())
     mockSampleSettings.mockReturnValue({
       id: 'TestSample',
       variantSearches: currentSearches,
@@ -206,7 +206,7 @@ describe('root store mutations', () => {
     }
 
     const currentSearches = []
-    const mockSampleSettings = (getters.sampleSettings = jest.fn())
+    const mockSampleSettings = (getters.getSampleSettings = jest.fn())
     mockSampleSettings.mockReturnValue({
       id: 'TestSample',
       variantSearches: currentSearches,
@@ -242,7 +242,7 @@ describe('root store mutations', () => {
     }
 
     const currentSearches = [searchTest1]
-    const mockSampleSettings = (getters.sampleSettings = jest.fn())
+    const mockSampleSettings = (getters.getSampleSettings = jest.fn())
     mockSampleSettings.mockReturnValue({
       id: 'TestSample',
       variantSearches: currentSearches,

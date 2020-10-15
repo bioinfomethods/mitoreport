@@ -29,17 +29,17 @@ export default {
   },
 
   computed: {
-    ...mapGetters(['igvHost', 'settingsBamFile']),
+    ...mapGetters(['getIgvHost', 'getSettingsBamFile']),
 
     igvUrl() {
-      if (!this.igvHost || !this.settingsBamFile) {
+      if (!this.getIgvHost || !this.getSettingsBamFile) {
         return null
       }
 
       const result = stringifyUrl({
-        url: `${this.igvHost}/load`,
+        url: `${this.getIgvHost}/load`,
         query: {
-          file: `file://${this.settingsBamFile}`,
+          file: `file://${this.getSettingsBamFile}`,
           locus: `chrM:${this.position}`,
         },
       })

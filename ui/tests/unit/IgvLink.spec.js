@@ -18,10 +18,10 @@ describe('IgvLink.vue', () => {
     vuetify = new Vuetify()
 
     getters = {
-      igvHost: () => {
+      getIgvHost: () => {
         return 'http://localhost:60151'
       },
-      settingsBamFile: () => {
+      getSettingsBamFile: () => {
         return '/bampath/bamFile.bam'
       },
     }

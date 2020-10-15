@@ -21,15 +21,15 @@ export default {
   },
 
   computed: {
-    ...mapGetters(['geneCardsUrlPrefix']),
+    ...mapGetters(['getGeneCardsUrlPrefix']),
 
     geneCardsUrl() {
-      if (!this.geneCardsUrlPrefix) {
+      if (!this.getGeneCardsUrlPrefix) {
         return null
       }
 
       const result = stringifyUrl({
-        url: this.geneCardsUrlPrefix,
+        url: this.getGeneCardsUrlPrefix,
         query: {
           gene: this.gene,
         },

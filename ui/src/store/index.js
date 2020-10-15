@@ -27,7 +27,7 @@ export const state = {
 }
 
 export const getters = {
-  sample: state => {
+  getSample: state => {
     if (!state.deletions) {
       return 'No Sample'
     }
@@ -40,41 +40,45 @@ export const getters = {
     }
   },
 
-  igvHost: state => {
+  getIgvHost: state => {
     return state.settings.igvHost || DEFAULT_IGV_HOST
   },
 
-  geneCardsUrlPrefix: state => {
+  getGeneCardsUrlPrefix: state => {
     return state.settings.geneCardsUrlPrefix || DEFAULT_GENECARDS_URL_PREFIX
   },
 
-  hmtVarUrlPrefix: state => {
+  getHmtVarUrlPrefix: state => {
     return state.settings.hmtVarUrlPrefix || DEFAULT_HMT_VAR_URL_PREFIX
   },
 
-  sampleSettings: state => {
+  getSampleSettings: state => {
     const result = (state.settings?.samples || []).find(
-      sample => sample.id === getters.sample(state)
+      sample => sample.id === getters.getSample(state)
     )
     return result || {}
   },
 
-  settingsBamDir: state => {
-    return getters.sampleSettings(state)?.bamDir
+  getSettingsBamDir: state => {
+    return getters.getSampleSettings(state)?.bamDir
   },
 
-  settingsBamFilename: state => {
-    return getters.sampleSettings(state)?.bamFilename
+  getSettingsBamFilename: state => {
+    return getters.getSampleSettings(state)?.bamFilename
   },
 
-  settingsBamFile: state => {
-    const sampleBamDir = getters.settingsBamDir(state)
-    const sampleBamFilename = getters.settingsBamFilename(state)
+  getSettingsBamFile: state => {
+    const sampleBamDir = getters.getSettingsBamDir(state)
+    const sampleBamFilename = getters.getSettingsBamFilename(state)
     if (!sampleBamDir || !sampleBamFilename) {
       return null
     }
 
     return `${sampleBamDir}${sampleBamFilename}`
+  },
+
+  getVariantById: state => id => {
+    return state.variants.find(v => v.id === id)
   },
 }
 
@@ -119,7 +123,7 @@ export const mutations = {
   },
 
   SET_BAM_DIR(state, newBamDir) {
-    getters.sampleSettings(state).bamDir = newBamDir
+    getters.getSampleSettings(state).bamDir = newBamDir
   },
 
   ACTIVATE_SNACKBAR(state, options) {
@@ -135,7 +139,7 @@ export const mutations = {
       return
     }
     const allCustomSearches = getters
-      .sampleSettings(state)
+      .getSampleSettings(state)
       .variantSearches.filter(vs => {
         return vs.custom
       })
@@ -143,7 +147,7 @@ export const mutations = {
       vs => vs.name === searchConfig.name
     )
     if (!existingSearch) {
-      getters.sampleSettings(state).variantSearches.push(searchConfig)
+      getters.getSampleSettings(state).variantSearches.push(searchConfig)
     } else {
       existingSearch.description = searchConfig.description
       existingSearch.filterConfig = Object.assign({}, searchConfig.filterConfig)
@@ -151,8 +155,10 @@ export const mutations = {
   },
 
   DELETE_SAVED_SEARCH(state, searchToDelete) {
-    getters.sampleSettings(state).variantSearches = getters
-      .sampleSettings(state)
+    getters.getSampleSettings(
+      state
+    ).variantSearches = getters
+      .getSampleSettings(state)
       .variantSearches.filter(vs => {
         return vs.name !== searchToDelete.name
       })

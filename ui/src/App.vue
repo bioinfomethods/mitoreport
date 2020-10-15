@@ -2,7 +2,7 @@
   <v-app mitoreport>
     <v-app-bar app color="primary">
       <v-toolbar-title>
-        <span class="white--text text-h6">Mito Report for {{ sample }}</span>
+        <span class="white--text text-h6">Mito Report for {{ getSample }}</span>
       </v-toolbar-title>
       <v-progress-circular class="ml-4" v-if="loading" indeterminate />
       <v-spacer></v-spacer>
@@ -112,7 +112,7 @@ export default {
     console.info(`MitoReport version=${process.env.VUE_APP_VERSION}`)
     await this.$store.dispatch('fetchData')
     this.saveInterval = setInterval(this.saveSettings, SAVE_INTERVAL_MS)
-    this.settingsForm.newBamDir = this.settingsBamDir
+    this.settingsForm.newBamDir = this.getSettingsBamDir
   },
 
   data: () => {
@@ -131,16 +131,16 @@ export default {
 
   computed: {
     ...mapState(['loading', 'snackbar']),
-    ...mapGetters(['sample', 'settingsBamDir', 'settingsBamFilename']),
+    ...mapGetters(['getSample', 'getSettingsBamDir', 'getSettingsBamFilename']),
     bamDirInputHint() {
       return `Directory to BAM File ${this.settingsBamFilename}`
     },
     settingsSubmitDisabled() {
-      if (!this.settingsBamDir || !this.settingsForm.valid) {
+      if (!this.getSettingsBamDir || !this.settingsForm.valid) {
         return true
       }
 
-      return this.settingsForm.newBamDir === this.settingsBamDir
+      return this.settingsForm.newBamDir === this.getSettingsBamDir
     },
   },
 

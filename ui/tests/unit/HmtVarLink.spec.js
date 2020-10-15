@@ -18,7 +18,7 @@ describe('HmtVarLink.vue', () => {
     vuetify = new Vuetify()
 
     getters = {
-      hmtVarUrlPrefix: () => {
+      getHmtVarUrlPrefix: () => {
         return 'https://www.hmtvar.uniba.it/results'
       },
     }

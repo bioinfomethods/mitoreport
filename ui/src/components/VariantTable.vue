@@ -445,7 +445,11 @@ export default {
 
   computed: {
     ...mapState(['variants', 'maxReadDepth', 'settings']),
-    ...mapGetters(['igvHost', 'settingsBamFile', 'sampleSettings']),
+    ...mapGetters([
+      'getSettingsBamFile',
+      'getSampleSettings',
+      'getVariantById',
+    ]),
 
     saveSearchDisabled() {
       return !this.searchForm.valid
@@ -453,7 +457,7 @@ export default {
 
     allSavedSearches() {
       const all = [DEFAULT_VARIANT_SEARCH].concat(
-        this.sampleSettings.variantSearches
+        this.getSampleSettings.variantSearches
       )
       const result = _.sortBy(all, ['custom', 'name'])
 
@@ -601,12 +605,7 @@ export default {
       }
     },
 
-    getVariantById(variantId) {
-      return this.variants.find(v => v.id === variantId)
-    },
-
     toggleVariantExpansion: function(variant) {
-      console.info(`var=${process.env.VUE_APP_ENABLE_VARIANT_DETAILS}`)
       if (process.env.VUE_APP_ENABLE_VARIANT_DETAILS === 'false') return
 
       const id = variant.id
@@ -640,7 +639,7 @@ export default {
 
     onSavedSearchChange: function(value) {
       let savedSearch =
-        (this.sampleSettings.variantSearches || []).find(vs => {
+        (this.getSampleSettings.variantSearches || []).find(vs => {
           return vs.name === value.name
         }) || DEFAULT_VARIANT_SEARCH.name
 

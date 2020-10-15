@@ -40,10 +40,10 @@ export default {
   },
 
   computed: {
-    ...mapGetters(['hmtVarUrlPrefix']),
+    ...mapGetters(['getHmtVarUrlPrefix']),
 
     hmtVarSearchResultsUrl() {
-      if (!this.hmtVarUrlPrefix) {
+      if (!this.getHmtVarUrlPrefix) {
         return null
       }
 
@@ -52,7 +52,7 @@ export default {
         : `${this.refAllele}${this.position}`
 
       const result = stringifyUrl({
-        url: this.hmtVarUrlPrefix,
+        url: this.getHmtVarUrlPrefix,
         query: {
           mutation: mutation,
         },

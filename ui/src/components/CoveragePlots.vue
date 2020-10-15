@@ -41,7 +41,7 @@ export default {
   },
 
   computed: {
-    ...mapGetters(['sample']),
+    ...mapGetters(['getSample']),
     ...mapState(['deletions']),
   },
 
