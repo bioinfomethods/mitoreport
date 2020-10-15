@@ -1,0 +1,415 @@
+
+<!DOCTYPE html><html lang="en">
+<head>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-135716654-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'UA-135716654-1');</script>
+<title> PolymorphismsControl &lt; MITOMAP &lt; Foswiki</title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.5, user-scalable=yes" />
+<meta name="mobile-web-app-capable" content="yes" />
+<meta name="mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<link rel="icon" href="/foswiki/bin/../pub/System/ProjectLogos/favicon.ico" type="image/x-icon" />
+<link rel="shortcut icon" href="/foswiki/bin/../pub/System/ProjectLogos/favicon.ico" type="image/x-icon" />
+<link rel="alternate" href="https://mitomap.org/foswiki/bin/edit/MITOMAP/PolymorphismsControl?t=1602716864" type="application/x-wiki" title="edit PolymorphismsControl" />
+<meta name="TEXT_NUM_TOPICS" content="Number of topics:" />
+<meta name="TEXT_MODIFY_SEARCH" content="Modify search" />
+<link rel="alternate" type="application/rss+xml" title="RSS Feed" href="/foswiki/bin/view/MITOMAP/WebRss" />
+<base href="https://mitomap.org/foswiki/bin/view/MITOMAP/PolymorphismsControl" /><!--[if IE]></base><![endif]--><link class='head JQUERYPLUGIN::COMMENT' rel='stylesheet' href='/foswiki/bin/../pub/System/CommentPlugin/comment.css?version=3.0' type='text/css' media='all' /><!--JQUERYPLUGIN::COMMENT-->
+<link class='head SMILIESPLUGIN' rel='stylesheet' href='/foswiki/bin/../pub/System/SmiliesPlugin/smilies.css' type='text/css' media='all' /><!--SMILIESPLUGIN--><link rel='stylesheet' href='/foswiki/bin/../pub/System/SkinTemplates/base.css' media='all' type='text/css' />
+<link rel='stylesheet' href='/foswiki/bin/../pub/System/PatternSkinTheme/layout.css' media='all' type='text/css' />
+<link rel='stylesheet' href='/foswiki/bin/../pub/System/PatternSkinTheme/style.css' media='all' type='text/css' />
+<link rel='stylesheet' href='/foswiki/bin/../pub/System/PatternSkinTheme/colors.css' media='all' type='text/css' />
+<link rel='stylesheet' href='/foswiki/bin/../pub/System/PatternSkinTheme/column_left.css' media='all' type='text/css' />
+<link rel='stylesheet' href='/foswiki/bin/../pub/System/PatternSkinTheme/variant_foswiki_noframe.css' media='all' type='text/css' /><style type="text/css" media="all">
+	/* Styles that are set using variables */
+	.patternBookView .foswikiTopRow,
+	.patternWebIndicator,
+	.patternWebIndicator a {
+		background-color:#CCFFFF;
+	}
+	#patternTopBarContents { background-image:url(/foswiki/bin/../pub/System/PatternSkin/header5.gif); background-repeat:repeat-x;}
+#patternTopBarContents { background-color:#ffffff;}
+.patternBookView {
+	border-color:#CCFFFF;
+}
+.patternPreviewPage #patternMain {
+	/* uncomment to set the preview image */
+	/*background-image:url("/foswiki/bin/../pub/System/PreviewBackground/preview2bg.gif");*/
+}
+</style>
+<link rel='stylesheet' href='/foswiki/bin/../pub/System/PatternSkin/print.css' media='print' type='text/css' />
+<!--[if IE 7 ]><style type="text/css" media="screen">
+.foswikiAttachments,
+.foswikiForm,
+.foswikiHelp,
+.foswikiPreviewArea,
+.patternPreviewPage .foswikiForm,
+.patternSigLine,
+.patternToolBar,
+.patternTop,
+.patternTopicAction,
+#patternSideBarContents .patternLeftBarPersonal,
+#patternSideBarContents h2,
+#patternSideBarContents li,
+#patternTopBarButtons ul {
+	height:1%;
+}
+#patternSideBarContents .patternLeftBarPersonal {
+	width:100%;
+}
+.foswikiFormStep {
+	height:100%;
+}
+#foswikiLogin {
+	 margin-left: 25%;
+	 margin-right: 25%;
+}
+#foswikiLogin .foswikiFormSteps {
+	 width:auto;
+}
+#foswikiLogin input[type="text"],
+#foswikiLogin input[type="password"] {
+	 width: auto;
+}
+.patternShadow {
+	border:10px solid #fff;
+	margin-top:10px;
+	margin-bottom:10px;
+	border:2px solid #ccc;
+}
+</style><![endif]-->
+<!--[if lte IE 9]>
+<script class='script JQUERYPLUGIN' type='text/javascript' src='/foswiki/bin/../pub/System/JQueryPlugin/jquery-1.11.3.js'></script>
+<![endif]-->
+<!--[if gt IE 9]><!-->
+<script class='script JQUERYPLUGIN' type='text/javascript' src='/foswiki/bin/../pub/System/JQueryPlugin/jquery-2.1.4.js'></script>
+<!--<![endif]-->
+
+<script class='script JQUERYPLUGIN' type='text/javascript' src='/foswiki/bin/../pub/System/JQueryPlugin/noconflict.js'></script><!--JQUERYPLUGIN-->
+<script class='script JQUERYPLUGIN::LIVEQUERY' type='text/javascript' src='/foswiki/bin/../pub/System/JQueryPlugin/plugins/livequery/jquery.livequery.js?version=1.3.6'></script><!--JQUERYPLUGIN::LIVEQUERY-->
+<script class='script JQUERYPLUGIN::MIGRATE' type='text/javascript' src='/foswiki/bin/../pub/System/JQueryPlugin/plugins/migrate/jquery.migrate.js?version=1.4.1'></script><!--JQUERYPLUGIN::MIGRATE-->
+<script class='script JQUERYPLUGIN::FOSWIKI' type='text/javascript' src='/foswiki/bin/../pub/System/JQueryPlugin/plugins/foswiki/jquery.foswiki.js?version=2.13'></script><!--JQUERYPLUGIN::FOSWIKI-->
+<script class='script JQUERYPLUGIN::COMMENT' type='text/javascript' src='/foswiki/bin/../pub/System/CommentPlugin/comment.js?version=3.0'></script><!--JQUERYPLUGIN::COMMENT-->
+<script class='script JQUERYPLUGIN::FOSWIKI::PREFERENCES foswikiPreferences' type='text/json'>{
+   "WEB" : "MITOMAP",
+   "SKIN" : "natedit,pattern",
+   "TOPIC" : "PolymorphismsControl",
+   "PUBURLPATH" : "/foswiki/bin/../pub",
+   "SERVERTIME" : "14 Oct 2020 - 19:07",
+   "SCRIPTSUFFIX" : "",
+   "SYSTEMWEB" : "System",
+   "SCRIPTURLPATHS" : {
+      "view" : "/foswiki/bin/view"
+   },
+   "SCRIPTURL" : "https://mitomap.org/foswiki/bin",
+   "PUBURL" : "https://mitomap.org/foswiki/bin/../pub",
+   "USERNAME" : "guest",
+   "WIKIUSERNAME" : "Main.WikiGuest",
+   "WIKINAME" : "WikiGuest",
+   "URLHOST" : "https://mitomap.org",
+   "NAMEFILTER" : "[\\\\\\s\\*?~^\\$@%`\"'\\x26;|\\x3c>\\[\\]#\\x00-\\x1f]",
+   "COOKIEREALM" : "",
+   "SCRIPTURLPATH" : "/foswiki/bin",
+   "USERSWEB" : "Main"
+}
+</script><!--JQUERYPLUGIN::FOSWIKI::PREFERENCES-->
+<script class='script JavascriptFiles/foswikiString' type="text/javascript" src="/foswiki/bin/../pub/System/JavascriptFiles/foswikiString.js"></script><!--JavascriptFiles/foswikiString-->
+<script class='script JavascriptFiles/foswikiForm' type="text/javascript" src="/foswiki/bin/../pub/System/JavascriptFiles/foswikiForm.js"></script><!--JavascriptFiles/foswikiForm-->
+<script class='script JavascriptFiles/foswikiPref' type="text/javascript" src="/foswiki/bin/../pub/System/JavascriptFiles/foswikiPref.js"></script><!--JavascriptFiles/foswikiPref-->
+<script class='script JavascriptFiles/strikeone' type="text/javascript" src="/foswiki/bin/../pub/System/JavascriptFiles/strikeone.js"></script><!--JavascriptFiles/strikeone-->
+<script class='script PatternSkin/pattern' type="text/javascript" src="/foswiki/bin/../pub/System/PatternSkin/pattern.js"></script><!--PatternSkin/pattern--></head>
+<body class="foswikiNoJs patternViewPage foswikiHasNoChangePermission foswikiGuest">
+<span id="PageTop"></span><div class="foswikiPage"><div id="patternScreen">
+<div id="patternPageShadow"><div id="patternTopBar">
+  <div id="patternTopBarContentsWrapper">
+	 <div id="patternTopBarContents"><table border="0" cellpadding="0" cellspacing="0" style="width:100%" summary="">
+<tr><td valign="middle"><span id="foswikiLogo" class="foswikiImage"><a href="https://mitomap.org/foswiki/bin/view/Main/WebHome"><img src="https://mitomap.org/foswiki/bin/../pub/System/ProjectLogos/foswiki-logo.png" border="0" alt="Powered by Foswiki, The Free and Open Source Wiki" style="border:none;" /></a></span></td>
+<td align="right" valign="top" class="patternMetaMenu">
+ <ul>
+<li> <form name="jumpForm" action="/foswiki/bin/view/MITOMAP/PolymorphismsControl"><input id="jumpFormField" title="Jump" type="text" class="foswikiInputField foswikiDefaultText" name="topic" value="" size="18" /><noscript>&nbsp;<input type="submit" class="foswikiButton" size="5" name="submit" value="Jump" />&nbsp;</noscript>   </form>
+</li> <li> <form name="quickSearchForm" action="/foswiki/bin/view/MITOMAP/WebSearch"><input type="text" class="foswikiInputField foswikiDefaultText" title="Search" id="quickSearchBox" name="search" value="" size="18" /><input type="hidden" name="scope" value="all" /><input type="hidden" name="web" value="MITOMAP" /><noscript>&nbsp;<input type="submit" size="5" class="foswikiButton" name="submit" value="Search" />&nbsp;</noscript>   </form>
+</li></ul>
+<p></p>
+</td></tr></table></div>
+  </div>
+</div>
+<div id="patternPage">
+<div id="patternWrapper"><div id="patternOuter" class="clear">
+<div id="patternFloatWrap">
+<div id="patternMain"><div id="patternClearHeaderCenter"></div>
+<div id="patternMainContents"><div class="patternTop clear"><span class="patternHomePath foswikiLeft"><span class="patternHomePathTitle">You are here: </span><a href="/foswiki/bin/view/">Foswiki</a><a href="/foswiki/bin/view/MITOMAP/WebHome">MITOMAP Web</a><a href="https://mitomap.org/foswiki/bin/view/MITOMAP/PolymorphismsControl" title='Topic revision: 325 (14 Oct 2020 - 06:03:47)'>PolymorphismsControl</a> <span class='patternRevInfo'>(14 Oct 2020, <a href="/foswiki/bin/view/Main/ShipingZhang">ShipingZhang</a>)</span></span><span class="patternToolBar foswikiRight"></span></div><div class="foswikiContentHeader"></div><div class="patternContent"><div class="foswikiTopic"><h1 id="MITOMAP:_mtDNA_Control_Region_Sequence_Variants">  MITOMAP: mtDNA Control Region Sequence Variants </h1>
+<p></p>
+<em>Last Edited: Oct 09, 2020</em>
+<p></p>
+
+<!--[if lt IE 9]>
+<script type="text/javascript">
+    $currentFile = window.location.pathname.split("/").pop();
+    window.location = $currentFile+"IE"
+</script>
+<![endif]-->
+
+<p></p>
+<p></p>
+        <link href="/master/css/styles.css" rel="stylesheet">
+        <link href="/master/bootstrap/css/bootstrap.css" rel="stylesheet">
+        <link href="/master//jasny-bootstrap/css/jasny-bootstrap.min.css" rel="stylesheet" media="screen">
+<p></p>
+<p></p>
+<p></p>
+<p></p>
+        <!--Theme-->
+        <link href="/master/jquery-ui-bootstrap/css/custom-theme/jquery-ui-1.8.16.custom.css" rel="stylesheet">
+<p></p>
+        <!--datatables-->
+        <link href="/master/css/dataTables.bootstrap.css" rel="stylesheet">
+        <link href="/master//DataTables/extensions/TableTools/css/dataTables.tableTools.css" rel="stylesheet">
+<p></p>
+<p></p>
+<p></p>
+<p></p>
+<p></p>
+    <script type="text/javascript" src="https://platform.twitter.com/widgets.js"></script>
+    <script src="/master/js/jquery-1.7.2.min.js"></script>
+    <script src="/master/js/jquery-ui-1.8.20.custom.min.js"></script>
+    <script src="/master/bootstrap/js/bootstrap.js"></script>
+     <script src="/master//js/bootstrap3-typeahead.js"></script>
+     <script src="/master//jasny-bootstrap/js/jasny-bootstrap.min.js"></script>
+    <script src="/master/js/mitomap.js"></script>
+     <script src="/master/js/jquery.dataTables.js"></script>
+     <script src="/master/js/dataTables.bootstrap.js"></script>
+    <script src="/master/js/ZeroClipboard.js"></script>
+    <script src="/master//js/dataTables.tableTools.js"></script>
+      <script src="/master/js/spin.min.js"></script>
+<script src="/master/js/naturalSort.js"></script>
+<script src="https://use.fontawesome.com/7b1911e50f.js"></script>
+<p></p>
+         <script type="text/javascript">
+		jQuery.fn.dataTableExt.oSort['natural-asc']  = function(a,b) {
+		    return naturalSort(a,b);
+		};
+
+		jQuery.fn.dataTableExt.oSort['natural-desc'] = function(a,b) {
+		    return naturalSort(a,b) * -1;
+		};
+
+    jQuery.fn.dataTableExt.oSort['linkComparer-asc'] = function (a, b) {
+        var value1 = parseInt(getInnerHTML(a));
+        var value2 = parseInt(getInnerHTML(b));
+        return naturalSort(a,b);
+    };
+
+    jQuery.fn.dataTableExt.oSort['linkComparer-desc'] = function (a, b) {
+        var value1 = parseInt(getInnerHTML(a));
+        var value2 = parseInt(getInnerHTML(b));
+        return naturalSort(a,b) * -1;
+    };
+jQuery.extend( jQuery.fn.dataTableExt.oSort, {
+    "num-html-pre": function ( a ) {
+        var x = String(a).replace( /<[\s\S]*?>/g, "" );
+        return parseFloat( x );
+    },
+
+    "num-html-asc": function ( a, b ) {
+        return naturalSort(a,b);
+
+    },
+
+    "num-html-desc": function ( a, b ) {
+        return naturalSort(a,b) * -1;
+    }
+} );
+
+
+	$(document).ready(function() {
+	    $('#datatable').html( '<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered" id="mmdt"></table>' );
+	var dtTableJSVar = $('#mmdt').DataTable( {
+"columnDefs" : [
+    {
+        className: "center-text",
+        targets: [0,1,2,3,4,5]
+    }
+ ],
+
+     "paging": true,
+        "lengthChange": true,
+           "info": true,
+           "autoWidth": true,
+		   "order": [[ 0, "asc" ]],
+    // l - Length changing
+    // f - Filtering input
+    // t - The table!
+    // i - Information
+    // p - Pagination
+    // r - pRocessing
+    // < and > - div elements
+    // <"class" and > - div with a class
+    // Examples: <"wrapper"flipt>, <lf<t>ip>
+    // T is tabletools
+    dom: 'Tltip',
+    tableTools: {
+		"sSwfPath": "/DataTables/extensions/TableTools/swf/copy_csv_xls_pdf.swf",
+
+    },
+"data":[
+["152","MT-OHR","T-C","<span style='white-space:nowrap;'><a href='/haploinfo_genbank/T152C.html' target=_blank>25.942%</a>&nbsp;<img src='/images/flag.png'></span><br><span style='white-space:nowrap;'>(<a href='/haploinfo_gbcontrol/T152C.html' target=_blank>17.494%</a>)&nbsp;<img src='/images/flag.png'></span>","<a href='/cgi-bin/index_mitomap.cgi?title=Control+Polymorphism+T-C+at+rCRS+position+152&pos=152&ref=T&alt=C' target='_blank'>26466 (13405/13061)</a>","<a href='/cgi-bin/print_ref_list?refs=1986,4,140,233,414,394,521,572,911,924,928,968,989,1739,2285,2882,3082,3311,3314,3502,3690,3779,3922,4022,4946,5348,6221,6169,6421,6432,6623,6687,8200,8405,8492,8510,90260,9531,10433,20043,20059,90335,20264,20429,90123,90254,90272,90296,90302,90311,90350,90680,90365,90398,90429,90435,90452,90453,90477,90501,90534,90537,90550,90562,90572,90592,90625,90628,90653,90687,90695,90749,90762,90764,90771,90773,90805,90814,90941,90962,90963,90965,90966,90977,91049,91021,91026,91030,91068,91077,91091,91214,91215,91256,91275,91288,91311,91312,91318,91343,91394,91423,91431,91468,91483,91612,91660,91687,91737,91755,91775,91793,91806,92045,92031,92043,92063,92100,92191,92268,99016&title=Control+Polymorphism+T-C+at+152' target='_blank'>121</a>"],
+["16565","Control Region","C-T","0.000%<br>(0.001%)","<a href='/cgi-bin/index_mitomap.cgi?title=Control+Polymorphism+C-T+at+rCRS+position+16565&pos=16565&ref=C&alt=T' target='_blank'>1 (0/1)</a>","<a href='/cgi-bin/print_ref_list?refs=20180104&title=Control+Polymorphism+C-T+at+16565' target='_blank'>1</a>"]],
+"columns": [{ "title": " Position " , "type": "num-html" },{ "title": " Locus " , "type": "string", "class":"select-filter"  },{ "title": " Nucleotide Change " , "type": "string" },{ "title": " GB Freq<br><span style='white-space:nowrap;'>FL&nbsp;(CR)<span class='mark'>&ast;&Dagger;</span></span> " , "type": "string" },{ "title": " GB Seqs<br><span style='white-space:nowrap;'>total&nbsp;(FL/CR)<span class='mark'>&ast;</span></span> " , "type": "string" },{ "title": " Curated References " , "type": "num-html" }]} );	dtTableJSVar.columns( '.select-filter' ).eq( 0 ).each( function ( colIdx ) {
+	    // Create the select list and search operation
+	   $("#mmdt_length").append('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label>Locus</label>&nbsp;')
+	    var select = $('<select aria-controls="mmdt" class="form-control input-sm">')
+	        .appendTo(
+	            "#mmdt_length"
+	        )
+	        .on( 'change', function () {
+	            dtTableJSVar
+	                .column( colIdx )
+	                .search( $(this).val() )
+	                .draw();
+	        } );
+			select.append('<option value="">All</option>');
+	    // Get the search data for the first column and add to the select list
+	    dtTableJSVar
+	        .column( colIdx )
+	        .cache( 'search' )
+	        .sort()
+	        .unique()
+	        .each( function ( d ) {
+	            select.append( $('<option value="'+d+'">'+d+'</option>') );
+	        } );
+		$("#mmdt_length").append("</select>")
+	} );
+} );
+
+</script>
+<div class="container">
+<div id="datatable">
+</div>
+</div>
+<p></p>
+<p></p>
+<span><span class="mark">*</span> <b>FL</b>: full length sequences, <b>CR</b>: control reqion sequences</span>
+<p></p>
+<div><span class="mark">&Dagger;</span> <b>High Frequency Haplogroups</b>:
+<p>Variants found in haplogroups at 50% or higher
+are marked with <img src="/images/flag.png">.
+You may click a flagged link to see the high-scoring haplogroups.
+For detailed info about the high frequency haplogroup flag,
+please check the
+<a href="/MITOMAP/HiFreqHGcalc" target=_blank>calculation criteria</a>.</p></div>
+<p></p>
+<p></p>
+<br />
+<strong>Footnotes:</strong>
+<br /><br />
+The GB frequency data is derived from <b>51673</b> GenBank sequences with size greater than 15.4kbp and <b>74660</b> Control Region sequences with size 0.4-1.6kbp. These sequences have been pre-loaded into Mitomaster and represent almost all haplogroups known to date. We will be updating and refining this set of sequences on a regular basis. As a caveat, please note that GenBank sequences may not be of equal quality  <a href="http://www.ncbi.nlm.nih.gov/pubmed?term=20004768" target="_blank">(Yao, et al, 2009)</a>, that some of these sequences are from individuals with past, current or future disease, and that this portion of our data set has not been hand-curated by Mitomap.
+<br /><br />
+For more details about the current GenBank sequence set, please see <a href="/MITOMAP/GBFreqInfo">GenBank Frequency Info</a>
+<p></p>
+This table lists polymorphic nucleotide positions from the mtDNA control region between the nucleotide positions 16024-576; including the D-loop region. Most of the variants have been ascertained from sequence analyses of the two hypervariable segments I and II between the nucleotide positions 57-372 and 16024-16383.
+<br /><br />
+"ins" = insertion
+<br />
+"del" = deletion  </div>
+<div class="foswikiContentFooter"></div><div class="foswikiFormSteps"><div class="patternTopicActions foswikiFormStep"><span class="patternActionButtons"><a class='foswikiRequiresChangePermission' href='https://mitomap.org/foswiki/bin/edit/MITOMAP/PolymorphismsControl?t=1602716868' rel='nofollow' title='Edit this topic text' accesskey='e'><span class='foswikiAccessKey'>E</span>dit </a><span class='foswikiSeparator'>&nbsp;|&nbsp;</span><a class='foswikiRequiresChangePermission' href='/foswiki/bin/attach/MITOMAP/PolymorphismsControl' rel='nofollow' title='Attach an image or document to this topic' accesskey='a'><span class='foswikiAccessKey'>A</span>ttach</a><span class='foswikiSeparator'>&nbsp;|&nbsp;</span><span><a href='/foswiki/bin/view/MITOMAP/PolymorphismsControl?cover=print;' rel='nofollow' title='Printable version of this topic' accesskey='p'><span class='foswikiAccessKey'>P</span>rint version</a></span><span class='foswikiSeparator'>&nbsp;|&nbsp;</span><span><a class='foswikiRequiresChangePermission' href='/foswiki/bin/oops/MITOMAP/PolymorphismsControl?template=oopshistory' rel='nofollow' title='View complete topic history' accesskey='h'><span class='foswikiAccessKey'>H</span>istory</a>: r325&nbsp;<a href="/foswiki/bin/compare/MITOMAP/PolymorphismsControl?rev1=324;rev2=325" rel="nofollow">&lt;</a>&nbsp;<a href="/foswiki/bin/view/MITOMAP/PolymorphismsControl?rev=324" rel="nofollow">r324</a>&nbsp;<a href="/foswiki/bin/compare/MITOMAP/PolymorphismsControl?rev1=323;rev2=324" rel="nofollow">&lt;</a>&nbsp;<a href="/foswiki/bin/view/MITOMAP/PolymorphismsControl?rev=323" rel="nofollow">r323</a>&nbsp;<a href="/foswiki/bin/compare/MITOMAP/PolymorphismsControl?rev1=322;rev2=323" rel="nofollow">&lt;</a>&nbsp;<a href="/foswiki/bin/view/MITOMAP/PolymorphismsControl?rev=322" rel="nofollow">r322</a></span><span class='foswikiSeparator'>&nbsp;|&nbsp;</span><span><a href='/foswiki/bin/view/MITOMAP/PolymorphismsControl?template=backlinksweb' rel='nofollow' title='Search the MITOMAP Web for topics that link to here' accesskey='b'><span class='foswikiAccessKey'>B</span>acklinks</a></span><span class='foswikiSeparator'>&nbsp;|&nbsp;</span><span><a href='/foswiki/bin/view/MITOMAP/PolymorphismsControl?raw=on' rel='nofollow' title='View without formatting' accesskey='v'><span class='foswikiAccessKey'>V</span>iew wiki text</a></span><span class='foswikiSeparator'>&nbsp;|&nbsp;</span><a class='foswikiRequiresChangePermission' href='https://mitomap.org/foswiki/bin/edit/MITOMAP/PolymorphismsControl?t=1602716868;nowysiwyg=1' rel='nofollow' title='Edit Wiki text' accesskey='w'>Edit <span class='foswikiAccessKey'>w</span>iki text</a><span class='foswikiSeparator'>&nbsp;|&nbsp;</span><span><a href='/foswiki/bin/view/MITOMAP/PolymorphismsControl?template=more&amp;maxrev=325&amp;currrev=325' rel='nofollow' title='Delete or rename this topic; set parent topic; view and compare revisions' accesskey='m'><span class='foswikiAccessKey'>M</span>ore topic actions</a></span></span></div></div></div><div class="patternInfo"><span class="patternRevInfo">Topic revision: r325 - 14 Oct 2020, <a href="/foswiki/bin/view/Main/ShipingZhang">ShipingZhang</a></span></div>
+</div>
+</div><div id="patternSideBar"><div id="patternClearHeaderLeft"></div>
+<div id="patternSideBarContents"><div class="patternWebIndicator">
+<a href='https://mitomap.org/foswiki/bin/view/MITOMAP/WebHome'>MITOMAP</a>
+</div>
+<!--<div class="patternLeftBarPersonal">
+<p></p>
+<p></p>
+<ul><li class="patternLogIn">&lt;span class=
+</div>-->
+<p></p>
+<p></p>
+<p></p>
+<!-- Administrators see all the webs, others see the public webs --> <ul>
+<li> <span style="white-space:nowrap"><a href="/foswiki/bin/view/MITOMAP/WebHome"> MITOMAP</a></span>
+</li> <li> <span style="white-space:nowrap"><a href="/foswiki/bin/view/MITOMASTER/WebHome"> MITOMASTER</a></span>
+</li></ul>
+<a href="/polg">POLG&nbsp;Server</a>
+<!--
+-->
+<p></p>
+<p></p> <ul>
+<li> <strong>Tools</strong>
+</li> <li> <a href="/foswiki/bin/view/MITOWIKI/HelpIndex"><span class='foswikiIcon'><img src='/foswiki/bin/../pub/System/DocumentGraphics/help.png' width='16' height='16' alt='help' /></span> Help</a>
+</li> <li> <a href="/foswiki/bin/view/Main/SearchSite"><span class='foswikiIcon'><img src='/foswiki/bin/../pub/System/DocumentGraphics/searchtopic.png' width='16' height='16' alt='searchtopic' /></span> Search</a>   <!-- * <a href="/foswiki/bin/view/MITOWIKI/HelpFeedback"><span class='foswikiIcon'><img src='/foswiki/bin/../pub/System/DocumentGraphics/bubble.png' width='16' height='16' alt='bubble' /></span> Feedback</a> -->
+</li> <li> <a href="/foswiki/bin/view/MITOMAP/WebTopicList"> <span class='foswikiIcon'><img src='/foswiki/bin/../pub/System/DocumentGraphics/index.png' width='16' height='16' alt='index' /></span> Index</a>
+</li></ul>
+<p></p>
+<style>
+#mitomap {
+    text-align: left;
+}
+a {
+    text-decoration: none;
+    color: #005587;
+}
+#cmem {
+    color: #005587;
+}
+#chop {
+    color: #005587;
+}
+</style>
+<div id="mitomap">
+<span style="font-size: 14px;">
+Service&nbsp;provided&nbsp;by&nbsp;the
+</span>
+<div>
+<a href="https://cmem.research.chop.edu/">
+<span id="cmem">
+Center&nbsp;for&nbsp;Mitochondrial
+<br>
+&amp;&nbsp;Epigenomic&nbsp;Medicine</span></a>
+<br>
+at&nbsp;the&nbsp;<a href="https://www.chop.edu/"><span id="chop">Children's&nbsp;Hospital
+<br>
+of&nbsp;Philadelphia</span></a>
+</div>
+</div>
+<p></p>
+<!-- Finish this later.  Useful page of summary statistics.  Embed SQL queries inside it. <ul>
+<li> <a href="/foswiki/bin/view/MITOWIKI/StatisticsData"> <span class='foswikiIcon'><img src='/foswiki/bin/../pub/System/DocumentGraphics/statistics.png' width='16' height='16' alt='statistics' /></span> Statistics</a>
+</li></ul>
+-->
+<p></p>
+<!-- This is a functional Atom feed for MITOWIKI, but doesn't seem all that useful.  Maybe later?
+<p></p>
+-->
+<p></p>
+<p></p>
+<!-- This will display a create topic button on MITOWIKI, but isn't needed since we have that dialogue on the front page.
+<p></p>
+-->
+<p></p>
+<p></p>
+<!-- These might be useful tools to enable later <ul>
+<li> <a href="/foswiki/bin/view/MITOMAP/WebChanges"> <span class='foswikiIcon'><img src='/foswiki/bin/../pub/System/DocumentGraphics/changes.png' width='16' height='16' alt='changes' /></span> Changes</a>
+</li> <li> <a href="/foswiki/bin/view/MITOMAP/WebNotify"> <span class='foswikiIcon'><img src='/foswiki/bin/../pub/System/DocumentGraphics/notify.png' width='16' height='16' alt='notify' /></span> Notifications</a>
+</li> <li> <a href="/foswiki/bin/view/MITOMAP/WebRss"> <span class='foswikiIcon'><img src='/foswiki/bin/../pub/System/DocumentGraphics/feed.png' width='16' height='16' alt='feed' /></span> RSS Feed</a>
+</li> <li> <a href="/foswiki/bin/view/MITOMAP/WebStatistics"> <span class='foswikiIcon'><img src='/foswiki/bin/../pub/System/DocumentGraphics/statistics.png' width='16' height='16' alt='statistics' /></span> Statistics</a>
+</li></ul>
+-->
+<p></p>
+<!-- Administrators get a list of tools for developing and administrating -->
+<p></p>
+<p></p>
+</div></div>
+</div>
+</div></div><div id="patternBottomBar"><div id="patternBottomBarContents"><div id="patternWebBottomBar"><span class="foswikiRight"> <a href="http://foswiki.org/"><img src="/foswiki/bin/../pub/System/ProjectLogos/foswiki-badge.png" alt="This site is powered by Foswiki" title="This site is powered by Foswiki" /></a></span>Copyright &copy; by the contributing authors. All material on this collaboration platform is the property of the contributing authors. <br /> Ideas, requests, problems regarding Foswiki? <a href='mailto:mitomap@email.chop.edu?subject=Foswiki%20Feedback%20on%20MITOMAP.PolymorphismsControl'>Send feedback</a></div></div></div>
+</div>
+</div>
+</div>
+</div></body></html>

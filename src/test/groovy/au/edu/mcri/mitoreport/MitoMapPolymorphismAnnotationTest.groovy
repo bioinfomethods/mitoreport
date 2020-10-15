@@ -33,28 +33,36 @@ class MitoMapPolymorphismAnnotationTest extends Specification {
     }
 
     @Unroll
-    def 'Given gbFreqStr=#gbFreqStr then gbFreqPct is #expGbFreqPct'() {
+    def 'Given regionType=#regionType, gbFreqStr=#gbFreqStr then gbFreqPct is #expGbFreqPct'() {
         given:
-        underTest = new MitoMapPolymorphismAnnotation(gbFreqStr: gbFreqStr)
+        underTest = new MitoMapPolymorphismAnnotation(regionType: regionType, gbFreqStr: gbFreqStr)
 
         expect:
         underTest.gbFreqPct == expGbFreqPct
 
         where:
-        gbFreqStr                                                                                                                                       | expGbFreqPct
-        null                                                                                                                                            | 0.0
-        ''                                                                                                                                              | 0.0
-        'abc'                                                                                                                                           | 0.0
-        '0'                                                                                                                                             | 0.0
-        '0%'                                                                                                                                            | 0.0
-        '10.0'                                                                                                                                          | 10.0
-        '98.7%'                                                                                                                                         | 98.7
-        '150.8%'                                                                                                                                        | 150.8
-        "<span style='white-space:nowrap;'><a href='/haploinfo_genbank/A15951G.html' target=_blank>0.010%</a>&nbsp;<img src='/images/flag.png'></span>" | 0.01
-        "<a href='/haploinfo_genbank/A15951G.html' target=_blank>0.011%</a>&nbsp;<img src='/images/flag.png'>"                                          | 0.011
-        "<a href='' target=_blank>0.012%</a>&nbsp;<img src='/images/flag.png'>"                                                                         | 0.012
-        "<a href='/haploinfo_genbank/A15951G.html' target=_blank>-</a>&nbsp;<img src='/images/flag.png'>"                                               | 0.0
-        "<a href='/haploinfo_genbank/A15951G.html' target=_blank></a>&nbsp;<img src='/images/flag.png'>"                                                | 0.0
+        regionType | gbFreqStr                                                                                                                                                                                                                                                                                          | expGbFreqPct
+        'CODING'   | null                                                                                                                                                                                                                                                                                               | 0.0
+        'CODING'   | ''                                                                                                                                                                                                                                                                                                 | 0.0
+        'CODING'   | 'abc'                                                                                                                                                                                                                                                                                              | 0.0
+        'CODING'   | '0'                                                                                                                                                                                                                                                                                                | 0.0
+        'CODING'   | '0%'                                                                                                                                                                                                                                                                                               | 0.0
+        'CODING'   | '10.0'                                                                                                                                                                                                                                                                                             | 10.0
+        'CODING'   | '98.7%'                                                                                                                                                                                                                                                                                            | 98.7
+        'CODING'   | '150.8%'                                                                                                                                                                                                                                                                                           | 150.8
+        'CODING'   | "<span style='white-space:nowrap;'><a href='/haploinfo_genbank/A15951G.html' target=_blank>0.010%</a>&nbsp;<img src='/images/flag.png'></span>"                                                                                                                                                    | 0.01
+        'CODING'   | "<a href='/haploinfo_genbank/A15951G.html' target=_blank>0.011%</a>&nbsp;<img src='/images/flag.png'>"                                                                                                                                                                                             | 0.011
+        'CODING'   | "<a href='' target=_blank>0.012%</a>&nbsp;<img src='/images/flag.png'>"                                                                                                                                                                                                                            | 0.012
+        'CODING'   | "<a href='/haploinfo_genbank/A15951G.html' target=_blank>-</a>&nbsp;<img src='/images/flag.png'>"                                                                                                                                                                                                  | 0.0
+        'CODING'   | "<a href='/haploinfo_genbank/A15951G.html' target=_blank></a>&nbsp;<img src='/images/flag.png'>"                                                                                                                                                                                                   | 0.0
+        'CODING'   | "0.000%<br>(0.001%)"                                                                                                                                                                                                                                                                               | 0.0
+        'CONTROL'  | null                                                                                                                                                                                                                                                                                               | 0.0
+        'CONTROL'  | "0"                                                                                                                                                                                                                                                                                                | 0.0
+        'CONTROL'  | "0%"                                                                                                                                                                                                                                                                                               | 0.0
+        'CONTROL'  | "0.000%<br>(0.001%)"                                                                                                                                                                                                                                                                               | 0.001
+        'CONTROL'  | "<a href='/haploinfo_genbank/A15951G.html' target=_blank>0.011%</a>&nbsp;<img src='/images/flag.png'>"                                                                                                                                                                                             | 0.0
+        'CONTROL'  | "<span style='white-space:nowrap;'><a href='/haploinfo_genbank/G203A.html' target=_blank>0.459%</a>&nbsp;<img src='/images/flag.png'></span><br>(0.166%)"                                                                                                                                          | 0.166
+        'CONTROL'  | "<span style='white-space:nowrap;'><a href='/haploinfo_genbank/T152C.html' target=_blank>25.942%</a>&nbsp;<img src='/images/flag.png'></span><br><span style='white-space:nowrap;'>(<a href='/haploinfo_gbcontrol/T152C.html' target=_blank>17.494%</a>)&nbsp;<img src='/images/flag.png'></span>" | 17.494
     }
 
     @Unroll

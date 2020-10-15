@@ -40,4 +40,4 @@ ui/public/variants.js
 ui/public/defaultSettings.js
 ui/public/mitoSettings.js
 ui/coverage
-mito_map_annotations_*.html
+mito_map_annotations_*.json

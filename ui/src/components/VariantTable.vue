@@ -606,6 +606,7 @@ export default {
     },
 
     toggleVariantExpansion: function(variant) {
+      console.info(`var=${process.env.VUE_APP_ENABLE_VARIANT_DETAILS}`)
       if (process.env.VUE_APP_ENABLE_VARIANT_DETAILS === 'false') return
 
       const id = variant.id
