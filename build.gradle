@@ -123,5 +123,5 @@ task buildGngs(type: Exec) {
 test.dependsOn += ['ui:runTestUnit']
 check.dependsOn += ['ui:runLint']
 compileJava.dependsOn += ['buildGngs']
-assemble.dependsOn += ['copyUiBuildToMitoOut']
+processResources.dependsOn += ['copyUiBuildToMitoOut']
 assemble.mustRunAfter 'check'
