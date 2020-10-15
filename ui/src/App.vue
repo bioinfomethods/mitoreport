@@ -109,6 +109,7 @@ export default {
   name: 'App',
 
   async created() {
+    console.info(`MitoReport version=${process.env.VUE_APP_VERSION}`)
     await this.$store.dispatch('fetchData')
     this.saveInterval = setInterval(this.saveSettings, SAVE_INTERVAL_MS)
     this.settingsForm.newBamDir = this.settingsBamDir
