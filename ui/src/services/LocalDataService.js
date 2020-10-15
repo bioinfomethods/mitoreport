@@ -25,8 +25,8 @@ export function concatSearches(objValue, srcValue, key) {
 }
 
 export async function loadSettings() {
-  const defaultSettings = window.defaultSettings
-  const fileSettings = window.settings
+  const defaultSettings = _.cloneDeep(window.defaultSettings)
+  const fileSettings = _.cloneDeep(window.settings)
   const localStorageSettings = JSON.parse(localStorage.getItem('mitoSettings'))
 
   const result = _.mergeWith(
