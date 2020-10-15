@@ -202,6 +202,23 @@ class MitoReportCommand implements Runnable {
                                                 ],
                                         ]
                                 ],
+                                variantTags          : [
+                                        ['name': 'Review', custom: false],
+                                        ['name': 'Excluded', custom: false],
+                                        ['name': 'FalsePositive', custom: false],
+                                        ['name': 'Likely', custom: false],
+                                        ['name': 'Match', custom: false],
+                                        ['name': 'Mismatch', custom: false],
+                                ],
+//                                curations            : [
+//                                        [
+//                                                id       : '',
+//                                                variantId: '',
+//                                                tagNames : [],
+//                                                text     : ''
+//                                        ]
+//                                ]
+                                curations            : [:]
                         ]
                 ]
         ]

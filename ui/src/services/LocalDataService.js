@@ -16,9 +16,11 @@ export async function getDeletions() {
   }
 }
 
-export function concatSearches(objValue, srcValue, key) {
-  if (key === 'variantSearches') {
+export function concatArrays(objValue, srcValue, key) {
+  if (key === 'variantSearches' || key === 'variantTags') {
     return _.unionBy((objValue || []).concat(srcValue || []), 'name')
+  } else if (key === 'curatedVariantNotes') {
+    return _.unionBy((objValue || []).concat(srcValue || []), 'id')
   } else {
     return undefined
   }
@@ -33,7 +35,7 @@ export async function loadSettings() {
     defaultSettings,
     fileSettings,
     localStorageSettings,
-    concatSearches
+    concatArrays
   )
 
   return {

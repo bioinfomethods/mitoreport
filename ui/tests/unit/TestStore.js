@@ -74,6 +74,21 @@ export const getters = {
   getVariantById: state => id => {
     return state.variants.find(v => v.id === id)
   },
+
+  getVariantTags: () => {
+    return [
+      { name: 'Review', custom: false },
+      { name: 'Excluded', custom: false },
+      { name: 'FalsePositive', custom: false },
+      { name: 'Likely', custom: false },
+      { name: 'Match', custom: false },
+      { name: 'Mismatch', custom: false },
+    ]
+  },
+
+  getCurationByVariantId: state => variantId => {
+    return getters.getSampleSettings(state)?.curations?.get(variantId)
+  },
 }
 
 export default new Vuex.Store({

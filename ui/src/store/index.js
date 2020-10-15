@@ -77,8 +77,16 @@ export const getters = {
     return `${sampleBamDir}${sampleBamFilename}`
   },
 
-  getVariantById: state => id => {
-    return state.variants.find(v => v.id === id)
+  getVariantById: state => variantId => {
+    return state.variants.find(v => v.id === variantId)
+  },
+
+  getVariantTags: state => {
+    return getters.getSampleSettings(state)?.variantTags || []
+  },
+
+  getCurationByVariantId: state => variantId => {
+    return getters.getSampleSettings(state)?.curations?.get(variantId)
   },
 }
 

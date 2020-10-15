@@ -93,7 +93,7 @@
         :expanded.sync="expandedVariants"
         item-key="id"
         @click:row="toggleVariantExpansion"
-        class="elevation-1"
+        class="elevation-1 row-pointer"
         dense
       >
         <template v-slot:body.prepend>
@@ -329,7 +329,7 @@
         </template>
         <template v-slot:expanded-item="{ headers, item }">
           <td
-            :colspan="headers.length - 1"
+            :colspan="headers.length"
             :class="{
               'ma-0 pa-0': true,
               'expanded-closing': !transitioned[item.id],
@@ -621,10 +621,13 @@ export default {
             ev => ev !== variant && this.closeVariantExpansion(ev)
           )
         )
-        this.$router.push({
-          name: 'variantDetails',
-          params: { variantId: variant.id },
-        })
+
+        if (this.$route.params.variantId !== id) {
+          this.$router.push({
+            name: 'variantDetails',
+            params: { variantId: variant.id },
+          })
+        }
       }
     },
 
@@ -828,8 +831,12 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="css" scoped>
 .variant-table-v-select {
   font-size: 0.8em;
+}
+
+.row-pointer >>> tbody tr :hover {
+  cursor: pointer;
 }
 </style>
