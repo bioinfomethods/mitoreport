@@ -1,9 +1,3 @@
-export const MIN_POS = 200
-
-export const MAX_POS = 16300
-
-export const SAVE_INTERVAL_MS = 5000
-
 export const DEFAULT_SNACKBAR_OPTS = {
   active: false,
   color: 'green',
@@ -11,21 +5,24 @@ export const DEFAULT_SNACKBAR_OPTS = {
   timeout: 3000,
 }
 
+export const DEBOUNCE_DELAY_MS = {
+  SHORT: 300,
+  MEDIUM: 500,
+  LONG: 1000,
+}
+
+export const MIN_POS = 200
+
+export const MAX_POS = 16300
+
+export const SAVE_INTERVAL_MS = 5000
+
 export const DEFAULT_IGV_HOST = 'http://localhost:60151'
 
 export const DEFAULT_GENECARDS_URL_PREFIX =
   'https://www.genecards.org/cgi-bin/carddisp.pl'
 
 export const DEFAULT_HMT_VAR_URL_PREFIX = 'https://www.hmtvar.uniba.it/results'
-
-export const CONSEQUENCE_NAMES = [
-  { id: 'frameshift_variant', name: 'frameshift_variant' },
-  { id: 'inframe_deletion', name: 'inframe_deletion' },
-  { id: 'missense_variant', name: 'missense_variant' },
-  { id: 'stop_gained', name: 'stop_gained' },
-  { id: 'synonymous_variant', name: 'synonymous_variant' },
-  { id: 'upstream_gene_variant', name: 'upstream_gene_variant' },
-]
 
 export const DEFAULT_VARIANT_SEARCH = {
   name: 'All',

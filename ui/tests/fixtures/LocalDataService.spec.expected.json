@@ -4,7 +4,7 @@
   "hmtVarUrlPrefix": "https://www.hmtvar.uniba.it/results",
   "samples": [
     {
-      "id": "TestSample",
+      "id": "15G002035-GM12878K_20pc_10kb_200",
       "bamDir": "/tmp/bamDir/",
       "bamFilename": "TestSample.bam",
       "vcfDir": "/tmp/vcfDir/",
@@ -72,7 +72,34 @@
             "vafRange": [0.00001, 0.1]
           }
         }
-      ]
+      ],
+      "variantTags": [
+        {
+          "name": "Review",
+          "custom": false
+        },
+        {
+          "name": "Excluded",
+          "custom": false
+        },
+        {
+          "name": "FalsePositive",
+          "custom": false
+        },
+        {
+          "name": "Likely",
+          "custom": false
+        },
+        {
+          "name": "Match",
+          "custom": false
+        },
+        {
+          "name": "Mismatch",
+          "custom": false
+        }
+      ],
+      "curations": []
     },
     {
       "id": "TestSample2",

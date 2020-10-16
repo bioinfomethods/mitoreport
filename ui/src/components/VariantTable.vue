@@ -93,7 +93,7 @@
         :expanded.sync="expandedVariants"
         item-key="id"
         @click:row="toggleVariantExpansion"
-        class="elevation-1 row-pointer"
+        class="elevation-1 variant-expanded"
         dense
       >
         <template v-slot:body.prepend>
@@ -337,9 +337,10 @@
             style="height: auto;"
           >
             <v-expand-transition>
-              <div v-show="transitioned[item.id]">
-                <VariantDetails :variantId="item.id"></VariantDetails>
-              </div>
+              <VariantDetails
+                v-show="transitioned[item.id]"
+                :variantId="item.id"
+              ></VariantDetails>
             </v-expand-transition>
           </td>
         </template>
@@ -836,7 +837,7 @@ export default {
   font-size: 0.8em;
 }
 
-.row-pointer >>> tbody tr :hover {
-  cursor: pointer;
+.variant-expanded >>> .v-data-table__expanded__row {
+  background-color: rgba(0, 0, 0, 0.12);
 }
 </style>

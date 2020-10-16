@@ -76,7 +76,7 @@ class Report extends ToolBase {
 
             Map vep = v.maxVep
 
-            def consequencesWithRank = RANKED_CONSEQUENCES.withIndex(1).collect { String consequence, Integer index -> [id: consequence, rank: index] }
+            def consequencesWithRank = RANKED_CONSEQUENCES.withIndex(1).collect { String consequence, Integer index -> [id: consequence, name: consequence, rank: index] }
             Map vepInfo = [
                     symbol     : vep.SYMBOL,
                     consequence: consequencesWithRank.find { it.id == vep.Consequence },

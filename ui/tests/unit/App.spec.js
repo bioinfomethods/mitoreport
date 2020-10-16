@@ -2,6 +2,9 @@ import App from '@/App.vue'
 import router from '@/router'
 import Deletions from '@/views/Deletions.vue'
 import Variants from '@/views/Variants.vue'
+import VariantDetails from '@/components/VariantDetails.vue'
+import VariantCuration from '@/components/VariantCuration.vue'
+import VariantTable from '@/components/VariantTable.vue'
 import { createLocalVue, mount } from '@vue/test-utils'
 import Vue from 'vue'
 import VueRouter from 'vue-router'
@@ -31,10 +34,26 @@ describe('App.vue', () => {
     })
   })
 
-  it('renders App and defaults to Variants page', async () => {
+  it('renders App and defaults to Variants page with VariantTable rendered', async () => {
     expect(router.currentRoute.fullPath).toBe('/variants')
     const variantsView = underTest.findComponent(Variants)
     expect(variantsView.exists()).toBe(true)
+    const variantTable = variantsView.findComponent(VariantTable)
+    expect(variantTable.exists()).toBe(true)
+  })
+
+  it('renders VariantDetails when navigate to a variant row', async () => {
+    router.push({
+      name: 'variantDetails',
+      params: { variantId: 'chrM-152-T-C' },
+    })
+    await underTest.vm.$nextTick()
+
+    const variantDetails = underTest.findComponent(VariantDetails)
+    expect(variantDetails.exists()).toBe(true)
+
+    const variantCuration = underTest.findComponent(VariantCuration)
+    expect(variantCuration.exists()).toBe(true)
   })
 
   describe('navigate to /deletions', () => {

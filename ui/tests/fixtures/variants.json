@@ -13,6 +13,7 @@
         "symbol": "MT-ND1",
         "consequence": {
             "id": "upstream_gene_variant",
+            "name": "upstream_gene_variant",
             "rank": 25
         },
         "hgvsp": "",
@@ -102,6 +103,7 @@
         "symbol": "MT-ND1",
         "consequence": {
             "id": "upstream_gene_variant",
+            "name": "upstream_gene_variant",
             "rank": 25
         },
         "hgvsp": "",
@@ -191,6 +193,7 @@
         "symbol": "MT-ND1",
         "consequence": {
             "id": "upstream_gene_variant",
+            "name": "upstream_gene_variant",
             "rank": 25
         },
         "hgvsp": "",
@@ -265,6 +268,7 @@
         "symbol": "MT-ND1",
         "consequence": {
             "id": "upstream_gene_variant",
+            "name": "upstream_gene_variant",
             "rank": 25
         },
         "hgvsp": "",
@@ -359,6 +363,7 @@
         "symbol": "MT-ND1",
         "consequence": {
             "id": "upstream_gene_variant",
+            "name": "upstream_gene_variant",
             "rank": 25
         },
         "hgvsp": "",
@@ -453,6 +458,7 @@
         "symbol": "MT-ND1",
         "consequence": {
             "id": "upstream_gene_variant",
+            "name": "upstream_gene_variant",
             "rank": 25
         },
         "hgvsp": "",
@@ -526,6 +532,7 @@
         "symbol": "MT-ND1",
         "consequence": {
             "id": "upstream_gene_variant",
+            "name": "upstream_gene_variant",
             "rank": 25
         },
         "hgvsp": "",
@@ -599,6 +606,7 @@
         "symbol": "MT-ND1",
         "consequence": {
             "id": "upstream_gene_variant",
+            "name": "upstream_gene_variant",
             "rank": 25
         },
         "hgvsp": "",
@@ -688,6 +696,7 @@
         "symbol": "MT-ND1",
         "consequence": {
             "id": "upstream_gene_variant",
+            "name": "upstream_gene_variant",
             "rank": 25
         },
         "hgvsp": "",
@@ -777,6 +786,7 @@
         "symbol": "MT-ND1",
         "consequence": {
             "id": "upstream_gene_variant",
+            "name": "upstream_gene_variant",
             "rank": 25
         },
         "hgvsp": "",
@@ -844,6 +854,7 @@
         "symbol": "MT-ND1",
         "consequence": {
             "id": "upstream_gene_variant",
+            "name": "upstream_gene_variant",
             "rank": 25
         },
         "hgvsp": "",
@@ -911,6 +922,7 @@
         "symbol": "MT-ND1",
         "consequence": {
             "id": "upstream_gene_variant",
+            "name": "upstream_gene_variant",
             "rank": 25
         },
         "hgvsp": "",
@@ -1000,6 +1012,7 @@
         "symbol": "MT-ND1",
         "consequence": {
             "id": "upstream_gene_variant",
+            "name": "upstream_gene_variant",
             "rank": 25
         },
         "hgvsp": "",
@@ -1069,6 +1082,7 @@
         "symbol": "MT-ND1",
         "consequence": {
             "id": "upstream_gene_variant",
+            "name": "upstream_gene_variant",
             "rank": 25
         },
         "hgvsp": "",
@@ -1138,6 +1152,7 @@
         "symbol": "MT-ND1",
         "consequence": {
             "id": "upstream_gene_variant",
+            "name": "upstream_gene_variant",
             "rank": 25
         },
         "hgvsp": "",
@@ -1227,6 +1242,7 @@
         "symbol": "MT-ND1",
         "consequence": {
             "id": "upstream_gene_variant",
+            "name": "upstream_gene_variant",
             "rank": 25
         },
         "hgvsp": "",
@@ -1319,6 +1335,7 @@
         "symbol": "MT-ND1",
         "consequence": {
             "id": "upstream_gene_variant",
+            "name": "upstream_gene_variant",
             "rank": 25
         },
         "hgvsp": "",
@@ -1408,6 +1425,7 @@
         "symbol": "MT-ND1",
         "consequence": {
             "id": "upstream_gene_variant",
+            "name": "upstream_gene_variant",
             "rank": 25
         },
         "hgvsp": "",
@@ -1476,6 +1494,7 @@
         "symbol": "MT-ND1",
         "consequence": {
             "id": "upstream_gene_variant",
+            "name": "upstream_gene_variant",
             "rank": 25
         },
         "hgvsp": "",
@@ -1544,6 +1563,7 @@
         "symbol": "MT-ND1",
         "consequence": {
             "id": "upstream_gene_variant",
+            "name": "upstream_gene_variant",
             "rank": 25
         },
         "hgvsp": "",
@@ -1613,6 +1633,7 @@
         "symbol": "MT-ND1",
         "consequence": {
             "id": "upstream_gene_variant",
+            "name": "upstream_gene_variant",
             "rank": 25
         },
         "hgvsp": "",
@@ -1681,6 +1702,7 @@
         "symbol": "MT-ND1",
         "consequence": {
             "id": "upstream_gene_variant",
+            "name": "upstream_gene_variant",
             "rank": 25
         },
         "hgvsp": "",
@@ -1750,6 +1772,7 @@
         "symbol": "MT-ND1",
         "consequence": {
             "id": "missense_variant",
+            "name": "missense_variant",
             "rank": 10
         },
         "hgvsp": "p.Gln47His",
@@ -1819,6 +1842,7 @@
         "symbol": "MT-ND1",
         "consequence": {
             "id": "missense_variant",
+            "name": "missense_variant",
             "rank": 10
         },
         "hgvsp": "p.Met53Lys",
@@ -1887,6 +1911,7 @@
         "symbol": "MT-ND1",
         "consequence": {
             "id": "missense_variant",
+            "name": "missense_variant",
             "rank": 10
         },
         "hgvsp": "p.Lys54Asn",
@@ -1956,6 +1981,7 @@
         "symbol": "MT-ND1",
         "consequence": {
             "id": "missense_variant",
+            "name": "missense_variant",
             "rank": 10
         },
         "hgvsp": "p.Phe56Ser",
@@ -2045,6 +2071,7 @@
         "symbol": "MT-ND1",
         "consequence": {
             "id": "missense_variant",
+            "name": "missense_variant",
             "rank": 10
         },
         "hgvsp": "p.Thr57Pro",
@@ -2113,6 +2140,7 @@
         "symbol": "MT-ND1",
         "consequence": {
             "id": "missense_variant",
+            "name": "missense_variant",
             "rank": 10
         },
         "hgvsp": "p.Glu59Asp",
@@ -2182,6 +2210,7 @@
         "symbol": "MT-ND1",
         "consequence": {
             "id": "missense_variant",
+            "name": "missense_variant",
             "rank": 10
         },
         "hgvsp": "p.Leu61Gln",
@@ -2271,6 +2300,7 @@
         "symbol": "MT-ND1",
         "consequence": {
             "id": "missense_variant",
+            "name": "missense_variant",
             "rank": 10
         },
         "hgvsp": "p.Lys62Asn",
@@ -2340,6 +2370,7 @@
         "symbol": "MT-ND2",
         "consequence": {
             "id": "synonymous_variant",
+            "name": "synonymous_variant",
             "rank": 16
         },
         "hgvsp": "p.Gln92=",
@@ -2429,6 +2460,7 @@
         "symbol": "MT-ND2",
         "consequence": {
             "id": "synonymous_variant",
+            "name": "synonymous_variant",
             "rank": 16
         },
         "hgvsp": "p.Met100=",
@@ -2518,6 +2550,7 @@
         "symbol": "MT-CO1",
         "consequence": {
             "id": "missense_variant",
+            "name": "missense_variant",
             "rank": 10
         },
         "hgvsp": "p.Pro437Ser",
@@ -2586,6 +2619,7 @@
         "symbol": "MT-CO1",
         "consequence": {
             "id": "synonymous_variant",
+            "name": "synonymous_variant",
             "rank": 16
         },
         "hgvsp": "p.Ser478=",
@@ -2675,6 +2709,7 @@
         "symbol": "MT-ATP8",
         "consequence": {
             "id": "missense_variant",
+            "name": "missense_variant",
             "rank": 10
         },
         "hgvsp": "p.Lys49Asn",
@@ -2743,6 +2778,7 @@
         "symbol": "MT-ATP8",
         "consequence": {
             "id": "missense_variant",
+            "name": "missense_variant",
             "rank": 10
         },
         "hgvsp": "p.Leu64Phe",
@@ -2832,6 +2868,7 @@
         "symbol": "MT-ATP8",
         "consequence": {
             "id": "missense_variant",
+            "name": "missense_variant",
             "rank": 10
         },
         "hgvsp": "p.Ser68Pro",
@@ -2921,6 +2958,7 @@
         "symbol": "MT-ATP6",
         "consequence": {
             "id": "synonymous_variant",
+            "name": "synonymous_variant",
             "rank": 16
         },
         "hgvsp": "p.Leu17=",
@@ -2989,6 +3027,7 @@
         "symbol": "MT-ATP6",
         "consequence": {
             "id": "missense_variant",
+            "name": "missense_variant",
             "rank": 10
         },
         "hgvsp": "p.Thr112Ala",
@@ -3078,6 +3117,7 @@
         "symbol": "MT-ND5",
         "consequence": {
             "id": "frameshift_variant",
+            "name": "frameshift_variant",
             "rank": 5
         },
         "hgvsp": "p.Asn30LysfsTer86",
@@ -3153,6 +3193,7 @@
         "symbol": "MT-ND5",
         "consequence": {
             "id": "inframe_deletion",
+            "name": "inframe_deletion",
             "rank": 9
         },
         "hgvsp": "p.Ala221del",
@@ -3227,6 +3268,7 @@
         "symbol": "MT-ND5",
         "consequence": {
             "id": "missense_variant",
+            "name": "missense_variant",
             "rank": 10
         },
         "hgvsp": "p.Gly318Asp",
@@ -3298,6 +3340,7 @@
         "symbol": "MT-ND5",
         "consequence": {
             "id": "synonymous_variant",
+            "name": "synonymous_variant",
             "rank": 16
         },
         "hgvsp": "p.Cys330=",
@@ -3390,6 +3433,7 @@
         "symbol": "MT-ND5",
         "consequence": {
             "id": "synonymous_variant",
+            "name": "synonymous_variant",
             "rank": 16
         },
         "hgvsp": "p.Pro448=",
@@ -3482,6 +3526,7 @@
         "symbol": "MT-ND5",
         "consequence": {
             "id": "stop_gained",
+            "name": "stop_gained",
             "rank": 4
         },
         "hgvsp": "p.Gly460Ter",
@@ -3553,6 +3598,7 @@
         "symbol": "MT-CYB",
         "consequence": {
             "id": "missense_variant",
+            "name": "missense_variant",
             "rank": 10
         },
         "hgvsp": "p.Ala29Thr",
@@ -3642,6 +3688,7 @@
         "symbol": "MT-CYB",
         "consequence": {
             "id": "synonymous_variant",
+            "name": "synonymous_variant",
             "rank": 16
         },
         "hgvsp": "p.Ile42=",
@@ -3731,6 +3778,7 @@
         "symbol": "MT-CYB",
         "consequence": {
             "id": "missense_variant",
+            "name": "missense_variant",
             "rank": 10
         },
         "hgvsp": "p.Asp58Asn",
@@ -3820,6 +3868,7 @@
         "symbol": "MT-CYB",
         "consequence": {
             "id": "missense_variant",
+            "name": "missense_variant",
             "rank": 10
         },
         "hgvsp": "p.Thr194Ala",
@@ -3909,6 +3958,7 @@
         "symbol": "MT-ND6",
         "consequence": {
             "id": "upstream_gene_variant",
+            "name": "upstream_gene_variant",
             "rank": 25
         },
         "hgvsp": "",

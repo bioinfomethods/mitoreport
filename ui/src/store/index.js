@@ -3,9 +3,10 @@ import {
   getVariants,
   saveSettingsToLocal,
 } from '@/services/LocalDataService.js'
-import { CONSEQUENCE_NAMES, DEFAULT_SNACKBAR_OPTS } from '@/shared/constants'
+import { DEFAULT_SNACKBAR_OPTS } from '@/shared/constants'
 import { saveAs } from 'file-saver'
 import * as _ from 'lodash'
+import { v4 as uuidv4 } from 'uuid'
 import Vue from 'vue'
 import Vuex from 'vuex'
 import { loadSettings } from '../services/LocalDataService'
@@ -86,7 +87,11 @@ export const getters = {
   },
 
   getCurationByVariantId: state => variantId => {
-    return getters.getSampleSettings(state)?.curations?.get(variantId)
+    return (
+      getters
+        .getSampleSettings(state)
+        ?.curations?.find(c => c.variantId === variantId) || {}
+    )
   },
 }
 
@@ -105,18 +110,7 @@ export const mutations = {
 
   SET_VARIANTS(state, variants) {
     state.variants = variants.map(variant => {
-      let result = {}
-
-      for (const [key, value] of Object.entries(variant)) {
-        if (key === 'consequence') {
-          const consequenceName =
-            CONSEQUENCE_NAMES.find(item => item.id === value.id)?.name ||
-            value.id
-          result[key] = { ...value, name: consequenceName }
-        } else {
-          result[key] = value
-        }
-      }
+      let result = { ...variant }
 
       result['ref_alt'] = `${result.ref}/${result.alt}`
 
@@ -171,6 +165,22 @@ export const mutations = {
         return vs.name !== searchToDelete.name
       })
   },
+
+  SET_CURATION(state, curationToSave) {
+    let existingCurations = getters.getSampleSettings(state)?.curations || []
+    let existing = existingCurations.find(
+      c => c.variantId === curationToSave.variantId
+    )
+
+    if (!existing) {
+      existing = { id: uuidv4() }
+      existingCurations.push(existing)
+    }
+
+    existing.variantId = curationToSave.variantId
+    existing.selectedTagNames = curationToSave.selectedTags.map(ct => ct.name)
+    existing.variantNote = curationToSave.variantNote
+  },
 }
 
 export const actions = {
@@ -209,6 +219,11 @@ export const actions = {
     if (searchToDelete.custom) {
       commit('DELETE_SAVED_SEARCH', searchToDelete)
     }
+  },
+
+  saveCuration({ commit, dispatch }, curationToSave) {
+    commit('SET_CURATION', curationToSave)
+    dispatch('saveSettings')
   },
 
   saveSettings({ commit, state }) {

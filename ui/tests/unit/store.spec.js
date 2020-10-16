@@ -14,6 +14,7 @@ const VARIANTS = [
     type: 'SNP',
     consequence: {
       id: 'missense_variant',
+      name: 'missense_variant',
       rank: 10,
     },
     DP: 4858,
@@ -26,6 +27,7 @@ const VARIANTS = [
     type: 'SNP',
     consequence: {
       id: 'inframe_deletion',
+      name: 'inframe_deletion',
       rank: 9,
     },
     DP: 3858,

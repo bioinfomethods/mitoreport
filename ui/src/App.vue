@@ -103,7 +103,6 @@
 
 <script>
 import { mapGetters, mapState } from 'vuex'
-import { SAVE_INTERVAL_MS } from '@/shared/constants'
 
 export default {
   name: 'App',
@@ -111,13 +110,11 @@ export default {
   async created() {
     console.info(`MitoReport version=${process.env.VUE_APP_VERSION}`)
     await this.$store.dispatch('fetchData')
-    this.saveInterval = setInterval(this.saveSettings, SAVE_INTERVAL_MS)
     this.settingsForm.newBamDir = this.getSettingsBamDir
   },
 
   data: () => {
     return {
-      saveInterval: null,
       settingsMenu: false,
       settingsForm: {
         valid: true,
@@ -166,10 +163,6 @@ export default {
       this.$store.dispatch('saveBamDir', this.settingsForm.newBamDir)
       this.settingsMenu = false
     },
-  },
-
-  beforeDestroy() {
-    clearInterval(this.saveInterval)
   },
 }
 </script>

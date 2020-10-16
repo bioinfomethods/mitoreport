@@ -1,4 +1,4 @@
-import { concatSearches } from '@/services/LocalDataService'
+import { customSettingsMerger } from '@/services/LocalDataService'
 import { DEFAULT_SNACKBAR_OPTS } from '@/shared/constants'
 import * as _ from 'lodash'
 import Vue from 'vue'
@@ -8,18 +8,27 @@ import {
   DEFAULT_HMT_VAR_URL_PREFIX,
   DEFAULT_IGV_HOST,
 } from '../../src/shared/constants'
+import { getters as realGetters } from '@/store'
 import defaultSettings from '../fixtures/defaultSettings.json'
 import deletions from '../fixtures/deletions.json'
 import mitoSettings from '../fixtures/mitoSettings.json'
 import variants from '../fixtures/variants.json'
+
 Vue.use(Vuex)
 
+const mapVariant = function(variant) {
+  let result = { ...variant }
+  result['ref_alt'] = `${result.ref}/${result.alt}`
+  return result
+}
+
 export const state = {
-  settings: _.mergeWith(defaultSettings, mitoSettings, concatSearches),
+  settings: _.mergeWith(defaultSettings, mitoSettings, customSettingsMerger),
   loading: false,
   snackbar: DEFAULT_SNACKBAR_OPTS,
-  variants: variants,
+  variants: variants.map(mapVariant),
   deletions: deletions,
+  maxReadDepth: 99999,
 }
 
 export const mutations = {}
@@ -29,6 +38,7 @@ export const actions = {
   saveBamDir() {},
   saveSearch() {},
   deleteSearch() {},
+  saveCuration() {},
   saveSettings() {},
   downloadSettings() {},
   closeSnackbar() {},
@@ -36,7 +46,7 @@ export const actions = {
 
 export const getters = {
   getSample: () => {
-    return 'TestSample'
+    return '15G002035-GM12878K_20pc_10kb_200'
   },
 
   getIgvHost: () => {
@@ -86,9 +96,7 @@ export const getters = {
     ]
   },
 
-  getCurationByVariantId: state => variantId => {
-    return getters.getSampleSettings(state)?.curations?.get(variantId)
-  },
+  getCurationByVariantId: realGetters.getCurationByVariantId,
 }
 
 export default new Vuex.Store({
