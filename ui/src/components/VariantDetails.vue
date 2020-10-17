@@ -2,7 +2,11 @@
   <v-card rounded="0">
     <v-card-text>
       <v-row align="start" justify="start" no-gutters>
-        <v-col md="4">
+        <v-col md="3">
+          <VariantInfo :variantId="variantId"></VariantInfo>
+        </v-col>
+        <v-divider vertical class="pr-4 mr-4"></v-divider>
+        <v-col md="3">
           <VariantCuration
             :variantId="variantId"
             :curation="getCurationByVariantId(variantId)"
@@ -16,6 +20,7 @@
 <script>
 import { mapGetters } from 'vuex'
 import VariantCuration from '@/components/VariantCuration.vue'
+import VariantInfo from '@/components/VariantInfo.vue'
 
 export default {
   name: 'VariantDetails',
@@ -29,6 +34,7 @@ export default {
 
   components: {
     VariantCuration,
+    VariantInfo,
   },
 
   computed: {

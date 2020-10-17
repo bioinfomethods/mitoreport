@@ -2,8 +2,9 @@ import App from '@/App.vue'
 import router from '@/router'
 import Deletions from '@/views/Deletions.vue'
 import Variants from '@/views/Variants.vue'
-import VariantDetails from '@/components/VariantDetails.vue'
 import VariantCuration from '@/components/VariantCuration.vue'
+import VariantDetails from '@/components/VariantDetails.vue'
+import VariantInfo from '@/components/VariantInfo.vue'
 import VariantTable from '@/components/VariantTable.vue'
 import { createLocalVue, mount } from '@vue/test-utils'
 import Vue from 'vue'
@@ -52,7 +53,10 @@ describe('App.vue', () => {
     const variantDetails = underTest.findComponent(VariantDetails)
     expect(variantDetails.exists()).toBe(true)
 
-    const variantCuration = underTest.findComponent(VariantCuration)
+    const variantInfo = variantDetails.findComponent(VariantInfo)
+    expect(variantInfo.exists()).toBe(true)
+
+    const variantCuration = variantDetails.findComponent(VariantCuration)
     expect(variantCuration.exists()).toBe(true)
   })
 

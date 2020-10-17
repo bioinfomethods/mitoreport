@@ -539,8 +539,9 @@ export default {
           filter: this.mitoMapFilter,
         },
         {
-          text: 'Curated Refs',
+          text: 'MitoMap Curated Refs',
           value: 'curatedRef',
+          align: 'center',
           width: '130',
           filter: this.curatedRefsFilter,
         },
