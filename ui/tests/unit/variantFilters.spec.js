@@ -26,6 +26,32 @@ describe('variantFilters', () => {
     )
   })
 
+  describe('curationFilter', () => {
+    it.each`
+      curationSearch | curationValue                                                                    | expResult
+      ${null}        | ${undefined}                                                                     | ${true}
+      ${undefined}   | ${undefined}                                                                     | ${true}
+      ${''}          | ${undefined}                                                                     | ${true}
+      ${'term'}      | ${undefined}                                                                     | ${false}
+      ${'term'}      | ${null}                                                                          | ${false}
+      ${'term'}      | ${{}}                                                                            | ${false}
+      ${'term'}      | ${{ selectedTagNames: [], variantNote: '' }}                                     | ${false}
+      ${'term'}      | ${{ selectedTagNames: ['Review', 'FalsePositive'], variantNote: 'Hello world' }} | ${false}
+      ${'review'}    | ${{ selectedTagNames: ['FalsePositive', 'Review'], variantNote: '' }}            | ${true}
+      ${'review'}    | ${{ selectedTagNames: ['FalsePositive', 'Review'], variantNote: undefined }}     | ${true}
+      ${'hello'}     | ${{ selectedTagNames: [], variantNote: 'Hello world' }}                          | ${true}
+      ${'hello'}     | ${{ selectedTagNames: undefined, variantNote: 'Hello world' }}                   | ${true}
+      ${'review'}    | ${{ selectedTagNames: ['Review', 'FalsePositive'], variantNote: 'Must review' }} | ${true}
+    `(
+      'curationFilter($curationSearch, $curationValue) is $expResult',
+      ({ curationSearch, curationValue, expResult }) => {
+        expect(underTest.curationFilter(curationSearch, curationValue)).toBe(
+          expResult
+        )
+      }
+    )
+  })
+
   describe('rangeTextFilter, e.g. 156-173', () => {
     it.each`
       input          | value        | expResult

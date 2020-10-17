@@ -12,6 +12,25 @@ export function consequenceFilter(selectedConsequence, consequenceValue) {
   return consequenceValue.rank <= selectedConsequence.rank
 }
 
+export function curationFilter(curationSearch, curation) {
+  if (!curationSearch) {
+    return true
+  }
+
+  if (curationSearch && _.isEmpty(curation)) {
+    return false
+  }
+
+  const matchesTagNames = (curation.selectedTagNames || []).some(t =>
+    iContainsFilter(curationSearch, t, false)
+  )
+
+  return (
+    matchesTagNames ||
+    iContainsFilter(curationSearch, curation.variantNote, false)
+  )
+}
+
 export function rangeTextFilter(input, value) {
   if (!input) {
     return true

@@ -237,6 +237,14 @@
             </td>
             <td>
               <v-text-field
+                v-model="filterConfig.curationSearch"
+                type="text"
+                label="Search"
+                dense
+              ></v-text-field>
+            </td>
+            <td>
+              <v-text-field
                 v-model="filterConfig.disease"
                 type="text"
                 label="Contains"
@@ -316,6 +324,11 @@
         <template v-slot:item.gbFreqPct="{ item }">
           <td>{{ item.gbFreqPct | precisionTo }}</td>
         </template>
+        <template v-slot:item.curation="{ item }">
+          <td>
+            <CurationCell :variantId="item.id"></CurationCell>
+          </td>
+        </template>
         <template v-slot:item.curatedRef="{ item }">
           <td>
             <CuratedRefLink
@@ -355,6 +368,7 @@ import CuratedRefLink from '@/components/CuratedRefLink'
 import GeneCardsLink from '@/components/GeneCardsLink'
 import HmtVarLink from '@/components/HmtVarLink'
 import IgvLink from '@/components/IgvLink'
+import CurationCell from '@/components/CurationCell'
 import VariantDetails from '@/components/VariantDetails'
 import * as filters from '@/shared/variantFilters'
 import * as vueFilters from '@/shared/vueFilters'
@@ -371,6 +385,7 @@ export default {
   },
 
   components: {
+    CurationCell,
     CuratedRefLink,
     GeneCardsLink,
     HmtVarLink,
@@ -395,6 +410,7 @@ export default {
         depthRange: [0, 999999],
         disease: '',
         diseaseShowBlank: false,
+        curationSearch: '',
         mitoMap: '',
         mitoMapShowBlank: false,
         selectedCuratedRefName: '',
@@ -450,6 +466,7 @@ export default {
       'getSettingsBamFile',
       'getSampleSettings',
       'getVariantById',
+      'getCurationByVariantId',
     ]),
 
     saveSearchDisabled() {
@@ -527,6 +544,12 @@ export default {
           value: 'genotypes[0].DP',
           width: '120',
           filter: this.depthFilter,
+        },
+        {
+          text: 'Curation',
+          value: 'curation',
+          width: '120',
+          filter: (value, search, item) => this.curationFilter(item),
         },
         {
           text: 'Disease',
@@ -758,6 +781,12 @@ export default {
 
     consequenceSort: function(l, r) {
       return l.rank - r.rank
+    },
+
+    curationFilter: function(item) {
+      const curation = this.getCurationByVariantId(item.id)
+
+      return filters.curationFilter(this.filterConfig.curationSearch, curation)
     },
 
     diseaseFilter: function(value) {
