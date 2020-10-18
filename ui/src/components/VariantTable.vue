@@ -868,7 +868,7 @@ export default {
     consequences: function() {
       this.filterConfig.selectedConsequence = this.consequences.slice(-1)[0]
     },
-    variants: function() {
+    filteredVariants: function() {
       this.toggleVariantById(this.variantId)
     },
     $route: function() {
