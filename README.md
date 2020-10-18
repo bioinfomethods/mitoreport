@@ -52,15 +52,16 @@ Below command will generate deletions and variants data including writing out th
 UI into a `mitoreport` directory ready for distribution.
 
 ```bash
+SAMPLE="15G002035-GM12878K_20pc_10kb_200"
 java -jar build/libs/mitoreport-0.1-all.jar mito-report \
-  -sample 15G002035-GM12878K_20pc_10kb_200 \
+  -sample $SAMPLE \
   -vcf tmp/15G002035.unshifted.contamination.filtering.intermediatefilter.norm.dedup.mito_vep.vcf.gz \
   -ann tmp/mtDNAanalysis_annotations_20170501.csv \
   -mann tmp/mito_map_annotations_20201013.json \
   tmp/*.bam
 
 # Open generated report in default browser
-open mitoreport/index.html
+open mitoreport-$SAMPLE/index.html
 ```
 
 ## UI Development
