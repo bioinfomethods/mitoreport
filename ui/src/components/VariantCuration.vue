@@ -18,6 +18,8 @@
           v-if="index <= 6"
           close
           @click:close="removeSelectedTag(item)"
+          :color="getChipStyle(item).color"
+          :text-color="getChipStyle(item).textColor"
           x-small
         >
           <span>{{ item.name }}</span>
@@ -43,6 +45,16 @@ import { mapGetters } from 'vuex'
 import * as _ from 'lodash'
 import { DEBOUNCE_DELAY_MS } from '@/shared/constants'
 
+const DEFAULT_CHIP_STYLE = {
+  color: '',
+  textColor: '',
+}
+
+const IMPORTANT_CHIP_STYLE = {
+  color: 'red',
+  textColor: 'white',
+}
+
 export default {
   name: 'VariantCuration',
 
@@ -67,7 +79,7 @@ export default {
   data: () => {
     return {
       selectedTags: [],
-      variantNote: 'Lorem ipsum',
+      variantNote: '',
     }
   },
 
@@ -83,7 +95,12 @@ export default {
       this.debounceSave()
     },
 
+    getChipStyle: function(tag) {
+      return tag.important ? IMPORTANT_CHIP_STYLE : DEFAULT_CHIP_STYLE
+    },
+
     debounceSave: _.debounce(function() {
+      console.debug(`debounceSave, variantId=${this.variantId}`)
       this.$store.dispatch('saveCuration', {
         variantId: this.variantId,
         selectedTags: this.selectedTags,
@@ -93,3 +110,5 @@ export default {
   },
 }
 </script>
+
+<style lang="css" scoped></style>

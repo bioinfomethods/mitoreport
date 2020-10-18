@@ -39,6 +39,7 @@ export const DEFAULT_VARIANT_SEARCH = {
     disease: '',
     diseaseShowBlank: false,
     curationSearch: '',
+    importantCuration: false,
     gbFreqMax: 100.0,
     mitoMap: '',
     mitoMapShowBlank: false,

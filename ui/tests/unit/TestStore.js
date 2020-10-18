@@ -27,6 +27,7 @@ export const state = {
   loading: false,
   snackbar: DEFAULT_SNACKBAR_OPTS,
   variants: variants.map(mapVariant),
+  filteredVariants: variants.map(mapVariant),
   deletions: deletions,
   maxReadDepth: 99999,
 }
@@ -42,6 +43,7 @@ export const actions = {
   saveSettings() {},
   downloadSettings() {},
   closeSnackbar() {},
+  filterImporantVariants() {},
 }
 
 export const getters = {
@@ -95,6 +97,8 @@ export const getters = {
       { name: 'Mismatch', custom: false },
     ]
   },
+
+  getImportantVariantTags: realGetters.getImportantVariantTags,
 
   getCurationByVariantId: realGetters.getCurationByVariantId,
 }

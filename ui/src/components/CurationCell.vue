@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-icon v-show="hasSelectedTags">mdi-tag-multiple</v-icon>
+    <v-icon v-show="hasSelectedTags" :color="tagColor">mdi-tag-multiple</v-icon>
     <v-icon v-show="hasNote">mdi-note-text</v-icon>
   </div>
 </template>
@@ -20,7 +20,7 @@ export default {
   },
 
   computed: {
-    ...mapGetters(['getCurationByVariantId']),
+    ...mapGetters(['getCurationByVariantId', 'getImportantVariantTags']),
 
     curation() {
       return this.getCurationByVariantId(this.variantId)
@@ -32,6 +32,14 @@ export default {
 
     hasSelectedTags() {
       return !_.isEmpty(this.curation.selectedTagNames)
+    },
+
+    tagColor() {
+      const hasImportantTag = this.getImportantVariantTags.some(impTag =>
+        (this.curation.selectedTagNames || []).includes(impTag.name)
+      )
+
+      return hasImportantTag ? 'red' : ''
     },
   },
 }

@@ -150,6 +150,7 @@ describe('root store mutations', () => {
     expect(state).toEqual({
       loading: false,
       variants: expVariants,
+      filteredVariants: expVariants,
       maxReadDepth: 4858,
       deletions: {},
     })

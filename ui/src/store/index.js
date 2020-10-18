@@ -23,6 +23,7 @@ export const state = {
   loading: false,
   snackbar: { ...DEFAULT_SNACKBAR_OPTS },
   variants: [],
+  filteredVariants: [],
   maxReadDepth: 0,
   deletions: {},
 }
@@ -86,6 +87,10 @@ export const getters = {
     return getters.getSampleSettings(state)?.variantTags || []
   },
 
+  getImportantVariantTags: state => {
+    return getters.getVariantTags(state).filter(t => t.important)
+  },
+
   getCurationByVariantId: state => variantId => {
     const sampleCurations = getters.getSampleSettings(state)?.curations || []
 
@@ -107,15 +112,22 @@ export const mutations = {
   },
 
   SET_VARIANTS(state, variants) {
-    state.variants = variants.map(variant => {
+    const transformed = variants.map(variant => {
       let result = { ...variant }
 
       result['ref_alt'] = `${result.ref}/${result.alt}`
 
       return result
     })
+    state.variants = transformed
+    state.filteredVariants = transformed
+
     const uniqReadDepths = _.union(state.variants.map(v => _.toNumber(v.DP)))
     state.maxReadDepth = _.max(uniqReadDepths)
+  },
+
+  SET_FILTERED_VARIANTS(state, filteredVariants) {
+    state.filteredVariants = filteredVariants
   },
 
   SET_DELETIONS(state, deletions) {
@@ -242,6 +254,24 @@ export const actions = {
 
   closeSnackbar({ commit }) {
     commit('DEACTIVATE_SNACKBAR')
+  },
+
+  filterImporantVariants({ state, commit }, selectImportant) {
+    const importantTagNames = getters
+      .getImportantVariantTags(state)
+      .map(v => v.name)
+    const filteredVariants = state.variants.filter(v => {
+      if (!selectImportant) return true
+
+      const curation = getters.getCurationByVariantId(state)(v.id)
+      const hasImportantTags = (curation.selectedTagNames || []).some(st =>
+        importantTagNames.includes(st)
+      )
+
+      return hasImportantTags
+    })
+
+    commit('SET_FILTERED_VARIANTS', filteredVariants)
   },
 }
 

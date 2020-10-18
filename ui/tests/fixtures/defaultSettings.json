@@ -21,7 +21,8 @@
             "allele": "A/C",
             "selectedTypes": ["SNP", "INS", "DEL"],
             "selectedConsequence": {},
-            "vafRange": [0.00001, 0.1]
+            "vafRange": [0.00001, 0.1],
+            "importantCuration": false
           }
         },
         {
@@ -33,33 +34,40 @@
             "selectedTypes": ["SNP", "DEL"],
             "selectedConsequence": {},
             "vafRange": [0.00001, 0.05],
-            "depthRange": [500, 12000]
+            "depthRange": [500, 12000],
+            "importantCuration": false
           }
         }
       ],
       "variantTags": [
         {
           "name": "Review",
+          "important": true,
           "custom": false
         },
         {
           "name": "Excluded",
+          "important": false,
           "custom": false
         },
         {
           "name": "FalsePositive",
+          "important": false,
           "custom": false
         },
         {
           "name": "Likely",
+          "important": true,
           "custom": false
         },
         {
           "name": "Match",
+          "important": true,
           "custom": false
         },
         {
           "name": "Mismatch",
+          "important": false,
           "custom": false
         }
       ],

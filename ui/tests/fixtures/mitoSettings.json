@@ -21,7 +21,8 @@
             "selectedTypes": ["SNP", "DEL"],
             "selectedConsequence": {},
             "vafRange": [0.00001, 0.05],
-            "depthRange": [500, 12000]
+            "depthRange": [500, 12000],
+            "importantCuration": false
           }
         },
         {
@@ -33,7 +34,8 @@
             "allele": "A/C",
             "selectedTypes": ["SNP", "INS", "DEL"],
             "selectedConsequence": {},
-            "vafRange": [0.00001, 0.1]
+            "vafRange": [0.00001, 0.1],
+            "importantCuration": false
           }
         }
       ]
@@ -56,7 +58,8 @@
             "selectedTypes": ["SNP", "DEL"],
             "selectedConsequence": {},
             "vafRange": [0.00001, 0.05],
-            "depthRange": [500, 12000]
+            "depthRange": [500, 12000],
+            "importantCuration": false
           }
         },
         {
@@ -68,7 +71,8 @@
             "allele": "A/C",
             "selectedTypes": ["SNP", "INS", "DEL"],
             "selectedConsequence": {},
-            "vafRange": [0.00001, 0.1]
+            "vafRange": [0.00001, 0.1],
+            "importantCuration": false
           }
         }
       ]

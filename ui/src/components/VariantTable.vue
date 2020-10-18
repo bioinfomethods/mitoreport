@@ -87,7 +87,7 @@
       <v-data-table
         ref="variantTable"
         :headers="headers"
-        :items="variants"
+        :items="filteredVariants"
         :options="tableOptions"
         :footer-props="tableFooterProps"
         :expanded.sync="expandedVariants"
@@ -236,12 +236,23 @@
               </v-range-slider>
             </td>
             <td>
-              <v-text-field
-                v-model="filterConfig.curationSearch"
-                type="text"
-                label="Search"
-                dense
-              ></v-text-field>
+              <v-row class="justify-space-between">
+                <v-text-field
+                  v-model="filterConfig.curationSearch"
+                  type="text"
+                  label="Search"
+                  class="pl-3 pr-1 pt-2 curation-search"
+                  dense
+                ></v-text-field>
+                <v-checkbox
+                  v-model="filterConfig.importantCuration"
+                  on-icon="mdi-tag-multiple"
+                  off-icon="mdi-tag-multiple-outline"
+                  @click="toggleImportantCuration"
+                  color="red"
+                  class="pa-0"
+                ></v-checkbox>
+              </v-row>
             </td>
             <td>
               <v-text-field
@@ -411,6 +422,7 @@ export default {
         disease: '',
         diseaseShowBlank: false,
         curationSearch: '',
+        importantCuration: false,
         mitoMap: '',
         mitoMapShowBlank: false,
         selectedCuratedRefName: '',
@@ -461,7 +473,7 @@ export default {
   },
 
   computed: {
-    ...mapState(['variants', 'maxReadDepth', 'settings']),
+    ...mapState(['filteredVariants', 'maxReadDepth', 'settings']),
     ...mapGetters([
       'getSettingsBamFile',
       'getSampleSettings',
@@ -548,7 +560,7 @@ export default {
         {
           text: 'Curation',
           value: 'curation',
-          width: '120',
+          width: '180',
           filter: (value, search, item) => this.curationFilter(item),
         },
         {
@@ -585,16 +597,16 @@ export default {
     },
 
     types() {
-      return [...new Set(this.variants.map(row => row.type))]
+      return [...new Set(this.filteredVariants.map(row => row.type))]
     },
 
     genes() {
-      return [...new Set(this.variants.map(row => row.symbol))]
+      return [...new Set(this.filteredVariants.map(row => row.symbol))]
     },
 
     consequences() {
       const allUniqConsequences = _.uniqWith(
-        this.variants.map(row => row.consequence),
+        this.filteredVariants.map(row => row.consequence),
         _.isEqual
       )
       return _.sortBy(allUniqConsequences, ['rank'])
@@ -691,6 +703,7 @@ export default {
         this.searchForm.name = ''
         this.searchForm.description = ''
       }
+      this.toggleImportantCuration()
     },
 
     onSaveSearch: function() {
@@ -789,6 +802,13 @@ export default {
       return filters.curationFilter(this.filterConfig.curationSearch, curation)
     },
 
+    toggleImportantCuration: function() {
+      this.$store.dispatch(
+        'filterImporantVariants',
+        this.filterConfig.importantCuration
+      )
+    },
+
     diseaseFilter: function(value) {
       return filters.iContainsFilter(
         this.filterConfig.disease,
@@ -869,5 +889,9 @@ export default {
 
 .variant-expanded >>> .v-data-table__expanded__row {
   background-color: rgba(0, 0, 0, 0.12);
+}
+
+.curation-search {
+  width: 100px;
 }
 </style>

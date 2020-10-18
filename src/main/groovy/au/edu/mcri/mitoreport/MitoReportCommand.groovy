@@ -182,11 +182,12 @@ class MitoReportCommand implements Runnable {
                                                 'description' : 'Filter 1 description',
                                                 'custom'      : false,
                                                 'filterConfig': [
-                                                        'posRange'            : [200, 16300],
-                                                        'allele'              : 'A/C',
-                                                        'selectedTypes'       : ['SNP', 'INS', 'DEL'],
-                                                        'selectedConsequences': [],
-                                                        'vafRange'            : [0.00001, 0.1],
+                                                        'posRange'           : [200, 16300],
+                                                        'allele'             : 'A/C',
+                                                        'selectedTypes'      : ['SNP', 'INS', 'DEL'],
+                                                        'selectedConsequence': [:],
+                                                        'vafRange'           : [0.00001, 0.1],
+                                                        'importantCuration'  : false,
                                                 ]
                                         ],
                                         [
@@ -194,22 +195,24 @@ class MitoReportCommand implements Runnable {
                                                 'description' : 'Filter 2 description',
                                                 'custom'      : false,
                                                 'filterConfig': [
-                                                        'posRange'            : [0, 16500],
-                                                        'selectedTypes'       : ['SNP', 'DEL'],
-                                                        'selectedConsequences': [],
-                                                        'vafRange'            : [0.00001, 0.05],
-                                                        'depthRange'          : [500, 12000],
+                                                        'posRange'           : [0, 16500],
+                                                        'selectedTypes'      : ['SNP', 'DEL'],
+                                                        'selectedConsequence': [:],
+                                                        'vafRange'           : [0.00001, 0.05],
+                                                        'depthRange'         : [500, 12000],
+                                                        'importantCuration'  : false,
                                                 ],
                                         ]
                                 ],
                                 variantTags          : [
-                                        ['name': 'Review', custom: false],
-                                        ['name': 'Excluded', custom: false],
-                                        ['name': 'FalsePositive', custom: false],
-                                        ['name': 'Likely', custom: false],
-                                        ['name': 'Match', custom: false],
-                                        ['name': 'Mismatch', custom: false],
+                                        ['name': 'Review', important: true, custom: false],
+                                        ['name': 'Excluded', important: false, custom: false],
+                                        ['name': 'FalsePositive', important: false, custom: false],
+                                        ['name': 'Likely', important: true, custom: false],
+                                        ['name': 'Match', important: true, custom: false],
+                                        ['name': 'Mismatch', important: false, custom: false],
                                 ],
+                                curations            : [],
                         ]
                 ]
         ]
