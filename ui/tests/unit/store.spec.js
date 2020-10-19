@@ -273,7 +273,8 @@ describe('root store actions', () => {
   it('fetchData', async () => {
     const commit = jest.fn()
 
-    await actions.fetchData({ commit })
+    const state = { variants: [] }
+    await actions.fetchData({ state, commit })
     await flushPromises()
 
     expect(commit).toHaveBeenCalledTimes(5)
