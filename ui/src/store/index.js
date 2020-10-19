@@ -138,6 +138,13 @@ export const mutations = {
     getters.getSampleSettings(state).bamDir = newBamDir
   },
 
+  SET_USER_TAGS(state, userTags) {
+    let currentTags = getters.getVariantTags(state)
+    const defaultTags = currentTags.filter(t => !t.custom)
+    const newVariantTags = defaultTags.concat(userTags)
+    getters.getSampleSettings(state).variantTags = newVariantTags
+  },
+
   ACTIVATE_SNACKBAR(state, options) {
     state.snackbar = _.merge(DEFAULT_SNACKBAR_OPTS, { active: true }, options)
   },
@@ -216,9 +223,28 @@ export const actions = {
       })
   },
 
-  saveBamDir({ dispatch, commit }, newBamDir) {
+  saveAppSettings({ dispatch, commit }, { newBamDir, userTags }) {
     commit('SET_BAM_DIR', newBamDir)
+    commit('SET_USER_TAGS', userTags)
+    dispatch('removeVariantTags', userTags)
     dispatch('saveSettings')
+  },
+
+  removeVariantTags({ state, commit }, userTags) {
+    const defaultTagNames = getters.getVariantTags(state).map(t => t.name)
+    const newUserTags = userTags.map(t => t.name)
+    const newTagNames = defaultTagNames.concat(newUserTags)
+    _.cloneDeep(state.curations || []).forEach(curation => {
+      const hasTagNamesToRemove = curation.selectedTagNames.some(
+        stn => !newTagNames.includes(stn)
+      )
+      curation.selectedTagNames = curation.selectedTagNames.filter(stn =>
+        newTagNames.includes(stn)
+      )
+      if (hasTagNamesToRemove) {
+        commit('SET_CURATION', curation)
+      }
+    })
   },
 
   saveSearch({ commit, dispatch }, searchConfig) {

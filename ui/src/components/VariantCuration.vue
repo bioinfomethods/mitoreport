@@ -43,7 +43,7 @@
 <script>
 import { mapGetters } from 'vuex'
 import * as _ from 'lodash'
-import { DEBOUNCE_DELAY_MS } from '@/shared/constants'
+import { DEBOUNCE_DELAY } from '@/shared/constants'
 
 const DEFAULT_CHIP_STYLE = {
   color: '',
@@ -100,13 +100,12 @@ export default {
     },
 
     debounceSave: _.debounce(function() {
-      console.debug(`debounceSave, variantId=${this.variantId}`)
       this.$store.dispatch('saveCuration', {
         variantId: this.variantId,
         selectedTags: this.selectedTags,
         variantNote: this.variantNote,
       })
-    }, DEBOUNCE_DELAY_MS.MEDIUM),
+    }, DEBOUNCE_DELAY.MEDIUM),
   },
 }
 </script>

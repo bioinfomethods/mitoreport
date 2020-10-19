@@ -73,9 +73,9 @@ describe('App.vue', () => {
 
   describe('save settings', () => {
     it('dispatches action to save', async () => {
-      const mockSaveBamDir = jest.fn()
+      const mockSaveAppSettings = jest.fn()
       const mockActions = {
-        saveBamDir: mockSaveBamDir,
+        saveAppSettings: mockSaveAppSettings,
         fetchData: jest.fn(),
       }
 
@@ -105,11 +105,15 @@ describe('App.vue', () => {
       await inputNewBamDir.setValue('/tmp/newBamDir/')
       await btnSubmitSaveSettings.trigger('click')
 
-      expect(mockSaveBamDir).toHaveBeenCalledTimes(1)
-      expect(mockSaveBamDir).toHaveBeenNthCalledWith(
+      expect(mockSaveAppSettings).toHaveBeenCalledTimes(1)
+
+      expect(mockSaveAppSettings).toHaveBeenNthCalledWith(
         1,
         expect.anything(),
-        '/tmp/newBamDir/'
+        {
+          newBamDir: '/tmp/newBamDir/',
+          userTags: [],
+        }
       )
     })
   })

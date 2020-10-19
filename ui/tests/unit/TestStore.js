@@ -36,7 +36,7 @@ export const mutations = {}
 
 export const actions = {
   fetchData() {},
-  saveBamDir() {},
+  saveAppSettings() {},
   saveSearch() {},
   deleteSearch() {},
   saveCuration() {},

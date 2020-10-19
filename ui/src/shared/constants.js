@@ -5,7 +5,7 @@ export const DEFAULT_SNACKBAR_OPTS = {
   timeout: 3000,
 }
 
-export const DEBOUNCE_DELAY_MS = {
+export const DEBOUNCE_DELAY = {
   SHORT: 300,
   MEDIUM: 500,
   LONG: 1000,

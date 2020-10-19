@@ -277,6 +277,7 @@ describe('root store actions', () => {
     await flushPromises()
 
     expect(commit).toHaveBeenCalledTimes(5)
+
     expect(commit).toHaveBeenNthCalledWith(1, 'SET_LOADING')
     expect(commit).toHaveBeenNthCalledWith(2, 'SET_SETTINGS', expSettings)
     expect(commit).toHaveBeenNthCalledWith(3, 'SET_VARIANTS', VARIANTS)
