@@ -80,7 +80,7 @@ export const getters = {
   },
 
   getVariantById: state => variantId => {
-    return state.variants.find(v => v.id === variantId)
+    return state.variants.find(v => v.id === variantId) || {}
   },
 
   getVariantTags: state => {
@@ -201,7 +201,7 @@ export const mutations = {
 }
 
 export const actions = {
-  async fetchData({ commit }) {
+  async fetchData({ state, commit }) {
     commit('SET_LOADING')
 
     Promise.all([loadSettings(), getVariants(), getDeletions()])
@@ -211,6 +211,21 @@ export const actions = {
         commit('SET_SETTINGS', settingsResp.data)
         commit('SET_VARIANTS', varResp.data)
         commit('SET_DELETIONS', delResp.data)
+
+        state.variants.forEach(v => {
+          const savedCuration = (
+            getters.getSampleSettings?.curations || []
+          ).find(c => c.variantId === v.variantId)
+          if (_.isEmpty(savedCuration)) {
+            const blankCuration = {
+              id: uuidv4(),
+              variantId: v.id,
+              selectedTags: [],
+              variantNote: '',
+            }
+            commit('SET_CURATION', blankCuration)
+          }
+        })
       })
       .catch(error => {
         commit('ACTIVATE_SNACKBAR', {

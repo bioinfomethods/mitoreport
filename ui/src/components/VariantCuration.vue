@@ -84,7 +84,7 @@ export default {
   },
 
   computed: {
-    ...mapGetters(['getVariantTags', 'getCurationByVariantId']),
+    ...mapGetters(['getVariantTags']),
   },
 
   methods: {
