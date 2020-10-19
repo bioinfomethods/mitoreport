@@ -6,7 +6,7 @@
 Mitoreport is an application for Mitochondrial DNA variants analysis.
 
 ## Prerequisites
-
+                                                                                                
 * Git installed
 * Java 8 installed, see [SdkMan](https://sdkman.io/) for managing different Java versions.
 

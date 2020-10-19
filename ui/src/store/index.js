@@ -216,8 +216,9 @@ export const actions = {
       })
   },
 
-  saveBamDir({ commit }, newBamDir) {
+  saveBamDir({ dispatch, commit }, newBamDir) {
     commit('SET_BAM_DIR', newBamDir)
+    dispatch('saveSettings')
   },
 
   saveSearch({ commit, dispatch }, searchConfig) {
