@@ -388,6 +388,7 @@ import { DEFAULT_VARIANT_SEARCH, MAX_POS, MIN_POS } from '@/shared/constants'
 
 export default {
   name: 'VariantTable',
+
   props: {
     variantId: {
       type: String,
@@ -405,6 +406,7 @@ export default {
   },
 
   mounted() {
+    console.debug(`VariantTable mounted, variantId=${this.variantId}`)
     this.toggleVariantById(this.variantId)
   },
 
@@ -637,14 +639,12 @@ export default {
   methods: {
     toggleVariantById: function(variantId) {
       const variant = this.getVariantById(variantId)
-      if (variant) {
+      if (!_.isEmpty(variant)) {
         this.toggleVariantExpansion(variant)
       }
     },
 
     toggleVariantExpansion: function(variant) {
-      if (process.env.VUE_APP_ENABLE_VARIANT_DETAILS === 'false') return
-
       const id = variant.id
       const isExpanded = this.$refs.variantTable.isExpanded
       if (isExpanded && this.transitioned[id]) {

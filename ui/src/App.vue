@@ -59,9 +59,9 @@ export default {
     AppSettings,
   },
 
-  created() {
+  async created() {
     console.info(`MitoReport version=${process.env.VUE_APP_VERSION}`)
-    this.$store.dispatch('fetchData')
+    await this.$store.dispatch('fetchData')
   },
 
   data: () => {
