@@ -92,7 +92,7 @@ export const getters = {
   },
 
   getCurationByVariantId: state => variantId => {
-    const sampleCurations = getters.getSampleSettings(state)?.curations || []
+    const sampleCurations = getters.getSampleSettings(state).curations
 
     return sampleCurations.find(c => c.variantId === variantId) || {}
   },
@@ -204,42 +204,43 @@ export const actions = {
   async fetchData({ state, commit, dispatch }) {
     commit('SET_LOADING')
 
-    await Promise.all([loadSettings(), getVariants(), getDeletions()])
-      .then(responses => {
-        let settingsResp, varResp, delResp
-        ;[settingsResp, varResp, delResp] = responses
-        commit('SET_SETTINGS', settingsResp.data)
-        commit('SET_VARIANTS', varResp.data)
-        commit('SET_DELETIONS', delResp.data)
+    try {
+      const settResp = await loadSettings()
+      commit('SET_SETTINGS', settResp.data)
 
-        state.variants.forEach(v => {
-          const savedCuration = getters
-            .getSampleSettings(state)
-            .curations?.find(c => c.variantId === v.id)
-          if (_.isEmpty(savedCuration)) {
-            const blankCuration = {
-              id: uuidv4(),
-              variantId: v.id,
-              selectedTags: [],
-              variantNote: '',
-            }
-            commit('SET_CURATION', blankCuration)
+      const varResp = await getVariants()
+      const delResp = await getDeletions()
+      commit('SET_VARIANTS', varResp.data)
+      commit('SET_DELETIONS', delResp.data)
+
+      state.variants.forEach(v => {
+        const savedCuration = getters
+          .getSampleSettings(state)
+          .curations?.find(c => c.variantId === v.id)
+        if (_.isEmpty(savedCuration)) {
+          const blankCuration = {
+            id: uuidv4(),
+            variantId: v.id,
+            selectedTags: [],
+            variantNote: '',
           }
-        })
-      })
-      .catch(error => {
-        commit('ACTIVATE_SNACKBAR', {
-          color: 'red',
-          message: `There was a problem fetching data: ${error.message}`,
-        })
-      })
-      .finally(() => {
-        commit('UNSET_LOADING')
+          commit('SET_CURATION', blankCuration)
+        }
       })
 
-    await dispatch('saveSettings')
+      await dispatch('saveSettings')
+    } catch (error) {
+      console.error(error)
 
-    console.debug('end fetchData')
+      commit('ACTIVATE_SNACKBAR', {
+        color: 'red',
+        message: `There was a problem fetching data: ${error.message}`,
+      })
+    } finally {
+      commit('UNSET_LOADING')
+    }
+
+    console.debug('Finished action fetchData')
   },
 
   saveAppSettings({ dispatch, commit }, { newBamDir, userTags }) {

@@ -1,7 +1,7 @@
 <template>
   <div>
-    <v-icon v-show="hasSelectedTags" :color="tagColor">mdi-tag-multiple</v-icon>
-    <v-icon v-show="hasNote">mdi-note-text</v-icon>
+    <v-icon v-if="hasSelectedTags" :color="tagColor">mdi-tag-multiple</v-icon>
+    <v-icon v-if="hasNote">mdi-note-text</v-icon>
   </div>
 </template>
 
@@ -20,7 +20,11 @@ export default {
   },
 
   computed: {
-    ...mapGetters(['getCurationByVariantId', 'getImportantVariantTags']),
+    ...mapGetters([
+      'getCurationByVariantId',
+      'getImportantVariantTags',
+      'getSampleSettings',
+    ]),
 
     curation() {
       return this.getCurationByVariantId(this.variantId)

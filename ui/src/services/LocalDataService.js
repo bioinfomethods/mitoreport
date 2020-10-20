@@ -29,7 +29,8 @@ export function customSettingsMerger(objValue, srcValue, key) {
 export async function loadSettings() {
   const defaultSettings = _.cloneDeep(window.defaultSettings)
   const fileSettings = _.cloneDeep(window.settings)
-  const localStorageSettings = JSON.parse(localStorage.getItem('mitoSettings'))
+  const localStorageSettings =
+    JSON.parse(localStorage.getItem('mitoSettings')) || {}
 
   const result = _.mergeWith(
     defaultSettings,

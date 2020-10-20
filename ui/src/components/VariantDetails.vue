@@ -1,6 +1,6 @@
 <template>
   <v-card rounded="0">
-    <v-card-text>
+    <v-card-text v-show="variantId">
       <v-row align="start" justify="start" no-gutters>
         <v-col md="3">
           <VariantInfo :variantId="variantId"></VariantInfo>
