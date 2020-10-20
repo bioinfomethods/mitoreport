@@ -59,9 +59,9 @@ export default {
     AppSettings,
   },
 
-  async created() {
+  created() {
     console.info(`MitoReport version=${process.env.VUE_APP_VERSION}`)
-    await this.$store.dispatch('fetchData')
+    this.$store.dispatch('fetchData')
   },
 
   data: () => {
@@ -73,7 +73,7 @@ export default {
   },
 
   computed: {
-    ...mapState(['loading', 'snackbar']),
+    ...mapState(['loading', 'snackbar', 'initialFetchDataLoaded']),
     ...mapGetters(['getSample']),
   },
 

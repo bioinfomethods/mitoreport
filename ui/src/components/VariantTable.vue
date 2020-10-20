@@ -337,7 +337,7 @@
         </template>
         <template v-slot:item.curation="{ item }">
           <td>
-            <CurationCell :variantId="item.id"></CurationCell>
+            <CurationCell :variantId="item.id" :key="item.id"></CurationCell>
           </td>
         </template>
         <template v-slot:item.curatedRef="{ item }">

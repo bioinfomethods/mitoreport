@@ -201,10 +201,10 @@ export const mutations = {
 }
 
 export const actions = {
-  async fetchData({ state, commit }) {
+  async fetchData({ state, commit, dispatch }) {
     commit('SET_LOADING')
 
-    Promise.all([loadSettings(), getVariants(), getDeletions()])
+    await Promise.all([loadSettings(), getVariants(), getDeletions()])
       .then(responses => {
         let settingsResp, varResp, delResp
         ;[settingsResp, varResp, delResp] = responses
@@ -213,9 +213,9 @@ export const actions = {
         commit('SET_DELETIONS', delResp.data)
 
         state.variants.forEach(v => {
-          const savedCuration = (
-            getters.getSampleSettings?.curations || []
-          ).find(c => c.variantId === v.variantId)
+          const savedCuration = getters
+            .getSampleSettings(state)
+            .curations?.find(c => c.variantId === v.id)
           if (_.isEmpty(savedCuration)) {
             const blankCuration = {
               id: uuidv4(),
@@ -236,6 +236,10 @@ export const actions = {
       .finally(() => {
         commit('UNSET_LOADING')
       })
+
+    await dispatch('saveSettings')
+
+    console.debug('end fetchData')
   },
 
   saveAppSettings({ dispatch, commit }, { newBamDir, userTags }) {

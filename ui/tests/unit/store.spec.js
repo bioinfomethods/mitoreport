@@ -272,18 +272,22 @@ describe('root store actions', () => {
 
   it('fetchData', async () => {
     const commit = jest.fn()
+    const dispatch = jest.fn()
 
     const state = { variants: [] }
-    await actions.fetchData({ state, commit })
+    await actions.fetchData({ state, commit, dispatch })
     await flushPromises()
 
     expect(commit).toHaveBeenCalledTimes(5)
+    expect(dispatch).toHaveBeenCalledTimes(1)
 
     expect(commit).toHaveBeenNthCalledWith(1, 'SET_LOADING')
     expect(commit).toHaveBeenNthCalledWith(2, 'SET_SETTINGS', expSettings)
     expect(commit).toHaveBeenNthCalledWith(3, 'SET_VARIANTS', VARIANTS)
     expect(commit).toHaveBeenNthCalledWith(4, 'SET_DELETIONS', DELETIONS)
     expect(commit).toHaveBeenNthCalledWith(5, 'UNSET_LOADING')
+
+    expect(dispatch).toHaveBeenNthCalledWith(1, 'saveSettings')
   })
 })
 
