@@ -16,9 +16,17 @@ export async function getDeletions() {
   }
 }
 
-export function customSettingsMerger(objValue, srcValue, key) {
+export function settingsAllSamplesMerger(objValue, srcValue, key) {
+  if (key === 'samples') {
+    return _.unionBy((srcValue || []).concat(objValue || []), 'id')
+  } else {
+    return undefined
+  }
+}
+
+export function settingsSampleMerger(objValue, srcValue, key) {
   if (key === 'variantSearches' || key === 'variantTags') {
-    return _.unionBy((objValue || []).concat(srcValue || []), 'name')
+    return _.unionBy((srcValue || []).concat(objValue || []), 'name')
   } else if (key === 'curations') {
     return srcValue
   } else {
@@ -32,17 +40,36 @@ export async function loadSettings() {
   const localStorageSettings =
     JSON.parse(localStorage.getItem('mitoSettings')) || {}
 
-  const result = _.mergeWith(
+  const samplesMerged = _.mergeWith(
+    {},
     defaultSettings,
     fileSettings,
     localStorageSettings,
-    customSettingsMerger
+    settingsAllSamplesMerger
   )
+
+  samplesMerged.samples = samplesMerged.samples.map(sam => {
+    const defaultSample = defaultSettings?.samples?.find(s => s.id === sam.id)
+    const fileSample = fileSettings?.samples?.find(s => s.id === sam.id)
+    const localSample = localStorageSettings?.samples?.find(
+      s => s.id === sam.id
+    )
+
+    const mergedSample = _.mergeWith(
+      {},
+      defaultSample,
+      fileSample,
+      localSample,
+      settingsSampleMerger
+    )
+
+    return mergedSample
+  })
 
   return {
     status: 200,
     statusText: 'OK',
-    data: result,
+    data: samplesMerged,
   }
 }
 

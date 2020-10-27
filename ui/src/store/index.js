@@ -94,7 +94,7 @@ export const getters = {
   getCurationByVariantId: state => variantId => {
     const sampleCurations = getters.getSampleSettings(state).curations
 
-    return sampleCurations.find(c => c.variantId === variantId) || {}
+    return sampleCurations?.find(c => c.variantId === variantId) || {}
   },
 }
 

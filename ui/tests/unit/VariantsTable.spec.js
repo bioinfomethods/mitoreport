@@ -6,7 +6,6 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Vuetify from 'vuetify'
 import Vuex from 'vuex'
-import defaultSettings from '../fixtures/defaultSettings.json'
 import store, { getters, mutations, state } from './TestStore'
 
 const app = document.createElement('div')
@@ -54,44 +53,6 @@ describe('VariantTable.vue', () => {
   })
 
   describe('onSavedSearchChange()', () => {
-    it('change to preset search sets filterConfig correctly', () => {
-      underTest.vm.onSavedSearchChange(
-        defaultSettings.samples[0].variantSearches.find(
-          vs => vs.name === 'Preset Filter 1'
-        )
-      )
-
-      expect(underTest.vm.$data.filterConfig).toEqual({
-        posRange: [200, 16300],
-        allele: 'A/C',
-        selectedTypes: ['SNP', 'INS', 'DEL'],
-        selectedGenes: [],
-        selectedConsequence: {},
-        vafRange: [0.00001, 0.1],
-        depthRange: [0, 999999],
-        disease: '',
-        diseaseShowBlank: false,
-        curationSearch: '',
-        importantCuration: false,
-        gbFreqMax: 100.0,
-        mitoMap: '',
-        mitoMapShowBlank: false,
-        selectedCuratedRefName: 'All',
-        hgvsp: '',
-        hgvspShowBlank: false,
-        hgvsc: '',
-        hgvscShowBlank: false,
-        hgvs: '',
-        hgvsShowBlank: false,
-      })
-      expect(underTest.vm.$data.vafIndexRange).toEqual([1, 10])
-      expect(underTest.vm.$data.searchForm).toEqual({
-        valid: true,
-        name: '',
-        description: '',
-      })
-    })
-
     it('change to custom search sets filterConfig correctly', () => {
       underTest.vm.onSavedSearchChange({
         name: 'Custom Filter 1',

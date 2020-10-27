@@ -37,6 +37,45 @@
             "vafRange": [0.00001, 0.1],
             "importantCuration": false
           }
+        },
+        {
+          "name": "Custom Filter 2",
+          "description": "Custom 2 description",
+          "custom": true,
+          "filterConfig": {
+            "posRange": [200, 16300],
+            "allele": "A/C",
+            "selectedTypes": ["SNP", "INS", "DEL"],
+            "selectedConsequence": {},
+            "vafRange": [0.00001, 0.1],
+            "importantCuration": false
+          }
+        },
+        {
+          "name": "Preset Filter 1",
+          "description": "Filter 1 description",
+          "custom": false,
+          "filterConfig": {
+            "posRange": [200, 16300],
+            "allele": "A/C",
+            "selectedTypes": ["SNP", "INS", "DEL"],
+            "selectedConsequence": {},
+            "vafRange": [0.00001, 0.1],
+            "importantCuration": false
+          }
+        },
+        {
+          "name": "Preset Filter 2",
+          "description": "Filter 2 description",
+          "custom": false,
+          "filterConfig": {
+            "posRange": [0, 16500],
+            "selectedTypes": ["SNP", "DEL"],
+            "selectedConsequence": {},
+            "vafRange": [0.00001, 0.05],
+            "depthRange": [500, 12000],
+            "importantCuration": false
+          }
         }
       ],
       "variantTags": [

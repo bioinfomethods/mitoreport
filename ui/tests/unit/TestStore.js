@@ -1,4 +1,4 @@
-import { customSettingsMerger } from '@/services/LocalDataService'
+import { settingsAllSamplesMerger } from '@/services/LocalDataService'
 import { DEFAULT_SNACKBAR_OPTS } from '@/shared/constants'
 import * as _ from 'lodash'
 import Vue from 'vue'
@@ -23,7 +23,11 @@ const mapVariant = function(variant) {
 }
 
 export const state = {
-  settings: _.mergeWith(defaultSettings, mitoSettings, customSettingsMerger),
+  settings: _.mergeWith(
+    defaultSettings,
+    mitoSettings,
+    settingsAllSamplesMerger
+  ),
   loading: false,
   snackbar: DEFAULT_SNACKBAR_OPTS,
   variants: variants.map(mapVariant),
