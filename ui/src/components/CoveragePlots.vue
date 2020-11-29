@@ -34,7 +34,7 @@ export default {
   props: {},
 
   mounted: function() {
-    if (this.sample && this.deletions[this.sample]) {
+    if (this.getSample && this.deletions[this.getSample]) {
       this.plotCoverage()
       this.plotSplitReads()
     }
@@ -49,8 +49,8 @@ export default {
     plotCoverage() {
       const covData = [
         {
-          key: this.sample,
-          values: this.deletions[this.sample].coverage,
+          key: this.getSample,
+          values: this.deletions[this.getSample].coverage,
         },
       ]
       const coverageChart = nv.models
@@ -70,8 +70,8 @@ export default {
     plotSplitReads() {
       const splitReadData = [
         {
-          key: this.sample,
-          values: this.deletions[this.sample].splitReads,
+          key: this.getSample,
+          values: this.deletions[this.getSample].splitReads,
         },
       ]
 
@@ -92,7 +92,7 @@ export default {
   },
 
   watch: {
-    sample: function() {
+    getSample: function() {
       this.plotCoverage()
       this.plotSplitReads()
     },
