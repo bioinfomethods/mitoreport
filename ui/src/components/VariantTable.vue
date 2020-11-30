@@ -218,24 +218,6 @@
               </v-slider>
             </td>
             <td>
-              <v-row class="px-4 justify-space-between">
-                <span class="grey--text text--darken-1">{{
-                  filterConfig.depthRange[0]
-                }}</span>
-                <span class="grey--text text--darken-1">{{
-                  filterConfig.depthRange[1]
-                }}</span>
-              </v-row>
-              <v-range-slider
-                v-model="filterConfig.depthRange"
-                :min="0"
-                :max="maxReadDepth"
-                step="100"
-                hide-details
-              >
-              </v-range-slider>
-            </td>
-            <td>
               <v-row class="justify-space-between">
                 <v-text-field
                   v-model="filterConfig.curationSearch"
@@ -420,7 +402,6 @@ export default {
         selectedConsequence: {},
         vafRange: [0, 1],
         gbFreqMax: 100.0,
-        depthRange: [0, 999999],
         disease: '',
         diseaseShowBlank: false,
         curationSearch: '',
@@ -552,12 +533,6 @@ export default {
           value: 'gbFreqPct',
           width: '130',
           filter: this.gbFreqFilter,
-        },
-        {
-          text: 'Depth',
-          value: 'genotypes[0].DP',
-          width: '120',
-          filter: this.depthFilter,
         },
         {
           text: 'Curation',
@@ -754,13 +729,6 @@ export default {
       return filters.rangeTextFilter(`${lower}-${upper}`, value || 0.0)
     },
 
-    depthFilter: function(value) {
-      return filters.rangeTextFilter(
-        `${this.filterConfig.depthRange[0]}-${this.filterConfig.depthRange[1]}`,
-        value
-      )
-    },
-
     alleleFilter: function(value) {
       return filters.iContainsFilter(this.filterConfig.allele, value)
     },
@@ -862,9 +830,6 @@ export default {
   },
 
   watch: {
-    maxReadDepth: function() {
-      this.filterConfig.depthRange = [0, this.maxReadDepth]
-    },
     consequences: function() {
       this.filterConfig.selectedConsequence = this.consequences.slice(-1)[0]
     },
