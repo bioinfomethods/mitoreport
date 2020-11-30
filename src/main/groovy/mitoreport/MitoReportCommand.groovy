@@ -1,4 +1,4 @@
-package au.edu.mcri.mitoreport
+package mitoreport
 
 import gngs.CliOptions
 import gngs.tools.DeletionPlot

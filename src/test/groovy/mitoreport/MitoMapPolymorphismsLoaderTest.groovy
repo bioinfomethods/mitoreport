@@ -1,4 +1,4 @@
-package au.edu.mcri.mitoreport
+package mitoreport
 
 import groovy.json.JsonSlurper
 import io.micronaut.core.io.ResourceLoader

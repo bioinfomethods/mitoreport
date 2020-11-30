@@ -5,7 +5,7 @@ plugins {
 }
 
 version "0.1"
-group "au.edu.mcri.mitoreport"
+group "mitoreport"
 defaultTasks 'clean', 'build'
 
 repositories {
@@ -60,7 +60,7 @@ dependencies {
 
 test.classpath += configurations.developmentOnly
 
-mainClassName = "au.edu.mcri.mitoreport.MitoCli"
+mainClassName = "mitoreport.MitoCli"
 
 java {
   sourceCompatibility = JavaVersion.toVersion('1.8')

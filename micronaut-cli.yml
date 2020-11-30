@@ -1,5 +1,5 @@
 applicationType: cli
-defaultPackage: au.edu.mcri.mitoreport
+defaultPackage: mitoreport
 testFramework: spock
 sourceLanguage: groovy
 buildTool: gradle

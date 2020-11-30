@@ -1,4 +1,4 @@
-package au.edu.mcri.mitoreport
+package mitoreport
 
 import spock.lang.Specification
 import spock.lang.Unroll
