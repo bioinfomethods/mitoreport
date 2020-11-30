@@ -523,7 +523,7 @@ export default {
           filter: this.consequenceFilter,
         },
         {
-          text: 'VAF',
+          text: 'Heteroplasmy',
           value: 'genotypes[0].AF',
           width: '120',
           filter: this.vafFilter,
