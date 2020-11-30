@@ -301,11 +301,7 @@
         </template>
         <template v-slot:item.ref_alt="{ item }">
           <td>
-            <HmtVarLink
-              :position="item.pos"
-              :refAllele="item.ref"
-              :altAllele="item.alt"
-            ></HmtVarLink>
+            <a :id='`varlink-${item.pos}-${item.ref}-${item.alt}`' @click.stop='activeVariant=item'>{{item.ref}}/{{item.alt}}</a>
           </td>
         </template>
         <template v-slot:item.symbol="{ item }">
@@ -357,6 +353,26 @@
         </template>
       </v-data-table>
     </v-card>
+
+    <v-dialog v-if='activeVariant' v-model='activeVariant' width='400'>
+      <v-card>
+        <v-card-title>
+          chrM:{{activeVariant.pos}} {{activeVariant.ref}}/{{activeVariant.alt}}
+        </v-card-title>
+        <v-card-text>
+          <ul>
+          <li><a :href='`https://gnomad.broadinstitute.org/region/M-${activeVariant.pos-5}-${activeVariant.pos+5}?dataset=gnomad_r3`' target='mrgnomadvariant'>gnomAD (Region)</a></li>
+          <li><a :href='`https://gnomad.broadinstitute.org/variant/M-${activeVariant.pos}-${activeVariant.ref}-${activeVariant.alt}?dataset=gnomad_r3`' target='mrgnomadregion'>gnomAD (Variant)</a></li>
+          <li><HmtVarLink
+              :position="activeVariant.pos"
+              :refAllele="activeVariant.ref"
+              :altAllele="activeVariant.alt"
+          ></HmtVarLink></li>
+          </ul>
+        </v-card-text>
+      </v-card>
+    </v-dialog>
+    
   </div>
 </template>
 
@@ -443,6 +459,7 @@ export default {
       expandedVariants: [],
       transitioned: [],
       closeTimeouts: {},
+      activeVariant: null 
     }
   },
 
@@ -542,7 +559,7 @@ export default {
           filter: this.mitoMapFilter,
         },
         {
-          text: 'MitoMap Curated Refs',
+          text: 'MitoMap Refs',
           value: 'curatedRef',
           align: 'center',
           width: '130',

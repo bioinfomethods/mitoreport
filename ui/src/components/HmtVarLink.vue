@@ -5,9 +5,8 @@
       :href="hmtVarSearchResultsUrl"
       target="_blank"
     >
-      {{ alleleVariant }}</a
+      HmtVar</a
     >
-    <sup><v-icon class="pa-1" size="small">mdi-open-in-new</v-icon></sup>
   </span>
   <span v-else>{{ alleleVariant }}</span>
 </template>
