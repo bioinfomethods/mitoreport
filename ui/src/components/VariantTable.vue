@@ -212,7 +212,9 @@
               </v-row>
               <v-slider
                 v-model="filterConfig.gbFreqMax"
-                step="1.0"
+                step="0.2"
+                min="0"
+                max="10"
                 hide-details
               >
               </v-slider>
@@ -315,7 +317,7 @@
           <td>{{ item.consequence ? item.consequence.name : '' }}</td>
         </template>
         <template v-slot:item.gbFreqPct="{ item }">
-          <td>{{ item.gbFreqPct | precisionTo }}</td>
+          <td>{{ item.gbFreqPct | precisionTo }}%</td>
         </template>
         <template v-slot:item.curation="{ item }">
           <td>
@@ -400,7 +402,7 @@ export default {
         selectedGenes: [],
         selectedConsequence: {},
         vafRange: [0, 1],
-        gbFreqMax: 100.0,
+        gbFreqMax: 5.0,
         disease: '',
         diseaseShowBlank: false,
         curationSearch: '',
