@@ -5,3 +5,12 @@ tr.paddedrow td {
 label.v-label {
   font-size: 10px;
 }
+
+a {
+ text-decoration: none; 
+}
+
+a:active, a:hover {
+ text-decoration: underline;
+}
+
