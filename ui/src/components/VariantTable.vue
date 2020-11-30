@@ -326,11 +326,11 @@
         </template>
         <template v-slot:item.symbol="{ item }">
           <td>
-            <GeneCardsLink :gene="item.symbol"></GeneCardsLink>
+            <GeneCardsLink v-if='item.symbol' :gene="item.symbol"></GeneCardsLink>
           </td>
         </template>
         <template v-slot:item.consequence="{ item }">
-          <td>{{ item.consequence.name }}</td>
+          <td>{{ item.consequence ? item.consequence.name : '' }}</td>
         </template>
         <template v-slot:item.gbFreqPct="{ item }">
           <td>{{ item.gbFreqPct | precisionTo }}</td>
