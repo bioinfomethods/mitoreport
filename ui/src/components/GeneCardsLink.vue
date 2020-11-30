@@ -1,7 +1,6 @@
 <template>
   <span v-if="geneCardsUrl">
     <a id="geneCardsUrlLink" :href="geneCardsUrl" target="_blank">{{ gene }}</a>
-    <sup><v-icon class="pa-1" size="small">mdi-open-in-new</v-icon></sup>
   </span>
   <span v-else>{{ gene }}</span>
 </template>

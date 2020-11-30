@@ -1,7 +1,6 @@
 <template>
   <span v-if="curatedRefUrl">
     <a id="curatedRefLink" :href="curatedRefUrl" target="_blank">{{ count }}</a>
-    <sup><v-icon class="pa-1" size="small">mdi-open-in-new</v-icon></sup>
   </span>
   <span id="curatedRefSpan" v-else>{{ count }}</span>
 </template>

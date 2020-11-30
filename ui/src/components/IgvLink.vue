@@ -3,7 +3,6 @@
     <a id="igvUrlLink" :href="igvUrl" @click.prevent="loadIGV" target="igv">{{
       position
     }}</a>
-    <sup><v-icon class="pa-1" size="small">mdi-open-in-new</v-icon></sup>
     <iframe
       ref="igvIframe"
       name="igv"
