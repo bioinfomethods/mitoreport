@@ -46,7 +46,7 @@ describe('App.vue', () => {
   it('renders VariantDetails when navigate to a variant row', async () => {
     router.push({
       name: 'variantDetails',
-      params: { variantId: 'chrM-152-T-C' },
+      params: { variantId: 'chrM-310-T-TC' },
     })
     await underTest.vm.$nextTick()
 
