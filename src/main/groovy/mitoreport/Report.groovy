@@ -56,6 +56,7 @@ class Report extends ToolBase {
 
         List results = []
 
+        def consequencesWithRank = RANKED_CONSEQUENCES.withIndex(1).collect { String consequence, Integer index -> [id: consequence, name: consequence, rank: index] }
         vcf.each { Variant v ->
 
             int sampleIndex = 0
@@ -76,7 +77,6 @@ class Report extends ToolBase {
 
             Map vep = v.maxVep
 
-            def consequencesWithRank = RANKED_CONSEQUENCES.withIndex(1).collect { String consequence, Integer index -> [id: consequence, name: consequence, rank: index] }
             Map vepInfo = [
                     symbol     : vep.SYMBOL,
                     consequence: consequencesWithRank.find { it.id == vep.Consequence },
