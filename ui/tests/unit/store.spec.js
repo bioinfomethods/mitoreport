@@ -201,7 +201,7 @@ describe('root store mutations', () => {
         posRange: [2000, 16300],
         allele: 'T',
         selectedTypes: ['SNP', 'INS'],
-        vafRange: [0.00001, 0.05],
+        vafRange: [0.03, 0.1],
       },
     }
 

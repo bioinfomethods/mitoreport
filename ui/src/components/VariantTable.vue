@@ -310,7 +310,10 @@
         </template>
         <template v-slot:item.symbol="{ item }">
           <td>
-            <GeneCardsLink v-if='item.symbol' :gene="item.symbol"></GeneCardsLink>
+            <GeneCardsLink
+              v-if="item.symbol"
+              :gene="item.symbol"
+            ></GeneCardsLink>
           </td>
         </template>
         <template v-slot:item.consequence="{ item }">
@@ -424,14 +427,8 @@ export default {
       },
       searchFormMenu: false,
       selectedSavedSearch: DEFAULT_VARIANT_SEARCH,
-      vafTicks: [
-        0.01,
-        0.03,
-        0.05,
-        0.1,
-        1,
-      ],
-      vafIndexRange: [1, 5],
+      vafTicks: [0.01, 0.03, 0.05, 0.1, 1],
+      vafIndexRange: [0, 4],
       tableOptions: {
         page: 1,
         itemsPerPage: 20,

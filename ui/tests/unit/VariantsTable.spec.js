@@ -66,7 +66,7 @@ describe('VariantTable.vue', () => {
         selectedTypes: ['SNP', 'DEL'],
         selectedGenes: [],
         selectedConsequence: {},
-        vafRange: [0.00001, 0.05],
+        vafRange: [0.03, 0.1],
         depthRange: [500, 12000],
         disease: '',
         diseaseShowBlank: false,
@@ -83,7 +83,7 @@ describe('VariantTable.vue', () => {
         hgvs: '',
         hgvsShowBlank: false,
       })
-      expect(underTest.vm.$data.vafIndexRange).toEqual([1, 9])
+      expect(underTest.vm.$data.vafIndexRange).toEqual([1, 3])
       expect(underTest.vm.$data.searchForm).toEqual({
         valid: true,
         name: 'Custom Filter 1',
@@ -147,7 +147,7 @@ describe('VariantTable.vue', () => {
           hgvs: '',
           hgvsShowBlank: false,
         },
-        vafIndexRange: [3, 7],
+        vafIndexRange: [1, 3],
         selectedSavedSearch: DEFAULT_VARIANT_SEARCH,
       })
 
@@ -165,7 +165,7 @@ describe('VariantTable.vue', () => {
           selectedTypes: ['SNP', 'INS', 'DEL'],
           selectedGenes: [],
           selectedConsequence: {},
-          vafRange: [0.0001, 0.03],
+          vafRange: [0.03, 0.1],
           depthRange: [0, 10000],
           disease: '',
           diseaseShowBlank: false,
