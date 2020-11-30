@@ -62,26 +62,6 @@ const DELETIONS = {
 const expSettings = _.merge(DEFAULT_SETTINGS, SETTINGS)
 
 describe('root store getters', () => {
-  describe('sample', () => {
-    it.each`
-      deletions                                                                                           | expResult
-      ${null}                                                                                             | ${'No Sample'}
-      ${undefined}                                                                                        | ${'No Sample'}
-      ${{}}                                                                                               | ${'No Sample'}
-      ${[]}                                                                                               | ${'No Sample'}
-      ${{ TestSample: { coverage: [], splitReads: [] } }}                                                 | ${'TestSample'}
-      ${{ TestSample1: { coverage: [], splitReads: [] }, TestSample2: { coverage: [], splitReads: [] } }} | ${'TestSample1'}
-    `(
-      'Given deletions is $deletions, expect sample is $expResult',
-      ({ deletions, expResult }) => {
-        const state = {
-          deletions: deletions,
-        }
-        expect(getters.getSample(state)).toEqual(expResult)
-      }
-    )
-  })
-
   describe('sampleSettings', () => {
     it.each`
       settings                                                      | expResult
@@ -94,29 +74,10 @@ describe('root store getters', () => {
       'Given settings is $settings, expect sampleSettings is $expResult',
       ({ settings, expResult }) => {
         const state = {
+          sampleId: 'TestSample',
           settings: settings,
         }
-        const mockSample = (getters.getSample = jest.fn())
-        mockSample.mockReturnValue('TestSample')
         expect(getters.getSampleSettings(state)).toEqual(expResult)
-      }
-    )
-  })
-
-  describe('settingsBamFile', () => {
-    it.each`
-      sampleSettings                                  | expResult
-      ${null}                                         | ${null}
-      ${undefined}                                    | ${null}
-      ${{ bamDir: '', bamFilename: 'test.bam' }}      | ${null}
-      ${{ bamDir: '/tmp/', bamFilename: '' }}         | ${null}
-      ${{ bamDir: '/tmp/', bamFilename: 'test.bam' }} | ${'/tmp/test.bam'}
-    `(
-      'Given sampleSettings is $sampleSettings, expect settingsBamFile is $expResult',
-      ({ sampleSettings, expResult }) => {
-        const mockSampleSettings = (getters.getSampleSettings = jest.fn())
-        mockSampleSettings.mockReturnValue(sampleSettings)
-        expect(getters.getSettingsBamFile({})).toEqual(expResult)
       }
     )
   })
@@ -278,14 +239,15 @@ describe('root store actions', () => {
     await actions.fetchData({ state, commit, dispatch })
     await flushPromises()
 
-    expect(commit).toHaveBeenCalledTimes(5)
+    expect(commit).toHaveBeenCalledTimes(6)
     expect(dispatch).toHaveBeenCalledTimes(1)
 
     expect(commit).toHaveBeenNthCalledWith(1, 'SET_LOADING')
     expect(commit).toHaveBeenNthCalledWith(2, 'SET_SETTINGS', expSettings)
     expect(commit).toHaveBeenNthCalledWith(3, 'SET_VARIANTS', VARIANTS)
     expect(commit).toHaveBeenNthCalledWith(4, 'SET_DELETIONS', DELETIONS)
-    expect(commit).toHaveBeenNthCalledWith(5, 'UNSET_LOADING')
+    expect(commit).toHaveBeenNthCalledWith(5, 'SET_SAMPLE_ID', DELETIONS)
+    expect(commit).toHaveBeenNthCalledWith(6, 'UNSET_LOADING')
 
     expect(dispatch).toHaveBeenNthCalledWith(1, 'saveSettings')
   })

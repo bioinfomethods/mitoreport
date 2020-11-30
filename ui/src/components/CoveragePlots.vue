@@ -27,30 +27,29 @@
 import nv from 'nvd3'
 import d3 from 'd3'
 import '@/assets/css/nv.d3.min.css'
-import { mapGetters, mapState } from 'vuex'
+import { mapState } from 'vuex'
 
 export default {
   name: 'CoveragePlots',
   props: {},
 
   mounted: function() {
-    if (this.getSample && this.deletions[this.getSample]) {
+    if (this.sampleId && this.deletions[this.sampleId]) {
       this.plotCoverage()
       this.plotSplitReads()
     }
   },
 
   computed: {
-    ...mapGetters(['getSample']),
-    ...mapState(['deletions']),
+    ...mapState(['deletions', 'sampleId']),
   },
 
   methods: {
     plotCoverage() {
       const covData = [
         {
-          key: this.getSample,
-          values: this.deletions[this.getSample].coverage,
+          key: this.sampleId,
+          values: this.deletions[this.sampleId].coverage,
         },
       ]
       const coverageChart = nv.models
@@ -70,8 +69,8 @@ export default {
     plotSplitReads() {
       const splitReadData = [
         {
-          key: this.getSample,
-          values: this.deletions[this.getSample].splitReads,
+          key: this.sampleId,
+          values: this.deletions[this.sampleId].splitReads,
         },
       ]
 
@@ -92,7 +91,7 @@ export default {
   },
 
   watch: {
-    getSample: function() {
+    sampleId: function() {
       this.plotCoverage()
       this.plotSplitReads()
     },

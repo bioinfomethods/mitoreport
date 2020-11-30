@@ -19,6 +19,7 @@ import {
 Vue.use(Vuex)
 
 export const state = {
+  sampleId: '',
   settings: {},
   loading: false,
   snackbar: { ...DEFAULT_SNACKBAR_OPTS },
@@ -29,19 +30,6 @@ export const state = {
 }
 
 export const getters = {
-  getSample: state => {
-    if (!state.deletions) {
-      return 'No Sample'
-    }
-
-    const samples = Object.keys(state.deletions)
-    if (samples.length > 0) {
-      return samples[0]
-    } else {
-      return 'No Sample'
-    }
-  },
-
   getIgvHost: state => {
     return state.settings.igvHost || DEFAULT_IGV_HOST
   },
@@ -55,23 +43,26 @@ export const getters = {
   },
 
   getSampleSettings: state => {
+    if (!state.sampleId) {
+      return {}
+    }
     const result = (state.settings?.samples || []).find(
-      sample => sample.id === getters.getSample(state)
+      sample => sample.id === state.sampleId
     )
     return result || {}
   },
 
-  getSettingsBamDir: state => {
-    return getters.getSampleSettings(state)?.bamDir
+  getSettingsBamDir: (state, getters) => {
+    return getters.getSampleSettings?.bamDir
   },
 
-  getSettingsBamFilename: state => {
-    return getters.getSampleSettings(state)?.bamFilename
+  getSettingsBamFilename: (state, getters) => {
+    return getters.getSampleSettings?.bamFilename
   },
 
-  getSettingsBamFile: state => {
-    const sampleBamDir = getters.getSettingsBamDir(state)
-    const sampleBamFilename = getters.getSettingsBamFilename(state)
+  getSettingsBamFile: (state, getters) => {
+    const sampleBamDir = getters.getSettingsBamDir
+    const sampleBamFilename = getters.getSettingsBamFilename
     if (!sampleBamDir || !sampleBamFilename) {
       return null
     }
@@ -83,16 +74,16 @@ export const getters = {
     return state.variants.find(v => v.id === variantId) || {}
   },
 
-  getVariantTags: state => {
-    return getters.getSampleSettings(state)?.variantTags || []
+  getVariantTags: (state, getters) => {
+    return getters?.getSampleSettings?.variantTags || []
   },
 
-  getImportantVariantTags: state => {
-    return getters.getVariantTags(state).filter(t => t.important)
+  getImportantVariantTags: (state, getters) => {
+    return getters.getVariantTags.filter(t => t.important)
   },
 
-  getCurationByVariantId: state => variantId => {
-    const sampleCurations = getters.getSampleSettings(state).curations
+  getCurationByVariantId: (state, getters) => variantId => {
+    const sampleCurations = getters.getSampleSettings?.curations || []
 
     return sampleCurations?.find(c => c.variantId === variantId) || {}
   },
@@ -109,6 +100,17 @@ export const mutations = {
 
   UNSET_LOADING(state) {
     state.loading = false
+  },
+
+  SET_SAMPLE_ID(state, deletions) {
+    let sampleId = 'No Sample'
+
+    const samples = Object.keys(deletions)
+    if (samples.length > 0) {
+      sampleId = samples[0]
+    }
+
+    state.sampleId = sampleId
   },
 
   SET_VARIANTS(state, variants) {
@@ -212,11 +214,14 @@ export const actions = {
       const delResp = await getDeletions()
       commit('SET_VARIANTS', varResp.data)
       commit('SET_DELETIONS', delResp.data)
+      commit('SET_SAMPLE_ID', delResp.data)
+
+      const sampleSettings = getters.getSampleSettings(state)
 
       state.variants.forEach(v => {
-        const savedCuration = getters
-          .getSampleSettings(state)
-          .curations?.find(c => c.variantId === v.id)
+        const savedCuration = sampleSettings.curations?.find(
+          c => c.variantId === v.id
+        )
         if (_.isEmpty(savedCuration)) {
           const blankCuration = {
             id: uuidv4(),
@@ -303,14 +308,33 @@ export const actions = {
     commit('DEACTIVATE_SNACKBAR')
   },
 
-  filterImporantVariants({ state, commit }, selectImportant) {
-    const importantTagNames = getters
-      .getImportantVariantTags(state)
-      .map(v => v.name)
+  // filterImportantVariants({ state, commit }, selectImportant) {
+  //   const importantTagNames = getters
+  //     .getImportantVariantTags(state)
+  //     .map(v => v.name)
+  //   const filteredVariants = state.variants.filter(v => {
+  //     if (!selectImportant) return true
+
+  //     const curation = getters.getCurationByVariantId(state)(v.id)
+  //     const hasImportantTags = (curation.selectedTagNames || []).some(st =>
+  //       importantTagNames.includes(st)
+  //     )
+
+  //     return hasImportantTags
+  //   })
+
+  //   commit('SET_FILTERED_VARIANTS', filteredVariants)
+  // },
+
+  filterImportantVariants({ state, commit, getters }, selectImportant) {
+    const importantTagNames = getters.getImportantVariantTags.map(v => v.name)
+
+    const sampleCurations = getters?.getSampleSettings?.curations || []
+    // return sampleCurations?.find(c => c.variantId === variantId) || {}
     const filteredVariants = state.variants.filter(v => {
       if (!selectImportant) return true
 
-      const curation = getters.getCurationByVariantId(state)(v.id)
+      const curation = sampleCurations?.find(c => c.variantId === v.id) || {}
       const hasImportantTags = (curation.selectedTagNames || []).some(st =>
         importantTagNames.includes(st)
       )

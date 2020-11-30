@@ -23,6 +23,7 @@ const mapVariant = function(variant) {
 }
 
 export const state = {
+  sampleId: '15G002035-GM12878K_20pc_10kb_200',
   settings: _.mergeWith(
     defaultSettings,
     mitoSettings,
@@ -47,14 +48,10 @@ export const actions = {
   saveSettings() {},
   downloadSettings() {},
   closeSnackbar() {},
-  filterImporantVariants() {},
+  filterImportantVariants() {},
 }
 
 export const getters = {
-  getSample: () => {
-    return '15G002035-GM12878K_20pc_10kb_200'
-  },
-
   getIgvHost: () => {
     return DEFAULT_IGV_HOST
   },
@@ -67,9 +64,9 @@ export const getters = {
     return DEFAULT_HMT_VAR_URL_PREFIX
   },
 
-  getSampleSettings: state => {
+  getSampleSettings: () => {
     return defaultSettings.samples.find(
-      sample => sample.id === getters.getSample(state)
+      sample => sample.id === '15G002035-GM12878K_20pc_10kb_200'
     )
   },
 

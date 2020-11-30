@@ -388,7 +388,6 @@ export default {
   },
 
   mounted() {
-    console.debug(`VariantTable mounted, variantId=${this.variantId}`)
     this.toggleVariantById(this.variantId)
   },
 
@@ -765,7 +764,7 @@ export default {
 
     toggleImportantCuration: function() {
       this.$store.dispatch(
-        'filterImporantVariants',
+        'filterImportantVariants',
         this.filterConfig.importantCuration
       )
     },

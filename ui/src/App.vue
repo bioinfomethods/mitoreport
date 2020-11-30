@@ -2,7 +2,7 @@
   <v-app mitoreport>
     <v-app-bar app color="primary">
       <v-toolbar-title>
-        <span class="white--text text-h6">Mito Report for {{ getSample }}</span>
+        <span class="white--text text-h6">Mito Report for {{ sampleId }}</span>
       </v-toolbar-title>
       <v-progress-circular class="ml-4" v-if="loading" indeterminate />
       <v-spacer></v-spacer>
@@ -49,7 +49,7 @@
 </style>
 
 <script>
-import { mapGetters, mapState } from 'vuex'
+import { mapState } from 'vuex'
 import AppSettings from '@/components/AppSettings'
 
 export default {
@@ -73,8 +73,7 @@ export default {
   },
 
   computed: {
-    ...mapState(['loading', 'snackbar', 'initialFetchDataLoaded']),
-    ...mapGetters(['getSample']),
+    ...mapState(['loading', 'snackbar', 'initialFetchDataLoaded', 'sampleId']),
   },
 
   methods: {
