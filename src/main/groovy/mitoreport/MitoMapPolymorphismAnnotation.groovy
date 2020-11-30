@@ -16,6 +16,7 @@ class MitoMapPolymorphismAnnotation {
     // private fields will not be serialized when using JsonOutput.toJson()
 
     private static final Pattern HTML_ANCHOR_PATTERN = Pattern.compile(/<a.*?href='(.*?)'.*?>(\d+?\.?\d*?%*)<\/a>/)
+    private static final Pattern HTML_TEXT_ANCHOR_PATTERN = Pattern.compile(/<a.*?href=['"](.*?)["'].*?>(.*?)<\/a>/)
 //    private static final Pattern CONTROL_GB_FREQ_PATTERN = Pattern.compile(/(\d+\.\d*%)<br>\((\d+\.\d*%)\)/)
     private static final Pattern CONTROL_GB_FREQ_PATTERN = Pattern.compile(/\(.*?(\d+\.\d*?)%.*?\)/)
     private static final Pattern ALLELE_CHANGE_PATTERN = Pattern.compile(/([ATCGU]+?)-([ATCGU|del]*)/)
@@ -118,6 +119,15 @@ class MitoMapPolymorphismAnnotation {
             String href = anchorMatcher[0][1]
 
             return "$mitoMapHost$href"
+        }
+    }
+    
+    String getLocus() {
+        Matcher anchorMatcher = locusAnchor =~ HTML_TEXT_ANCHOR_PATTERN
+        if (!anchorMatcher.find()) {
+            return null
+        } else {
+            return anchorMatcher[0][2] // locus
         }
     }
 }

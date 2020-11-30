@@ -28,6 +28,16 @@ class Report extends ToolBase {
 
     MitoMapPolymorphismsLoader mitoMapLoader
 
+    /**
+     * Index of consequences, ordered by severity
+     */
+    List<Map> consequencesWithRank = RANKED_CONSEQUENCES.withIndex(1).collect { String consequence, Integer index -> [id: consequence, name: consequence, rank: index] }
+    
+    final static Set<String> EXCLUDE_CONSEQUENCES = [
+        "upstream_gene_variant",
+        "downstream_gene_variant",
+    ] as Set
+
     @Override
     public void run() {
 
@@ -56,7 +66,6 @@ class Report extends ToolBase {
 
         List results = []
 
-        def consequencesWithRank = RANKED_CONSEQUENCES.withIndex(1).collect { String consequence, Integer index -> [id: consequence, name: consequence, rank: index] }
         vcf.each { Variant v ->
 
             int sampleIndex = 0
@@ -75,14 +84,7 @@ class Report extends ToolBase {
                     dosages: v.getDosages()
             ]
 
-            Map vep = v.maxVep
-
-            Map vepInfo = [
-                    symbol     : vep.SYMBOL,
-                    consequence: consequencesWithRank.find { it.id == vep.Consequence },
-                    hgvsp      : URLDecoder.decode(vep.HGVSp?.replaceAll('^.*:', ''), "UTF-8"),
-                    hgvsc      : vep.HGVSc?.replaceAll('^.*:', '')
-            ]
+            Map vepInfo = extractMitoVEPInfo(v)
 
             Map variantAnnotations =
                     annotations.getOrDefault(compactAllele, [:]).collectEntries { key, value ->
@@ -102,6 +104,16 @@ class Report extends ToolBase {
 
             Map infoField = v.parsedInfo
             infoField.remove('ANN')
+            
+            // If there is a locus annotation from mito map, we always prefer that
+            if(mitoAnnotation && mitoAnnotation.locus) {
+                vepInfo.symbol = mitoAnnotation.locus
+            }
+            else 
+            if(variantAnnotations && variantAnnotations.Locus) {
+                vepInfo.symbol = variantAnnotations.locus
+            }
+            // else stick with what VEP put there
 
             results << variantInfo + vepInfo + variantAnnotations + infoField + [genotypes: v.parsedGenotypes]
         }
@@ -118,6 +130,39 @@ class Report extends ToolBase {
         Utils.writer(variantsResultJson).withWriter { it << json; it << '\n' }
 
         log.info "Wrote annotated variants to $variantsResultJson"
+    }
+
+    /**
+     * Extract relevant VEP information for a mtDNA variant
+     * <p>
+     * This process filters out annotations that are less interpretable for mtDNA variants,
+     * for example, we prefer not to annotate with 'upstream' or 'downstream' since the variant is
+     * not actually inside the gene of interest, and by VEP's interpretation of upstream and downstream,
+     * every mtDNA variant would be upstream or downstream of every gene in the mtDNA.
+     * 
+     * @param v
+     * @return
+     */
+    private Map extractMitoVEPInfo(Variant v) {
+
+        Map vep = v.maxVep
+        if(vep.Consequence in EXCLUDE_CONSEQUENCES) {
+            return [
+                symbol : null,
+                consequence: null,
+                hgvsp : null,
+                hgvsc : null
+            ]
+        }
+
+        Map vepInfo = [
+            symbol     : vep.SYMBOL,
+            consequence: consequencesWithRank.find { it.id == vep.Consequence },
+            hgvsp      : URLDecoder.decode(vep.HGVSp?.replaceAll('^.*:', ''), "UTF-8"),
+            hgvsc      : vep.HGVSc?.replaceAll('^.*:', '')
+        ]
+        
+        return vepInfo 
     }
 
 
