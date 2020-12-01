@@ -618,7 +618,9 @@ export default {
         this.filteredVariants.map(row => row.consequence),
         _.isEqual
       )
-      return _.sortBy(allUniqConsequences, ['rank'])
+      const nullsExcluded = _.filter(allUniqConsequences, c => c !== null)
+
+      return _.sortBy(nullsExcluded, ['rank'])
     },
 
     vafLastTickIndex() {
