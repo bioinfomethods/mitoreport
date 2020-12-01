@@ -24,7 +24,7 @@ class MitoReportCommand implements Runnable {
     private static final String DEFAULT_IGV_HOST = 'http://localhost:60151'
     private static final String DEFAULT_GENE_CARDS_URL_PREFIX = 'https://www.genecards.org/cgi-bin/carddisp.pl'
     private static final String DEFAULT_HMT_VAR_URL_PREFIX = 'https://www.hmtvar.uniba.it/results'
-    private static final String JAR_UI_DIR = 'mitoreport'
+    private static final String JAR_UI_DIR = 'mitoui'
 
     @Option(names = ['-s', '-sample', '--sample'], required = true, description = 'Sample ID')
     String sample

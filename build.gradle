@@ -93,7 +93,7 @@ tasks.withType(JavaExec) {
   }
 }
 
-String mitoOut = "${projectDir}/src/main/resources/mitoreport"
+String mitoOut = "${projectDir}/src/main/resources/mitoui"
 task cleanMitoOut(type: Delete) {
   delete mitoOut
 }

@@ -886,7 +886,7 @@ export default {
 
 .variant-expanded >>> .v-data-table__expanded__row {
   background-color: rgba(0, 0, 0, 0.12);
-}  
+}
 
 .curation-search {
   width: 100px;
