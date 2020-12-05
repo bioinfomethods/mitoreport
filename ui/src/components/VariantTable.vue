@@ -350,13 +350,25 @@
           <td>{{ item.consequence ? item.consequence.name : '' }}</td>
         </template>
         <template v-slot:item.gbFreqPct="{ item }">
-          <td><span v-if='item.gbFreqPct>0'>{{ item.gbFreqPct | precisionTo }}%</span></td>
+          <td>
+            <span v-if="item.gbFreqPct > 0"
+              >{{ item.gbFreqPct | precisionTo }}%</span
+            >
+          </td>
         </template>
         <template v-slot:item.gnomad_af_het="{ item }">
-          <td><span v-if='item.gnomad_af_het>0'>{{ (100*item.gnomad_af_het) | precisionTo }}%</span></td>
+          <td>
+            <span v-if="item.gnomad_af_het > 0"
+              >{{ (100 * item.gnomad_af_het) | precisionTo }}%</span
+            >
+          </td>
         </template>
         <template v-slot:item.gnomad_af_hom="{ item }">
-          <td><span v-if='item.gnomad_af_hom>0'>{{ (100*item.gnomad_af_hom) | precisionTo }}%</span></td>
+          <td>
+            <span v-if="item.gnomad_af_hom > 0"
+              >{{ (100 * item.gnomad_af_hom) | precisionTo }}%</span
+            >
+          </td>
         </template>
         <template v-slot:item.curation="{ item }">
           <td>
@@ -817,14 +829,20 @@ export default {
       let lower = 0
       let upper = this.filterConfig.gnomADHetFreqMax
 
-      return filters.rangeTextFilter(`${lower/100}-${upper/100}`, value || 0.0)
+      return filters.rangeTextFilter(
+        `${lower / 100}-${upper / 100}`,
+        value || 0.0
+      )
     },
 
     gnomADHomFreqFilter: function(value) {
       let lower = 0
       let upper = this.filterConfig.gnomADHomFreqMax
 
-      return filters.rangeTextFilter(`${lower/100}-${upper/100}`, value || 0.0)
+      return filters.rangeTextFilter(
+        `${lower / 100}-${upper / 100}`,
+        value || 0.0
+      )
     },
 
     alleleFilter: function(value) {
