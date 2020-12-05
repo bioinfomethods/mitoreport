@@ -35,6 +35,9 @@ class MitoReportCommand implements Runnable {
     @Option(names = ['-mann', '--mito-annotations'], required = true, description = 'Annotations from MitoMap to apply to VCF')
     Path mitoMapAnnotations
 
+    @Option(names = ['-gnomad', '--gnomad-vcf'], required = true, description = 'gnomAD mtDNA sites VCF')
+    Path gnomADVCF
+
     @Option(names = ['-vcf'], required = true, description = 'VCF file for sample')
     File vcfFile
 
@@ -100,6 +103,7 @@ class MitoReportCommand implements Runnable {
                 'del' : deletionsJson.absolutePath,
                 'ann' : annotations,
                 'mann': mitoMapAnnotations,
+                'gnomad' : gnomADVCF.toFile().absolutePath,
                 'o'   : mitoReportPathName,
         ])
 

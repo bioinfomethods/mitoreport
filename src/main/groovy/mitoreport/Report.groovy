@@ -21,6 +21,8 @@ import static gngs.VEPConsequences.RANKED_CONSEQUENCES
 class Report extends ToolBase {
 
     VCF vcf
+    
+    VCF gnomAD 
 
     Map deletion
 
@@ -43,6 +45,9 @@ class Report extends ToolBase {
 
         log.info "Loading vcf $opts.vcf"
         vcf = VCF.parse(opts.vcf)
+        
+        gnomAD = VCF.parse(opts.gnomad)
+        log.info "Loaded ${gnomAD.size()} variants from gnomAD VCF ${opts.vcf}"
 
         log.info "Loaded ${vcf.size()} variants from $opts.vcf"
 
@@ -61,12 +66,17 @@ class Report extends ToolBase {
         Map<String, Map> annotations = new CSV(opts.ann).toListMap().collectEntries { [it.Allele, it] }
         log.info "Loaded ${annotations.size()} functional annotations"
 
-        List<MitoMapPolymorphismAnnotation> mitoMapAnnotations = mitoMapLoader.getAnnotations(opts.mann)
+        List<MitoMapPolymorphismAnnotation> mitoMapAnnotations = (opts.mann && mitoMapLoader) ? mitoMapLoader.getAnnotations(opts.mann) : []
         log.info "Loaded ${mitoMapAnnotations.size()} MitoMap annotations"
+        
+        int total = 0
+        int gnomADVariantCount = 0
 
         List results = []
 
         vcf.each { Variant v ->
+            
+            ++total
 
             int sampleIndex = 0
 
@@ -114,8 +124,22 @@ class Report extends ToolBase {
                 vepInfo.symbol = variantAnnotations.locus
             }
             // else stick with what VEP put there
+            
+            Map resultInfo = variantInfo + vepInfo + variantAnnotations + infoField + [genotypes: v.parsedGenotypes]
+            
+            Variant gnomADVariant = gnomAD.find(v)
+            if(gnomADVariant) {
+                MitoGnomAD gnomADInfo = MitoGnomAD.parse(gnomADVariant.info)
+                
+                resultInfo.gnomAD = gnomADInfo // native object serializes to JSON OK
 
-            results << variantInfo + vepInfo + variantAnnotations + infoField + [genotypes: v.parsedGenotypes]
+                ++gnomADVariantCount
+            }
+            else {
+                resultInfo.gnomAD = null
+            }
+
+            results << resultInfo
         }
 
         String json = JsonOutput.prettyPrint(JsonOutput.toJson(results))
@@ -129,6 +153,7 @@ class Report extends ToolBase {
         variantsResultJson = new File("$dir/variants.json")
         Utils.writer(variantsResultJson).withWriter { it << json; it << '\n' }
 
+        log.info "Annotated ${gnomADVariantCount} variants with gnomAD annotations (${Utils.perc(gnomADVariantCount/(total+1))})"
         log.info "Wrote annotated variants to $variantsResultJson"
     }
 
@@ -172,6 +197,8 @@ class Report extends ToolBase {
             vcf 'VCF file for sample', args: Cli.UNLIMITED, required: true
             del 'Deletion analysis for sample', args: Cli.UNLIMITED, required: true
             ann 'Annotation file to apply to VCF', args: 1, required: true
+            mann 'MitoMap Annotations file in JSON format (see command to download)', args: 1, required: true
+            gnomad 'gnomAD mitochondrial VCF file', args: 1, required: true
         }
     }
 
