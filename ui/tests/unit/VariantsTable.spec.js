@@ -73,6 +73,8 @@ describe('VariantTable.vue', () => {
         curationSearch: '',
         importantCuration: false,
         gbFreqMax: 100.0,
+        gnomADHetFreqMax : 5,
+        gnomADHomFreqMax : 5,        
         mitoMap: '',
         mitoMapShowBlank: false,
         selectedCuratedRefName: 'All',
