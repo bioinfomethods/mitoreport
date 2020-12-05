@@ -115,7 +115,18 @@ export const mutations = {
 
   SET_VARIANTS(state, variants) {
     const transformed = variants.map(variant => {
-      let result = { ...variant }
+      let result = { 
+        ...variant,
+      }
+
+      // This is because I can't work out how to get the vuetify datatable 
+      // to work with nested objects
+      let gnomAD = variant.gnomAD
+      if(gnomAD) {
+        for(var prop in gnomAD) {
+          result['gnomad_'+prop] = gnomAD[prop]
+        }
+      }
 
       result['ref_alt'] = `${result.ref}/${result.alt}`
 

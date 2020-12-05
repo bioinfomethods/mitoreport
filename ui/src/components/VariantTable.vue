@@ -220,6 +220,36 @@
               </v-slider>
             </td>
             <td>
+              <v-row class="px-4 justify-center">
+                <span class="grey--text text--darken-1">
+                  {{ filterConfig.gnomADHetFreqMax }}
+                </span>
+              </v-row>
+              <v-slider
+                v-model="filterConfig.gnomADHetFreqMax"
+                step="0.2"
+                min="0"
+                max="10"
+                hide-details
+              >
+              </v-slider>
+            </td>
+            <td>
+              <v-row class="px-4 justify-center">
+                <span class="grey--text text--darken-1">
+                  {{ filterConfig.gnomADHomFreqMax }}
+                </span>
+              </v-row>
+              <v-slider
+                v-model="filterConfig.gnomADHomFreqMax"
+                step="0.2"
+                min="0"
+                max="10"
+                hide-details
+              >
+              </v-slider>
+            </td>
+            <td>
               <v-row class="justify-space-between">
                 <v-text-field
                   v-model="filterConfig.curationSearch"
@@ -320,7 +350,13 @@
           <td>{{ item.consequence ? item.consequence.name : '' }}</td>
         </template>
         <template v-slot:item.gbFreqPct="{ item }">
-          <td>{{ item.gbFreqPct | precisionTo }}%</td>
+          <td><span v-if='item.gbFreqPct>0'>{{ item.gbFreqPct | precisionTo }}%</span></td>
+        </template>
+        <template v-slot:item.gnomad_af_het="{ item }">
+          <td><span v-if='item.gnomad_af_het>0'>{{ (100*item.gnomad_af_het) | precisionTo }}%</span></td>
+        </template>
+        <template v-slot:item.gnomad_af_hom="{ item }">
+          <td><span v-if='item.gnomad_af_hom>0'>{{ (100*item.gnomad_af_hom) | precisionTo }}%</span></td>
         </template>
         <template v-slot:item.curation="{ item }">
           <td>
@@ -446,6 +482,8 @@ export default {
         selectedConsequence: {},
         vafRange: [0, 1],
         gbFreqMax: 5.0,
+        gnomADHetFreqMax: 5.0,
+        gnomADHomFreqMax: 5.0,
         disease: '',
         diseaseShowBlank: false,
         curationSearch: '',
@@ -561,10 +599,22 @@ export default {
           filter: this.vafFilter,
         },
         {
-          text: 'Genbank Freq (%)',
+          text: 'Genbank %',
           value: 'gbFreqPct',
           width: '130',
           filter: this.gbFreqFilter,
+        },
+        {
+          text: 'gnomAD Het %',
+          value: 'gnomad_af_het',
+          width: '130',
+          filter: this.gnomADHetFreqFilter,
+        },
+        {
+          text: 'gnomAD Hom %',
+          value: 'gnomad_af_hom',
+          width: '130',
+          filter: this.gnomADHomFreqFilter,
         },
         {
           text: 'Curation',
@@ -761,6 +811,20 @@ export default {
       let upper = this.filterConfig.gbFreqMax
 
       return filters.rangeTextFilter(`${lower}-${upper}`, value || 0.0)
+    },
+
+    gnomADHetFreqFilter: function(value) {
+      let lower = 0
+      let upper = this.filterConfig.gnomADHetFreqMax
+
+      return filters.rangeTextFilter(`${lower/100}-${upper/100}`, value || 0.0)
+    },
+
+    gnomADHomFreqFilter: function(value) {
+      let lower = 0
+      let upper = this.filterConfig.gnomADHomFreqMax
+
+      return filters.rangeTextFilter(`${lower/100}-${upper/100}`, value || 0.0)
     },
 
     alleleFilter: function(value) {
