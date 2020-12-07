@@ -249,6 +249,7 @@
               >
               </v-slider>
             </td>
+            <td></td>
             <td>
               <v-row class="justify-space-between">
                 <v-text-field
@@ -271,14 +272,6 @@
             <td>
               <v-text-field
                 v-model="filterConfig.disease"
-                type="text"
-                label="Contains"
-                dense
-              ></v-text-field>
-            </td>
-            <td>
-              <v-text-field
-                v-model="filterConfig.mitoMap"
                 type="text"
                 label="Contains"
                 dense
@@ -310,15 +303,6 @@
                 v-model="filterConfig.hgvsc"
                 type="text"
                 label="Contains"
-                dense
-              ></v-text-field>
-            </td>
-            <td>
-              <v-text-field
-                v-model="filterConfig.hgvs"
-                type="text"
-                label="Contains"
-                style="font-size: 5px;"
                 dense
               ></v-text-field>
             </td>
@@ -369,6 +353,20 @@
               >{{ (100 * item.gnomad_af_hom) | precisionTo }}%</span
             >
           </td>
+        </template>
+        <template v-slot:item.gnomAD.age_hist_hom="{ item }">
+          <span v-if="item && item.gnomAD">
+            <v-sparkline
+              :value="item.gnomAD['age_hist_hom'].bins"
+              type="bar"
+              :gradient="['#3974CC', '#97C4FA']"
+              radius="10"
+              padding="1"
+              smooth="1"
+              gradient-direction="top"
+              auto-line-width
+            ></v-sparkline>
+          </span>
         </template>
         <template v-slot:item.curation="{ item }">
           <td>
@@ -629,6 +627,13 @@ export default {
           filter: this.gnomADHomFreqFilter,
         },
         {
+          text: 'Age Distribution (Homoplasmic)',
+          align: 'center',
+          value: 'gnomAD.age_hist_hom',
+          sortable: false,
+          width: '120',
+        },
+        {
           text: 'Curation',
           value: 'curation',
           width: '180',
@@ -640,15 +645,11 @@ export default {
           filter: this.diseaseFilter,
         },
         {
-          text: 'MitoMap',
-          value: 'Status_MitoMap',
-          filter: this.mitoMapFilter,
-        },
-        {
           text: 'MitoMap Refs',
           value: 'curatedRef',
           align: 'center',
-          width: '130',
+          sortable: false,
+          width: '100',
           filter: this.curatedRefsFilter,
         },
         {
@@ -663,7 +664,6 @@ export default {
           width: '100',
           filter: this.hgvscFilter,
         },
-        { text: 'HGVS', value: 'HGVS', width: '100', filter: this.hgvsFilter },
       ]
     },
 

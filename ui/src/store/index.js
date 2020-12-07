@@ -319,24 +319,6 @@ export const actions = {
     commit('DEACTIVATE_SNACKBAR')
   },
 
-  // filterImportantVariants({ state, commit }, selectImportant) {
-  //   const importantTagNames = getters
-  //     .getImportantVariantTags(state)
-  //     .map(v => v.name)
-  //   const filteredVariants = state.variants.filter(v => {
-  //     if (!selectImportant) return true
-
-  //     const curation = getters.getCurationByVariantId(state)(v.id)
-  //     const hasImportantTags = (curation.selectedTagNames || []).some(st =>
-  //       importantTagNames.includes(st)
-  //     )
-
-  //     return hasImportantTags
-  //   })
-
-  //   commit('SET_FILTERED_VARIANTS', filteredVariants)
-  // },
-
   filterImportantVariants({ state, commit, getters }, selectImportant) {
     const importantTagNames = getters.getImportantVariantTags.map(v => v.name)
 
