@@ -250,6 +250,7 @@
               </v-slider>
             </td>
             <td></td>
+            <td></td>
             <td>
               <v-row class="justify-space-between">
                 <v-text-field
@@ -354,10 +355,10 @@
             >
           </td>
         </template>
-        <template v-slot:item.gnomAD.age_hist_hom="{ item }">
-          <span v-if="item && item.gnomAD">
+        <template v-slot:item.gnomAD.hl_hist="{ item }">
+          <span v-if="heteroplasmyDistExists(item)">
             <v-sparkline
-              :value="item.gnomAD['age_hist_hom'].bins"
+              :value="heteroplasmyDistHeights(item)"
               type="bar"
               :gradient="['#3974CC', '#97C4FA']"
               radius="10"
@@ -365,7 +366,29 @@
               smooth="1"
               gradient-direction="top"
               auto-line-width
-            ></v-sparkline>
+            >
+              <template v-slot:label>
+                {{ heteroplasmyDistLabel(item) }}
+              </template>
+            </v-sparkline>
+          </span>
+        </template>
+        <template v-slot:item.gnomAD.age_hist_hom="{ item }">
+          <span v-if="ageDistExists(item)">
+            <v-sparkline
+              :value="ageDistHomoHeights(item)"
+              type="bar"
+              :gradient="['#3974CC', '#97C4FA']"
+              radius="10"
+              padding="1"
+              smooth="1"
+              gradient-direction="top"
+              auto-line-width
+            >
+              <template v-slot:label>
+                {{ ageDistLabel(item) }}
+              </template>
+            </v-sparkline>
           </span>
         </template>
         <template v-slot:item.curation="{ item }">
@@ -627,6 +650,13 @@ export default {
           filter: this.gnomADHomFreqFilter,
         },
         {
+          text: 'Heteroplasmy Distribution',
+          align: 'center',
+          value: 'gnomAD.hl_hist',
+          sortable: false,
+          width: '120',
+        },
+        {
           text: 'Age Distribution (Homoplasmic)',
           align: 'center',
           value: 'gnomAD.age_hist_hom',
@@ -843,6 +873,36 @@ export default {
         `${lower / 100}-${upper / 100}`,
         value || 0.0
       )
+    },
+
+    heteroplasmyDistExists: function(item) {
+      return _.some(this.heteroplasmyDistHeights(item), Boolean)
+    },
+
+    heteroplasmyDistHeights: function(item) {
+      return item?.gnomAD?.hl_hist || []
+    },
+
+    heteroplasmyDistLabel: function(item) {
+      return this.heteroplasmyDistHeights(item)
+        .map(() => '-')
+        .join()
+    },
+
+    ageDistExists: function(item) {
+      return _.some(this.ageDistHomoHeights(item), Boolean)
+    },
+
+    ageDistHomoHeights: function(item) {
+      const min = item?.gnomAD?.age_hist_hom?.smaller || 0
+      const max = item?.gnomAD?.age_hist_hom?.larger || 0
+      return [min].concat(item?.gnomAD?.age_hist_hom?.bins || [], [max])
+    },
+
+    ageDistLabel: function(item) {
+      return this.ageDistHomoHeights(item)
+        .map(() => '-')
+        .join()
     },
 
     alleleFilter: function(value) {

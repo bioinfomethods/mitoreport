@@ -149,7 +149,18 @@
                 89
             ],
             "position_hist": null,
-            "hl_hist": null,
+            "hl_hist": [
+                0,
+                46,
+                26,
+                22,
+                10,
+                19,
+                17,
+                19,
+                19,
+                17718
+            ],
             "hap_defining_variant": true,
             "contamination_hist": null,
             "max_hl": 1.0,
@@ -863,7 +874,18 @@
                 89
             ],
             "position_hist": null,
-            "hl_hist": null,
+            "hl_hist": [
+                0,
+                2,
+                0,
+                0,
+                2,
+                0,
+                0,
+                2,
+                2,
+                55898
+            ],
             "hap_defining_variant": true,
             "contamination_hist": null,
             "max_hl": 1.0,
@@ -1562,7 +1584,18 @@
                 37
             ],
             "position_hist": null,
-            "hl_hist": null,
+            "hl_hist": [
+                0,
+                959,
+                405,
+                309,
+                441,
+                987,
+                2257,
+                4798,
+                2757,
+                170
+            ],
             "hap_defining_variant": false,
             "contamination_hist": null,
             "max_hl": 0.979,
@@ -2281,7 +2314,18 @@
                 44
             ],
             "position_hist": null,
-            "hl_hist": null,
+            "hl_hist": [
+                0,
+                9166,
+                2388,
+                540,
+                303,
+                355,
+                653,
+                299,
+                53,
+                3
+            ],
             "hap_defining_variant": false,
             "contamination_hist": null,
             "max_hl": 0.941,
@@ -3000,7 +3044,18 @@
                 56
             ],
             "position_hist": null,
-            "hl_hist": null,
+            "hl_hist": [
+                0,
+                2105,
+                723,
+                178,
+                52,
+                5,
+                0,
+                1,
+                1,
+                0
+            ],
             "hap_defining_variant": false,
             "contamination_hist": null,
             "max_hl": 0.859,
@@ -3698,7 +3753,18 @@
                 85
             ],
             "position_hist": null,
-            "hl_hist": null,
+            "hl_hist": [
+                0,
+                0,
+                2,
+                1,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+            ],
             "hap_defining_variant": false,
             "contamination_hist": null,
             "max_hl": 0.341,
@@ -4396,7 +4462,18 @@
                 87
             ],
             "position_hist": null,
-            "hl_hist": null,
+            "hl_hist": [
+                0,
+                3,
+                6,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+            ],
             "hap_defining_variant": false,
             "contamination_hist": null,
             "max_hl": 0.266,
@@ -5110,7 +5187,18 @@
                 22
             ],
             "position_hist": null,
-            "hl_hist": null,
+            "hl_hist": [
+                0,
+                7,
+                5,
+                5,
+                0,
+                2,
+                2,
+                0,
+                1,
+                379
+            ],
             "hap_defining_variant": true,
             "contamination_hist": null,
             "max_hl": 1.0,
@@ -5824,7 +5912,18 @@
                 89
             ],
             "position_hist": null,
-            "hl_hist": null,
+            "hl_hist": [
+                0,
+                1,
+                2,
+                3,
+                2,
+                1,
+                4,
+                6,
+                335,
+                51069
+            ],
             "hap_defining_variant": false,
             "contamination_hist": null,
             "max_hl": 1.0,
@@ -6516,7 +6615,18 @@
                 89
             ],
             "position_hist": null,
-            "hl_hist": null,
+            "hl_hist": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+            ],
             "hap_defining_variant": false,
             "contamination_hist": null,
             "max_hl": 0.0,
@@ -7208,7 +7318,18 @@
                 89
             ],
             "position_hist": null,
-            "hl_hist": null,
+            "hl_hist": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+            ],
             "hap_defining_variant": false,
             "contamination_hist": null,
             "max_hl": 0.0,
@@ -7922,7 +8043,18 @@
                 89
             ],
             "position_hist": null,
-            "hl_hist": null,
+            "hl_hist": [
+                0,
+                0,
+                0,
+                0,
+                1,
+                1,
+                1,
+                1,
+                1,
+                55420
+            ],
             "hap_defining_variant": true,
             "contamination_hist": null,
             "max_hl": 1.0,
@@ -8616,7 +8748,18 @@
                 89
             ],
             "position_hist": null,
-            "hl_hist": null,
+            "hl_hist": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                4
+            ],
             "hap_defining_variant": false,
             "contamination_hist": null,
             "max_hl": 1.0,
@@ -9310,7 +9453,18 @@
                 89
             ],
             "position_hist": null,
-            "hl_hist": null,
+            "hl_hist": [
+                0,
+                1,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+            ],
             "hap_defining_variant": false,
             "contamination_hist": null,
             "max_hl": 0.119,
@@ -10024,7 +10178,18 @@
                 89
             ],
             "position_hist": null,
-            "hl_hist": null,
+            "hl_hist": [
+                0,
+                1,
+                0,
+                2,
+                0,
+                0,
+                0,
+                0,
+                1,
+                53745
+            ],
             "hap_defining_variant": true,
             "contamination_hist": null,
             "max_hl": 1.0,
@@ -10828,7 +10993,18 @@
                 89
             ],
             "position_hist": null,
-            "hl_hist": null,
+            "hl_hist": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                457
+            ],
             "hap_defining_variant": true,
             "contamination_hist": null,
             "max_hl": 1.0,
@@ -11521,7 +11697,18 @@
                 89
             ],
             "position_hist": null,
-            "hl_hist": null,
+            "hl_hist": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+            ],
             "hap_defining_variant": false,
             "contamination_hist": null,
             "max_hl": 0.0,
@@ -12281,7 +12468,18 @@
                 89
             ],
             "position_hist": null,
-            "hl_hist": null,
+            "hl_hist": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+            ],
             "hap_defining_variant": false,
             "contamination_hist": null,
             "max_hl": 0.0,
@@ -12974,7 +13172,18 @@
                 89
             ],
             "position_hist": null,
-            "hl_hist": null,
+            "hl_hist": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+            ],
             "hap_defining_variant": false,
             "contamination_hist": null,
             "max_hl": 0.0,
@@ -13739,7 +13948,18 @@
                 89
             ],
             "position_hist": null,
-            "hl_hist": null,
+            "hl_hist": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+            ],
             "hap_defining_variant": false,
             "contamination_hist": null,
             "max_hl": 0.0,
@@ -14507,7 +14727,18 @@
                 89
             ],
             "position_hist": null,
-            "hl_hist": null,
+            "hl_hist": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+            ],
             "hap_defining_variant": false,
             "contamination_hist": null,
             "max_hl": 0.0,
@@ -15225,7 +15456,18 @@
                 89
             ],
             "position_hist": null,
-            "hl_hist": null,
+            "hl_hist": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+            ],
             "hap_defining_variant": false,
             "contamination_hist": null,
             "max_hl": 0.0,
@@ -15993,7 +16235,18 @@
                 89
             ],
             "position_hist": null,
-            "hl_hist": null,
+            "hl_hist": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+            ],
             "hap_defining_variant": false,
             "contamination_hist": null,
             "max_hl": 0.0,
@@ -16711,7 +16964,18 @@
                 89
             ],
             "position_hist": null,
-            "hl_hist": null,
+            "hl_hist": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+            ],
             "hap_defining_variant": false,
             "contamination_hist": null,
             "max_hl": 0.0,
@@ -17409,7 +17673,18 @@
                 89
             ],
             "position_hist": null,
-            "hl_hist": null,
+            "hl_hist": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+            ],
             "hap_defining_variant": false,
             "contamination_hist": null,
             "max_hl": 0.0,
@@ -18127,7 +18402,18 @@
                 89
             ],
             "position_hist": null,
-            "hl_hist": null,
+            "hl_hist": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0,
+                345
+            ],
             "hap_defining_variant": true,
             "contamination_hist": null,
             "max_hl": 1.0,
@@ -18845,7 +19131,18 @@
                 89
             ],
             "position_hist": null,
-            "hl_hist": null,
+            "hl_hist": [
+                0,
+                0,
+                0,
+                1,
+                0,
+                0,
+                0,
+                1,
+                0,
+                55440
+            ],
             "hap_defining_variant": true,
             "contamination_hist": null,
             "max_hl": 1.0,
@@ -19542,7 +19839,18 @@
                 89
             ],
             "position_hist": null,
-            "hl_hist": null,
+            "hl_hist": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+            ],
             "hap_defining_variant": false,
             "contamination_hist": null,
             "max_hl": 0.0,
@@ -20260,7 +20568,18 @@
                 89
             ],
             "position_hist": null,
-            "hl_hist": null,
+            "hl_hist": [
+                0,
+                1,
+                1,
+                3,
+                1,
+                0,
+                0,
+                0,
+                0,
+                965
+            ],
             "hap_defining_variant": true,
             "contamination_hist": null,
             "max_hl": 1.0,
@@ -20957,7 +21276,18 @@
                 89
             ],
             "position_hist": null,
-            "hl_hist": null,
+            "hl_hist": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+            ],
             "hap_defining_variant": false,
             "contamination_hist": null,
             "max_hl": 0.0,
@@ -21675,7 +22005,18 @@
                 89
             ],
             "position_hist": null,
-            "hl_hist": null,
+            "hl_hist": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                7
+            ],
             "hap_defining_variant": true,
             "contamination_hist": null,
             "max_hl": 1.0,
@@ -22393,7 +22734,18 @@
                 89
             ],
             "position_hist": null,
-            "hl_hist": null,
+            "hl_hist": [
+                0,
+                1,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                78
+            ],
             "hap_defining_variant": true,
             "contamination_hist": null,
             "max_hl": 1.0,
@@ -23090,7 +23442,18 @@
                 89
             ],
             "position_hist": null,
-            "hl_hist": null,
+            "hl_hist": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+            ],
             "hap_defining_variant": false,
             "contamination_hist": null,
             "max_hl": 0.0,
@@ -23808,7 +24171,18 @@
                 89
             ],
             "position_hist": null,
-            "hl_hist": null,
+            "hl_hist": [
+                0,
+                0,
+                0,
+                0,
+                1,
+                0,
+                0,
+                1,
+                3,
+                56073
+            ],
             "hap_defining_variant": true,
             "contamination_hist": null,
             "max_hl": 1.0,
@@ -24512,7 +24886,18 @@
                 89
             ],
             "position_hist": null,
-            "hl_hist": null,
+            "hl_hist": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+            ],
             "hap_defining_variant": false,
             "contamination_hist": null,
             "max_hl": 0.0,
@@ -25288,7 +25673,18 @@
                 89
             ],
             "position_hist": null,
-            "hl_hist": null,
+            "hl_hist": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+            ],
             "hap_defining_variant": false,
             "contamination_hist": null,
             "max_hl": 0.0,
@@ -26009,7 +26405,18 @@
                 89
             ],
             "position_hist": null,
-            "hl_hist": null,
+            "hl_hist": [
+                0,
+                0,
+                0,
+                0,
+                1,
+                1,
+                0,
+                0,
+                0,
+                318
+            ],
             "hap_defining_variant": true,
             "contamination_hist": null,
             "max_hl": 1.0,
@@ -26730,7 +27137,18 @@
                 89
             ],
             "position_hist": null,
-            "hl_hist": null,
+            "hl_hist": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                346
+            ],
             "hap_defining_variant": true,
             "contamination_hist": null,
             "max_hl": 1.0,
@@ -27430,7 +27848,18 @@
                 89
             ],
             "position_hist": null,
-            "hl_hist": null,
+            "hl_hist": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+            ],
             "hap_defining_variant": false,
             "contamination_hist": null,
             "max_hl": 0.0,
@@ -28148,7 +28577,18 @@
                 89
             ],
             "position_hist": null,
-            "hl_hist": null,
+            "hl_hist": [
+                0,
+                11,
+                0,
+                2,
+                2,
+                1,
+                0,
+                0,
+                0,
+                162
+            ],
             "hap_defining_variant": true,
             "contamination_hist": null,
             "max_hl": 1.0,
@@ -28866,7 +29306,18 @@
                 89
             ],
             "position_hist": null,
-            "hl_hist": null,
+            "hl_hist": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                487
+            ],
             "hap_defining_variant": true,
             "contamination_hist": null,
             "max_hl": 1.0,
@@ -29584,7 +30035,18 @@
                 89
             ],
             "position_hist": null,
-            "hl_hist": null,
+            "hl_hist": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+            ],
             "hap_defining_variant": false,
             "contamination_hist": null,
             "max_hl": 0.0,
@@ -30302,7 +30764,18 @@
                 89
             ],
             "position_hist": null,
-            "hl_hist": null,
+            "hl_hist": [
+                0,
+                0,
+                0,
+                0,
+                1,
+                1,
+                2,
+                2,
+                2,
+                56031
+            ],
             "hap_defining_variant": true,
             "contamination_hist": null,
             "max_hl": 1.0,
@@ -31016,7 +31489,18 @@
                 89
             ],
             "position_hist": null,
-            "hl_hist": null,
+            "hl_hist": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+            ],
             "hap_defining_variant": false,
             "contamination_hist": null,
             "max_hl": 0.0,
