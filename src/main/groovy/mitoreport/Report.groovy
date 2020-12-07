@@ -121,7 +121,7 @@ class Report extends ToolBase {
             }
             else 
             if(variantAnnotations && variantAnnotations.Locus) {
-                vepInfo.symbol = variantAnnotations.locus
+                vepInfo.symbol = variantAnnotations.Locus
             }
             // else stick with what VEP put there
             
