@@ -894,9 +894,10 @@ export default {
     },
 
     ageDistHomoHeights: function(item) {
-      const min = item?.gnomAD?.age_hist_hom?.smaller || 0
-      const max = item?.gnomAD?.age_hist_hom?.larger || 0
-      return [min].concat(item?.gnomAD?.age_hist_hom?.bins || [], [max])
+      const smaller = item?.gnomAD?.age_hist_hom?.smaller || 0
+      const larger = item?.gnomAD?.age_hist_hom?.larger || 0
+
+      return [smaller].concat(item?.gnomAD?.age_hist_hom?.bins || [], [larger])
     },
 
     ageDistLabel: function(item) {
