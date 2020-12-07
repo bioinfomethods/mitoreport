@@ -48,16 +48,25 @@ java -jar build/libs/mitoreport-0.1-all.jar mito-map-download \
   --output tmp/mito_map_annotations_20201013.json
 ```
 
-Below command will generate deletions and variants data including writing out the Single Page Application
+Below example commands will generate deletions and variants data including writing out the Single Page Application
 UI into a `mitoreport` directory ready for distribution.
 
 ```bash
+java -jar build/libs/mitoreport-0.1-all.jar mito-report \
+  -sample "15G002035-GM12878K_20pc_10kb_200" \
+  -vcf tmp/variants/15G002035.unshifted.contamination.filtering.intermediatefilter.norm.dedup.mito_vep.vcf.gz \
+  -ann tmp/mtDNAanalysis_annotations_20170501.csv \
+  -mann tmp/mito_map_annotations_20201013.json \
+  -gnomad tmp/gnomad.genomes.v3.1.sites.chrM.vcf.bgz \
+  "tmp/align/15G002035-GM12878K_20pc_10kb_200.unshifted.bam" tmp/controls/*.bam
+
 SAMPLE="VCGS_FAM1_1"
 java -jar build/libs/mitoreport-0.1-all.jar mito-report \
   -sample "$SAMPLE" \
   -vcf "tmp/variants/$SAMPLE.unshifted.contamination.filtering.intermediatefilter.norm.dedup.mito_vep.vcf.gz" \
   -ann tmp/mtDNAanalysis_annotations_20170501.csv \
   -mann tmp/mito_map_annotations_20201013.json \
+  -gnomad tmp/gnomad.genomes.v3.1.sites.chrM.vcf.bgz \
   "tmp/align/$SAMPLE.coverage.bam" tmp/controls/*.bam
 
 # Run report for mother 
@@ -67,6 +76,7 @@ java -jar build/libs/mitoreport-0.1-all.jar mito-report \
   -vcf "tmp/variants/$SAMPLE.unshifted.contamination.filtering.intermediatefilter.norm.dedup.mito_vep.vcf.gz" \
   -ann tmp/mtDNAanalysis_annotations_20170501.csv \
   -mann tmp/mito_map_annotations_20201013.json \
+  -gnomad tmp/gnomad.genomes.v3.1.sites.chrM.vcf.bgz \
   "tmp/align/$SAMPLE.coverage.bam" tmp/controls/*.bam
 ```
 
