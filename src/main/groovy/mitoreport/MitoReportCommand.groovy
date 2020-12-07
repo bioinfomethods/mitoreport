@@ -57,7 +57,8 @@ class MitoReportCommand implements Runnable {
     MitoMapPolymorphismsLoader mitoMapLoader
 
     void run() {
-        (bamFiles + [vcfFile]).each { assert it.exists(), "${it.absolutePath} does not exist." }
+        (bamFiles + [vcfFile, new File(annotations), mitoMapAnnotations.toFile(), gnomADVCF.toFile()])
+                .each { assert it.exists(), "${it.absolutePath} does not exist." }
 
         // Default to a directory named after the sample
         if (!this.outputDir) {
@@ -99,12 +100,12 @@ class MitoReportCommand implements Runnable {
 
     File runReport(File deletionsJson) {
         CliOptions reportOpts = new CliOptions(overrides: [
-                'vcf' : vcfFile.absolutePath,
-                'del' : deletionsJson.absolutePath,
-                'ann' : annotations,
-                'mann': mitoMapAnnotations,
-                'gnomad' : gnomADVCF.toFile().absolutePath,
-                'o'   : mitoReportPathName,
+                'vcf'   : vcfFile.absolutePath,
+                'del'   : deletionsJson.absolutePath,
+                'ann'   : annotations,
+                'mann'  : mitoMapAnnotations,
+                'gnomad': gnomADVCF.toFile().absolutePath,
+                'o'     : mitoReportPathName,
         ])
 
         Report mitoReport = new Report(opts: reportOpts, mitoMapLoader: mitoMapLoader)

@@ -84,7 +84,7 @@ class MitoMapPolymorphismsLoader {
 
     static List<MitoMapPolymorphismAnnotation> getAnnotations(Path annotationsFilePath = Paths.get(System.getProperty('user.dir'), "mito_map_annotations_${LocalDate.now().format(DateTimeFormatter.BASIC_ISO_DATE)}.json")) {
         if (annotationsFilePath == null || !Files.exists(annotationsFilePath)) {
-            log.warn("Annotations file ${annotationsFilePath?.toString()} does not exist.")
+            log.error("Annotations file ${annotationsFilePath?.toString()} does not exist.")
 
             return Collections.emptyList()
         }
