@@ -11,6 +11,12 @@ export const DEBOUNCE_DELAY = {
   LONG: 1000,
 }
 
+export const ANIMATION_DURATION = {
+  SHORT: 200,
+  MEDIUM: 400,
+  LONG: 800,
+}
+
 export const MIN_POS = 200
 
 export const MAX_POS = 16300

@@ -70,6 +70,7 @@ export default {
   },
 
   mounted() {
+    console.log(`VariantCuration mounted`)
     this.selectedTags = this.getVariantTags.filter(vt => {
       return this.curation?.selectedTagNames?.includes(vt.name)
     })
