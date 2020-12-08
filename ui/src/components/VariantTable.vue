@@ -360,7 +360,7 @@
             <v-sparkline
               :value="heteroplasmyDistHeights(item)"
               type="bar"
-              :gradient="['#3974CC', '#97C4FA']"
+              :gradient="[COLORS.PRIMARY, COLORS.PRIMARY_LIGHT]"
               radius="10"
               padding="1"
               smooth="1"
@@ -378,7 +378,7 @@
             <v-sparkline
               :value="ageDistHomoHeights(item)"
               type="bar"
-              :gradient="['#3974CC', '#97C4FA']"
+              :gradient="[COLORS.PRIMARY, COLORS.PRIMARY_LIGHT]"
               radius="10"
               padding="1"
               smooth="1"
@@ -480,7 +480,12 @@ import VariantDetails from '@/components/VariantDetails'
 import * as filters from '@/shared/variantFilters'
 import * as vueFilters from '@/shared/vueFilters'
 import * as _ from 'lodash'
-import { DEFAULT_VARIANT_SEARCH, MAX_POS, MIN_POS } from '@/shared/constants'
+import {
+  DEFAULT_VARIANT_SEARCH,
+  MAX_POS,
+  MIN_POS,
+  COLORS,
+} from '@/shared/constants'
 
 export default {
   name: 'VariantTable',
@@ -595,7 +600,9 @@ export default {
     MAX_POS() {
       return MAX_POS
     },
-
+    COLORS() {
+      return COLORS
+    },
     headers() {
       return [
         {

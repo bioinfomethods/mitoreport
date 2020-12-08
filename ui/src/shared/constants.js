@@ -17,6 +17,11 @@ export const ANIMATION_DURATION = {
   LONG: 800,
 }
 
+export const COLORS = {
+  PRIMARY: '#3974CC',
+  PRIMARY_LIGHT: '#97C4FA',
+}
+
 export const MIN_POS = 200
 
 export const MAX_POS = 16300
