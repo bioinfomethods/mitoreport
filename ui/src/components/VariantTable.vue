@@ -341,17 +341,17 @@
             >
           </td>
         </template>
-        <template v-slot:item.gnomad_af_het="{ item }">
+        <template v-slot:item.gnomAD.af_het="{ item }">
           <td>
-            <span v-if="item.gnomad_af_het > 0"
-              >{{ (100 * item.gnomad_af_het) | precisionTo }}%</span
+            <span v-if="item.gnomAD && item.gnomAD.af_het > 0"
+              >{{ (100 * item.gnomAD.af_het) | precisionTo }}%</span
             >
           </td>
         </template>
-        <template v-slot:item.gnomad_af_hom="{ item }">
+        <template v-slot:item.gnomAD.af_hom="{ item }">
           <td>
-            <span v-if="item.gnomad_af_hom > 0"
-              >{{ (100 * item.gnomad_af_hom) | precisionTo }}%</span
+            <span v-if="item.gnomAD && item.gnomAD.af_hom > 0"
+              >{{ (100 * item.gnomAD.af_hom) | precisionTo }}%</span
             >
           </td>
         </template>
@@ -646,13 +646,13 @@ export default {
         },
         {
           text: 'gnomAD Het %',
-          value: 'gnomad_af_het',
+          value: 'gnomAD.af_het',
           width: '130',
           filter: this.gnomADHetFreqFilter,
         },
         {
           text: 'gnomAD Hom %',
-          value: 'gnomad_af_hom',
+          value: 'gnomAD.af_hom',
           width: '130',
           filter: this.gnomADHomFreqFilter,
         },
