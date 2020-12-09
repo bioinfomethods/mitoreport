@@ -142,8 +142,7 @@ export const mutations = {
     getters.getSampleSettings(state).bamDir = newBamDir
   },
 
-  SET_USER_TAGS(state, userTags) {
-    let currentTags = getters.getVariantTags(state)
+  SET_USER_TAGS(state, { userTags, currentTags }) {
     const defaultTags = currentTags.filter(t => !t.custom)
     const newVariantTags = defaultTags.concat(userTags)
     getters.getSampleSettings(state).variantTags = newVariantTags
@@ -250,9 +249,10 @@ export const actions = {
     console.debug('Finished action fetchData')
   },
 
-  saveAppSettings({ dispatch, commit }, { newBamDir, userTags }) {
+  saveAppSettings({ dispatch, commit, getters }, { newBamDir, userTags }) {
+    const currentTags = getters.getVariantTags
     commit('SET_BAM_DIR', newBamDir)
-    commit('SET_USER_TAGS', userTags)
+    commit('SET_USER_TAGS', { userTags, currentTags })
     dispatch('removeVariantTags', userTags)
     dispatch('saveSettings')
   },
