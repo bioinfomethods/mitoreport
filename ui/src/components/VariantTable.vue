@@ -96,6 +96,7 @@
         class="elevation-1 variant-expanded"
         dense
       >
+        <!-- v-slot:body.prepend includes all components for each column's filtering -->
         <template v-slot:body.prepend>
           <tr class="paddedrow">
             <td>
@@ -309,16 +310,17 @@
             </td>
           </tr>
         </template>
-        <template v-slot:header.pos="{ header }">
-          <VariantTableHeader :header="header"></VariantTableHeader>
+
+        <!-- Dynamically iterate through all header slots v-slot:header.${header.value} to include VariantTableHeader component -->
+        <template v-for="h in headers" :slot="`header.${h.value}`">
+          <VariantTableHeader :key="h.value" :header="h"></VariantTableHeader>
         </template>
+
+        <!-- Override row values where necessary using slot v-slot:item.${header.value} -->
         <template v-slot:item.pos="{ item }">
           <td>
             <IgvLink :position="item.pos"></IgvLink>
           </td>
-        </template>
-        <template v-slot:header.ref_alt="{ header }">
-          <VariantTableHeader :header="header"></VariantTableHeader>
         </template>
         <template v-slot:item.ref_alt="{ item }">
           <td>
@@ -329,12 +331,6 @@
             >
           </td>
         </template>
-        <template v-slot:header.type="{ header }">
-          <VariantTableHeader :header="header"></VariantTableHeader>
-        </template>
-        <template v-slot:header.symbol="{ header }">
-          <VariantTableHeader :header="header"></VariantTableHeader>
-        </template>
         <template v-slot:item.symbol="{ item }">
           <td>
             <GeneCardsLink
@@ -343,17 +339,8 @@
             ></GeneCardsLink>
           </td>
         </template>
-        <template v-slot:header.consequence="{ header }">
-          <VariantTableHeader :header="header"></VariantTableHeader>
-        </template>
         <template v-slot:item.consequence="{ item }">
           <td>{{ item.consequence ? item.consequence.name : '' }}</td>
-        </template>
-        <template v-slot:header.genotypes[0].AF="{ header }">
-          <VariantTableHeader :header="header"></VariantTableHeader>
-        </template>
-        <template v-slot:header.gbFreqPct="{ header }">
-          <VariantTableHeader :header="header"></VariantTableHeader>
         </template>
         <template v-slot:item.gbFreqPct="{ item }">
           <td>
@@ -362,9 +349,6 @@
             >
           </td>
         </template>
-        <template v-slot:header.gnomAD.af_het="{ header }">
-          <VariantTableHeader :header="header"></VariantTableHeader>
-        </template>
         <template v-slot:item.gnomAD.af_het="{ item }">
           <td>
             <span v-if="item.gnomAD && item.gnomAD.af_het > 0"
@@ -372,18 +356,12 @@
             >
           </td>
         </template>
-        <template v-slot:header.gnomAD.af_hom="{ header }">
-          <VariantTableHeader :header="header"></VariantTableHeader>
-        </template>
         <template v-slot:item.gnomAD.af_hom="{ item }">
           <td>
             <span v-if="item.gnomAD && item.gnomAD.af_hom > 0"
               >{{ (100 * item.gnomAD.af_hom) | precisionTo }}%</span
             >
           </td>
-        </template>
-        <template v-slot:header.gnomAD.hl_hist="{ header }">
-          <VariantTableHeader :header="header"></VariantTableHeader>
         </template>
         <template v-slot:item.gnomAD.hl_hist="{ item }">
           <span v-if="heteroplasmyDistExists(item)">
@@ -403,12 +381,6 @@
             </v-sparkline>
           </span>
         </template>
-        <template v-slot:header.gnomAD.age_hist_hom="{ header }">
-          <VariantTableHeader :header="header"></VariantTableHeader>
-        </template>
-        <template v-slot:header.age_hist_hom="{ header }">
-          <VariantTableHeader :header="header"></VariantTableHeader>
-        </template>
         <template v-slot:item.gnomAD.age_hist_hom="{ item }">
           <span v-if="ageDistExists(item)">
             <v-sparkline
@@ -427,19 +399,10 @@
             </v-sparkline>
           </span>
         </template>
-        <template v-slot:header.curation="{ header }">
-          <VariantTableHeader :header="header"></VariantTableHeader>
-        </template>
         <template v-slot:item.curation="{ item }">
           <td>
             <CurationCell :variantId="item.id" :key="item.id"></CurationCell>
           </td>
-        </template>
-        <template v-slot:header.Disease="{ header }">
-          <VariantTableHeader :header="header"></VariantTableHeader>
-        </template>
-        <template v-slot:header.curatedRef="{ header }">
-          <VariantTableHeader :header="header"></VariantTableHeader>
         </template>
         <template v-slot:item.curatedRef="{ item }">
           <td>
@@ -448,12 +411,6 @@
               :count="item.curatedRef.count"
             ></CuratedRefLink>
           </td>
-        </template>
-        <template v-slot:header.hgvsp="{ header }">
-          <VariantTableHeader :header="header"></VariantTableHeader>
-        </template>
-        <template v-slot:header.hgvsc="{ header }">
-          <VariantTableHeader :header="header"></VariantTableHeader>
         </template>
         <template v-slot:item.hgvsc="{ item }">
           <td v-html="item.hgvsc"></td>
