@@ -309,10 +309,16 @@
             </td>
           </tr>
         </template>
+        <template v-slot:header.pos="{ header }">
+          <VariantTableHeader :header="header"></VariantTableHeader>
+        </template>
         <template v-slot:item.pos="{ item }">
           <td>
             <IgvLink :position="item.pos"></IgvLink>
           </td>
+        </template>
+        <template v-slot:header.ref_alt="{ header }">
+          <VariantTableHeader :header="header"></VariantTableHeader>
         </template>
         <template v-slot:item.ref_alt="{ item }">
           <td>
@@ -323,6 +329,12 @@
             >
           </td>
         </template>
+        <template v-slot:header.type="{ header }">
+          <VariantTableHeader :header="header"></VariantTableHeader>
+        </template>
+        <template v-slot:header.symbol="{ header }">
+          <VariantTableHeader :header="header"></VariantTableHeader>
+        </template>
         <template v-slot:item.symbol="{ item }">
           <td>
             <GeneCardsLink
@@ -331,8 +343,17 @@
             ></GeneCardsLink>
           </td>
         </template>
+        <template v-slot:header.consequence="{ header }">
+          <VariantTableHeader :header="header"></VariantTableHeader>
+        </template>
         <template v-slot:item.consequence="{ item }">
           <td>{{ item.consequence ? item.consequence.name : '' }}</td>
+        </template>
+        <template v-slot:header.genotypes[0].AF="{ header }">
+          <VariantTableHeader :header="header"></VariantTableHeader>
+        </template>
+        <template v-slot:header.gbFreqPct="{ header }">
+          <VariantTableHeader :header="header"></VariantTableHeader>
         </template>
         <template v-slot:item.gbFreqPct="{ item }">
           <td>
@@ -341,6 +362,9 @@
             >
           </td>
         </template>
+        <template v-slot:header.gnomAD.af_het="{ header }">
+          <VariantTableHeader :header="header"></VariantTableHeader>
+        </template>
         <template v-slot:item.gnomAD.af_het="{ item }">
           <td>
             <span v-if="item.gnomAD && item.gnomAD.af_het > 0"
@@ -348,12 +372,18 @@
             >
           </td>
         </template>
+        <template v-slot:header.gnomAD.af_hom="{ header }">
+          <VariantTableHeader :header="header"></VariantTableHeader>
+        </template>
         <template v-slot:item.gnomAD.af_hom="{ item }">
           <td>
             <span v-if="item.gnomAD && item.gnomAD.af_hom > 0"
               >{{ (100 * item.gnomAD.af_hom) | precisionTo }}%</span
             >
           </td>
+        </template>
+        <template v-slot:header.gnomAD.hl_hist="{ header }">
+          <VariantTableHeader :header="header"></VariantTableHeader>
         </template>
         <template v-slot:item.gnomAD.hl_hist="{ item }">
           <span v-if="heteroplasmyDistExists(item)">
@@ -373,6 +403,12 @@
             </v-sparkline>
           </span>
         </template>
+        <template v-slot:header.gnomAD.age_hist_hom="{ header }">
+          <VariantTableHeader :header="header"></VariantTableHeader>
+        </template>
+        <template v-slot:header.age_hist_hom="{ header }">
+          <VariantTableHeader :header="header"></VariantTableHeader>
+        </template>
         <template v-slot:item.gnomAD.age_hist_hom="{ item }">
           <span v-if="ageDistExists(item)">
             <v-sparkline
@@ -391,10 +427,19 @@
             </v-sparkline>
           </span>
         </template>
+        <template v-slot:header.curation="{ header }">
+          <VariantTableHeader :header="header"></VariantTableHeader>
+        </template>
         <template v-slot:item.curation="{ item }">
           <td>
             <CurationCell :variantId="item.id" :key="item.id"></CurationCell>
           </td>
+        </template>
+        <template v-slot:header.Disease="{ header }">
+          <VariantTableHeader :header="header"></VariantTableHeader>
+        </template>
+        <template v-slot:header.curatedRef="{ header }">
+          <VariantTableHeader :header="header"></VariantTableHeader>
         </template>
         <template v-slot:item.curatedRef="{ item }">
           <td>
@@ -403,6 +448,12 @@
               :count="item.curatedRef.count"
             ></CuratedRefLink>
           </td>
+        </template>
+        <template v-slot:header.hgvsp="{ header }">
+          <VariantTableHeader :header="header"></VariantTableHeader>
+        </template>
+        <template v-slot:header.hgvsc="{ header }">
+          <VariantTableHeader :header="header"></VariantTableHeader>
         </template>
         <template v-slot:item.hgvsc="{ item }">
           <td v-html="item.hgvsc"></td>
@@ -477,6 +528,7 @@ import HmtVarLink from '@/components/HmtVarLink'
 import IgvLink from '@/components/IgvLink'
 import CurationCell from '@/components/CurationCell'
 import VariantDetails from '@/components/VariantDetails'
+import VariantTableHeader from '@/components/VariantTableHeader'
 import * as filters from '@/shared/variantFilters'
 import * as vueFilters from '@/shared/vueFilters'
 import * as _ from 'lodash'
@@ -504,6 +556,7 @@ export default {
     HmtVarLink,
     IgvLink,
     VariantDetails,
+    VariantTableHeader,
   },
 
   mounted() {
@@ -607,6 +660,7 @@ export default {
       return [
         {
           text: 'Position',
+          // tooltip: 'Position tooltip',
           align: 'start',
           value: 'pos',
           width: '120',
@@ -614,19 +668,28 @@ export default {
         },
         {
           text: 'Allele',
+          // tooltip: 'Allele tooltip',
           value: 'ref_alt',
           width: '180',
           filter: this.alleleFilter,
         },
-        { text: 'Type', value: 'type', width: '100', filter: this.typesFilter },
+        {
+          text: 'Type',
+          // tooltip: 'Type tooltip',
+          value: 'type',
+          width: '100',
+          filter: this.typesFilter,
+        },
         {
           text: 'Gene',
+          // tooltip: 'Gene tooltip',
           value: 'symbol',
           width: '150',
           filter: this.genesFilter,
         },
         {
           text: 'Consequence',
+          // tooltip: 'Consequence tooltip',
           value: 'consequence',
           width: '180',
           sort: this.consequenceSort,
@@ -634,30 +697,35 @@ export default {
         },
         {
           text: 'Heteroplasmy',
+          // tooltip: 'Heteroplasmy tooltip',
           value: 'genotypes[0].AF',
           width: '120',
           filter: this.vafFilter,
         },
         {
           text: 'Genbank %',
+          // tooltip: 'Genbank % tooltip',
           value: 'gbFreqPct',
           width: '130',
           filter: this.gbFreqFilter,
         },
         {
           text: 'gnomAD Het %',
+          // tooltip: 'gnomAD Het % tooltip',
           value: 'gnomAD.af_het',
           width: '130',
           filter: this.gnomADHetFreqFilter,
         },
         {
           text: 'gnomAD Hom %',
+          // tooltip: 'gnomAD Hom % tooltip',
           value: 'gnomAD.af_hom',
           width: '130',
           filter: this.gnomADHomFreqFilter,
         },
         {
           text: 'Heteroplasmy Distribution',
+          // tooltip: 'Heteroplasmy Distribution tooltip',
           align: 'center',
           value: 'gnomAD.hl_hist',
           sortable: false,
@@ -665,6 +733,7 @@ export default {
         },
         {
           text: 'Age Distribution (Homoplasmic)',
+          // tooltip: 'Age Distribution (Homoplasmic) tooltip',
           align: 'center',
           value: 'gnomAD.age_hist_hom',
           sortable: false,
@@ -672,17 +741,20 @@ export default {
         },
         {
           text: 'Curation',
+          // tooltip: 'Curation tooltip',
           value: 'curation',
           width: '180',
           filter: (value, search, item) => this.curationFilter(item),
         },
         {
           text: 'Disease',
+          // tooltip: 'Disease tooltip',
           value: 'Disease',
           filter: this.diseaseFilter,
         },
         {
           text: 'MitoMap Refs',
+          // tooltip: 'MitoMap Refs tooltip',
           value: 'curatedRef',
           align: 'center',
           sortable: false,
@@ -691,12 +763,14 @@ export default {
         },
         {
           text: 'HGVS.p',
+          // tooltip: 'HGVS.p tooltip',
           value: 'hgvsp',
           width: '100',
           filter: this.hgvspFilter,
         },
         {
           text: 'HGVS.c',
+          // tooltip: 'HGVS.c tooltip',
           value: 'hgvsc',
           width: '100',
           filter: this.hgvscFilter,
