@@ -257,7 +257,7 @@
                 <v-text-field
                   v-model="filterConfig.curationSearch"
                   type="text"
-                  label="Search"
+                  label="Search notes or tag names"
                   class="pl-3 pr-1 pt-2 curation-search"
                   dense
                 ></v-text-field>
@@ -646,7 +646,7 @@ export default {
         },
         {
           text: 'Consequence',
-          // tooltip: 'Consequence tooltip',
+          tooltip: 'Sorting is on severity of consequence',
           value: 'consequence',
           width: '180',
           sort: this.consequenceSort,
