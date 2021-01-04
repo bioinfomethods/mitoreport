@@ -85,7 +85,7 @@ describe('VariantTable.vue', () => {
         hgvs: '',
         hgvsShowBlank: false,
       })
-      expect(underTest.vm.$data.vafIndexRange).toEqual([1, 3])
+      expect(underTest.vm.$data.vafIndexRange).toEqual([2, 4])
       expect(underTest.vm.$data.searchForm).toEqual({
         valid: true,
         name: 'Custom Filter 1',
@@ -169,7 +169,7 @@ describe('VariantTable.vue', () => {
           selectedTypes: ['SNP', 'INS', 'DEL'],
           selectedGenes: [],
           selectedConsequence: {},
-          vafRange: [0.03, 0.1],
+          vafRange: [0.01, 0.05],
           depthRange: [0, 10000],
           disease: '',
           diseaseShowBlank: false,

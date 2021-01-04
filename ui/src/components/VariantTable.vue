@@ -213,9 +213,9 @@
               </v-row>
               <v-slider
                 v-model="filterConfig.gbFreqMax"
-                step="0.2"
+                step="5"
                 min="0"
-                max="10"
+                max="100"
                 hide-details
               >
               </v-slider>
@@ -228,9 +228,9 @@
               </v-row>
               <v-slider
                 v-model="filterConfig.gnomADHetFreqMax"
-                step="0.2"
+                step="5"
                 min="0"
-                max="10"
+                max="100"
                 hide-details
               >
               </v-slider>
@@ -243,9 +243,9 @@
               </v-row>
               <v-slider
                 v-model="filterConfig.gnomADHomFreqMax"
-                step="0.2"
+                step="5"
                 min="0"
-                max="10"
+                max="100"
                 hide-details
               >
               </v-slider>
@@ -553,8 +553,8 @@ export default {
       },
       searchFormMenu: false,
       selectedSavedSearch: DEFAULT_VARIANT_SEARCH,
-      vafTicks: [0.01, 0.03, 0.05, 0.1, 1],
-      vafIndexRange: [0, 4],
+      vafTicks: [0, 0.01, 0.03, 0.05, 0.1, 1],
+      vafIndexRange: [1, 5],
       tableOptions: {
         page: 1,
         itemsPerPage: 20,
