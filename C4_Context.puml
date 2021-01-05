@@ -1,6 +1,4 @@
-!include C4.puml
-' uncomment the following line and comment the first to use locally
-' !include C4.puml
+!include http://git.mcri.edu.au/simon.sadedin/mitoreport/-/raw/master/C4.puml
 
 ' Scope: A single software system.
 ' Primary elements: The software system in scope.

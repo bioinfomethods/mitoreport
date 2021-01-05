@@ -41,9 +41,14 @@ Run build, i.e. everything
 
 ```plantuml
 @startuml
+' start
+' !include http://git.mcri.edu.au/bioinfomethods/devops/-/raw/master/C4-PlantUML-pumls/C4_Container.puml
+!include http://git.mcri.edu.au/simon.sadedin/mitoreport/-/raw/master/C4_container.puml
 ' !include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
-' !include http://git.mcri.edu.au/bioinfomethods/devops/-/raw/master/C4-PlantUML-pumls/C4_Context.puml
-!include C4_container.puml
+' stop;
+' !include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+
+
 ' !include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
 
 ' !define DEVICONS https://raw.githubusercontent.com/tupadr3/plantuml-icon-font-sprites/master/devicons
