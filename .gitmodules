@@ -1,3 +1,6 @@
 [submodule "gngs"]
 	path = gngs
 	url = https://github.com/ssadedin/groovy-ngs-utils.git
+[submodule "mitoreport.wiki"]
+	path = mitoreport.wiki
+	url = git@git.mcri.edu.au:simon.sadedin/mitoreport.wiki.git
