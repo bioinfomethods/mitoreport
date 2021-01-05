@@ -37,6 +37,56 @@ Run build, i.e. everything
 ./gradlew
 ```
 
+## Context and Architecture
+
+```plantuml "mitoreport"
+@startuml
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+
+!define DEVICONS https://raw.githubusercontent.com/tupadr3/plantuml-icon-font-sprites/master/devicons
+!define FONTAWESOME https://raw.githubusercontent.com/tupadr3/plantuml-icon-font-sprites/master/font-awesome-5
+
+!include FONTAWESOME/users.puml
+
+LAYOUT_TOP_DOWN()
+' LAYOUT_AS_SKETCH()
+LAYOUT_WITH_LEGEND()
+
+
+Person(curators, "Curators", "", "users")
+Person(admins, "Administrators", "", "users")
+
+System_Boundary(c1, "mitoreport"){
+
+    Container(ui, "Browser Application (SPA)", "Vue.js", "Allows curators to analyse and interpret mitochondria variants")
+
+    Container(mitoreport, "CLI Application", "Java, Groovy, Micronaut", "Annotates VCF with external data sources and generates variants and deletions data")
+
+    ContainerDb(browser_storage, "Browser Storage", "Stores all user settings including tags and curations")
+
+}
+
+System_Ext(gnomad, "Gnomad", "https://gnomad.broadinstitute.org")
+System_Ext(mitomap, "MitoMap", "https://mitomap.org/")
+System_Ext(mito_pipeline, "MitoPipeline", "/group/bioi1/simons/broad/mito/pipeline")
+System_Ext(igv, "IGV", "pre-installed and running on users' computer")
+
+Rel(curators, ui, "Opens/Uses", "HTTP local")
+Rel(admins, mito_pipeline, "Runs", "cli")
+Rel(mitoreport, ui, "Generates standalone browser UI report application", "filesystem")
+Rel(mito_pipeline, mitoreport, "Uses mitoreport", "bpipe")
+Rel(gnomad, mitoreport, "Downloads", "HTTP")
+Rel(mitomap, mitoreport, "Downloads", "HTTP")
+Rel(ui, igv, "Opens", "HTTP Link")
+
+BiRel(ui, browser_storage, "Reads from and writes to", "localhost")
+
+@enduml
+```
+
+Above diagram generated using [C4 model](https://c4model.com/).  Also see [C4-PlantUML](https://github.com/plantuml-stdlib/C4-PlantUML) on
+how PlantUML can be used to document architectures using C4.
+
 ## Using mito-cli
 
 Mitoreport is a standalone CLI application intended to be run by administrators.
@@ -69,7 +119,7 @@ java -jar build/libs/mitoreport-0.1-all.jar mito-report \
   -gnomad tmp/gnomad.genomes.v3.1.sites.chrM.vcf.bgz \
   "tmp/align/$SAMPLE.coverage.bam" tmp/controls/*.bam
 
-# Run report for mother 
+# Run report for mother
 SAMPLE="VCGS_FAM1_3"
 java -jar build/libs/mitoreport-0.1-all.jar mito-report \
   -sample "$SAMPLE" \
