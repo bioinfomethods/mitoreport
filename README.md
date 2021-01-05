@@ -41,20 +41,23 @@ Run build, i.e. everything
 
 ```plantuml
 @startuml
-!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+' !include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+' !include http://git.mcri.edu.au/bioinfomethods/devops/-/raw/master/C4-PlantUML-pumls/C4_Context.puml
+!include C4_container.puml
+' !include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
 
-!define DEVICONS https://raw.githubusercontent.com/tupadr3/plantuml-icon-font-sprites/master/devicons
-!define FONTAWESOME https://raw.githubusercontent.com/tupadr3/plantuml-icon-font-sprites/master/font-awesome-5
+' !define DEVICONS https://raw.githubusercontent.com/tupadr3/plantuml-icon-font-sprites/master/devicons
+' !define FONTAWESOME https://raw.githubusercontent.com/tupadr3/plantuml-icon-font-sprites/master/font-awesome-5
 
-!include FONTAWESOME/users.puml
+' !include FONTAWESOME/users.puml
 
 LAYOUT_TOP_DOWN()
 ' LAYOUT_AS_SKETCH()
 LAYOUT_WITH_LEGEND()
 
 
-Person(curators, "Curators", "", "users")
-Person(admins, "Administrators", "", "users")
+Person(curators, "Curators")
+Person(admins, "Administrators")
 
 System_Boundary(c1, "mitoreport"){
 
