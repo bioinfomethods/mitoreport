@@ -41,25 +41,11 @@ Run build, i.e. everything
 
 ```plantuml
 @startuml
-' start
-' !include http://git.mcri.edu.au/bioinfomethods/devops/-/raw/master/C4-PlantUML-pumls/C4_Container.puml
-!include http://git.mcri.edu.au/simon.sadedin/mitoreport/-/raw/master/C4_container.puml
-' !include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
-' stop;
-' !include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
 
-
-' !include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
-
-' !define DEVICONS https://raw.githubusercontent.com/tupadr3/plantuml-icon-font-sprites/master/devicons
-' !define FONTAWESOME https://raw.githubusercontent.com/tupadr3/plantuml-icon-font-sprites/master/font-awesome-5
-
-' !include FONTAWESOME/users.puml
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
 
 LAYOUT_TOP_DOWN()
-' LAYOUT_AS_SKETCH()
 LAYOUT_WITH_LEGEND()
-
 
 Person(curators, "Curators")
 Person(admins, "Administrators")
@@ -91,6 +77,8 @@ BiRel(ui, browser_storage, "Reads from and writes to", "localhost")
 
 @enduml
 ```
+
+[![arch-diagram-c1.png](http://git.mcri.edu.au/simon.sadedin/mitoreport/-/wikis/uploads/arch-diagram-c1.png)](http://git.mcri.edu.au/simon.sadedin/mitoreport/-/wikis/uploads/arch-diagram-c1.png)
 
 Above diagram generated using [C4 model](https://c4model.com/).  Also see [C4-PlantUML](https://github.com/plantuml-stdlib/C4-PlantUML) on
 how PlantUML can be used to document architectures using C4.
