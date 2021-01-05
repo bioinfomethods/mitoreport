@@ -3,4 +3,4 @@
 	url = https://github.com/ssadedin/groovy-ngs-utils.git
 [submodule "mitoreport.wiki"]
 	path = mitoreport.wiki
-	url = http://git.mcri.edu.au/simon.sadedin/mitoreport.wiki.git
+	url = http://oauth:gitlabrunner@git.mcri.edu.au/simon.sadedin/mitoreport.wiki.git
