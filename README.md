@@ -39,7 +39,7 @@ Run build, i.e. everything
 
 ## Context and Architecture
 
-```plantuml "mitoreport"
+```plantuml
 @startuml
 !include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
 
