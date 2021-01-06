@@ -31,6 +31,12 @@ build
 out
 mitoreport-*
 tmp
+tmp2
+test_fixtures
+*.tgz
+*.bgz
+*.vcf
+*.gz
 logs
 .gradle
 src/main/resources/mitoui/*
@@ -40,6 +46,4 @@ ui/public/variants.js
 ui/public/defaultSettings.js
 ui/public/mitoSettings.js
 ui/coverage
-mito_map_annotations_*.json
-mito_map_polymorphisms.html
 /dist/

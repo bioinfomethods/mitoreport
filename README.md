@@ -7,33 +7,27 @@ Mitoreport is an application for Mitochondrial DNA variants analysis.
 
 ## Prerequisites
 
-* Git installed
 * Java 8 installed, see [SdkMan](https://sdkman.io/) for managing different Java versions.
+* Access to MCRI filesystem group `bioi1.dl`.  If not, please submit request to [MCRI ServiceDesk](https://servicedesk.mcri.edu.au/).
+* Access to `bio1` filesystem, preferably mounted locally.  Will refer to this mount as `MCRI_BIO1_MNT`.
 
 ## Getting Started
 
-Clone submodules:
-
 ```bash
+# Git clone repo and cd into it then set PROJECT_DIR env
+PROJECT_DIR=$(pwd)
+
+# Clone submodules
 git submodule init
 git submodule update --init --recursive
-```
 
-Run tests, linting and coverage.  Detailed coverage reports can be found in `$PROJECT_DIR/ui/coverage/`
-
-```bash
+# Run tests, linting and coverage.  Detailed coverage reports can be found in `$PROJECT_DIR/ui/coverage/`
 ./gradlew check
-```
 
-Create project output artifacts in `$PROJECT_DIR/build/libs/`
-
-```bash
+# Create project output artifacts in `$PROJECT_DIR/build/libs/`
 ./gradlew assemble
-```
 
-Run build, i.e. everything
-
-```bash
+# Run build, i.e. everything
 ./gradlew
 ```
 
@@ -61,7 +55,7 @@ System_Boundary(c1, "mitoreport"){
 }
 
 System_Ext(gnomad, "Gnomad", "https://gnomad.broadinstitute.org")
-System_Ext(mitomap, "MitoMap", "https://mitomap.org/")
+System_Ext(mitomap, "MitoMap", "https://mitomap.org")
 System_Ext(mito_pipeline, "MitoPipeline", "/group/bioi1/simons/broad/mito/pipeline")
 System_Ext(igv, "IGV", "pre-installed and running on users' computer")
 
@@ -81,49 +75,53 @@ BiRel(ui, browser_storage, "Reads from and writes to", "localhost")
 [![arch-diagram-c1.png](http://git.mcri.edu.au/simon.sadedin/mitoreport/-/wikis/uploads/arch-diagram-c1.png)](http://git.mcri.edu.au/simon.sadedin/mitoreport/-/wikis/uploads/arch-diagram-c1.png)
 
 Above diagram generated using [C4 model](https://c4model.com/).  Also see [C4-PlantUML](https://github.com/plantuml-stdlib/C4-PlantUML) on
-how PlantUML can be used to document architectures using C4.
+how PlantUML can be used to document architectures using C4.  Unfortunately, MCRI Gitlab is probably on an old version and is not
+rendering the C4 Markdown properly.  The image shown above is a screenshot taken from the Markdown Preview using
+[VSCode PlantUML extension](https://marketplace.visualstudio.com/items?itemName=jebbs.plantuml).
 
 ## Using mito-cli
 
-Mitoreport is a standalone CLI application intended to be run by administrators.
+### Running the Report
 
-To download annotations from MitoMap (this is required to run the actual report).
+Mitoreport is a standalone CLI application intended to be run by administrators.
+A set of input files are required to run the report.  A prepared test version of
+these files can be found at `/group/bioi1/simons/broad/mito/test_fixtures.tgz`.
+Copy this to your project dir as below.
 
 ```bash
-java -jar build/libs/mitoreport-0.1-all.jar mito-map-download \
-  --output tmp/mito_map_annotations_20201013.json
+cp $MCRI_BIO1_MNT/simons/broad/mito/test_fixtures.tgz $PROJECT_DIR/
+
+tar -zxvf $PROJECT_DIR/test_fixtures.tgz -C $PROJECT_DIR
 ```
 
 Below example commands will generate deletions and variants data including writing out the Single Page Application
 UI into a `mitoreport` directory ready for distribution.
 
 ```bash
-java -jar build/libs/mitoreport-0.1-all.jar mito-report \
+java -jar $PROJECT_DIR/build/libs/mitoreport-0.1-all.jar mito-report \
   -sample "15G002035-GM12878K_20pc_10kb_200" \
-  -vcf tmp/variants/15G002035.unshifted.contamination.filtering.intermediatefilter.norm.dedup.mito_vep.vcf.gz \
-  -ann tmp/mtDNAanalysis_annotations_20170501.csv \
-  -mann tmp/mito_map_annotations_20201013.json \
-  -gnomad tmp/gnomad.genomes.v3.1.sites.chrM.vcf.bgz \
-  "tmp/align/15G002035-GM12878K_20pc_10kb_200.unshifted.bam" tmp/controls/*.bam
+  -vcf $PROJECT_DIR/test_fixtures/variants/15G002035.unshifted.contamination.filtering.intermediatefilter.norm.dedup.mito_vep.vcf.gz \
+  -ann $PROJECT_DIR/test_fixtures/mtDNAanalysis_annotations_20170501.csv \
+  -mann $PROJECT_DIR/test_fixtures/mito_map_annotations_20201207.json \
+  -gnomad $PROJECT_DIR/test_fixtures/gnomad.genomes.v3.1.sites.chrM.vcf.bgz \
+  "$PROJECT_DIR/test_fixtures/align/15G002035-GM12878K_20pc_10kb_200.unshifted.bam" $PROJECT_DIR/test_fixtures/controls/*.bam
+```
 
-SAMPLE="VCGS_FAM1_1"
-java -jar build/libs/mitoreport-0.1-all.jar mito-report \
-  -sample "$SAMPLE" \
-  -vcf "tmp/variants/$SAMPLE.unshifted.contamination.filtering.intermediatefilter.norm.dedup.mito_vep.vcf.gz" \
-  -ann tmp/mtDNAanalysis_annotations_20170501.csv \
-  -mann tmp/mito_map_annotations_20201013.json \
-  -gnomad tmp/gnomad.genomes.v3.1.sites.chrM.vcf.bgz \
-  "tmp/align/$SAMPLE.coverage.bam" tmp/controls/*.bam
+A new directory `mitoreport-15G002035-GM12878K_20pc_10kb_200` should now be created.  Open `index.html`
+to run this interactive report.
 
-# Run report for mother
-SAMPLE="VCGS_FAM1_3"
-java -jar build/libs/mitoreport-0.1-all.jar mito-report \
-  -sample "$SAMPLE" \
-  -vcf "tmp/variants/$SAMPLE.unshifted.contamination.filtering.intermediatefilter.norm.dedup.mito_vep.vcf.gz" \
-  -ann tmp/mtDNAanalysis_annotations_20170501.csv \
-  -mann tmp/mito_map_annotations_20201013.json \
-  -gnomad tmp/gnomad.genomes.v3.1.sites.chrM.vcf.bgz \
-  "tmp/align/$SAMPLE.coverage.bam" tmp/controls/*.bam
+```bash
+open $PROJECT_DIR/mitoreport-15G002035-GM12878K_20pc_10kb_200/index.html
+```
+
+### Downloading Annotations from MitoMap
+
+Run this to download new MitoMap annotations to file.  The test fixtures data above
+already includes this so it shouldn't be necessary unless you want a new version.
+
+```bash
+java -jar build/libs/mitoreport-0.1-all.jar mito-map-download \
+  --output tmp/mito_map_annotations_20210106.json
 ```
 
 ## UI Development
