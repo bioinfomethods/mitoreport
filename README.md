@@ -52,12 +52,15 @@ System_Boundary(c1, "mitoreport"){
 
     ContainerDb(browser_storage, "Browser Storage", "Stores all user settings including tags and curations")
 
+    ContainerDb(local_fs, "Local Filesystem", "Stores all user settings including tags and curations")
+
 }
 
 System_Ext(gnomad, "Gnomad", "https://gnomad.broadinstitute.org")
 System_Ext(mitomap, "MitoMap", "https://mitomap.org")
 System_Ext(mito_pipeline, "MitoPipeline", "/group/bioi1/simons/broad/mito/pipeline")
 System_Ext(igv, "IGV", "pre-installed and running on users' computer")
+
 
 Rel(curators, ui, "Opens/Uses", "HTTP local")
 Rel(admins, mito_pipeline, "Runs", "cli")
@@ -67,6 +70,7 @@ Rel(gnomad, mitoreport, "Downloads", "HTTP")
 Rel(mitomap, mitoreport, "Downloads", "HTTP")
 Rel(ui, igv, "Opens", "HTTP Link")
 
+BiRel(ui, local_fs, "User triggered, reads from and writes to", "JSON file")
 BiRel(ui, browser_storage, "Reads from and writes to", "localhost")
 
 @enduml
