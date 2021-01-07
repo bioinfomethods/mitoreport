@@ -125,10 +125,17 @@ already includes this so it shouldn't be necessary unless you want a new version
 
 ```bash
 java -jar build/libs/mitoreport-0.1-all.jar mito-map-download \
-  --output tmp/mito_map_annotations_20210106.json
+  --output $PROJECT_DIR/test_fixtures/mito_map_annotations_20210106.json
 ```
 
 ## UI Development
+
+Make sure you can run the steps in [Running the Report](#running-the-report) above as
+that'll be the easiest way to procure test data for UI development.
+
+```bash
+cp $PROJECT_DIR/mitoreport-15G002035-GM12878K_20pc_10kb_200/*.js $PROJECT_DIR/ui/public/
+```
 
 In `$PROJECT_DIR/ui`
 
