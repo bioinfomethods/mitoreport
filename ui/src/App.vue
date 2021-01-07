@@ -6,9 +6,7 @@
       </v-toolbar-title>
       <v-progress-circular class="ml-4" v-if="loading" indeterminate />
       <v-spacer></v-spacer>
-      <v-btn @click.prevent="downloadSettings" icon large>
-        <v-icon class="white--text" large>mdi-download</v-icon>
-      </v-btn>
+      <ExportSettings></ExportSettings>
       <AppSettings></AppSettings>
     </v-app-bar>
 
@@ -51,12 +49,14 @@
 <script>
 import { mapState } from 'vuex'
 import AppSettings from '@/components/AppSettings'
+import ExportSettings from '@/components/ExportSettings'
 
 export default {
   name: 'App',
 
   components: {
     AppSettings,
+    ExportSettings,
   },
 
   async created() {

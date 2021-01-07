@@ -4,10 +4,21 @@
     :close-on-content-click="false"
     :nudge-width="500"
   >
-    <template v-slot:activator="{ on, attrs }">
-      <v-btn id="btnSettingsMenu" icon large v-on="on" v-bind="attrs">
-        <v-icon class="white--text" large>mdi-cog</v-icon>
-      </v-btn>
+    <template v-slot:activator="{ on: menu, attrs }">
+      <v-tooltip bottom>
+        <template v-slot:activator="{ on: tooltip }">
+          <v-btn
+            id="btnSettingsMenu"
+            icon
+            large
+            v-on="{ ...tooltip, ...menu }"
+            v-bind="attrs"
+          >
+            <v-icon class="white--text" large>mdi-cog</v-icon>
+          </v-btn>
+        </template>
+        <span>Application Settings</span>
+      </v-tooltip>
     </template>
     <v-card>
       <v-form

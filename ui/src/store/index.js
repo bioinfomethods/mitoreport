@@ -306,6 +306,17 @@ export const actions = {
     saveAs(blob, 'mitoSettings.json')
   },
 
+  downloadSettingsSample({ state }) {
+    const settingsToExport = { ...state.settings }
+    settingsToExport.samples = settingsToExport.samples.filter(
+      s => s.id === this.state.sampleId
+    )
+    var blob = new Blob([JSON.stringify(settingsToExport, null, 2)], {
+      type: 'text/json;charset=utf-8',
+    })
+    saveAs(blob, 'mitoSettings.json')
+  },
+
   closeSnackbar({ commit }) {
     commit('DEACTIVATE_SNACKBAR')
   },
