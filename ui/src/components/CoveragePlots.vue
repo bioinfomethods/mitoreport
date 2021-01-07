@@ -35,6 +35,7 @@ export default {
 
   mounted: function() {
     if (this.sampleId && this.deletions[this.sampleId]) {
+      console.log(`plotting charts`)
       this.plotCoverage()
       this.plotSplitReads()
     }
