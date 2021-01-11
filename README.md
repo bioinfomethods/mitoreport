@@ -8,6 +8,7 @@ Mitoreport is an application for Mitochondrial DNA variants analysis.
 ## Prerequisites
 
 * Java 8 installed, see [SdkMan](https://sdkman.io/) for managing different Java versions.
+* Java 8 AdoptOpenJDK "Hotspot" is recommended, e.g. 8.0.275.hs-adpt. j9 is too strict to allow the deprecated functions used in the gngs submodule.
 * Access to MCRI filesystem group `bioi1.dl`.  If not, please submit request to [MCRI ServiceDesk](https://servicedesk.mcri.edu.au/).
 * Access to `bio1` filesystem, preferably mounted locally.  Will refer to this mount as `MCRI_BIO1_MNT`.
 
