@@ -13,7 +13,12 @@ import picocli.CommandLine.Parameters
 
 import javax.inject.Inject
 import java.nio.file.*
+import java.nio.file.attribute.BasicFileAttributes
+import java.time.ZoneOffset
+import java.time.format.DateTimeFormatter
 import java.util.stream.Collectors
+
+import static java.time.LocalDateTime.parse
 
 @Slf4j
 @Command(name = 'mito-report', description = 'Mito Report', mixinStandardHelpOptions = true)
@@ -57,6 +62,8 @@ class MitoReportCommand implements Runnable {
     MitoMapPolymorphismsLoader mitoMapLoader
 
     void run() {
+        System.out.println "Hello world? lol ok"
+
         (bamFiles + [vcfFile, new File(annotations), mitoMapAnnotations.toFile(), gnomADVCF.toFile()])
                 .each { assert it.exists(), "${it.absolutePath} does not exist." }
 
@@ -67,13 +74,43 @@ class MitoReportCommand implements Runnable {
 
         this.mitoReportPathName = this.outputDir.absolutePath
 
-        writeOutUi()
+//        writeOutUi()
 
-        Map<String, File> deletionsResult = createDeletionsPlot()
-        File deletionsJson = deletionsResult.deletionsJsonFile
-        File variantsJson = runReport(deletionsJson)
+//        Map<String, File> deletionsResult = createDeletionsPlot()
+//        File deletionsJson = deletionsResult.deletionsJsonFile
+//        File variantsJson
 
-        writeOutUiDataAndSettings(deletionsJson, deletionsResult.bamFile, variantsJson)
+//        Map<String, File> deletionsResult = createDeletionsPlot()
+//        File deletionsJson = deletionsResult.deletionsJsonFile
+//        File variantsJson = runReport(deletionsJson)
+
+//        File gnomadFile = gnomADVCF.toFile()
+
+//        gnomadFile.lastModified
+
+        BasicFileAttributes fileAttr = Files.readAttributes(gnomADVCF, BasicFileAttributes)
+
+
+        Map<String, String> metadata = [
+            absolutePath: gnomADVCF.toAbsolutePath().toString(),
+            fileName    : gnomADVCF.fileName.toString(),
+            created     : timestampStrToLocal(fileAttr.creationTime().toString()),
+            modified    : timestampStrToLocal(fileAttr.lastModifiedTime().toString()),
+            accessed    : timestampStrToLocal(fileAttr.lastAccessTime().toString()),
+            test: "123"
+        ]
+
+        String metadataJson = JsonOutput.prettyPrint(JsonOutput.toJson( metadata + [
+            hello: "world",
+            timestamp: java.util.Calendar.getInstance().getTime(),
+            javaVersion: System.getProperty("java.version"),
+            javaSpecVersion: System.getProperty("java.specification.version")
+        ]))
+
+        new File(Paths.get(mitoReportPathName, 'metadata.js').toUri())
+                .withWriter { it << 'metadata = ' + metadataJson }
+
+//        writeOutUiDataAndSettings(deletionsJson, deletionsResult.bamFile, variantsJson, metadata)
     }
 
     Map<String, File> createDeletionsPlot() {
@@ -156,7 +193,7 @@ class MitoReportCommand implements Runnable {
         }
     }
 
-    void writeOutUiDataAndSettings(File deletionsJson, File sampleBamFile, File variantsJson) {
+    void writeOutUiDataAndSettings(File deletionsJson, File sampleBamFile, File variantsJson, Map metadata) {
         new File(Paths.get(mitoReportPathName, 'deletions.js').toUri())
                 .withWriter { it << 'window.deletions = ' + deletionsJson.text }
 
@@ -229,5 +266,23 @@ class MitoReportCommand implements Runnable {
                 .withWriter { it << 'window.defaultSettings = ' + defaultSettingsJson }
         new File(Paths.get(mitoReportPathName, 'mitoSettings.js').toUri())
                 .withWriter { it << 'window.settings = ' + settingsJson }
+
+        String metadataJson = JsonOutput.prettyPrint(JsonOutput.toJson( metadata + [
+            hello: "world",
+            timestamp: java.util.Calendar.getInstance().getTime(),
+            javaVersion: System.getProperty("java.specification.version")
+        ]))
+
+        new File(Paths.get(mitoReportPathName, 'metadata.js').toUri())
+                .withWriter { it << 'metadata = ' + metadataJson }
+    }
+
+    static String timestampStrToLocal(String timestamp) {
+        String result = java.time.LocalDateTime.parse(timestamp, DateTimeFormatter.ISO_DATE_TIME)
+            .atOffset(ZoneOffset.of("+10:00"))
+            .toLocalDateTime()
+            .toString()
+
+        return result
     }
 }
