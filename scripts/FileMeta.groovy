@@ -15,7 +15,7 @@ BasicFileAttributes fileAttr = Files.readAttributes(filePath, BasicFileAttribute
 def jsonData = [
         absolutePath: filePath.toAbsolutePath().toString(),
         fileName    : filePath.fileName.toString(),
-        'created'   : timestampStrToLocal(fileAttr.creationTime().toString()),
+        created     : timestampStrToLocal(fileAttr.creationTime().toString()),
         modified    : timestampStrToLocal(fileAttr.lastModifiedTime().toString()),
         accessed    : timestampStrToLocal(fileAttr.lastAccessTime().toString()),
 ]
