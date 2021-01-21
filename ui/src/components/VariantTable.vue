@@ -422,7 +422,7 @@
               'ma-0 pa-0': true,
               'expanded-closing': !transitioned[item.id],
             }"
-            style="height: auto;"
+            style="height: auto"
           >
             <v-expand-transition>
               <VariantDetails
