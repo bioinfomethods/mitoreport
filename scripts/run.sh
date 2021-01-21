@@ -10,8 +10,9 @@ echo $PROJECT_DIR
 
 #./gradlew -x ui
 
-#
-java -jar $PROJECT_DIR/build/libs/mitoreport-0.1-all.jar mito-report \
+#./gradlew
+
+java -jar $PROJECT_DIR/build/libs/mitoreport-0.1.0-all.jar mito-report \
   -d -sample "15G002035-GM12878K_20pc_10kb_200" \
   -vcf $PROJECT_DIR/test_fixtures/variants/15G002035.unshifted.contamination.filtering.intermediatefilter.norm.dedup.mito_vep.vcf.gz \
   --annotations $PROJECT_DIR/test_fixtures/mtDNAanalysis_annotations_20170501.csv \
