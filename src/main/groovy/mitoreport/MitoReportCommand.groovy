@@ -18,8 +18,6 @@ import java.time.ZoneOffset
 import java.time.format.DateTimeFormatter
 import java.util.stream.Collectors
 
-import static java.time.LocalDateTime.parse
-
 @Slf4j
 @Command(name = 'mito-report', description = 'Mito Report', mixinStandardHelpOptions = true)
 class MitoReportCommand implements Runnable {
@@ -52,6 +50,9 @@ class MitoReportCommand implements Runnable {
     @Option(names = ['-o', '--output-dir'], required = false, description = 'Directory to write output to, defaults to mitoreport-<sample>')
     File outputDir
 
+    @Option(names = ['-d', '-dev', '--dev'], required = false, description = 'Developer Mode, copies .js files to ui folder')
+    Boolean devMode
+
     @Parameters(paramLabel = "BAMS", arity = '1..*', description = "One or more BAM files, one of them must be the sample BAM and the rest are control BAMs")
     List<File> bamFiles
 
@@ -74,15 +75,11 @@ class MitoReportCommand implements Runnable {
 
         this.mitoReportPathName = this.outputDir.absolutePath
 
-//        writeOutUi()
+        writeOutUi()
 
-//        Map<String, File> deletionsResult = createDeletionsPlot()
-//        File deletionsJson = deletionsResult.deletionsJsonFile
-//        File variantsJson
-
-//        Map<String, File> deletionsResult = createDeletionsPlot()
-//        File deletionsJson = deletionsResult.deletionsJsonFile
-//        File variantsJson = runReport(deletionsJson)
+        Map<String, File> deletionsResult = createDeletionsPlot()
+        File deletionsJson = deletionsResult.deletionsJsonFile
+        File variantsJson = runReport(deletionsJson)
 
 //        File gnomadFile = gnomADVCF.toFile()
 
@@ -110,7 +107,7 @@ class MitoReportCommand implements Runnable {
         new File(Paths.get(mitoReportPathName, 'metadata.js').toUri())
                 .withWriter { it << 'metadata = ' + metadataJson }
 
-//        writeOutUiDataAndSettings(deletionsJson, deletionsResult.bamFile, variantsJson, metadata)
+        writeOutUiDataAndSettings(deletionsJson, deletionsResult.bamFile, variantsJson, metadata)
     }
 
     Map<String, File> createDeletionsPlot() {
@@ -275,6 +272,27 @@ class MitoReportCommand implements Runnable {
 
         new File(Paths.get(mitoReportPathName, 'metadata.js').toUri())
                 .withWriter { it << 'metadata = ' + metadataJson }
+
+        if(devMode) {
+            System.out.println("Running in developer mode")
+
+            String[] array = [
+                    'defaultSettings.js',
+                    'mitoSettings.js',
+                    'deletions.js',
+                    'variants.js',
+                    'metadata.js'
+            ]
+
+            array.each { filename ->
+                Files.copy(
+                    Paths.get(mitoReportPathName, filename),
+                    Paths.get("ui", "public", filename),
+                    StandardCopyOption.REPLACE_EXISTING
+                )
+            }
+        }
+
     }
 
     static String timestampStrToLocal(String timestamp) {
