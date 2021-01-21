@@ -63,7 +63,6 @@ class MitoReportCommand implements Runnable {
     MitoMapPolymorphismsLoader mitoMapLoader
 
     void run() {
-        System.out.println "Hello world? lol ok"
 
         (bamFiles + [vcfFile, new File(annotations), mitoMapAnnotations.toFile(), gnomADVCF.toFile()])
                 .each { assert it.exists(), "${it.absolutePath} does not exist." }
@@ -81,14 +80,12 @@ class MitoReportCommand implements Runnable {
         File deletionsJson = deletionsResult.deletionsJsonFile
         File variantsJson = runReport(deletionsJson)
 
-//        File gnomadFile = gnomADVCF.toFile()
-
-//        gnomadFile.lastModified
+//        Map<String, String> metadata = collectMetadata()
 
         BasicFileAttributes fileAttr = Files.readAttributes(gnomADVCF, BasicFileAttributes)
 
-
         Map<String, String> metadata = [
+            mitoreportVersion: this.getClass().getPackage().getImplementationVersion(),
             absolutePath: gnomADVCF.toAbsolutePath().toString(),
             fileName    : gnomADVCF.fileName.toString(),
             created     : timestampStrToLocal(fileAttr.creationTime().toString()),
@@ -209,6 +206,7 @@ class MitoReportCommand implements Runnable {
                 'samples'           : [
                         [
                                 'id'                 : sample,
+                                'metadata'           : metadata,
                                 'bamDir'             : bamDir,
                                 'bamFilename'        : bamFileName,
                                 'vcfDir'             : sampleVcfDir,
