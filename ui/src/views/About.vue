@@ -13,8 +13,9 @@
             pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
             culpa qui officia deserunt mollit anim id est laborum.
 
+            <br />
+            <br />
             <span>Gnomad and other citations:</span>
-            <!-- <svg id="coveragePlot" style="width: 100%; height: 240px"></svg> -->
           </v-card-text>
         </v-card>
       </v-col>
@@ -22,11 +23,20 @@
         <v-card>
           <v-card-title>Data</v-card-title>
           <v-card-text>
-            <ul style="clip: rect(0px, 1000px, 0px, 0px);">
-              <li>Sample ID: {{ sampleSettings.id }}</li>
-              <li>Absolute Path: {{ metadata.absolutePath }}</li>
-            </ul>
-            <!-- <svg id="splitReadPlot" style="width: 100%; height: 240px"></svg> -->
+            <table id="metadata">
+              <tr>
+                <td>Sample ID</td>
+                <td>{{ sampleSettings.id }}</td>
+              </tr>
+              <tr>
+                <td>Time generated</td>
+                <td>{{ date }}</td>
+              </tr>
+              <tr>
+                <td>Path</td>
+                <td>{{ metadata.absolutePath }}</td>
+              </tr>
+            </table>
           </v-card-text>
         </v-card>
       </v-col>
@@ -35,8 +45,14 @@
 </template>
 
 <style lang="scss" scoped>
-#test {
-  background: red;
+table#metadata {
+  td {
+    padding: 2px;
+    border-bottom: solid 1px grey;
+    &:first-child {
+      border-right: solid 1px grey;
+    }
+  }
 }
 </style>
 
@@ -52,6 +68,10 @@ export default {
 
     metadata() {
       return this.getSampleMetadata
+    },
+
+    date() {
+      return new Date(this.metadata.accessed).toLocaleString();
     },
 
     sampleSettings() {
