@@ -99,9 +99,9 @@ export default {
         "Gnomad Timestamp": new Date(this.metadata.created).toLocaleString(),
         "Gnomad Path": this.getSampleMetadata.absolutePath,
         "Mitoreport Version": this.getSampleMetadata.mitoreportVersion,
-        "Mitoreport Git Branch": "",
-        "Mitoreport Git Hash": "",
-        "Mitoreport Git Date": "",
+        "Mitoreport Git Branch": this.getSampleMetadata.gitBranch,
+        "Mitoreport Git Hash": this.getSampleMetadata.gitHash,
+        "Mitoreport Git Date": this.getSampleMetadata.gitDate,
       }
     },
 

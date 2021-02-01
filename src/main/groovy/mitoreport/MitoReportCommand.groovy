@@ -91,7 +91,10 @@ class MitoReportCommand implements Runnable {
             created     : timestampStrToLocal(fileAttr.creationTime().toString()),
             modified    : timestampStrToLocal(fileAttr.lastModifiedTime().toString()),
             accessed    : timestampStrToLocal(fileAttr.lastAccessTime().toString()),
-            test: "123"
+//            gitTag      : ("git describe".execute().text), // Use tags for release / version number?
+            gitHash     : ("git rev-parse --short HEAD".execute().text).trim(),
+            gitBranch   : ("git status".execute().text).split("\n").first().split(" ").last(),
+            gitDate     : ("git show -s --format=%cD".execute().text).trim()
         ]
 
         String metadataJson = JsonOutput.prettyPrint(JsonOutput.toJson( metadata + [
