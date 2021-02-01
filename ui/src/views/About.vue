@@ -33,17 +33,10 @@
           <v-card-title>Data</v-card-title>
           <v-card-text>
             <table id="metadata">
-              <AboutPage
-                inline-template
-                v-for="(item, key) in displayedData"
-                :prop="item"
-                :key="key"
-              >
-                <tr>
-                  <td>{{ key }}</td>
-                  <td>{{ item }}</td>
-                </tr>
-              </AboutPage>
+              <tr v-for="(item, key) in displayedData" :key="key">
+                <td>{{ key }}</td>
+                <td>{{ item }}</td>
+              </tr>
             </table>
           </v-card-text>
         </v-card>
@@ -69,8 +62,7 @@ import { mapGetters } from 'vuex'
 // import * as _ from 'lodash'
 
 export default {
-  name: 'AboutPage',
-
+  name: 'About',
   computed: {
     ...mapGetters([
       'getSampleMetadata',
@@ -104,7 +96,6 @@ export default {
         "Mitoreport Git Date": this.getSampleMetadata.gitDate,
       }
     },
-
   },
 }
 </script>
