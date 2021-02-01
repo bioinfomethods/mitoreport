@@ -5,17 +5,26 @@
         <v-card>
           <v-card-title>About</v-card-title>
           <v-card-text>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat. Duis aute irure dolor in
-            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-            culpa qui officia deserunt mollit anim id est laborum.
+            <span>Mitoreport</span>
+            <p>
+              Mitoreport is a tool developed by the Bioinformatics Methods team
+              at the MCRI. This tool generates an automated report of variants
+              within the mitochondria DNA using Gnomad and other resources, and
+              allows manual curation and annotation of these variants.
+            </p>
 
-            <br />
-            <br />
-            <span>Gnomad and other citations:</span>
+            <span>Gnomad</span>
+            <p>
+              The
+              <a href="https://gnomad.broadinstitute.org/about" target="_blank"
+                >Genome Aggregation Database</a
+              >
+              (gnomAD) is a resource developed by an international coalition of
+              investigators, with the goal of aggregating and harmonizing both
+              exome and genome sequencing data from a wide variety of
+              large-scale sequencing projects, and making summary data available
+              for the wider scientific community.
+            </p>
           </v-card-text>
         </v-card>
       </v-col>
@@ -72,7 +81,7 @@ export default {
       return this.getSampleMetadata
     },
 
-    date() {
+    reportDate() {
       return new Date(this.metadata.accessed).toLocaleString();
     },
 
@@ -83,8 +92,16 @@ export default {
     displayedData() {
       return {
         "Sample ID": this.getSampleSettings.id,
-        "Time Generated": this.date,
-        "Path": this.getSampleMetadata.absolutePath
+        "Report Generated": this.reportDate,
+        "Report Last Modified": this.reportDate,
+        "Report Author": "",
+        "Gnomad Version": "v3.1",
+        "Gnomad Timestamp": new Date(this.metadata.created).toLocaleString(),
+        "Gnomad Path": this.getSampleMetadata.absolutePath,
+        "Mitoreport Version": this.getSampleMetadata.mitoreportVersion,
+        "Mitoreport Git Branch": "",
+        "Mitoreport Git Hash": "",
+        "Mitoreport Git Date": "",
       }
     },
 
