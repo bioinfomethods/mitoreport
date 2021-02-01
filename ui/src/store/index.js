@@ -53,7 +53,7 @@ export const getters = {
   },
 
   getSampleMetaData: (state, getters) => {
-    return getters.getSampleSettings?.metadata
+    return getters.getSampleSettings?.metadata || {}
   },
 
   getSettingsBamDir: (state, getters) => {
