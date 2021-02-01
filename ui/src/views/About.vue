@@ -23,17 +23,9 @@
           <v-card-title>Data</v-card-title>
           <v-card-text>
             <ul style="clip: rect(0px, 1000px, 0px, 0px);">
-              <li>Environment: pa_cloud</li>
-              <li>Build version: 1511</li>
-              <li>Grails version: 2.3.7</li>
-              <li>Groovy version: 2.1.9</li>
-              <li>JVM version: 1.7.0_101</li>
-              <li>Reloading active: false</li>
-              <li>Controllers: 48</li>
-              <li>Domains: 38</li>
-              <li>Services: 31</li>
-              <li>Tag Libraries: 48</li>
-              <li>git rev-parse HEAD: ca3706a</li>
+              <li>Sample: {{}}</li>
+              <li>Absolute Path: {{ metadata.absolutePath }}</li>
+              <li>Absolute Path: {{ metadata }}</li>
             </ul>
             <!-- <svg id="splitReadPlot" style="width: 100%; height: 240px"></svg> -->
           </v-card-text>
@@ -50,9 +42,27 @@
 </style>
 
 <script lang="typescript">
-console.log("hello world");
+import { mapGetters } from 'vuex'
+// import * as _ from 'lodash'
 
-// const asdf : number = 1
+export default {
+  name: 'AboutPage',
 
-// console.log(asdf)
+  computed: {
+    ...mapGetters(['getSampleMetaData', 'getSampleSettings']),
+
+    absolutePath() {
+      return this.getSampleMetaData.absolutePath
+    },
+
+    metadata() {
+      return this.getSampleMetaData
+    },
+
+    sampleSettings() {
+      return this.getSampleSettings
+    }
+
+  },
+}
 </script>
