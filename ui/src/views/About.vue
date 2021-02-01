@@ -48,10 +48,10 @@ export default {
   name: 'AboutPage',
 
   computed: {
-    ...mapGetters(['getSampleMetaData', 'getSampleSettings']),
+    ...mapGetters(['getSampleMetadata', 'getSampleSettings']),
 
     metadata() {
-      return this.getSampleMetaData
+      return this.getSampleMetadata
     },
 
     sampleSettings() {

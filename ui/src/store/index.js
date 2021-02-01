@@ -52,7 +52,7 @@ export const getters = {
     return result || {}
   },
 
-  getSampleMetaData: (state, getters) => {
+  getSampleMetadata: (state, getters) => {
     return getters.getSampleSettings?.metadata || {}
   },
 
