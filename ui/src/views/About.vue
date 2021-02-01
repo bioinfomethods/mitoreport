@@ -24,18 +24,17 @@
           <v-card-title>Data</v-card-title>
           <v-card-text>
             <table id="metadata">
-              <tr>
-                <td>Sample ID</td>
-                <td>{{ sampleSettings.id }}</td>
-              </tr>
-              <tr>
-                <td>Time generated</td>
-                <td>{{ date }}</td>
-              </tr>
-              <tr>
-                <td>Path</td>
-                <td>{{ metadata.absolutePath }}</td>
-              </tr>
+              <AboutPage
+                inline-template
+                v-for="(item, key) in displayedData"
+                :prop="item"
+                :key="key"
+              >
+                <tr>
+                  <td>{{ key }}</td>
+                  <td>{{ item }}</td>
+                </tr>
+              </AboutPage>
             </table>
           </v-card-text>
         </v-card>
@@ -64,7 +63,10 @@ export default {
   name: 'AboutPage',
 
   computed: {
-    ...mapGetters(['getSampleMetadata', 'getSampleSettings']),
+    ...mapGetters([
+      'getSampleMetadata',
+      'getSampleSettings',
+    ]),
 
     metadata() {
       return this.getSampleMetadata
@@ -76,7 +78,15 @@ export default {
 
     sampleSettings() {
       return this.getSampleSettings
-    }
+    },
+
+    displayedData() {
+      return {
+        "Sample ID": this.getSampleSettings.id,
+        "Time Generated": this.date,
+        "Path": this.getSampleMetadata.absolutePath
+      }
+    },
 
   },
 }
