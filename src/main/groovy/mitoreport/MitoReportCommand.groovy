@@ -288,7 +288,7 @@ class MitoReportCommand implements Runnable {
             array.each { filename ->
                 Files.copy(
                     Paths.get(mitoReportPathName, filename),
-                    Paths.get("ui", "public", filename),
+                    Paths.get(mitoReportPathName, "ui", "public", filename),
                     StandardCopyOption.REPLACE_EXISTING
                 )
             }
