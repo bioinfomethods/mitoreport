@@ -79,6 +79,15 @@
               <v-icon>mdi-delete</v-icon>
             </v-btn>
           </v-col>
+          <!-- 
+            TODO: #31
+            <v-col md="1">
+            <span>Hello World</span>
+            <v-switch id="toggleDavid" ref="toggleDavid" v-model="toggleDavid"
+              >Toggle stuff</v-switch
+            >
+            <span>Hide something?</span>
+          </v-col> -->
         </v-row>
       </v-card-text>
     </v-card>
@@ -148,6 +157,32 @@
                   >
                 </template>
               </v-select>
+            </td>
+            <td>
+              <!-- TODO: #31
+                
+                <v-select
+                v-model="filterConfig.gnomADHapFilterOptions"
+                :items="hapOptions"
+                type="text"
+                label="Select"
+                multiple
+                dense
+              >
+                <template v-slot:selection="{ item, index }">
+                  <v-chip
+                    v-if="index <= 3"
+                    close
+                    @click:close="removeSelectedType(item)"
+                    x-small
+                  >
+                    <span>{{ item }}</span>
+                  </v-chip>
+                  <span v-if="index === 4" class="grey--text caption"
+                    >(+{{ filterConfig.selectedTypes.length - 4 }} others)</span
+                  >
+                </template>
+              </v-select> -->
             </td>
             <td>
               <v-select
@@ -330,6 +365,16 @@
               >{{ item.ref }}/{{ item.alt }}</a
             >
           </td>
+        </template>
+        <!-- TODO: #31 -->
+        <template v-slot:item.gnomAD="{ item }">
+          {{
+            item.gnomAD
+              ? item.gnomAD.hap_defining_variant
+                ? 'Hap defining'
+                : 'Not hap defining'
+              : 'no gnomad??'
+          }}
         </template>
         <template v-slot:item.symbol="{ item }">
           <td>
@@ -527,6 +572,7 @@ export default {
         allele: '',
         selectedTypes: [],
         selectedGenes: [],
+        gnomADHapFilterOptions: ['true', 'false'],
         selectedConsequence: {},
         vafRange: [0, 1],
         gbFreqMax: 5.0,
@@ -637,6 +683,13 @@ export default {
           width: '100',
           filter: this.typesFilter,
         },
+        // TODO: #31
+        {
+          text: 'Haplotype Defining',
+          value: 'gnomAD',
+          width: 100,
+          filter: this.gnomADHapFilter,
+        },
         {
           text: 'Gene',
           // tooltip: 'Gene tooltip',
@@ -738,6 +791,11 @@ export default {
     types() {
       return [...new Set(this.filteredVariants.map(row => row.type))]
     },
+
+    // TODO: #31
+    // hapOptions() {
+    //   return [...new Set(['true', 'false'])]
+    // },
 
     genes() {
       return [...new Set(this.filteredVariants.map(row => row.symbol))]
@@ -951,6 +1009,11 @@ export default {
     typesFilter: function(value) {
       return filters.inSetFilter(this.filterConfig.selectedTypes, value)
     },
+
+    // TODO: #31
+    // gnomADHapFilter: function(value) {
+    //   return filters.inSetFilter(['true', 'false'], value)
+    // },
 
     genesFilter: function(value) {
       return filters.inSetFilter(this.filterConfig.selectedGenes, value)
