@@ -189,7 +189,7 @@
                 v-model="filterConfig.selectedGenes"
                 :items="genes"
                 type="text"
-                label="Select"
+                label="Select Genes"
                 multiple
                 dense
               >
@@ -798,7 +798,9 @@ export default {
     // },
 
     genes() {
-      return [...new Set(this.filteredVariants.map(row => row.symbol))]
+      return [...new Set(this.filteredVariants.map(row => row.symbol))].filter(
+        d => d
+      )
     },
 
     consequences() {
