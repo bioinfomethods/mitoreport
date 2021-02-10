@@ -88,11 +88,11 @@ class MitoReportCommand implements Runnable {
             fileName    : gnomADVCF.fileName.toString(),
             created     : timestampStrToLocal(fileAttr.creationTime().toString()),
             modified    : timestampStrToLocal(fileAttr.lastModifiedTime().toString()),
-            accessed    : timestampStrToLocal(fileAttr.lastAccessTime().toString()),
+            accessed    : timestampStrToLocal(fileAttr.lastAccessTime().toString())
 //            gitTag      : ("git describe".execute().text), // Use tags for release / version number?
-            gitHash     : ("git rev-parse --short HEAD".execute().text).trim(),
-            gitBranch   : ("git status".execute().text).split("\n").first().split(" ").last(),
-            gitDate     : ("git show -s --format=%cD".execute().text).trim()
+//            gitHash     : ("git rev-parse --short HEAD".execute().text).trim(),
+//            gitBranch   : ("git status".execute().text).split("\n").first().split(" ").last(),
+//            gitDate     : ("git show -s --format=%cD".execute().text).trim()
         ]
 
 
@@ -267,7 +267,7 @@ class MitoReportCommand implements Runnable {
             array.each { filename ->
                 Files.copy(
                     Paths.get(mitoReportPathName, filename),
-                    Paths.get(mitoReportPathName, "ui", "public", filename),
+                    Paths.get(mitoReportPathName, "..", "ui", "public", filename),
                     StandardCopyOption.REPLACE_EXISTING
                 )
             }
