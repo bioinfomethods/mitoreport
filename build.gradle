@@ -4,7 +4,7 @@ plugins {
   id "application"
 }
 
-version "0.1"
+version "0.1.0"
 group "mitoreport"
 defaultTasks 'clean', 'build'
 
@@ -73,7 +73,7 @@ tasks.withType(GroovyCompile) {
 
 jar {
   manifest {
-    attributes 'Main-Class': mainClassName
+    attributes 'Main-Class': mainClassName, 'Implementation-Version': '0.1.0'
   }
 }
 

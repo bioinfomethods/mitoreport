@@ -2,6 +2,7 @@ import Deletions from '@/views/Deletions.vue'
 import Variants from '@/views/Variants.vue'
 import VariantDetails from '@/components/VariantDetails.vue'
 import NotFound from '@/views/NotFound.vue'
+import About from '@/views/About.vue'
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
@@ -30,6 +31,11 @@ const routes = [
     path: '/deletions',
     name: 'deletions',
     component: Deletions,
+  },
+  {
+    path: '/about',
+    name: 'about',
+    component: About,
   },
   {
     path: '*',

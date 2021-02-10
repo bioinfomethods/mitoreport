@@ -13,6 +13,9 @@ import picocli.CommandLine.Parameters
 
 import javax.inject.Inject
 import java.nio.file.*
+import java.nio.file.attribute.BasicFileAttributes
+import java.time.ZoneOffset
+import java.time.format.DateTimeFormatter
 import java.util.stream.Collectors
 
 @Slf4j
@@ -47,6 +50,9 @@ class MitoReportCommand implements Runnable {
     @Option(names = ['-o', '--output-dir'], required = false, description = 'Directory to write output to, defaults to mitoreport-<sample>')
     File outputDir
 
+    @Option(names = ['-d', '-dev', '--dev'], required = false, description = 'Developer Mode, copies .js files to ui folder')
+    Boolean devMode
+
     @Parameters(paramLabel = "BAMS", arity = '1..*', description = "One or more BAM files, one of them must be the sample BAM and the rest are control BAMs")
     List<File> bamFiles
 
@@ -57,6 +63,7 @@ class MitoReportCommand implements Runnable {
     MitoMapPolymorphismsLoader mitoMapLoader
 
     void run() {
+
         (bamFiles + [vcfFile, new File(annotations), mitoMapAnnotations.toFile(), gnomADVCF.toFile()])
                 .each { assert it.exists(), "${it.absolutePath} does not exist." }
 
@@ -73,7 +80,23 @@ class MitoReportCommand implements Runnable {
         File deletionsJson = deletionsResult.deletionsJsonFile
         File variantsJson = runReport(deletionsJson)
 
-        writeOutUiDataAndSettings(deletionsJson, deletionsResult.bamFile, variantsJson)
+        BasicFileAttributes fileAttr = Files.readAttributes(gnomADVCF, BasicFileAttributes)
+
+        Map<String, String> metadata = [
+            mitoreportVersion: this.getClass().getPackage().getImplementationVersion(),
+            absolutePath: gnomADVCF.toAbsolutePath().toString(),
+            fileName    : gnomADVCF.fileName.toString(),
+            created     : timestampStrToLocal(fileAttr.creationTime().toString()),
+            modified    : timestampStrToLocal(fileAttr.lastModifiedTime().toString()),
+            accessed    : timestampStrToLocal(fileAttr.lastAccessTime().toString())
+//            gitTag      : ("git describe".execute().text), // Use tags for release / version number?
+//            gitHash     : ("git rev-parse --short HEAD".execute().text).trim(),
+//            gitBranch   : ("git status".execute().text).split("\n").first().split(" ").last(),
+//            gitDate     : ("git show -s --format=%cD".execute().text).trim()
+        ]
+
+
+        writeOutUiDataAndSettings(deletionsJson, deletionsResult.bamFile, variantsJson, metadata)
     }
 
     Map<String, File> createDeletionsPlot() {
@@ -156,7 +179,7 @@ class MitoReportCommand implements Runnable {
         }
     }
 
-    void writeOutUiDataAndSettings(File deletionsJson, File sampleBamFile, File variantsJson) {
+    void writeOutUiDataAndSettings(File deletionsJson, File sampleBamFile, File variantsJson, Map metadata) {
         new File(Paths.get(mitoReportPathName, 'deletions.js').toUri())
                 .withWriter { it << 'window.deletions = ' + deletionsJson.text }
 
@@ -175,6 +198,7 @@ class MitoReportCommand implements Runnable {
                 'samples'           : [
                         [
                                 'id'                 : sample,
+                                'metadata'           : metadata,
                                 'bamDir'             : bamDir,
                                 'bamFilename'        : bamFileName,
                                 'vcfDir'             : sampleVcfDir,
@@ -229,5 +253,34 @@ class MitoReportCommand implements Runnable {
                 .withWriter { it << 'window.defaultSettings = ' + defaultSettingsJson }
         new File(Paths.get(mitoReportPathName, 'mitoSettings.js').toUri())
                 .withWriter { it << 'window.settings = ' + settingsJson }
+
+        if(devMode) {
+            System.out.println("Running in developer mode")
+
+            String[] array = [
+                    'defaultSettings.js',
+                    'mitoSettings.js',
+                    'deletions.js',
+                    'variants.js'
+            ]
+
+            array.each { filename ->
+                Files.copy(
+                    Paths.get(mitoReportPathName, filename),
+                    Paths.get(mitoReportPathName, "..", "ui", "public", filename),
+                    StandardCopyOption.REPLACE_EXISTING
+                )
+            }
+        }
+
+    }
+
+    static String timestampStrToLocal(String timestamp) {
+        String result = java.time.LocalDateTime.parse(timestamp, DateTimeFormatter.ISO_DATE_TIME)
+            .atOffset(ZoneOffset.of("+10:00"))
+            .toLocalDateTime()
+            .toString()
+
+        return result
     }
 }
