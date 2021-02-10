@@ -25,6 +25,19 @@
               large-scale sequencing projects, and making summary data available
               for the wider scientific community.
             </p>
+            <span>MITOMAP</span>
+            <p>
+              <a href="https://mitomap.org/MITOMAP" target="_blank">MITOMAP</a>
+              reports published data on human mitochondrial DNA variation.
+              MITOMAP is a Service provided by the
+              <a href="https://cmem.research.chop.edu/" target="_blank"
+                >Center for Mitochondrial & Epigenomic Medicine</a
+              >
+              at the
+              <a href="https://www.chop.edu/" target="_blank"
+                >Children's Hospital of Philadelphia</a
+              >.
+            </p>
           </v-card-text>
         </v-card>
       </v-col>
@@ -59,7 +72,7 @@ table#metadata {
 
 <script lang="typescript">
 import { mapGetters } from 'vuex'
-// import * as _ from 'lodash'
+import * as _ from 'lodash'
 
 export default {
   name: 'About',
@@ -82,7 +95,7 @@ export default {
     },
 
     displayedData() {
-      return {
+      const data = {
         "Sample ID": this.getSampleSettings.id,
         "Report Generated": this.reportDate,
         "Report Last Modified": this.reportDate,
@@ -91,10 +104,17 @@ export default {
         "Gnomad Timestamp": new Date(this.metadata.created).toLocaleString(),
         "Gnomad Path": this.getSampleMetadata.absolutePath,
         "Mitoreport Version": this.getSampleMetadata.mitoreportVersion,
-        "Mitoreport Git Branch": this.getSampleMetadata.gitBranch,
-        "Mitoreport Git Hash": this.getSampleMetadata.gitHash,
-        "Mitoreport Git Date": this.getSampleMetadata.gitDate,
       }
+
+// Should this stuff always be fresh? Perhaps don't pull it from localstorage mitosettings?
+      if (this.getSampleMetadata.gitBranch) {
+        _.merge(data, {
+          "Mitoreport Git Branch": this.getSampleMetadata.gitBranch,
+          "Mitoreport Git Hash": this.getSampleMetadata.gitHash,
+          "Mitoreport Git Date": this.getSampleMetadata.gitDate,
+        })
+      }
+      return data
     },
   },
 }

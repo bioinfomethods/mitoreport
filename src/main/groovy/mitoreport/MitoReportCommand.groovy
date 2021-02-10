@@ -80,8 +80,6 @@ class MitoReportCommand implements Runnable {
         File deletionsJson = deletionsResult.deletionsJsonFile
         File variantsJson = runReport(deletionsJson)
 
-//        Map<String, String> metadata = collectMetadata()
-
         BasicFileAttributes fileAttr = Files.readAttributes(gnomADVCF, BasicFileAttributes)
 
         Map<String, String> metadata = [
@@ -90,22 +88,13 @@ class MitoReportCommand implements Runnable {
             fileName    : gnomADVCF.fileName.toString(),
             created     : timestampStrToLocal(fileAttr.creationTime().toString()),
             modified    : timestampStrToLocal(fileAttr.lastModifiedTime().toString()),
-            accessed    : timestampStrToLocal(fileAttr.lastAccessTime().toString()),
+            accessed    : timestampStrToLocal(fileAttr.lastAccessTime().toString())
 //            gitTag      : ("git describe".execute().text), // Use tags for release / version number?
-            gitHash     : ("git rev-parse --short HEAD".execute().text).trim(),
-            gitBranch   : ("git status".execute().text).split("\n").first().split(" ").last(),
-            gitDate     : ("git show -s --format=%cD".execute().text).trim()
+//            gitHash     : ("git rev-parse --short HEAD".execute().text).trim(),
+//            gitBranch   : ("git status".execute().text).split("\n").first().split(" ").last(),
+//            gitDate     : ("git show -s --format=%cD".execute().text).trim()
         ]
 
-        String metadataJson = JsonOutput.prettyPrint(JsonOutput.toJson( metadata + [
-            hello: "world",
-            timestamp: java.util.Calendar.getInstance().getTime(),
-            javaVersion: System.getProperty("java.version"),
-            javaSpecVersion: System.getProperty("java.specification.version")
-        ]))
-
-        new File(Paths.get(mitoReportPathName, 'metadata.js').toUri())
-                .withWriter { it << 'metadata = ' + metadataJson }
 
         writeOutUiDataAndSettings(deletionsJson, deletionsResult.bamFile, variantsJson, metadata)
     }
@@ -265,15 +254,6 @@ class MitoReportCommand implements Runnable {
         new File(Paths.get(mitoReportPathName, 'mitoSettings.js').toUri())
                 .withWriter { it << 'window.settings = ' + settingsJson }
 
-        String metadataJson = JsonOutput.prettyPrint(JsonOutput.toJson( metadata + [
-            hello: "world",
-            timestamp: java.util.Calendar.getInstance().getTime(),
-            javaVersion: System.getProperty("java.specification.version")
-        ]))
-
-        new File(Paths.get(mitoReportPathName, 'metadata.js').toUri())
-                .withWriter { it << 'metadata = ' + metadataJson }
-
         if(devMode) {
             System.out.println("Running in developer mode")
 
@@ -281,14 +261,13 @@ class MitoReportCommand implements Runnable {
                     'defaultSettings.js',
                     'mitoSettings.js',
                     'deletions.js',
-                    'variants.js',
-                    'metadata.js'
+                    'variants.js'
             ]
 
             array.each { filename ->
                 Files.copy(
                     Paths.get(mitoReportPathName, filename),
-                    Paths.get(mitoReportPathName, "ui", "public", filename),
+                    Paths.get(mitoReportPathName, "..", "ui", "public", filename),
                     StandardCopyOption.REPLACE_EXISTING
                 )
             }
