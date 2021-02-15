@@ -213,7 +213,7 @@
               </v-row>
               <v-slider
                 v-model="filterConfig.gbFreqMax"
-                step="5"
+                step="0.2"
                 min="0"
                 max="100"
                 hide-details
