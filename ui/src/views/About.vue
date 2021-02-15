@@ -9,11 +9,11 @@
             <p>
               Mitoreport is a tool developed by the Bioinformatics Methods team
               at the MCRI. This tool generates an automated report of variants
-              within the mitochondria DNA using Gnomad and other resources, and
+              within the mitochondria DNA using gnomAD and other resources, and
               allows manual curation and annotation of these variants.
             </p>
 
-            <span>Gnomad</span>
+            <span>gnomAD</span>
             <p>
               The
               <a href="https://gnomad.broadinstitute.org/about" target="_blank"
@@ -100,9 +100,9 @@ export default {
         "Report Generated": this.reportDate,
         "Report Last Modified": this.reportDate,
         "Report Author": "",
-        "Gnomad Version": "v3.1",
-        "Gnomad Timestamp": new Date(this.metadata.created).toLocaleString(),
-        "Gnomad Path": this.getSampleMetadata.absolutePath,
+        "gnomAD Version": "v3.1",
+        "gnomAD Timestamp": new Date(this.metadata.created).toLocaleString(),
+        "gnomAD Path": this.getSampleMetadata.absolutePath,
         "Mitoreport Version": this.getSampleMetadata.mitoreportVersion,
       }
 
