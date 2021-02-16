@@ -159,32 +159,6 @@
               </v-select>
             </td>
             <td>
-              <!-- TODO: #31
-                
-                <v-select
-                v-model="filterConfig.gnomADHapFilterOptions"
-                :items="hapOptions"
-                type="text"
-                label="Select"
-                multiple
-                dense
-              >
-                <template v-slot:selection="{ item, index }">
-                  <v-chip
-                    v-if="index <= 3"
-                    close
-                    @click:close="removeSelectedType(item)"
-                    x-small
-                  >
-                    <span>{{ item }}</span>
-                  </v-chip>
-                  <span v-if="index === 4" class="grey--text caption"
-                    >(+{{ filterConfig.selectedTypes.length - 4 }} others)</span
-                  >
-                </template>
-              </v-select> -->
-            </td>
-            <td>
               <v-select
                 v-model="filterConfig.selectedGenes"
                 :items="genes"
@@ -285,6 +259,29 @@
               >
               </v-slider>
             </td>
+            <td>
+              <v-select
+                v-model="filterConfig.gnomADHap"
+                :items="['True', 'False', 'Null']"
+                label="Filter"
+                multiple
+                dense
+              >
+                <template v-slot:selection="{ item, index }">
+                  <v-chip
+                    v-if="index <= 3"
+                    close
+                    @click:close="removeSelectedHaploFilter(item)"
+                    x-small
+                  >
+                    <span>{{ item }}</span>
+                  </v-chip>
+                  <span v-if="index === 4" class="grey--text caption"
+                    >(+{{ filterConfig.gnomADHap.length - 4 }} others)</span
+                  >
+                </template>
+              </v-select>
+            </td>
             <td></td>
             <td></td>
             <td>
@@ -362,16 +359,6 @@
             >{{ item.ref }}/{{ item.alt }}</a
           >
         </template>
-        <!-- TODO: #31 -->
-        <template v-slot:item.gnomAD="{ item }">
-          {{
-            item.gnomAD
-              ? item.gnomAD.hap_defining_variant
-                ? 'Hap defining'
-                : 'Not hap defining'
-              : 'no gnomad??'
-          }}
-        </template>
         <template v-slot:item.symbols="{ item }">
           <GeneCardsLink
             v-for="gene in item.symbols"
@@ -396,6 +383,25 @@
           <span v-if="item.gnomAD && item.gnomAD.af_hom > 0"
             >{{ (100 * item.gnomAD.af_hom) | precisionTo }}%</span
           >
+        </template>
+        <template v-slot:item.gnomAD.hap_defining_variant="{ item }">
+          <span
+            :title="
+              item.gnomAD
+                ? item.gnomAD.hap_defining_variant
+                  ? 'Haplotype Defining'
+                  : 'Not Haplotype Defining'
+                : 'No gnomAD data'
+            "
+          >
+            {{
+              item.gnomAD
+                ? item.gnomAD.hap_defining_variant
+                  ? '✅'
+                  : '❌'
+                : '⚠️'
+            }}
+          </span>
         </template>
         <template v-slot:item.gnomAD.hl_hist="{ item }">
           <span v-if="heteroplasmyDistExists(item)">
@@ -557,7 +563,7 @@ export default {
         allele: '',
         selectedTypes: [],
         selectedGenes: [],
-        gnomADHapFilterOptions: ['true', 'false'],
+        gnomADHap: [],
         selectedConsequence: {},
         vafRange: [0, 1],
         gbFreqMax: 5.0,
@@ -668,13 +674,6 @@ export default {
           width: '100',
           filter: this.typesFilter,
         },
-        // TODO: #31
-        {
-          text: 'Haplotype Defining',
-          value: 'gnomAD',
-          width: 100,
-          filter: this.gnomADHapFilter,
-        },
         {
           text: 'Gene',
           // tooltip: 'Gene tooltip',
@@ -717,6 +716,15 @@ export default {
           value: 'gnomAD.af_hom',
           width: '130',
           filter: this.gnomADHomFreqFilter,
+        },
+        {
+          text: 'Haplotype Defining',
+          align: 'center',
+          value: 'gnomAD.hap_defining_variant',
+          width: 100,
+          sort: this.gnomADHapSort,
+          isDescending: true,
+          filter: this.gnomADHapFilter,
         },
         {
           text: 'Heteroplasmy Distribution',
@@ -1004,13 +1012,18 @@ export default {
       return filters.inSetFilter(this.filterConfig.selectedTypes, value)
     },
 
-    // TODO: #31
-    // gnomADHapFilter: function(value) {
-    //   return filters.inSetFilter(['true', 'false'], value)
-    // },
+    gnomADHapFilter: function(value) {
+      return filters.trioFilter(this.filterConfig.gnomADHap, value)
+    },
 
     genesFilter: function(value) {
       return filters.setInSetFilter(this.filterConfig.selectedGenes, value)
+    },
+
+    removeSelectedHaploFilter: function(toRemove) {
+      this.filterConfig.gnomADHap = this.filterConfig.gnomADHap.filter(
+        selected => selected !== toRemove
+      )
     },
 
     removeSelectedType: function(toRemove) {
@@ -1034,6 +1047,14 @@ export default {
 
     consequenceSort: function(l, r) {
       return l.rank - r.rank
+    },
+
+    gnomADHapSort: function(l, r) {
+      return weight(r) - weight(l)
+
+      function weight(gnomAD) {
+        return gnomAD !== undefined ? (gnomAD ? 1 : 0) : -1
+      }
     },
 
     curationFilter: function(item) {

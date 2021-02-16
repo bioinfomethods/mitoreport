@@ -119,3 +119,23 @@ export function setInSetFilter(set, values) {
 
   return result
 }
+
+/**
+ * Trio filter for gnomAD Haplotype filter.
+ * Passes in the words: "True", "False" or "Null"
+ */
+export function trioFilter(set, value) {
+  if (!set || set.length === 0) {
+    return true
+  }
+
+  if (value === true && set.includes('True')) {
+    return true
+  } else if (value === false && set.includes('False')) {
+    return true
+  } else if (value === undefined && set.includes('Null')) {
+    return true
+  } else {
+    return false
+  }
+}
