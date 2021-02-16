@@ -7,10 +7,14 @@ label.v-label {
 }
 
 a {
- text-decoration: none; 
+  text-decoration: none;
 }
 
-a:active, a:hover {
- text-decoration: underline;
+a:active,
+a:hover {
+  text-decoration: underline;
 }
 
+th[role='columnheader'] {
+  vertical-align: top;
+}
