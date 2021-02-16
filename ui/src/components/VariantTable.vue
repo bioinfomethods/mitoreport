@@ -372,13 +372,12 @@
               : 'no gnomad??'
           }}
         </template>
-        <template v-slot:item.symbol="{ item }">
-          <div
-            v-for="gene in item.symbol ? item.symbol.split(', ') : []"
+        <template v-slot:item.symbols="{ item }">
+          <GeneCardsLink
+            v-for="gene in item.symbols"
             :key="gene"
-          >
-            <GeneCardsLink v-if="gene" :gene="gene"></GeneCardsLink>
-          </div>
+            :gene="gene"
+          ></GeneCardsLink>
         </template>
         <template v-slot:item.consequence="{ item }">
           {{ item.consequence ? item.consequence.name : '' }}
@@ -679,7 +678,7 @@ export default {
         {
           text: 'Gene',
           // tooltip: 'Gene tooltip',
-          value: 'symbol',
+          value: 'symbols',
           width: '150',
           filter: this.genesFilter,
         },
@@ -787,8 +786,8 @@ export default {
       const genes = [
         ...new Set(
           this.filteredVariants
-            .filter(row => row.symbol)
-            .map(row => row.symbol.split(', '))
+            .filter(row => row.symbols)
+            .map(row => row.symbols)
             .flat()
         ),
       ]
@@ -1011,7 +1010,7 @@ export default {
     // },
 
     genesFilter: function(value) {
-      return filters.inSetFilter(this.filterConfig.selectedGenes, value)
+      return filters.setInSetFilter(this.filterConfig.selectedGenes, value)
     },
 
     removeSelectedType: function(toRemove) {
