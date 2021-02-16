@@ -1,0 +1,4 @@
+package mitoreport
+
+class HaplogroupResult {
+}

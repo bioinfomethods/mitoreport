@@ -82,6 +82,8 @@ class MitoReportCommand implements Runnable {
         File deletionsJson = deletionsResult.deletionsJsonFile
         File variantsJson = runReport(deletionsJson)
 
+        def haplogroupResult = new HaplogroupClassifier(vcfFile, sample).call()
+
         BasicFileAttributes fileAttr = Files.readAttributes(gnomADVCF, BasicFileAttributes)
 
         Map<String, String> metadata = [
