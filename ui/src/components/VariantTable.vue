@@ -215,7 +215,7 @@
                 v-model="filterConfig.gbFreqMax"
                 step="0.2"
                 min="0"
-                max="100"
+                max="10"
                 hide-details
               >
               </v-slider>
@@ -228,9 +228,9 @@
               </v-row>
               <v-slider
                 v-model="filterConfig.gnomADHetFreqMax"
-                step="5"
+                step="0.2"
                 min="0"
-                max="100"
+                max="10"
                 hide-details
               >
               </v-slider>
@@ -243,9 +243,9 @@
               </v-row>
               <v-slider
                 v-model="filterConfig.gnomADHomFreqMax"
-                step="5"
+                step="0.2"
                 min="0"
-                max="100"
+                max="10"
                 hide-details
               >
               </v-slider>
