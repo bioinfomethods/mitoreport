@@ -353,18 +353,14 @@
 
         <!-- Override row values where necessary using slot v-slot:item.${header.value} -->
         <template v-slot:item.pos="{ item }">
-          <td>
-            <IgvLink :position="item.pos"></IgvLink>
-          </td>
+          <IgvLink :position="item.pos"></IgvLink>
         </template>
         <template v-slot:item.ref_alt="{ item }">
-          <td>
-            <a
-              :id="`varlink-${item.pos}-${item.ref}-${item.alt}`"
-              @click.stop="activeVariant = item"
-              >{{ item.ref }}/{{ item.alt }}</a
-            >
-          </td>
+          <a
+            :id="`varlink-${item.pos}-${item.ref}-${item.alt}`"
+            @click.stop="activeVariant = item"
+            >{{ item.ref }}/{{ item.alt }}</a
+          >
         </template>
         <!-- TODO: #31 -->
         <template v-slot:item.gnomAD="{ item }">
@@ -377,36 +373,30 @@
           }}
         </template>
         <template v-slot:item.symbol="{ item }">
-          <td>
-            <GeneCardsLink
-              v-if="item.symbol"
-              :gene="item.symbol"
-            ></GeneCardsLink>
-          </td>
+          <div
+            v-for="gene in item.symbol ? item.symbol.split(', ') : []"
+            :key="gene"
+          >
+            <GeneCardsLink v-if="gene" :gene="gene"></GeneCardsLink>
+          </div>
         </template>
         <template v-slot:item.consequence="{ item }">
-          <td>{{ item.consequence ? item.consequence.name : '' }}</td>
+          {{ item.consequence ? item.consequence.name : '' }}
         </template>
         <template v-slot:item.gbFreqPct="{ item }">
-          <td>
-            <span v-if="item.gbFreqPct > 0"
-              >{{ item.gbFreqPct | precisionTo }}%</span
-            >
-          </td>
+          <span v-if="item.gbFreqPct > 0"
+            >{{ item.gbFreqPct | precisionTo }}%</span
+          >
         </template>
         <template v-slot:item.gnomAD.af_het="{ item }">
-          <td>
-            <span v-if="item.gnomAD && item.gnomAD.af_het > 0"
-              >{{ (100 * item.gnomAD.af_het) | precisionTo }}%</span
-            >
-          </td>
+          <span v-if="item.gnomAD && item.gnomAD.af_het > 0"
+            >{{ (100 * item.gnomAD.af_het) | precisionTo }}%</span
+          >
         </template>
         <template v-slot:item.gnomAD.af_hom="{ item }">
-          <td>
-            <span v-if="item.gnomAD && item.gnomAD.af_hom > 0"
-              >{{ (100 * item.gnomAD.af_hom) | precisionTo }}%</span
-            >
-          </td>
+          <span v-if="item.gnomAD && item.gnomAD.af_hom > 0"
+            >{{ (100 * item.gnomAD.af_hom) | precisionTo }}%</span
+          >
         </template>
         <template v-slot:item.gnomAD.hl_hist="{ item }">
           <span v-if="heteroplasmyDistExists(item)">
@@ -445,20 +435,16 @@
           </span>
         </template>
         <template v-slot:item.curation="{ item }">
-          <td>
-            <CurationCell :variantId="item.id" :key="item.id"></CurationCell>
-          </td>
+          <CurationCell :variantId="item.id" :key="item.id"></CurationCell>
         </template>
         <template v-slot:item.curatedRef="{ item }">
-          <td>
-            <CuratedRefLink
-              :href="item.curatedRef.url"
-              :count="item.curatedRef.count"
-            ></CuratedRefLink>
-          </td>
+          <CuratedRefLink
+            :href="item.curatedRef.url"
+            :count="item.curatedRef.count"
+          ></CuratedRefLink>
         </template>
         <template v-slot:item.hgvsc="{ item }">
-          <td v-html="item.hgvsc"></td>
+          {{ item.hgvsc }}
         </template>
         <template v-slot:expanded-item="{ headers, item }">
           <td
@@ -798,9 +784,16 @@ export default {
     // },
 
     genes() {
-      return [...new Set(this.filteredVariants.map(row => row.symbol))].filter(
-        d => d
-      )
+      const genes = [
+        ...new Set(
+          this.filteredVariants
+            .filter(row => row.symbol)
+            .map(row => row.symbol.split(', '))
+            .flat()
+        ),
+      ]
+
+      return genes
     },
 
     consequences() {
