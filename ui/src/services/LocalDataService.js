@@ -74,9 +74,7 @@ export async function loadSettings() {
 }
 
 export async function saveSettingsToLocal(settings) {
-  const settingsToSave = {
-    ...settings,
-  }
+  const settingsToSave = _.cloneDeep(settings)
   const nonBlankCurationPredicate = curation =>
     !_.isEmpty(curation.selectedTagNames) || !_.isEmpty(curation.variantNote)
   settingsToSave.samples.forEach(s => {
