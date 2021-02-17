@@ -5,6 +5,7 @@ import graxxia.CSV
 import groovy.json.JsonOutput
 import groovy.json.JsonSlurper
 import groovy.util.logging.Slf4j
+import mitoreport.haplogrep.GnomadBaseHaplogroup
 
 import static gngs.VEPConsequences.RANKED_CONSEQUENCES
 
@@ -21,8 +22,8 @@ import static gngs.VEPConsequences.RANKED_CONSEQUENCES
 class Report extends ToolBase {
 
     VCF vcf
-    
-    VCF gnomAD 
+
+    VCF gnomAD
 
     Map deletion
 
@@ -34,7 +35,7 @@ class Report extends ToolBase {
      * Index of consequences, ordered by severity
      */
     List<Map> consequencesWithRank = RANKED_CONSEQUENCES.withIndex(1).collect { String consequence, Integer index -> [id: consequence, name: consequence, rank: index] }
-    
+
     final static Set<String> EXCLUDE_CONSEQUENCES = [
         "upstream_gene_variant",
         "downstream_gene_variant",
@@ -45,7 +46,7 @@ class Report extends ToolBase {
 
         log.info "Loading vcf $opts.vcf"
         vcf = VCF.parse(opts.vcf)
-        
+
         gnomAD = VCF.parse(opts.gnomad)
         log.info "Loaded ${gnomAD.size()} variants from gnomAD VCF ${opts.vcf}"
 
@@ -68,14 +69,14 @@ class Report extends ToolBase {
 
         List<MitoMapPolymorphismAnnotation> mitoMapAnnotations = (opts.mann && mitoMapLoader) ? mitoMapLoader.getAnnotations(opts.mann) : []
         log.info "Loaded ${mitoMapAnnotations.size()} MitoMap annotations"
-        
+
         int total = 0
         int gnomADVariantCount = 0
 
         List results = []
 
         vcf.each { Variant v ->
-            
+
             ++total
 
             int sampleIndex = 0
@@ -115,24 +116,44 @@ class Report extends ToolBase {
 
             Map infoField = v.parsedInfo
             infoField.remove('ANN')
-            
+
             // If there is a locus annotation from mito map, we always prefer that
             if(mitoAnnotation && mitoAnnotation.locus) {
                 vepInfo.symbol = mitoAnnotation.locus
             }
-            else 
+            else
             if(variantAnnotations && variantAnnotations.Locus) {
                 vepInfo.symbol = variantAnnotations.Locus
             }
             // else stick with what VEP put there
-            
+
             Map resultInfo = variantInfo + vepInfo + variantAnnotations + infoField + [genotypes: v.parsedGenotypes]
-            
+
             Variant gnomADVariant = gnomAD.find(v)
             if(gnomADVariant) {
                 MitoGnomAD gnomADInfo = MitoGnomAD.parse(gnomADVariant.info)
-                
-                resultInfo.gnomAD = gnomADInfo // native object serializes to JSON OK
+                gnomADInfo.metaClass.getHap_ac_het_map << {->
+                    GnomadBaseHaplogroup.mapToBaseHaplogroup(gnomADInfo.hap_ac_het)
+                }
+                gnomADInfo.metaClass.getHap_ac_hom_map << {->
+                    GnomadBaseHaplogroup.mapToBaseHaplogroup(gnomADInfo.hap_ac_hom)
+                }
+                gnomADInfo.metaClass.getHap_af_het_map << {->
+                    GnomadBaseHaplogroup.mapToBaseHaplogroup(gnomADInfo.hap_af_het)
+                }
+                gnomADInfo.metaClass.getHap_af_hom_map << {->
+                    GnomadBaseHaplogroup.mapToBaseHaplogroup(gnomADInfo.hap_af_hom)
+                }
+                gnomADInfo.metaClass.getHap_an_map << {->
+                    GnomadBaseHaplogroup.mapToBaseHaplogroup(gnomADInfo.hap_an)
+                }
+                gnomADInfo.metaClass.getHap_faf_hom_map << {->
+                    GnomadBaseHaplogroup.mapToBaseHaplogroup(gnomADInfo.hap_faf_hom)
+                }
+                gnomADInfo.metaClass.getHap_hl_hist_map << {->
+                    GnomadBaseHaplogroup.mapToBaseHaplogroup(gnomADInfo.hap_hl_hist)
+                }
+                resultInfo.gnomAD = gnomADInfo  // native object serializes to JSON OK including metaClass properties
 
                 ++gnomADVariantCount
             }
@@ -165,7 +186,7 @@ class Report extends ToolBase {
      * for example, we prefer not to annotate with 'upstream' or 'downstream' since the variant is
      * not actually inside the gene of interest, and by VEP's interpretation of upstream and downstream,
      * every mtDNA variant would be upstream or downstream of every gene in the mtDNA.
-     * 
+     *
      * @param v
      * @return
      */
@@ -187,8 +208,8 @@ class Report extends ToolBase {
             hgvsp      : URLDecoder.decode(vep.HGVSp?.replaceAll('^.*:', ''), "UTF-8"),
             hgvsc      : vep.HGVSc?.replaceAll('^.*:', '')
         ]
-        
-        return vepInfo 
+
+        return vepInfo
     }
 
 
