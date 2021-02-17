@@ -107,6 +107,7 @@ class Report extends ToolBase {
 
             MitoMapPolymorphismAnnotation mitoAnnotation = mitoMapAnnotations.find { it.compactAllele == compactAllele }
             variantAnnotations.gbFreqPct = mitoAnnotation?.gbFreqPct ?: 0.0
+            variantAnnotations.gbFreq = mitoAnnotation?.gbFreq ?: 0.0
             variantAnnotations.curatedRef = mitoAnnotation ? [
                     'count': mitoAnnotation?.curatedRefsCount ?: 0,
                     'url'  : mitoAnnotation?.curatedRefsUrl,

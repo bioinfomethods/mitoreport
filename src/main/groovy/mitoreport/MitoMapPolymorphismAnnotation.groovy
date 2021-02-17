@@ -96,6 +96,10 @@ class MitoMapPolymorphismAnnotation {
         }
     }
 
+    BigDecimal getGbFreq() {
+        return (this.gbFreqPct ?: 0.0) / 100.0
+    }
+
     Integer getCuratedRefsCount() {
         Matcher anchorMatcher = curatedRefsAnchor =~ HTML_ANCHOR_PATTERN
         if (!anchorMatcher.find()) {
@@ -121,7 +125,7 @@ class MitoMapPolymorphismAnnotation {
             return "$mitoMapHost$href"
         }
     }
-    
+
     String getLocus() {
         Matcher anchorMatcher = locusAnchor =~ HTML_TEXT_ANCHOR_PATTERN
         if (!anchorMatcher.find()) {
