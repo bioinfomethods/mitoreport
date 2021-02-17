@@ -18,6 +18,8 @@ import java.time.ZoneOffset
 import java.time.format.DateTimeFormatter
 import java.util.stream.Collectors
 
+import static java.time.LocalDateTime.parse as ld
+
 @Slf4j
 @Command(name = 'mito-report', description = 'Mito Report', mixinStandardHelpOptions = true)
 class MitoReportCommand implements Runnable {
@@ -83,12 +85,12 @@ class MitoReportCommand implements Runnable {
         BasicFileAttributes fileAttr = Files.readAttributes(gnomADVCF, BasicFileAttributes)
 
         Map<String, String> metadata = [
-            mitoreportVersion: this.getClass().getPackage().getImplementationVersion(),
-            absolutePath: gnomADVCF.toAbsolutePath().toString(),
-            fileName    : gnomADVCF.fileName.toString(),
-            created     : timestampStrToLocal(fileAttr.creationTime().toString()),
-            modified    : timestampStrToLocal(fileAttr.lastModifiedTime().toString()),
-            accessed    : timestampStrToLocal(fileAttr.lastAccessTime().toString())
+                mitoreportVersion: this.getClass().getPackage().getImplementationVersion(),
+                absolutePath     : gnomADVCF.toAbsolutePath().toString(),
+                fileName         : gnomADVCF.fileName.toString(),
+                created          : timestampStrToLocal(fileAttr.creationTime().toString()),
+                modified         : timestampStrToLocal(fileAttr.lastModifiedTime().toString()),
+                accessed         : timestampStrToLocal(fileAttr.lastAccessTime().toString())
 //            gitTag      : ("git describe".execute().text), // Use tags for release / version number?
 //            gitHash     : ("git rev-parse --short HEAD".execute().text).trim(),
 //            gitBranch   : ("git status".execute().text).split("\n").first().split(" ").last(),
@@ -258,35 +260,34 @@ class MitoReportCommand implements Runnable {
 
         new File(Paths.get(mitoReportPathName, 'defaultSettings.js').toUri())
                 .withWriter { it << 'window.defaultSettings = ' + defaultSettingsJson }
-        new File(Paths.get(mitoReportPathName, "mitoSettings_${sample}.js").toUri())
+        String mitoSettingsFileName = "mitoSettings_${sample}.js"
+        new File(Paths.get(mitoReportPathName, mitoSettingsFileName).toUri())
                 .withWriter { it << 'window.settings = ' + settingsJson }
 
-        if(devMode) {
-            System.out.println("Running in developer mode")
-
-            String[] array = [
+        if (devMode) {
+            log.info('Running in developer mode')
+            List<String> fileNamesToCopy = [
                     'defaultSettings.js',
-                    'mitoSettings.js',
+                    mitoSettingsFileName,
                     'deletions.js',
                     'variants.js'
             ]
 
-            array.each { filename ->
+            fileNamesToCopy.each { fileName ->
                 Files.copy(
-                    Paths.get(mitoReportPathName, filename),
-                    Paths.get(mitoReportPathName, "..", "ui", "public", filename),
-                    StandardCopyOption.REPLACE_EXISTING
+                        Paths.get(mitoReportPathName, fileName),
+                        Paths.get(mitoReportPathName, "..", "ui", "public", fileName),
+                        StandardCopyOption.REPLACE_EXISTING
                 )
             }
         }
-
     }
 
     private static String timestampStrToLocal(String timestamp) {
-        String result = java.time.LocalDateTime.parse(timestamp, DateTimeFormatter.ISO_DATE_TIME)
-            .atOffset(ZoneOffset.of("+10:00"))
-            .toLocalDateTime()
-            .toString()
+        String result = ld(timestamp, DateTimeFormatter.ISO_DATE_TIME)
+                .atOffset(ZoneOffset.of("+10:00"))
+                .toLocalDateTime()
+                .toString()
 
         return result
     }
