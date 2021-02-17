@@ -394,13 +394,19 @@
                 : 'No gnomAD data'
             "
           >
-            {{
-              item.gnomAD
-                ? item.gnomAD.hap_defining_variant
-                  ? '✅'
-                  : '❌'
-                : '⚠️'
-            }}
+            <!--
+              A question mark might be better for the unknown value: mdi-help-circle-outline
+              or an exclamation mark: mdi-alert-circle-outline
+            -->
+            <v-icon>
+              {{
+                item.gnomAD
+                  ? item.gnomAD.hap_defining_variant
+                    ? 'mdi-check-circle-outline'
+                    : 'mdi-close-circle-outline'
+                  : 'mdi-circle-outline'
+              }}
+            </v-icon>
           </span>
         </template>
         <template v-slot:item.gnomAD.hl_hist="{ item }">
@@ -1050,7 +1056,7 @@ export default {
     },
 
     gnomADHapSort: function(l, r) {
-      return weight(r) - weight(l)
+      return weight(l) - weight(r)
 
       function weight(gnomAD) {
         return gnomAD !== undefined ? (gnomAD ? 1 : 0) : -1
