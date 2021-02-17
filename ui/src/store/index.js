@@ -29,6 +29,32 @@ export const state = {
   deletions: {},
 }
 
+function triggerDownloadSettings(settings, sampleId = null) {
+  const settingsToExport = _.cloneDeep(settings)
+  if (sampleId !== null) {
+    settingsToExport.samples = settingsToExport.samples.filter(
+      s => s.id === sampleId
+    )
+  }
+
+  const nonBlankCurationPredicate = curation =>
+    !_.isEmpty(curation.selectedTagNames) || !_.isEmpty(curation.variantNote)
+  settingsToExport.samples.forEach(s => {
+    s.curations = s.curations?.filter(nonBlankCurationPredicate) || []
+  })
+
+  let mitoReport = new Blob(
+    ['window.settings = ' + JSON.stringify(settingsToExport, null, 2)],
+    {
+      type: 'text/json;charset=utf-8',
+    }
+  )
+
+  const fileName =
+    sampleId === null ? 'mitoSettings.js' : `mitoSettings_${state.sampleId}.js`
+  saveAs(mitoReport, fileName)
+}
+
 export const getters = {
   getIgvHost: state => {
     return state.settings.igvHost || DEFAULT_IGV_HOST
@@ -304,27 +330,11 @@ export const actions = {
   },
 
   downloadSettings({ state }) {
-    var blob = new Blob(
-      ['window.settings = ' + JSON.stringify(state.settings, null, 2)],
-      {
-        type: 'text/json;charset=utf-8',
-      }
-    )
-    saveAs(blob, 'mitoSettings.js')
+    triggerDownloadSettings(state.settings)
   },
 
   downloadSettingsSample({ state }) {
-    const settingsToExport = { ...state.settings }
-    settingsToExport.samples = settingsToExport.samples.filter(
-      s => s.id === this.state.sampleId
-    )
-    let mitoReport = new Blob(
-      ['window.settings = ' + JSON.stringify(settingsToExport, null, 2)],
-      {
-        type: 'text/json;charset=utf-8',
-      }
-    )
-    saveAs(mitoReport, `mitoSettings_${state.sampleId}.js`)
+    triggerDownloadSettings(state.settings, state.sampleId)
   },
 
   closeSnackbar({ commit }) {

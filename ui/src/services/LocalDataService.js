@@ -74,14 +74,7 @@ export async function loadSettings() {
 }
 
 export async function saveSettingsToLocal(settings) {
-  const settingsToSave = _.cloneDeep(settings)
-  const nonBlankCurationPredicate = curation =>
-    !_.isEmpty(curation.selectedTagNames) || !_.isEmpty(curation.variantNote)
-  settingsToSave.samples.forEach(s => {
-    s.curations = s.curations?.filter(nonBlankCurationPredicate) || []
-  })
-
-  localStorage.setItem('mitoSettings', JSON.stringify(settingsToSave))
+  localStorage.setItem('mitoSettings', JSON.stringify(settings))
 
   return {
     status: 200,

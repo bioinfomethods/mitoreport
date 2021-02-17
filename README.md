@@ -103,6 +103,8 @@ Below example commands will generate deletions and variants data including writi
 UI into a `mitoreport` directory ready for distribution.
 
 ```bash
+PROJECT_DIR=$(pwd)  # project root of mitoreport checkout
+
 java -jar $PROJECT_DIR/build/libs/mitoreport-0.1.0-all.jar mito-report \
   -sample "15G002035-GM12878K_20pc_10kb_200" \
   -vcf $PROJECT_DIR/test_fixtures/variants/15G002035.unshifted.contamination.filtering.intermediatefilter.norm.dedup.mito_vep.vcf.gz \
