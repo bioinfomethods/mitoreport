@@ -304,10 +304,13 @@ export const actions = {
   },
 
   downloadSettings({ state }) {
-    var blob = new Blob([JSON.stringify(state.settings, null, 2)], {
-      type: 'text/json;charset=utf-8',
-    })
-    saveAs(blob, 'mitoSettings.json')
+    var blob = new Blob(
+      ['window.settings = ' + JSON.stringify(state.settings, null, 2)],
+      {
+        type: 'text/json;charset=utf-8',
+      }
+    )
+    saveAs(blob, 'mitoSettings.js')
   },
 
   downloadSettingsSample({ state }) {
@@ -315,10 +318,13 @@ export const actions = {
     settingsToExport.samples = settingsToExport.samples.filter(
       s => s.id === this.state.sampleId
     )
-    var blob = new Blob([JSON.stringify(settingsToExport, null, 2)], {
-      type: 'text/json;charset=utf-8',
-    })
-    saveAs(blob, 'mitoSettings.json')
+    let mitoReport = new Blob(
+      ['window.settings = ' + JSON.stringify(settingsToExport, null, 2)],
+      {
+        type: 'text/json;charset=utf-8',
+      }
+    )
+    saveAs(mitoReport, `mitoSettings_${state.sampleId}.js`)
   },
 
   closeSnackbar({ commit }) {
