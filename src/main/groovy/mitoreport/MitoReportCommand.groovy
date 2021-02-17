@@ -74,7 +74,7 @@ class MitoReportCommand implements Runnable {
 
         this.mitoReportPathName = this.outputDir.absolutePath
 
-        writeOutUi()
+        writeOutUiAssets()
 
         Map<String, File> deletionsResult = createDeletionsPlot()
         File deletionsJson = deletionsResult.deletionsJsonFile
@@ -137,7 +137,7 @@ class MitoReportCommand implements Runnable {
         return mitoReport.variantsResultJson
     }
 
-    void writeOutUi() {
+    private void writeOutUiAssets() {
         File mitoreport = new File(Paths.get(mitoReportPathName).toUri())
         FileUtils.deleteQuietly(mitoreport)
         FileUtils.forceMkdir(mitoreport)
@@ -163,7 +163,7 @@ class MitoReportCommand implements Runnable {
             mitoReportOutputPaths.each { Path reportFilePath ->
                 String reportFilePathStr = reportFilePath.toString()
                 String jarResourcePath = reportFilePathStr.startsWith('/') ? reportFilePathStr[1..-1] : reportFilePathStr
-                String outFileName = Paths.get(jarResourcePath.replace(JAR_UI_DIR, mitoReportPathName))
+                String outFileName = Paths.get(jarResourcePath.replace(JAR_UI_DIR, mitoReportPathName)).toString()
                 String containingDir = FilenameUtils.getFullPathNoEndSeparator(outFileName)
                 FileUtils.forceMkdir(new File(containingDir))
                 resourceLoader.getResourceAsStream("classpath:$jarResourcePath").ifPresent { InputStream is ->
@@ -177,9 +177,16 @@ class MitoReportCommand implements Runnable {
                 FileUtils.copyDirectory(new File(reportDir.toURI()), new File(mitoReportPathName))
             }
         }
+
+        contextualiseReportSettings(mitoReportPathName)
     }
 
-    void writeOutUiDataAndSettings(File deletionsJson, File sampleBamFile, File variantsJson, Map metadata) {
+    private void contextualiseReportSettings(String reportPathName) {
+        File indexHtml = new File(Paths.get(reportPathName, 'index.html').toString())
+        indexHtml.text = indexHtml.text.replaceFirst('mitoSettings.js', "mitoSettings_${sample}.js")
+    }
+
+    private void writeOutUiDataAndSettings(File deletionsJson, File sampleBamFile, File variantsJson, Map metadata) {
         new File(Paths.get(mitoReportPathName, 'deletions.js').toUri())
                 .withWriter { it << 'window.deletions = ' + deletionsJson.text }
 
@@ -251,7 +258,7 @@ class MitoReportCommand implements Runnable {
 
         new File(Paths.get(mitoReportPathName, 'defaultSettings.js').toUri())
                 .withWriter { it << 'window.defaultSettings = ' + defaultSettingsJson }
-        new File(Paths.get(mitoReportPathName, 'mitoSettings.js').toUri())
+        new File(Paths.get(mitoReportPathName, "mitoSettings_${sample}.js").toUri())
                 .withWriter { it << 'window.settings = ' + settingsJson }
 
         if(devMode) {
@@ -275,7 +282,7 @@ class MitoReportCommand implements Runnable {
 
     }
 
-    static String timestampStrToLocal(String timestamp) {
+    private static String timestampStrToLocal(String timestamp) {
         String result = java.time.LocalDateTime.parse(timestamp, DateTimeFormatter.ISO_DATE_TIME)
             .atOffset(ZoneOffset.of("+10:00"))
             .toLocalDateTime()
