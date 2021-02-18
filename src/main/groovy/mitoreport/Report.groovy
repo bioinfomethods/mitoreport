@@ -37,8 +37,8 @@ class Report extends ToolBase {
     List<Map> consequencesWithRank = RANKED_CONSEQUENCES.withIndex(1).collect { String consequence, Integer index -> [id: consequence, name: consequence, rank: index] }
 
     final static Set<String> EXCLUDE_CONSEQUENCES = [
-        "upstream_gene_variant",
-        "downstream_gene_variant",
+            "upstream_gene_variant",
+            "downstream_gene_variant",
     ] as Set
 
     @Override
@@ -118,11 +118,9 @@ class Report extends ToolBase {
             infoField.remove('ANN')
 
             // If there is a locus annotation from mito map, we always prefer that
-            if(mitoAnnotation && mitoAnnotation.locus) {
+            if (mitoAnnotation && mitoAnnotation.locus) {
                 vepInfo.symbol = mitoAnnotation.locus
-            }
-            else
-            if(variantAnnotations && variantAnnotations.Locus) {
+            } else if (variantAnnotations && variantAnnotations.Locus) {
                 vepInfo.symbol = variantAnnotations.Locus
             }
             // else stick with what VEP put there
@@ -130,34 +128,34 @@ class Report extends ToolBase {
             Map resultInfo = variantInfo + vepInfo + variantAnnotations + infoField + [genotypes: v.parsedGenotypes]
 
             Variant gnomADVariant = gnomAD.find(v)
-            if(gnomADVariant) {
+            if (gnomADVariant) {
                 MitoGnomAD gnomADInfo = MitoGnomAD.parse(gnomADVariant.info)
-                gnomADInfo.metaClass.getHap_ac_het_map << {->
+                gnomADInfo.metaClass.getHap_ac_het_map << { ->
                     GnomadBaseHaplogroup.mapToBaseHaplogroup(gnomADInfo.hap_ac_het)
                 }
-                gnomADInfo.metaClass.getHap_ac_hom_map << {->
+                gnomADInfo.metaClass.getHap_ac_hom_map << { ->
                     GnomadBaseHaplogroup.mapToBaseHaplogroup(gnomADInfo.hap_ac_hom)
                 }
-                gnomADInfo.metaClass.getHap_af_het_map << {->
+                gnomADInfo.metaClass.getHap_af_het_map << { ->
                     GnomadBaseHaplogroup.mapToBaseHaplogroup(gnomADInfo.hap_af_het)
                 }
-                gnomADInfo.metaClass.getHap_af_hom_map << {->
+                gnomADInfo.metaClass.getHap_af_hom_map << { ->
                     GnomadBaseHaplogroup.mapToBaseHaplogroup(gnomADInfo.hap_af_hom)
                 }
-                gnomADInfo.metaClass.getHap_an_map << {->
+                gnomADInfo.metaClass.getHap_an_map << { ->
                     GnomadBaseHaplogroup.mapToBaseHaplogroup(gnomADInfo.hap_an)
                 }
-                gnomADInfo.metaClass.getHap_faf_hom_map << {->
+                gnomADInfo.metaClass.getHap_faf_hom_map << { ->
                     GnomadBaseHaplogroup.mapToBaseHaplogroup(gnomADInfo.hap_faf_hom)
                 }
-                gnomADInfo.metaClass.getHap_hl_hist_map << {->
+                gnomADInfo.metaClass.getHap_hl_hist_map << { ->
                     GnomadBaseHaplogroup.mapToBaseHaplogroup(gnomADInfo.hap_hl_hist)
                 }
-                resultInfo.gnomAD = gnomADInfo  // native object serializes to JSON OK including metaClass properties
+                resultInfo.gnomAD = gnomADInfo
+                // native object serializes to JSON OK including metaClass properties
 
                 ++gnomADVariantCount
-            }
-            else {
+            } else {
                 resultInfo.gnomAD = null
             }
 
@@ -175,7 +173,7 @@ class Report extends ToolBase {
         variantsResultJson = new File("$dir/variants.json")
         Utils.writer(variantsResultJson).withWriter { it << json; it << '\n' }
 
-        log.info "Annotated ${gnomADVariantCount} variants with gnomAD annotations (${Utils.perc(gnomADVariantCount/(total+1))})"
+        log.info "Annotated ${gnomADVariantCount} variants with gnomAD annotations (${Utils.perc(gnomADVariantCount / (total + 1))})"
         log.info "Wrote annotated variants to $variantsResultJson"
     }
 
@@ -193,20 +191,20 @@ class Report extends ToolBase {
     private Map extractMitoVEPInfo(Variant v) {
 
         Map vep = v.maxVep
-        if(vep.Consequence in EXCLUDE_CONSEQUENCES) {
+        if (vep.Consequence in EXCLUDE_CONSEQUENCES) {
             return [
-                symbol : null,
-                consequence: null,
-                hgvsp : null,
-                hgvsc : null
+                    symbol     : null,
+                    consequence: null,
+                    hgvsp      : null,
+                    hgvsc      : null
             ]
         }
 
         Map vepInfo = [
-            symbol     : vep.SYMBOL,
-            consequence: consequencesWithRank.find { it.id == vep.Consequence },
-            hgvsp      : URLDecoder.decode(vep.HGVSp?.replaceAll('^.*:', ''), "UTF-8"),
-            hgvsc      : vep.HGVSc?.replaceAll('^.*:', '')
+                symbol     : vep.SYMBOL,
+                consequence: consequencesWithRank.find { it.id == vep.Consequence },
+                hgvsp      : URLDecoder.decode(vep.HGVSp?.replaceAll('^.*:', ''), "UTF-8"),
+                hgvsc      : vep.HGVSc?.replaceAll('^.*:', '')
         ]
 
         return vepInfo
