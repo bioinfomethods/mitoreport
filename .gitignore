@@ -44,6 +44,6 @@ src/main/resources/mitoui/*
 ui/public/deletions.js
 ui/public/variants.js
 ui/public/defaultSettings.js
-ui/public/mitoSettings.js
+ui/public/mitoSettings*.js
 ui/coverage
 /dist/
