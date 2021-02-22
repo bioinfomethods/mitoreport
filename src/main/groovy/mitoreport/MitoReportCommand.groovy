@@ -5,6 +5,8 @@ import gngs.tools.DeletionPlot
 import groovy.json.JsonOutput
 import groovy.util.logging.Slf4j
 import io.micronaut.core.io.ResourceLoader
+import mitoreport.haplogrep.HaplogrepClassification
+import mitoreport.haplogrep.HaplogroupClassifier
 import org.apache.commons.io.FileUtils
 import org.apache.commons.io.FilenameUtils
 import picocli.CommandLine.Command
@@ -97,8 +99,8 @@ class MitoReportCommand implements Runnable {
 //            gitDate     : ("git show -s --format=%cD".execute().text).trim()
         ]
 
-
-        writeOutUiDataAndSettings(deletionsJson, deletionsResult.bamFile, variantsJson, metadata)
+        HaplogrepClassification haplogrepClassification = new HaplogroupClassifier(vcfFile, sample).call()
+        writeOutUiDataAndSettings(deletionsJson, deletionsResult.bamFile, variantsJson, haplogrepClassification, metadata)
     }
 
     Map<String, File> createDeletionsPlot() {
@@ -188,7 +190,7 @@ class MitoReportCommand implements Runnable {
         indexHtml.text = indexHtml.text.replaceFirst('mitoSettings.js', "mitoSettings_${sample}.js")
     }
 
-    private void writeOutUiDataAndSettings(File deletionsJson, File sampleBamFile, File variantsJson, Map metadata) {
+    private void writeOutUiDataAndSettings(File deletionsJson, File sampleBamFile, File variantsJson, HaplogrepClassification haplogrepClassification, Map metadata) {
         new File(Paths.get(mitoReportPathName, 'deletions.js').toUri())
                 .withWriter { it << 'window.deletions = ' + deletionsJson.text }
 
@@ -206,15 +208,16 @@ class MitoReportCommand implements Runnable {
                 'hmtVarUrlPrefix'   : DEFAULT_HMT_VAR_URL_PREFIX,
                 'samples'           : [
                         [
-                                'id'                 : sample,
-                                'metadata'           : metadata,
-                                'bamDir'             : bamDir,
-                                'bamFilename'        : bamFileName,
-                                'vcfDir'             : sampleVcfDir,
-                                'vcfFilename'        : sampleVcfFileName,
-                                'maternalVcfDir'     : null,
-                                'maternalVcfFilename': null,
-                                'variantSearches'    : [
+                                'id'                     : sample,
+                                'metadata'               : metadata,
+                                'haplogrepClassification': haplogrepClassification,
+                                'bamDir'                 : bamDir,
+                                'bamFilename'            : bamFileName,
+                                'vcfDir'                 : sampleVcfDir,
+                                'vcfFilename'            : sampleVcfFileName,
+                                'maternalVcfDir'         : null,
+                                'maternalVcfFilename'    : null,
+                                'variantSearches'        : [
                                         [
                                                 'name'        : 'Preset Filter 1',
                                                 'description' : 'Filter 1 description',
@@ -242,7 +245,7 @@ class MitoReportCommand implements Runnable {
                                                 ],
                                         ]
                                 ],
-                                variantTags          : [
+                                variantTags              : [
                                         ['name': 'Review', important: true, custom: false],
                                         ['name': 'Excluded', important: false, custom: false],
                                         ['name': 'FalsePositive', important: false, custom: false],
@@ -250,7 +253,7 @@ class MitoReportCommand implements Runnable {
                                         ['name': 'Match', important: true, custom: false],
                                         ['name': 'Mismatch', important: false, custom: false],
                                 ],
-                                curations            : [],
+                                curations                : [],
                         ]
                 ]
         ]
