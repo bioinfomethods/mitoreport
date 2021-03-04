@@ -1,8 +1,12 @@
 <template>
-  <span v-if="geneCardsUrl">
-    <a id="geneCardsUrlLink" :href="geneCardsUrl" target="_blank">{{ gene }}</a>
-  </span>
-  <span v-else>{{ gene }}</span>
+  <div>
+    <span v-if="geneCardsUrl">
+      <a id="geneCardsUrlLink" :href="geneCardsUrl" target="_blank">{{
+        gene
+      }}</a>
+    </span>
+    <span v-else>{{ gene }}</span>
+  </div>
 </template>
 
 <script>

@@ -120,8 +120,12 @@ class Report extends ToolBase {
             // If there is a locus annotation from mito map, we always prefer that
             if (mitoAnnotation && mitoAnnotation.locus) {
                 vepInfo.symbol = mitoAnnotation.locus
-            } else if (variantAnnotations && variantAnnotations.Locus) {
+                vepInfo.symbols = vepInfo.symbol.split(", ")
+            }
+            else 
+            if(variantAnnotations && variantAnnotations.Locus) {
                 vepInfo.symbol = variantAnnotations.Locus
+                vepInfo.symbols = vepInfo.symbol.split(", ")
             }
             // else stick with what VEP put there
 
@@ -193,18 +197,20 @@ class Report extends ToolBase {
         Map vep = v.maxVep
         if (vep.Consequence in EXCLUDE_CONSEQUENCES) {
             return [
-                    symbol     : null,
-                    consequence: null,
-                    hgvsp      : null,
-                    hgvsc      : null
+                symbol : null,
+                symbols : null,
+                consequence: null,
+                hgvsp : null,
+                hgvsc : null
             ]
         }
 
         Map vepInfo = [
-                symbol     : vep.SYMBOL,
-                consequence: consequencesWithRank.find { it.id == vep.Consequence },
-                hgvsp      : URLDecoder.decode(vep.HGVSp?.replaceAll('^.*:', ''), "UTF-8"),
-                hgvsc      : vep.HGVSc?.replaceAll('^.*:', '')
+            symbol     : vep.SYMBOL,
+            symbols    : vep.SYMBOL?.split(", "),
+            consequence: consequencesWithRank.find { it.id == vep.Consequence },
+            hgvsp      : URLDecoder.decode(vep.HGVSp?.replaceAll('^.*:', ''), "UTF-8"),
+            hgvsc      : vep.HGVSc?.replaceAll('^.*:', '')
         ]
 
         return vepInfo

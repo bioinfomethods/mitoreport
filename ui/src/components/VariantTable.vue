@@ -79,6 +79,15 @@
               <v-icon>mdi-delete</v-icon>
             </v-btn>
           </v-col>
+          <!-- 
+            TODO: #31
+            <v-col md="1">
+            <span>Hello World</span>
+            <v-switch id="toggleDavid" ref="toggleDavid" v-model="toggleDavid"
+              >Toggle stuff</v-switch
+            >
+            <span>Hide something?</span>
+          </v-col> -->
         </v-row>
       </v-card-text>
     </v-card>
@@ -154,7 +163,7 @@
                 v-model="filterConfig.selectedGenes"
                 :items="genes"
                 type="text"
-                label="Select"
+                label="Select Genes"
                 multiple
                 dense
               >
@@ -250,6 +259,29 @@
               >
               </v-slider>
             </td>
+            <td>
+              <v-select
+                v-model="filterConfig.gnomADHap"
+                :items="['True', 'False', 'Null']"
+                label="Filter"
+                multiple
+                dense
+              >
+                <template v-slot:selection="{ item, index }">
+                  <v-chip
+                    v-if="index <= 3"
+                    close
+                    @click:close="removeSelectedHaploFilter(item)"
+                    x-small
+                  >
+                    <span>{{ item }}</span>
+                  </v-chip>
+                  <span v-if="index === 4" class="grey--text caption"
+                    >(+{{ filterConfig.gnomADHap.length - 4 }} others)</span
+                  >
+                </template>
+              </v-select>
+            </td>
             <td></td>
             <td></td>
             <td>
@@ -318,50 +350,64 @@
 
         <!-- Override row values where necessary using slot v-slot:item.${header.value} -->
         <template v-slot:item.pos="{ item }">
-          <td>
-            <IgvLink :position="item.pos"></IgvLink>
-          </td>
+          <IgvLink :position="item.pos"></IgvLink>
         </template>
         <template v-slot:item.ref_alt="{ item }">
-          <td>
-            <a
-              :id="`varlink-${item.pos}-${item.ref}-${item.alt}`"
-              @click.stop="activeVariant = item"
-              >{{ item.ref }}/{{ item.alt }}</a
-            >
-          </td>
+          <a
+            :id="`varlink-${item.pos}-${item.ref}-${item.alt}`"
+            @click.stop="activeVariant = item"
+            >{{ item.ref }}/{{ item.alt }}</a
+          >
         </template>
-        <template v-slot:item.symbol="{ item }">
-          <td>
-            <GeneCardsLink
-              v-if="item.symbol"
-              :gene="item.symbol"
-            ></GeneCardsLink>
-          </td>
+        <template v-slot:item.symbols="{ item }">
+          <GeneCardsLink
+            v-for="gene in item.symbols"
+            :key="gene"
+            :gene="gene"
+          ></GeneCardsLink>
         </template>
         <template v-slot:item.consequence="{ item }">
-          <td>{{ item.consequence ? item.consequence.name : '' }}</td>
+          {{ item.consequence ? item.consequence.name : '' }}
         </template>
         <template v-slot:item.gbFreqPct="{ item }">
-          <td>
-            <span v-if="item.gbFreqPct > 0"
-              >{{ item.gbFreqPct | precisionTo }}%</span
-            >
-          </td>
+          <span v-if="item.gbFreqPct > 0"
+            >{{ item.gbFreqPct | precisionTo }}%</span
+          >
         </template>
         <template v-slot:item.gnomAD.af_het="{ item }">
-          <td>
-            <span v-if="item.gnomAD && item.gnomAD.af_het > 0"
-              >{{ (100 * item.gnomAD.af_het) | precisionTo }}%</span
-            >
-          </td>
+          <span v-if="item.gnomAD && item.gnomAD.af_het > 0"
+            >{{ (100 * item.gnomAD.af_het) | precisionTo }}%</span
+          >
         </template>
         <template v-slot:item.gnomAD.af_hom="{ item }">
-          <td>
-            <span v-if="item.gnomAD && item.gnomAD.af_hom > 0"
-              >{{ (100 * item.gnomAD.af_hom) | precisionTo }}%</span
-            >
-          </td>
+          <span v-if="item.gnomAD && item.gnomAD.af_hom > 0"
+            >{{ (100 * item.gnomAD.af_hom) | precisionTo }}%</span
+          >
+        </template>
+        <template v-slot:item.gnomAD.hap_defining_variant="{ item }">
+          <span
+            :title="
+              item.gnomAD
+                ? item.gnomAD.hap_defining_variant
+                  ? 'Haplotype Defining'
+                  : 'Not Haplotype Defining'
+                : 'No gnomAD data'
+            "
+          >
+            <!--
+              A question mark might be better for the unknown value: mdi-help-circle-outline
+              or an exclamation mark: mdi-alert-circle-outline
+            -->
+            <v-icon>
+              {{
+                item.gnomAD
+                  ? item.gnomAD.hap_defining_variant
+                    ? 'mdi-check-circle-outline'
+                    : 'mdi-close-circle-outline'
+                  : 'mdi-circle-outline'
+              }}
+            </v-icon>
+          </span>
         </template>
         <template v-slot:item.gnomAD.hl_hist="{ item }">
           <span v-if="heteroplasmyDistExists(item)">
@@ -400,20 +446,16 @@
           </span>
         </template>
         <template v-slot:item.curation="{ item }">
-          <td>
-            <CurationCell :variantId="item.id" :key="item.id"></CurationCell>
-          </td>
+          <CurationCell :variantId="item.id" :key="item.id"></CurationCell>
         </template>
         <template v-slot:item.curatedRef="{ item }">
-          <td>
-            <CuratedRefLink
-              :href="item.curatedRef.url"
-              :count="item.curatedRef.count"
-            ></CuratedRefLink>
-          </td>
+          <CuratedRefLink
+            :href="item.curatedRef.url"
+            :count="item.curatedRef.count"
+          ></CuratedRefLink>
         </template>
         <template v-slot:item.hgvsc="{ item }">
-          <td v-html="item.hgvsc"></td>
+          {{ item.hgvsc }}
         </template>
         <template v-slot:expanded-item="{ headers, item }">
           <td
@@ -527,6 +569,7 @@ export default {
         allele: '',
         selectedTypes: [],
         selectedGenes: [],
+        gnomADHap: [],
         selectedConsequence: {},
         vafRange: [0, 1],
         gbFreqMax: 5.0,
@@ -636,7 +679,8 @@ export default {
         },
         {
           text: 'Gene',
-          value: 'symbol',
+          // tooltip: 'Gene tooltip',
+          value: 'symbols',
           width: '150',
           filter: this.genesFilter,
         },
@@ -676,6 +720,15 @@ export default {
           value: 'gnomAD.af_hom',
           width: '130',
           filter: this.gnomADHomFreqFilter,
+        },
+        {
+          text: 'Haplotype Defining',
+          align: 'center',
+          value: 'gnomAD.hap_defining_variant',
+          width: 100,
+          sort: this.gnomADHapSort,
+          isDescending: true,
+          filter: this.gnomADHapFilter,
         },
         {
           text: 'Heteroplasmy Distribution',
@@ -733,8 +786,22 @@ export default {
       return [...new Set(this.filteredVariants.map(row => row.type))]
     },
 
+    // TODO: #31
+    // hapOptions() {
+    //   return [...new Set(['true', 'false'])]
+    // },
+
     genes() {
-      return [...new Set(this.filteredVariants.map(row => row.symbol))]
+      const genes = [
+        ...new Set(
+          this.filteredVariants
+            .filter(row => row.symbols)
+            .map(row => row.symbols)
+            .flat()
+        ),
+      ]
+
+      return genes
     },
 
     consequences() {
@@ -946,8 +1013,18 @@ export default {
       return filters.inSetFilter(this.filterConfig.selectedTypes, value)
     },
 
+    gnomADHapFilter: function(value) {
+      return filters.trioFilter(this.filterConfig.gnomADHap, value)
+    },
+
     genesFilter: function(value) {
-      return filters.inSetFilter(this.filterConfig.selectedGenes, value)
+      return filters.setInSetFilter(this.filterConfig.selectedGenes, value)
+    },
+
+    removeSelectedHaploFilter: function(toRemove) {
+      this.filterConfig.gnomADHap = this.filterConfig.gnomADHap.filter(
+        selected => selected !== toRemove
+      )
     },
 
     removeSelectedType: function(toRemove) {
@@ -971,6 +1048,14 @@ export default {
 
     consequenceSort: function(l, r) {
       return l.rank - r.rank
+    },
+
+    gnomADHapSort: function(l, r) {
+      return weight(l) - weight(r)
+
+      function weight(gnomAD) {
+        return gnomAD !== undefined ? (gnomAD ? 1 : 0) : -1
+      }
     },
 
     curationFilter: function(item) {
