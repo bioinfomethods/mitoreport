@@ -187,3 +187,33 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 * [Vetur](https://marketplace.visualstudio.com/items?itemName=octref.vetur)
 * [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)
 * [ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)
+
+## Troubleshooting
+
+### Maven User or Group ID too big error during Gradle task buildHaplogrepCmd()
+
+The error is something like this:
+
+```bash
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-assembly-plugin:2.5.5:single (attachConfig) on project cmr-impl: Execution attachConfig of goal org.apache.maven.plugins:maven-assembly-plugin:2.5.5:single failed: group id '1377585961' is too big ( > 2097151 ). Use STAR or POSIX extensions to overcome this limit -> [Help 1]
+org.apache.maven.lifecycle.LifecycleExecutionException: Failed to execute goal org.apache.maven.plugins:maven-assembly-plugin:2.5.5:single (attachConfig) on project cmr-impl: Execution attachConfig of goal org.apache.maven.plugins:maven-assembly-plugin:2.5.5:single failed: group id '1377585961' is too big ( > 2097151 ). Use STAR or POSIX extensions to overcome this limit
+    at org.apache.maven.lifecycle.internal.MojoExecutor.execute(MojoExecutor.java:225)
+    at org.apache.maven.lifecycle.internal.MojoExecutor.execute(MojoExecutor.java:153)
+```
+
+There's a [good workaround from Stack Overflow](https://stackoverflow.com/a/56278471) but this
+requires changing `haplogrep-cmd/pom.xml` which is a problem because `haplogrep-cmd` Git submodule
+is not a fork.
+
+At MCRI, it is suspected that all users' laptops that have their computer user accounts integrated
+with MCRI AD will be impacted. This is because the uid will exceed the max value of UID/GUID as
+described in Stack Overflow post above. This is also mentioned
+in [Maven Assembly Plugin FAQ](http://maven.apache.org/plugins/maven-assembly-plugin/faq.html#tarFileModes)
+.
+
+The Gradle task `buildHaplogrepCmd` that runs this Maven build packages up `haplogrep-cmd` tool into
+a jar called `haplogrep.jar` (found in `haplogrep-cmd/target/haplogrep.jar`). Unfortunately, this
+jar cannot be found on any public maven repos hence this jar is built locally as part of mitoreport
+build. Since this jar only requires re-packaging when we want to utilise new features
+of [haplogrep](https://github.com/seppinho/haplogrep-cmd) from upstream, the StackOverflow
+workaround should suffice for now.
