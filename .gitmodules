@@ -6,4 +6,4 @@
 	url = ../mitoreport.wiki.git
 [submodule "haplogrep-cmd"]
 	path = haplogrep-cmd
-	url = https://github.com/seppinho/haplogrep-cmd.git
+	url = https://github.com/david-ma/haplogrep-cmd.git
