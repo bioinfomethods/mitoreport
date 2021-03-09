@@ -11,8 +11,8 @@ variables:
 build:
   stage: build
   tags:
-    - gradle:jdk8
     - docker
+    - mcri
   script:
     - ./gradlew clean build --build-cache --info
   artifacts:
