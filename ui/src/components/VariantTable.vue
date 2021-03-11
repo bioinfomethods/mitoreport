@@ -237,9 +237,9 @@
               </v-row>
               <v-slider
                 v-model="filterConfig.gnomADHetFreqMax"
-                step="0.2"
+                step="0.0001"
                 min="0"
-                max="10"
+                max="1"
                 hide-details
               >
               </v-slider>
@@ -252,9 +252,9 @@
               </v-row>
               <v-slider
                 v-model="filterConfig.gnomADHomFreqMax"
-                step="0.2"
+                step="0.0001"
                 min="0"
-                max="10"
+                max="1"
                 hide-details
               >
               </v-slider>
@@ -571,8 +571,8 @@ export default {
         selectedConsequence: {},
         vafRange: [0, 1],
         gbFreqTickIndex: 6,
-        gnomADHetFreqMax: 5.0,
-        gnomADHomFreqMax: 5.0,
+        gnomADHetFreqMax: 1.0,
+        gnomADHomFreqMax: 1.0,
         disease: '',
         diseaseShowBlank: false,
         curationSearch: '',
@@ -963,7 +963,7 @@ export default {
       let upper = this.filterConfig.gnomADHetFreqMax
 
       return filters.rangeTextFilter(
-        `${lower / 100}-${upper / 100}`,
+        `${lower}-${upper}`,
         value || 0.0
       )
     },
@@ -973,7 +973,7 @@ export default {
       let upper = this.filterConfig.gnomADHomFreqMax
 
       return filters.rangeTextFilter(
-        `${lower / 100}-${upper / 100}`,
+        `${lower}-${upper}`,
         value || 0.0
       )
     },
