@@ -373,14 +373,14 @@
           <span v-if="item.gbFreq > 0">{{ item.gbFreq | precisionTo }}</span>
         </template>
         <template v-slot:item.gnomAD.af_het="{ item }">
-          <span v-if="item.gnomAD && item.gnomAD.af_het > 0"
-            >{{ (100 * item.gnomAD.af_het) | precisionTo }}%</span
-          >
+          <span v-if="item.gnomAD && item.gnomAD.af_het > 0">{{
+            item.gnomAD.af_het | precisionTo
+          }}</span>
         </template>
         <template v-slot:item.gnomAD.af_hom="{ item }">
-          <span v-if="item.gnomAD && item.gnomAD.af_hom > 0"
-            >{{ (100 * item.gnomAD.af_hom) | precisionTo }}%</span
-          >
+          <span v-if="item.gnomAD && item.gnomAD.af_hom > 0">{{
+            item.gnomAD.af_hom | precisionTo
+          }}</span>
         </template>
         <template v-slot:item.gnomAD.hap_defining_variant="{ item }">
           <span
@@ -706,7 +706,7 @@ export default {
           filter: this.gbFreqFilter,
         },
         {
-          text: 'gnomAD Het %',
+          text: 'gnomAD Het',
           tooltip:
             'Proportion of individuals with variant at heteroplasmy between 0.10 - 0.95 in gnomAD',
           value: 'gnomAD.af_het',
@@ -714,7 +714,7 @@ export default {
           filter: this.gnomADHetFreqFilter,
         },
         {
-          text: 'gnomAD Hom %',
+          text: 'gnomAD Hom',
           tooltip:
             'Proportion of individuals with variant at homoplasmy (heteroplasmy >= 0.95) in gnomAD',
           value: 'gnomAD.af_hom',
