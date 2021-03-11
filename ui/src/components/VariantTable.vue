@@ -962,20 +962,14 @@ export default {
       let lower = 0
       let upper = this.filterConfig.gnomADHetFreqMax
 
-      return filters.rangeTextFilter(
-        `${lower}-${upper}`,
-        value || 0.0
-      )
+      return filters.rangeTextFilter(`${lower}-${upper}`, value || 0.0)
     },
 
     gnomADHomFreqFilter: function(value) {
       let lower = 0
       let upper = this.filterConfig.gnomADHomFreqMax
 
-      return filters.rangeTextFilter(
-        `${lower}-${upper}`,
-        value || 0.0
-      )
+      return filters.rangeTextFilter(`${lower}-${upper}`, value || 0.0)
     },
 
     heteroplasmyDistExists: function(item) {
