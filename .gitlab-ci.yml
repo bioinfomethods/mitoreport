@@ -12,6 +12,7 @@ variables:
 build:
   stage: build
   tags:
+    - bioinfomethods
     - docker
     - mcri
   script:
