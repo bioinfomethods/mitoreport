@@ -79,15 +79,12 @@
               <v-icon>mdi-delete</v-icon>
             </v-btn>
           </v-col>
-          <!-- 
-            TODO: #31
-            <v-col md="1">
-            <span>Hello World</span>
+          <v-col md="2">
+            <span>Halogroup is: {{ haplogroup }}</span>
             <v-switch id="toggleDavid" ref="toggleDavid" v-model="toggleDavid"
-              >Toggle stuff</v-switch
+              ><template v-slot:label>Toggle Haplogroup</template></v-switch
             >
-            <span>Hide something?</span>
-          </v-col> -->
+          </v-col>
         </v-row>
       </v-card-text>
     </v-card>
@@ -784,6 +781,20 @@ export default {
 
     types() {
       return [...new Set(this.filteredVariants.map(row => row.type))]
+    },
+
+    haplogroup() {
+      var haplogrepClass = this.getSampleSettings.haplogrepClassification
+      if (haplogrepClass && !_.isEmpty(haplogrepClass.haplogrepResults)) {
+        return _.uniq(
+          Object.keys(haplogrepClass.haplogrepResults).map(
+            d => haplogrepClass.haplogrepResults[d].baseHaplogroup
+          )
+        ).join(', ')
+      } else {
+        // No haplogroup info?
+        return 'Unknown Haplogroup, no Haplogrep data'
+      }
     },
 
     // TODO: #31
