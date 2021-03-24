@@ -79,15 +79,12 @@
               <v-icon>mdi-delete</v-icon>
             </v-btn>
           </v-col>
-          <!-- 
-            TODO: #31
-            <v-col md="1">
-            <span>Hello World</span>
+          <v-col md="2">
+            <span>Halogroup is: {{ haplogroup }}</span>
             <v-switch id="toggleDavid" ref="toggleDavid" v-model="toggleDavid"
-              >Toggle stuff</v-switch
+              ><template v-slot:label>Toggle Haplogroup</template></v-switch
             >
-            <span>Hide something?</span>
-          </v-col> -->
+          </v-col>
         </v-row>
       </v-card-text>
     </v-card>
@@ -217,14 +214,14 @@
             <td>
               <v-row class="px-4 justify-center">
                 <span class="grey--text text--darken-1">
-                  {{ filterConfig.gbFreqMax }}
+                  {{ gbFreqTicks[filterConfig.gbFreqTickIndex] }}
                 </span>
               </v-row>
               <v-slider
-                v-model="filterConfig.gbFreqMax"
-                step="0.2"
+                v-model="filterConfig.gbFreqTickIndex"
+                :value="gbFreqTicks"
                 min="0"
-                max="10"
+                :max="gbFreqLastTickIndex"
                 hide-details
               >
               </v-slider>
@@ -237,9 +234,9 @@
               </v-row>
               <v-slider
                 v-model="filterConfig.gnomADHetFreqMax"
-                step="0.2"
+                step="0.0001"
                 min="0"
-                max="10"
+                max="1"
                 hide-details
               >
               </v-slider>
@@ -252,9 +249,9 @@
               </v-row>
               <v-slider
                 v-model="filterConfig.gnomADHomFreqMax"
-                step="0.2"
+                step="0.0001"
                 min="0"
-                max="10"
+                max="1"
                 hide-details
               >
               </v-slider>
@@ -369,20 +366,18 @@
         <template v-slot:item.consequence="{ item }">
           {{ item.consequence ? item.consequence.name : '' }}
         </template>
-        <template v-slot:item.gbFreqPct="{ item }">
-          <span v-if="item.gbFreqPct > 0"
-            >{{ item.gbFreqPct | precisionTo }}%</span
-          >
+        <template v-slot:item.gbFreq="{ item }">
+          <span v-if="item.gbFreq > 0">{{ item.gbFreq | precisionTo }}</span>
         </template>
         <template v-slot:item.gnomAD.af_het="{ item }">
-          <span v-if="item.gnomAD && item.gnomAD.af_het > 0"
-            >{{ (100 * item.gnomAD.af_het) | precisionTo }}%</span
-          >
+          <span v-if="item.gnomAD && item.gnomAD.af_het > 0">{{
+            item.gnomAD.af_het | precisionTo
+          }}</span>
         </template>
         <template v-slot:item.gnomAD.af_hom="{ item }">
-          <span v-if="item.gnomAD && item.gnomAD.af_hom > 0"
-            >{{ (100 * item.gnomAD.af_hom) | precisionTo }}%</span
-          >
+          <span v-if="item.gnomAD && item.gnomAD.af_hom > 0">{{
+            item.gnomAD.af_hom | precisionTo
+          }}</span>
         </template>
         <template v-slot:item.gnomAD.hap_defining_variant="{ item }">
           <span
@@ -572,9 +567,9 @@ export default {
         gnomADHap: [],
         selectedConsequence: {},
         vafRange: [0, 1],
-        gbFreqMax: 5.0,
-        gnomADHetFreqMax: 5.0,
-        gnomADHomFreqMax: 5.0,
+        gbFreqTickIndex: 6,
+        gnomADHetFreqMax: 1.0,
+        gnomADHomFreqMax: 1.0,
         disease: '',
         diseaseShowBlank: false,
         curationSearch: '',
@@ -598,6 +593,7 @@ export default {
       selectedSavedSearch: DEFAULT_VARIANT_SEARCH,
       vafTicks: [0, 0.01, 0.03, 0.05, 0.1, 1],
       vafIndexRange: [1, 5],
+      gbFreqTicks: [0.0, 0.001, 0.002, 0.005, 0.01, 0.1, 1.0],
       tableOptions: {
         page: 1,
         itemsPerPage: 20,
@@ -700,13 +696,14 @@ export default {
           filter: this.vafFilter,
         },
         {
-          text: 'Genbank %',
-          value: 'gbFreqPct',
+          text: 'Genbank',
+          // tooltip: 'Genbank % tooltip',
+          value: 'gbFreq',
           width: '130',
           filter: this.gbFreqFilter,
         },
         {
-          text: 'gnomAD Het %',
+          text: 'gnomAD Het',
           tooltip:
             'Proportion of individuals with variant at heteroplasmy between 0.10 - 0.95 in gnomAD',
           value: 'gnomAD.af_het',
@@ -714,7 +711,7 @@ export default {
           filter: this.gnomADHetFreqFilter,
         },
         {
-          text: 'gnomAD Hom %',
+          text: 'gnomAD Hom',
           tooltip:
             'Proportion of individuals with variant at homoplasmy (heteroplasmy >= 0.95) in gnomAD',
           value: 'gnomAD.af_hom',
@@ -786,6 +783,20 @@ export default {
       return [...new Set(this.filteredVariants.map(row => row.type))]
     },
 
+    haplogroup() {
+      var haplogrepClass = this.getSampleSettings.haplogrepClassification
+      if (haplogrepClass && !_.isEmpty(haplogrepClass.haplogrepResults)) {
+        return _.uniq(
+          Object.keys(haplogrepClass.haplogrepResults).map(
+            d => haplogrepClass.haplogrepResults[d].baseHaplogroup
+          )
+        ).join(', ')
+      } else {
+        // No haplogroup info?
+        return 'Unknown Haplogroup, no Haplogrep data'
+      }
+    },
+
     // TODO: #31
     // hapOptions() {
     //   return [...new Set(['true', 'false'])]
@@ -816,6 +827,10 @@ export default {
 
     vafLastTickIndex() {
       return this.vafTicks.length - 1
+    },
+
+    gbFreqLastTickIndex() {
+      return this.gbFreqTicks.length - 1
     },
 
     curatedRefs() {
@@ -949,7 +964,7 @@ export default {
 
     gbFreqFilter: function(value) {
       let lower = 0
-      let upper = this.filterConfig.gbFreqMax
+      let upper = this.gbFreqTicks[this.filterConfig.gbFreqTickIndex]
 
       return filters.rangeTextFilter(`${lower}-${upper}`, value || 0.0)
     },
@@ -958,20 +973,14 @@ export default {
       let lower = 0
       let upper = this.filterConfig.gnomADHetFreqMax
 
-      return filters.rangeTextFilter(
-        `${lower / 100}-${upper / 100}`,
-        value || 0.0
-      )
+      return filters.rangeTextFilter(`${lower}-${upper}`, value || 0.0)
     },
 
     gnomADHomFreqFilter: function(value) {
       let lower = 0
       let upper = this.filterConfig.gnomADHomFreqMax
 
-      return filters.rangeTextFilter(
-        `${lower / 100}-${upper / 100}`,
-        value || 0.0
-      )
+      return filters.rangeTextFilter(`${lower}-${upper}`, value || 0.0)
     },
 
     heteroplasmyDistExists: function(item) {

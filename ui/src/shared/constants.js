@@ -51,7 +51,7 @@ export const DEFAULT_VARIANT_SEARCH = {
     diseaseShowBlank: false,
     curationSearch: '',
     importantCuration: false,
-    gbFreqMax: 100.0,
+    gbFreqTickIndex: 6,
     mitoMap: '',
     mitoMapShowBlank: false,
     selectedCuratedRefName: 'All',

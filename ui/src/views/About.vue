@@ -53,18 +53,47 @@
             </table>
           </v-card-text>
         </v-card>
+        <v-card>
+          <v-card-title>Haplogrep Classification</v-card-title>
+          <v-card-text>
+            <span>
+              <b>Has Multiple Base Haplogroups:</b>
+              {{ haplogrepClass.hasMultipleBaseHaplogroups }}
+            </span>
+            <table id="haplogrepClassification">
+              <tr>
+                <td>Rank</td>
+                <td>Base Haplogroup</td>
+                <td>Haplogroup</td>
+                <td>Quality</td>
+              </tr>
+              <tr
+                v-for="(item, key) in haplogrepClass.haplogrepResults"
+                :key="key"
+              >
+                <td>{{ item.rank }}</td>
+                <td>{{ item.baseHaplogroup }}</td>
+                <td>{{ item.haplogroup }}</td>
+                <td>{{ item.quality }}</td>
+              </tr>
+            </table>
+          </v-card-text>
+        </v-card>
       </v-col>
     </v-row>
   </v-container>
 </template>
 
 <style lang="scss" scoped>
-table#metadata {
+table#metadata,
+table#haplogrepClassification {
+  width: 100%;
   td {
     padding: 2px;
     border-bottom: solid 1px grey;
-    &:first-child {
-      border-right: solid 1px grey;
+    border-right: solid 1px grey;
+    &:last-child {
+      border-right: none;
     }
   }
 }
@@ -92,6 +121,10 @@ export default {
 
     sampleSettings() {
       return this.getSampleSettings
+    },
+
+    haplogrepClass() {
+      return this.getSampleSettings.haplogrepClassification
     },
 
     displayedData() {
