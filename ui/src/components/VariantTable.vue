@@ -81,7 +81,11 @@
           </v-col>
           <v-col md="2">
             <span>Halogroup is: {{ haplogroup }}</span>
-            <v-switch id="toggleDavid" ref="toggleDavid" v-model="toggleDavid"
+            <v-switch
+              id="displayHaplodata"
+              :items="displayHaplodata"
+              ref="displayHaplodata"
+              v-model="displayHaplodata"
               ><template v-slot:label>Toggle Haplogroup</template></v-switch
             >
           </v-col>
@@ -374,11 +378,26 @@
             item.gnomAD.af_het | precisionTo
           }}</span>
         </template>
+
+        <!-- gnomAD Hom -->
         <template v-slot:item.gnomAD.af_hom="{ item }">
           <span v-if="item.gnomAD && item.gnomAD.af_hom > 0">{{
             item.gnomAD.af_hom | precisionTo
           }}</span>
+          <span
+            v-if="
+              item.gnomAD &&
+                item.gnomAD.hap_af_hom &&
+                displayHaplodata &&
+                gnomadHapKey
+            "
+          >
+            <br />
+            {{ item.gnomAD.hap_af_hom[gnomadHapKey] | precisionTo }}
+          </span>
         </template>
+
+        <!-- Haplotype Defining -->
         <template v-slot:item.gnomAD.hap_defining_variant="{ item }">
           <span
             :title="
@@ -609,6 +628,39 @@ export default {
       transitioned: [],
       closeTimeouts: {},
       activeVariant: null,
+      displayHaplodata: false,
+      gnomadHapKey: false,
+      gnomadBaseHaplogroup: [
+        'A',
+        'B',
+        'C',
+        'D',
+        'E',
+        'F',
+        'G',
+        'H',
+        'HV',
+        'I',
+        'J',
+        'K',
+        'L0',
+        'L1',
+        'L2',
+        'L3',
+        'L4',
+        'L5',
+        'M',
+        'N',
+        'P',
+        'R',
+        'T',
+        'U',
+        'V',
+        'W',
+        'X',
+        'Y',
+        'Z',
+      ],
     }
   },
 
@@ -852,6 +904,10 @@ export default {
   },
 
   methods: {
+    toggleHaplodata: function(toggleHaplodata) {
+      console.log(`Hey haplogroup is "${this.haplogroup}"`, toggleHaplodata)
+    },
+
     toggleVariantById: function(variantId) {
       const variant = this.getVariantById(variantId)
       if (!_.isEmpty(variant)) {
@@ -1141,6 +1197,12 @@ export default {
     },
     $route: function() {
       this.toggleVariantById(this.variantId)
+    },
+    displayHaplodata: function() {
+      console.log('Toggling haplodata', this.displayHaplodata)
+      if (this.haplogroup.indexOf(',') === -1)
+        this.gnomadHapKey = this.gnomadBaseHaplogroup.indexOf(this.haplogroup)
+      this.toggleHaplodata(this.displayHaplodata)
     },
   },
 
