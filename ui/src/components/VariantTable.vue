@@ -372,10 +372,22 @@
         <template v-slot:item.gbFreq="{ item }">
           <span v-if="item.gbFreq > 0">{{ item.gbFreq | precisionTo }}</span>
         </template>
+
         <template v-slot:item.gnomAD.af_het="{ item }">
           <span v-if="item.gnomAD && item.gnomAD.af_het > 0">{{
             item.gnomAD.af_het | precisionTo
           }}</span>
+          <span
+            v-if="
+              item.gnomAD &&
+                item.gnomAD.hap_af_het_map &&
+                displayHaplodata &&
+                haplogroup
+            "
+          >
+            <br />
+            {{ item.gnomAD.hap_af_het_map[haplogroup] | precisionTo }}
+          </span>
         </template>
 
         <!-- gnomAD Hom -->
@@ -388,7 +400,7 @@
               item.gnomAD &&
                 item.gnomAD.hap_af_hom_map &&
                 displayHaplodata &&
-                gnomadHapKey
+                haplogroup
             "
           >
             <br />
@@ -628,38 +640,6 @@ export default {
       closeTimeouts: {},
       activeVariant: null,
       displayHaplodata: false,
-      gnomadHapKey: false,
-      gnomadBaseHaplogroup: [
-        'A',
-        'B',
-        'C',
-        'D',
-        'E',
-        'F',
-        'G',
-        'H',
-        'HV',
-        'I',
-        'J',
-        'K',
-        'L0',
-        'L1',
-        'L2',
-        'L3',
-        'L4',
-        'L5',
-        'M',
-        'N',
-        'P',
-        'R',
-        'T',
-        'U',
-        'V',
-        'W',
-        'X',
-        'Y',
-        'Z',
-      ],
     }
   },
 
@@ -834,18 +814,22 @@ export default {
       return [...new Set(this.filteredVariants.map(row => row.type))]
     },
 
-    haplogroup() {
+    haplogroups() {
       let haplogrepClass = this.getSampleSettings.haplogrepClassification
       if (haplogrepClass && !_.isEmpty(haplogrepClass.haplogrepResults)) {
         return _.uniq(
           Object.keys(haplogrepClass.haplogrepResults).map(
             d => haplogrepClass.haplogrepResults[d].baseHaplogroup
           )
-        ).join(', ')
+        )
       } else {
         // No haplogroup info?
-        return 'Unknown Haplogroup, no Haplogrep data'
+        return ['No Group data provided']
       }
+    },
+
+    haplogroup() {
+      return this.haplogroups[0]
     },
 
     // TODO: #31
@@ -1199,8 +1183,7 @@ export default {
     },
     displayHaplodata: function() {
       console.log('Toggling haplodata', this.displayHaplodata)
-      if (this.haplogroup.indexOf(',') === -1)
-        this.gnomadHapKey = this.gnomadBaseHaplogroup.indexOf(this.haplogroup)
+
       this.toggleHaplodata(this.displayHaplodata)
     },
   },
