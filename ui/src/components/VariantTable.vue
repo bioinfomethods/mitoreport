@@ -84,7 +84,6 @@
             <v-switch
               id="displayHaplodata"
               :items="displayHaplodata"
-              ref="displayHaplodata"
               v-model="displayHaplodata"
               ><template v-slot:label>Toggle Haplogroup</template></v-switch
             >
@@ -387,13 +386,13 @@
           <span
             v-if="
               item.gnomAD &&
-                item.gnomAD.hap_af_hom &&
+                item.gnomAD.hap_af_hom_map &&
                 displayHaplodata &&
                 gnomadHapKey
             "
           >
             <br />
-            {{ item.gnomAD.hap_af_hom[gnomadHapKey] | precisionTo }}
+            {{ item.gnomAD.hap_af_hom_map[haplogroup] | precisionTo }}
           </span>
         </template>
 
@@ -836,7 +835,7 @@ export default {
     },
 
     haplogroup() {
-      var haplogrepClass = this.getSampleSettings.haplogrepClassification
+      let haplogrepClass = this.getSampleSettings.haplogrepClassification
       if (haplogrepClass && !_.isEmpty(haplogrepClass.haplogrepResults)) {
         return _.uniq(
           Object.keys(haplogrepClass.haplogrepResults).map(
