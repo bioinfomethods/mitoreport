@@ -167,6 +167,8 @@ export const mutations = {
         ...variant,
       }
 
+      result.hetRatio = result.id
+
       result['ref_alt'] = `${result.ref}/${result.alt}`
 
       return result

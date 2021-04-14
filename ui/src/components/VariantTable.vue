@@ -87,6 +87,7 @@
               v-model="displayHaplodata"
               ><template v-slot:label>Toggle Haplogroup</template></v-switch
             >
+            <!-- <span>{{ hetRatio }}</span> -->
           </v-col>
         </v-row>
       </v-card-text>
@@ -401,6 +402,12 @@
                 | precisionTo
             }}
           </span>
+        </template>
+
+        <template v-slot:item.hetRatio="{ item }">
+          <span v-if="hapRatios[item.id] && hapRatios[item.id].hetRatio">
+            {{ hapRatios[item.id].hetRatio | precisionTo }}</span
+          >
         </template>
 
         <!-- gnomAD Hom -->
@@ -817,8 +824,9 @@ export default {
         },
         {
           text: 'gnomAD Het Ratio',
-          value: 'placeHolder',
-          width: '100',
+          value: 'hetRatio',
+          sort: this.hetRatioSort,
+          width: '83',
         },
         {
           text: 'gnomAD Hom',
@@ -898,6 +906,26 @@ export default {
     // hapOptions() {
     //   return [...new Set(['true', 'false'])]
     // },
+
+    hapRatios() {
+      console.log('Calculating hapRatios')
+      return this.filteredVariants.reduce((map, variant) => {
+        if (variant.gnomAD) {
+          map[variant.id] = {}
+          if (variant.gnomAD.af_het) {
+            map[variant.id].hetRatio =
+              variant.gnomAD.hap_af_het_map[this.getFirstHaplogroup] /
+              variant.gnomAD.af_het
+          }
+          if (variant.gnomAD.af_hom) {
+            map[variant.id].homRatio =
+              variant.gnomAD.hap_af_hom_map[this.getFirstHaplogroup] /
+              variant.gnomAD.af_hom
+          }
+        }
+        return map
+      }, {})
+    },
 
     genes() {
       const genes = [
@@ -1163,6 +1191,22 @@ export default {
 
     consequenceSort: function(l, r) {
       return l.rank - r.rank
+    },
+
+    hetRatioSort: function(l, r) {
+      if (this.hapRatios[l]) {
+        if (this.hapRatios[r]) {
+          return this.hapRatios[l].hetRatio - this.hapRatios[r].hetRatio
+        } else {
+          return 1
+        }
+      } else {
+        if (this.hapRatios[r]) {
+          return -1
+        } else {
+          return 0
+        }
+      }
     },
 
     gnomADHomSort: function(l, r) {
