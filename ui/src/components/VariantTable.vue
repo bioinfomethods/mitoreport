@@ -403,7 +403,7 @@
         </template>
 
         <!-- gnomAD Hom -->
-        <template v-slot:item.gnomAD.af_hom="{ item }">
+        <template v-slot:item.gnomAD="{ item }">
           <span class="gnomADspan" v-if="item.gnomAD && item.gnomAD.af_hom > 0">
             {{ item.gnomAD.af_hom | precisionTo }}</span
           >
@@ -772,8 +772,9 @@ export default {
           text: 'gnomAD Hom',
           tooltip:
             'Proportion of individuals with variant at homoplasmy (heteroplasmy >= 0.95) in gnomAD',
-          value: 'gnomAD.af_hom',
+          value: 'gnomAD',
           width: '130',
+          sort: this.gnomADHomSort,
           filter: this.gnomADHomFreqFilter,
         },
         {
@@ -1042,7 +1043,9 @@ export default {
       return filters.rangeTextFilter(`${lower}-${upper}`, value || 0.0)
     },
 
-    gnomADHomFreqFilter: function(value) {
+    gnomADHomFreqFilter: function(gnomAD) {
+      const value = gnomAD ? gnomAD.af_hom : 0.0
+
       let lower = 0
       let upper = this.filterConfig.gnomADHomFreqMax
 
@@ -1123,6 +1126,22 @@ export default {
 
     consequenceSort: function(l, r) {
       return l.rank - r.rank
+    },
+
+    gnomADHomSort: function(l, r) {
+      if (l && l.af_hom) {
+        if (r && r.af_hom) {
+          return l.af_hom - r.af_hom
+        } else {
+          return 1
+        }
+      } else {
+        if (r && r.af_hom) {
+          return -1
+        } else {
+          return 0
+        }
+      }
     },
 
     gnomADHapSort: function(l, r) {
