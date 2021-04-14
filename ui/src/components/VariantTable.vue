@@ -1131,7 +1131,14 @@ export default {
     gnomADHomSort: function(l, r) {
       if (l && l.af_hom) {
         if (r && r.af_hom) {
-          return l.af_hom - r.af_hom
+          if (this.displayHaplodata) {
+            return (
+              l.hap_af_hom_map[this.haplogroup] / l.af_hom -
+              r.hap_af_hom_map[this.haplogroup] / r.af_hom
+            )
+          } else {
+            return l.af_hom - r.af_hom
+          }
         } else {
           return 1
         }
