@@ -80,7 +80,7 @@
             </v-btn>
           </v-col>
           <v-col md="2">
-            <span>Halogroup is: {{ haplogroup }}</span>
+            <span>Halogroup is: {{ getFirstHaplogroup }}</span>
             <v-switch
               id="displayHaplodata"
               :items="displayHaplodata"
@@ -387,16 +387,17 @@
                 item.gnomAD.af_het > 0 &&
                 item.gnomAD.hap_af_het_map &&
                 displayHaplodata &&
-                haplogroup
+                getFirstHaplogroup
             "
           >
             <br />
-            <span class="haplogroupIcon">{{ haplogroup }}</span>
-            {{ item.gnomAD.hap_af_het_map[haplogroup] | precisionTo }}
+            <span class="haplogroupIcon">{{ getFirstHaplogroup }}</span>
+            {{ item.gnomAD.hap_af_het_map[getFirstHaplogroup] | precisionTo }}
             <br />
             <v-icon>mdi-contrast-box</v-icon>
             {{
-              (item.gnomAD.hap_af_het_map[haplogroup] / item.gnomAD.af_het)
+              (item.gnomAD.hap_af_het_map[getFirstHaplogroup] /
+                item.gnomAD.af_het)
                 | precisionTo
             }}
           </span>
@@ -421,16 +422,18 @@
                       item.gnomAD.af_hom > 0 &&
                       item.gnomAD.hap_af_hom_map &&
                       displayHaplodata &&
-                      haplogroup
+                      getFirstHaplogroup
                   "
                 >
                   <br />
-                  <span class="haplogroupIcon">{{ haplogroup }}</span>
-                  {{ item.gnomAD.hap_af_hom_map[haplogroup] | precisionTo }}
+                  <span class="haplogroupIcon">{{ getFirstHaplogroup }}</span>
+                  {{
+                    item.gnomAD.hap_af_hom_map[getFirstHaplogroup] | precisionTo
+                  }}
                   <br />
                   <v-icon>mdi-contrast-box</v-icon>
                   {{
-                    (item.gnomAD.hap_af_hom_map[haplogroup] /
+                    (item.gnomAD.hap_af_hom_map[getFirstHaplogroup] /
                       item.gnomAD.af_hom)
                       | precisionTo
                   }}
@@ -451,18 +454,21 @@
                   item.gnomAD.af_hom > 0 &&
                   item.gnomAD.hap_af_hom_map &&
                   displayHaplodata &&
-                  haplogroup
+                  getFirstHaplogroup
               "
             >
               <br />
-              <span class="haplogroupIcon tooltipIcon">{{ haplogroup }}</span>
-              Haplogroup ({{ haplogroup }}):
-              {{ item.gnomAD.hap_af_hom_map[haplogroup] | precisionTo }}
+              <span class="haplogroupIcon tooltipIcon">{{
+                getFirstHaplogroup
+              }}</span>
+              Haplogroup ({{ getFirstHaplogroup }}):
+              {{ item.gnomAD.hap_af_hom_map[getFirstHaplogroup] | precisionTo }}
               <br />
               <v-icon class="tooltipIcon">mdi-contrast-box</v-icon> Ratio
               (Haplogroup / Global):
               {{
-                (item.gnomAD.hap_af_hom_map[haplogroup] / item.gnomAD.af_hom)
+                (item.gnomAD.hap_af_hom_map[getFirstHaplogroup] /
+                  item.gnomAD.af_hom)
                   | precisionTo
               }}
             </span>
@@ -716,6 +722,8 @@ export default {
       'getSampleSettings',
       'getVariantById',
       'getCurationByVariantId',
+      'getHaplogroups',
+      'getFirstHaplogroup',
     ]),
 
     saveSearchDisabled() {
@@ -808,6 +816,11 @@ export default {
           filter: this.gnomADHetFreqFilter,
         },
         {
+          text: 'gnomAD Het Ratio',
+          value: 'placeHolder',
+          width: '100',
+        },
+        {
           text: 'gnomAD Hom',
           tooltip:
             'Proportion of individuals with variant at homoplasmy (heteroplasmy >= 0.95) in gnomAD',
@@ -881,24 +894,6 @@ export default {
       return [...new Set(this.filteredVariants.map(row => row.type))]
     },
 
-    haplogroups() {
-      let haplogrepClass = this.getSampleSettings.haplogrepClassification
-      if (haplogrepClass && !_.isEmpty(haplogrepClass.haplogrepResults)) {
-        return _.uniq(
-          Object.keys(haplogrepClass.haplogrepResults).map(
-            d => haplogrepClass.haplogrepResults[d].baseHaplogroup
-          )
-        )
-      } else {
-        // No haplogroup info?
-        return ['No Group data provided']
-      }
-    },
-
-    haplogroup() {
-      return this.haplogroups[0]
-    },
-
     // TODO: #31
     // hapOptions() {
     //   return [...new Set(['true', 'false'])]
@@ -955,7 +950,10 @@ export default {
 
   methods: {
     toggleHaplodata: function(toggleHaplodata) {
-      console.log(`Hey haplogroup is "${this.haplogroup}"`, toggleHaplodata)
+      console.log(
+        `Hey haplogroup is "${this.getFirstHaplogroup}"`,
+        toggleHaplodata
+      )
     },
 
     toggleVariantById: function(variantId) {
@@ -1172,8 +1170,8 @@ export default {
         if (r && r.af_hom) {
           if (this.displayHaplodata) {
             return (
-              l.hap_af_hom_map[this.haplogroup] / l.af_hom -
-              r.hap_af_hom_map[this.haplogroup] / r.af_hom
+              l.hap_af_hom_map[this.getFirstHaplogroup] / l.af_hom -
+              r.hap_af_hom_map[this.getFirstHaplogroup] / r.af_hom
             )
           } else {
             return l.af_hom - r.af_hom

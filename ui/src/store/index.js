@@ -64,6 +64,24 @@ export const getters = {
     return state.settings.geneCardsUrlPrefix || DEFAULT_GENECARDS_URL_PREFIX
   },
 
+  getHaplogroups: (state, getters) => {
+    let haplogrepClass = getters.getSampleSettings.haplogrepClassification
+    if (haplogrepClass && !_.isEmpty(haplogrepClass.haplogrepResults)) {
+      return _.uniq(
+        Object.keys(haplogrepClass.haplogrepResults).map(
+          d => haplogrepClass.haplogrepResults[d].baseHaplogroup
+        )
+      )
+    } else {
+      // No haplogroup info?
+      return ['No Group data provided']
+    }
+  },
+
+  getFirstHaplogroup: (state, getters) => {
+    return getters.getHaplogroups[0]
+  },
+
   getHmtVarUrlPrefix: state => {
     return state.settings.hmtVarUrlPrefix || DEFAULT_HMT_VAR_URL_PREFIX
   },
