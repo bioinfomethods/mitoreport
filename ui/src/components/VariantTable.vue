@@ -404,30 +404,69 @@
 
         <!-- gnomAD Hom -->
         <template v-slot:item.gnomAD="{ item }">
-          <span class="gnomADspan" v-if="item.gnomAD && item.gnomAD.af_hom > 0">
-            {{ item.gnomAD.af_hom | precisionTo }}</span
-          >
-          <v-icon class="worldIcon">mdi-earth</v-icon>
+          <v-tooltip top>
+            <template v-slot:activator="{ on, attrs }">
+              <span v-bind="attrs" v-on="on">
+                <span
+                  class="gnomADspan"
+                  v-if="item.gnomAD && item.gnomAD.af_hom > 0"
+                >
+                  {{ item.gnomAD.af_hom | precisionTo }}</span
+                >
+                <v-icon class="worldIcon">mdi-earth</v-icon>
 
-          <span
-            v-if="
-              item.gnomAD &&
-                item.gnomAD.af_hom > 0 &&
-                item.gnomAD.hap_af_hom_map &&
-                displayHaplodata &&
-                haplogroup
-            "
-          >
-            <br />
-            <span class="haplogroupIcon">{{ haplogroup }}</span>
-            {{ item.gnomAD.hap_af_hom_map[haplogroup] | precisionTo }}
-            <br />
-            <v-icon>mdi-contrast-box</v-icon>
-            {{
-              (item.gnomAD.hap_af_hom_map[haplogroup] / item.gnomAD.af_hom)
-                | precisionTo
-            }}
-          </span>
+                <span
+                  v-if="
+                    item.gnomAD &&
+                      item.gnomAD.af_hom > 0 &&
+                      item.gnomAD.hap_af_hom_map &&
+                      displayHaplodata &&
+                      haplogroup
+                  "
+                >
+                  <br />
+                  <span class="haplogroupIcon">{{ haplogroup }}</span>
+                  {{ item.gnomAD.hap_af_hom_map[haplogroup] | precisionTo }}
+                  <br />
+                  <v-icon>mdi-contrast-box</v-icon>
+                  {{
+                    (item.gnomAD.hap_af_hom_map[haplogroup] /
+                      item.gnomAD.af_hom)
+                      | precisionTo
+                  }}
+                </span>
+              </span>
+            </template>
+            <span
+              class="gnomADspan"
+              v-if="item.gnomAD && item.gnomAD.af_hom > 0"
+            >
+              Global: {{ item.gnomAD.af_hom | precisionTo }}</span
+            >
+            <v-icon class="worldIcon tooltipIcon">mdi-earth</v-icon>
+
+            <span
+              v-if="
+                item.gnomAD &&
+                  item.gnomAD.af_hom > 0 &&
+                  item.gnomAD.hap_af_hom_map &&
+                  displayHaplodata &&
+                  haplogroup
+              "
+            >
+              <br />
+              <span class="haplogroupIcon tooltipIcon">{{ haplogroup }}</span>
+              Haplogroup ({{ haplogroup }}):
+              {{ item.gnomAD.hap_af_hom_map[haplogroup] | precisionTo }}
+              <br />
+              <v-icon class="tooltipIcon">mdi-contrast-box</v-icon> Ratio
+              (Haplogroup / Global):
+              {{
+                (item.gnomAD.hap_af_hom_map[haplogroup] / item.gnomAD.af_hom)
+                  | precisionTo
+              }}
+            </span>
+          </v-tooltip>
         </template>
 
         <!-- Haplotype Defining -->
