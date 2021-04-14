@@ -393,6 +393,12 @@
             <br />
             <span class="haplogroupIcon">{{ haplogroup }}</span>
             {{ item.gnomAD.hap_af_het_map[haplogroup] | precisionTo }}
+            <br />
+            <v-icon>mdi-contrast-box</v-icon>
+            {{
+              (item.gnomAD.hap_af_het_map[haplogroup] / item.gnomAD.af_het)
+                | precisionTo
+            }}
           </span>
         </template>
 
@@ -415,6 +421,12 @@
             <br />
             <span class="haplogroupIcon">{{ haplogroup }}</span>
             {{ item.gnomAD.hap_af_hom_map[haplogroup] | precisionTo }}
+            <br />
+            <v-icon>mdi-contrast-box</v-icon>
+            {{
+              (item.gnomAD.hap_af_hom_map[haplogroup] / item.gnomAD.af_hom)
+                | precisionTo
+            }}
           </span>
         </template>
 
