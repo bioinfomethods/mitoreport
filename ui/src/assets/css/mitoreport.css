@@ -18,3 +18,29 @@ a:hover {
 th[role='columnheader'] {
   vertical-align: top;
 }
+
+span.gnomADspan {
+  padding-left: 2px;
+  height: 25px;
+  display: inline-block;
+}
+i.worldIcon.mdi-earth {
+  float: left;
+}
+i.worldIcon.mdi-earth:last-child {
+  display: none;
+}
+
+span.haplogroupIcon {
+  border: solid 2px rgba(0, 0, 0, 0.54);
+  font-weight: 900;
+  color: rgba(0, 0, 0, 0.54);
+  border-radius: 21px;
+  margin: 1px;
+  text-align: center;
+  vertical-align: middle;
+  display: inline-block;
+  width: 21px;
+  height: 21px;
+  font-size: 12px;
+}

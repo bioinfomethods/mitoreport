@@ -373,37 +373,47 @@
           <span v-if="item.gbFreq > 0">{{ item.gbFreq | precisionTo }}</span>
         </template>
 
+        <!-- gnomAD Het -->
+
         <template v-slot:item.gnomAD.af_het="{ item }">
-          <span v-if="item.gnomAD && item.gnomAD.af_het > 0">{{
-            item.gnomAD.af_het | precisionTo
-          }}</span>
+          <span class="gnomADspan" v-if="item.gnomAD && item.gnomAD.af_het > 0">
+            {{ item.gnomAD.af_het | precisionTo }}</span
+          >
+          <v-icon class="worldIcon">mdi-earth</v-icon>
+
           <span
             v-if="
               item.gnomAD &&
+                item.gnomAD.af_het > 0 &&
                 item.gnomAD.hap_af_het_map &&
                 displayHaplodata &&
                 haplogroup
             "
           >
             <br />
+            <span class="haplogroupIcon">{{ haplogroup }}</span>
             {{ item.gnomAD.hap_af_het_map[haplogroup] | precisionTo }}
           </span>
         </template>
 
         <!-- gnomAD Hom -->
         <template v-slot:item.gnomAD.af_hom="{ item }">
-          <span v-if="item.gnomAD && item.gnomAD.af_hom > 0">{{
-            item.gnomAD.af_hom | precisionTo
-          }}</span>
+          <span class="gnomADspan" v-if="item.gnomAD && item.gnomAD.af_hom > 0">
+            {{ item.gnomAD.af_hom | precisionTo }}</span
+          >
+          <v-icon class="worldIcon">mdi-earth</v-icon>
+
           <span
             v-if="
               item.gnomAD &&
+                item.gnomAD.af_hom > 0 &&
                 item.gnomAD.hap_af_hom_map &&
                 displayHaplodata &&
                 haplogroup
             "
           >
             <br />
+            <span class="haplogroupIcon">{{ haplogroup }}</span>
             {{ item.gnomAD.hap_af_hom_map[haplogroup] | precisionTo }}
           </span>
         </template>
@@ -434,6 +444,8 @@
             </v-icon>
           </span>
         </template>
+
+        <!-- Heteroplasmy Distribution -->
         <template v-slot:item.gnomAD.hl_hist="{ item }">
           <span v-if="heteroplasmyDistExists(item)">
             <v-sparkline
@@ -452,6 +464,8 @@
             </v-sparkline>
           </span>
         </template>
+
+        <!-- Age Distribution Homoplasmic -->
         <template v-slot:item.gnomAD.age_hist_hom="{ item }">
           <span v-if="ageDistExists(item)">
             <v-sparkline
@@ -470,6 +484,7 @@
             </v-sparkline>
           </span>
         </template>
+
         <template v-slot:item.curation="{ item }">
           <CurationCell :variantId="item.id" :key="item.id"></CurationCell>
         </template>
