@@ -80,7 +80,7 @@
             </v-btn>
           </v-col>
           <v-col md="2">
-            <span>Halogroup is: {{ getFirstHaplogroup }}</span>
+            <span>Haplogroup is: {{ getFirstHaplogroup }}</span>
             <v-switch
               id="displayHaplodata"
               :items="displayHaplodata"
@@ -88,6 +88,11 @@
               ><template v-slot:label>Toggle Haplogroup</template></v-switch
             >
             <!-- <span>{{ hetRatio }}</span> -->
+          </v-col>
+
+          <v-col md="2">
+            <span>Show/Hide Weight</span>
+            <v-switch :input-value="true" @change="toggleWeight()"></v-switch>
           </v-col>
         </v-row>
       </v-card-text>
@@ -1000,6 +1005,10 @@ export default {
   },
 
   methods: {
+    toggleWeight() {
+      document.getElementById('app').classList.toggle('noWeight')
+    },
+
     toggleHaplodata: function(toggleHaplodata) {
       console.log(
         `Hey haplogroup is "${this.getFirstHaplogroup}"`,

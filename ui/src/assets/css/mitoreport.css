@@ -51,3 +51,8 @@ span.haplogroupIcon {
   height: 21px;
   font-size: 12px;
 }
+
+div#app.noWeight th:nth-child(10),
+div#app.noWeight td:nth-child(10) {
+  display: none;
+}
