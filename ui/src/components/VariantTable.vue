@@ -240,6 +240,9 @@
               >
               </v-slider>
             </td>
+            <td></td>
+            <!-- 8 Hap weight goes here!!! -->
+            <!-- 9 gnomad het freq -->
             <td>
               <v-row class="px-4 justify-center">
                 <span class="grey--text text--darken-1">
@@ -255,6 +258,8 @@
               >
               </v-slider>
             </td>
+            <td></td>
+            <!-- 11 gnomad hom freq -->
             <td>
               <v-row class="px-4 justify-center">
                 <span class="grey--text text--darken-1">
@@ -270,6 +275,42 @@
               >
               </v-slider>
             </td>
+            <!-- 12 -->
+            <td></td>
+
+<!-- 13: bundled het -->
+            <td>
+              <v-row class="px-4 justify-center">
+                <span class="grey--text text--darken-1">
+                  {{ filterConfig.gnomADHetFreqMax }}
+                </span>
+              </v-row>
+              <v-slider
+                v-model="filterConfig.gnomADHetFreqMax"
+                step="0.0001"
+                min="0"
+                max="1"
+                hide-details
+              >
+              </v-slider>
+            </td>
+<!-- 14: bundled hom -->
+            <td>
+              <v-row class="px-4 justify-center">
+                <span class="grey--text text--darken-1">
+                  {{ filterConfig.gnomADHomFreqMax }}
+                </span>
+              </v-row>
+              <v-slider
+                v-model="filterConfig.gnomADHomFreqMax"
+                step="0.0001"
+                min="0"
+                max="1"
+                hide-details
+              >
+              </v-slider>
+            </td>
+            <!-- Haplotype Defining 15 -->
             <td>
               <v-select
                 v-model="filterConfig.gnomADHap"
