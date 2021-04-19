@@ -91,7 +91,7 @@
           </v-col>
 
           <v-col md="2">
-            <span>Show/Hide Weight</span>
+            <span>Toggle gnomAD Hap Weight</span>
             <v-switch @change="toggleWeight()"></v-switch>
           </v-col>
 
@@ -278,7 +278,7 @@
             <!-- 12 -->
             <td></td>
 
-<!-- 13: bundled het -->
+            <!-- 13: bundled het -->
             <td>
               <v-row class="px-4 justify-center">
                 <span class="grey--text text--darken-1">
@@ -294,7 +294,7 @@
               >
               </v-slider>
             </td>
-<!-- 14: bundled hom -->
+            <!-- 14: bundled hom -->
             <td>
               <v-row class="px-4 justify-center">
                 <span class="grey--text text--darken-1">
@@ -971,7 +971,7 @@ export default {
           text: 'gnomAD Hap Weight',
           value: 'hapWeight',
           sort: this.hapWeightSort,
-          width: '83',
+          width: '86',
         },
 
         // Seperate column for ratio
@@ -995,7 +995,6 @@ export default {
             'Proportion of individuals with variant at homoplasmy (heteroplasmy >= 0.95) in gnomAD',
           value: 'gnomAD.af_hom',
           width: '130',
-          sort: this.gnomADHomSort,
           filter: this.gnomADHomFreqFilter,
         },
         {
@@ -1020,7 +1019,7 @@ export default {
             'Proportion of individuals with variant at homoplasmy (heteroplasmy >= 0.95) in gnomAD',
           value: 'gnomADhomBundle',
           width: '130',
-          sort: this.gnomADHomSort,
+          // sort: this.gnomADHombundleSort,
           filter: this.gnomADHomFreqFilter,
         },
 
@@ -1310,9 +1309,7 @@ export default {
       return filters.rangeTextFilter(`${lower}-${upper}`, value || 0.0)
     },
 
-    gnomADHomFreqFilter: function(gnomAD) {
-      const value = gnomAD ? gnomAD.af_hom : 0.0
-
+    gnomADHomFreqFilter: function(value) {
       let lower = 0
       let upper = this.filterConfig.gnomADHomFreqMax
 
@@ -1427,7 +1424,7 @@ export default {
       }
     },
 
-    gnomADHomSort: function(l, r) {
+    gnomADHombundleSort: function(l, r) {
       if (l && l.af_hom) {
         if (r && r.af_hom) {
           if (this.displayHaplodata) {
