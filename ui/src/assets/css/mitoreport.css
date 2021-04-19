@@ -54,5 +54,5 @@ span.haplogroupIcon {
 
 div#app.noWeight th:nth-child(10),
 div#app.noWeight td:nth-child(10) {
-  display: none;
+  /* display: none; */
 }
