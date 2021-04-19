@@ -412,7 +412,7 @@
 
         <template v-slot:item.hapWeight="{ item }">
           <span v-if="hapRatios[item.id] && hapRatios[item.id].hapWeight">
-            {{ hapRatios[item.id].hapWeight }}</span
+            {{ hapRatios[item.id].hapWeight | precisionTo }}</span
           >
         </template>
 
@@ -926,17 +926,24 @@ export default {
           map[variant.id] = {
             hapWeight: 0,
           }
-          if (variant.gnomAD.af_het) {
-            map[variant.id].hetRatio =
+          if (
+            variant.gnomAD.af_het &&
+            variant.gnomAD.hap_af_het_map[this.getFirstHaplogroup]
+          ) {
+            let hetRatio = (map[variant.id].hetRatio =
               variant.gnomAD.hap_af_het_map[this.getFirstHaplogroup] /
-              variant.gnomAD.af_het
-            map[variant.id].hapWeight += Math.log(map[variant.id].hetRatio)
+              variant.gnomAD.af_het)
+
+            map[variant.id].hapWeight = Math.log(hetRatio) * Math.log(hetRatio)
           }
-          if (variant.gnomAD.af_hom) {
-            map[variant.id].homRatio =
+          if (
+            variant.gnomAD.af_hom &&
+            variant.gnomAD.hap_af_hom_map[this.getFirstHaplogroup]
+          ) {
+            let homRatio = (map[variant.id].homRatio =
               variant.gnomAD.hap_af_hom_map[this.getFirstHaplogroup] /
-              variant.gnomAD.af_hom
-            map[variant.id].hapWeight += Math.log(map[variant.id].hapRatio)
+              variant.gnomAD.af_hom)
+            map[variant.id].hapWeight += Math.log(homRatio) * Math.log(homRatio)
           }
         }
         return map
