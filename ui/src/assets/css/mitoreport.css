@@ -52,7 +52,52 @@ span.haplogroupIcon {
   font-size: 12px;
 }
 
-div#app.noWeight th:nth-child(10),
-div#app.noWeight td:nth-child(10) {
-  /* display: none; */
+
+td:nth-child(8),
+td:nth-child(10),
+td:nth-child(12),
+th:nth-child(8),
+th:nth-child(10),
+th:nth-child(12) {
+  display: none;
+}
+
+div#app.showWeight th:nth-child(8),
+div#app.showWeight td:nth-child(8) {
+  display: table-cell;
+}
+
+/* div#app.showHaplodata td:nth-child(8),
+div#app.showHaplodata th:nth-child(8), */
+div#app.showHaplodata td:nth-child(10),
+div#app.showHaplodata td:nth-child(12),
+div#app.showHaplodata th:nth-child(10),
+div#app.showHaplodata th:nth-child(12) {
+  display: table-cell;
+}
+
+
+div#app.bundle td:nth-child(9),
+div#app.bundle td:nth-child(10),
+div#app.bundle td:nth-child(11),
+div#app.bundle td:nth-child(12),
+div#app.bundle th:nth-child(9),
+div#app.bundle th:nth-child(10),
+div#app.bundle th:nth-child(11),
+div#app.bundle th:nth-child(12) {
+  display: none;
+}
+
+td:nth-child(13),
+td:nth-child(14),
+th:nth-child(13),
+th:nth-child(14) {
+  display: none;
+}
+
+div#app.bundle td:nth-child(13),
+div#app.bundle td:nth-child(14),
+div#app.bundle th:nth-child(13),
+div#app.bundle th:nth-child(14) {
+  display: table-cell;
 }

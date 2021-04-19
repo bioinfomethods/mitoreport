@@ -92,7 +92,7 @@
 
           <v-col md="2">
             <span>Show/Hide Weight</span>
-            <v-switch :input-value="true" @change="toggleWeight()"></v-switch>
+            <v-switch @change="toggleWeight()"></v-switch>
           </v-col>
 
           <v-col md="2">
@@ -1054,7 +1054,6 @@ export default {
     // },
 
     hapRatios() {
-      console.log('Calculating hapRatios')
       return this.filteredVariants.reduce((map, variant) => {
         if (variant.gnomAD) {
           map[variant.id] = {
@@ -1135,7 +1134,7 @@ export default {
 
   methods: {
     toggleWeight() {
-      document.getElementById('app').classList.toggle('noWeight')
+      document.getElementById('app').classList.toggle('showWeight')
     },
 
     toggleBundle() {
@@ -1143,11 +1142,7 @@ export default {
     },
 
     toggleHaplodata: function(toggleHaplodata) {
-      document.getElementById('app').classList.toggle('haplodata')
-      console.log(
-        `Hey haplogroup is "${this.getFirstHaplogroup}"`,
-        toggleHaplodata
-      )
+      document.getElementById('app').classList.toggle('showHaplodata')
     },
 
     toggleVariantById: function(variantId) {
