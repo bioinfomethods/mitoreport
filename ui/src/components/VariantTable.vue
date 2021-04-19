@@ -410,6 +410,12 @@
           >
         </template>
 
+        <template v-slot:item.hapWeight="{ item }">
+          <span v-if="hapRatios[item.id] && hapRatios[item.id].hapWeight">
+            {{ hapRatios[item.id].hapWeight }}</span
+          >
+        </template>
+
         <!-- gnomAD Hom -->
         <template v-slot:item.gnomAD="{ item }">
           <v-tooltip top>
@@ -829,6 +835,12 @@ export default {
           width: '83',
         },
         {
+          text: 'gnomAD Hap Weight',
+          value: 'hapWeight',
+          sort: this.hapWeightSort,
+          width: '83',
+        },
+        {
           text: 'gnomAD Hom',
           tooltip:
             'Proportion of individuals with variant at homoplasmy (heteroplasmy >= 0.95) in gnomAD',
@@ -911,16 +923,20 @@ export default {
       console.log('Calculating hapRatios')
       return this.filteredVariants.reduce((map, variant) => {
         if (variant.gnomAD) {
-          map[variant.id] = {}
+          map[variant.id] = {
+            hapWeight: 0,
+          }
           if (variant.gnomAD.af_het) {
             map[variant.id].hetRatio =
               variant.gnomAD.hap_af_het_map[this.getFirstHaplogroup] /
               variant.gnomAD.af_het
+            map[variant.id].hapWeight += Math.log(map[variant.id].hetRatio)
           }
           if (variant.gnomAD.af_hom) {
             map[variant.id].homRatio =
               variant.gnomAD.hap_af_hom_map[this.getFirstHaplogroup] /
               variant.gnomAD.af_hom
+            map[variant.id].hapWeight += Math.log(map[variant.id].hapRatio)
           }
         }
         return map
@@ -1191,6 +1207,22 @@ export default {
 
     consequenceSort: function(l, r) {
       return l.rank - r.rank
+    },
+
+    hapWeightSort: function(l, r) {
+      if (this.hapRatios[l]) {
+        if (this.hapRatios[r]) {
+          return this.hapRatios[l].hapWeight - this.hapRatios[r].hapWeight
+        } else {
+          return 1
+        }
+      } else {
+        if (this.hapRatios[r]) {
+          return -1
+        } else {
+          return 0
+        }
+      }
     },
 
     hetRatioSort: function(l, r) {
