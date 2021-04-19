@@ -44,7 +44,7 @@
 </template>
 
 <style>
-@import url('./assets/css/mitoreport.css');
+@import url('./assets/css/mitoreport.scss');
 </style>
 
 <script>

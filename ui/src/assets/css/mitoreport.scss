@@ -52,6 +52,10 @@ span.haplogroupIcon {
   font-size: 12px;
 }
 
+td, th {
+  transition: background-color 1s ease !important;
+  background-color: rgba(0,0,0,0);
+}
 
 td:nth-child(8),
 td:nth-child(10),
@@ -59,12 +63,17 @@ td:nth-child(12),
 th:nth-child(8),
 th:nth-child(10),
 th:nth-child(12) {
-  display: none;
+  position: absolute;
+  opacity: 0;
+  background-color: rgba(0,0,0,0.3);
 }
 
 div#app.showWeight th:nth-child(8),
 div#app.showWeight td:nth-child(8) {
-  display: table-cell;
+  position: inherit;
+  opacity: 1;
+  transition: background-color 1s ease;
+  background-color: rgba(0,0,0,0);
 }
 
 /* div#app.showHaplodata td:nth-child(8),
@@ -73,7 +82,10 @@ div#app.showHaplodata td:nth-child(10),
 div#app.showHaplodata td:nth-child(12),
 div#app.showHaplodata th:nth-child(10),
 div#app.showHaplodata th:nth-child(12) {
-  display: table-cell;
+  position: inherit;
+  opacity: 1;
+  transition: background-color 1s ease;
+  background-color: rgba(0,0,0,0);
 }
 
 
@@ -85,25 +97,28 @@ div#app.bundle th:nth-child(9),
 div#app.bundle th:nth-child(10),
 div#app.bundle th:nth-child(11),
 div#app.bundle th:nth-child(12) {
-  display: none;
+  position: absolute;
+  opacity: 0;
+  background-color: rgba(0,0,0,0.3);
 }
 
 td:nth-child(13),
 td:nth-child(14),
 th:nth-child(13),
 th:nth-child(14) {
-  display: none;
+  position: absolute;
+  opacity: 0;
+  background-color: rgba(0,0,0,0.3);
 }
 
 div#app.bundle td:nth-child(13),
 div#app.bundle td:nth-child(14),
 div#app.bundle th:nth-child(13),
 div#app.bundle th:nth-child(14) {
-  display: table-cell;
-}
-
-td,th {
-  border-left: solid 1px lightgrey;
+  position: inherit;
+  opacity: 1;
+  transition: background-color 1s ease;
+  background-color: rgba(0,0,0,0);
 }
 
 tr:nth-child(even) {
