@@ -1424,6 +1424,22 @@ export default {
       }
     },
 
+    homRatioSort: function(l, r) {
+      if (this.hapRatios[l]) {
+        if (this.hapRatios[r]) {
+          return this.hapRatios[l].homRatio - this.hapRatios[r].homRatio
+        } else {
+          return 1
+        }
+      } else {
+        if (this.hapRatios[r]) {
+          return -1
+        } else {
+          return 0
+        }
+      }
+    },
+
     gnomADHombundleSort: function(l, r) {
       if (l && l.af_hom) {
         if (r && r.af_hom) {

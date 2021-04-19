@@ -101,3 +101,11 @@ div#app.bundle th:nth-child(13),
 div#app.bundle th:nth-child(14) {
   display: table-cell;
 }
+
+td,th {
+  border-left: solid 1px lightgrey;
+}
+
+tr:nth-child(even) {
+  background-color: rgba(0,0,0,0.02);
+}
