@@ -190,7 +190,6 @@
               </v-slider>
             </td>
             <td></td>
-            <!-- 8 Hap weight goes here!!! -->
             <!-- 9 gnomad het freq -->
             <td>
               <v-row class="px-4 justify-center">
@@ -692,14 +691,6 @@ export default {
           value: 'gbFreq',
           width: '130',
           filter: this.gbFreqFilter,
-        },
-
-        // gnomAD Haplogroup Weight by interest
-        {
-          text: 'gnomAD Hap Weight',
-          value: 'hapWeight',
-          sort: this.hapWeightSort,
-          width: '86',
         },
 
         {

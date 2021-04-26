@@ -32,19 +32,16 @@ describe('VariantTable.vue', () => {
 
   it('renders VariantTable', () => {
     const expHeaderTexts = [
-      'Position',
-      'Allele',
-      'Type',
+      'HGVS.g',
       'Gene',
       'Consequence',
-      'VAF',
-      'Depth',
-      'Disease',
-      'MitoMap',
-      'Curated Refs',
-      'HGVS.p',
-      'HGVS.c',
-      'HGVS',
+      'Heteroplasmy',
+      'Genbank',
+      'gnomAD Het',
+      'gnomAD Hom',
+      'Heteroplasmy Distribution',
+      'Age Distribution (Homoplasmic)',
+      'Curation',
     ]
     const wrapperText = underTest.text()
     expHeaderTexts.every(header => {
