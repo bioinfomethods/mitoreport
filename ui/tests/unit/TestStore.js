@@ -5,6 +5,8 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import {
   DEFAULT_GENECARDS_URL_PREFIX,
+  DEFAULT_HAPLOGROUPS,
+  DEFAULT_FIRST_HAPLOGROUP,
   DEFAULT_HMT_VAR_URL_PREFIX,
   DEFAULT_IGV_HOST,
 } from '../../src/shared/constants'
@@ -58,6 +60,14 @@ export const getters = {
 
   getGeneCardsUrlPrefix: () => {
     return DEFAULT_GENECARDS_URL_PREFIX
+  },
+
+  getHaplogroups: () => {
+    return DEFAULT_HAPLOGROUPS
+  },
+
+  getFirstHaplogroup: () => {
+    return DEFAULT_FIRST_HAPLOGROUP
   },
 
   getHmtVarUrlPrefix: () => {

@@ -33,6 +33,9 @@ export const DEFAULT_IGV_HOST = 'http://localhost:60151'
 export const DEFAULT_GENECARDS_URL_PREFIX =
   'https://www.genecards.org/cgi-bin/carddisp.pl'
 
+export const DEFAULT_HAPLOGROUPS = []
+export const DEFAULT_FIRST_HAPLOGROUP = null
+
 export const DEFAULT_HMT_VAR_URL_PREFIX = 'https://www.hmtvar.uniba.it/results'
 
 export const DEFAULT_VARIANT_SEARCH = {
