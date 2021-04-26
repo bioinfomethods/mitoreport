@@ -22,6 +22,18 @@
           <td>HGVS:</td>
           <td>{{ variant.HGVS }}</td>
         </tr>
+        <tr>
+          <td>Haplotype Defining:</td>
+          <td>
+            {{
+              variant.gnomAD
+                ? variant.gnomAD.hap_defining_variant
+                  ? 'Haplotype Defining'
+                  : 'Not Haplotype Defining'
+                : 'No gnomAD data'
+            }}
+          </td>
+        </tr>
       </tbody>
     </template>
   </v-simple-table>

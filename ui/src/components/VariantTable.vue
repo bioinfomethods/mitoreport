@@ -226,31 +226,6 @@
               >
               </v-slider>
             </td>
-
-            <!-- 11 Haplotype Defining -->
-            <td>
-              <v-select
-                v-model="filterConfig.gnomADHap"
-                :items="['True', 'False', 'Null']"
-                label="Filter"
-                multiple
-                dense
-              >
-                <template v-slot:selection="{ item, index }">
-                  <v-chip
-                    v-if="index <= 3"
-                    close
-                    @click:close="removeSelectedHaploFilter(item)"
-                    x-small
-                  >
-                    <span>{{ item }}</span>
-                  </v-chip>
-                  <span v-if="index === 4" class="grey--text caption"
-                    >(+{{ filterConfig.gnomADHap.length - 4 }} others)</span
-                  >
-                </template>
-              </v-select>
-            </td>
             <td>
               <v-select
                 v-model="filterConfig.selectedConsequence"
@@ -368,33 +343,6 @@
             <br />
             <span class="haplogroupIcon">{{ getFirstHaplogroup }}</span>
             {{ item.gnomAD.hap_af_hom_map[getFirstHaplogroup] | precisionTo }}
-          </span>
-        </template>
-
-        <!-- Haplotype Defining -->
-        <template v-slot:item.gnomAD.hap_defining_variant="{ item }">
-          <span
-            :title="
-              item.gnomAD
-                ? item.gnomAD.hap_defining_variant
-                  ? 'Haplotype Defining'
-                  : 'Not Haplotype Defining'
-                : 'No gnomAD data'
-            "
-          >
-            <!--
-              A question mark might be better for the unknown value: mdi-help-circle-outline
-              or an exclamation mark: mdi-alert-circle-outline
-            -->
-            <v-icon>
-              {{
-                item.gnomAD
-                  ? item.gnomAD.hap_defining_variant
-                    ? 'mdi-check-circle-outline'
-                    : 'mdi-close-circle-outline'
-                  : 'mdi-circle-outline'
-              }}
-            </v-icon>
           </span>
         </template>
 
@@ -706,15 +654,6 @@ export default {
           value: 'gnomAD.af_hom',
           width: '100',
           filter: this.gnomADHomFreqFilter,
-        },
-
-        {
-          text: 'Haplotype Defining',
-          value: 'gnomAD.hap_defining_variant',
-          width: '50',
-          sort: this.gnomADHapSort,
-          isDescending: true,
-          filter: this.gnomADHapFilter,
         },
         {
           text: 'Consequence',
