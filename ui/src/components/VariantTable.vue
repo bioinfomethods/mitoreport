@@ -143,18 +143,23 @@
               </v-select>
             </td>
             <td>
-              <v-select
-                v-model="filterConfig.selectedConsequence"
-                :items="consequences"
-                item-text=".name"
-                item-value=".name"
-                return-object
-                type="text"
-                label="Select up to severity"
-                dense
-                class="variant-table-v-select"
-              >
-              </v-select>
+              <v-row class="justify-space-between">
+                <v-text-field
+                  v-model="filterConfig.curationSearch"
+                  type="text"
+                  label="Search notes or tag names"
+                  class="pl-3 pr-1 pt-2 curation-search"
+                  dense
+                ></v-text-field>
+                <v-checkbox
+                  v-model="filterConfig.importantCuration"
+                  on-icon="mdi-tag-multiple"
+                  off-icon="mdi-tag-multiple-outline"
+                  @click="toggleImportantCuration"
+                  color="red"
+                  class="pa-0"
+                ></v-checkbox>
+              </v-row>
             </td>
             <td>
               <v-row class="px-4 justify-space-between">
@@ -189,7 +194,6 @@
               >
               </v-slider>
             </td>
-            <td></td>
             <!-- 9 gnomad het freq -->
             <td>
               <v-row class="px-4 justify-center">
@@ -247,26 +251,19 @@
                 </template>
               </v-select>
             </td>
-            <td></td>
-            <td></td>
             <td>
-              <v-row class="justify-space-between">
-                <v-text-field
-                  v-model="filterConfig.curationSearch"
-                  type="text"
-                  label="Search notes or tag names"
-                  class="pl-3 pr-1 pt-2 curation-search"
-                  dense
-                ></v-text-field>
-                <v-checkbox
-                  v-model="filterConfig.importantCuration"
-                  on-icon="mdi-tag-multiple"
-                  off-icon="mdi-tag-multiple-outline"
-                  @click="toggleImportantCuration"
-                  color="red"
-                  class="pa-0"
-                ></v-checkbox>
-              </v-row>
+              <v-select
+                v-model="filterConfig.selectedConsequence"
+                :items="consequences"
+                item-text=".name"
+                item-value=".name"
+                return-object
+                type="text"
+                label="Select up to severity"
+                dense
+                class="variant-table-v-select"
+              >
+              </v-select>
             </td>
             <td>
               <v-text-field
@@ -288,6 +285,8 @@
               >
               </v-select>
             </td>
+            <td></td>
+            <td></td>
           </tr>
         </template>
 
@@ -671,12 +670,10 @@ export default {
           filter: this.genesFilter,
         },
         {
-          text: 'Consequence',
-          tooltip: 'Sorting is on severity of consequence',
-          value: 'consequence',
+          text: 'Curation',
+          value: 'curation',
           width: '180',
-          sort: this.consequenceSort,
-          filter: this.consequenceFilter,
+          filter: (value, search, item) => this.curationFilter(item),
         },
         {
           text: 'Heteroplasmy',
@@ -689,36 +686,59 @@ export default {
           text: 'Genbank',
           // tooltip: 'Genbank % tooltip',
           value: 'gbFreq',
-          width: '130',
+          width: '100',
           filter: this.gbFreqFilter,
         },
 
         {
-          text: 'gnomAD Het',
+          text: 'gnomAD Heteroplasmy',
           tooltip:
             'Proportion of individuals with variant at heteroplasmy between 0.10 - 0.95 in gnomAD',
           value: 'gnomAD.af_het',
-          width: '130',
+          width: '100',
           filter: this.gnomADHetFreqFilter,
         },
 
         {
-          text: 'gnomAD Hom',
+          text: 'gnomAD Homoplasmy',
           tooltip:
             'Proportion of individuals with variant at homoplasmy (heteroplasmy >= 0.95) in gnomAD',
           value: 'gnomAD.af_hom',
-          width: '130',
+          width: '100',
           filter: this.gnomADHomFreqFilter,
         },
 
         {
           text: 'Haplotype Defining',
-          align: 'center',
           value: 'gnomAD.hap_defining_variant',
-          width: 100,
+          width: '50',
           sort: this.gnomADHapSort,
           isDescending: true,
           filter: this.gnomADHapFilter,
+        },
+        {
+          text: 'Consequence',
+          tooltip: 'Sorting is on severity of consequence',
+          value: 'consequence',
+          width: '180',
+          sort: this.consequenceSort,
+          filter: this.consequenceFilter,
+        },
+        {
+          text: 'Disease',
+          tooltip: 'Disease association from MitoMap',
+          value: 'Disease',
+          width: 100,
+          filter: this.diseaseFilter,
+        },
+        {
+          text: 'MitoMap Refs',
+          tooltip: 'MitoMap curated references',
+          value: 'curatedRef',
+          align: 'center',
+          sortable: false,
+          width: '100',
+          filter: this.curatedRefsFilter,
         },
         {
           text: 'Heteroplasmy Distribution',
@@ -735,27 +755,6 @@ export default {
           value: 'gnomAD.age_hist_hom',
           sortable: false,
           width: '120',
-        },
-        {
-          text: 'Curation',
-          value: 'curation',
-          width: '180',
-          filter: (value, search, item) => this.curationFilter(item),
-        },
-        {
-          text: 'Disease',
-          tooltip: 'Disease association from MitoMap',
-          value: 'Disease',
-          filter: this.diseaseFilter,
-        },
-        {
-          text: 'MitoMap Refs',
-          tooltip: 'MitoMap curated references',
-          value: 'curatedRef',
-          align: 'center',
-          sortable: false,
-          width: '100',
-          filter: this.curatedRefsFilter,
         },
       ]
     },
