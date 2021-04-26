@@ -248,6 +248,8 @@
                 dense
               ></v-text-field>
             </td>
+
+            <!-- MitoMap Refs -->
             <td>
               <v-select
                 v-model="filterConfig.selectedCuratedRefName"
@@ -276,8 +278,23 @@
           <a
             :id="`varlink-${item.pos}-${item.ref}-${item.alt}`"
             @click.stop="activeVariant = item"
+            :title="
+              `${item.HGVS ||
+                item.id.replace(/chrM-(\d+)-(\w)-(\w+)/, 'm.$1$2>$3')}`
+            "
             >{{
-              item.HGVS || item.id.replace(/chrM-(\d+)-(\w)-(\w+)/, 'm.$1$2>$3')
+              item.HGVS ||
+                item.id.replace(/chrM-(\d+)-(\w)-(\w+)/, function(
+                  original,
+                  a,
+                  b,
+                  c
+                ) {
+                  if (c.length > 3) {
+                    c = `${c[0]}…${c[c.length - 1]}`
+                  }
+                  return `m.${a}${b}>${c}`
+                })
             }}
           </a>
         </template>
@@ -676,7 +693,7 @@ export default {
           value: 'curatedRef',
           align: 'center',
           sortable: false,
-          width: '100',
+          width: '50',
           filter: this.curatedRefsFilter,
         },
         {
