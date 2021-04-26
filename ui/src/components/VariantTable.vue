@@ -110,54 +110,13 @@
         <template v-slot:body.prepend>
           <tr class="paddedrow">
             <td>
-              <v-row class="px-4 justify-space-between">
-                <span class="grey--text text--darken-1 text-caption">{{
-                  filterConfig.posRange[0]
-                }}</span>
-                <span class="grey--text text--darken-1 text-caption">{{
-                  filterConfig.posRange[1]
-                }}</span>
-              </v-row>
-              <v-range-slider
-                v-model="filterConfig.posRange"
-                :min="0"
-                :max="MAX_POS"
-                step="100"
-                hide-details
-              >
-              </v-range-slider>
-            </td>
-            <td>
               <v-text-field
-                v-model="filterConfig.allele"
+                v-model="filterConfig.hgvsg"
                 type="text"
                 label="Contains"
+                single-line
                 dense
               ></v-text-field>
-            </td>
-            <td>
-              <v-select
-                v-model="filterConfig.selectedTypes"
-                :items="types"
-                type="text"
-                label="Select"
-                multiple
-                dense
-              >
-                <template v-slot:selection="{ item, index }">
-                  <v-chip
-                    v-if="index <= 3"
-                    close
-                    @click:close="removeSelectedType(item)"
-                    x-small
-                  >
-                    <span>{{ item }}</span>
-                  </v-chip>
-                  <span v-if="index === 4" class="grey--text caption"
-                    >(+{{ filterConfig.selectedTypes.length - 4 }} others)</span
-                  >
-                </template>
-              </v-select>
             </td>
             <td>
               <v-select
@@ -330,23 +289,6 @@
               >
               </v-select>
             </td>
-            <td>
-              <v-text-field
-                v-model="filterConfig.hgvsp"
-                type="text"
-                label="Contains"
-                single-line
-                dense
-              ></v-text-field>
-            </td>
-            <td>
-              <v-text-field
-                v-model="filterConfig.hgvsc"
-                type="text"
-                label="Contains"
-                dense
-              ></v-text-field>
-            </td>
           </tr>
         </template>
 
@@ -356,16 +298,17 @@
         </template>
 
         <!-- Override row values where necessary using slot v-slot:item.${header.value} -->
-        <template v-slot:item.pos="{ item }">
-          <IgvLink :position="item.pos"></IgvLink>
-        </template>
-        <template v-slot:item.ref_alt="{ item }">
+        <template v-slot:item.hgvsg="{ item }">
+          <!-- Todo: test this regex? Also confirm it is a good idea. -->
           <a
             :id="`varlink-${item.pos}-${item.ref}-${item.alt}`"
             @click.stop="activeVariant = item"
-            >{{ item.ref }}/{{ item.alt }}</a
-          >
+            >{{
+              item.HGVS || item.id.replace(/chrM-(\d+)-(\w)-(\w+)/, 'm.$1$2>$3')
+            }}
+          </a>
         </template>
+
         <template v-slot:item.symbols="{ item }">
           <GeneCardsLink
             v-for="gene in item.symbols"
@@ -506,9 +449,6 @@
             :count="item.curatedRef.count"
           ></CuratedRefLink>
         </template>
-        <template v-slot:item.hgvsc="{ item }">
-          {{ item.hgvsc }}
-        </template>
         <template v-slot:expanded-item="{ headers, item }">
           <td
             :colspan="headers.length"
@@ -563,6 +503,9 @@
                 :refAllele="activeVariant.ref"
                 :altAllele="activeVariant.alt"
               ></HmtVarLink>
+            </li>
+            <li>
+              <IgvLink :position="activeVariant.pos"></IgvLink>
             </li>
           </ul>
         </v-card-text>
@@ -716,23 +659,10 @@ export default {
     headers() {
       return [
         {
-          text: 'Position',
-          align: 'start',
-          value: 'pos',
-          width: '120',
-          filter: this.posFilter,
-        },
-        {
-          text: 'Allele',
-          value: 'ref_alt',
-          width: '180',
-          filter: this.alleleFilter,
-        },
-        {
-          text: 'Type',
-          value: 'type',
+          text: 'HGVS.g',
+          value: 'hgvsg',
           width: '100',
-          filter: this.typesFilter,
+          filter: this.hgvsgFilter,
         },
         {
           text: 'Gene',
@@ -835,18 +765,6 @@ export default {
           sortable: false,
           width: '100',
           filter: this.curatedRefsFilter,
-        },
-        {
-          text: 'HGVS.p',
-          value: 'hgvsp',
-          width: '100',
-          filter: this.hgvspFilter,
-        },
-        {
-          text: 'HGVS.c',
-          value: 'hgvsc',
-          width: '100',
-          filter: this.hgvscFilter,
         },
       ]
     },

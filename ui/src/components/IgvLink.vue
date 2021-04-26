@@ -1,8 +1,8 @@
 <template>
   <span v-if="igvUrl">
-    <a id="igvUrlLink" :href="igvUrl" @click.prevent="loadIGV" target="igv">{{
-      position
-    }}</a>
+    <a id="igvUrlLink" :href="igvUrl" @click.prevent="loadIGV" target="igv"
+      >IGV Link: {{ position }}</a
+    >
     <iframe
       ref="igvIframe"
       name="igv"
