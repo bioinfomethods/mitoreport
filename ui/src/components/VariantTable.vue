@@ -90,15 +90,6 @@
             <!-- <span>{{ hetRatio }}</span> -->
           </v-col>
 
-          <v-col md="2">
-            <span>Toggle gnomAD Hap Weight</span>
-            <v-switch @change="toggleWeight()"></v-switch>
-          </v-col>
-
-          <v-col md="2">
-            <span>Two columns or bundled</span>
-            <v-switch @change="toggleBundle()"></v-switch>
-          </v-col>
         </v-row>
       </v-card-text>
     </v-card>
@@ -453,13 +444,6 @@
           </span>
         </template>
 
-        <template v-slot:item.hetRatio="{ item }">
-          <span v-if="hapRatios[item.id] && hapRatios[item.id].hetRatio">
-            <v-icon>mdi-contrast-box</v-icon
-            >{{ hapRatios[item.id].hetRatio | precisionTo }}</span
-          >
-        </template>
-
         <!-- gnomAD Hom -->
         <template v-slot:item.gnomAD.af_hom="{ item }">
           <span class="gnomADspan" v-if="item.gnomAD && item.gnomAD.af_hom > 0">
@@ -480,157 +464,6 @@
             <span class="haplogroupIcon">{{ getFirstHaplogroup }}</span>
             {{ item.gnomAD.hap_af_hom_map[getFirstHaplogroup] | precisionTo }}
           </span>
-        </template>
-
-        <template v-slot:item.homRatio="{ item }">
-          <span v-if="hapRatios[item.id] && hapRatios[item.id].homRatio">
-            <v-icon>mdi-contrast-box</v-icon
-            >{{ hapRatios[item.id].homRatio | precisionTo }}</span
-          >
-        </template>
-
-        <!-- gnomAD Het Bundle -->
-        <template v-slot:item.gnomADhetBundle="{ item }">
-          <v-tooltip top>
-            <template v-slot:activator="{ on, attrs }">
-              <span v-bind="attrs" v-on="on">
-                <span
-                  class="gnomADspan"
-                  v-if="item.gnomAD && item.gnomAD.af_het > 0"
-                >
-                  {{ item.gnomAD.af_het | precisionTo }}</span
-                >
-                <v-icon class="worldIcon">mdi-earth</v-icon>
-
-                <span
-                  v-if="
-                    item.gnomAD &&
-                      item.gnomAD.af_het > 0 &&
-                      item.gnomAD.hap_af_het_map &&
-                      displayHaplodata &&
-                      getFirstHaplogroup
-                  "
-                >
-                  <br />
-                  <span class="haplogroupIcon">{{ getFirstHaplogroup }}</span>
-                  {{
-                    item.gnomAD.hap_af_het_map[getFirstHaplogroup] | precisionTo
-                  }}
-                  <br />
-                  <v-icon>mdi-contrast-box</v-icon>
-                  {{
-                    (item.gnomAD.hap_af_het_map[getFirstHaplogroup] /
-                      item.gnomAD.af_het)
-                      | precisionTo
-                  }}
-                </span>
-              </span>
-            </template>
-            <span
-              class="gnomADspan"
-              v-if="item.gnomAD && item.gnomAD.af_het > 0"
-            >
-              Global: {{ item.gnomAD.af_het | precisionTo }}</span
-            >
-            <v-icon class="worldIcon tooltipIcon">mdi-earth</v-icon>
-
-            <span
-              v-if="
-                item.gnomAD &&
-                  item.gnomAD.af_het > 0 &&
-                  item.gnomAD.hap_af_het_map &&
-                  displayHaplodata &&
-                  getFirstHaplogroup
-              "
-            >
-              <br />
-              <span class="haplogroupIcon tooltipIcon">{{
-                getFirstHaplogroup
-              }}</span>
-              Haplogroup ({{ getFirstHaplogroup }}):
-              {{ item.gnomAD.hap_af_het_map[getFirstHaplogroup] | precisionTo }}
-              <br />
-              <v-icon class="tooltipIcon">mdi-contrast-box</v-icon> Ratio
-              (Haplogroup / Global):
-              {{
-                (item.gnomAD.hap_af_het_map[getFirstHaplogroup] /
-                  item.gnomAD.af_het)
-                  | precisionTo
-              }}
-            </span>
-          </v-tooltip>
-        </template>
-
-        <!-- gnomAD Hom Bundle -->
-        <template v-slot:item.gnomADhomBundle="{ item }">
-          <v-tooltip top>
-            <template v-slot:activator="{ on, attrs }">
-              <span v-bind="attrs" v-on="on">
-                <span
-                  class="gnomADspan"
-                  v-if="item.gnomAD && item.gnomAD.af_hom > 0"
-                >
-                  {{ item.gnomAD.af_hom | precisionTo }}</span
-                >
-                <v-icon class="worldIcon">mdi-earth</v-icon>
-
-                <span
-                  v-if="
-                    item.gnomAD &&
-                      item.gnomAD.af_hom > 0 &&
-                      item.gnomAD.hap_af_hom_map &&
-                      displayHaplodata &&
-                      getFirstHaplogroup
-                  "
-                >
-                  <br />
-                  <span class="haplogroupIcon">{{ getFirstHaplogroup }}</span>
-                  {{
-                    item.gnomAD.hap_af_hom_map[getFirstHaplogroup] | precisionTo
-                  }}
-                  <br />
-                  <v-icon>mdi-contrast-box</v-icon>
-                  {{
-                    (item.gnomAD.hap_af_hom_map[getFirstHaplogroup] /
-                      item.gnomAD.af_hom)
-                      | precisionTo
-                  }}
-                </span>
-              </span>
-            </template>
-            <span
-              class="gnomADspan"
-              v-if="item.gnomAD && item.gnomAD.af_hom > 0"
-            >
-              Global: {{ item.gnomAD.af_hom | precisionTo }}</span
-            >
-            <v-icon class="worldIcon tooltipIcon">mdi-earth</v-icon>
-
-            <span
-              v-if="
-                item.gnomAD &&
-                  item.gnomAD.af_hom > 0 &&
-                  item.gnomAD.hap_af_hom_map &&
-                  displayHaplodata &&
-                  getFirstHaplogroup
-              "
-            >
-              <br />
-              <span class="haplogroupIcon tooltipIcon">{{
-                getFirstHaplogroup
-              }}</span>
-              Haplogroup ({{ getFirstHaplogroup }}):
-              {{ item.gnomAD.hap_af_hom_map[getFirstHaplogroup] | precisionTo }}
-              <br />
-              <v-icon class="tooltipIcon">mdi-contrast-box</v-icon> Ratio
-              (Haplogroup / Global):
-              {{
-                (item.gnomAD.hap_af_hom_map[getFirstHaplogroup] /
-                  item.gnomAD.af_hom)
-                  | precisionTo
-              }}
-            </span>
-          </v-tooltip>
         </template>
 
         <!-- Haplotype Defining -->
@@ -786,6 +619,8 @@ import VariantTableHeader from '@/components/VariantTableHeader'
 import * as filters from '@/shared/variantFilters'
 import * as vueFilters from '@/shared/vueFilters'
 import * as _ from 'lodash'
+import * as $ from 'jquery'
+
 import {
   DEFAULT_VARIANT_SEARCH,
   MAX_POS,
@@ -974,7 +809,6 @@ export default {
           width: '86',
         },
 
-        // Seperate column for ratio
         {
           text: 'gnomAD Het',
           tooltip:
@@ -983,43 +817,13 @@ export default {
           width: '130',
           filter: this.gnomADHetFreqFilter,
         },
-        {
-          text: 'gnomAD Het Ratio',
-          value: 'hetRatio',
-          sort: this.hetRatioSort,
-          width: '84',
-        },
+
         {
           text: 'gnomAD Hom',
           tooltip:
             'Proportion of individuals with variant at homoplasmy (heteroplasmy >= 0.95) in gnomAD',
           value: 'gnomAD.af_hom',
           width: '130',
-          filter: this.gnomADHomFreqFilter,
-        },
-        {
-          text: 'gnomAD Hom Ratio',
-          value: 'homRatio',
-          sort: this.homRatioSort,
-          width: '84',
-        },
-
-        // Bundled version
-        {
-          text: 'gnomAD Het',
-          tooltip:
-            'Proportion of individuals with variant at heteroplasmy between 0.10 - 0.95 in gnomAD',
-          value: 'gnomADhetBundle',
-          width: '130',
-          filter: this.gnomADHetFreqFilter,
-        },
-        {
-          text: 'gnomAD Hom',
-          tooltip:
-            'Proportion of individuals with variant at homoplasmy (heteroplasmy >= 0.95) in gnomAD',
-          value: 'gnomADhomBundle',
-          width: '130',
-          // sort: this.gnomADHombundleSort,
           filter: this.gnomADHomFreqFilter,
         },
 
@@ -1173,15 +977,7 @@ export default {
   },
 
   methods: {
-    toggleWeight() {
-      document.getElementById('app').classList.toggle('showWeight')
-    },
-
-    toggleBundle() {
-      document.getElementById('app').classList.toggle('bundle')
-    },
-
-    toggleHaplodata: function(toggleHaplodata) {
+    toggleHaplodata() {
       document.getElementById('app').classList.toggle('showHaplodata')
     },
 
