@@ -1136,7 +1136,7 @@ export default {
 
     shortenConsequenceOntology(consequence) {
       var result = consequence.replace('variant', '').trim()
-      if (result.length > 10) {
+      if (result.length > 25) {
         result = result
           .split(' ')
           .map(word => word.slice(0, 1))
