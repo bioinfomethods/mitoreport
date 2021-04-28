@@ -311,11 +311,12 @@
           <a
             v-if="item.consequence"
             target="_blank"
+            :title="item.consequence.displayTerm"
             :href="
               `http://www.sequenceontology.org/miso/current_svn/term/${item.consequence.soAccession}`
             "
           >
-            {{ item.consequence.displayTerm }}</a
+            {{ shortenConsequenceOntology(item.consequence.displayTerm) }}</a
           >
         </template>
         <template v-slot:item.gbFreq="{ item }">
@@ -1131,6 +1132,18 @@ export default {
           return 0
         }
       }
+    },
+
+    shortenConsequenceOntology(consequence) {
+      var result = consequence.replace('variant', '').trim()
+      if (result.length > 10) {
+        result = result
+          .split(' ')
+          .map(word => word.slice(0, 1))
+          .join('')
+          .toUpperCase()
+      }
+      return result
     },
 
     gnomADHapSort: function(l, r) {
