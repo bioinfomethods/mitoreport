@@ -1,15 +1,15 @@
 import * as _ from 'lodash'
 
-export function consequenceFilter(selectedConsequence, consequenceValue) {
+export function consequenceFilter(selectedConsequences, consequenceValue) {
   if (
-    !selectedConsequence ||
-    _.isEmpty(selectedConsequence) ||
+    !selectedConsequences ||
+    _.isEmpty(selectedConsequences) ||
     !consequenceValue
   ) {
     return true
   }
 
-  return consequenceValue.rank <= selectedConsequence.rank
+  return selectedConsequences.indexOf(consequenceValue.displayTerm) >= 0
 }
 
 export function curationFilter(curationSearch, curation) {

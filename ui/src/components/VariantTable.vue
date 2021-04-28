@@ -228,16 +228,32 @@
             </td>
             <td>
               <v-select
-                v-model="filterConfig.selectedConsequence"
+                v-model="filterConfig.selectedConsequences"
                 :items="consequences"
-                item-text=".shortName"
-                item-value=".shortName"
-                return-object
+                item-text=".displayTerm"
                 type="text"
-                label="Select up to severity"
+                label="Select Consequences"
+                multiple
                 dense
-                class="variant-table-v-select"
               >
+                <template v-slot:selection="{ item, index }">
+                  <v-chip
+                    v-if="index <= 3"
+                    close
+                    @click:close="removeSelectedConsequence(item)"
+                    x-small
+                  >
+                    <span>{{
+                      shortenConsequenceOntology(item.displayTerm)
+                    }}</span>
+                  </v-chip>
+                  <span v-if="index === 4" class="grey--text caption"
+                    >(+{{
+                      filterConfig.selectedConsequences.length - 4
+                    }}
+                    others)</span
+                  >
+                </template>
               </v-select>
             </td>
             <td>
@@ -545,8 +561,8 @@ export default {
         allele: '',
         selectedTypes: [],
         selectedGenes: [],
+        selectedConsequences: [],
         gnomADHap: [],
-        selectedConsequence: {},
         vafRange: [0, 1],
         gbFreqTickIndex: 6,
         gnomADHetFreqTickIndex: 7,
@@ -713,7 +729,7 @@ export default {
           text: 'Consequence',
           tooltip: 'Sorting is on severity of consequence',
           value: 'consequence',
-          width: '180',
+          width: '100',
           sort: this.consequenceSort,
           filter: this.consequenceFilter,
         },
@@ -805,13 +821,18 @@ export default {
     },
 
     consequences() {
-      const allUniqConsequences = _.uniqWith(
-        this.filteredVariants.map(row => row.consequence),
-        _.isEqual
-      )
-      const nullsExcluded = _.filter(allUniqConsequences, c => c !== null)
+      const consequences = [
+        ...new Set(
+          this.filteredVariants
+            .filter(row => row.consequence)
+            .map(row => row.consequence)
+            .flat()
+        ),
+      ]
 
-      return _.sortBy(nullsExcluded, ['rank'])
+      console.log(consequences)
+
+      return consequences
     },
 
     vafLastTickIndex() {
@@ -1052,15 +1073,21 @@ export default {
       )
     },
 
+    removeSelectedConsequence: function(toRemove) {
+      this.filterConfig.selectedConsequences = this.filterConfig.selectedConsequences.filter(
+        selected => selected !== toRemove.displayTerm
+      )
+    },
+
     consequenceFilter: function(value) {
       return filters.consequenceFilter(
-        this.filterConfig.selectedConsequence,
+        this.filterConfig.selectedConsequences,
         value
       )
     },
 
     consequenceSort: function(l, r) {
-      return l.rank - r.rank
+      return l?.rank - r?.rank || -1
     },
 
     hapWeightSort: function(l, r) {

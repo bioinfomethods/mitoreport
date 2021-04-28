@@ -20,6 +20,16 @@
           <td>{{ variant.hgvsc }}</td>
         </tr>
         <tr>
+          <td>Consequence:</td>
+          <td>
+            {{
+              variant.consequence
+                ? variant.consequence.displayTerm
+                : 'No VEP consequence'
+            }}
+          </td>
+        </tr>
+        <tr>
           <td>Disease:</td>
           <td>{{ variant.Disease }}</td>
         </tr>
