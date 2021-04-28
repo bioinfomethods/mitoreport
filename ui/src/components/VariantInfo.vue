@@ -3,12 +3,9 @@
     <template v-slot:default>
       <tbody>
         <tr>
-          <td>Disease:</td>
-          <td>{{ variant.Disease }}</td>
-        </tr>
-        <tr>
-          <td>MitoMap Status:</td>
-          <td>{{ variant.Status_MitoMap }}</td>
+          <td>HGVS.g:</td>
+          <td>{{ variant.HGVS || variant.id.replace(/chrM-(\d+)-(\w)-(\w+)/, 'm.$1$2>$3')
+            }}</td>
         </tr>
         <tr>
           <td>HGVS.p:</td>
@@ -19,8 +16,12 @@
           <td>{{ variant.hgvsc }}</td>
         </tr>
         <tr>
-          <td>HGVS:</td>
-          <td>{{ variant.HGVS }}</td>
+          <td>Disease:</td>
+          <td>{{ variant.Disease }}</td>
+        </tr>
+        <tr>
+          <td>MitoMap Status:</td>
+          <td>{{ variant.Status_MitoMap }}</td>
         </tr>
         <tr>
           <td>Haplotype Defining:</td>
