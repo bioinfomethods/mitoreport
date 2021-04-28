@@ -11,6 +11,10 @@
             1
         ],
         "symbol": "MT-HV2, MT-OHR",
+        "symbols": [
+            "MT-HV2",
+            "MT-OHR"
+        ],
         "consequence": null,
         "hgvsp": null,
         "hgvsc": null,
@@ -1273,6 +1277,10 @@
             1
         ],
         "symbol": "MT-HV2, MT-OHR",
+        "symbols": [
+            "MT-HV2",
+            "MT-OHR"
+        ],
         "consequence": null,
         "hgvsp": null,
         "hgvsc": null,
@@ -2535,6 +2543,7 @@
             1
         ],
         "symbol": null,
+        "symbols": null,
         "consequence": null,
         "hgvsp": null,
         "hgvsc": null,
@@ -3782,6 +3791,13 @@
             1
         ],
         "symbol": "MT-CR, MT-HV2, MT-OHR, MT-TFY, MT-CSB2",
+        "symbols": [
+            "MT-CR",
+            "MT-HV2",
+            "MT-OHR",
+            "MT-TFY",
+            "MT-CSB2"
+        ],
         "consequence": null,
         "hgvsp": null,
         "hgvsc": null,
@@ -5049,6 +5065,12 @@
             1
         ],
         "symbol": "MT-HV2, MT-OHR, MT-TFY, MT-CSB2",
+        "symbols": [
+            "MT-HV2",
+            "MT-OHR",
+            "MT-TFY",
+            "MT-CSB2"
+        ],
         "consequence": null,
         "hgvsp": null,
         "hgvsc": null,
@@ -6316,6 +6338,7 @@
             1
         ],
         "symbol": null,
+        "symbols": null,
         "consequence": null,
         "hgvsp": null,
         "hgvsc": null,
@@ -7562,6 +7585,7 @@
             1
         ],
         "symbol": null,
+        "symbols": null,
         "consequence": null,
         "hgvsp": null,
         "hgvsc": null,
@@ -8808,6 +8832,11 @@
             1
         ],
         "symbol": "MT-HV2, MT-OHR, MT-CSB2",
+        "symbols": [
+            "MT-HV2",
+            "MT-OHR",
+            "MT-CSB2"
+        ],
         "consequence": null,
         "hgvsp": null,
         "hgvsc": null,
@@ -10070,6 +10099,12 @@
             1
         ],
         "symbol": "MT-CR, MT-HV2, MT-OHR, MT-CSB2",
+        "symbols": [
+            "MT-CR",
+            "MT-HV2",
+            "MT-OHR",
+            "MT-CSB2"
+        ],
         "consequence": null,
         "hgvsp": null,
         "hgvsc": null,
@@ -11332,6 +11367,7 @@
             1
         ],
         "symbol": null,
+        "symbols": null,
         "consequence": null,
         "hgvsp": null,
         "hgvsc": null,
@@ -12572,6 +12608,7 @@
             1
         ],
         "symbol": null,
+        "symbols": null,
         "consequence": null,
         "hgvsp": null,
         "hgvsc": null,
@@ -13812,9 +13849,29 @@
             1
         ],
         "symbol": "MT-RNR1",
-        "consequence": null,
-        "hgvsp": null,
-        "hgvsc": null,
+        "symbols": [
+            "MT-RNR1"
+        ],
+        "consequence": {
+            "id": "NON_CODING_TRANSCRIPT_EXON_VARIANT",
+            "rank": 23,
+            "severity": 18,
+            "name": "NON_CODING_TRANSCRIPT_EXON_VARIANT",
+            "shortName": "non_coding_transcript_exon",
+            "term": "non_coding_transcript_exon_variant",
+            "impact": {
+                "id": "MODIFIER",
+                "name": "MODIFIER",
+                "description": "Usually non-coding variants or variants affecting non-coding genes, where predictions are difficult or there is no evidence of impact."
+            },
+            "type": "SILENT",
+            "soAccession": "SO:0001792",
+            "ensemblColourHex": "#32cd32",
+            "displayTerm": "Non coding transcript exon variant",
+            "description": "A sequence variant that changes non-coding exon sequence in a non-coding transcript"
+        },
+        "hgvsp": "",
+        "hgvsc": "n.103A>G",
         "Allele": "A750G",
         "Locus": "MT-RNR1",
         "Position": 750,
@@ -15074,9 +15131,29 @@
             1
         ],
         "symbol": "MT-RNR1",
-        "consequence": null,
-        "hgvsp": null,
-        "hgvsc": null,
+        "symbols": [
+            "MT-RNR1"
+        ],
+        "consequence": {
+            "id": "NON_CODING_TRANSCRIPT_EXON_VARIANT",
+            "rank": 23,
+            "severity": 18,
+            "name": "NON_CODING_TRANSCRIPT_EXON_VARIANT",
+            "shortName": "non_coding_transcript_exon",
+            "term": "non_coding_transcript_exon_variant",
+            "impact": {
+                "id": "MODIFIER",
+                "name": "MODIFIER",
+                "description": "Usually non-coding variants or variants affecting non-coding genes, where predictions are difficult or there is no evidence of impact."
+            },
+            "type": "SILENT",
+            "soAccession": "SO:0001792",
+            "ensemblColourHex": "#32cd32",
+            "displayTerm": "Non coding transcript exon variant",
+            "description": "A sequence variant that changes non-coding exon sequence in a non-coding transcript"
+        },
+        "hgvsp": "",
+        "hgvsc": "n.129A>G",
         "gbFreqPct": 0.0,
         "gbFreq": 0.0,
         "curatedRef": {
@@ -16316,9 +16393,29 @@
             1
         ],
         "symbol": "MT-RNR1",
-        "consequence": null,
-        "hgvsp": null,
-        "hgvsc": null,
+        "symbols": [
+            "MT-RNR1"
+        ],
+        "consequence": {
+            "id": "NON_CODING_TRANSCRIPT_EXON_VARIANT",
+            "rank": 23,
+            "severity": 18,
+            "name": "NON_CODING_TRANSCRIPT_EXON_VARIANT",
+            "shortName": "non_coding_transcript_exon",
+            "term": "non_coding_transcript_exon_variant",
+            "impact": {
+                "id": "MODIFIER",
+                "name": "MODIFIER",
+                "description": "Usually non-coding variants or variants affecting non-coding genes, where predictions are difficult or there is no evidence of impact."
+            },
+            "type": "SILENT",
+            "soAccession": "SO:0001792",
+            "ensemblColourHex": "#32cd32",
+            "displayTerm": "Non coding transcript exon variant",
+            "description": "A sequence variant that changes non-coding exon sequence in a non-coding transcript"
+        },
+        "hgvsp": "",
+        "hgvsc": "n.772G>A",
         "gbFreqPct": 0.0,
         "gbFreq": 0.0,
         "curatedRef": {
@@ -17558,9 +17655,29 @@
             1
         ],
         "symbol": "MT-RNR1",
-        "consequence": null,
-        "hgvsp": null,
-        "hgvsc": null,
+        "symbols": [
+            "MT-RNR1"
+        ],
+        "consequence": {
+            "id": "NON_CODING_TRANSCRIPT_EXON_VARIANT",
+            "rank": 23,
+            "severity": 18,
+            "name": "NON_CODING_TRANSCRIPT_EXON_VARIANT",
+            "shortName": "non_coding_transcript_exon",
+            "term": "non_coding_transcript_exon_variant",
+            "impact": {
+                "id": "MODIFIER",
+                "name": "MODIFIER",
+                "description": "Usually non-coding variants or variants affecting non-coding genes, where predictions are difficult or there is no evidence of impact."
+            },
+            "type": "SILENT",
+            "soAccession": "SO:0001792",
+            "ensemblColourHex": "#32cd32",
+            "displayTerm": "Non coding transcript exon variant",
+            "description": "A sequence variant that changes non-coding exon sequence in a non-coding transcript"
+        },
+        "hgvsp": "",
+        "hgvsc": "n.791A>G",
         "Allele": "A1438G",
         "Locus": "MT-RNR1",
         "Position": 1438,
@@ -18820,9 +18937,29 @@
             1
         ],
         "symbol": "MT-RNR2",
-        "consequence": null,
-        "hgvsp": null,
-        "hgvsc": null,
+        "symbols": [
+            "MT-RNR2"
+        ],
+        "consequence": {
+            "id": "NON_CODING_TRANSCRIPT_EXON_VARIANT",
+            "rank": 23,
+            "severity": 18,
+            "name": "NON_CODING_TRANSCRIPT_EXON_VARIANT",
+            "shortName": "non_coding_transcript_exon",
+            "term": "non_coding_transcript_exon_variant",
+            "impact": {
+                "id": "MODIFIER",
+                "name": "MODIFIER",
+                "description": "Usually non-coding variants or variants affecting non-coding genes, where predictions are difficult or there is no evidence of impact."
+            },
+            "type": "SILENT",
+            "soAccession": "SO:0001792",
+            "ensemblColourHex": "#32cd32",
+            "displayTerm": "Non coding transcript exon variant",
+            "description": "A sequence variant that changes non-coding exon sequence in a non-coding transcript"
+        },
+        "hgvsp": "",
+        "hgvsc": "n.554C>T",
         "Allele": "C2224T",
         "Locus": "MT-RNR2",
         "Position": 2224,
@@ -18911,9 +19048,29 @@
             1
         ],
         "symbol": "MT-RNR2",
-        "consequence": null,
-        "hgvsp": null,
-        "hgvsc": null,
+        "symbols": [
+            "MT-RNR2"
+        ],
+        "consequence": {
+            "id": "NON_CODING_TRANSCRIPT_EXON_VARIANT",
+            "rank": 23,
+            "severity": 18,
+            "name": "NON_CODING_TRANSCRIPT_EXON_VARIANT",
+            "shortName": "non_coding_transcript_exon",
+            "term": "non_coding_transcript_exon_variant",
+            "impact": {
+                "id": "MODIFIER",
+                "name": "MODIFIER",
+                "description": "Usually non-coding variants or variants affecting non-coding genes, where predictions are difficult or there is no evidence of impact."
+            },
+            "type": "SILENT",
+            "soAccession": "SO:0001792",
+            "ensemblColourHex": "#32cd32",
+            "displayTerm": "Non coding transcript exon variant",
+            "description": "A sequence variant that changes non-coding exon sequence in a non-coding transcript"
+        },
+        "hgvsp": "",
+        "hgvsc": "n.589C>T",
         "Allele": "C2259T",
         "Locus": "MT-RNR2",
         "Position": 2259,
@@ -20172,10 +20329,30 @@
         "dosages": [
             1
         ],
-        "symbol": null,
-        "consequence": null,
-        "hgvsp": null,
-        "hgvsc": null,
+        "symbol": "MT-RNR2",
+        "symbols": [
+            "MT-RNR2"
+        ],
+        "consequence": {
+            "id": "NON_CODING_TRANSCRIPT_EXON_VARIANT",
+            "rank": 23,
+            "severity": 18,
+            "name": "NON_CODING_TRANSCRIPT_EXON_VARIANT",
+            "shortName": "non_coding_transcript_exon",
+            "term": "non_coding_transcript_exon_variant",
+            "impact": {
+                "id": "MODIFIER",
+                "name": "MODIFIER",
+                "description": "Usually non-coding variants or variants affecting non-coding genes, where predictions are difficult or there is no evidence of impact."
+            },
+            "type": "SILENT",
+            "soAccession": "SO:0001792",
+            "ensemblColourHex": "#32cd32",
+            "displayTerm": "Non coding transcript exon variant",
+            "description": "A sequence variant that changes non-coding exon sequence in a non-coding transcript"
+        },
+        "hgvsp": "",
+        "hgvsc": "n.795T>A",
         "gbFreqPct": 0.0,
         "gbFreq": 0.0,
         "curatedRef": {
@@ -21413,10 +21590,30 @@
         "dosages": [
             1
         ],
-        "symbol": null,
-        "consequence": null,
-        "hgvsp": null,
-        "hgvsc": null,
+        "symbol": "MT-RNR2",
+        "symbols": [
+            "MT-RNR2"
+        ],
+        "consequence": {
+            "id": "NON_CODING_TRANSCRIPT_EXON_VARIANT",
+            "rank": 23,
+            "severity": 18,
+            "name": "NON_CODING_TRANSCRIPT_EXON_VARIANT",
+            "shortName": "non_coding_transcript_exon",
+            "term": "non_coding_transcript_exon_variant",
+            "impact": {
+                "id": "MODIFIER",
+                "name": "MODIFIER",
+                "description": "Usually non-coding variants or variants affecting non-coding genes, where predictions are difficult or there is no evidence of impact."
+            },
+            "type": "SILENT",
+            "soAccession": "SO:0001792",
+            "ensemblColourHex": "#32cd32",
+            "displayTerm": "Non coding transcript exon variant",
+            "description": "A sequence variant that changes non-coding exon sequence in a non-coding transcript"
+        },
+        "hgvsp": "",
+        "hgvsc": "n.809C>A",
         "gbFreqPct": 0.0,
         "gbFreq": 0.0,
         "curatedRef": {
@@ -21481,9 +21678,29 @@
             1
         ],
         "symbol": "MT-RNR2",
-        "consequence": null,
-        "hgvsp": null,
-        "hgvsc": null,
+        "symbols": [
+            "MT-RNR2"
+        ],
+        "consequence": {
+            "id": "NON_CODING_TRANSCRIPT_EXON_VARIANT",
+            "rank": 23,
+            "severity": 18,
+            "name": "NON_CODING_TRANSCRIPT_EXON_VARIANT",
+            "shortName": "non_coding_transcript_exon",
+            "term": "non_coding_transcript_exon_variant",
+            "impact": {
+                "id": "MODIFIER",
+                "name": "MODIFIER",
+                "description": "Usually non-coding variants or variants affecting non-coding genes, where predictions are difficult or there is no evidence of impact."
+            },
+            "type": "SILENT",
+            "soAccession": "SO:0001792",
+            "ensemblColourHex": "#32cd32",
+            "displayTerm": "Non coding transcript exon variant",
+            "description": "A sequence variant that changes non-coding exon sequence in a non-coding transcript"
+        },
+        "hgvsp": "",
+        "hgvsc": "n.817A>C",
         "gbFreqPct": 0.002,
         "gbFreq": 0.00002,
         "curatedRef": {
@@ -22722,10 +22939,30 @@
         "dosages": [
             1
         ],
-        "symbol": null,
-        "consequence": null,
-        "hgvsp": null,
-        "hgvsc": null,
+        "symbol": "MT-RNR2",
+        "symbols": [
+            "MT-RNR2"
+        ],
+        "consequence": {
+            "id": "NON_CODING_TRANSCRIPT_EXON_VARIANT",
+            "rank": 23,
+            "severity": 18,
+            "name": "NON_CODING_TRANSCRIPT_EXON_VARIANT",
+            "shortName": "non_coding_transcript_exon",
+            "term": "non_coding_transcript_exon_variant",
+            "impact": {
+                "id": "MODIFIER",
+                "name": "MODIFIER",
+                "description": "Usually non-coding variants or variants affecting non-coding genes, where predictions are difficult or there is no evidence of impact."
+            },
+            "type": "SILENT",
+            "soAccession": "SO:0001792",
+            "ensemblColourHex": "#32cd32",
+            "displayTerm": "Non coding transcript exon variant",
+            "description": "A sequence variant that changes non-coding exon sequence in a non-coding transcript"
+        },
+        "hgvsp": "",
+        "hgvsc": "n.975G>A",
         "gbFreqPct": 0.0,
         "gbFreq": 0.0,
         "curatedRef": {
@@ -23964,9 +24201,29 @@
             1
         ],
         "symbol": "MT-RNR2",
-        "consequence": null,
-        "hgvsp": null,
-        "hgvsc": null,
+        "symbols": [
+            "MT-RNR2"
+        ],
+        "consequence": {
+            "id": "NON_CODING_TRANSCRIPT_EXON_VARIANT",
+            "rank": 23,
+            "severity": 18,
+            "name": "NON_CODING_TRANSCRIPT_EXON_VARIANT",
+            "shortName": "non_coding_transcript_exon",
+            "term": "non_coding_transcript_exon_variant",
+            "impact": {
+                "id": "MODIFIER",
+                "name": "MODIFIER",
+                "description": "Usually non-coding variants or variants affecting non-coding genes, where predictions are difficult or there is no evidence of impact."
+            },
+            "type": "SILENT",
+            "soAccession": "SO:0001792",
+            "ensemblColourHex": "#32cd32",
+            "displayTerm": "Non coding transcript exon variant",
+            "description": "A sequence variant that changes non-coding exon sequence in a non-coding transcript"
+        },
+        "hgvsp": "",
+        "hgvsc": "n.1312C>T",
         "gbFreqPct": 0.002,
         "gbFreq": 0.00002,
         "curatedRef": {
@@ -24032,10 +24289,26 @@
             1
         ],
         "symbol": "MT-ND1",
+        "symbols": [
+            "MT-ND1"
+        ],
         "consequence": {
-            "id": "missense_variant",
-            "name": "missense_variant",
-            "rank": 10
+            "id": "MISSENSE_VARIANT",
+            "rank": 12,
+            "severity": 29,
+            "name": "MISSENSE_VARIANT",
+            "shortName": "missense",
+            "term": "missense_variant",
+            "impact": {
+                "id": "MODERATE",
+                "name": "MODERATE",
+                "description": "A non-disruptive variant that might change protein effectiveness."
+            },
+            "type": "MISSENSE",
+            "soAccession": "SO:0001583",
+            "ensemblColourHex": "#ffd700",
+            "displayTerm": "Missense variant",
+            "description": "A sequence variant, that changes one or more bases, resulting in a different amino acid sequence but where the length is preserved"
         },
         "hgvsp": "p.Gln47His",
         "hgvsc": "c.141A>C",
@@ -25278,10 +25551,26 @@
             1
         ],
         "symbol": "MT-ND1",
+        "symbols": [
+            "MT-ND1"
+        ],
         "consequence": {
-            "id": "missense_variant",
-            "name": "missense_variant",
-            "rank": 10
+            "id": "MISSENSE_VARIANT",
+            "rank": 12,
+            "severity": 29,
+            "name": "MISSENSE_VARIANT",
+            "shortName": "missense",
+            "term": "missense_variant",
+            "impact": {
+                "id": "MODERATE",
+                "name": "MODERATE",
+                "description": "A non-disruptive variant that might change protein effectiveness."
+            },
+            "type": "MISSENSE",
+            "soAccession": "SO:0001583",
+            "ensemblColourHex": "#ffd700",
+            "displayTerm": "Missense variant",
+            "description": "A sequence variant, that changes one or more bases, resulting in a different amino acid sequence but where the length is preserved"
         },
         "hgvsp": "p.Met53Lys",
         "hgvsc": "c.158T>A",
@@ -25349,10 +25638,26 @@
             1
         ],
         "symbol": "MT-ND1",
+        "symbols": [
+            "MT-ND1"
+        ],
         "consequence": {
-            "id": "missense_variant",
-            "name": "missense_variant",
-            "rank": 10
+            "id": "MISSENSE_VARIANT",
+            "rank": 12,
+            "severity": 29,
+            "name": "MISSENSE_VARIANT",
+            "shortName": "missense",
+            "term": "missense_variant",
+            "impact": {
+                "id": "MODERATE",
+                "name": "MODERATE",
+                "description": "A non-disruptive variant that might change protein effectiveness."
+            },
+            "type": "MISSENSE",
+            "soAccession": "SO:0001583",
+            "ensemblColourHex": "#ffd700",
+            "displayTerm": "Missense variant",
+            "description": "A sequence variant, that changes one or more bases, resulting in a different amino acid sequence but where the length is preserved"
         },
         "hgvsp": "p.Lys54Asn",
         "hgvsc": "c.162A>C",
@@ -26595,10 +26900,26 @@
             1
         ],
         "symbol": "MT-ND1",
+        "symbols": [
+            "MT-ND1"
+        ],
         "consequence": {
-            "id": "missense_variant",
-            "name": "missense_variant",
-            "rank": 10
+            "id": "MISSENSE_VARIANT",
+            "rank": 12,
+            "severity": 29,
+            "name": "MISSENSE_VARIANT",
+            "shortName": "missense",
+            "term": "missense_variant",
+            "impact": {
+                "id": "MODERATE",
+                "name": "MODERATE",
+                "description": "A non-disruptive variant that might change protein effectiveness."
+            },
+            "type": "MISSENSE",
+            "soAccession": "SO:0001583",
+            "ensemblColourHex": "#ffd700",
+            "displayTerm": "Missense variant",
+            "description": "A sequence variant, that changes one or more bases, resulting in a different amino acid sequence but where the length is preserved"
         },
         "hgvsp": "p.Phe56Ser",
         "hgvsc": "c.167T>C",
@@ -27861,10 +28182,26 @@
             1
         ],
         "symbol": "MT-ND1",
+        "symbols": [
+            "MT-ND1"
+        ],
         "consequence": {
-            "id": "missense_variant",
-            "name": "missense_variant",
-            "rank": 10
+            "id": "MISSENSE_VARIANT",
+            "rank": 12,
+            "severity": 29,
+            "name": "MISSENSE_VARIANT",
+            "shortName": "missense",
+            "term": "missense_variant",
+            "impact": {
+                "id": "MODERATE",
+                "name": "MODERATE",
+                "description": "A non-disruptive variant that might change protein effectiveness."
+            },
+            "type": "MISSENSE",
+            "soAccession": "SO:0001583",
+            "ensemblColourHex": "#ffd700",
+            "displayTerm": "Missense variant",
+            "description": "A sequence variant, that changes one or more bases, resulting in a different amino acid sequence but where the length is preserved"
         },
         "hgvsp": "p.Thr57Pro",
         "hgvsc": "c.169A>C",
@@ -27932,10 +28269,26 @@
             1
         ],
         "symbol": "MT-ND1",
+        "symbols": [
+            "MT-ND1"
+        ],
         "consequence": {
-            "id": "missense_variant",
-            "name": "missense_variant",
-            "rank": 10
+            "id": "MISSENSE_VARIANT",
+            "rank": 12,
+            "severity": 29,
+            "name": "MISSENSE_VARIANT",
+            "shortName": "missense",
+            "term": "missense_variant",
+            "impact": {
+                "id": "MODERATE",
+                "name": "MODERATE",
+                "description": "A non-disruptive variant that might change protein effectiveness."
+            },
+            "type": "MISSENSE",
+            "soAccession": "SO:0001583",
+            "ensemblColourHex": "#ffd700",
+            "displayTerm": "Missense variant",
+            "description": "A sequence variant, that changes one or more bases, resulting in a different amino acid sequence but where the length is preserved"
         },
         "hgvsp": "p.Glu59Asp",
         "hgvsc": "c.177G>C",
@@ -29178,10 +29531,26 @@
             1
         ],
         "symbol": "MT-ND1",
+        "symbols": [
+            "MT-ND1"
+        ],
         "consequence": {
-            "id": "missense_variant",
-            "name": "missense_variant",
-            "rank": 10
+            "id": "MISSENSE_VARIANT",
+            "rank": 12,
+            "severity": 29,
+            "name": "MISSENSE_VARIANT",
+            "shortName": "missense",
+            "term": "missense_variant",
+            "impact": {
+                "id": "MODERATE",
+                "name": "MODERATE",
+                "description": "A non-disruptive variant that might change protein effectiveness."
+            },
+            "type": "MISSENSE",
+            "soAccession": "SO:0001583",
+            "ensemblColourHex": "#ffd700",
+            "displayTerm": "Missense variant",
+            "description": "A sequence variant, that changes one or more bases, resulting in a different amino acid sequence but where the length is preserved"
         },
         "hgvsp": "p.Leu61Gln",
         "hgvsc": "c.182T>A",
@@ -30444,10 +30813,26 @@
             1
         ],
         "symbol": "MT-ND1",
+        "symbols": [
+            "MT-ND1"
+        ],
         "consequence": {
-            "id": "missense_variant",
-            "name": "missense_variant",
-            "rank": 10
+            "id": "MISSENSE_VARIANT",
+            "rank": 12,
+            "severity": 29,
+            "name": "MISSENSE_VARIANT",
+            "shortName": "missense",
+            "term": "missense_variant",
+            "impact": {
+                "id": "MODERATE",
+                "name": "MODERATE",
+                "description": "A non-disruptive variant that might change protein effectiveness."
+            },
+            "type": "MISSENSE",
+            "soAccession": "SO:0001583",
+            "ensemblColourHex": "#ffd700",
+            "displayTerm": "Missense variant",
+            "description": "A sequence variant, that changes one or more bases, resulting in a different amino acid sequence but where the length is preserved"
         },
         "hgvsp": "p.Lys62Asn",
         "hgvsc": "c.186A>C",
@@ -31690,10 +32075,26 @@
             1
         ],
         "symbol": "MT-ND2",
+        "symbols": [
+            "MT-ND2"
+        ],
         "consequence": {
-            "id": "synonymous_variant",
-            "name": "synonymous_variant",
-            "rank": 16
+            "id": "SYNONYMOUS_VARIANT",
+            "rank": 18,
+            "severity": 23,
+            "name": "SYNONYMOUS_VARIANT",
+            "shortName": "synonymous",
+            "term": "synonymous_variant",
+            "impact": {
+                "id": "LOW",
+                "name": "LOW",
+                "description": "Assumed to be mostly harmless or unlikely to change protein behaviour."
+            },
+            "type": "SILENT",
+            "soAccession": "SO:0001819",
+            "ensemblColourHex": "#76ee00",
+            "displayTerm": "Synonymous variant",
+            "description": "A sequence variant where there is no resulting change to the encoded amino acid"
         },
         "hgvsp": "p.Gln92=",
         "hgvsc": "c.276A>G",
@@ -32956,10 +33357,26 @@
             1
         ],
         "symbol": "MT-ND2",
+        "symbols": [
+            "MT-ND2"
+        ],
         "consequence": {
-            "id": "synonymous_variant",
-            "name": "synonymous_variant",
-            "rank": 16
+            "id": "SYNONYMOUS_VARIANT",
+            "rank": 18,
+            "severity": 23,
+            "name": "SYNONYMOUS_VARIANT",
+            "shortName": "synonymous",
+            "term": "synonymous_variant",
+            "impact": {
+                "id": "LOW",
+                "name": "LOW",
+                "description": "Assumed to be mostly harmless or unlikely to change protein behaviour."
+            },
+            "type": "SILENT",
+            "soAccession": "SO:0001819",
+            "ensemblColourHex": "#76ee00",
+            "displayTerm": "Synonymous variant",
+            "description": "A sequence variant where there is no resulting change to the encoded amino acid"
         },
         "hgvsp": "p.Met100=",
         "hgvsc": "c.300A>G",
@@ -34222,10 +34639,26 @@
             1
         ],
         "symbol": "MT-CO1",
+        "symbols": [
+            "MT-CO1"
+        ],
         "consequence": {
-            "id": "missense_variant",
-            "name": "missense_variant",
-            "rank": 10
+            "id": "MISSENSE_VARIANT",
+            "rank": 12,
+            "severity": 29,
+            "name": "MISSENSE_VARIANT",
+            "shortName": "missense",
+            "term": "missense_variant",
+            "impact": {
+                "id": "MODERATE",
+                "name": "MODERATE",
+                "description": "A non-disruptive variant that might change protein effectiveness."
+            },
+            "type": "MISSENSE",
+            "soAccession": "SO:0001583",
+            "ensemblColourHex": "#ffd700",
+            "displayTerm": "Missense variant",
+            "description": "A sequence variant, that changes one or more bases, resulting in a different amino acid sequence but where the length is preserved"
         },
         "hgvsp": "p.Pro437Ser",
         "hgvsc": "c.1309C>T",
@@ -35467,10 +35900,26 @@
             1
         ],
         "symbol": "MT-CO1",
+        "symbols": [
+            "MT-CO1"
+        ],
         "consequence": {
-            "id": "synonymous_variant",
-            "name": "synonymous_variant",
-            "rank": 16
+            "id": "SYNONYMOUS_VARIANT",
+            "rank": 18,
+            "severity": 23,
+            "name": "SYNONYMOUS_VARIANT",
+            "shortName": "synonymous",
+            "term": "synonymous_variant",
+            "impact": {
+                "id": "LOW",
+                "name": "LOW",
+                "description": "Assumed to be mostly harmless or unlikely to change protein behaviour."
+            },
+            "type": "SILENT",
+            "soAccession": "SO:0001819",
+            "ensemblColourHex": "#76ee00",
+            "displayTerm": "Synonymous variant",
+            "description": "A sequence variant where there is no resulting change to the encoded amino acid"
         },
         "hgvsp": "p.Ser478=",
         "hgvsc": "c.1434G>A",
@@ -36733,10 +37182,26 @@
             1
         ],
         "symbol": "MT-ATP8",
+        "symbols": [
+            "MT-ATP8"
+        ],
         "consequence": {
-            "id": "missense_variant",
-            "name": "missense_variant",
-            "rank": 10
+            "id": "MISSENSE_VARIANT",
+            "rank": 12,
+            "severity": 29,
+            "name": "MISSENSE_VARIANT",
+            "shortName": "missense",
+            "term": "missense_variant",
+            "impact": {
+                "id": "MODERATE",
+                "name": "MODERATE",
+                "description": "A non-disruptive variant that might change protein effectiveness."
+            },
+            "type": "MISSENSE",
+            "soAccession": "SO:0001583",
+            "ensemblColourHex": "#ffd700",
+            "displayTerm": "Missense variant",
+            "description": "A sequence variant, that changes one or more bases, resulting in a different amino acid sequence but where the length is preserved"
         },
         "hgvsp": "p.Lys49Asn",
         "hgvsc": "c.147A>C",
@@ -37978,10 +38443,26 @@
             1
         ],
         "symbol": "MT-ATP8",
+        "symbols": [
+            "MT-ATP8"
+        ],
         "consequence": {
-            "id": "missense_variant",
-            "name": "missense_variant",
-            "rank": 10
+            "id": "MISSENSE_VARIANT",
+            "rank": 12,
+            "severity": 29,
+            "name": "MISSENSE_VARIANT",
+            "shortName": "missense",
+            "term": "missense_variant",
+            "impact": {
+                "id": "MODERATE",
+                "name": "MODERATE",
+                "description": "A non-disruptive variant that might change protein effectiveness."
+            },
+            "type": "MISSENSE",
+            "soAccession": "SO:0001583",
+            "ensemblColourHex": "#ffd700",
+            "displayTerm": "Missense variant",
+            "description": "A sequence variant, that changes one or more bases, resulting in a different amino acid sequence but where the length is preserved"
         },
         "hgvsp": "p.Leu64Phe",
         "hgvsc": "c.192G>C",
@@ -39244,10 +39725,26 @@
             1
         ],
         "symbol": "MT-ATP6",
+        "symbols": [
+            "MT-ATP6"
+        ],
         "consequence": {
-            "id": "missense_variant",
-            "name": "missense_variant",
-            "rank": 10
+            "id": "MISSENSE_VARIANT",
+            "rank": 12,
+            "severity": 29,
+            "name": "MISSENSE_VARIANT",
+            "shortName": "missense",
+            "term": "missense_variant",
+            "impact": {
+                "id": "MODERATE",
+                "name": "MODERATE",
+                "description": "A non-disruptive variant that might change protein effectiveness."
+            },
+            "type": "MISSENSE",
+            "soAccession": "SO:0001583",
+            "ensemblColourHex": "#ffd700",
+            "displayTerm": "Missense variant",
+            "description": "A sequence variant, that changes one or more bases, resulting in a different amino acid sequence but where the length is preserved"
         },
         "hgvsp": "p.Ser68Pro",
         "hgvsc": "c.202T>C",
@@ -40510,10 +41007,26 @@
             1
         ],
         "symbol": "MT-ATP6",
+        "symbols": [
+            "MT-ATP6"
+        ],
         "consequence": {
-            "id": "synonymous_variant",
-            "name": "synonymous_variant",
-            "rank": 16
+            "id": "SYNONYMOUS_VARIANT",
+            "rank": 18,
+            "severity": 23,
+            "name": "SYNONYMOUS_VARIANT",
+            "shortName": "synonymous",
+            "term": "synonymous_variant",
+            "impact": {
+                "id": "LOW",
+                "name": "LOW",
+                "description": "Assumed to be mostly harmless or unlikely to change protein behaviour."
+            },
+            "type": "SILENT",
+            "soAccession": "SO:0001819",
+            "ensemblColourHex": "#76ee00",
+            "displayTerm": "Synonymous variant",
+            "description": "A sequence variant where there is no resulting change to the encoded amino acid"
         },
         "hgvsp": "p.Leu17=",
         "hgvsc": "c.51A>C",
@@ -41755,10 +42268,26 @@
             1
         ],
         "symbol": "MT-ATP6",
+        "symbols": [
+            "MT-ATP6"
+        ],
         "consequence": {
-            "id": "missense_variant",
-            "name": "missense_variant",
-            "rank": 10
+            "id": "MISSENSE_VARIANT",
+            "rank": 12,
+            "severity": 29,
+            "name": "MISSENSE_VARIANT",
+            "shortName": "missense",
+            "term": "missense_variant",
+            "impact": {
+                "id": "MODERATE",
+                "name": "MODERATE",
+                "description": "A non-disruptive variant that might change protein effectiveness."
+            },
+            "type": "MISSENSE",
+            "soAccession": "SO:0001583",
+            "ensemblColourHex": "#ffd700",
+            "displayTerm": "Missense variant",
+            "description": "A sequence variant, that changes one or more bases, resulting in a different amino acid sequence but where the length is preserved"
         },
         "hgvsp": "p.Thr112Ala",
         "hgvsc": "c.334A>G",
@@ -43021,10 +43550,26 @@
             1
         ],
         "symbol": "MT-ND5",
+        "symbols": [
+            "MT-ND5"
+        ],
         "consequence": {
-            "id": "frameshift_variant",
-            "name": "frameshift_variant",
-            "rank": 5
+            "id": "FRAMESHIFT_VARIANT",
+            "rank": 5,
+            "severity": 36,
+            "name": "FRAMESHIFT_VARIANT",
+            "shortName": "frameshift",
+            "term": "frameshift_variant",
+            "impact": {
+                "id": "HIGH",
+                "name": "HIGH",
+                "description": "The variant is assumed to have high (disruptive) impact in the protein, probably causing protein truncation, loss of function or triggering nonsense mediated decay."
+            },
+            "type": "FRAMESHIFT",
+            "soAccession": "SO:0001589",
+            "ensemblColourHex": "#9400d3",
+            "displayTerm": "Frameshift variant",
+            "description": "A sequence variant which causes a disruption of the translational reading frame, because the number of nucleotides inserted or deleted is not a multiple of three"
         },
         "hgvsp": "p.Asn30LysfsTer86",
         "hgvsc": "c.89dup",
@@ -44273,10 +44818,26 @@
             1
         ],
         "symbol": "MT-ND5",
+        "symbols": [
+            "MT-ND5"
+        ],
         "consequence": {
-            "id": "inframe_deletion",
-            "name": "inframe_deletion",
-            "rank": 9
+            "id": "INFRAME_DELETION",
+            "rank": 11,
+            "severity": 30,
+            "name": "INFRAME_DELETION",
+            "shortName": "inframe_deletion",
+            "term": "inframe_deletion",
+            "impact": {
+                "id": "MODERATE",
+                "name": "MODERATE",
+                "description": "A non-disruptive variant that might change protein effectiveness."
+            },
+            "type": "MISSENSE",
+            "soAccession": "SO:0001822",
+            "ensemblColourHex": "#ff69b4",
+            "displayTerm": "Inframe deletion",
+            "description": "An inframe non synonymous variant that deletes bases from the coding sequence"
         },
         "hgvsp": "p.Ala221del",
         "hgvsc": "c.662_664del",
@@ -44350,10 +44911,26 @@
             1
         ],
         "symbol": "MT-ND5",
+        "symbols": [
+            "MT-ND5"
+        ],
         "consequence": {
-            "id": "missense_variant",
-            "name": "missense_variant",
-            "rank": 10
+            "id": "MISSENSE_VARIANT",
+            "rank": 12,
+            "severity": 29,
+            "name": "MISSENSE_VARIANT",
+            "shortName": "missense",
+            "term": "missense_variant",
+            "impact": {
+                "id": "MODERATE",
+                "name": "MODERATE",
+                "description": "A non-disruptive variant that might change protein effectiveness."
+            },
+            "type": "MISSENSE",
+            "soAccession": "SO:0001583",
+            "ensemblColourHex": "#ffd700",
+            "displayTerm": "Missense variant",
+            "description": "A sequence variant, that changes one or more bases, resulting in a different amino acid sequence but where the length is preserved"
         },
         "hgvsp": "p.Gly318Asp",
         "hgvsc": "c.953G>A",
@@ -45598,10 +46175,26 @@
             1
         ],
         "symbol": "MT-ND5",
+        "symbols": [
+            "MT-ND5"
+        ],
         "consequence": {
-            "id": "synonymous_variant",
-            "name": "synonymous_variant",
-            "rank": 16
+            "id": "SYNONYMOUS_VARIANT",
+            "rank": 18,
+            "severity": 23,
+            "name": "SYNONYMOUS_VARIANT",
+            "shortName": "synonymous",
+            "term": "synonymous_variant",
+            "impact": {
+                "id": "LOW",
+                "name": "LOW",
+                "description": "Assumed to be mostly harmless or unlikely to change protein behaviour."
+            },
+            "type": "SILENT",
+            "soAccession": "SO:0001819",
+            "ensemblColourHex": "#76ee00",
+            "displayTerm": "Synonymous variant",
+            "description": "A sequence variant where there is no resulting change to the encoded amino acid"
         },
         "hgvsp": "p.Cys330=",
         "hgvsc": "c.990T>C",
@@ -46867,10 +47460,26 @@
             1
         ],
         "symbol": "MT-ND5",
+        "symbols": [
+            "MT-ND5"
+        ],
         "consequence": {
-            "id": "synonymous_variant",
-            "name": "synonymous_variant",
-            "rank": 16
+            "id": "SYNONYMOUS_VARIANT",
+            "rank": 18,
+            "severity": 23,
+            "name": "SYNONYMOUS_VARIANT",
+            "shortName": "synonymous",
+            "term": "synonymous_variant",
+            "impact": {
+                "id": "LOW",
+                "name": "LOW",
+                "description": "Assumed to be mostly harmless or unlikely to change protein behaviour."
+            },
+            "type": "SILENT",
+            "soAccession": "SO:0001819",
+            "ensemblColourHex": "#76ee00",
+            "displayTerm": "Synonymous variant",
+            "description": "A sequence variant where there is no resulting change to the encoded amino acid"
         },
         "hgvsp": "p.Pro448=",
         "hgvsc": "c.1344C>T",
@@ -48136,10 +48745,26 @@
             1
         ],
         "symbol": "MT-ND5",
+        "symbols": [
+            "MT-ND5"
+        ],
         "consequence": {
-            "id": "stop_gained",
-            "name": "stop_gained",
-            "rank": 4
+            "id": "STOP_GAINED",
+            "rank": 4,
+            "severity": 37,
+            "name": "STOP_GAINED",
+            "shortName": "stop_gained",
+            "term": "stop_gained",
+            "impact": {
+                "id": "HIGH",
+                "name": "HIGH",
+                "description": "The variant is assumed to have high (disruptive) impact in the protein, probably causing protein truncation, loss of function or triggering nonsense mediated decay."
+            },
+            "type": "NONSENSE",
+            "soAccession": "SO:0001587",
+            "ensemblColourHex": "#ff0000",
+            "displayTerm": "Stop gained",
+            "description": "A sequence variant whereby at least one base of a codon is changed, resulting in a premature stop codon, leading to a shortened transcript"
         },
         "hgvsp": "p.Gly460Ter",
         "hgvsc": "c.1378G>A",
@@ -49384,10 +50009,26 @@
             1
         ],
         "symbol": "MT-CYB",
+        "symbols": [
+            "MT-CYB"
+        ],
         "consequence": {
-            "id": "missense_variant",
-            "name": "missense_variant",
-            "rank": 10
+            "id": "MISSENSE_VARIANT",
+            "rank": 12,
+            "severity": 29,
+            "name": "MISSENSE_VARIANT",
+            "shortName": "missense",
+            "term": "missense_variant",
+            "impact": {
+                "id": "MODERATE",
+                "name": "MODERATE",
+                "description": "A non-disruptive variant that might change protein effectiveness."
+            },
+            "type": "MISSENSE",
+            "soAccession": "SO:0001583",
+            "ensemblColourHex": "#ffd700",
+            "displayTerm": "Missense variant",
+            "description": "A sequence variant, that changes one or more bases, resulting in a different amino acid sequence but where the length is preserved"
         },
         "hgvsp": "p.Ala29Thr",
         "hgvsc": "c.85G>A",
@@ -50650,10 +51291,26 @@
             1
         ],
         "symbol": "MT-CYB",
+        "symbols": [
+            "MT-CYB"
+        ],
         "consequence": {
-            "id": "synonymous_variant",
-            "name": "synonymous_variant",
-            "rank": 16
+            "id": "SYNONYMOUS_VARIANT",
+            "rank": 18,
+            "severity": 23,
+            "name": "SYNONYMOUS_VARIANT",
+            "shortName": "synonymous",
+            "term": "synonymous_variant",
+            "impact": {
+                "id": "LOW",
+                "name": "LOW",
+                "description": "Assumed to be mostly harmless or unlikely to change protein behaviour."
+            },
+            "type": "SILENT",
+            "soAccession": "SO:0001819",
+            "ensemblColourHex": "#76ee00",
+            "displayTerm": "Synonymous variant",
+            "description": "A sequence variant where there is no resulting change to the encoded amino acid"
         },
         "hgvsp": "p.Ile42=",
         "hgvsc": "c.126C>T",
@@ -51916,10 +52573,26 @@
             1
         ],
         "symbol": "MT-CYB",
+        "symbols": [
+            "MT-CYB"
+        ],
         "consequence": {
-            "id": "missense_variant",
-            "name": "missense_variant",
-            "rank": 10
+            "id": "MISSENSE_VARIANT",
+            "rank": 12,
+            "severity": 29,
+            "name": "MISSENSE_VARIANT",
+            "shortName": "missense",
+            "term": "missense_variant",
+            "impact": {
+                "id": "MODERATE",
+                "name": "MODERATE",
+                "description": "A non-disruptive variant that might change protein effectiveness."
+            },
+            "type": "MISSENSE",
+            "soAccession": "SO:0001583",
+            "ensemblColourHex": "#ffd700",
+            "displayTerm": "Missense variant",
+            "description": "A sequence variant, that changes one or more bases, resulting in a different amino acid sequence but where the length is preserved"
         },
         "hgvsp": "p.Asp58Asn",
         "hgvsc": "c.172G>A",
@@ -53182,10 +53855,26 @@
             1
         ],
         "symbol": "MT-CYB",
+        "symbols": [
+            "MT-CYB"
+        ],
         "consequence": {
-            "id": "missense_variant",
-            "name": "missense_variant",
-            "rank": 10
+            "id": "MISSENSE_VARIANT",
+            "rank": 12,
+            "severity": 29,
+            "name": "MISSENSE_VARIANT",
+            "shortName": "missense",
+            "term": "missense_variant",
+            "impact": {
+                "id": "MODERATE",
+                "name": "MODERATE",
+                "description": "A non-disruptive variant that might change protein effectiveness."
+            },
+            "type": "MISSENSE",
+            "soAccession": "SO:0001583",
+            "ensemblColourHex": "#ffd700",
+            "displayTerm": "Missense variant",
+            "description": "A sequence variant, that changes one or more bases, resulting in a different amino acid sequence but where the length is preserved"
         },
         "hgvsp": "p.Thr194Ala",
         "hgvsc": "c.580A>G",
@@ -54448,9 +55137,29 @@
             1
         ],
         "symbol": "MT-TP",
-        "consequence": null,
-        "hgvsp": null,
-        "hgvsc": null,
+        "symbols": [
+            "MT-TP"
+        ],
+        "consequence": {
+            "id": "NON_CODING_TRANSCRIPT_EXON_VARIANT",
+            "rank": 23,
+            "severity": 18,
+            "name": "NON_CODING_TRANSCRIPT_EXON_VARIANT",
+            "shortName": "non_coding_transcript_exon",
+            "term": "non_coding_transcript_exon_variant",
+            "impact": {
+                "id": "MODIFIER",
+                "name": "MODIFIER",
+                "description": "Usually non-coding variants or variants affecting non-coding genes, where predictions are difficult or there is no evidence of impact."
+            },
+            "type": "SILENT",
+            "soAccession": "SO:0001792",
+            "ensemblColourHex": "#32cd32",
+            "displayTerm": "Non coding transcript exon variant",
+            "description": "A sequence variant that changes non-coding exon sequence in a non-coding transcript"
+        },
+        "hgvsp": "",
+        "hgvsc": "n.1C>T",
         "Allele": "G16023A",
         "Locus": "MT-TP",
         "Position": 16023,
