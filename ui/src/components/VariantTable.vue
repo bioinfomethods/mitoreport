@@ -198,14 +198,14 @@
             <td>
               <v-row class="px-4 justify-center">
                 <span class="grey--text text--darken-1">
-                  {{ filterConfig.gnomADHetFreqMax }}
+                  {{ gnomADHetFreqTicks[filterConfig.gnomADHetFreqTickIndex] }}
                 </span>
               </v-row>
               <v-slider
-                v-model="filterConfig.gnomADHetFreqMax"
-                step="0.0001"
-                min="0"
-                max="1"
+                v-model="filterConfig.gnomADHetFreqTickIndex"
+                :value="gnomADHetFreqTicks"
+                min="0.0"
+                :max="gnomADHetFreqLastTickIndex"
                 hide-details
               >
               </v-slider>
@@ -214,14 +214,14 @@
             <td>
               <v-row class="px-4 justify-center">
                 <span class="grey--text text--darken-1">
-                  {{ filterConfig.gnomADHomFreqMax }}
+                  {{ gnomADHomFreqTicks[filterConfig.gnomADHomFreqTickIndex] }}
                 </span>
               </v-row>
               <v-slider
-                v-model="filterConfig.gnomADHomFreqMax"
-                step="0.0001"
-                min="0"
-                max="1"
+                v-model="filterConfig.gnomADHomFreqTickIndex"
+                :value="gnomADHomFreqTicks"
+                min="0.0"
+                :max="gnomADHomFreqLastTickIndex"
                 hide-details
               >
               </v-slider>
@@ -278,6 +278,7 @@
           <a
             :id="`varlink-${item.pos}-${item.ref}-${item.alt}`"
             @click.stop="activeVariant = item"
+            :href="'#'"
             :title="
               `${item.HGVS ||
                 item.id.replace(/chrM-(\d+)-(\w)-(\w+)/, 'm.$1$2>$3')}`
@@ -532,8 +533,8 @@ export default {
         selectedConsequence: {},
         vafRange: [0, 1],
         gbFreqTickIndex: 6,
-        gnomADHetFreqMax: 1.0,
-        gnomADHomFreqMax: 1.0,
+        gnomADHetFreqTickIndex: 7,
+        gnomADHomFreqTickIndex: 7,
         disease: '',
         diseaseShowBlank: false,
         curationSearch: '',
@@ -558,6 +559,8 @@ export default {
       vafTicks: [0, 0.01, 0.03, 0.05, 0.1, 1],
       vafIndexRange: [1, 5],
       gbFreqTicks: [0.0, 0.001, 0.002, 0.005, 0.01, 0.1, 1.0],
+      gnomADHetFreqTicks: [0.0, 0.00005, 0.0001, 0.0002, 0.0005, 0.001, 0.1, 1.0],
+      gnomADHomFreqTicks: [0.0, 0.00005, 0.0001, 0.0002, 0.0005, 0.001, 0.1, 1.0],
       tableOptions: {
         page: 1,
         itemsPerPage: 20,
@@ -660,7 +663,7 @@ export default {
           tooltip:
             'Proportion of individuals with variant at heteroplasmy between 0.10 - 0.95 in gnomAD',
           value: 'gnomAD.af_het',
-          width: '100',
+          width: '130',
           filter: this.gnomADHetFreqFilter,
         },
 
@@ -669,7 +672,7 @@ export default {
           tooltip:
             'Proportion of individuals with variant at homoplasmy (heteroplasmy >= 0.95) in gnomAD',
           value: 'gnomAD.af_hom',
-          width: '100',
+          width: '130',
           filter: this.gnomADHomFreqFilter,
         },
         {
@@ -783,6 +786,14 @@ export default {
 
     gbFreqLastTickIndex() {
       return this.gbFreqTicks.length - 1
+    },
+
+    gnomADHetFreqLastTickIndex() {
+      return this.gnomADHetFreqTicks.length - 1
+    },
+
+    gnomADHomFreqLastTickIndex() {
+      return this.gnomADHomFreqTicks.length - 1
     },
 
     curatedRefs() {
@@ -927,14 +938,17 @@ export default {
 
     gnomADHetFreqFilter: function(value) {
       let lower = 0
-      let upper = this.filterConfig.gnomADHetFreqMax
-
+      let upper = this.gnomADHetFreqTicks[
+        this.filterConfig.gnomADHetFreqTickIndex
+      ]
       return filters.rangeTextFilter(`${lower}-${upper}`, value || 0.0)
     },
 
     gnomADHomFreqFilter: function(value) {
       let lower = 0
-      let upper = this.filterConfig.gnomADHomFreqMax
+      let upper = this.gnomADHomFreqTicks[
+        this.filterConfig.gnomADHomFreqTickIndex
+      ]
 
       return filters.rangeTextFilter(`${lower}-${upper}`, value || 0.0)
     },
