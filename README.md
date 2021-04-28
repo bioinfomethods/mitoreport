@@ -12,6 +12,23 @@ Mitoreport is an application for Mitochondrial DNA variants analysis.
 * Access to MCRI filesystem group `bioi1.dl`.  If not, please submit request to [MCRI ServiceDesk](https://servicedesk.mcri.edu.au/).
 * Access to `bio1` filesystem, preferably mounted locally.  Will refer to this mount as `MCRI_BIO1_MNT`.
 
+## TL;DR For Devs
+
+```bash
+PROJECT_DIR=$(pwd)
+
+./gradlew
+
+java -jar $PROJECT_DIR/build/libs/mitoreport-0.1.0-all.jar mito-report \
+  -d \
+  -sample "15G002035-GM12878K_20pc_10kb_200" \
+  -vcf $PROJECT_DIR/test_fixtures/variants/15G002035.unshifted.contamination.filtering.intermediatefilter.norm.dedup.mito_vep.vcf.gz \
+  -ann $PROJECT_DIR/test_fixtures/mtDNAanalysis_annotations_20170501.csv \
+  -mann $PROJECT_DIR/test_fixtures/mito_map_annotations_20201207.json \
+  -gnomad $PROJECT_DIR/test_fixtures/gnomad.genomes.v3.1.sites.chrM.vcf.bgz \
+  "$PROJECT_DIR/test_fixtures/align/15G002035-GM12878K_20pc_10kb_200.unshifted.bam" $PROJECT_DIR/test_fixtures/controls/*.bam
+```
+
 ## Getting Started
 
 ```bash
