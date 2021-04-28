@@ -4,8 +4,12 @@
       <tbody>
         <tr>
           <td>HGVS.g:</td>
-          <td>{{ variant.HGVS || variant.id.replace(/chrM-(\d+)-(\w)-(\w+)/, 'm.$1$2>$3')
-            }}</td>
+          <td>
+            {{
+              variant.HGVS ||
+                variant.id.replace(/chrM-(\d+)-(\w)-(\w+)/, 'm.$1$2>$3')
+            }}
+          </td>
         </tr>
         <tr>
           <td>HGVS.p:</td>

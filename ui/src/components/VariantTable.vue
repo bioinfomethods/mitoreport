@@ -308,7 +308,15 @@
           ></GeneCardsLink>
         </template>
         <template v-slot:item.consequence="{ item }">
-          {{ item.consequence ? item.consequence.shortName : '' }}
+          <a
+            v-if="item.consequence"
+            target="_blank"
+            :href="
+              `http://www.sequenceontology.org/miso/current_svn/term/${item.consequence.soAccession}`
+            "
+          >
+            {{ item.consequence.displayTerm }}</a
+          >
         </template>
         <template v-slot:item.gbFreq="{ item }">
           <span v-if="item.gbFreq > 0">{{ item.gbFreq | precisionTo }}</span>
@@ -413,6 +421,13 @@
             :count="item.curatedRef.count"
           ></CuratedRefLink>
         </template>
+
+        <template v-slot:item.Disease="{ item }">
+          <span v-if="item.Disease">
+            <v-icon>mdi-biohazard</v-icon>&nbsp;{{ item.Disease }}
+          </span>
+        </template>
+
         <template v-slot:expanded-item="{ headers, item }">
           <td
             :colspan="headers.length"
