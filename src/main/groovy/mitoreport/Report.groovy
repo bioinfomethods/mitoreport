@@ -31,11 +31,6 @@ class Report extends ToolBase {
 
     MitoMapPolymorphismsLoader mitoMapLoader
 
-    /**
-     * Index of consequences, ordered by severity
-     */
-    List<Map> consequencesWithRank = RANKED_CONSEQUENCES.withIndex(1).collect { String consequence, Integer index -> [id: consequence, name: consequence, rank: index] }
-
     final static Set<String> EXCLUDE_CONSEQUENCES = [
             "upstream_gene_variant",
             "downstream_gene_variant",
@@ -208,7 +203,7 @@ class Report extends ToolBase {
         Map vepInfo = [
             symbol     : vep.SYMBOL,
             symbols    : vep.SYMBOL?.split(", "),
-            consequence: consequencesWithRank.find { it.id == vep.Consequence },
+            consequence: VepConsequence.fromTerm(vep.Consequence).toMap(),
             hgvsp      : URLDecoder.decode(vep.HGVSp?.replaceAll('^.*:', ''), "UTF-8"),
             hgvsc      : vep.HGVSc?.replaceAll('^.*:', '')
         ]

@@ -230,8 +230,8 @@
               <v-select
                 v-model="filterConfig.selectedConsequence"
                 :items="consequences"
-                item-text=".name"
-                item-value=".name"
+                item-text=".shortName"
+                item-value=".shortName"
                 return-object
                 type="text"
                 label="Select up to severity"
@@ -308,7 +308,7 @@
           ></GeneCardsLink>
         </template>
         <template v-slot:item.consequence="{ item }">
-          {{ item.consequence ? item.consequence.name : '' }}
+          {{ item.consequence ? item.consequence.shortName : '' }}
         </template>
         <template v-slot:item.gbFreq="{ item }">
           <span v-if="item.gbFreq > 0">{{ item.gbFreq | precisionTo }}</span>
