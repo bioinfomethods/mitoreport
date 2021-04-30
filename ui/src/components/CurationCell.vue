@@ -4,9 +4,14 @@
       <v-icon>mdi-biohazard</v-icon>&nbsp;{{ variant.Disease }}
     </span>
 
-    <v-icon v-if="hasSelectedTags" :color="tagColor">mdi-tag-multiple</v-icon>
-    <v-icon v-if="hasNote">mdi-note-text</v-icon>
+    <span v-if="hasSelectedTags">
+      <v-icon v-if="hasSelectedTags" :color="tagColor">mdi-tag-multiple</v-icon>
+    </span>
 
+    <span v-if="hasNote">
+      <v-icon v-if="hasNote">mdi-note-text</v-icon>
+      {{ curation.variantNote }}
+    </span>
   </div>
 </template>
 <style lang="scss">
@@ -16,7 +21,7 @@ span.autoTag {
   padding: 2px;
   border-radius: 5px;
   white-space: nowrap;
-  background: #FAFAFAFA;
+  background: #fafafafa;
   .v-icon {
     font-size: 20px;
   }

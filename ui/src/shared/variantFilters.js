@@ -12,7 +12,7 @@ export function consequenceFilter(selectedConsequences, consequenceValue) {
   return selectedConsequences.indexOf(consequenceValue.displayTerm) >= 0
 }
 
-export function curationFilter(curationSearch, curation) {
+export function curationFilter(curationSearch, curation, disease) {
   if (!curationSearch) {
     return true
   }
@@ -27,6 +27,7 @@ export function curationFilter(curationSearch, curation) {
 
   return (
     matchesTagNames ||
+    iContainsFilter(curationSearch, disease, false) ||
     iContainsFilter(curationSearch, curation.variantNote, false)
   )
 }

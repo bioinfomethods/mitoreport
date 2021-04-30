@@ -1047,8 +1047,13 @@ export default {
 
     curationWeight: function(id) {
       var variant = this.getVariantById(id)
+      var curation = this.getCurationByVariantId(id)
       var weight = 0
-      if (variant && variant.Disease) weight++
+
+      if (variant?.Disease) weight++
+      if (curation?.variantNote) weight++
+      if (curation?.selectedTagNames) weight++
+
       return weight
     },
 
@@ -1149,8 +1154,13 @@ export default {
 
     curationFilter: function(item) {
       const curation = this.getCurationByVariantId(item.id)
+      const disease = this.getVariantById(item.id).Disease
 
-      return filters.curationFilter(this.filterConfig.curationSearch, curation)
+      return filters.curationFilter(
+        this.filterConfig.curationSearch,
+        curation,
+        disease
+      )
     },
 
     toggleImportantCuration: function() {
