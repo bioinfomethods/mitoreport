@@ -13,8 +13,13 @@
 span.autoTag {
   border: 1px solid grey;
   line-height: 1.5em;
-  // background:red;
   padding: 2px;
+  border-radius: 5px;
+  white-space: nowrap;
+  background: #FAFAFAFA;
+  .v-icon {
+    font-size: 20px;
+  }
 }
 </style>
 <script>
