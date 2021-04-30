@@ -38,6 +38,15 @@
           <td>{{ variant.Status_MitoMap }}</td>
         </tr>
         <tr>
+          <td>MitoMap Refs:</td>
+          <td>
+            <CuratedRefLink
+              :href="variant.curatedRef.url"
+              :count="variant.curatedRef.count"
+            ></CuratedRefLink>
+          </td>
+        </tr>
+        <tr>
           <td>Haplotype Defining:</td>
           <td>
             {{
@@ -56,6 +65,7 @@
 
 <script>
 import { mapGetters } from 'vuex'
+import CuratedRefLink from '@/components/CuratedRefLink'
 
 export default {
   name: 'VariantInfo',
@@ -65,6 +75,9 @@ export default {
       type: String,
       required: false,
     },
+  },
+  components: {
+    CuratedRefLink,
   },
 
   computed: {

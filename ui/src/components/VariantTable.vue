@@ -264,20 +264,6 @@
                 dense
               ></v-text-field>
             </td>
-
-            <!-- MitoMap Refs -->
-            <td>
-              <v-select
-                v-model="filterConfig.selectedCuratedRefName"
-                :items="curatedRefs"
-                item-text=".name"
-                item-value=".name"
-                type="text"
-                no-data-text="Select"
-                dense
-              >
-              </v-select>
-            </td>
             <td></td>
             <td></td>
           </tr>
@@ -432,12 +418,6 @@
         <template v-slot:item.curation="{ item }">
           <CurationCell :variantId="item.id" :key="item.id"></CurationCell>
         </template>
-        <template v-slot:item.curatedRef="{ item }">
-          <CuratedRefLink
-            :href="item.curatedRef.url"
-            :count="item.curatedRef.count"
-          ></CuratedRefLink>
-        </template>
 
         <template v-slot:item.Disease="{ item }">
           <span v-if="item.Disease">
@@ -512,7 +492,6 @@
 
 <script>
 import { mapGetters, mapState } from 'vuex'
-import CuratedRefLink from '@/components/CuratedRefLink'
 import GeneCardsLink from '@/components/GeneCardsLink'
 import HmtVarLink from '@/components/HmtVarLink'
 import IgvLink from '@/components/IgvLink'
@@ -542,7 +521,6 @@ export default {
 
   components: {
     CurationCell,
-    CuratedRefLink,
     GeneCardsLink,
     HmtVarLink,
     IgvLink,
@@ -739,15 +717,6 @@ export default {
           value: 'Disease',
           width: 100,
           filter: this.diseaseFilter,
-        },
-        {
-          text: 'MitoMap Refs',
-          tooltip: 'MitoMap curated references',
-          value: 'curatedRef',
-          align: 'center',
-          sortable: false,
-          width: '50',
-          filter: this.curatedRefsFilter,
         },
         {
           text: 'Heteroplasmy Distribution',
@@ -1197,25 +1166,6 @@ export default {
         this.filterConfig.disease,
         value,
         this.filterConfig.diseaseShowBlank
-      )
-    },
-
-    mitoMapFilter: function(value) {
-      return filters.iContainsFilter(
-        this.filterConfig.mitoMap,
-        value,
-        this.filterConfig.mitoMapShowBlank
-      )
-    },
-
-    curatedRefsFilter: function(value) {
-      const selectedCuratedRef =
-        this.curatedRefs.find(
-          cr => cr.name === this.filterConfig.selectedCuratedRefName
-        ) || this.curatedRefs[0]
-      return filters.predicateFilter(
-        selectedCuratedRef.predicate,
-        value?.count || 0
       )
     },
 
