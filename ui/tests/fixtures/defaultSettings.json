@@ -20,7 +20,7 @@
             "posRange": [200, 16300],
             "allele": "A/C",
             "selectedTypes": ["SNP", "INS", "DEL"],
-            "selectedConsequence": {},
+            "selectedConsequences": [],
             "vafRange": [0.03, 0.1],
             "importantCuration": false
           }
@@ -32,7 +32,7 @@
           "filterConfig": {
             "posRange": [0, 16500],
             "selectedTypes": ["SNP", "DEL"],
-            "selectedConsequence": {},
+            "selectedConsequences": [],
             "vafRange": [0.03, 0.1],
             "depthRange": [500, 12000],
             "importantCuration": false

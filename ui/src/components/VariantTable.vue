@@ -830,8 +830,6 @@ export default {
         ),
       ]
 
-      console.log(consequences)
-
       return consequences
     },
 
@@ -1247,9 +1245,6 @@ export default {
   },
 
   watch: {
-    consequences: function() {
-      this.filterConfig.selectedConsequence = this.consequences.slice(-1)[0]
-    },
     filteredVariants: function() {
       this.toggleVariantById(this.variantId)
     },
@@ -1257,8 +1252,6 @@ export default {
       this.toggleVariantById(this.variantId)
     },
     displayHaplodata: function() {
-      console.log('Toggling haplodata', this.displayHaplodata)
-
       this.toggleHaplodata(this.displayHaplodata)
     },
   },

@@ -3,24 +3,24 @@ import * as underTest from '@/shared/variantFilters'
 describe('variantFilters', () => {
   describe('consequenceFilter', () => {
     it.each`
-      selectedConsequence | consequenceValue | expResult
-      ${null}             | ${{ rank: 1 }}   | ${true}
-      ${undefined}        | ${{ rank: 1 }}   | ${true}
-      ${{ rank: 1 }}      | ${null}          | ${true}
-      ${{ rank: 1 }}      | ${undefined}     | ${true}
-      ${{ rank: 1 }}      | ${{ rank: 1 }}   | ${true}
-      ${{ rank: 2 }}      | ${{ rank: 1 }}   | ${true}
-      ${{ rank: 2 }}      | ${{ rank: 2 }}   | ${true}
-      ${{ rank: 2 }}      | ${{ rank: 3 }}   | ${false}
-      ${{}}               | ${{ rank: 1 }}   | ${true}
-      ${{}}               | ${{ rank: 3 }}   | ${true}
-      ${{}}               | ${null}          | ${true}
-      ${{}}               | ${undefined}     | ${true}
+      selectedConsequences | consequenceValue      | expResult | i
+      ${null}              | ${{ displayTerm: 1 }} | ${true}   | ${1}
+      ${undefined}         | ${{ displayTerm: 1 }} | ${true}   | ${2}
+      ${[1]}               | ${null}               | ${true}   | ${3}
+      ${[1]}               | ${undefined}          | ${true}   | ${4}
+      ${[1]}               | ${{ displayTerm: 1 }} | ${true}   | ${5}
+      ${[2]}               | ${{ displayTerm: 1 }} | ${false}  | ${6}
+      ${[2]}               | ${{ displayTerm: 2 }} | ${true}   | ${7}
+      ${[2]}               | ${{ displayTerm: 3 }} | ${false}  | ${8}
+      ${[]}                | ${{ displayTerm: 1 }} | ${true}   | ${9}
+      ${[]}                | ${{ displayTerm: 3 }} | ${true}   | ${10}
+      ${[]}                | ${null}               | ${true}   | ${11}
+      ${[]}                | ${undefined}          | ${true}   | ${12}
     `(
-      'consequenceFilter($selectedConsequence, $consequenceValue) is $expResult',
-      ({ selectedConsequence, consequenceValue, expResult }) => {
+      '$i) consequenceFilter($selectedConsequences, $consequenceValue) is $expResult',
+      ({ selectedConsequences, consequenceValue, expResult }) => {
         expect(
-          underTest.consequenceFilter(selectedConsequence, consequenceValue)
+          underTest.consequenceFilter(selectedConsequences, consequenceValue)
         ).toBe(expResult)
       }
     )

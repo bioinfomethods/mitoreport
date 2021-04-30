@@ -47,7 +47,7 @@ export const DEFAULT_VARIANT_SEARCH = {
     allele: '',
     selectedTypes: [],
     selectedGenes: [],
-    selectedConsequence: {},
+    selectedConsequences: [],
     vafRange: [0, 1],
     depthRange: [0, 999999],
     disease: '',
