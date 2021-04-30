@@ -101,6 +101,8 @@
         :options="tableOptions"
         :footer-props="tableFooterProps"
         :expanded.sync="expandedVariants"
+        :sort-by="'id'"
+        :sort-desc="true"
         item-key="id"
         @click:row="toggleVariantExpansion"
         class="elevation-1 variant-expanded"
@@ -256,14 +258,6 @@
                 </template>
               </v-select>
             </td>
-            <td>
-              <v-text-field
-                v-model="filterConfig.disease"
-                type="text"
-                label="Contains"
-                dense
-              ></v-text-field>
-            </td>
             <td></td>
             <td></td>
           </tr>
@@ -415,7 +409,7 @@
           </span>
         </template>
 
-        <template v-slot:item.curation="{ item }">
+        <template v-slot:item.id="{ item }">
           <CurationCell :variantId="item.id" :key="item.id"></CurationCell>
         </template>
 
@@ -667,8 +661,9 @@ export default {
         },
         {
           text: 'Curation',
-          value: 'curation',
-          width: '180',
+          value: 'id',
+          width: '250',
+          sort: this.curationSort,
           filter: (value, search, item) => this.curationFilter(item),
         },
         {
@@ -710,13 +705,6 @@ export default {
           width: '100',
           sort: this.consequenceSort,
           filter: this.consequenceFilter,
-        },
-        {
-          text: 'Disease',
-          tooltip: 'Disease association from MitoMap',
-          value: 'Disease',
-          width: 100,
-          filter: this.diseaseFilter,
         },
         {
           text: 'Heteroplasmy Distribution',
@@ -1051,6 +1039,17 @@ export default {
         this.filterConfig.selectedConsequences,
         value
       )
+    },
+
+    curationSort: function(l, r) {
+      return this.curationWeight(l) - this.curationWeight(r)
+    },
+
+    curationWeight: function(id) {
+      var variant = this.getVariantById(id)
+      var weight = 0
+      if (variant && variant.Disease) weight++
+      return weight
     },
 
     consequenceSort: function(l, r) {

@@ -2,9 +2,17 @@
   <div>
     <v-icon v-if="hasSelectedTags" :color="tagColor">mdi-tag-multiple</v-icon>
     <v-icon v-if="hasNote">mdi-note-text</v-icon>
+
+    <span v-if="variant.Disease" class="autoTag">
+      <v-icon>mdi-biohazard</v-icon>&nbsp;{{ variant.Disease }}
+    </span>
   </div>
 </template>
-
+<style>
+span.autoTag {
+  border: 1px solid grey;
+}
+</style>
 <script>
 import { mapGetters } from 'vuex'
 import * as _ from 'lodash'
@@ -24,7 +32,12 @@ export default {
       'getCurationByVariantId',
       'getImportantVariantTags',
       'getSampleSettings',
+      'getVariantById',
     ]),
+
+    variant() {
+      return this.getVariantById(this.variantId)
+    },
 
     curation() {
       return this.getCurationByVariantId(this.variantId)
