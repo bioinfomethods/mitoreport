@@ -29,10 +29,10 @@
             }}
           </td>
         </tr>
-        <tr>
+        <!-- <tr>
           <td>Disease:</td>
           <td>{{ variant.Disease }}</td>
-        </tr>
+        </tr> -->
         <tr>
           <td>MitoMap Status:</td>
           <td>{{ variant.Status_MitoMap }}</td>
@@ -62,7 +62,14 @@
     </template>
   </v-simple-table>
 </template>
-
+<style lang="scss">
+div.variant-info div.v-data-table__wrapper table tr td {
+  padding: 0 2px 0 0;
+  &:first-child {
+    width: 50px;
+  }
+}
+</style>
 <script>
 import { mapGetters } from 'vuex'
 import CuratedRefLink from '@/components/CuratedRefLink'

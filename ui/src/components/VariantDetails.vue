@@ -2,11 +2,11 @@
   <v-card rounded="0">
     <v-card-text class="ma-0 pa-2">
       <v-row align="start" justify="start" no-gutters>
-        <v-col cols="3">
+        <v-col cols="2">
           <VariantInfo :variantId="variantId"></VariantInfo>
         </v-col>
         <v-divider vertical inset class="pr-4 mr-4"></v-divider>
-        <v-col cols="2">
+        <v-col cols="3">
           <VariantCuration
             :variantId="variantId"
             :curation="getCurationByVariantId(variantId)"

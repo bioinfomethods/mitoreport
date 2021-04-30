@@ -1,16 +1,20 @@
 <template>
   <div>
-    <v-icon v-if="hasSelectedTags" :color="tagColor">mdi-tag-multiple</v-icon>
-    <v-icon v-if="hasNote">mdi-note-text</v-icon>
-
     <span v-if="variant.Disease" class="autoTag">
       <v-icon>mdi-biohazard</v-icon>&nbsp;{{ variant.Disease }}
     </span>
+
+    <v-icon v-if="hasSelectedTags" :color="tagColor">mdi-tag-multiple</v-icon>
+    <v-icon v-if="hasNote">mdi-note-text</v-icon>
+
   </div>
 </template>
-<style>
+<style lang="scss">
 span.autoTag {
   border: 1px solid grey;
+  line-height: 1.5em;
+  // background:red;
+  padding: 2px;
 }
 </style>
 <script>

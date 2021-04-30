@@ -37,9 +37,23 @@
       outlined
       dense
     ></v-textarea>
+
+    <table class="curationDetailsTable" v-if="variant.Disease">
+      <tbody>
+        <tr>
+          <td>Disease:</td>
+          <td>{{ variant.Disease }}</td>
+        </tr>
+      </tbody>
+    </table>
   </v-form>
 </template>
 
+<style lang="scss">
+table.curationDetailsTable td {
+  vertical-align: top;
+}
+</style>
 <script>
 import { mapGetters } from 'vuex'
 import * as _ from 'lodash'
@@ -84,7 +98,10 @@ export default {
   },
 
   computed: {
-    ...mapGetters(['getVariantTags']),
+    ...mapGetters(['getVariantTags', 'getVariantById']),
+    variant() {
+      return this.getVariantById(this.variantId)
+    },
   },
 
   methods: {
