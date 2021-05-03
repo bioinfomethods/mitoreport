@@ -5,12 +5,26 @@
     </span>
 
     <span v-if="hasSelectedTags">
-      <v-icon v-if="hasSelectedTags" :color="tagColor">mdi-tag-multiple</v-icon>
+      <v-tooltip top>
+        <template v-slot:activator="{ on, attrs }">
+          <span v-bind="attrs" v-on="on">
+            <v-icon v-if="hasSelectedTags" :color="tagColor"
+              >mdi-tag-multiple</v-icon
+            >
+          </span>
+        </template>
+        <span class="text-caption">
+          {{ curation.selectedTagNames.join(', ') }}
+        </span>
+      </v-tooltip>
     </span>
 
     <span v-if="hasNote">
       <v-icon v-if="hasNote">mdi-note-text</v-icon>
-      {{ curation.variantNote }}
+      {{
+        curation.variantNote.substring(0, 60) +
+          (curation.variantNote.length > 60 ? '…' : '')
+      }}
     </span>
   </div>
 </template>
@@ -23,7 +37,8 @@ span.autoTag {
   white-space: nowrap;
   background: #fafafafa;
   .v-icon {
-    font-size: 20px;
+    top: -2px;
+    font-size: 18px;
   }
 }
 </style>
