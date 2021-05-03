@@ -19,7 +19,6 @@
       </span>
     </v-tooltip>
 
-
     <span v-if="hasSelectedTags">
       <v-tooltip top>
         <template v-slot:activator="{ on, attrs }">
@@ -41,7 +40,7 @@
         curation.variantNote.substring(0, 100) +
           (curation.variantNote.length > 100 ? '…' : '')
       }}
-      <br>
+      <br />
     </span>
 
     <span v-if="variant.Disease" class="autoTag">

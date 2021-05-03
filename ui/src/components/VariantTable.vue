@@ -10,10 +10,10 @@
             <v-select
               id="inputSelectSavedSearch"
               v-model="selectedSavedSearch"
-              :items="allSavedSearches"
+              :items="allSavedSearchesDisplay"
               item-text=".name"
               item-value=".name"
-              @change="onSavedSearchChange"
+              @input="onSavedSearchChange"
               type="text"
               label="Presets"
               return-object
@@ -659,9 +659,9 @@ import VariantTableHeader from '@/components/VariantTableHeader'
 import * as filters from '@/shared/variantFilters'
 import * as vueFilters from '@/shared/vueFilters'
 import * as _ from 'lodash'
-
 import {
   DEFAULT_VARIANT_SEARCH,
+  SAVE_INTERVAL_MS,
   MAX_POS,
   MIN_POS,
   COLORS,
@@ -688,10 +688,31 @@ export default {
 
   mounted() {
     this.toggleVariantById(this.variantId)
+    this.saveSearchInterval = setInterval(() => {
+      this.onIntervalSaveSearch()
+    }, SAVE_INTERVAL_MS)
+
+    if (this?.allSavedSearches) {
+      const found = this.allSavedSearches.find(
+        ss => ss && ss.name === 'Current'
+      )
+
+      if (found) {
+        this.onSavedSearchChange(found)
+      } else {
+        this.onSavedSearchChange(DEFAULT_VARIANT_SEARCH)
+        this.selectedSavedSearch = DEFAULT_VARIANT_SEARCH
+      }
+    }
+  },
+
+  beforeDestroy() {
+    clearInterval(this.saveSearchInterval)
   },
 
   data: () => {
     return {
+      saveSearchInterval: null,
       filterConfig: {
         posRange: [0, MAX_POS],
         allele: '',
@@ -788,6 +809,14 @@ export default {
         this.getSampleSettings.variantSearches
       )
       const result = _.sortBy(all, ['custom', 'name'])
+
+      return result
+    },
+
+    allSavedSearchesDisplay() {
+      const result = [DEFAULT_VARIANT_SEARCH]
+        .concat(this.allSavedSearches)
+        .filter(s => s && s.name !== 'Current')
 
       return result
     },
@@ -1062,6 +1091,20 @@ export default {
         this.searchForm.description = ''
       }
       this.toggleImportantCuration()
+    },
+
+    onIntervalSaveSearch: function() {
+      const toSave = {
+        name: 'Current',
+        description: 'Currently configured filters',
+        custom: true,
+        filterConfig: { ...this.filterConfig },
+      }
+      toSave.filterConfig.vafRange = [
+        this.vafTicks[this.vafIndexRange[0]],
+        this.vafTicks[this.vafIndexRange[1]],
+      ]
+      this.$store.dispatch('saveSearch', toSave)
     },
 
     onSaveSearch: function() {
@@ -1389,9 +1432,11 @@ export default {
     filteredVariants: function() {
       this.toggleVariantById(this.variantId)
     },
+
     $route: function() {
       this.toggleVariantById(this.variantId)
     },
+
     displayHaplodata: function() {
       this.toggleHaplodata(this.displayHaplodata)
     },

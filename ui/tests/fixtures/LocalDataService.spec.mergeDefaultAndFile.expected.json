@@ -5,6 +5,50 @@
   "samples": [
     {
       "id": "15G002035-GM12878K_20pc_10kb_200",
+      "metadata": {
+        "mitoreportVersion": "0.1.0",
+        "absolutePath": "/Users/tommyli/Development/mcri/mitoreport/test_fixtures/gnomad.genomes.v3.1.sites.chrM.vcf.bgz",
+        "fileName": "gnomad.genomes.v3.1.sites.chrM.vcf.bgz",
+        "created": "2020-12-07T02:46:18",
+        "modified": "2020-12-07T02:46:18",
+        "accessed": "2021-01-26T23:32:01"
+      },
+      "haplogrepClassification": {
+        "sampleId": "15G002035-GM12878K_20pc_10kb_200",
+        "hasMultipleBaseHaplogroups": false,
+        "haplogrepResults": {
+          "1": {
+            "baseHaplogroup": "H",
+            "rank": 1,
+            "haplogroup": "H13a1a1a",
+            "quality": 0.9957
+          },
+          "2": {
+            "baseHaplogroup": "H",
+            "rank": 2,
+            "haplogroup": "H13a1a1",
+            "quality": 0.9646
+          },
+          "3": {
+            "baseHaplogroup": "H",
+            "rank": 3,
+            "haplogroup": "H13a1a1c",
+            "quality": 0.9331
+          },
+          "4": {
+            "baseHaplogroup": "H",
+            "rank": 4,
+            "haplogroup": "H13a1a1e",
+            "quality": 0.9319
+          },
+          "5": {
+            "baseHaplogroup": "H",
+            "rank": 5,
+            "haplogroup": "H13a1a1b",
+            "quality": 0.9271
+          }
+        }
+      },
       "bamDir": "/tmp/bamDir/",
       "bamFilename": "TestSample.bam",
       "vcfDir": "/tmp/vcfDir/",
@@ -17,11 +61,23 @@
           "description": "Custom 1 description",
           "custom": true,
           "filterConfig": {
-            "posRange": [0, 16500],
-            "selectedTypes": ["SNP", "DEL"],
+            "posRange": [
+              0,
+              16500
+            ],
+            "selectedTypes": [
+              "SNP",
+              "DEL"
+            ],
             "selectedConsequences": [],
-            "vafRange": [0.03, 0.1],
-            "depthRange": [500, 12000],
+            "vafRange": [
+              0.03,
+              0.1
+            ],
+            "depthRange": [
+              500,
+              12000
+            ],
             "importantCuration": false
           }
         },
@@ -30,48 +86,92 @@
           "description": "Custom 2 description",
           "custom": true,
           "filterConfig": {
-            "posRange": [200, 16300],
+            "posRange": [
+              200,
+              16300
+            ],
             "allele": "A/C",
-            "selectedTypes": ["SNP", "INS", "DEL"],
+            "selectedTypes": [
+              "SNP",
+              "INS",
+              "DEL"
+            ],
             "selectedConsequences": [],
-            "vafRange": [0.03, 0.1],
+            "vafRange": [
+              0.03,
+              0.1
+            ],
             "importantCuration": false
           }
         },
         {
-          "name": "Preset Filter 1",
-          "description": "Filter 1 description",
+          "name": "All",
+          "description": "No filters applied",
           "custom": false,
           "filterConfig": {
-            "posRange": [200, 16300],
-            "allele": "A/C",
-            "selectedTypes": ["SNP", "INS", "DEL"],
+            "posRange": [
+              0,
+              16500
+            ],
+            "allele": "",
+            "selectedTypes": [],
+            "selectedGenes": [],
             "selectedConsequences": [],
-            "vafRange": [0.03, 0.1],
-            "importantCuration": false
-          }
-        },
-        {
-          "name": "Preset Filter 2",
-          "description": "Filter 2 description",
-          "custom": false,
-          "filterConfig": {
-            "posRange": [0, 16500],
-            "selectedTypes": ["SNP", "DEL"],
-            "selectedConsequences": [],
-            "vafRange": [0.03, 0.1],
-            "depthRange": [500, 12000],
-            "importantCuration": false
+            "gnomADHap": [],
+            "vafRange": [
+              0,
+              1
+            ],
+            "gbFreqTickIndex": 6,
+            "gnomADHetFreqTickIndex": 8,
+            "gnomADHomFreqTickIndex": 8,
+            "disease": "",
+            "diseaseShowBlank": false,
+            "curationSearch": "",
+            "importantCuration": false,
+            "mitoMap": "",
+            "mitoMapShowBlank": false,
+            "selectedCuratedRefName": "",
+            "hgvsp": "",
+            "hgvspShowBlank": false,
+            "hgvsc": "",
+            "hgvscShowBlank": false,
+            "hgvs": "",
+            "hgvsShowBlank": false
           }
         }
       ],
       "variantTags": [
-        { "name": "Review", "important": true, "custom": false },
-        { "name": "Excluded", "important": false, "custom": false },
-        { "name": "FalsePositive", "important": false, "custom": false },
-        { "name": "Likely", "important": true, "custom": false },
-        { "name": "Match", "important": true, "custom": false },
-        { "name": "Mismatch", "important": false, "custom": false }
+        {
+          "name": "Review",
+          "important": true,
+          "custom": false
+        },
+        {
+          "name": "Excluded",
+          "important": false,
+          "custom": false
+        },
+        {
+          "name": "FalsePositive",
+          "important": false,
+          "custom": false
+        },
+        {
+          "name": "Likely",
+          "important": true,
+          "custom": false
+        },
+        {
+          "name": "Match",
+          "important": true,
+          "custom": false
+        },
+        {
+          "name": "Mismatch",
+          "important": false,
+          "custom": false
+        }
       ],
       "curations": []
     },
@@ -89,11 +189,23 @@
           "description": "Custom 1 description",
           "custom": true,
           "filterConfig": {
-            "posRange": [0, 16500],
-            "selectedTypes": ["SNP", "DEL"],
+            "posRange": [
+              0,
+              16500
+            ],
+            "selectedTypes": [
+              "SNP",
+              "DEL"
+            ],
             "selectedConsequences": [],
-            "vafRange": [0.03, 0.1],
-            "depthRange": [500, 12000],
+            "vafRange": [
+              0.03,
+              0.1
+            ],
+            "depthRange": [
+              500,
+              12000
+            ],
             "importantCuration": false
           }
         },
@@ -102,11 +214,21 @@
           "description": "Custom 2 description",
           "custom": true,
           "filterConfig": {
-            "posRange": [200, 16300],
+            "posRange": [
+              200,
+              16300
+            ],
             "allele": "A/C",
-            "selectedTypes": ["SNP", "INS", "DEL"],
+            "selectedTypes": [
+              "SNP",
+              "INS",
+              "DEL"
+            ],
             "selectedConsequences": [],
-            "vafRange": [0.03, 0.1],
+            "vafRange": [
+              0.03,
+              0.1
+            ],
             "importantCuration": false
           }
         }
