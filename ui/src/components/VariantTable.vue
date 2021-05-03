@@ -327,7 +327,16 @@
 
         <!-- gnomAD Het -->
         <template v-slot:item.gnomAD.af_het="{ item }">
-          <span class="gnomADspan" v-if="item.gnomAD && item.gnomAD.af_het > 0">
+          <span
+            v-if="item.gnomAD && item.gnomAD.af_het > 0"
+            :class="
+              'gnomADspan ' +
+                (hapRatios[item.id].hetRatio > 2 ||
+                hapRatios[item.id].hetRatio < 0.5
+                  ? 'colorMeRed'
+                  : '')
+            "
+          >
             {{ item.gnomAD.af_het | precisionTo }}</span
           >
           <v-icon class="worldIcon">mdi-earth</v-icon>
@@ -349,7 +358,16 @@
 
         <!-- gnomAD Hom -->
         <template v-slot:item.gnomAD.af_hom="{ item }">
-          <span class="gnomADspan" v-if="item.gnomAD && item.gnomAD.af_hom > 0">
+          <span
+            v-if="item.gnomAD && item.gnomAD.af_hom > 0"
+            :class="
+              'gnomADspan ' +
+                (hapRatios[item.id].homRatio > 2 ||
+                hapRatios[item.id].homRatio < 0.5
+                  ? 'colorMeRed'
+                  : '')
+            "
+          >
             {{ item.gnomAD.af_hom | precisionTo }}</span
           >
           <v-icon class="worldIcon">mdi-earth</v-icon>

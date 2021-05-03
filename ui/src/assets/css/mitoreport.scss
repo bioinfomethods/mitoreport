@@ -59,6 +59,17 @@ span.haploWeightIcon {
 div#app.showHaplodata span.haploWeightIcon {
   display: inline;
 }
+span.haploWeightIcon span i.mdi-contrast-box {
+  color: #f44336;
+}
+
+span.colorMeRed,
+span.colorMeRed + i.mdi-earth::before,
+span.colorMeRed + i + span,
+span.colorMeRed + i + span span.haplogroupIcon {
+  color: red;
+  border-color: red;
+}
 
 tr:nth-child(even) {
   background-color: rgba(0, 0, 0, 0.02);

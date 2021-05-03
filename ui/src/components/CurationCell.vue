@@ -3,7 +3,7 @@
     <v-tooltip top>
       <template v-slot:activator="{ on, attrs }">
         <span v-bind="attrs" v-on="on" class="haploWeightIcon">
-          <span v-if="hapRatio && hapRatio.hapWeight > 1">
+          <span v-if="hapRatio && hapRatio.hapWeight > 0.5">
             <v-icon>mdi-contrast-box</v-icon></span
           >
         </span>
