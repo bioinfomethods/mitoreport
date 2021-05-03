@@ -52,6 +52,14 @@ span.haplogroupIcon {
   font-size: 12px;
 }
 
+span.haploWeightIcon {
+  display: none;
+}
+
+div#app.showHaplodata span.haploWeightIcon {
+  display: inline;
+}
+
 tr:nth-child(even) {
   background-color: rgba(0, 0, 0, 0.02);
 }

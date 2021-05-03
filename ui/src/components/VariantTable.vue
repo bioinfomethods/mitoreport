@@ -1046,13 +1046,29 @@ export default {
     },
 
     curationWeight: function(id) {
-      var variant = this.getVariantById(id)
-      var curation = this.getCurationByVariantId(id)
-      var weight = 0
+      const variant = this.getVariantById(id)
+      const curation = this.getCurationByVariantId(id)
+      let weight = 0
 
-      if (variant?.Disease) weight++
+      if (variant?.Disease) weight += 2
       if (curation?.variantNote) weight++
+
+      // Should hapWeight be added? Or just be given a floor of 1?
+      if (this.displayHaplodata) {
+        // if (this.hapRatios[id]?.hapWeight > 1)
+        weight += this.hapRatios[id]?.hapWeight || 0
+      }
+      // Add weight for tag names here, still apply "selectedTagNames" in case custom names are used.
       if (curation?.selectedTagNames) weight++
+      const blacklist = ['Excluded', 'Mismatch', 'FalsePositive']
+      blacklist.forEach(item => {
+        if (curation?.selectedTagNames?.indexOf(item) >= 0) weight = -1
+      })
+
+      const whitelist = ['Review', 'Likely', 'Match']
+      whitelist.forEach(item => {
+        if (curation?.selectedTagNames?.indexOf(item) >= 0) weight += 5
+      })
 
       return weight
     },

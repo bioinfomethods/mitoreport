@@ -1,5 +1,24 @@
 <template>
   <div>
+    <v-tooltip top>
+      <template v-slot:activator="{ on, attrs }">
+        <span v-bind="attrs" v-on="on" class="haploWeightIcon">
+          <span v-if="hapRatio && hapRatio.hapWeight > 1">
+            <v-icon>mdi-contrast-box</v-icon></span
+          >
+        </span>
+      </template>
+      <span class="text-caption">
+        <span
+          >This variant has a high discordance between the observed "global"
+          vs<br />
+          "haplogroup" gnomAD Heteroplasmy frequency and/or Homoplasmy
+          frequency.<br />
+          Weight: {{ hapRatio.hapWeight | precisionTo }}</span
+        >
+      </span>
+    </v-tooltip>
+
     <span v-if="variant.Disease" class="autoTag">
       <v-icon>mdi-biohazard</v-icon>&nbsp;{{ variant.Disease }}
     </span>
@@ -45,6 +64,7 @@ span.autoTag {
 <script>
 import { mapGetters } from 'vuex'
 import * as _ from 'lodash'
+import * as vueFilters from '@/shared/vueFilters'
 
 export default {
   name: 'CurationCell',
@@ -62,6 +82,7 @@ export default {
       'getImportantVariantTags',
       'getSampleSettings',
       'getVariantById',
+      'getFirstHaplogroup',
     ]),
 
     variant() {
@@ -87,6 +108,40 @@ export default {
 
       return hasImportantTag ? 'red' : ''
     },
+
+    hapRatio() {
+      var variant = this.variant
+      var map = {}
+      if (variant.gnomAD) {
+        map = {
+          hapWeight: 0,
+        }
+        if (
+          variant.gnomAD.af_het &&
+          variant.gnomAD.hap_af_het_map[this.getFirstHaplogroup]
+        ) {
+          let hetRatio = (map.hetRatio =
+            variant.gnomAD.hap_af_het_map[this.getFirstHaplogroup] /
+            variant.gnomAD.af_het)
+
+          map.hapWeight = Math.log(hetRatio) * Math.log(hetRatio)
+        }
+        if (
+          variant.gnomAD.af_hom &&
+          variant.gnomAD.hap_af_hom_map[this.getFirstHaplogroup]
+        ) {
+          let homRatio = (map.homRatio =
+            variant.gnomAD.hap_af_hom_map[this.getFirstHaplogroup] /
+            variant.gnomAD.af_hom)
+          map.hapWeight += Math.log(homRatio) * Math.log(homRatio)
+        }
+      }
+      return map
+    },
+  },
+
+  filters: {
+    precisionTo: vueFilters.precisionTo,
   },
 }
 </script>
