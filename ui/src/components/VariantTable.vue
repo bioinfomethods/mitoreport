@@ -327,64 +327,150 @@
 
         <!-- gnomAD Het -->
         <template v-slot:item.gnomAD.af_het="{ item }">
-          <span
-            v-if="item.gnomAD && item.gnomAD.af_het > 0"
-            :class="
-              'gnomADspan ' +
-                (hapRatios[item.id].hetRatio > 2 ||
-                hapRatios[item.id].hetRatio < 0.5
-                  ? 'colorMeRed'
-                  : '')
-            "
-          >
-            {{ item.gnomAD.af_het | precisionTo }}</span
-          >
-          <v-icon class="worldIcon">mdi-earth</v-icon>
+          <v-tooltip top>
+            <template v-slot:activator="{ on, attrs }">
+              <span v-bind="attrs" v-on="on">
+                <span
+                  v-if="item.gnomAD && item.gnomAD.af_het > 0"
+                  :class="
+                    'gnomADspan ' +
+                      (hapRatios[item.id].hetRatio > 2 ||
+                      hapRatios[item.id].hetRatio < 0.5
+                        ? 'colorMeRed'
+                        : '')
+                  "
+                >
+                  {{ item.gnomAD.af_het | precisionTo }}</span
+                >
+                <v-icon class="worldIcon">mdi-earth</v-icon>
 
-          <span
-            v-if="
-              item.gnomAD &&
-                item.gnomAD.af_het > 0 &&
-                item.gnomAD.hap_af_het_map &&
-                displayHaplodata &&
-                getFirstHaplogroup
-            "
-          >
-            <br />
-            <span class="haplogroupIcon">{{ getFirstHaplogroup }}</span>
-            {{ item.gnomAD.hap_af_het_map[getFirstHaplogroup] | precisionTo }}
-          </span>
+                <span
+                  v-if="
+                    item.gnomAD &&
+                      item.gnomAD.af_het > 0 &&
+                      item.gnomAD.hap_af_het_map &&
+                      displayHaplodata &&
+                      getFirstHaplogroup
+                  "
+                >
+                  <br />
+                  <span class="haplogroupIcon">{{ getFirstHaplogroup }}</span>
+                  {{
+                    item.gnomAD.hap_af_het_map[getFirstHaplogroup] | precisionTo
+                  }}
+                </span>
+              </span>
+            </template>
+            <span class="text-caption">
+              <span
+                class="gnomADspan"
+                v-if="item.gnomAD && item.gnomAD.af_het > 0"
+              >
+                Global gnomAD Freq: {{ item.gnomAD.af_het | precisionTo }}</span
+              >
+              <v-icon class="worldIcon tooltipIcon">mdi-earth</v-icon>
+
+              <span
+                v-if="
+                  item.gnomAD &&
+                    item.gnomAD.af_het > 0 &&
+                    item.gnomAD.hap_af_het_map &&
+                    getFirstHaplogroup
+                "
+              >
+                <br />
+                <span class="haplogroupIcon tooltipIcon">{{
+                  getFirstHaplogroup
+                }}</span>
+                Haplogroup ({{ getFirstHaplogroup }}) Freq:
+                {{
+                  item.gnomAD.hap_af_het_map[getFirstHaplogroup] | precisionTo
+                }}
+                <br />
+                <v-icon class="tooltipIcon">mdi-contrast-box</v-icon> Ratio
+                (Global / Haplogroup):
+                {{
+                  (item.gnomAD.af_het /
+                    item.gnomAD.hap_af_het_map[getFirstHaplogroup])
+                    | precisionTo
+                }}
+              </span></span
+            >
+          </v-tooltip>
         </template>
 
         <!-- gnomAD Hom -->
         <template v-slot:item.gnomAD.af_hom="{ item }">
-          <span
-            v-if="item.gnomAD && item.gnomAD.af_hom > 0"
-            :class="
-              'gnomADspan ' +
-                (hapRatios[item.id].homRatio > 2 ||
-                hapRatios[item.id].homRatio < 0.5
-                  ? 'colorMeRed'
-                  : '')
-            "
-          >
-            {{ item.gnomAD.af_hom | precisionTo }}</span
-          >
-          <v-icon class="worldIcon">mdi-earth</v-icon>
+          <v-tooltip top>
+            <template v-slot:activator="{ on, attrs }">
+              <span v-bind="attrs" v-on="on">
+                <span
+                  v-if="item.gnomAD && item.gnomAD.af_hom > 0"
+                  :class="
+                    'gnomADspan ' +
+                      (hapRatios[item.id].homRatio > 2 ||
+                      hapRatios[item.id].homRatio < 0.5
+                        ? 'colorMeRed'
+                        : '')
+                  "
+                >
+                  {{ item.gnomAD.af_hom | precisionTo }}</span
+                >
+                <v-icon class="worldIcon">mdi-earth</v-icon>
 
-          <span
-            v-if="
-              item.gnomAD &&
-                item.gnomAD.af_hom > 0 &&
-                item.gnomAD.hap_af_hom_map &&
-                displayHaplodata &&
-                getFirstHaplogroup
-            "
-          >
-            <br />
-            <span class="haplogroupIcon">{{ getFirstHaplogroup }}</span>
-            {{ item.gnomAD.hap_af_hom_map[getFirstHaplogroup] | precisionTo }}
-          </span>
+                <span
+                  v-if="
+                    item.gnomAD &&
+                      item.gnomAD.af_hom > 0 &&
+                      item.gnomAD.hap_af_hom_map &&
+                      displayHaplodata &&
+                      getFirstHaplogroup
+                  "
+                >
+                  <br />
+                  <span class="haplogroupIcon">{{ getFirstHaplogroup }}</span>
+                  {{
+                    item.gnomAD.hap_af_hom_map[getFirstHaplogroup] | precisionTo
+                  }}
+                </span>
+              </span>
+            </template>
+            <span class="text-caption">
+              <span
+                class="gnomADspan"
+                v-if="item.gnomAD && item.gnomAD.af_hom > 0"
+              >
+                Global gnomAD Freq: {{ item.gnomAD.af_hom | precisionTo }}</span
+              >
+              <v-icon class="worldIcon tooltipIcon">mdi-earth</v-icon>
+
+              <span
+                v-if="
+                  item.gnomAD &&
+                    item.gnomAD.af_hom > 0 &&
+                    item.gnomAD.hap_af_hom_map &&
+                    getFirstHaplogroup
+                "
+              >
+                <br />
+                <span class="haplogroupIcon tooltipIcon">{{
+                  getFirstHaplogroup
+                }}</span>
+                Haplogroup ({{ getFirstHaplogroup }}) Freq:
+                {{
+                  item.gnomAD.hap_af_hom_map[getFirstHaplogroup] | precisionTo
+                }}
+                <br />
+                <v-icon class="tooltipIcon">mdi-contrast-box</v-icon> Ratio
+                (Global / Haplogroup):
+                {{
+                  (item.gnomAD.af_hom /
+                    item.gnomAD.hap_af_hom_map[getFirstHaplogroup])
+                    | precisionTo
+                }}
+              </span></span
+            >
+          </v-tooltip>
         </template>
 
         <!-- Heteroplasmy Distribution -->
