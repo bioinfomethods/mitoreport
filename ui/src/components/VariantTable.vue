@@ -334,9 +334,11 @@
                   v-if="item.gnomAD && item.gnomAD.af_het > 0"
                   :class="
                     'gnomADspan ' +
+                      ((item.gnomAD.af_het > 0.0001 ||
+                      item.gnomAD.hap_af_het_map[getFirstHaplogroup] > 0.0001) &&
                       (hapRatios[item.id].hetRatio > 2 ||
-                      hapRatios[item.id].hetRatio < 0.5
-                        ? 'colorMeRed'
+                        hapRatios[item.id].hetRatio < 0.5)
+                        ? 'highlightMe'
                         : '')
                   "
                 >
@@ -408,9 +410,11 @@
                   v-if="item.gnomAD && item.gnomAD.af_hom > 0"
                   :class="
                     'gnomADspan ' +
+                      ((item.gnomAD.af_hom > 0.0001 ||
+                      item.gnomAD.hap_af_hom_map[getFirstHaplogroup] > 0.0001) &&
                       (hapRatios[item.id].homRatio > 2 ||
-                      hapRatios[item.id].homRatio < 0.5
-                        ? 'colorMeRed'
+                        hapRatios[item.id].homRatio < 0.5)
+                        ? 'highlightMe'
                         : '')
                   "
                 >

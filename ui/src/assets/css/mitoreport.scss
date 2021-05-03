@@ -63,10 +63,10 @@ span.haploWeightIcon span i.mdi-contrast-box {
   color: orange;
 }
 
-span.colorMeRed,
-span.colorMeRed + i.mdi-earth::before,
-span.colorMeRed + i + span,
-span.colorMeRed + i + span span.haplogroupIcon {
+span.highlightMe,
+span.highlightMe + i.mdi-earth::before,
+span.highlightMe + i + span,
+span.highlightMe + i + span span.haplogroupIcon {
   color: orange;
   border-color: orange;
   font-weight: 600;
