@@ -67,8 +67,9 @@ span.colorMeRed,
 span.colorMeRed + i.mdi-earth::before,
 span.colorMeRed + i + span,
 span.colorMeRed + i + span span.haplogroupIcon {
-  color: red;
-  border-color: red;
+  color: orange;
+  border-color: orange;
+  font-weight: 600;
 }
 
 tr:nth-child(even) {

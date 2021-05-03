@@ -145,6 +145,36 @@
               </v-select>
             </td>
             <td>
+              <v-select
+                v-model="filterConfig.selectedConsequences"
+                :items="consequences"
+                item-text=".displayTerm"
+                type="text"
+                label="Select Consequences"
+                multiple
+                dense
+              >
+                <template v-slot:selection="{ item, index }">
+                  <v-chip
+                    v-if="index <= 3"
+                    close
+                    @click:close="removeSelectedConsequence(item)"
+                    x-small
+                  >
+                    <span>{{
+                      shortenConsequenceOntology(item.displayTerm)
+                    }}</span>
+                  </v-chip>
+                  <span v-if="index === 4" class="grey--text caption"
+                    >(+{{
+                      filterConfig.selectedConsequences.length - 4
+                    }}
+                    others)</span
+                  >
+                </template>
+              </v-select>
+            </td>
+            <td>
               <v-row class="justify-space-between">
                 <v-text-field
                   v-model="filterConfig.curationSearch"
@@ -227,36 +257,6 @@
                 hide-details
               >
               </v-slider>
-            </td>
-            <td>
-              <v-select
-                v-model="filterConfig.selectedConsequences"
-                :items="consequences"
-                item-text=".displayTerm"
-                type="text"
-                label="Select Consequences"
-                multiple
-                dense
-              >
-                <template v-slot:selection="{ item, index }">
-                  <v-chip
-                    v-if="index <= 3"
-                    close
-                    @click:close="removeSelectedConsequence(item)"
-                    x-small
-                  >
-                    <span>{{
-                      shortenConsequenceOntology(item.displayTerm)
-                    }}</span>
-                  </v-chip>
-                  <span v-if="index === 4" class="grey--text caption"
-                    >(+{{
-                      filterConfig.selectedConsequences.length - 4
-                    }}
-                    others)</span
-                  >
-                </template>
-              </v-select>
             </td>
             <td></td>
             <td></td>
@@ -555,8 +555,8 @@ export default {
         gnomADHap: [],
         vafRange: [0, 1],
         gbFreqTickIndex: 6,
-        gnomADHetFreqTickIndex: 7,
-        gnomADHomFreqTickIndex: 7,
+        gnomADHetFreqTickIndex: 8,
+        gnomADHomFreqTickIndex: 8,
         disease: '',
         diseaseShowBlank: false,
         curationSearch: '',
@@ -588,6 +588,7 @@ export default {
         0.0002,
         0.0005,
         0.001,
+        0.01,
         0.1,
         1.0,
       ],
@@ -598,16 +599,17 @@ export default {
         0.0002,
         0.0005,
         0.001,
+        0.01,
         0.1,
         1.0,
       ],
       tableOptions: {
-        page: 1,
-        itemsPerPage: 20,
+        // page: 1,
+        itemsPerPage: 1000,
         multiSort: true,
       },
       tableFooterProps: {
-        itemsPerPageOptions: [5, 10, 20, 50, -1],
+        itemsPerPageOptions: [5, 10, 20, 50, 1000, -1],
       },
       rules: {
         required: value => !!value || 'Required.',
@@ -678,6 +680,14 @@ export default {
           filter: this.genesFilter,
         },
         {
+          text: 'Consequence',
+          tooltip: 'Sorting is on severity of consequence',
+          value: 'consequence',
+          width: '100',
+          sort: this.consequenceSort,
+          filter: this.consequenceFilter,
+        },
+        {
           text: 'Curation',
           value: 'id',
           width: '250',
@@ -685,14 +695,14 @@ export default {
           filter: (value, search, item) => this.curationFilter(item),
         },
         {
-          text: 'Heteroplasmy',
+          text: 'Sample Heteroplasmy',
           tooltip: 'Heteroplasmy freq of variant in sample',
           value: 'genotypes[0].AF',
           width: '120',
           filter: this.vafFilter,
         },
         {
-          text: 'Genbank',
+          text: 'Genbank Freq',
           // tooltip: 'Genbank % tooltip',
           value: 'gbFreq',
           width: '100',
@@ -700,7 +710,7 @@ export default {
         },
 
         {
-          text: 'gnomAD Heteroplasmy',
+          text: 'gnomAD Freq (Heteroplasmic)',
           tooltip:
             'Proportion of individuals with variant at heteroplasmy between 0.10 - 0.95 in gnomAD',
           value: 'gnomAD.af_het',
@@ -709,20 +719,12 @@ export default {
         },
 
         {
-          text: 'gnomAD Homoplasmy',
+          text: 'gnomAD Freq (Homoplasmic)',
           tooltip:
             'Proportion of individuals with variant at homoplasmy (heteroplasmy >= 0.95) in gnomAD',
           value: 'gnomAD.af_hom',
           width: '130',
           filter: this.gnomADHomFreqFilter,
-        },
-        {
-          text: 'Consequence',
-          tooltip: 'Sorting is on severity of consequence',
-          value: 'consequence',
-          width: '100',
-          sort: this.consequenceSort,
-          filter: this.consequenceFilter,
         },
         {
           text: 'Heteroplasmy Distribution',
