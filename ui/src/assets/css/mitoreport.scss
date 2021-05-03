@@ -63,13 +63,23 @@ span.haploWeightIcon span i.mdi-contrast-box {
   color: orange;
 }
 
-span.highlightMe,
 span.highlightMe + i.mdi-earth::before,
+span.highlightMe i.mdi-contrast-box::before {
+  color: orange;
+}
+
+span.highlightMe,
 span.highlightMe + i + span,
 span.highlightMe + i + span span.haplogroupIcon {
   color: orange;
   border-color: orange;
   font-weight: 600;
+}
+span.extraInfo {
+  display: none;
+}
+span.highlightMe span.extraInfo {
+  display: inline;
 }
 
 tr:nth-child(even) {

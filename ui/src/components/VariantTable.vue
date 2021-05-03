@@ -335,7 +335,8 @@
                   :class="
                     'gnomADspan ' +
                       ((item.gnomAD.af_het > 0.0001 ||
-                      item.gnomAD.hap_af_het_map[getFirstHaplogroup] > 0.0001) &&
+                        item.gnomAD.hap_af_het_map[getFirstHaplogroup] >
+                          0.0001) &&
                       (hapRatios[item.id].hetRatio > 2 ||
                         hapRatios[item.id].hetRatio < 0.5)
                         ? 'highlightMe'
@@ -389,13 +390,31 @@
                   item.gnomAD.hap_af_het_map[getFirstHaplogroup] | precisionTo
                 }}
                 <br />
-                <v-icon class="tooltipIcon">mdi-contrast-box</v-icon> Ratio
-                (Global / Haplogroup):
-                {{
-                  (item.gnomAD.af_het /
-                    item.gnomAD.hap_af_het_map[getFirstHaplogroup])
-                    | precisionTo
-                }}
+                <span
+                  :class="
+                    (item.gnomAD.af_het > 0.0001 ||
+                      item.gnomAD.hap_af_het_map[getFirstHaplogroup] >
+                        0.0001) &&
+                    (hapRatios[item.id].hetRatio > 2 ||
+                      hapRatios[item.id].hetRatio < 0.5)
+                      ? 'highlightMe'
+                      : ''
+                  "
+                >
+                  <v-icon class="tooltipIcon">mdi-contrast-box</v-icon> Ratio
+                  (Global / Haplogroup):
+                  {{
+                    (item.gnomAD.af_het /
+                      item.gnomAD.hap_af_het_map[getFirstHaplogroup])
+                      | precisionTo
+                  }}
+                  <span class="extraInfo">
+                    <br />
+                    Highlighted because the Ratio is smaller than 0.5 or larger
+                    than 2<br />
+                    and the Global Freq or Haplogroup Freq is larger than 0.0001
+                  </span>
+                </span>
               </span></span
             >
           </v-tooltip>
@@ -411,7 +430,8 @@
                   :class="
                     'gnomADspan ' +
                       ((item.gnomAD.af_hom > 0.0001 ||
-                      item.gnomAD.hap_af_hom_map[getFirstHaplogroup] > 0.0001) &&
+                        item.gnomAD.hap_af_hom_map[getFirstHaplogroup] >
+                          0.0001) &&
                       (hapRatios[item.id].homRatio > 2 ||
                         hapRatios[item.id].homRatio < 0.5)
                         ? 'highlightMe'
@@ -465,13 +485,31 @@
                   item.gnomAD.hap_af_hom_map[getFirstHaplogroup] | precisionTo
                 }}
                 <br />
-                <v-icon class="tooltipIcon">mdi-contrast-box</v-icon> Ratio
-                (Global / Haplogroup):
-                {{
-                  (item.gnomAD.af_hom /
-                    item.gnomAD.hap_af_hom_map[getFirstHaplogroup])
-                    | precisionTo
-                }}
+                <span
+                  :class="
+                    (item.gnomAD.af_hom > 0.0001 ||
+                      item.gnomAD.hap_af_hom_map[getFirstHaplogroup] >
+                        0.0001) &&
+                    (hapRatios[item.id].homRatio > 2 ||
+                      hapRatios[item.id].homRatio < 0.5)
+                      ? 'highlightMe'
+                      : ''
+                  "
+                >
+                  <v-icon class="tooltipIcon">mdi-contrast-box</v-icon> Ratio
+                  (Global / Haplogroup):
+                  {{
+                    (item.gnomAD.af_hom /
+                      item.gnomAD.hap_af_hom_map[getFirstHaplogroup])
+                      | precisionTo
+                  }}
+                  <span class="extraInfo">
+                    <br />
+                    Highlighted because the Ratio is smaller than 0.5 or larger
+                    than 2<br />
+                    and the Global Freq or Haplogroup Freq is larger than 0.0001
+                  </span>
+                </span>
               </span></span
             >
           </v-tooltip>
