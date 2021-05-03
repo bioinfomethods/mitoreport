@@ -119,6 +119,24 @@
                 single-line
                 dense
               ></v-text-field>
+
+              <v-row class="px-4 justify-space-between posSlider">
+                <span class="grey--text text--darken-1 text-caption">{{
+                  filterConfig.posRange[0]
+                }}</span>
+                <span class="grey--text text--darken-1 text-caption">{{
+                  filterConfig.posRange[1]
+                }}</span>
+              </v-row>
+              <v-range-slider
+                class="posSlider"
+                v-model="filterConfig.posRange"
+                :min="0"
+                :max="MAX_POS"
+                step="100"
+                hide-details
+              >
+              </v-range-slider>
             </td>
             <td>
               <v-select
@@ -823,10 +841,10 @@ export default {
           filter: (value, search, item) => this.curationFilter(item),
         },
         {
-          text: 'Sample Heteroplasmy',
+          text: 'Heteroplasmy of Sample',
           tooltip: 'Heteroplasmy freq of variant in sample',
           value: 'genotypes[0].AF',
-          width: '120',
+          width: '110',
           filter: this.vafFilter,
         },
         {
@@ -842,7 +860,7 @@ export default {
           tooltip:
             'Proportion of individuals with variant at heteroplasmy between 0.10 - 0.95 in gnomAD',
           value: 'gnomAD.af_het',
-          width: '130',
+          width: '135',
           filter: this.gnomADHetFreqFilter,
         },
 
@@ -851,7 +869,7 @@ export default {
           tooltip:
             'Proportion of individuals with variant at homoplasmy (heteroplasmy >= 0.95) in gnomAD',
           value: 'gnomAD.af_hom',
-          width: '130',
+          width: '135',
           filter: this.gnomADHomFreqFilter,
         },
         {
