@@ -292,25 +292,9 @@
           <a
             :id="`varlink-${item.pos}-${item.ref}-${item.alt}`"
             @click.stop="activeVariant = item"
-            :href="'#'"
-            :title="
-              `${item.HGVS ||
-                item.id.replace(/chrM-(\d+)-(\w)-(\w+)/, 'm.$1$2>$3')}`
-            "
-            >{{
-              item.HGVS ||
-                item.id.replace(/chrM-(\d+)-(\w)-(\w+)/, function(
-                  original,
-                  a,
-                  b,
-                  c
-                ) {
-                  if (c.length > 3) {
-                    c = `${c[0]}…${c[c.length - 1]}`
-                  }
-                  return `m.${a}${b}>${c}`
-                })
-            }}
+            href="#"
+            :title="convertHGVSg(item)"
+            >{{ convertHGVSg(item, true) }}
           </a>
         </template>
 
@@ -1217,6 +1201,27 @@ export default {
 
     genesFilter: function(value) {
       return filters.setInSetFilter(this.filterConfig.selectedGenes, value)
+    },
+
+    convertHGVSg: function(item, limited) {
+      return (
+        item.HGVS ||
+        item.id.replace(/chrM-(\d+)-(\w)-(\w+)/, function(original, a, b, c) {
+          if (limited && c.length > 3) {
+            c = `${c[0]}…${c[c.length - 1]}`
+          }
+          return `m.${a}${b}>${c}`
+        })
+      )
+    },
+
+    hgvsgFilter: function(value, search, item) {
+      return (
+        filters.iContainsFilter(
+          this.filterConfig.hgvsg,
+          this.convertHGVSg(item)
+        ) && this.posFilter(item.pos)
+      )
     },
 
     removeSelectedHaploFilter: function(toRemove) {
