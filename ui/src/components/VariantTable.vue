@@ -1217,7 +1217,7 @@ export default {
     convertHGVSg: function(item, limited) {
       return (
         item.HGVS ||
-        item.id.replace(/chrM-(\d+)-(\w)-(\w+)/, function(original, a, b, c) {
+        item.id.replace(/chrM-(\d+)-(\w+)-(\w+)/, function(original, a, b, c) {
           if (limited && c.length > 3) {
             c = `${c[0]}…${c[c.length - 1]}`
           }
