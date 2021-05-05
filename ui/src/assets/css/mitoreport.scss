@@ -92,3 +92,11 @@ tr:nth-child(even) {
 .v-card__title {
   display: none;
 }
+
+div.filteredItemCount span {
+  color: lightblue;
+  text-decoration: 2px underline lightblue;
+}
+span.filterActive {
+  text-decoration: 4px underline lightblue;
+}
