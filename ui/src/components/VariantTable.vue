@@ -5,6 +5,11 @@
         <v-row align="start" justify="start">
           <v-col md="1">
             <span class="text-subtitle-1">Saved Search:</span>
+            <br />
+            <span
+              >Filtered to {{ currentVariants.length }} of
+              {{ filteredVariants.length }} variants</span
+            >
           </v-col>
           <v-col md="2">
             <v-select
@@ -104,6 +109,7 @@
         :sort-by="'id'"
         :sort-desc="true"
         item-key="id"
+        @current-items="currentItems"
         @click:row="toggleVariantExpansion"
         class="elevation-1 variant-expanded"
         dense
@@ -770,6 +776,7 @@ export default {
       closeTimeouts: {},
       activeVariant: null,
       displayHaplodata: false,
+      currentVariants: [],
     }
   },
 
@@ -1006,6 +1013,10 @@ export default {
   methods: {
     toggleHaplodata() {
       document.getElementById('app').classList.toggle('showHaplodata')
+    },
+
+    currentItems(items) {
+      this.currentVariants = items
     },
 
     toggleVariantById: function(variantId) {
