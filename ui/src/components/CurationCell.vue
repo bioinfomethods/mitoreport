@@ -1,41 +1,13 @@
 <template>
-  <div>
+  <div class='middled'>
     <v-tooltip top>
-      <template v-slot:activator="{ on, attrs }">
-        <span v-bind="attrs" v-on="on" class="haploWeightIcon">
-          <span v-if="hapRatio && hapRatio.hapWeight > 0.5">
-            <v-icon>mdi-contrast-box</v-icon></span
-          >
-        </span>
-      </template>
-      <span class="text-caption">
-        <span
-          >This variant has a high discordance between the observed "global"
-          vs<br />
-          "haplogroup" gnomAD Heteroplasmy frequency and/or Homoplasmy
-          frequency.<br />
-          Weight: {{ hapRatio.hapWeight | precisionTo }}</span
-        >
-      </span>
+      <template v-slot:activator="{ on, attrs }"> <span v-bind="attrs" v-on="on" class="haploWeightIcon"> <span v-if="hapRatio && hapRatio.hapWeight > 0.5"> <v-icon>mdi-contrast-box</v-icon></span > </span></template>
+      <span class="text-caption"> <span >This variant has a high discordance between the observed "global" vs<br /> "haplogroup" gnomAD Heteroplasmy frequency and/or Homoplasmy frequency.<br /> Weight: {{ hapRatio.hapWeight | precisionTo }}</span > </span>
     </v-tooltip>
 
-    <span v-if="hasSelectedTags">
-      <v-tooltip top>
-        <template v-slot:activator="{ on, attrs }">
-          <span v-bind="attrs" v-on="on">
-            <v-icon v-if="hasSelectedTags" :color="tagColor"
-              >mdi-tag-multiple</v-icon
-            >
-          </span>
-        </template>
-        <span class="text-caption">
-          {{ curation.selectedTagNames.join(', ') }}
-        </span>
-      </v-tooltip>
-    </span>
+    <div class='tag' v-for='tag in curation.selectedTagNames' v-bind:key='tag'>{{tag}}</div>
 
     <span v-if="hasNote">
-      <v-icon v-if="hasNote">mdi-note-text</v-icon>
       {{
         curation.variantNote.substring(0, 100) +
           (curation.variantNote.length > 100 ? '…' : '')
@@ -49,6 +21,9 @@
   </div>
 </template>
 <style lang="scss">
+div.middled * {
+  vertical-align: middle;
+}
 span.autoTag {
   border: 1px solid grey;
   line-height: 1.5em;
@@ -60,6 +35,15 @@ span.autoTag {
     top: -2px;
     font-size: 18px;
   }
+}
+div.tag {
+  color: white;
+  background-color: purple;
+  display: inline;
+  margin-right: 3px;
+  padding: 2px 4px;
+  border-radius: 4px;
+  font-size: 10px;
 }
 </style>
 <script>
