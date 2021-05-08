@@ -1374,6 +1374,8 @@ export default {
     },
 
     shortenConsequenceOntology(consequence) {
+      if(!consequence)
+        return ''
       var result = consequence.replace('variant', '').trim()
       if (result.length > 25) {
         result = result
