@@ -25,7 +25,7 @@ import static java.math.RoundingMode.HALF_EVEN
 class HaplogroupClassifier implements Callable<HaplogrepClassification> {
 
     static final Integer DEFAULT_HAPLOGREP_QUALITY_SCALE = 4
-    static final BigDecimal DEFAULT_HAPLOGREP_HET_LEVEL = 0.9
+    static final BigDecimal DEFAULT_HAPLOGREP_HET_LEVEL = 0.9 as BigDecimal
     static final String DEFAULT_PHYLOTREE_FILE_NAME = 'phylotree17.xml'
     static final String DEFAULT_PHYLOGENETIC_WEIGHTS_FILE_NAME = 'weights17.txt'
     static final String DEFAULT_RANKING_METHOD = 'kulczynski'
