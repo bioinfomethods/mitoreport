@@ -167,6 +167,74 @@
                   >
                 </template>
               </v-select>
+
+              <v-select
+                v-model="filterConfig.masks"
+                :items="masks.map(mask => mask.name)"
+                type="text"
+                label="Variant Masks"
+                multiple
+                dense
+              >
+                <template v-slot:prepend-item>
+                  <v-list-item
+                    ripple
+                    @click="toggleAllMasks"
+                    style="width: 330px;"
+                  >
+                    <v-list-item-action>
+                      <v-icon
+                        :color="
+                          filterConfig.masks.length > 0 ? 'indigo darken-4' : ''
+                        "
+                      >
+                        {{ maskSelectAllIcon }}
+                      </v-icon>
+                    </v-list-item-action>
+                    <v-list-item-content>
+                      <v-list-item-title>
+                        Select All variant masks to exclude
+                      </v-list-item-title>
+                    </v-list-item-content>
+                  </v-list-item>
+                  <v-divider class="mt-2"></v-divider>
+                </template>
+
+                <template v-slot:item="{ active, item, attrs, on }">
+                  <v-list-item v-on="on" v-bind="attrs" #default="{ active }">
+                    <v-list-item-action>
+                      <v-checkbox :input-value="active"></v-checkbox>
+                    </v-list-item-action>
+                    <v-list-item-content>
+                      <v-list-item-title>
+                        <v-row no-gutters align="center">
+                          <span>{{ item }}</span>
+                          <v-spacer></v-spacer>
+                          <span>{{
+                            `Region: ${
+                              masks.find(mask => mask.name == item).start
+                            }-${masks.find(mask => mask.name == item).end}`
+                          }}</span>
+                        </v-row>
+                      </v-list-item-title>
+                    </v-list-item-content>
+                  </v-list-item>
+                </template>
+
+                <template v-slot:selection="{ item, index }">
+                  <v-chip
+                    v-if="index < 1"
+                    close
+                    @click:close="removeSelectedGene(item)"
+                    x-small
+                  >
+                    <span>{{ item }}</span>
+                  </v-chip>
+                  <span v-if="index === 1" class="grey--text caption"
+                    >(+{{ filterConfig.masks.length - 1 }} others)</span
+                  >
+                </template>
+              </v-select>
             </td>
             <td>
               <v-select
@@ -651,6 +719,7 @@ import * as vueFilters from '@/shared/vueFilters'
 import * as _ from 'lodash'
 import {
   DEFAULT_VARIANT_SEARCH,
+  VARIANT_MASKS,
   SAVE_INTERVAL_MS,
   MAX_POS,
   MIN_POS,
@@ -718,6 +787,7 @@ export default {
         diseaseShowBlank: false,
         curationSearch: '',
         importantCuration: false,
+        masks: [],
         mitoMap: '',
         mitoMapShowBlank: false,
         selectedCuratedRefName: '',
@@ -790,6 +860,18 @@ export default {
       'getHaplogroups',
       'getFirstHaplogroup',
     ]),
+
+    allMasksSelected() {
+      return this.filterConfig.masks.length === VARIANT_MASKS.length
+    },
+    someMasksSelected() {
+      return this.filterConfig.masks.length > 0 && !this.allMasksSelected
+    },
+    maskSelectAllIcon() {
+      if (this.allMasksSelected) return 'mdi-checkbox-marked'
+      if (this.someMasksSelected) return 'mdi-minus-box'
+      return 'mdi-checkbox-blank-outline'
+    },
 
     saveSearchDisabled() {
       return !this.searchForm.valid
@@ -950,6 +1032,10 @@ export default {
       }, {})
     },
 
+    masks() {
+      return VARIANT_MASKS
+    },
+
     genes() {
       const genes = [
         ...new Set(
@@ -1011,6 +1097,16 @@ export default {
   },
 
   methods: {
+    toggleAllMasks() {
+      this.$nextTick(() => {
+        if (this.allMasksSelected) {
+          this.filterConfig.masks = []
+        } else {
+          this.filterConfig.masks = VARIANT_MASKS.map(mask => mask.name)
+        }
+      })
+    },
+
     toggleHaplodata() {
       document.getElementById('app').classList.toggle('showHaplodata')
     },
@@ -1210,8 +1306,35 @@ export default {
       return filters.trioFilter(this.filterConfig.gnomADHap, value)
     },
 
-    genesFilter: function(value) {
-      return filters.setInSetFilter(this.filterConfig.selectedGenes, value)
+    maskFilter: function(pos) {
+      var result = true
+
+      this.filterConfig.masks.forEach(activeMask => {
+        var mask = VARIANT_MASKS?.find(d => d.name == activeMask)
+        pos = parseInt(pos)
+
+        if (!mask) {
+          console.error('Error finding mask:', activeMask)
+        }
+
+        if (mask.end > mask.start) {
+          if (mask.start < pos && pos < mask.end) {
+            result = false
+          }
+        } else {
+          if (pos < mask.end || mask.start < pos) {
+            result = false
+          }
+        }
+      })
+      return result
+    },
+
+    genesFilter: function(value, search, item) {
+      return (
+        filters.setInSetFilter(this.filterConfig.selectedGenes, value) &&
+        this.maskFilter(item.pos)
+      )
     },
 
     convertHGVSg: function(item, limited) {

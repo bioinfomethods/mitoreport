@@ -237,6 +237,7 @@ class MitoReportCommand implements Runnable {
                                                         diseaseShowBlank      : false,
                                                         curationSearch        : '',
                                                         importantCuration     : false,
+                                                        masks                 : [],
                                                         mitoMap               : '',
                                                         mitoMapShowBlank      : false,
                                                         selectedCuratedRefName: '',

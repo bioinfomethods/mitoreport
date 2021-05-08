@@ -57,6 +57,7 @@ export const DEFAULT_VARIANT_SEARCH = {
     diseaseShowBlank: false,
     curationSearch: '',
     importantCuration: false,
+    masks: ['MT-HV1', 'MT-HV2', 'MT-HV3', 'MT-OHR', 'MT-CR'],
     mitoMap: '',
     mitoMapShowBlank: false,
     selectedCuratedRefName: 'All',
@@ -68,3 +69,31 @@ export const DEFAULT_VARIANT_SEARCH = {
     hgvsShowBlank: false,
   },
 }
+
+export const VARIANT_MASKS = [
+  {
+    name: 'MT-HV1',
+    start: 16024,
+    end: 16383,
+  },
+  {
+    name: 'MT-HV2',
+    start: 57,
+    end: 372,
+  },
+  {
+    name: 'MT-HV3',
+    start: 438,
+    end: 574,
+  },
+  {
+    name: 'MT-OHR',
+    start: 110,
+    end: 441,
+  },
+  {
+    name: 'MT-CR',
+    start: 16024,
+    end: 576,
+  },
+]
