@@ -4,13 +4,16 @@ PROJECT_DIR=$(pwd)
 
 echo $PROJECT_DIR
 
-#./gradlew compileJava jar
+echo $JAVA_HOME
 
-./gradlew -x check -x test -x copyUiBuildToMitoOut -x buildGngs -x clean
+./gradlew
+# ./gradlew compileJava jar 
+
+# ./gradlew -x check -x copyUiBuildToMitoOut -x buildGngs -x clean -x buildHaplogrepCmd -x test
 
 #./gradlew -x ui
 
-#./gradlew
+# ./gradlew -x test
 
 java -jar $PROJECT_DIR/build/libs/mitoreport-0.1.0-all.jar mito-report \
   -d -sample "15G002035-GM12878K_20pc_10kb_200" \
