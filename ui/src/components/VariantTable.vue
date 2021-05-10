@@ -225,7 +225,7 @@
                   <v-chip
                     v-if="index < 1"
                     close
-                    @click:close="removeSelectedGene(item)"
+                    @click:close="removeSelectedMask(item)"
                     x-small
                   >
                     <span>{{ item }}</span>
@@ -1366,6 +1366,12 @@ export default {
 
     removeSelectedType: function(toRemove) {
       this.filterConfig.selectedTypes = this.filterConfig.selectedTypes.filter(
+        selected => selected !== toRemove
+      )
+    },
+
+    removeSelectedMask: function(toRemove) {
+      this.filterConfig.masks = this.filterConfig.masks.filter(
         selected => selected !== toRemove
       )
     },
