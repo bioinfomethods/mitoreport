@@ -68,6 +68,7 @@
             "allele": "",
             "selectedTypes": [],
             "selectedGenes": [],
+            "selectedMasks": [],
             "selectedConsequences": [],
             "gnomADHap": [],
             "vafRange": [

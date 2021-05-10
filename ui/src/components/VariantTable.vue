@@ -169,8 +169,8 @@
               </v-select>
 
               <v-select
-                v-model="filterConfig.masks"
-                :items="masks.map(mask => mask.name)"
+                v-model="filterConfig.selectedMasks"
+                :items="allMasks.map(mask => mask.name)"
                 type="text"
                 label="Variant Masks"
                 multiple
@@ -185,7 +185,9 @@
                     <v-list-item-action>
                       <v-icon
                         :color="
-                          filterConfig.masks.length > 0 ? 'indigo darken-4' : ''
+                          filterConfig.selectedMasks.length > 0
+                            ? 'indigo darken-4'
+                            : ''
                         "
                       >
                         {{ maskSelectAllIcon }}
@@ -212,8 +214,8 @@
                           <v-spacer></v-spacer>
                           <span>{{
                             `Region: ${
-                              masks.find(mask => mask.name == item).start
-                            }-${masks.find(mask => mask.name == item).end}`
+                              allMasks.find(mask => mask.name == item).start
+                            }-${allMasks.find(mask => mask.name == item).end}`
                           }}</span>
                         </v-row>
                       </v-list-item-title>
@@ -231,7 +233,7 @@
                     <span>{{ item }}</span>
                   </v-chip>
                   <span v-if="index === 1" class="grey--text caption"
-                    >(+{{ filterConfig.masks.length - 1 }} others)</span
+                    >(+{{ filterConfig.selectedMasks.length - 1 }} others)</span
                   >
                 </template>
               </v-select>
@@ -777,6 +779,7 @@ export default {
         allele: '',
         selectedTypes: [],
         selectedGenes: [],
+        selectedMasks: [],
         selectedConsequences: [],
         gnomADHap: [],
         vafRange: [0, 1],
@@ -787,7 +790,6 @@ export default {
         diseaseShowBlank: false,
         curationSearch: '',
         importantCuration: false,
-        masks: [],
         mitoMap: '',
         mitoMapShowBlank: false,
         selectedCuratedRefName: '',
@@ -862,10 +864,12 @@ export default {
     ]),
 
     allMasksSelected() {
-      return this.filterConfig.masks.length === VARIANT_MASKS.length
+      return this.filterConfig.selectedMasks.length === VARIANT_MASKS.length
     },
     someMasksSelected() {
-      return this.filterConfig.masks.length > 0 && !this.allMasksSelected
+      return (
+        this.filterConfig.selectedMasks.length > 0 && !this.allMasksSelected
+      )
     },
     maskSelectAllIcon() {
       if (this.allMasksSelected) return 'mdi-checkbox-marked'
@@ -1032,10 +1036,11 @@ export default {
       }, {})
     },
 
-    masks() {
+    allMasks() {
       return VARIANT_MASKS
     },
 
+    // Change to allGenes?
     genes() {
       const genes = [
         ...new Set(
@@ -1100,9 +1105,9 @@ export default {
     toggleAllMasks() {
       this.$nextTick(() => {
         if (this.allMasksSelected) {
-          this.filterConfig.masks = []
+          this.filterConfig.selectedMasks = []
         } else {
-          this.filterConfig.masks = VARIANT_MASKS.map(mask => mask.name)
+          this.filterConfig.selectedMasks = VARIANT_MASKS.map(mask => mask.name)
         }
       })
     },
@@ -1309,7 +1314,7 @@ export default {
     maskFilter: function(pos) {
       var result = true
 
-      this.filterConfig.masks.forEach(activeMask => {
+      this.filterConfig.selectedMasks.forEach(activeMask => {
         var mask = VARIANT_MASKS?.find(d => d.name == activeMask)
         pos = parseInt(pos)
 
@@ -1371,7 +1376,7 @@ export default {
     },
 
     removeSelectedMask: function(toRemove) {
-      this.filterConfig.masks = this.filterConfig.masks.filter(
+      this.filterConfig.selectedMasks = this.filterConfig.selectedMasks.filter(
         selected => selected !== toRemove
       )
     },
