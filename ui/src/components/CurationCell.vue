@@ -31,8 +31,8 @@
       <br />
     </span>
 
-    <span v-if="variant.Disease" class="autoTag">
-      <v-icon>mdi-biohazard</v-icon>&nbsp;{{ variant.Disease }}
+    <span v-if="variant.Disease" class="autoTag" :title="variant.Disease">
+      <v-icon>mdi-biohazard</v-icon>&nbsp;{{ shortDisease }}
     </span>
   </div>
 </template>
@@ -100,6 +100,21 @@ export default {
 
     hasSelectedTags() {
       return !_.isEmpty(this.curation.selectedTagNames)
+    },
+
+    shortDisease() {
+      if (!this.variant.Disease) return ''
+
+      let result = this.variant.Disease
+      if (result.length > 30) {
+        if (result.split(',').length > 2) {
+          result =
+            result.split(',')[0] + ` +${result.split(',').length - 1} more`
+        } else {
+          result = result.substring(0, 30) + '…'
+        }
+      }
+      return result
     },
 
     tagColor() {

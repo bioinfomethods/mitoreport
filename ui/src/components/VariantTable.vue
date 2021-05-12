@@ -119,7 +119,6 @@
           <tr class="paddedrow">
             <td>
               <v-text-field
-                id="asdf"
                 v-model="filterConfig.hgvsg"
                 type="text"
                 label="Contains"
@@ -164,7 +163,7 @@
                     <span>{{ item }}</span>
                   </v-chip>
                   <span v-if="index === 4" class="grey--text caption"
-                    >(+{{ filterConfig.selectedGenes.length - 4 }} others)</span
+                    >+{{ filterConfig.selectedGenes.length - 4 }} more</span
                   >
                 </template>
               </v-select>
@@ -234,7 +233,7 @@
                     <span>{{ item }}</span>
                   </v-chip>
                   <span v-if="index === 1" class="grey--text caption"
-                    >(+{{ filterConfig.selectedMasks.length - 1 }} others)</span
+                    >+{{ filterConfig.selectedMasks.length - 1 }} more</span
                   >
                 </template>
               </v-select>
@@ -261,10 +260,10 @@
                     }}</span>
                   </v-chip>
                   <span v-if="index === 4" class="grey--text caption"
-                    >(+{{
+                    >+{{
                       filterConfig.selectedConsequences.length - 4
                     }}
-                    others)</span
+                    more</span
                   >
                 </template>
               </v-select>
@@ -275,7 +274,7 @@
                   v-model="filterConfig.curationSearch"
                   type="text"
                   label="Search notes or tag names"
-                  class="pl-3 pr-1 pt-2 curation-search"
+                  class="pl-3 pr-1 curation-search"
                   dense
                 ></v-text-field>
                 <v-checkbox

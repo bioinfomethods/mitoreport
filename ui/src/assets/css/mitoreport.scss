@@ -87,7 +87,7 @@ tr:nth-child(even) {
 }
 
 .posSlider {
-  margin-top: -13px;
+  margin-top: -8px;
 }
 .v-card__title {
   display: none;
@@ -106,6 +106,7 @@ span.filterActive {
 }
 .v-data-table div.v-data-table__wrapper table tbody tr td,
 .v-data-table div.v-data-table__wrapper table thead tr th {
+  vertical-align: top;
   padding: 2px;
   height: 1em;
   border-right: solid 1px rgb(228, 228, 228, 0.5);
