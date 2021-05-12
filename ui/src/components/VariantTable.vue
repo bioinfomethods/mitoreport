@@ -2,7 +2,7 @@
   <div>
     <v-card>
       <v-card-text class="py-0 my-0">
-        <v-row align="start" justify="start">
+        <v-row>
           <v-col md="1">
             <span class="text-subtitle-1">Saved Search:</span>
             <br />
@@ -119,6 +119,7 @@
           <tr class="paddedrow">
             <td>
               <v-text-field
+                id="asdf"
                 v-model="filterConfig.hgvsg"
                 type="text"
                 label="Contains"
@@ -209,7 +210,7 @@
                     </v-list-item-action>
                     <v-list-item-content>
                       <v-list-item-title>
-                        <v-row no-gutters align="center">
+                        <v-row no-gutters>
                           <span>{{ item }}</span>
                           <v-spacer></v-spacer>
                           <span>{{
@@ -921,14 +922,14 @@ export default {
         {
           text: 'HGVS.g',
           value: 'hgvsg',
-          width: '100',
+          width: '85',
           filter: this.hgvsgFilter,
         },
         {
           text: 'Gene',
           // tooltip: 'Gene tooltip',
           value: 'symbols',
-          width: '150',
+          width: '85',
           filter: this.genesFilter,
         },
         {
@@ -950,14 +951,14 @@ export default {
           text: 'Heteroplasmy of Sample',
           tooltip: 'Heteroplasmy freq of variant in sample',
           value: 'genotypes[0].AF',
-          width: '110',
+          width: '80',
           filter: this.vafFilter,
         },
         {
           text: 'Genbank Freq',
           // tooltip: 'Genbank % tooltip',
           value: 'gbFreq',
-          width: '100',
+          width: '80',
           filter: this.gbFreqFilter,
         },
 
@@ -966,7 +967,7 @@ export default {
           tooltip:
             'Proportion of individuals with variant at heteroplasmy between 0.10 - 0.95 in gnomAD',
           value: 'gnomAD.af_het',
-          width: '135',
+          width: '80',
           filter: this.gnomADHetFreqFilter,
         },
 
@@ -975,13 +976,12 @@ export default {
           tooltip:
             'Proportion of individuals with variant at homoplasmy (heteroplasmy >= 0.95) in gnomAD',
           value: 'gnomAD.af_hom',
-          width: '135',
+          width: '80',
           filter: this.gnomADHomFreqFilter,
         },
         {
           text: 'Heteroplasmy Distribution',
           tooltip: 'Heteroplasmy Distribution of variant from gnomAD',
-          align: 'center',
           value: 'gnomAD.hl_hist',
           sortable: false,
           width: '120',
@@ -989,7 +989,6 @@ export default {
         {
           text: 'Age Distribution (Homoplasmic)',
           tooltip: 'Age Distribution (Homoplasmic) from gnomAD',
-          align: 'center',
           value: 'gnomAD.age_hist_hom',
           sortable: false,
           width: '120',

@@ -100,3 +100,13 @@ div.filteredItemCount span {
 span.filterActive {
   text-decoration: 4px underline lightblue;
 }
+
+.v-data-table div.v-data-table__wrapper table thead tr th {
+  text-align: center !important;
+}
+.v-data-table div.v-data-table__wrapper table tbody tr td,
+.v-data-table div.v-data-table__wrapper table thead tr th {
+  padding: 2px;
+  height: 1em;
+  border-right: solid 1px rgb(228, 228, 228, 0.5);
+}

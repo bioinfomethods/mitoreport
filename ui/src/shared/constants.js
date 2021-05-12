@@ -51,7 +51,7 @@ export const DEFAULT_VARIANT_SEARCH = {
     selectedConsequences: [],
     gnomADHap: [],
     vafRange: [0.01, 1],
-    gbFreqTickIndex: 2,
+    gbFreqTickIndex: 3,
     gnomADHetFreqTickIndex: 6,
     gnomADHomFreqTickIndex: 6,
     disease: '',
