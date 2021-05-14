@@ -643,9 +643,11 @@
         </template>
 
         <template v-slot:item.id="{ item }">
-          <div :class="showQuickTags ? 'showQuickTags' : ''">
-            <CurationCell :variantId="item.id" :key="item.id"></CurationCell>
-          </div>
+          <CurationCell
+            :variantId="item.id"
+            :key="item.id"
+            :show-quick-tags="showQuickTags"
+          ></CurationCell>
         </template>
 
         <template v-slot:item.Disease="{ item }">

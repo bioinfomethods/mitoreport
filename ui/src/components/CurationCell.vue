@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div :class="showQuickTags ? 'showQuickTags' : ''">
     <v-tooltip top>
       <template v-slot:activator="{ on, attrs }">
         <span v-bind="attrs" v-on="on" class="haploWeightIcon">
@@ -25,6 +25,7 @@
       "
       v-for="tag in getVariantTags.map(d => d.name)"
       v-bind:key="tag"
+      @click="toggleTag(tag)"
     >
       {{ tag }}
     </span>
@@ -64,11 +65,6 @@ span.tag.selected {
   color: white;
   background-color: purple;
 }
-span.tag:hover {
-  border: solid 1px black;
-  color: black;
-  background-color: rgba(128, 0, 128, 0.5);
-}
 span.tag {
   border: solid 1px lightgrey;
   display: none;
@@ -83,11 +79,17 @@ span.tag {
   display: inline;
   cursor: pointer;
 }
+.showQuickTags span.tag:hover {
+  border: solid 1px black;
+  color: black;
+  background-color: rgba(128, 0, 128, 0.5);
+}
 </style>
 <script>
 import { mapGetters } from 'vuex'
 import * as _ from 'lodash'
 import * as vueFilters from '@/shared/vueFilters'
+import { DEBOUNCE_DELAY } from '@/shared/constants'
 
 export default {
   name: 'CurationCell',
@@ -97,13 +99,43 @@ export default {
       type: String,
       required: false,
     },
+    showQuickTags: Boolean,
   },
   data: () => {
     return {
       selectedTags: [],
     }
   },
+  methods: {
+    toggleTag: function(tag) {
+      if (this.showQuickTags) {
+        event.stopPropagation()
 
+        if (this.curation.selectedTagNames.indexOf(tag) >= 0) {
+          this.selectedTags = this.selectedTags.filter(
+            selected => selected !== tag
+          )
+          this.debounceSave()
+        } else {
+          this.selectedTags.push(this.getVariantTags.find(d => d.name == tag))
+          this.debounceSave()
+        }
+      }
+    },
+
+    debounceSave: _.debounce(function() {
+      this.$store.dispatch('saveCuration', {
+        variantId: this.variantId,
+        selectedTags: this.selectedTags,
+        variantNote: this.variantNote,
+      })
+    }, DEBOUNCE_DELAY.MEDIUM),
+  },
+  mounted() {
+    this.selectedTags = this.getVariantTags.filter(vt => {
+      return this.curation?.selectedTagNames?.includes(vt.name)
+    })
+  },
   computed: {
     ...mapGetters([
       'getCurationByVariantId',
