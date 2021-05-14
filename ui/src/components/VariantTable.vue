@@ -92,7 +92,16 @@
               v-model="displayHaplodata"
               ><template v-slot:label>Toggle Haplogroup</template></v-switch
             >
-            <!-- <span>{{ hetRatio }}</span> -->
+          </v-col>
+
+          <v-col md="2">
+            <span>Toggle Quick Tags</span>
+            <v-switch
+              id="quickTagSwitch"
+              :items="showQuickTags"
+              v-model="showQuickTags"
+              ><template v-slot:label>Show Quick Tags</template></v-switch
+            >
           </v-col>
         </v-row>
       </v-card-text>
@@ -634,7 +643,9 @@
         </template>
 
         <template v-slot:item.id="{ item }">
-          <CurationCell :variantId="item.id" :key="item.id"></CurationCell>
+          <div :class="showQuickTags ? 'showQuickTags' : ''">
+            <CurationCell :variantId="item.id" :key="item.id"></CurationCell>
+          </div>
         </template>
 
         <template v-slot:item.Disease="{ item }">
@@ -848,6 +859,7 @@ export default {
       closeTimeouts: {},
       activeVariant: null,
       displayHaplodata: false,
+      showQuickTags: false,
       currentVariants: [],
     }
   },

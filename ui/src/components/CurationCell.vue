@@ -1,5 +1,5 @@
 <template>
-  <div class="middled">
+  <div>
     <v-tooltip top>
       <template v-slot:activator="{ on, attrs }">
         <span v-bind="attrs" v-on="on" class="haploWeightIcon">
@@ -19,9 +19,15 @@
       </span>
     </v-tooltip>
 
-    <div class="tag" v-for="tag in curation.selectedTagNames" v-bind:key="tag">
+    <span
+      :class="
+        curation.selectedTagNames.indexOf(tag) >= 0 ? 'selected tag' : 'tag'
+      "
+      v-for="tag in getVariantTags.map(d => d.name)"
+      v-bind:key="tag"
+    >
       {{ tag }}
-    </div>
+    </span>
 
     <span v-if="hasNote">
       {{
@@ -52,14 +58,30 @@ span.autoTag {
     font-size: 18px;
   }
 }
-div.tag {
+span.tag.selected {
+  border: none;
+  display: inline;
   color: white;
   background-color: purple;
-  display: inline;
+}
+span.tag:hover {
+  border: solid 1px black;
+  color: black;
+  background-color: rgba(128, 0, 128, 0.5);
+}
+span.tag {
+  border: solid 1px lightgrey;
+  display: none;
+  color: grey;
+  background-color: white;
   margin-right: 3px;
-  padding: 2px 4px;
+  padding: 2px;
   border-radius: 4px;
   font-size: 10px;
+}
+.showQuickTags span.tag {
+  display: inline;
+  cursor: pointer;
 }
 </style>
 <script>
@@ -76,6 +98,11 @@ export default {
       required: false,
     },
   },
+  data: () => {
+    return {
+      selectedTags: [],
+    }
+  },
 
   computed: {
     ...mapGetters([
@@ -84,6 +111,7 @@ export default {
       'getSampleSettings',
       'getVariantById',
       'getFirstHaplogroup',
+      'getVariantTags',
     ]),
 
     variant() {
