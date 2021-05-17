@@ -6,6 +6,10 @@ description = 'Mito Report UI'
 
 defaultTasks 'runTestUnit', 'runLint', 'runBuild'
 
+node {
+  download = true
+}
+
 task runServe(type: NpmTask, dependsOn: 'npmInstall') {
   group = 'development'
   description = 'npm run serve'
