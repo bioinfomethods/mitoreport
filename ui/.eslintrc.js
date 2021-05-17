@@ -15,10 +15,12 @@ module.exports = {
         ignore: ['variantId', 'refAllele', 'altAllele'],
       },
     ],
+    'vue/no-unused-components': 'warn',
+    'vue/no-unused-vars': 'warn',
     'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
     'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
-    'vue/no-unused-components': 'warn',
     'no-unused-vars': 'warn',
+    'space-before-function-paren': [0, 'never'],
   },
   overrides: [
     {

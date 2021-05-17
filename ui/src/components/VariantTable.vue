@@ -189,7 +189,7 @@
                   <v-list-item
                     ripple
                     @click="toggleAllMasks"
-                    style="width: 330px;"
+                    style="width: 330px"
                   >
                     <v-list-item-action>
                       <v-icon

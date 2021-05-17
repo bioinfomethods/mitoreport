@@ -7,7 +7,7 @@
       ref="igvIframe"
       name="igv"
       src="about:blank"
-      style="display:none"
+      style="display: none"
     ></iframe>
   </span>
   <span v-else>{{ position }}</span>
