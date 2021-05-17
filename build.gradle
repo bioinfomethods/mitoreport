@@ -44,7 +44,7 @@ dependencies {
   testRuntime "cglib:cglib-nodep:$cglibNoDepVersion"
 
   implementation files('gngs/build/libs/groovy-ngs-utils.jar')
-  implementation files('haplogrep-cmd/target/haplogrep.jar')
+  implementation files('libs/haplogrep.jar')
 
   // groovy-ngs-utils.jar is an uber jar with the following groovy modules.
   // Here we force upgrade the version.
@@ -59,7 +59,6 @@ dependencies {
   implementation "org.codehaus.groovy:groovy-xml:$groovyVersion"
   implementation "org.codehaus.groovy:groovy:$groovyVersion"
 
-  // implementation "genepi:haplogrep-core:2.6.0"
   implementation "io.github.http-builder-ng:http-builder-ng-core:$httpBuilderNgVersion"
   implementation "commons-io:commons-io:$commonsIoVersion"
 }
@@ -126,18 +125,8 @@ task buildGngs(type: Exec) {
   outputs.file('gngs/build/libs/groovy-ngs-utils.jar').withPropertyName('gngsJar')
 }
 
-task buildHaplogrepCmd(type: Exec) {
-  group = 'build'
-  description 'Build haplogrep-cmd module dependency'
-  workingDir './'
-  commandLine './mvnw', '-f', "${projectDir.absolutePath}${File.separator}haplogrep-cmd${File.separator}pom.xml", 'package', '-DskipTests'
-
-  inputs.dir('haplogrep-cmd').withPropertyName('haplogrep-cmd')
-  outputs.file('haplogrep-cmd/target/haplogrep.jar').withPropertyName('haplogrepJar')
-}
-
 test.dependsOn += ['ui:runTestUnit']
 check.dependsOn += ['ui:runLint']
-compileJava.dependsOn += ['buildGngs', 'buildHaplogrepCmd']
+compileJava.dependsOn += ['buildGngs']
 processResources.dependsOn += ['copyUiBuildToMitoOut']
 assemble.mustRunAfter 'check'
