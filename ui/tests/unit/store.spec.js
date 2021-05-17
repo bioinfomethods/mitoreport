@@ -1,3 +1,5 @@
+/* eslint-disable no-import-assign */
+
 import * as dataService from '@/services/LocalDataService.js'
 import { actions, mutations, getters } from '@/store'
 import flushPromises from 'flush-promises'

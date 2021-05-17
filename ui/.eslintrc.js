@@ -8,6 +8,8 @@ module.exports = {
     parser: 'babel-eslint',
   },
   rules: {
+    'arrow-parens': [0, 'as-needed'],
+    'space-before-function-paren': [0, 'never'],
     'vue/attribute-hyphenation': [
       'error',
       'always',
@@ -17,10 +19,15 @@ module.exports = {
     ],
     'vue/no-unused-components': 'warn',
     'vue/no-unused-vars': 'warn',
+    'vue/valid-v-slot': [
+      'error',
+      {
+        allowModifiers: true,
+      },
+    ],
     'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
     'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
     'no-unused-vars': 'warn',
-    'space-before-function-paren': [0, 'never'],
   },
   overrides: [
     {
