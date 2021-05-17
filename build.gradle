@@ -10,11 +10,6 @@ defaultTasks 'clean', 'build'
 
 repositories {
   mavenCentral()
-  jcenter()
-  maven {
-    name 'bintray-genepi'
-    url 'https://dl.bintray.com/genepi/maven'
-  }
 }
 
 configurations {
