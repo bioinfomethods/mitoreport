@@ -117,7 +117,7 @@ export default {
 
         if (this.curation?.selectedTagNames.indexOf(tag) >= 0) {
           this.selectedTags = this.selectedTags.filter(
-            selected => selected !== tag
+            selected => selected.name !== tag
           )
           this.debounceSave()
         } else {
