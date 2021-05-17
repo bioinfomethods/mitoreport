@@ -21,7 +21,11 @@
 
     <span
       :class="
-        curation.selectedTagNames.indexOf(tag) >= 0 ? 'selected tag' : 'tag'
+        curation &&
+        curation.selectedTagNames &&
+        curation.selectedTagNames.indexOf(tag) >= 0
+          ? 'selected tag'
+          : 'tag'
       "
       v-for="tag in getVariantTags.map(d => d.name)"
       v-bind:key="tag"
@@ -111,7 +115,7 @@ export default {
       if (this.showQuickTags) {
         event.stopPropagation()
 
-        if (this.curation.selectedTagNames.indexOf(tag) >= 0) {
+        if (this.curation?.selectedTagNames.indexOf(tag) >= 0) {
           this.selectedTags = this.selectedTags.filter(
             selected => selected !== tag
           )

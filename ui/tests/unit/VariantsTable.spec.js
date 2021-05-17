@@ -71,7 +71,7 @@ describe('VariantTable.vue', () => {
         curationSearch: '',
         importantCuration: false,
         gnomADHap: [],
-        gbFreqTickIndex: 2,
+        gbFreqTickIndex: 3,
         gnomADHetFreqTickIndex: 6,
         gnomADHomFreqTickIndex: 6,
         mitoMap: '',
