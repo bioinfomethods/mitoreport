@@ -211,7 +211,7 @@
                   <v-divider class="mt-2"></v-divider>
                 </template>
 
-                <template v-slot:item="{ active, item, attrs, on }">
+                <template v-slot:item="{ item, attrs, on }">
                   <v-list-item v-on="on" v-bind="attrs" #default="{ active }">
                     <v-list-item-action>
                       <v-checkbox :input-value="active"></v-checkbox>
