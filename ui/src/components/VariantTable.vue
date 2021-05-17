@@ -372,7 +372,7 @@
         </template>
 
         <!-- Override row values where necessary using slot v-slot:item.${header.value} -->
-        <template v-slot:item.hgvsg="{ item }">
+        <template v-slot:item.pos="{ item }">
           <!-- Todo: test this regex? Also confirm it is a good idea. -->
           <a
             :id="`varlink-${item.pos}-${item.ref}-${item.alt}`"
@@ -934,7 +934,7 @@ export default {
       return [
         {
           text: 'HGVS.g',
-          value: 'hgvsg',
+          value: 'pos',
           width: '85',
           filter: this.hgvsgFilter,
         },
