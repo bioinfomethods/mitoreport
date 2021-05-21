@@ -35,9 +35,7 @@
     >
       {{ snackbar.message }}
       <template v-slot:action="{ attrs }">
-        <v-btn dark text v-bind="attrs" @click="closeSnackbar">
-          Close
-        </v-btn>
+        <v-btn dark text v-bind="attrs" @click="closeSnackbar"> Close </v-btn>
       </template>
     </v-snackbar>
   </v-app>
