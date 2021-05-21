@@ -734,7 +734,6 @@ import * as _ from 'lodash'
 import {
   DEFAULT_VARIANT_SEARCH,
   VARIANT_MASKS,
-  SAVE_INTERVAL_MS,
   MAX_POS,
   MIN_POS,
   COLORS,
@@ -761,9 +760,6 @@ export default {
 
   mounted() {
     this.toggleVariantById(this.variantId)
-    this.saveSearchInterval = setInterval(() => {
-      this.onIntervalSaveSearch()
-    }, SAVE_INTERVAL_MS)
 
     if (this?.allSavedSearches) {
       const found = this.allSavedSearches.find(
@@ -780,12 +776,11 @@ export default {
   },
 
   beforeDestroy() {
-    clearInterval(this.saveSearchInterval)
+    this.saveCurrentSearch()
   },
 
   data: () => {
     return {
-      saveSearchInterval: null,
       filterConfig: {
         posRange: [0, MAX_POS],
         allele: '',
@@ -1200,7 +1195,7 @@ export default {
       this.toggleImportantCuration()
     },
 
-    onIntervalSaveSearch: function() {
+    saveCurrentSearch: function() {
       const toSave = {
         name: 'Current',
         description: 'Currently configured filters',
