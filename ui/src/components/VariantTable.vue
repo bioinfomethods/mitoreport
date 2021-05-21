@@ -278,12 +278,11 @@
               </v-select>
             </td>
             <td>
-              <v-row class="justify-space-between">
+              <v-row class="justify-space-between curation-search">
                 <v-text-field
                   v-model="filterConfig.curationSearch"
                   type="text"
                   label="Search notes or tag names"
-                  class="pl-3 pr-1 curation-search"
                   dense
                 ></v-text-field>
                 <v-checkbox
@@ -291,8 +290,8 @@
                   on-icon="mdi-tag-multiple"
                   off-icon="mdi-tag-multiple-outline"
                   @click="toggleImportantCuration"
+                  style="margin-top: 4px;"
                   color="red"
-                  class="pa-0"
                 ></v-checkbox>
               </v-row>
             </td>
@@ -1611,7 +1610,7 @@ export default {
 }
 </script>
 
-<style lang="css" scoped>
+<style lang="scss" scoped>
 .variant-table-v-select {
   font-size: 0.8em;
 }
@@ -1620,7 +1619,11 @@ export default {
   background-color: rgba(0, 0, 0, 0.12);
 }
 
-.curation-search {
-  width: 100px;
+.row.curation-search {
+  margin: 0;
+  width: 100%;
+}
+.row {
+  margin: 0 -12px;
 }
 </style>
