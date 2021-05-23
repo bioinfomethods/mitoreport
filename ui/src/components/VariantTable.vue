@@ -604,7 +604,7 @@
 
         <!-- Heteroplasmy Distribution -->
         <template v-slot:item.gnomAD.hl_hist="{ item }">
-          <span v-if="heteroplasmyDistExists(item)">
+          <div v-if="heteroplasmyDistExists(item)" class='hist-wrapper'>
             <v-sparkline
               :value="heteroplasmyDistHeights(item)"
               type="bar"
@@ -614,27 +614,28 @@
               smooth="1"
               gradient-direction="top"
               auto-line-width
-              :show-labels="false"
+              height=45
             >
             </v-sparkline>
-          </span>
+          </div>
         </template>
 
         <!-- Age Distribution Homoplasmic -->
         <template v-slot:item.gnomAD.age_hist_hom="{ item }">
-          <span v-if="ageDistExists(item)">
+          <div v-if="ageDistExists(item)" class='hist-wrapper'>
             <v-sparkline
               :value="ageDistHomoHeights(item)"
               type="bar"
               :gradient="[COLORS.PRIMARY, COLORS.PRIMARY_LIGHT]"
               radius="10"
-              padding="1"
+              padding="3"
               smooth="1"
               gradient-direction="top"
               auto-line-width
+              height=45
             >
             </v-sparkline>
-          </span>
+          </div>
         </template>
 
         <template v-slot:item.id="{ item }">
@@ -1625,5 +1626,8 @@ export default {
 #variantTable .row {
   /* fix header alignment incorrect - seems vuetify issue changed .row to have -12px top margin in recent update causing vertical overlap */
   margin-top: auto;
+}
+.hist-wrapper {
+  padding: 2px;
 }
 </style>
