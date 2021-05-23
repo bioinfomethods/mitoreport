@@ -85,7 +85,7 @@
             </v-btn>
           </v-col>
           <v-col md="2">
-            <span>Haplogroup is: {{ getFirstHaplogroup }}</span>
+            <span>Haplogroup is: {{ getFirstHaplogroup }} <span class='secondary-info'>({{getFirstFullHaplogroup}})</span></span>
             <v-switch
               id="displayHaplodata"
               :items="displayHaplodata"
@@ -870,6 +870,7 @@ export default {
       'getCurationByVariantId',
       'getHaplogroups',
       'getFirstHaplogroup',
+      'getFirstFullHaplogroup',
     ]),
 
     allMasksSelected() {
@@ -1617,5 +1618,9 @@ export default {
 
 .curation-search {
   width: 100px;
+}
+
+.secondary-info {
+  color:#aaa
 }
 </style>
