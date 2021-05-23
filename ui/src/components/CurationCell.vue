@@ -48,9 +48,6 @@
   </div>
 </template>
 <style lang="scss">
-div.middled * {
-  vertical-align: middle;
-}
 span.autoTag {
   border: 1px solid grey;
   line-height: 1.5em;
@@ -63,12 +60,6 @@ span.autoTag {
     font-size: 18px;
   }
 }
-span.tag.selected {
-  border: none;
-  display: inline;
-  color: white;
-  background-color: purple;
-}
 span.tag {
   border: solid 1px lightgrey;
   display: none;
@@ -78,15 +69,21 @@ span.tag {
   padding: 2px;
   border-radius: 4px;
   font-size: 10px;
+  &.selected {
+    border: none;
+    display: inline;
+    color: white;
+    background-color: purple;
+  }
 }
 .showQuickTags span.tag {
   display: inline;
   cursor: pointer;
-}
-.showQuickTags span.tag:hover {
-  border: solid 1px black;
-  color: black;
-  background-color: rgba(128, 0, 128, 0.5);
+  &:hover {
+    border: solid 1px black;
+    color: black;
+    background-color: rgba(128, 0, 128, 0.5);
+  }
 }
 </style>
 <script>

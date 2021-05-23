@@ -26,8 +26,6 @@ export const MIN_POS = 200
 
 export const MAX_POS = 16300
 
-export const SAVE_INTERVAL_MS = 5000
-
 export const DEFAULT_IGV_HOST = 'http://localhost:60151'
 
 export const DEFAULT_GENECARDS_URL_PREFIX =

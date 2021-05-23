@@ -279,12 +279,11 @@
               </v-select>
             </td>
             <td>
-              <v-row class="justify-space-between">
+              <v-row class="justify-space-between curation-search">
                 <v-text-field
                   v-model="filterConfig.curationSearch"
                   type="text"
                   label="Search notes or tag names"
-                  class="pl-3 pr-1 curation-search"
                   dense
                 ></v-text-field>
                 <v-checkbox
@@ -292,8 +291,8 @@
                   on-icon="mdi-tag-multiple"
                   off-icon="mdi-tag-multiple-outline"
                   @click="toggleImportantCuration"
+                  style="margin-top: 4px;"
                   color="red"
-                  class="pa-0"
                 ></v-checkbox>
               </v-row>
             </td>
@@ -731,7 +730,6 @@ import * as _ from 'lodash'
 import {
   DEFAULT_VARIANT_SEARCH,
   VARIANT_MASKS,
-  SAVE_INTERVAL_MS,
   MAX_POS,
   MIN_POS,
   COLORS,
@@ -758,9 +756,6 @@ export default {
 
   mounted() {
     this.toggleVariantById(this.variantId)
-    this.saveSearchInterval = setInterval(() => {
-      this.onIntervalSaveSearch()
-    }, SAVE_INTERVAL_MS)
 
     if (this?.allSavedSearches) {
       const found = this.allSavedSearches.find(
@@ -777,12 +772,11 @@ export default {
   },
 
   beforeDestroy() {
-    clearInterval(this.saveSearchInterval)
+    this.saveCurrentSearch()
   },
 
   data: () => {
     return {
-      saveSearchInterval: null,
       filterConfig: {
         posRange: [0, MAX_POS],
         allele: '',
@@ -1198,7 +1192,7 @@ export default {
       this.toggleImportantCuration()
     },
 
-    onIntervalSaveSearch: function() {
+    saveCurrentSearch: function() {
       const toSave = {
         name: 'Current',
         description: 'Currently configured filters',
@@ -1608,7 +1602,7 @@ export default {
 }
 </script>
 
-<style lang="css" scoped>
+<style lang="scss" scoped>
 .variant-table-v-select {
   font-size: 0.8em;
 }
@@ -1617,8 +1611,12 @@ export default {
   background-color: rgba(0, 0, 0, 0.12);
 }
 
-.curation-search {
-  width: 100px;
+.row.curation-search {
+  margin: 0;
+  width: 100%;
+}
+.row {
+  margin: 0 -12px;
 }
 
 .secondary-info {
