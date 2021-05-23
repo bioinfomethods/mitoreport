@@ -614,10 +614,8 @@
               smooth="1"
               gradient-direction="top"
               auto-line-width
+              :show-labels="false"
             >
-              <template v-slot:label>
-                {{ heteroplasmyDistLabel(item) }}
-              </template>
             </v-sparkline>
           </span>
         </template>
@@ -635,9 +633,6 @@
               gradient-direction="top"
               auto-line-width
             >
-              <template v-slot:label>
-                {{ ageDistLabel(item) }}
-              </template>
             </v-sparkline>
           </span>
         </template>
