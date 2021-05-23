@@ -77,7 +77,7 @@ export const getters = {
       return ['No Group data provided']
     }
   },
-  
+
   getFullHaplogroups: (state, getters) => {
     let haplogrepClass = getters.getSampleSettings.haplogrepClassification
     if (haplogrepClass && !_.isEmpty(haplogrepClass.haplogrepResults)) {
@@ -91,7 +91,7 @@ export const getters = {
       return ['No Group data provided']
     }
   },
-  
+
   getFirstFullHaplogroup: (state, getters) => {
     return getters.getFullHaplogroups[0]
   },

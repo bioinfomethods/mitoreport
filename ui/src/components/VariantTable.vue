@@ -85,7 +85,12 @@
             </v-btn>
           </v-col>
           <v-col md="2">
-            <span>Haplogroup is: {{ getFirstHaplogroup }} <span class='secondary-info'>({{getFirstFullHaplogroup}})</span></span>
+            <span
+              >Haplogroup is: {{ getFirstHaplogroup }}
+              <span class="secondary-info"
+                >({{ getFirstFullHaplogroup }})</span
+              ></span
+            >
             <v-switch
               id="displayHaplodata"
               :items="displayHaplodata"
@@ -604,7 +609,7 @@
 
         <!-- Heteroplasmy Distribution -->
         <template v-slot:item.gnomAD.hl_hist="{ item }">
-          <div v-if="heteroplasmyDistExists(item)" class='hist-wrapper'>
+          <div v-if="heteroplasmyDistExists(item)" class="hist-wrapper">
             <v-sparkline
               :value="heteroplasmyDistHeights(item)"
               type="bar"
@@ -614,7 +619,7 @@
               smooth="1"
               gradient-direction="top"
               auto-line-width
-              height=45
+              height="45"
             >
             </v-sparkline>
           </div>
@@ -622,7 +627,7 @@
 
         <!-- Age Distribution Homoplasmic -->
         <template v-slot:item.gnomAD.age_hist_hom="{ item }">
-          <div v-if="ageDistExists(item)" class='hist-wrapper'>
+          <div v-if="ageDistExists(item)" class="hist-wrapper">
             <v-sparkline
               :value="ageDistHomoHeights(item)"
               type="bar"
@@ -632,7 +637,7 @@
               smooth="1"
               gradient-direction="top"
               auto-line-width
-              height=45
+              height="45"
             >
             </v-sparkline>
           </div>
@@ -1621,7 +1626,7 @@ export default {
 }
 
 .secondary-info {
-  color:#aaa
+  color: #aaa;
 }
 #variantTable .row {
   /* fix header alignment incorrect - seems vuetify issue changed .row to have -12px top margin in recent update causing vertical overlap */
