@@ -110,6 +110,7 @@
       <v-card-title></v-card-title>
       <v-data-table
         ref="variantTable"
+        id="variantTable"
         :headers="headers"
         :items="filteredVariants"
         :options="tableOptions"
@@ -1622,5 +1623,9 @@ export default {
 
 .secondary-info {
   color:#aaa
+}
+#variantTable .row {
+  /* fix header alignment incorrect - seems vuetify issue changed .row to have -12px top margin in recent update causing vertical overlap */
+  margin-top: auto;
 }
 </style>
