@@ -119,3 +119,6 @@ span.filterActive {
 #variantTable tr.v-data-table__expanded.v-data-table__expanded__content {
   cursor: inherit;
 }
+.v-card__title {
+  display: flex !important;
+}

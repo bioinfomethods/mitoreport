@@ -112,7 +112,6 @@
       </v-card-text>
     </v-card>
     <v-card>
-      <v-card-title></v-card-title>
       <v-data-table
         ref="variantTable"
         id="variantTable"

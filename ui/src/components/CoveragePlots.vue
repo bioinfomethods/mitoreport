@@ -99,9 +99,3 @@ export default {
   },
 }
 </script>
-
-<style scoped>
-#deletionsPage .v-card__title {
-  display: flex !important;
-}
-</style>
