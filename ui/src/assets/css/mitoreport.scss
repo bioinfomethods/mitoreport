@@ -111,3 +111,11 @@ span.filterActive {
   height: 1em;
   border-right: solid 1px rgb(240, 240, 240);
 }
+
+#variantTable tr {
+  cursor: pointer;
+}
+#variantTable tr.paddedrow,
+#variantTable tr.v-data-table__expanded.v-data-table__expanded__content {
+  cursor: inherit;
+}
