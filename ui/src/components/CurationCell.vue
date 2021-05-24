@@ -24,8 +24,8 @@
         curation &&
         curation.selectedTagNames &&
         curation.selectedTagNames.indexOf(tag) >= 0
-          ? 'selected tag'
-          : 'tag'
+          ? `selected tag ${tag}`
+          : `tag ${tag}`
       "
       v-for="tag in getVariantTags.map(d => d.name)"
       v-bind:key="tag"
@@ -91,6 +91,7 @@ import { mapGetters } from 'vuex'
 import * as _ from 'lodash'
 import * as vueFilters from '@/shared/vueFilters'
 import { DEBOUNCE_DELAY } from '@/shared/constants'
+import d3 from 'd3'
 
 export default {
   name: 'CurationCell',
@@ -111,14 +112,17 @@ export default {
     toggleTag: function(tag) {
       if (this.showQuickTags) {
         event.stopPropagation()
+        var el = d3.select(this.$el).select(`.${tag}`)
 
         if (this.curation?.selectedTagNames.indexOf(tag) >= 0) {
           this.selectedTags = this.selectedTags.filter(
             selected => selected.name !== tag
           )
+          el.classed('selected', false)
           this.debounceSave()
         } else {
           this.selectedTags.push(this.getVariantTags.find(d => d.name == tag))
+          el.classed('selected', true)
           this.debounceSave()
         }
       }
