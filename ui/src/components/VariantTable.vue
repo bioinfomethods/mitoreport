@@ -396,16 +396,7 @@
           ></GeneCardsLink>
         </template>
         <template v-slot:item.consequence="{ item }">
-          <a
-            v-if="item.consequence"
-            target="_blank"
-            :title="item.consequence.displayTerm"
-            :href="
-              `http://www.sequenceontology.org/miso/current_svn/term/${item.consequence.soAccession}`
-            "
-          >
-            {{ shortenConsequenceOntology(item.consequence.displayTerm) }}</a
-          >
+          {{ shortenConsequenceOntology(item.consequence.displayTerm) }}
         </template>
         <template v-slot:item.gbFreq="{ item }">
           <span v-if="item.gbFreq > 0">{{ item.gbFreq | precisionTo }}</span>

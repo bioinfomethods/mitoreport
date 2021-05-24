@@ -22,11 +22,16 @@
         <tr>
           <td>Consequence:</td>
           <td>
-            {{
-              variant.consequence
-                ? variant.consequence.displayTerm
-                : 'No VEP consequence'
-            }}
+            <a
+              v-if="variant.consequence"
+              target="_blank"
+              :title="variant.consequence.displayTerm"
+              :href="
+                `http://www.sequenceontology.org/miso/current_svn/term/${variant.consequence.soAccession}`
+              "
+              >{{ variant.consequence.displayTerm }}</a
+            >
+            <span v-else>No VEP consequence</span>
           </td>
         </tr>
         <!-- <tr>
