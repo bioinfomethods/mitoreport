@@ -2,9 +2,9 @@
 
 PROJECT_DIR=$(pwd)
 
-echo $PROJECT_DIR
-
-echo $JAVA_HOME
+echo "Building mitoreport"
+echo "Project directory: $PROJECT_DIR"
+echo "Java home: $JAVA_HOME"
 
 ./gradlew
 # ./gradlew compileJava jar 
