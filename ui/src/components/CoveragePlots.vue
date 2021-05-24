@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <v-container id="deletionsPage">
     <v-row>
       <v-col>
         <v-card>
@@ -100,4 +100,8 @@ export default {
 }
 </script>
 
-<style scoped></style>
+<style scoped>
+#deletionsPage .v-card__title {
+  display: flex !important;
+}
+</style>
