@@ -267,7 +267,8 @@ export const mutations = {
     existing.selectedTagNames =
       curationToSave.selectedTags?.map(ct => ct.name) ||
       existing.selectedTagNames
-    existing.variantNote = curationToSave.variantNote || existing.variantNote || ""
+    existing.variantNote =
+      curationToSave.variantNote || existing.variantNote || ''
   },
 }
 

@@ -3,7 +3,6 @@ import router from '@/router'
 import Deletions from '@/views/Deletions.vue'
 import Variants from '@/views/Variants.vue'
 import VariantCuration from '@/components/VariantCuration.vue'
-import VariantDetails from '@/components/VariantDetails.vue'
 import VariantInfo from '@/components/VariantInfo.vue'
 import VariantTable from '@/components/VariantTable.vue'
 import { createLocalVue, mount } from '@vue/test-utils'
@@ -43,7 +42,7 @@ describe('App.vue', () => {
     expect(variantTable.exists()).toBe(true)
   })
 
-  it('renders VariantDetails when navigate to a variant row', async () => {
+  it('renders expanded details when navigate to a variant row', async () => {
     router.push({
       name: 'variantDetails',
       params: { variantId: 'chrM-2465-T-A' },
