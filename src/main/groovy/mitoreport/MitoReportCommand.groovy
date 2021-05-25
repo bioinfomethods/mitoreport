@@ -3,6 +3,7 @@ package mitoreport
 import gngs.CliOptions
 import gngs.tools.DeletionPlot
 import groovy.json.JsonOutput
+import groovy.json.JsonSlurper
 import groovy.util.logging.Slf4j
 import io.micronaut.core.io.ResourceLoader
 import mitoreport.haplogrep.HaplogrepClassification
@@ -86,6 +87,7 @@ class MitoReportCommand implements Runnable {
 
         Map<String, File> deletionsResult = createDeletionsPlot()
         File deletionsJson = deletionsResult.deletionsJsonFile
+        File coverageStatsJson = deletionsResult.coverageStatsJsonFile
         File variantsJson = runReport(deletionsJson)
 
         BasicFileAttributes fileAttr = Files.readAttributes(gnomADVCF, BasicFileAttributes)
@@ -104,20 +106,22 @@ class MitoReportCommand implements Runnable {
         ]
 
         HaplogrepClassification haplogrepClassification = new HaplogroupClassifier(vcfFile, sample).call()
-        writeOutUiDataAndSettings(deletionsJson, deletionsResult.bamFile, variantsJson, haplogrepClassification, metadata)
+        writeOutUiDataAndSettings(deletionsJson, deletionsResult.bamFile, variantsJson, haplogrepClassification, coverageStatsJson, metadata)
     }
 
     Map<String, File> createDeletionsPlot() {
-        File result = new File(Paths.get(mitoReportPathName, 'deletions.json').toUri())
+        File deletionsFile = new File(Paths.get(mitoReportPathName, 'deletions.json').toUri())
+        File coverageStatsJsonFile = new File(Paths.get(mitoReportPathName, 'covo_stats.json').toUri())
 
         CliOptions dpOpts = new CliOptions(overrides: [
                 'region'      : region,
                 'covo'        : Paths.get(mitoReportPathName, 'covo.tsv').toString(),
+                'covoStats'   : coverageStatsJsonFile.absolutePath,
                 'sample'      : sample,
                 'sampleOutput': sampleOutput,
                 'covplot'     : Paths.get(mitoReportPathName, 'covo.png').toString(),
                 'srplot'      : Paths.get(mitoReportPathName, 'sr.png').toString(),
-                'json'        : result.absolutePath,
+                'json'        : deletionsFile.absolutePath,
                 'arguments'   : bamFiles.collect { it.absolutePath }
         ])
 
@@ -127,7 +131,7 @@ class MitoReportCommand implements Runnable {
         // TODO - This bamFile location is required to generate IGV links in the UI
         File bamFile = deletionPlot.getBam().samFile
 
-        return ['bamFile': bamFile, 'deletionsJsonFile': result]
+        return ['bamFile': bamFile, 'deletionsJsonFile': deletionsFile, 'coverageStatsJsonFile': coverageStatsJsonFile]
     }
 
     File runReport(File deletionsJson) {
@@ -195,7 +199,7 @@ class MitoReportCommand implements Runnable {
         indexHtml.text = indexHtml.text.replaceFirst('mitoSettings.js', "mitoSettings_${sampleOutput}.js")
     }
 
-    private void writeOutUiDataAndSettings(File deletionsJson, File sampleBamFile, File variantsJson, HaplogrepClassification haplogrepClassification, Map metadata) {
+    private void writeOutUiDataAndSettings(File deletionsJson, File sampleBamFile, File variantsJson, HaplogrepClassification haplogrepClassification, File coverageStatsJson, Map metadata) {
         new File(Paths.get(mitoReportPathName, 'deletions.js').toUri())
                 .withWriter { it << 'window.deletions = ' + deletionsJson.text }
 
@@ -206,6 +210,8 @@ class MitoReportCommand implements Runnable {
         String bamFileName = FilenameUtils.getName(sampleBamFile.absolutePath)
         String sampleVcfDir = FilenameUtils.getFullPath(vcfFile.absolutePath)
         String sampleVcfFileName = FilenameUtils.getName(vcfFile.absolutePath)
+        def coverageStats = new JsonSlurper().parseText(coverageStatsJson.text)
+        def qc = ['coverageStats': coverageStats]
 
         def defaultSettings = [
                 'igvHost'           : DEFAULT_IGV_HOST,
@@ -215,6 +221,7 @@ class MitoReportCommand implements Runnable {
                         [
                                 'id'                     : sampleOutput,
                                 'metadata'               : metadata,
+                                'qc'                     : qc,
                                 'haplogrepClassification': new HaplogrepClassification(sampleOutput, haplogrepClassification.haplogrepResults),
                                 'bamDir'                 : bamDir,
                                 'bamFilename'            : bamFileName,
