@@ -36,6 +36,9 @@ class MitoReportCommand implements Runnable {
     @Option(names = ['-s', '-sample', '--sample'], required = true, description = 'Sample ID')
     String sample
 
+    @Option(names = ['-so', '-sample-output', '--sample-output'], required = false, description = 'Provide replacement Sample ID')
+    String sampleOutput
+
     @Option(names = ['-ann', '-annotations', '--annotations'], required = true, description = 'Annotation file to apply to VCF')
     String annotations
 
@@ -67,13 +70,14 @@ class MitoReportCommand implements Runnable {
     MitoMapPolymorphismsLoader mitoMapLoader
 
     void run() {
+        this.sampleOutput = this.sampleOutput ?: sample
 
         (bamFiles + [vcfFile, new File(annotations), mitoMapAnnotations.toFile(), gnomADVCF.toFile()])
                 .each { assert it.exists(), "${it.absolutePath} does not exist." }
 
         // Default to a directory named after the sample
         if (!this.outputDir) {
-            this.outputDir = new File("mitoreport-$sample")
+            this.outputDir = new File("mitoreport-$sampleOutput")
         }
 
         this.mitoReportPathName = this.outputDir.absolutePath
@@ -107,13 +111,14 @@ class MitoReportCommand implements Runnable {
         File result = new File(Paths.get(mitoReportPathName, 'deletions.json').toUri())
 
         CliOptions dpOpts = new CliOptions(overrides: [
-                'region'   : region,
-                'covo'     : Paths.get(mitoReportPathName, 'covo.tsv').toString(),
-                'sample'   : sample,
-                'covplot'  : Paths.get(mitoReportPathName, 'covo.png').toString(),
-                'srplot'   : Paths.get(mitoReportPathName, 'sr.png').toString(),
-                'json'     : result.absolutePath,
-                'arguments': bamFiles.collect { it.absolutePath }
+                'region'      : region,
+                'covo'        : Paths.get(mitoReportPathName, 'covo.tsv').toString(),
+                'sample'      : sample,
+                'sampleOutput': sampleOutput,
+                'covplot'     : Paths.get(mitoReportPathName, 'covo.png').toString(),
+                'srplot'      : Paths.get(mitoReportPathName, 'sr.png').toString(),
+                'json'        : result.absolutePath,
+                'arguments'   : bamFiles.collect { it.absolutePath }
         ])
 
         DeletionPlot deletionPlot = new DeletionPlot(opts: dpOpts)
@@ -187,7 +192,7 @@ class MitoReportCommand implements Runnable {
 
     private void contextualiseReportSettings(String reportPathName) {
         File indexHtml = new File(Paths.get(reportPathName, 'index.html').toString())
-        indexHtml.text = indexHtml.text.replaceFirst('mitoSettings.js', "mitoSettings_${sample}.js")
+        indexHtml.text = indexHtml.text.replaceFirst('mitoSettings.js', "mitoSettings_${sampleOutput}.js")
     }
 
     private void writeOutUiDataAndSettings(File deletionsJson, File sampleBamFile, File variantsJson, HaplogrepClassification haplogrepClassification, Map metadata) {
@@ -208,9 +213,9 @@ class MitoReportCommand implements Runnable {
                 'hmtVarUrlPrefix'   : DEFAULT_HMT_VAR_URL_PREFIX,
                 'samples'           : [
                         [
-                                'id'                     : sample,
+                                'id'                     : sampleOutput,
                                 'metadata'               : metadata,
-                                'haplogrepClassification': haplogrepClassification,
+                                'haplogrepClassification': new HaplogrepClassification(sampleOutput, haplogrepClassification.haplogrepResults),
                                 'bamDir'                 : bamDir,
                                 'bamFilename'            : bamFileName,
                                 'vcfDir'                 : sampleVcfDir,
@@ -268,7 +273,7 @@ class MitoReportCommand implements Runnable {
 
         new File(Paths.get(mitoReportPathName, 'defaultSettings.js').toUri())
                 .withWriter { it << 'window.defaultSettings = ' + defaultSettingsJson }
-        String mitoSettingsFileName = "mitoSettings_${sample}.js"
+        String mitoSettingsFileName = "mitoSettings_${sampleOutput}.js"
         new File(Paths.get(mitoReportPathName, mitoSettingsFileName).toUri())
                 .withWriter { it << 'window.settings = ' + settingsJson }
 
