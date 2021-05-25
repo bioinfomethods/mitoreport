@@ -125,8 +125,6 @@
         :options="tableOptions"
         :footer-props="tableFooterProps"
         :expanded.sync="expandedVariants"
-        :sort-by="'id'"
-        :sort-desc="true"
         item-key="id"
         @current-items="currentItems"
         @click:row="toggleVariantExpansion"
