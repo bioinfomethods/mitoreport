@@ -99,5 +99,6 @@ export default {
 .variant-info tr > td:first-child {
   font-weight: bold;
   width: 150px;
+  padding-left: 5px;
 }
 </style>
