@@ -138,7 +138,7 @@ export default {
       this.$store.dispatch('saveCuration', {
         variantId: this.variantId,
         selectedTags: this.selectedTags,
-        variantNote: this.variantNote,
+        // variantNote: this.variantNote,
       })
     }, DEBOUNCE_DELAY.MEDIUM),
   },

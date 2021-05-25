@@ -264,8 +264,10 @@ export const mutations = {
     }
 
     existing.variantId = curationToSave.variantId
-    existing.selectedTagNames = curationToSave.selectedTags.map(ct => ct.name)
-    existing.variantNote = curationToSave.variantNote
+    existing.selectedTagNames =
+      curationToSave.selectedTags?.map(ct => ct.name) ||
+      existing.selectedTagNames
+    existing.variantNote = curationToSave.variantNote || existing.variantNote || ""
   },
 }
 

@@ -76,7 +76,7 @@ export default {
     debounceSave: _.debounce(function() {
       this.$store.dispatch('saveCuration', {
         variantId: this.variantId,
-        selectedTags: this.selectedTags,
+        // selectedTags: this.selectedTags,
         variantNote: this.variantNote,
       })
     }, DEBOUNCE_DELAY.MEDIUM),
