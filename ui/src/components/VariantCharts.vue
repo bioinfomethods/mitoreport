@@ -60,7 +60,7 @@ export default {
           })
           .color([COLORS.PRIMARY])
           .duration(ANIMATION_DURATION.MEDIUM)
-          .width(450)
+          .width(350)
           .height(100)
           .valueFormat(d3.format(',.0f'))
           .showXAxis(true)

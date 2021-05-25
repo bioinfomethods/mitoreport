@@ -125,8 +125,6 @@
         :options="tableOptions"
         :footer-props="tableFooterProps"
         :expanded.sync="expandedVariants"
-        :sort-by="'id'"
-        :sort-desc="true"
         item-key="id"
         @current-items="currentItems"
         @click:row="toggleVariantExpansion"
@@ -658,7 +656,7 @@
         </template>
 
         <template v-slot:expanded-item="{ headers, item }">
-          <td colspan="3">
+          <td colspan="3" class="expandedVariant">
             <v-expand-transition>
               <VariantInfo
                 v-show="transitioned[item.id]"
@@ -666,7 +664,7 @@
               ></VariantInfo>
             </v-expand-transition>
           </td>
-          <td>
+          <td class="expandedVariant">
             <v-expand-transition>
               <VariantCuration
                 v-show="transitioned[item.id]"
@@ -675,7 +673,7 @@
               ></VariantCuration>
             </v-expand-transition>
           </td>
-          <td :colspan="headers.length - 4">
+          <td :colspan="headers.length - 4" class="expandedVariant">
             <v-expand-transition>
               <VariantCharts
                 v-show="transitioned[item.id]"
@@ -849,7 +847,7 @@ export default {
       },
       searchFormMenu: false,
       selectedSavedSearch: DEFAULT_VARIANT_SEARCH,
-      vafTicks: [0, 0.01, 0.03, 0.05, 0.1, 1],
+      vafTicks: [0, 0.01, 0.02, 0.03, 0.05, 0.1, 1],
       vafIndexRange: [1, 5],
       gbFreqTicks: [0.0, 0.001, 0.002, 0.005, 0.01, 0.1, 1.0],
       gnomADHetFreqTicks: [
@@ -986,7 +984,7 @@ export default {
         {
           text: 'Curation',
           value: 'id',
-          width: '50%',
+          width: '35%',
           sort: this.curationSort,
           filter: (value, search, item) => this.curationFilter(item),
         },
@@ -1682,5 +1680,8 @@ export default {
 }
 .hist-wrapper {
   padding: 2px;
+}
+span.filterActive {
+  text-decoration: 3px underline lightblue !important;
 }
 </style>
