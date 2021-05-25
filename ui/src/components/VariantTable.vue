@@ -1041,7 +1041,7 @@ export default {
           value: 'DP',
           sortable: true,
           width: '60',
-        }
+        },
       ]
     },
 
