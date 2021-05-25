@@ -648,13 +648,7 @@
         </template>
 
         <template v-slot:expanded-item="{ headers, item }">
-          <td
-            colspan="3"
-            :class="{
-              'expanded-closing': !transitioned[item.id],
-            }"
-            style="height: auto"
-          >
+          <td colspan="3">
             <v-expand-transition>
               <VariantInfo
                 v-show="transitioned[item.id]"
@@ -662,28 +656,22 @@
               ></VariantInfo>
             </v-expand-transition>
           </td>
-          <td
-            colspan="1"
-            :class="{
-              'expanded-closing': !transitioned[item.id],
-            }"
-            style="height: auto"
-          >
+          <td>
             <v-expand-transition>
               <VariantCuration
+                v-show="transitioned[item.id]"
                 :variantId="variantId"
                 :curation="getCurationByVariantId(variantId)"
               ></VariantCuration>
             </v-expand-transition>
           </td>
-          <td
-            :colspan="headers.length - 4"
-            :class="{
-              'expanded-closing': !transitioned[item.id],
-            }"
-            style="height: auto"
-          >
-            <VariantCharts :variantId="variantId"></VariantCharts>
+          <td :colspan="headers.length - 4">
+            <v-expand-transition>
+              <VariantCharts
+                v-show="transitioned[item.id]"
+                :variantId="variantId"
+              ></VariantCharts>
+            </v-expand-transition>
           </td>
         </template>
       </v-data-table>
