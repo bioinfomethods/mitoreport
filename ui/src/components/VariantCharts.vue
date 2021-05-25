@@ -1,10 +1,10 @@
 <template>
-  <v-container>
+  <v-container class="px-0">
     <v-row align="start" justify="start" no-gutters>
-      <v-col cols="6" v-for="c in chartDataList" :key="c.id">
+      <v-col class="variantChart" v-for="c in chartDataList" :key="c.id">
         <div v-if="c.dataExists">
           <span>{{ c.title }}</span>
-          <svg :id="`${c.id}`"></svg>
+          <svg viewBox="0 0 450 150" :id="`${c.id}`"></svg>
         </div>
       </v-col>
     </v-row>
@@ -145,4 +145,14 @@ export default {
 }
 </script>
 
-<style lang="css" scoped></style>
+<style lang="css" scoped>
+div.variantChart {
+  border: solid 1px lightgrey;
+  text-align: center;
+}
+div.variantChart span,
+div.variantChart svg {
+  width: 100%;
+  padding: 1px;
+}
+</style>
