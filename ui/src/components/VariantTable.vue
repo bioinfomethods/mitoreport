@@ -649,19 +649,41 @@
 
         <template v-slot:expanded-item="{ headers, item }">
           <td
-            :colspan="headers.length"
+            colspan="3"
             :class="{
-              'ma-0 pa-0': true,
               'expanded-closing': !transitioned[item.id],
             }"
             style="height: auto"
           >
             <v-expand-transition>
-              <VariantDetails
+              <VariantInfo
                 v-show="transitioned[item.id]"
-                :variantId="item.id"
-              ></VariantDetails>
+                :variantId="variantId"
+              ></VariantInfo>
             </v-expand-transition>
+          </td>
+          <td
+            colspan="1"
+            :class="{
+              'expanded-closing': !transitioned[item.id],
+            }"
+            style="height: auto"
+          >
+            <v-expand-transition>
+              <VariantCuration
+                :variantId="variantId"
+                :curation="getCurationByVariantId(variantId)"
+              ></VariantCuration>
+            </v-expand-transition>
+          </td>
+          <td
+            :colspan="headers.length - 4"
+            :class="{
+              'expanded-closing': !transitioned[item.id],
+            }"
+            style="height: auto"
+          >
+            <VariantCharts :variantId="variantId"></VariantCharts>
           </td>
         </template>
       </v-data-table>
@@ -719,6 +741,10 @@ import HmtVarLink from '@/components/HmtVarLink'
 import IgvLink from '@/components/IgvLink'
 import CurationCell from '@/components/CurationCell'
 import VariantDetails from '@/components/VariantDetails'
+import VariantInfo from '@/components/VariantInfo'
+import VariantCuration from '@/components/VariantCuration'
+import VariantCharts from '@/components/VariantCharts'
+
 import VariantTableHeader from '@/components/VariantTableHeader'
 import * as filters from '@/shared/variantFilters'
 import * as vueFilters from '@/shared/vueFilters'
@@ -747,6 +773,9 @@ export default {
     HmtVarLink,
     IgvLink,
     VariantDetails,
+    VariantInfo,
+    VariantCuration,
+    VariantCharts,
     VariantTableHeader,
   },
 
