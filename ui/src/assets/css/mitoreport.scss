@@ -138,7 +138,7 @@ span.filterActive {
 }
 
 #variantTable tr.v-data-table__expanded.v-data-table__expanded__row td {
-  border-top: solid 1px black;
+  border-top: solid 2px black;
 }
 #variantTable
   tr.v-data-table__expanded.v-data-table__expanded__content
@@ -146,7 +146,7 @@ span.filterActive {
 #variantTable
   tr.v-data-table__expanded.v-data-table__expanded__row
   td:first-child {
-  border-left: solid 1px black;
+  border-left: solid 2px black;
 }
 #variantTable
   tr.v-data-table__expanded.v-data-table__expanded__content
@@ -154,8 +154,8 @@ span.filterActive {
 #variantTable
   tr.v-data-table__expanded.v-data-table__expanded__row
   td:last-child {
-  border-right: solid 1px black;
+  border-right: solid 2px black;
 }
 #variantTable tr.v-data-table__expanded.v-data-table__expanded__content > td {
-  border-bottom: solid 1px black;
+  border-bottom: solid 2px black;
 }
