@@ -82,8 +82,22 @@ span.highlightMe span.extraInfo {
   display: inline;
 }
 
-tr:nth-child(even) {
-  background-color: rgba(0, 0, 0, 0.02);
+tr:nth-child(even):not(.v-data-table__expanded__content) {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+#variantTable > div > table > tbody > tr:hover.paddedrow {
+  background: none;
+}
+
+#variantTable
+  > div
+  > table
+  > tbody
+  > tr:hover:not(.paddedrow, .v-data-table__expanded)
+  > td {
+  border-top: 1px solid black;
+  border-bottom: 1px solid black;
 }
 
 .posSlider {
@@ -121,4 +135,27 @@ span.filterActive {
 }
 .v-card__title {
   display: flex !important;
+}
+
+#variantTable tr.v-data-table__expanded.v-data-table__expanded__row td {
+  border-top: solid 2px black;
+}
+#variantTable
+  tr.v-data-table__expanded.v-data-table__expanded__content
+  > td:first-child,
+#variantTable
+  tr.v-data-table__expanded.v-data-table__expanded__row
+  td:first-child {
+  border-left: solid 2px black;
+}
+#variantTable
+  tr.v-data-table__expanded.v-data-table__expanded__content
+  > td:last-child,
+#variantTable
+  tr.v-data-table__expanded.v-data-table__expanded__row
+  td:last-child {
+  border-right: solid 2px black;
+}
+#variantTable tr.v-data-table__expanded.v-data-table__expanded__content > td {
+  border-bottom: solid 2px black;
 }

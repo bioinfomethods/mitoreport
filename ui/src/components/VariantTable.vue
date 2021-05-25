@@ -95,17 +95,22 @@
               id="displayHaplodata"
               :items="displayHaplodata"
               v-model="displayHaplodata"
-              ><template v-slot:label>Toggle Haplogroup</template></v-switch
+              ><template v-slot:label
+                >{{ displayHaplodata ? 'Hide' : 'Show' }} Haplogroup
+                Data</template
+              ></v-switch
             >
           </v-col>
 
           <v-col md="2">
-            <span>Toggle Quick Tags</span>
+            <span>Toggle Curation Tags</span>
             <v-switch
               id="quickTagSwitch"
               :items="showQuickTags"
               v-model="showQuickTags"
-              ><template v-slot:label>Show Quick Tags</template></v-switch
+              ><template v-slot:label
+                >{{ showQuickTags ? 'Hide' : 'Show' }} Tags</template
+              ></v-switch
             >
           </v-col>
         </v-row>
@@ -395,11 +400,9 @@
           ></GeneCardsLink>
         </template>
         <template v-slot:item.consequence="{ item }">
-          {{
-            item.consequence
-              ? shortenConsequenceOntology(item.consequence.displayTerm)
-              : ''
-          }}
+          <span v-if="item.consequence" :title="item.consequence.displayTerm">{{
+            shortenConsequenceOntology(item.consequence.displayTerm)
+          }}</span>
         </template>
         <template v-slot:item.gbFreq="{ item }">
           <span v-if="item.gbFreq > 0">{{ item.gbFreq | precisionTo }}</span>
@@ -721,6 +724,17 @@
             <li>
               <IgvLink :position="activeVariant.pos"></IgvLink>
             </li>
+            <li>
+              <a
+                target="_blank"
+                :href="
+                  `http://genome.ucsc.edu/cgi-bin/hgTracks?db=hg38&lastVirtModeType=default&lastVirtModeExtraState=&virtModeType=default&virtMode=0&nonVirtPosition=&position=${encodeURIComponent(
+                    `chrM:${activeVariant.pos}-${activeVariant.pos}`
+                  ).replace('-', '%2D')}`
+                "
+                >UCSC</a
+              >
+            </li>
           </ul>
         </v-card-text>
       </v-card>
@@ -742,6 +756,7 @@ import VariantTableHeader from '@/components/VariantTableHeader'
 import * as filters from '@/shared/variantFilters'
 import * as vueFilters from '@/shared/vueFilters'
 import * as _ from 'lodash'
+import * as $ from 'jquery'
 import {
   DEFAULT_VARIANT_SEARCH,
   VARIANT_MASKS,
@@ -1610,6 +1625,15 @@ export default {
 
     displayHaplodata: function() {
       this.toggleHaplodata(this.displayHaplodata)
+    },
+
+    showQuickTags: function() {
+      if (this.showQuickTags) {
+        $('th.text-start.sortable.active.asc')
+          .click()
+          .click()
+        $('th.text-start.sortable.active.desc').click()
+      }
     },
   },
 
