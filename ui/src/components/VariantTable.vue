@@ -943,7 +943,7 @@ export default {
         {
           text: 'Curation',
           value: 'id',
-          width: '250',
+          width: '50%',
           sort: this.curationSort,
           filter: (value, search, item) => this.curationFilter(item),
         },
