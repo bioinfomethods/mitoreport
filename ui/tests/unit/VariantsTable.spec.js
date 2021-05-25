@@ -84,7 +84,7 @@ describe('VariantTable.vue', () => {
         hgvs: '',
         hgvsShowBlank: false,
       })
-      expect(underTest.vm.$data.vafIndexRange).toEqual([2, 4])
+      expect(underTest.vm.$data.vafIndexRange).toEqual([3, 5])
       expect(underTest.vm.$data.searchForm).toEqual({
         valid: true,
         name: 'Custom Filter 1',
@@ -171,7 +171,7 @@ describe('VariantTable.vue', () => {
           selectedGenes: [],
           selectedMasks: ['MT-HV1', 'MT-HV2', 'MT-HV3', 'MT-OHR', 'MT-CR'],
           selectedConsequences: [],
-          vafRange: [0.01, 0.05],
+          vafRange: [0.01, 0.03],
           depthRange: [0, 10000],
           disease: '',
           diseaseShowBlank: false,
