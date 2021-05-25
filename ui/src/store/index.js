@@ -114,6 +114,10 @@ export const getters = {
     return result || {}
   },
 
+  getSampleQc: (state, getters) => {
+    return getters.getSampleSettings?.qc || {}
+  },
+
   getSampleMetadata: (state, getters) => {
     return getters.getSampleSettings?.metadata || {}
   },

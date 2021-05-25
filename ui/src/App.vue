@@ -17,6 +17,7 @@
             <v-tabs>
               <v-tab to="/variants">Variants</v-tab>
               <v-tab to="/deletions">Deletions</v-tab>
+              <v-tab to="/qc">QC</v-tab>
               <v-tab to="/about">About</v-tab>
               <v-spacer />
             </v-tabs>

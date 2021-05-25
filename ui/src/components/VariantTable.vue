@@ -372,6 +372,7 @@
             </td>
             <td></td>
             <td></td>
+            <td></td>
           </tr>
         </template>
 
@@ -1035,6 +1036,12 @@ export default {
           sortable: false,
           width: '120',
         },
+        {
+          text: 'Read Depth',
+          value: 'DP',
+          sortable: true,
+          width: '60',
+        }
       ]
     },
 
