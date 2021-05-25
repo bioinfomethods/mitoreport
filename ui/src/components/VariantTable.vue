@@ -655,7 +655,7 @@
         </template>
 
         <template v-slot:expanded-item="{ headers, item }">
-          <td colspan="3">
+          <td colspan="3" class="expandedVariant">
             <v-expand-transition>
               <VariantInfo
                 v-show="transitioned[item.id]"
@@ -663,7 +663,7 @@
               ></VariantInfo>
             </v-expand-transition>
           </td>
-          <td>
+          <td class="expandedVariant">
             <v-expand-transition>
               <VariantCuration
                 v-show="transitioned[item.id]"
@@ -672,7 +672,7 @@
               ></VariantCuration>
             </v-expand-transition>
           </td>
-          <td :colspan="headers.length - 4">
+          <td :colspan="headers.length - 4" class="expandedVariant">
             <v-expand-transition>
               <VariantCharts
                 v-show="transitioned[item.id]"
