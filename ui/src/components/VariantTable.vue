@@ -95,17 +95,22 @@
               id="displayHaplodata"
               :items="displayHaplodata"
               v-model="displayHaplodata"
-              ><template v-slot:label>Toggle Haplogroup</template></v-switch
+              ><template v-slot:label
+                >{{ displayHaplodata ? 'Hide' : 'Show' }} Haplogroup
+                Data</template
+              ></v-switch
             >
           </v-col>
 
           <v-col md="2">
-            <span>Toggle Quick Tags</span>
+            <span>Toggle Curation Tags</span>
             <v-switch
               id="quickTagSwitch"
               :items="showQuickTags"
               v-model="showQuickTags"
-              ><template v-slot:label>Show Quick Tags</template></v-switch
+              ><template v-slot:label
+                >{{ showQuickTags ? 'Hide' : 'Show' }} Tags</template
+              ></v-switch
             >
           </v-col>
         </v-row>
