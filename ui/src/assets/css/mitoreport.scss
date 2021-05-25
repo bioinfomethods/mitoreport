@@ -83,7 +83,16 @@ span.highlightMe span.extraInfo {
 }
 
 tr:nth-child(even) {
-  background-color: rgba(0, 0, 0, 0.02);
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+#variantTable > div > table > tbody > tr:hover.paddedrow {
+  background: none;
+}
+
+#variantTable > div > table > tbody > tr:hover:not(.paddedrow) > td {
+  border-top: 1px solid black;
+  border-bottom: 1px solid black;
 }
 
 .posSlider {
