@@ -50,13 +50,16 @@ describe('App.vue', () => {
     })
     await underTest.vm.$nextTick()
 
-    const variantDetails = underTest.findComponent(VariantDetails)
-    expect(variantDetails.exists()).toBe(true)
+    const variantsView = underTest.findComponent(Variants)
+    expect(variantsView.exists()).toBe(true)
 
-    const variantInfo = variantDetails.findComponent(VariantInfo)
+    const variantTable = variantsView.findComponent(VariantTable)
+    expect(variantTable.exists()).toBe(true)
+
+    const variantInfo = variantTable.findComponent(VariantInfo)
     expect(variantInfo.exists()).toBe(true)
 
-    const variantCuration = variantDetails.findComponent(VariantCuration)
+    const variantCuration = variantTable.findComponent(VariantCuration)
     expect(variantCuration.exists()).toBe(true)
   })
 

@@ -70,6 +70,10 @@ export const getters = {
     return DEFAULT_FIRST_HAPLOGROUP
   },
 
+  getFirstFullHaplogroup: () => {
+    return DEFAULT_FIRST_HAPLOGROUP
+  },
+
   getHmtVarUrlPrefix: () => {
     return DEFAULT_HMT_VAR_URL_PREFIX
   },
