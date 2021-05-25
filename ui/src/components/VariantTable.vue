@@ -842,7 +842,7 @@ export default {
       },
       searchFormMenu: false,
       selectedSavedSearch: DEFAULT_VARIANT_SEARCH,
-      vafTicks: [0, 0.01, 0.03, 0.05, 0.1, 1],
+      vafTicks: [0, 0.01, 0.02, 0.03, 0.05, 0.1, 1],
       vafIndexRange: [1, 5],
       gbFreqTicks: [0.0, 0.001, 0.002, 0.005, 0.01, 0.1, 1.0],
       gnomADHetFreqTicks: [

@@ -48,7 +48,7 @@ export const DEFAULT_VARIANT_SEARCH = {
     selectedMasks: ['MT-HV1', 'MT-HV2', 'MT-HV3', 'MT-OHR', 'MT-CR'],
     selectedConsequences: [],
     gnomADHap: [],
-    vafRange: [0.01, 1],
+    vafRange: [0.02, 1],
     gbFreqTickIndex: 3,
     gnomADHetFreqTickIndex: 6,
     gnomADHomFreqTickIndex: 6,
