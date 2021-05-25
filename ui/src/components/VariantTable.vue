@@ -400,11 +400,9 @@
           ></GeneCardsLink>
         </template>
         <template v-slot:item.consequence="{ item }">
-          {{
-            item.consequence
-              ? shortenConsequenceOntology(item.consequence.displayTerm)
-              : ''
-          }}
+          <span v-if="item.consequence" :title="item.consequence.displayTerm">{{
+            shortenConsequenceOntology(item.consequence.displayTerm)
+          }}</span>
         </template>
         <template v-slot:item.gbFreq="{ item }">
           <span v-if="item.gbFreq > 0">{{ item.gbFreq | precisionTo }}</span>
