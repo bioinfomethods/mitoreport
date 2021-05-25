@@ -724,6 +724,17 @@
             <li>
               <IgvLink :position="activeVariant.pos"></IgvLink>
             </li>
+            <li>
+              <a
+                target="_blank"
+                :href="
+                  `http://genome.ucsc.edu/cgi-bin/hgTracks?db=hg38&lastVirtModeType=default&lastVirtModeExtraState=&virtModeType=default&virtMode=0&nonVirtPosition=&position=${encodeURIComponent(
+                    `chrM:${activeVariant.pos}-${activeVariant.pos}`
+                  ).replace('-', '%2D')}`
+                "
+                >UCSC</a
+              >
+            </li>
           </ul>
         </v-card-text>
       </v-card>
@@ -1617,9 +1628,11 @@ export default {
     },
 
     showQuickTags: function() {
-      if(this.showQuickTags) {
-        $("th.text-start.sortable.active.asc").click().click()
-        $("th.text-start.sortable.active.desc").click()
+      if (this.showQuickTags) {
+        $('th.text-start.sortable.active.asc')
+          .click()
+          .click()
+        $('th.text-start.sortable.active.desc').click()
       }
     },
   },
