@@ -34,7 +34,7 @@
       {{ tag }}
     </span>
 
-    <span v-if="hasNote">
+    <span class="curationCellVariantNote" v-if="hasNote">
       {{
         curation.variantNote.substring(0, 100) +
           (curation.variantNote.length > 100 ? '…' : '')
@@ -76,6 +76,7 @@ span.tag {
     background-color: purple;
   }
 }
+tr.v-data-table__expanded.v-data-table__expanded__row span.tag,
 .showQuickTags span.tag {
   display: inline;
   cursor: pointer;
@@ -84,6 +85,10 @@ span.tag {
     color: black;
     background-color: rgba(128, 0, 128, 0.5);
   }
+}
+tr.v-data-table__expanded.v-data-table__expanded__row .curationCellVariantNote,
+tr.v-data-table__expanded.v-data-table__expanded__row .autoTag {
+  display: none;
 }
 </style>
 <script>
@@ -102,6 +107,7 @@ export default {
       required: false,
     },
     showQuickTags: Boolean,
+    expanded: Boolean,
   },
   data: () => {
     return {
@@ -110,7 +116,7 @@ export default {
   },
   methods: {
     toggleTag: function(tag) {
-      if (this.showQuickTags) {
+      if (this.showQuickTags || this.expanded) {
         event.stopPropagation()
         var el = d3.select(this.$el).select(`.${tag}`)
 

@@ -638,6 +638,8 @@
             :variantId="item.id"
             :key="item.id"
             :show-quick-tags="showQuickTags"
+            :expanded="transitioned[item.id]"
+            :curation="getCurationByVariantId(item.id)"
           ></CurationCell>
         </template>
 
@@ -728,7 +730,6 @@ import GeneCardsLink from '@/components/GeneCardsLink'
 import HmtVarLink from '@/components/HmtVarLink'
 import IgvLink from '@/components/IgvLink'
 import CurationCell from '@/components/CurationCell'
-import VariantDetails from '@/components/VariantDetails'
 import VariantInfo from '@/components/VariantInfo'
 import VariantCuration from '@/components/VariantCuration'
 import VariantCharts from '@/components/VariantCharts'
@@ -760,7 +761,6 @@ export default {
     GeneCardsLink,
     HmtVarLink,
     IgvLink,
-    VariantDetails,
     VariantInfo,
     VariantCuration,
     VariantCharts,
