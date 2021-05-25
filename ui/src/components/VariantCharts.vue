@@ -1,8 +1,8 @@
 <template>
   <v-container class="px-0">
     <v-row align="start" justify="start" no-gutters>
-      <v-col class="variantChart" v-for="c in chartDataList" :key="c.id">
-        <div v-if="c.dataExists">
+      <v-col v-for="c in chartDataList" :key="c.id">
+        <div class="variantChart" v-if="c.dataExists">
           <span>{{ c.title }}</span>
           <svg viewBox="0 0 450 150" :id="`${c.id}`"></svg>
         </div>
