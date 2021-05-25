@@ -745,6 +745,7 @@ import VariantTableHeader from '@/components/VariantTableHeader'
 import * as filters from '@/shared/variantFilters'
 import * as vueFilters from '@/shared/vueFilters'
 import * as _ from 'lodash'
+import * as $ from 'jquery'
 import {
   DEFAULT_VARIANT_SEARCH,
   VARIANT_MASKS,
@@ -1613,6 +1614,13 @@ export default {
 
     displayHaplodata: function() {
       this.toggleHaplodata(this.displayHaplodata)
+    },
+
+    showQuickTags: function() {
+      if(this.showQuickTags) {
+        $("th.text-start.sortable.active.asc").click().click()
+        $("th.text-start.sortable.active.desc").click()
+      }
     },
   },
 
