@@ -1670,4 +1670,7 @@ export default {
 .hist-wrapper {
   padding: 2px;
 }
+span.filterActive {
+  text-decoration: 3px underline lightblue !important;
+}
 </style>
