@@ -43,6 +43,7 @@ dependencies {
   testRuntime "cglib:cglib-nodep:$cglibNoDepVersion"
 
   implementation files('gngs/build/libs/groovy-ngs-utils.jar')
+  implementation files('haplogrep-cmd/target/haplogrep.jar')
 
   // groovy-ngs-utils.jar is an uber jar with the following groovy modules.
   // Here we force upgrade the version.
