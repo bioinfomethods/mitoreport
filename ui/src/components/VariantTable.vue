@@ -161,7 +161,7 @@
               >
               </v-range-slider>
             </td>
-            <td>
+            <td id="geneHeader">
               <v-select
                 v-model="filterConfig.selectedGenes"
                 :items="genes"
@@ -238,16 +238,8 @@
                 </template>
 
                 <template v-slot:selection="{ item, index }">
-                  <v-chip
-                    v-if="index < 1"
-                    close
-                    @click:close="removeSelectedMask(item)"
-                    x-small
-                  >
-                    <span>{{ item }}</span>
-                  </v-chip>
-                  <span v-if="index === 1" class="grey--text caption"
-                    >+{{ filterConfig.selectedMasks.length - 1 }} more</span
+                  <span v-if="index === 1" style="font-size: 12px;"
+                    >{{ filterConfig.selectedMasks.length }}&nbsp;masks</span
                   >
                 </template>
               </v-select>
