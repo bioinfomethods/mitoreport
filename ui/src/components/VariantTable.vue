@@ -238,8 +238,21 @@
                 </template>
 
                 <template v-slot:selection="{ item, index }">
-                  <span v-if="index === 1" style="font-size: 12px;"
+                  <span
+                    v-if="
+                      index === 1 &&
+                        filterConfig.selectedMasks.length === allMasks.length
+                    "
+                    style="font-size: 12px; width: 53px;"
+                    >All masks</span
+                  >
+                  <span v-else-if="index === 1" style="font-size: 12px;"
                     >{{ filterConfig.selectedMasks.length }}&nbsp;masks</span
+                  >
+                  <span
+                    v-else-if="filterConfig.selectedMasks.length === 1"
+                    style="font-size: 12px;"
+                    >1&nbsp;mask</span
                   >
                 </template>
               </v-select>
