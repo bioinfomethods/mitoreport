@@ -109,10 +109,14 @@ tr:nth-child(even):not(.v-data-table__expanded__content) {
 
 div.filteredItemCount span {
   color: lightblue;
-  text-decoration: 2px underline lightblue;
+  text-decoration: underline;
+  text-decoration-color: lightblue;
+  text-decoration-thickness: 2px;
 }
 span.filterActive {
-  text-decoration: 4px underline lightblue;
+  text-decoration: underline;
+  text-decoration-color: lightblue;
+  text-decoration-thickness: 4px;
 }
 
 .v-data-table div.v-data-table__wrapper table thead tr th {

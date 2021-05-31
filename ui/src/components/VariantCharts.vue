@@ -1,5 +1,5 @@
 <template>
-  <v-container class="px-0">
+  <v-container class="px-0 py-0">
     <v-row align="start" justify="start" no-gutters>
       <v-col v-for="c in chartDataList" :key="c.id">
         <div class="variantChart" v-if="c.dataExists">
