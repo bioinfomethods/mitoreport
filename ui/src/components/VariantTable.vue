@@ -226,15 +226,12 @@
                     </v-list-item-action>
                     <v-list-item-content>
                       <v-list-item-title>
-                        <v-row no-gutters>
-                          <span>{{ item }}</span>
-                          <v-spacer></v-spacer>
-                          <span>{{
-                            `Region: ${
-                              allMasks.find(mask => mask.name == item).start
-                            }-${allMasks.find(mask => mask.name == item).end}`
-                          }}</span>
-                        </v-row>
+                        <span>{{ item }}</span>
+                        <span class="float-right">{{
+                          `Region: ${
+                            allMasks.find(mask => mask.name == item).start
+                          }-${allMasks.find(mask => mask.name == item).end}`
+                        }}</span>
                       </v-list-item-title>
                     </v-list-item-content>
                   </v-list-item>
