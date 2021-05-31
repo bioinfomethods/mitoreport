@@ -235,7 +235,7 @@ class MitoReportCommand implements Runnable {
                                                 'description' : 'No filters applied',
                                                 'custom'      : false,
                                                 'filterConfig': [
-                                                        posRange              : [0, 16500],
+                                                        posRange              : [0, 16569],
                                                         allele                : '',
                                                         selectedTypes         : [],
                                                         selectedGenes         : [],

@@ -24,7 +24,7 @@ export const COLORS = {
 
 export const MIN_POS = 200
 
-export const MAX_POS = 16300
+export const MAX_POS = 16569
 
 export const DEFAULT_IGV_HOST = 'http://localhost:60151'
 
@@ -41,7 +41,7 @@ export const DEFAULT_VARIANT_SEARCH = {
   description: 'Default recommended filter configs',
   custom: false,
   filterConfig: {
-    posRange: [1000, 16500],
+    posRange: [500, 16569],
     allele: '',
     selectedTypes: [],
     selectedGenes: [],
