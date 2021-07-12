@@ -24,8 +24,8 @@ class MitoMapPolymorphismsLoaderTest extends Specification {
         underTest = GroovySpy(global: true)
         String codingsHtml = resourceLoader.getResourceAsStream('classpath:mito_map_polymorphisms_codings_small.html').get().text
         String controlsHtml = resourceLoader.getResourceAsStream('classpath:mito_map_polymorphisms_controls_small.html').get().text
-        1 * MitoMapAnnotationsLoader.downloadPolymorphismsPage('https://mitomap.org/foswiki/bin/view/MITOMAP/PolymorphismsCoding') >> codingsHtml
-        1 * MitoMapAnnotationsLoader.downloadPolymorphismsPage('https://mitomap.org/foswiki/bin/view/MITOMAP/PolymorphismsControl') >> controlsHtml
+        1 * MitoMapAnnotationsLoader.downloadPage('https://mitomap.org/foswiki/bin/view/MITOMAP/PolymorphismsCoding') >> codingsHtml
+        1 * MitoMapAnnotationsLoader.downloadPage('https://mitomap.org/foswiki/bin/view/MITOMAP/PolymorphismsControl') >> controlsHtml
 
         when:
         Path actualResult = Files.createTempFile('MitoMapPolymorphismsLoaderTest', null)

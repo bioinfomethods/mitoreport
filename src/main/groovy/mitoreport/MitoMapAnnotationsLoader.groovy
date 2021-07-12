@@ -43,10 +43,10 @@ class MitoMapAnnotationsLoader {
 
     void downloadPolymorphisms(Path outputPath) {
         if (Files.notExists(outputPath) || outputPath.toFile().text.empty) {
-            String codingsHtml = downloadPolymorphismsPage("$mitoMapHost$codingsPagePath")
-            String controlsHtml = downloadPolymorphismsPage("$mitoMapHost$controlsPagePath")
-            List<MitoMapPolymorphismAnnotation> codings = parseHtml(codingsHtml, 'CODING')
-            List<MitoMapPolymorphismAnnotation> controls = parseHtml(controlsHtml, 'CONTROL')
+            String codingsHtml = downloadPage("$mitoMapHost$codingsPagePath")
+            String controlsHtml = downloadPage("$mitoMapHost$controlsPagePath")
+            List<MitoMapPolymorphismAnnotation> codings = parsePolymorphismsHtmlPage(codingsHtml, 'CODING')
+            List<MitoMapPolymorphismAnnotation> controls = parsePolymorphismsHtmlPage(controlsHtml, 'CONTROL')
             List<MitoMapPolymorphismAnnotation> allAnnotations = codings + controls
 
             String json = JsonOutput.prettyPrint(JsonOutput.toJson(allAnnotations))
@@ -56,7 +56,7 @@ class MitoMapAnnotationsLoader {
         }
     }
 
-    private List<MitoMapPolymorphismAnnotation> parseHtml(String htmlText, String regionType) {
+    private List<MitoMapPolymorphismAnnotation> parsePolymorphismsHtmlPage(String htmlText, String regionType) {
         Pattern matchData = Pattern.compile(/"data":(\[\s*?\[.*?\]\])/, Pattern.DOTALL)
         Pattern matchColumns = Pattern.compile(/"columns": (.*?}])/, Pattern.DOTALL)
         def dataMatcher = htmlText =~ matchData
@@ -98,8 +98,8 @@ class MitoMapAnnotationsLoader {
         return result
     }
 
-    static String downloadPolymorphismsPage(String pageUrl) {
-        log.info("Downloading MitoMap Polymorphisms HTML page from $pageUrl")
+    static String downloadPage(String pageUrl) {
+        log.info("Downloading MitoMap page from $pageUrl")
 
         def respBytes = HttpBuilder.configure {
             request.uri = pageUrl
