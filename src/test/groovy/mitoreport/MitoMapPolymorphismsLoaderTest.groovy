@@ -17,15 +17,15 @@ class MitoMapPolymorphismsLoaderTest extends Specification {
     ResourceLoader resourceLoader
 
     @Inject
-    MitoMapPolymorphismsLoader underTest
+    MitoMapAnnotationsLoader underTest
 
     def 'downloadPolymorphisms() saves annotations to JSON file correctly'() {
         given: 'Downloaded Polymorphisms from MitoMap'
         underTest = GroovySpy(global: true)
         String codingsHtml = resourceLoader.getResourceAsStream('classpath:mito_map_polymorphisms_codings_small.html').get().text
         String controlsHtml = resourceLoader.getResourceAsStream('classpath:mito_map_polymorphisms_controls_small.html').get().text
-        1 * MitoMapPolymorphismsLoader.downloadPolymorphismsPage('https://mitomap.org/foswiki/bin/view/MITOMAP/PolymorphismsCoding') >> codingsHtml
-        1 * MitoMapPolymorphismsLoader.downloadPolymorphismsPage('https://mitomap.org/foswiki/bin/view/MITOMAP/PolymorphismsControl') >> controlsHtml
+        1 * MitoMapAnnotationsLoader.downloadPolymorphismsPage('https://mitomap.org/foswiki/bin/view/MITOMAP/PolymorphismsCoding') >> codingsHtml
+        1 * MitoMapAnnotationsLoader.downloadPolymorphismsPage('https://mitomap.org/foswiki/bin/view/MITOMAP/PolymorphismsControl') >> controlsHtml
 
         when:
         Path actualResult = Files.createTempFile('MitoMapPolymorphismsLoaderTest', null)
@@ -42,7 +42,7 @@ class MitoMapPolymorphismsLoaderTest extends Specification {
         Path annotationsJsonFile = Paths.get(resourceLoader.getResource('classpath:MitoMapPolymorphismsLoaderTest_expected.json').get().path)
 
         when:
-        List<MitoMapPolymorphismAnnotation> actualResult = MitoMapPolymorphismsLoader.getAnnotations(annotationsJsonFile)
+        List<MitoMapPolymorphismAnnotation> actualResult = MitoMapAnnotationsLoader.getAnnotations(annotationsJsonFile)
 
         then:
         actualResult.size() == 4

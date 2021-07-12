@@ -19,7 +19,7 @@ class MitoMapDownloadCommand implements Callable<Path> {
     Path outputPath
 
     @Inject
-    MitoMapPolymorphismsLoader mitoMapLoader
+    MitoMapAnnotationsLoader mitoMapLoader
 
     Path call() throws Exception {
         if (!outputPath) {

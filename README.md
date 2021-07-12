@@ -146,7 +146,7 @@ already includes this so it shouldn't be necessary unless you want a new version
 
 ```bash
 java -jar build/libs/mitoreport-0.1-all.jar mito-map-download \
-  --output $PROJECT_DIR/test_fixtures/mito_map_annotations_20210106.json
+  --output $PROJECT_DIR/test_fixtures/mito_map_annotations_20210712.json
 ```
 
 ## UI Development

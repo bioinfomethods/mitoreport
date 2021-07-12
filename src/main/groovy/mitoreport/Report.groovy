@@ -7,8 +7,6 @@ import groovy.json.JsonSlurper
 import groovy.util.logging.Slf4j
 import mitoreport.haplogrep.GnomadBaseHaplogroup
 
-import static gngs.VEPConsequences.RANKED_CONSEQUENCES
-
 /**
  * Creates a comprehensive report for interpreting Mitochondrial variants based on:
  *
@@ -29,7 +27,7 @@ class Report extends ToolBase {
 
     File variantsResultJson
 
-    MitoMapPolymorphismsLoader mitoMapLoader
+    MitoMapAnnotationsLoader mitoMapLoader
 
     final static Set<String> EXCLUDE_CONSEQUENCES = [
             "upstream_gene_variant",
@@ -117,8 +115,7 @@ class Report extends ToolBase {
                 vepInfo.symbol = mitoAnnotation.locus
                 vepInfo.symbols = vepInfo.symbol.split(", ")
             }
-            else 
-            if(variantAnnotations && variantAnnotations.Locus) {
+            else if(variantAnnotations && variantAnnotations.Locus) {
                 vepInfo.symbol = variantAnnotations.Locus
                 vepInfo.symbols = vepInfo.symbol.split(", ")
             }

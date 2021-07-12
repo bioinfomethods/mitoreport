@@ -21,7 +21,7 @@ import static java.nio.file.StandardCopyOption.REPLACE_EXISTING
 @TupleConstructor(includes = 'mitoMapHost, codingsPagePath, controlsPagePath')
 @MapConstructor
 @Singleton
-class MitoMapPolymorphismsLoader {
+class MitoMapAnnotationsLoader {
 
     static final Map<String, String> TITLE_TO_PROPERTY_NAMES = Collections.unmodifiableMap([
             'Position'                                                                                               : 'positionStr',

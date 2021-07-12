@@ -68,7 +68,7 @@ class MitoReportCommand implements Runnable {
     ResourceLoader resourceLoader
 
     @Inject
-    MitoMapPolymorphismsLoader mitoMapLoader
+    MitoMapAnnotationsLoader mitoMapLoader
 
     void run() {
         this.sampleOutput = this.sampleOutput ?: sample
