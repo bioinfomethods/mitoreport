@@ -11,7 +11,7 @@ import java.nio.file.Path
 import java.nio.file.Paths
 
 @MicronautTest
-class MitoMapPolymorphismsLoaderTest extends Specification {
+class MitoMapAnnotationsLoaderTest extends Specification {
 
     @Inject
     ResourceLoader resourceLoader
@@ -28,7 +28,7 @@ class MitoMapPolymorphismsLoaderTest extends Specification {
         1 * MitoMapAnnotationsLoader.downloadPage('https://mitomap.org/foswiki/bin/view/MITOMAP/PolymorphismsControl') >> controlsHtml
 
         when:
-        Path actualResult = Files.createTempFile('MitoMapPolymorphismsLoaderTest', null)
+        Path actualResult = Files.createTempFile('MitoMapAnnotationsLoaderTest', null)
         underTest.downloadPolymorphisms(actualResult)
 
         then:
