@@ -40,14 +40,47 @@ class MitoMapAnnotationsLoader {
     String mitoMapHost = 'https://mitomap.org'
     String codingsPagePath = '/foswiki/bin/view/MITOMAP/PolymorphismsCoding'
     String controlsPagePath = '/foswiki/bin/view/MITOMAP/PolymorphismsControl'
+    String diseasesPagePath = '/cgi-bin/disease.cgi'
 
-    void downloadPolymorphisms(Path outputPath) {
+    void downloadAnnotations(Path outputPath) {
         if (Files.notExists(outputPath) || outputPath.toFile().text.empty) {
             String codingsHtml = downloadPage("$mitoMapHost$codingsPagePath")
             String controlsHtml = downloadPage("$mitoMapHost$controlsPagePath")
             List<MitoMapAnnotation> codings = parsePolymorphismsHtmlPage(codingsHtml, 'CODING')
             List<MitoMapAnnotation> controls = parsePolymorphismsHtmlPage(controlsHtml, 'CONTROL')
             List<MitoMapAnnotation> allAnnotations = codings + controls
+
+            String diseasesTsv = downloadPage("$mitoMapHost$diseasesPagePath")
+
+            Map<String, Object> diseasesAnnotations = diseasesTsv.split(/\n/)
+                    .tail()
+                    .collectEntries { String line ->
+//                        id	pos	ref	alt	aachange	homoplasmy	heteroplasmy	disease	status	pubmed_ids	gbcnt	gbfreq
+//                        205	114	C	T	noncoding	+	-	BD-associated	Reported	19290059	229	0.44
+
+                        def lineItems = line.split(/\t/)
+                        Integer lineItemsSize = lineItems.size()
+                        String pos = lineItemsSize > 1 ? lineItems[1] : null
+                        String ref = lineItemsSize > 2 ? lineItems[2] : null
+                        String alt = lineItemsSize > 3 ? lineItems[3] : null
+                        String aaChange = lineItemsSize > 4 ? lineItems[4] : null
+                        String homoplasmy = lineItemsSize > 5 ? lineItems[5] : null
+                        String heteroplasmy = lineItemsSize > 6 ? lineItems[6] : null
+                        String disease = lineItemsSize > 7 ? lineItems[7] : null
+                        String mitoMapStatus = lineItemsSize > 8 ? lineItems[8] : null
+                        String pubmedIds = lineItemsSize > 9 ? lineItems[9] : null
+                        String gbCount = lineItemsSize > 10 ? lineItems[10] : null
+                        String gbFreq = lineItemsSize > 11 ? lineItems[11] : null
+                        String compactAllele = "$ref$pos$alt"
+                        [(compactAllele): ['diseaseAaChange': aaChange, 'disease': disease, 'mitoMapStatus': mitoMapStatus]]
+                    }
+
+            allAnnotations.each { MitoMapAnnotation annotation ->
+                def diseaseAnnotation = diseasesAnnotations.getOrDefault(annotation.compactAllele, [:])
+                annotation.diseaseAaChange = diseaseAnnotation.getOrDefault('diseaseAaChange', null)
+                annotation.disease = diseaseAnnotation.getOrDefault('disease', null)
+                annotation.diseaseStatus = diseaseAnnotation.getOrDefault('mitoMapStatus', null)
+            }
 
             String json = JsonOutput.prettyPrint(JsonOutput.toJson(allAnnotations))
             writeToFile(outputPath, json)

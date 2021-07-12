@@ -1,7 +1,6 @@
 package mitoreport
 
 
-import groovy.transform.Immutable
 import groovy.transform.MapConstructor
 import groovy.util.logging.Slf4j
 
@@ -9,7 +8,6 @@ import java.util.regex.Matcher
 import java.util.regex.Pattern
 
 @Slf4j
-@Immutable
 @MapConstructor
 class MitoMapAnnotation {
 
@@ -32,6 +30,9 @@ class MitoMapAnnotation {
     String gbFreqStr
     String gbSeqsAnchor
     String curatedRefsAnchor
+    String diseaseAaChange
+    String disease
+    String diseaseStatus
 
     Long getPosition() {
         positionStr && positionStr.isLong() ? Long.valueOf(positionStr) : 0L
@@ -133,5 +134,13 @@ class MitoMapAnnotation {
         } else {
             return anchorMatcher[0][2] // locus
         }
+    }
+
+    List<String> getDiseases() {
+        disease?.split(/\+/)?.collect { it.trim() } ?: []
+    }
+
+    Boolean getDiseaseConfirmedPathogenic() {
+        diseaseStatus?.toUpperCase() == 'CFRM'
     }
 }

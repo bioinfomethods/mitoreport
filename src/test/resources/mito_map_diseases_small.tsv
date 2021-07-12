@@ -1,0 +1,23 @@
+id	pos	ref	alt	aachange	homoplasmy	heteroplasmy	disease	status	pubmed_ids	gbcnt	gbfreq
+205	114	C	T	noncoding	+	-	BD-associated	Reported	19290059	229	0.44
+355	146	T	C	noncoding	+	-	Absence of Endometriosis	Reported	29124462	10113	19.51
+166	150	C	T	noncoding	+	+	Longevity / Cervical Carcinoma / HPV infection risk	Conflicting reports	12606714, 11404057, 21262335, 16857160, 15483642, 21385627, 21319252, 12538859	6836	13.19
+363	547	A	T	noncoding	+	-	Tubulointerstitial kidney disease	Reported	28267784	0	0.00
+356	573	C	CCC	noncoding	+	-	Absence of Endometriosis	Reported	29124462	0	0.00
+477	576	A	G	noncoding MT-TF precursor	nr	nr	Hearing loss patient	Reported	32169613	3	0.01
+416	576	A	G		nr	nr	Hearing loss patient	Reported	32169613	3	0.01
+416	577	G	A		nr	nr	Hearing loss patient	Reported	32169613	3	0.01
+437	15997	T	C		nr	nr	Hearing loss patient	Reported	32169613	0	0.00
+332	15998	A	T		-	+	Mitochondrial myopathy	Reported	27536729	0	0.00
+191	16002	T	C		-	+	Mitochondrial cytopathy	Reported	31965079, 11196116	0	0.00
+333	16015	T	C		-	+	Mitochondrial myopathy	Reported	27536729	0	0.00
+305	16018	T	TTCTCTGTTCTTTCAT		-	+	Dilated cardiomyopathy (15 bp dup), alternate notation	Reported	31965079, 22954281	0	0.00
+334	16021	CT	:		-	+	Mitochondrial myopathy	Reported	27536729	0	0.00
+301	16023	G	A		-	+	Migraine +pigmentary retinopathy +deafness +leukariosis	Reported	23696415	0	0.00
+302	16023	G	T	noncoding	-	+	Migraine +pigmentary retinopathy +deafness +leukariosis	Reported	23696415	0	0.00
+302	16032	T	TTCTCTGTTCTTTCAT		-	+	Dilated cardiomyopathy (15 bp dup), alternate notation	Reported	22954281	1	0.00
+445	16068	T	C	noncoding	+	-	Low VO2max response	Reported	33064405	13	0.03
+302	16081	A	G	noncoding	-	+	Cyclic Vomiting Syndrome	Reported	15368478	4	0.01
+301	16093	T	C	noncoding	-	+	Cyclic Vomiting Syndrome	Reported	15368478, 31143779	2989	5.77
+446	16125	G	A	noncoding	+	-	Low VO2max response	Reported	33064405	2	0.00
+300	16129	G	A	noncoding	-	+	Cyclic Vomiting Syndrome with Migraine	Reported	15368478	6961	13.43

@@ -19,21 +19,23 @@ class MitoMapAnnotationsLoaderTest extends Specification {
     @Inject
     MitoMapAnnotationsLoader underTest
 
-    def 'downloadPolymorphisms() saves annotations to JSON file correctly'() {
-        given: 'Downloaded Polymorphisms from MitoMap'
+    def 'downloadAnnotations() saves annotations to JSON file correctly'() {
+        given: 'Downloaded annotations from MitoMap'
         underTest = GroovySpy(global: true)
         String codingsHtml = resourceLoader.getResourceAsStream('classpath:mito_map_polymorphisms_codings_small.html').get().text
         String controlsHtml = resourceLoader.getResourceAsStream('classpath:mito_map_polymorphisms_controls_small.html').get().text
+        String diseasesTsv = resourceLoader.getResourceAsStream('classpath:mito_map_diseases_small.tsv').get().text
         1 * MitoMapAnnotationsLoader.downloadPage('https://mitomap.org/foswiki/bin/view/MITOMAP/PolymorphismsCoding') >> codingsHtml
         1 * MitoMapAnnotationsLoader.downloadPage('https://mitomap.org/foswiki/bin/view/MITOMAP/PolymorphismsControl') >> controlsHtml
+        1 * MitoMapAnnotationsLoader.downloadPage('https://mitomap.org/cgi-bin/disease.cgi') >> diseasesTsv
 
         when:
         Path actualResult = Files.createTempFile('MitoMapAnnotationsLoaderTest', null)
-        underTest.downloadPolymorphisms(actualResult)
+        underTest.downloadAnnotations(actualResult)
 
         then:
         def actualJson = new JsonSlurper().parse(actualResult.toFile())
-        def expJson = new JsonSlurper().parse(resourceLoader.getResourceAsStream('classpath:MitoMapPolymorphismsLoaderTest_expected.json').get())
+        def expJson = new JsonSlurper().parse(resourceLoader.getResourceAsStream('classpath:MitoMapAnnotationsLoaderTest_expected.json').get())
         actualJson == expJson
     }
 

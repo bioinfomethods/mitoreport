@@ -30,7 +30,7 @@ class MitoMapDownloadCommand implements Callable<Path> {
         }
 
         log.info("Downloading MitoMap annotations to ${outputPath.toString()}")
-        mitoMapLoader.downloadPolymorphisms(outputPath)
+        mitoMapLoader.downloadAnnotations(outputPath)
 
         return outputPath
     }
