@@ -42,7 +42,7 @@ class MitoMapPolymorphismsLoaderTest extends Specification {
         Path annotationsJsonFile = Paths.get(resourceLoader.getResource('classpath:MitoMapPolymorphismsLoaderTest_expected.json').get().path)
 
         when:
-        List<MitoMapPolymorphismAnnotation> actualResult = MitoMapAnnotationsLoader.getAnnotations(annotationsJsonFile)
+        List<MitoMapAnnotation> actualResult = MitoMapAnnotationsLoader.getAnnotations(annotationsJsonFile)
 
         then:
         actualResult.size() == 4

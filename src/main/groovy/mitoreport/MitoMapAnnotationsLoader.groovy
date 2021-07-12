@@ -45,9 +45,9 @@ class MitoMapAnnotationsLoader {
         if (Files.notExists(outputPath) || outputPath.toFile().text.empty) {
             String codingsHtml = downloadPage("$mitoMapHost$codingsPagePath")
             String controlsHtml = downloadPage("$mitoMapHost$controlsPagePath")
-            List<MitoMapPolymorphismAnnotation> codings = parsePolymorphismsHtmlPage(codingsHtml, 'CODING')
-            List<MitoMapPolymorphismAnnotation> controls = parsePolymorphismsHtmlPage(controlsHtml, 'CONTROL')
-            List<MitoMapPolymorphismAnnotation> allAnnotations = codings + controls
+            List<MitoMapAnnotation> codings = parsePolymorphismsHtmlPage(codingsHtml, 'CODING')
+            List<MitoMapAnnotation> controls = parsePolymorphismsHtmlPage(controlsHtml, 'CONTROL')
+            List<MitoMapAnnotation> allAnnotations = codings + controls
 
             String json = JsonOutput.prettyPrint(JsonOutput.toJson(allAnnotations))
             writeToFile(outputPath, json)
@@ -56,7 +56,7 @@ class MitoMapAnnotationsLoader {
         }
     }
 
-    private List<MitoMapPolymorphismAnnotation> parsePolymorphismsHtmlPage(String htmlText, String regionType) {
+    private List<MitoMapAnnotation> parsePolymorphismsHtmlPage(String htmlText, String regionType) {
         Pattern matchData = Pattern.compile(/"data":(\[\s*?\[.*?\]\])/, Pattern.DOTALL)
         Pattern matchColumns = Pattern.compile(/"columns": (.*?}])/, Pattern.DOTALL)
         def dataMatcher = htmlText =~ matchData
@@ -67,7 +67,7 @@ class MitoMapAnnotationsLoader {
         def data = new JsonSlurper().parse(dataJson.bytes)
         def columns = new JsonSlurper().parse(columnsJson.bytes)
 
-        List<MitoMapPolymorphismAnnotation> result = data.collect { def row ->
+        List<MitoMapAnnotation> result = data.collect { def row ->
             Map<String, String> transformedRow = ['mitoMapHost': mitoMapHost, 'regionType': regionType]
             columns.eachWithIndex { def column, int index ->
                 String title = column.title?.trim() ?: ''
@@ -76,23 +76,23 @@ class MitoMapAnnotationsLoader {
                 transformedRow["$propertyName".toString()] = propertyValue
             }
 
-            new MitoMapPolymorphismAnnotation(transformedRow)
+            new MitoMapAnnotation(transformedRow)
         }
 
         return result
     }
 
-    static List<MitoMapPolymorphismAnnotation> getAnnotations(Path annotationsFilePath = Paths.get(System.getProperty('user.dir'), "mito_map_annotations_${LocalDate.now().format(DateTimeFormatter.BASIC_ISO_DATE)}.json")) {
+    static List<MitoMapAnnotation> getAnnotations(Path annotationsFilePath = Paths.get(System.getProperty('user.dir'), "mito_map_annotations_${LocalDate.now().format(DateTimeFormatter.BASIC_ISO_DATE)}.json")) {
         if (annotationsFilePath == null || !Files.exists(annotationsFilePath)) {
             log.error("Annotations file ${annotationsFilePath?.toString()} does not exist.")
 
             return Collections.emptyList()
         }
 
-        List<MitoMapPolymorphismAnnotation> result = new JsonSlurper()
+        List<MitoMapAnnotation> result = new JsonSlurper()
                 .parse(annotationsFilePath.toFile())
                 .collect { def obj ->
-                    new MitoMapPolymorphismAnnotation(obj)
+                    new MitoMapAnnotation(obj)
                 }
 
         return result

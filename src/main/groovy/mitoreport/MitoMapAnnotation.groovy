@@ -11,7 +11,7 @@ import java.util.regex.Pattern
 @Slf4j
 @Immutable
 @MapConstructor
-class MitoMapPolymorphismAnnotation {
+class MitoMapAnnotation {
 
     // private fields will not be serialized when using JsonOutput.toJson()
 

@@ -60,7 +60,7 @@ class Report extends ToolBase {
         Map<String, Map> annotations = new CSV(opts.ann).toListMap().collectEntries { [it.Allele, it] }
         log.info "Loaded ${annotations.size()} functional annotations"
 
-        List<MitoMapPolymorphismAnnotation> mitoMapAnnotations = (opts.mann && mitoMapLoader) ? mitoMapLoader.getAnnotations(opts.mann) : []
+        List<MitoMapAnnotation> mitoMapAnnotations = (opts.mann && mitoMapLoader) ? mitoMapLoader.getAnnotations(opts.mann) : []
         log.info "Loaded ${mitoMapAnnotations.size()} MitoMap annotations"
 
         int total = 0
@@ -99,7 +99,7 @@ class Report extends ToolBase {
                         [key, result]
                     }
 
-            MitoMapPolymorphismAnnotation mitoAnnotation = mitoMapAnnotations.find { it.compactAllele == compactAllele }
+            MitoMapAnnotation mitoAnnotation = mitoMapAnnotations.find { it.compactAllele == compactAllele }
             variantAnnotations.gbFreqPct = mitoAnnotation?.gbFreqPct ?: 0.0
             variantAnnotations.gbFreq = mitoAnnotation?.gbFreq ?: 0.0
             variantAnnotations.curatedRef = mitoAnnotation ? [

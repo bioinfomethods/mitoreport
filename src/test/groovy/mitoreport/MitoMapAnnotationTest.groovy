@@ -3,14 +3,14 @@ package mitoreport
 import spock.lang.Specification
 import spock.lang.Unroll
 
-class MitoMapPolymorphismAnnotationTest extends Specification {
+class MitoMapAnnotationTest extends Specification {
 
-    MitoMapPolymorphismAnnotation underTest
+    MitoMapAnnotation underTest
 
     @Unroll
     def 'Given position=#positionStr, alleleChange=#alleleChange then ref=#expRef, alt=#expAlt, compactAllele=#expCompactAllele'() {
         given:
-        underTest = new MitoMapPolymorphismAnnotation(positionStr: positionStr, alleleChange: alleleChange)
+        underTest = new MitoMapAnnotation(positionStr: positionStr, alleleChange: alleleChange)
 
         expect:
         underTest.refAllele == expRef
@@ -35,7 +35,7 @@ class MitoMapPolymorphismAnnotationTest extends Specification {
     @Unroll
     def 'Given regionType=#regionType, gbFreqStr=#gbFreqStr then gbFreqPct is #expGbFreqPct'() {
         given:
-        underTest = new MitoMapPolymorphismAnnotation(regionType: regionType, gbFreqStr: gbFreqStr)
+        underTest = new MitoMapAnnotation(regionType: regionType, gbFreqStr: gbFreqStr)
 
         expect:
         underTest.gbFreqPct == expGbFreqPct
@@ -69,7 +69,7 @@ class MitoMapPolymorphismAnnotationTest extends Specification {
     @Unroll
     def 'Given curatedRefsAnchor=#curatedRefsAnchor then curatedRefsCount is #expCountResult, curatedRefsUrl is #expUrlResult'() {
         given:
-        underTest = new MitoMapPolymorphismAnnotation(mitoMapHost: 'https://mitomap.org', curatedRefsAnchor: curatedRefsAnchor)
+        underTest = new MitoMapAnnotation(mitoMapHost: 'https://mitomap.org', curatedRefsAnchor: curatedRefsAnchor)
 
         expect:
         underTest.curatedRefsCount == expCountResult
