@@ -1,4 +1,4 @@
-import java.time.LocalDate
+import java.time.OffsetDateTime
 
 plugins {
     id "groovy"
@@ -14,7 +14,8 @@ def gitDescribeItems = grgit.describe().split(/-/)
 
 project.ext {
     appVersion = "${gitDescribeItems[0]}-${gitDescribeItems[1]}"
-    buildDate = LocalDate.now()
+    appArchiveVersion = "${gitDescribeItems[0]}"
+    buildTimestamp = OffsetDateTime.now().toString()
     buildCommit = gitDescribeItems[2]
 }
 
@@ -91,16 +92,18 @@ jar {
         attributes(
                 'Name': 'MitoReport',
                 'Main-Class': mainClassName,
+                'Implementation-Title': 'MitoReport',
                 'Implementation-Version': appVersion,
-                'Implementation-Timestamp': buildDate,
-                'Implementation-Commit': buildCommit,
+                'Implementation-Vendor': 'MCRI',
+                'Build-Timestamp': buildTimestamp,
+                'Build-Commit': buildCommit,
         )
     }
 }
 
 shadowJar {
     mergeServiceFiles()
-    archiveVersion.set(appVersion)
+    archiveVersion.set(appArchiveVersion)
 }
 
 tasks.withType(JavaExec) {

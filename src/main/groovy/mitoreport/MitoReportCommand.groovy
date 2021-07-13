@@ -19,6 +19,8 @@ import java.nio.file.*
 import java.nio.file.attribute.BasicFileAttributes
 import java.time.ZoneOffset
 import java.time.format.DateTimeFormatter
+import java.util.jar.Attributes
+import java.util.jar.Manifest
 import java.util.stream.Collectors
 
 import static java.time.LocalDateTime.parse as ld
@@ -90,19 +92,28 @@ class MitoReportCommand implements Runnable {
         File coverageStatsJson = deletionsResult.coverageStatsJsonFile
         File variantsJson = runReport(deletionsJson)
 
-        BasicFileAttributes fileAttr = Files.readAttributes(gnomADVCF, BasicFileAttributes)
+        Map<String, Object> manifestInfo = getManifestInfo()
+        BasicFileAttributes gnomadVcfFileAttrs = Files.readAttributes(gnomADVCF, BasicFileAttributes)
 
-        Map<String, String> metadata = [
-                mitoreportVersion: this.getClass().getPackage().getImplementationVersion(),
+        Map<String, Object> metadata = [
+                applicationName  : manifestInfo.get('Implementation-Title'),
+                version          : manifestInfo.get('Implementation-Version'),
+                vendor           : manifestInfo.get('Implementation-Vendor'),
+                buildTimestamp   : manifestInfo.get('Build-Timestamp'),
+                buildCommit      : manifestInfo.get('Build-Commit'),
+                mitoreportVersion: manifestInfo.get('Implementation-Version'),
+                gnomadSource     : [
+                        absolutePath: gnomADVCF.toAbsolutePath().toString(),
+                        fileName    : gnomADVCF.fileName.toString(),
+                        created     : timestampStrToLocal(gnomadVcfFileAttrs.creationTime().toString()),
+                        modified    : timestampStrToLocal(gnomadVcfFileAttrs.lastModifiedTime().toString()),
+                        accessed    : timestampStrToLocal(gnomadVcfFileAttrs.lastAccessTime().toString())
+                ],
                 absolutePath     : gnomADVCF.toAbsolutePath().toString(),
                 fileName         : gnomADVCF.fileName.toString(),
-                created          : timestampStrToLocal(fileAttr.creationTime().toString()),
-                modified         : timestampStrToLocal(fileAttr.lastModifiedTime().toString()),
-                accessed         : timestampStrToLocal(fileAttr.lastAccessTime().toString())
-//            gitTag      : ("git describe".execute().text), // Use tags for release / version number?
-//            gitHash     : ("git rev-parse --short HEAD".execute().text).trim(),
-//            gitBranch   : ("git status".execute().text).split("\n").first().split(" ").last(),
-//            gitDate     : ("git show -s --format=%cD".execute().text).trim()
+                created          : timestampStrToLocal(gnomadVcfFileAttrs.creationTime().toString()),
+                modified         : timestampStrToLocal(gnomadVcfFileAttrs.lastModifiedTime().toString()),
+                accessed         : timestampStrToLocal(gnomadVcfFileAttrs.lastAccessTime().toString())
         ]
 
         HaplogrepClassification haplogrepClassification = new HaplogroupClassifier(vcfFile, sample).call()
@@ -309,5 +320,17 @@ class MitoReportCommand implements Runnable {
                 .toString()
 
         return result
+    }
+
+    private Map<String, String> getManifestInfo() {
+        Optional<URL> maybeManifestUrl = resourceLoader.getResource('classpath:META-INF/MANIFEST.MF')
+        if (maybeManifestUrl.isPresent()) {
+            Manifest manifest = new Manifest(maybeManifestUrl.get().openStream())
+            Attributes manifestAttribtues = manifest.getMainAttributes()
+
+            return Collections.unmodifiableMap(manifestAttribtues.collectEntries { k, v -> [(k.name): v] } as Map<String, String>)
+        } else {
+            return Collections.emptyMap()
+        }
     }
 }

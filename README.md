@@ -20,10 +20,11 @@ Mitoreport is an application for Mitochondrial DNA variants analysis.
 
 ```bash
 PROJECT_DIR=$(pwd)
+APP_ARCHIVE_VERSION=$(git describe --abbrev=0)
 
 ./gradlew
 
-java -jar "$PROJECT_DIR/build/libs/mitoreport-0.1.0-all.jar" mito-report \
+java -jar "$PROJECT_DIR/build/libs/mitoreport-$APP_ARCHIVE_VERSION-all.jar" mito-report \
   -d \
   -sample "15G002035-GM12878K_20pc_10kb_200" \
   -sample-output "anonymous-sample-id" \
@@ -114,9 +115,11 @@ Run this to download new MitoMap annotations to file.  The test fixtures data ab
 shouldn't be necessary unless you want a new version.
 
 ```bash
+PROJECT_DIR=$(pwd)
 TODAY=$(date +"%Y%m%d")
+APP_ARCHIVE_VERSION=$(git describe --abbrev=0)
 
-java -jar build/libs/mitoreport-0.1.0-all.jar mito-map-download \
+java -jar "$PROJECT_DIR/build/libs/mitoreport-$APP_ARCHIVE_VERSION-all.jar" mito-map-download \
   --output "$PROJECT_DIR/test_fixtures/mito_map_annotations_$TODAY.json"
 ```
 
@@ -137,8 +140,9 @@ into a `mitoreport` directory ready for distribution.
 
 ```bash
 PROJECT_DIR=$(pwd)  # project root of mitoreport checkout
+APP_ARCHIVE_VERSION=$(git describe --abbrev=0)
 
-java -jar "$PROJECT_DIR/build/libs/mitoreport-0.1.0-all.jar" mito-report \
+java -jar "$PROJECT_DIR/build/libs/mitoreport-$APP_ARCHIVE_VERSION-all.jar" mito-report \
   -sample "15G002035-GM12878K_20pc_10kb_200" \
   -sample-output "anonymous-sample-id" \
   -vcf $PROJECT_DIR/test_fixtures/variants/15G002035.unshifted.contamination.filtering.intermediatefilter.norm.dedup.mito_vep.vcf.gz \
@@ -151,7 +155,7 @@ A new directory `mitoreport-15G002035-GM12878K_20pc_10kb_200` should now be crea
 interactive report.
 
 ```bash
-open $PROJECT_DIR/mitoreport-15G002035-GM12878K_20pc_10kb_200/index.html
+open $PROJECT_DIR/mitoreport-anonymous-sample-id/index.html
 ```
 
 ## UI Development
@@ -160,7 +164,7 @@ Make sure you can run the steps in [Running the Report](#running-the-report) abo
 procure test data for UI development.
 
 ```bash
-cp $PROJECT_DIR/mitoreport-15G002035-GM12878K_20pc_10kb_200/*.js $PROJECT_DIR/ui/public/
+cp $PROJECT_DIR/mitoreport-anonymous-sample-id/*.js $PROJECT_DIR/ui/public/
 ```
 
 In `$PROJECT_DIR/ui`
