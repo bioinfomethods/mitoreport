@@ -5,7 +5,7 @@ stages:
 
 variables:
   GIT_SUBMODULE_STRATEGY: recursive
-  GRADLE_OPTS: '-Dorg.gradle.daemon=false'
+  GRADLE_OPTS: "-Dorg.gradle.daemon=false"
   GRADLE_USER_HOME: /cache
   MAVEN_OPTS: "-Dmaven.repo.local=/.m2"
 

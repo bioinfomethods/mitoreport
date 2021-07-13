@@ -1,7 +1,7 @@
 plugins {
-  id "groovy"
-  id "com.github.johnrengelman.shadow" version "6.0.0"
-  id "application"
+    id "groovy"
+    id "com.github.johnrengelman.shadow" version "6.0.0"
+    id "application"
 }
 
 version "0.1.0"
@@ -9,58 +9,58 @@ group "mitoreport"
 defaultTasks 'clean', 'build'
 
 repositories {
-  mavenCentral()
-  maven {
-    name 'jfrog-genepi-maven'
-    url 'https://genepi.jfrog.io/artifactory/maven'
-  }
+    mavenCentral()
+    maven {
+        name 'jfrog-genepi-maven'
+        url 'https://genepi.jfrog.io/artifactory/maven'
+    }
 }
 
 configurations {
-  // for dependencies that are needed for development only
-  developmentOnly
+    // for dependencies that are needed for development only
+    developmentOnly
 }
 
 dependencies {
-  annotationProcessor platform("io.micronaut:micronaut-bom:$micronautVersion")
-  annotationProcessor "io.micronaut.configuration:micronaut-picocli"
-  compileOnly platform("io.micronaut:micronaut-bom:$micronautVersion")
-  compileOnly "io.micronaut:micronaut-inject-groovy"
-  implementation platform("io.micronaut:micronaut-bom:$micronautVersion")
-  implementation "io.micronaut:micronaut-runtime"
-  implementation "io.micronaut:micronaut-runtime-groovy"
-  implementation "io.micronaut:micronaut-validation"
-  implementation "info.picocli:picocli"
-  implementation "io.micronaut.configuration:micronaut-picocli"
-  testCompileOnly platform("io.micronaut:micronaut-bom:$micronautVersion")
-  testImplementation platform("io.micronaut:micronaut-bom:$micronautVersion")
-  testImplementation("org.spockframework:spock-core") {
-    exclude group: "org.codehaus.groovy", module: "groovy-all"
-  }
-  testImplementation "io.micronaut:micronaut-inject-groovy"
-  testImplementation "io.micronaut.test:micronaut-test-spock"
-  testImplementation "io.micronaut.test:micronaut-test-junit5"
-  testRuntime "cglib:cglib-nodep:$cglibNoDepVersion"
+    annotationProcessor platform("io.micronaut:micronaut-bom:$micronautVersion")
+    annotationProcessor "io.micronaut.configuration:micronaut-picocli"
+    compileOnly platform("io.micronaut:micronaut-bom:$micronautVersion")
+    compileOnly "io.micronaut:micronaut-inject-groovy"
+    implementation platform("io.micronaut:micronaut-bom:$micronautVersion")
+    implementation "io.micronaut:micronaut-runtime"
+    implementation "io.micronaut:micronaut-runtime-groovy"
+    implementation "io.micronaut:micronaut-validation"
+    implementation "info.picocli:picocli"
+    implementation "io.micronaut.configuration:micronaut-picocli"
+    testCompileOnly platform("io.micronaut:micronaut-bom:$micronautVersion")
+    testImplementation platform("io.micronaut:micronaut-bom:$micronautVersion")
+    testImplementation("org.spockframework:spock-core") {
+        exclude group: "org.codehaus.groovy", module: "groovy-all"
+    }
+    testImplementation "io.micronaut:micronaut-inject-groovy"
+    testImplementation "io.micronaut.test:micronaut-test-spock"
+    testImplementation "io.micronaut.test:micronaut-test-junit5"
+    testRuntime "cglib:cglib-nodep:$cglibNoDepVersion"
 
-  implementation files('gngs/build/libs/groovy-ngs-utils.jar')
-  implementation files('haplogrep-cmd/target/haplogrep.jar')
+    implementation files('gngs/build/libs/groovy-ngs-utils.jar')
+    implementation files('haplogrep-cmd/target/haplogrep.jar')
 
-  // groovy-ngs-utils.jar is an uber jar with the following groovy modules.
-  // Here we force upgrade the version.
-  implementation "org.codehaus.groovy:groovy-all:$groovyVersion"
-  implementation "org.codehaus.groovy:groovy-ant:$groovyVersion"
-  implementation "org.codehaus.groovy:groovy-cli-commons:$groovyVersion"
-  implementation "org.codehaus.groovy:groovy-cli-picocli:$groovyVersion"
-  implementation "org.codehaus.groovy:groovy-groovydoc:$groovyVersion"
-  implementation "org.codehaus.groovy:groovy-json:$groovyVersion"
-  implementation "org.codehaus.groovy:groovy-sql:$groovyVersion"
-  implementation "org.codehaus.groovy:groovy-templates:$groovyVersion"
-  implementation "org.codehaus.groovy:groovy-xml:$groovyVersion"
-  implementation "org.codehaus.groovy:groovy:$groovyVersion"
-  implementation "genepi:haplogrep-core:2.6.0"
+    // groovy-ngs-utils.jar is an uber jar with the following groovy modules.
+    // Here we force upgrade the version.
+    implementation "org.codehaus.groovy:groovy-all:$groovyVersion"
+    implementation "org.codehaus.groovy:groovy-ant:$groovyVersion"
+    implementation "org.codehaus.groovy:groovy-cli-commons:$groovyVersion"
+    implementation "org.codehaus.groovy:groovy-cli-picocli:$groovyVersion"
+    implementation "org.codehaus.groovy:groovy-groovydoc:$groovyVersion"
+    implementation "org.codehaus.groovy:groovy-json:$groovyVersion"
+    implementation "org.codehaus.groovy:groovy-sql:$groovyVersion"
+    implementation "org.codehaus.groovy:groovy-templates:$groovyVersion"
+    implementation "org.codehaus.groovy:groovy-xml:$groovyVersion"
+    implementation "org.codehaus.groovy:groovy:$groovyVersion"
+    implementation "genepi:haplogrep-core:2.6.0"
 
-  implementation "io.github.http-builder-ng:http-builder-ng-core:$httpBuilderNgVersion"
-  implementation "commons-io:commons-io:$commonsIoVersion"
+    implementation "io.github.http-builder-ng:http-builder-ng-core:$httpBuilderNgVersion"
+    implementation "commons-io:commons-io:$commonsIoVersion"
 }
 
 test.classpath += configurations.developmentOnly
@@ -68,71 +68,71 @@ test.classpath += configurations.developmentOnly
 mainClassName = "mitoreport.MitoCli"
 
 java {
-  sourceCompatibility = JavaVersion.toVersion('1.8')
-  targetCompatibility = JavaVersion.toVersion('1.8')
+    sourceCompatibility = JavaVersion.toVersion('1.8')
+    targetCompatibility = JavaVersion.toVersion('1.8')
 }
 
 tasks.withType(GroovyCompile) {
-  groovyOptions.forkOptions.jvmArgs.add('-Dgroovy.parameters=true')
+    groovyOptions.forkOptions.jvmArgs.add('-Dgroovy.parameters=true')
 }
 
 jar {
-  manifest {
-    attributes 'Main-Class': mainClassName, 'Implementation-Version': '0.1.0'
-  }
+    manifest {
+        attributes 'Main-Class': mainClassName, 'Implementation-Version': '0.1.0'
+    }
 }
 
 shadowJar {
-  mergeServiceFiles()
+    mergeServiceFiles()
 }
 
 tasks.withType(JavaExec) {
-  classpath += configurations.developmentOnly
-  jvmArgs('-XX:TieredStopAtLevel=1', '-Dcom.sun.management.jmxremote')
-  if (gradle.startParameter.continuous) {
-    systemProperties(
-      'micronaut.io.watch.restart': 'true',
-      'micronaut.io.watch.enabled': 'true',
-      "micronaut.io.watch.paths": "src/main"
-    )
-  }
+    classpath += configurations.developmentOnly
+    jvmArgs('-XX:TieredStopAtLevel=1', '-Dcom.sun.management.jmxremote')
+    if (gradle.startParameter.continuous) {
+        systemProperties(
+                'micronaut.io.watch.restart': 'true',
+                'micronaut.io.watch.enabled': 'true',
+                "micronaut.io.watch.paths": "src/main"
+        )
+    }
 }
 
 String mitoOut = "${projectDir}/src/main/resources/mitoui"
 task cleanMitoOut(type: Delete) {
-  delete mitoOut
+    delete mitoOut
 }
 
 task copyUiBuildToMitoOut(type: Copy, dependsOn: ['cleanMitoOut', ':ui:runBuild']) {
-  group = 'build'
-  description 'Copy UI build output into application resources'
+    group = 'build'
+    description 'Copy UI build output into application resources'
 
-  from project(':ui').getTasksByName('runBuild', false).first().outputs
-  into mitoOut
+    from project(':ui').getTasksByName('runBuild', false).first().outputs
+    into mitoOut
 }
 
 shadowJar.configure {
-  inputs.dir(mitoOut).withPropertyName('mitoOut')
+    inputs.dir(mitoOut).withPropertyName('mitoOut')
 }
 
 task buildGngs(type: Exec) {
-  group = 'build'
-  description 'Build groovy-ngs-utils module dependency'
-  workingDir './gngs'
-  commandLine './gradlew', 'jar'
+    group = 'build'
+    description 'Build groovy-ngs-utils module dependency'
+    workingDir './gngs'
+    commandLine './gradlew', 'jar'
 
-  inputs.dir('gngs').withPropertyName('gngs')
-  outputs.file('gngs/build/libs/groovy-ngs-utils.jar').withPropertyName('gngsJar')
+    inputs.dir('gngs').withPropertyName('gngs')
+    outputs.file('gngs/build/libs/groovy-ngs-utils.jar').withPropertyName('gngsJar')
 }
 
 task buildHaplogrepCmd(type: Exec) {
-  group = 'build'
-  description 'Build haplogrep-cmd module dependency'
-  workingDir './'
-  commandLine './mvnw', '-f', "${projectDir.absolutePath}${File.separator}haplogrep-cmd${File.separator}pom.xml", 'package', '-DskipTests'
+    group = 'build'
+    description 'Build haplogrep-cmd module dependency'
+    workingDir './'
+    commandLine './mvnw', '-f', "${projectDir.absolutePath}${File.separator}haplogrep-cmd${File.separator}pom.xml", 'package', '-DskipTests'
 
-  inputs.dir('haplogrep-cmd').withPropertyName('haplogrep-cmd')
-  outputs.file('haplogrep-cmd/target/haplogrep.jar').withPropertyName('haplogrepJar')
+    inputs.dir('haplogrep-cmd').withPropertyName('haplogrep-cmd')
+    outputs.file('haplogrep-cmd/target/haplogrep.jar').withPropertyName('haplogrepJar')
 }
 
 test.dependsOn += ['ui:runTestUnit']
