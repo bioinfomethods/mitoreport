@@ -83,4 +83,51 @@ class MitoMapAnnotationTest extends Specification {
         'abc'                                                                                                       | 0              | 'https://mitomap.org'
         "<a href='' target='_blank'>3</a>"                                                                          | 3              | 'https://mitomap.org'
     }
+
+    @Unroll
+    def 'Given disease=#disease then diseases=#expDiseases'() {
+        given:
+        underTest = new MitoMapAnnotation(disease: disease)
+
+        expect:
+        underTest.diseases == expDiseases
+
+        where:
+        disease                                                   | expDiseases
+        null                                                      | Collections.emptyList()
+        ''                                                        | Collections.emptyList()
+        'deafness'                                                | ['deafness']
+        'Migraine +pigmentary retinopathy +deafness +leukariosis' | ['Migraine', 'pigmentary retinopathy', 'deafness', 'leukariosis']
+    }
+
+    @Unroll
+    def 'Given diseaseStatus=#diseaseStatus then diseaseConfirmedPathogenic=#expDiseaseConfirmedPathogenic'() {
+        given:
+        underTest = new MitoMapAnnotation(diseaseStatus: diseaseStatus)
+
+        expect:
+        underTest.diseaseConfirmedPathogenic == expDiseaseConfirmedPathogenic
+
+        where:
+        diseaseStatus | expDiseaseConfirmedPathogenic
+        null          | false
+        ''            | false
+        'Reported'    | false
+        'cfRm'        | true
+    }
+
+    @Unroll
+    def 'Given mitoTipFreqPct=#mitoTipFreqPct then mitoTipFreq=#expMitoTipFreq'() {
+        given:
+        underTest = new MitoMapAnnotation(mitoTipFreqPct: mitoTipFreqPct)
+
+        expect:
+        underTest.mitoTipFreq == expMitoTipFreq
+
+        where:
+        mitoTipFreqPct | expMitoTipFreq
+        null           | null
+        0.0            | 0.0
+        8.8            | 0.088
+    }
 }

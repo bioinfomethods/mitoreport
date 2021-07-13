@@ -6,12 +6,12 @@
         "codonPosition": "-",
         "curatedRefsCount": 1,
         "altAllele": "A",
-        "disease": "Hearing loss patient",
         "gbFreqPct": 0.0,
         "gbFreq": 0.0,
         "codonNumber": "-",
         "diseaseAaChange": "",
         "regionType": "CODING",
+        "disease": "Hearing loss patient",
         "diseases": ["Hearing loss patient"],
         "diseaseStatus": "Reported",
         "diseaseConfirmedPathogenic": false,
@@ -24,7 +24,12 @@
         "refAllele": "G",
         "locusAnchor": "<a href='/MITOMAP/GenomeLoci#MTTF'>MT-TF</a>",
         "aminoAcidChange": "tRNA",
-        "locus": "MT-TF"
+        "locus": "MT-TF",
+        "mitoTipScore": 17.75,
+        "mitoTipQuartile": "Q1",
+        "mitoTipCount": 0,
+        "mitoTipFreq": 0,
+        "mitoTipFreqPct": 0.0
     },
     {
         "mitoMapHost": "https://mitomap.org",
@@ -51,7 +56,12 @@
         "refAllele": "G",
         "locusAnchor": "<a href='/MITOMAP/GenomeLoci#MTTP'>MT-TP</a>",
         "aminoAcidChange": "tRNA",
-        "locus": "MT-TP"
+        "locus": "MT-TP",
+        "mitoTipScore": 20.1973,
+        "mitoTipQuartile": "Q1",
+        "mitoTipCount": 5,
+        "mitoTipFreq": 0.0001,
+        "mitoTipFreqPct": 0.010
     },
     {
         "mitoMapHost": "https://mitomap.org",
@@ -78,7 +88,12 @@
         "refAllele": "T",
         "locusAnchor": "MT-OHR",
         "aminoAcidChange": null,
-        "locus": null
+        "locus": null,
+        "mitoTipScore": null,
+        "mitoTipQuartile": "UNKNOWN",
+        "mitoTipCount": null,
+        "mitoTipFreq": null,
+        "mitoTipFreqPct": null
     },
     {
         "mitoMapHost": "https://mitomap.org",
@@ -105,6 +120,11 @@
         "refAllele": "C",
         "locusAnchor": "Control Region",
         "aminoAcidChange": null,
-        "locus": null
+        "locus": null,
+        "mitoTipScore": null,
+        "mitoTipQuartile": "UNKNOWN",
+        "mitoTipCount": null,
+        "mitoTipFreq": null,
+        "mitoTipFreqPct": null
     }
 ]

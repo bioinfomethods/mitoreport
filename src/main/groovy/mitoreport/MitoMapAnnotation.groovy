@@ -1,6 +1,5 @@
 package mitoreport
 
-
 import groovy.transform.MapConstructor
 import groovy.util.logging.Slf4j
 
@@ -33,6 +32,10 @@ class MitoMapAnnotation {
     String diseaseAaChange
     String disease
     String diseaseStatus
+    BigDecimal mitoTipScore
+    MitoTipQuartile mitoTipQuartile
+    Integer mitoTipCount
+    BigDecimal mitoTipFreqPct
 
     Long getPosition() {
         positionStr && positionStr.isLong() ? Long.valueOf(positionStr) : 0L
@@ -137,10 +140,31 @@ class MitoMapAnnotation {
     }
 
     List<String> getDiseases() {
-        disease?.split(/\+/)?.collect { it.trim() } ?: []
+        disease?.split(/\+/)?.collect { it.trim() }?.findAll() ?: Collections.emptyList() as List<String>
     }
 
     Boolean getDiseaseConfirmedPathogenic() {
         diseaseStatus?.toUpperCase() == 'CFRM'
+    }
+
+    BigDecimal getMitoTipFreq() {
+        if (this.mitoTipFreqPct == null) {
+            return this.mitoTipFreqPct
+        } else {
+            return this.mitoTipFreqPct / 100.0
+        }
+    }
+}
+
+enum MitoTipQuartile {
+    Q1,
+    Q2,
+    Q3,
+    Q4,
+    UNKNOWN
+    ;
+
+    static MitoTipQuartile safeValueOf(String value) {
+        values().find { it.name() == value } ?: UNKNOWN
     }
 }
