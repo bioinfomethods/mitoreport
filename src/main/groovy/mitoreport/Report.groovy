@@ -1,7 +1,6 @@
 package mitoreport
 
 import gngs.*
-import graxxia.CSV
 import groovy.json.JsonOutput
 import groovy.json.JsonSlurper
 import groovy.util.logging.Slf4j
@@ -56,11 +55,9 @@ class Report extends ToolBase {
 
     void writeAnnotations(String dir) {
 
-        log.info "Loading annotations from $opts.ann"
-        Map<String, Map> annotations = new CSV(opts.ann).toListMap().collectEntries { [it.Allele, it] }
-        log.info "Loaded ${annotations.size()} functional annotations"
-
-        List<MitoMapAnnotation> mitoMapAnnotations = (opts.mann && mitoMapLoader) ? mitoMapLoader.getAnnotations(opts.mann) : []
+        Map<String, MitoMapAnnotation> mitoMapAnnotations = (opts.mann && mitoMapLoader)
+                ? mitoMapLoader.getAnnotations(opts.mann)
+                : Collections.emptyMap() as Map<String, MitoMapAnnotation>
         log.info "Loaded ${mitoMapAnnotations.size()} MitoMap annotations"
 
         int total = 0
@@ -71,8 +68,6 @@ class Report extends ToolBase {
         vcf.each { Variant v ->
 
             ++total
-
-            int sampleIndex = 0
 
             Map<String, String> compacted = getCompactVariantRepresentation(v)
             String compactAllele = compacted.compactAllele
@@ -89,39 +84,29 @@ class Report extends ToolBase {
             ]
 
             Map vepInfo = extractMitoVEPInfo(v)
+            Map<String, Object> mitoMapAnnotation = (mitoMapAnnotations.getOrDefault(compactAllele, null)?.toMap() ?: [:]) as Map<String, Object>
 
-            Map variantAnnotations =
-                    annotations.getOrDefault(compactAllele, [:]).collectEntries { key, value ->
-                        def result = value
-                        if (value instanceof String)
-                            result = value.tokenize('|+').grep { it != 'NA' }*.trim().join(', ')
-
-                        [key, result]
-                    }
-
-            MitoMapAnnotation mitoAnnotation = mitoMapAnnotations.find { it.compactAllele == compactAllele }
-            variantAnnotations.gbFreqPct = mitoAnnotation?.gbFreqPct ?: 0.0
-            variantAnnotations.gbFreq = mitoAnnotation?.gbFreq ?: 0.0
-            variantAnnotations.curatedRef = mitoAnnotation ? [
-                    'count': mitoAnnotation?.curatedRefsCount ?: 0,
-                    'url'  : mitoAnnotation?.curatedRefsUrl,
-            ] : Collections.emptyMap()
+            // Keep annotations file backwards compatible with older UI, remove this if and else
+            // clause once UI is updated to use newly named properties instead
+            if (mitoMapAnnotation) {
+                mitoMapAnnotation.put('Status_MitoMap', mitoMapAnnotation.getOrDefault('diseaseStatus', null))
+                mitoMapAnnotation.put('HGVS', mitoMapAnnotation.getOrDefault('hgvs', null))
+                mitoMapAnnotation.put('Disease', mitoMapAnnotation.getOrDefault('disease', null))
+            } else {
+                mitoMapAnnotation.put('curatedRef', ['count': 0, 'url': null])
+            }
 
             Map infoField = v.parsedInfo
             infoField.remove('ANN')
 
             // If there is a locus annotation from mito map, we always prefer that
-            if (mitoAnnotation && mitoAnnotation.locus) {
-                vepInfo.symbol = mitoAnnotation.locus
-                vepInfo.symbols = vepInfo.symbol.split(", ")
-            }
-            else if(variantAnnotations && variantAnnotations.Locus) {
-                vepInfo.symbol = variantAnnotations.Locus
+            if (mitoMapAnnotation && mitoMapAnnotation.locus) {
+                vepInfo.symbol = mitoMapAnnotation.locus
                 vepInfo.symbols = vepInfo.symbol.split(", ")
             }
             // else stick with what VEP put there
 
-            Map resultInfo = variantInfo + vepInfo + variantAnnotations + infoField + [genotypes: v.parsedGenotypes]
+            Map resultInfo = variantInfo + vepInfo + mitoMapAnnotation + infoField + [genotypes: v.parsedGenotypes]
 
             Variant gnomADVariant = gnomAD.find(v)
             if (gnomADVariant) {

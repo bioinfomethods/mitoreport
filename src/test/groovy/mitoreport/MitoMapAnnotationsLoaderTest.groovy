@@ -46,13 +46,12 @@ class MitoMapAnnotationsLoaderTest extends Specification {
         Path annotationsJsonFile = Paths.get(resourceLoader.getResource('classpath:MitoMapAnnotationsLoaderTest_expected.json').get().path)
 
         when:
-        List<MitoMapAnnotation> actualResult = MitoMapAnnotationsLoader.getAnnotations(annotationsJsonFile)
+        Map<String, MitoMapAnnotation> actualResult = MitoMapAnnotationsLoader.getAnnotations(annotationsJsonFile)
 
         then:
         actualResult.size() == 4
 
-
-        def actualResult1 = actualResult[0]
+        MitoMapAnnotation actualResult1 = actualResult.get('G577A')
         actualResult1.mitoMapHost == 'https://mitomap.org'
         actualResult1.regionType == 'CODING'
         actualResult1.positionStr == '577'
@@ -67,7 +66,7 @@ class MitoMapAnnotationsLoaderTest extends Specification {
         actualResult1.mitoTipCount == 0
         actualResult1.mitoTipFreq == 0
 
-        def actualResult2 = actualResult[1]
+        MitoMapAnnotation actualResult2 = actualResult.get('G16023T')
         actualResult2.mitoMapHost == 'https://mitomap.org'
         actualResult2.regionType == 'CODING'
         actualResult2.positionStr == '16023'
@@ -82,7 +81,7 @@ class MitoMapAnnotationsLoaderTest extends Specification {
         actualResult2.mitoTipCount == 5
         actualResult2.mitoTipFreq == 0.0001
 
-        def actualResult3 = actualResult[2]
+        MitoMapAnnotation actualResult3 = actualResult.get('T152C')
         actualResult3.mitoMapHost == 'https://mitomap.org'
         actualResult3.regionType == 'CONTROL'
         actualResult3.positionStr == '152'
@@ -97,7 +96,7 @@ class MitoMapAnnotationsLoaderTest extends Specification {
         actualResult3.mitoTipCount == null
         actualResult3.mitoTipFreq == null
 
-        def actualResult4 = actualResult[3]
+        MitoMapAnnotation actualResult4 = actualResult.get('C16565T')
         actualResult4.mitoMapHost == 'https://mitomap.org'
         actualResult4.regionType == 'CONTROL'
         actualResult4.positionStr == '16565'

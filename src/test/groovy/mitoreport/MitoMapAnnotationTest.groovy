@@ -16,20 +16,21 @@ class MitoMapAnnotationTest extends Specification {
         underTest.refAllele == expRef
         underTest.altAllele == expAlt
         underTest.compactAllele == expCompactAllele
+        underTest.hgvs == expHgvs
 
         where:
-        positionStr | alleleChange | expRef | expAlt | expCompactAllele
-        8888        | null         | null   | null   | null
-        8888        | ''           | null   | null   | null
-        null        | 'T-C'        | 'T'    | 'C'    | null
-        ''          | 'T-C'        | 'T'    | 'C'    | null
-        8888        | 'A-G'        | 'A'    | 'G'    | 'A8888G'
-        8888        | 'T-TT'       | 'T'    | 'TT'   | 'T8888TT'
-        8888        | 'GAA-G'      | 'GAA'  | 'G'    | 'GAA8888G'
-        8888        | 'A-del'      | 'A'    | 'del'  | 'A8888del'
-        8888        | 'A-'         | 'A'    | null   | 'A8888'
-        8888        | 'B-D'        | null   | null   | null
-        8888        | '-A'         | null   | null   | null
+        positionStr | alleleChange | expRef | expAlt | expCompactAllele | expHgvs
+        8888        | null         | null   | null   | null             | null
+        8888        | ''           | null   | null   | null             | null
+        null        | 'T-C'        | 'T'    | 'C'    | null             | null
+        ''          | 'T-C'        | 'T'    | 'C'    | null             | null
+        8888        | 'A-G'        | 'A'    | 'G'    | 'A8888G'         | 'm.8888A>G'
+        8888        | 'T-TT'       | 'T'    | 'TT'   | 'T8888TT'        | 'm.8888T>TT'
+        8888        | 'GAA-G'      | 'GAA'  | 'G'    | 'GAA8888G'       | 'm.8888GAA>G'
+        8888        | 'A-del'      | 'A'    | 'del'  | 'A8888del'       | 'm.8888Adel'
+        8888        | 'A-'         | 'A'    | null   | 'A8888'          | null
+        8888        | 'B-D'        | null   | null   | null             | null
+        8888        | '-A'         | null   | null   | null             | null
     }
 
     @Unroll

@@ -40,7 +40,7 @@ class MitoReportCommand implements Runnable {
     @Option(names = ['-so', '-sample-output', '--sample-output'], required = false, description = 'Provide replacement Sample ID')
     String sampleOutput
 
-    @Option(names = ['-ann', '-annotations', '--annotations'], required = true, description = 'Annotation file to apply to VCF')
+    @Option(names = ['-ann', '-annotations', '--annotations'], required = false, description = 'DEPRECATED, -mann replaces this.  Annnotation file to apply to VCF')
     String annotations
 
     @Option(names = ['-mann', '--mito-annotations'], required = true, description = 'Annotations from MitoMap to apply to VCF')
@@ -73,7 +73,7 @@ class MitoReportCommand implements Runnable {
     void run() {
         this.sampleOutput = this.sampleOutput ?: sample
 
-        (bamFiles + [vcfFile, new File(annotations), mitoMapAnnotations.toFile(), gnomADVCF.toFile()])
+        (bamFiles + [vcfFile, mitoMapAnnotations.toFile(), gnomADVCF.toFile()])
                 .each { assert it.exists(), "${it.absolutePath} does not exist." }
 
         // Default to a directory named after the sample
@@ -138,7 +138,6 @@ class MitoReportCommand implements Runnable {
         CliOptions reportOpts = new CliOptions(overrides: [
                 'vcf'   : vcfFile.absolutePath,
                 'del'   : deletionsJson.absolutePath,
-                'ann'   : annotations,
                 'mann'  : mitoMapAnnotations,
                 'gnomad': gnomADVCF.toFile().absolutePath,
                 'o'     : mitoReportPathName,

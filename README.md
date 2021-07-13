@@ -19,14 +19,13 @@ PROJECT_DIR=$(pwd)
 
 ./gradlew
 
-java -jar $PROJECT_DIR/build/libs/mitoreport-0.1.0-all.jar mito-report \
+java -jar "$PROJECT_DIR/build/libs/mitoreport-0.1.0-all.jar" mito-report \
   -d \
   -sample "15G002035-GM12878K_20pc_10kb_200" \
   -sample-output "anonymous-sample-id" \
-  -vcf $PROJECT_DIR/test_fixtures/variants/15G002035.unshifted.contamination.filtering.intermediatefilter.norm.dedup.mito_vep.vcf.gz \
-  -ann $PROJECT_DIR/test_fixtures/mtDNAanalysis_annotations_20170501.csv \
-  -mann $PROJECT_DIR/test_fixtures/mito_map_annotations_20201207.json \
-  -gnomad $PROJECT_DIR/test_fixtures/gnomad.genomes.v3.1.sites.chrM.vcf.bgz \
+  -vcf "$PROJECT_DIR/test_fixtures/variants/15G002035.unshifted.contamination.filtering.intermediatefilter.norm.dedup.mito_vep.vcf.gz" \
+  -mann "$PROJECT_DIR/test_fixtures/mito_map_annotations_20210713.json" \
+  -gnomad "$PROJECT_DIR/test_fixtures/gnomad.genomes.v3.1.sites.chrM.vcf.bgz" \
   "$PROJECT_DIR/test_fixtures/align/15G002035-GM12878K_20pc_10kb_200.unshifted.bam" $PROJECT_DIR/test_fixtures/controls/*.bam
 ```
 
@@ -104,6 +103,18 @@ rendering the C4 Markdown properly.  The image shown above is a screenshot taken
 
 ## Using mito-cli
 
+### Downloading Annotations from MitoMap
+
+Run this to download new MitoMap annotations to file.  The test fixtures data above
+already includes this so it shouldn't be necessary unless you want a new version.
+
+```bash
+TODAY=$(date +"%Y%m%d")
+
+java -jar build/libs/mitoreport-0.1.0-all.jar mito-map-download \
+  --output "$PROJECT_DIR/test_fixtures/mito_map_annotations_$TODAY.json"
+```
+
 ### Running the Report
 
 Mitoreport is a standalone CLI application intended to be run by administrators.
@@ -123,11 +134,11 @@ UI into a `mitoreport` directory ready for distribution.
 ```bash
 PROJECT_DIR=$(pwd)  # project root of mitoreport checkout
 
-java -jar $PROJECT_DIR/build/libs/mitoreport-0.1.0-all.jar mito-report \
+java -jar "$PROJECT_DIR/build/libs/mitoreport-0.1.0-all.jar" mito-report \
   -sample "15G002035-GM12878K_20pc_10kb_200" \
+  -sample-output "anonymous-sample-id" \
   -vcf $PROJECT_DIR/test_fixtures/variants/15G002035.unshifted.contamination.filtering.intermediatefilter.norm.dedup.mito_vep.vcf.gz \
-  -ann $PROJECT_DIR/test_fixtures/mtDNAanalysis_annotations_20170501.csv \
-  -mann $PROJECT_DIR/test_fixtures/mito_map_annotations_20201207.json \
+  -mann $PROJECT_DIR/test_fixtures/mito_map_annotations_20210713.json \
   -gnomad $PROJECT_DIR/test_fixtures/gnomad.genomes.v3.1.sites.chrM.vcf.bgz \
   "$PROJECT_DIR/test_fixtures/align/15G002035-GM12878K_20pc_10kb_200.unshifted.bam" $PROJECT_DIR/test_fixtures/controls/*.bam
 ```
@@ -137,16 +148,6 @@ to run this interactive report.
 
 ```bash
 open $PROJECT_DIR/mitoreport-15G002035-GM12878K_20pc_10kb_200/index.html
-```
-
-### Downloading Annotations from MitoMap
-
-Run this to download new MitoMap annotations to file.  The test fixtures data above
-already includes this so it shouldn't be necessary unless you want a new version.
-
-```bash
-java -jar build/libs/mitoreport-0.1-all.jar mito-map-download \
-  --output $PROJECT_DIR/test_fixtures/mito_map_annotations_20210712.json
 ```
 
 ## UI Development

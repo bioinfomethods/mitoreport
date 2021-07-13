@@ -145,17 +145,18 @@ class MitoMapAnnotationsLoader {
         return result
     }
 
-    static List<MitoMapAnnotation> getAnnotations(Path annotationsFilePath = Paths.get(System.getProperty('user.dir'), "mito_map_annotations_${LocalDate.now().format(DateTimeFormatter.BASIC_ISO_DATE)}.json")) {
+    static Map<String, MitoMapAnnotation> getAnnotations(Path annotationsFilePath = Paths.get(System.getProperty('user.dir'), "mito_map_annotations_${LocalDate.now().format(DateTimeFormatter.BASIC_ISO_DATE)}.json")) {
         if (annotationsFilePath == null || !Files.exists(annotationsFilePath)) {
             log.error("Annotations file ${annotationsFilePath?.toString()} does not exist.")
 
-            return Collections.emptyList()
+            return Collections.emptyMap()
         }
 
-        List<MitoMapAnnotation> result = new JsonSlurper()
+        Map<String, MitoMapAnnotation> result = new JsonSlurper()
                 .parse(annotationsFilePath.toFile())
-                .collect { def obj ->
-                    new MitoMapAnnotation(obj)
+                .collectEntries { def obj ->
+                    MitoMapAnnotation annotation = new MitoMapAnnotation(obj)
+                    [(annotation.compactAllele): annotation]
                 }
 
         return result

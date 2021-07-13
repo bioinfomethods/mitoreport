@@ -8,7 +8,7 @@ import java.util.regex.Pattern
 
 @Slf4j
 @MapConstructor
-class MitoMapAnnotation {
+class MitoMapAnnotation implements ToMap {
 
     // private fields will not be serialized when using JsonOutput.toJson()
 
@@ -64,6 +64,18 @@ class MitoMapAnnotation {
             return null
         } else {
             return "$refAllele$position${altAllele ?: ''}"
+        }
+    }
+
+    String getAllele() {
+        return compactAllele
+    }
+
+    String getHgvs() {
+        if (!position || !refAllele | !altAllele) {
+            return null
+        } else {
+            altAllele == 'del' ? "m.${position}${refAllele}del" : "m.${position}${refAllele}>${altAllele}"
         }
     }
 
