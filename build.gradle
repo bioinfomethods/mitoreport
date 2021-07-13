@@ -1,12 +1,22 @@
+import java.time.LocalDate
+
 plugins {
     id "groovy"
     id "com.github.johnrengelman.shadow" version "6.0.0"
     id "application"
+    id "org.ajoberstar.grgit" version "4.1.0"
 }
 
-version "0.1.0"
 group "mitoreport"
 defaultTasks 'clean', 'build'
+
+def gitDescribeItems = grgit.describe().split(/-/)
+
+project.ext {
+    appVersion = "${gitDescribeItems[0]}-${gitDescribeItems[1]}"
+    buildDate = LocalDate.now()
+    buildCommit = gitDescribeItems[2]
+}
 
 repositories {
     mavenCentral()
@@ -78,12 +88,19 @@ tasks.withType(GroovyCompile) {
 
 jar {
     manifest {
-        attributes 'Main-Class': mainClassName, 'Implementation-Version': '0.1.0'
+        attributes(
+                'Name': 'MitoReport',
+                'Main-Class': mainClassName,
+                'Implementation-Version': appVersion,
+                'Implementation-Timestamp': buildDate,
+                'Implementation-Commit': buildCommit,
+        )
     }
 }
 
 shadowJar {
     mergeServiceFiles()
+    archiveVersion.set(appVersion)
 }
 
 tasks.withType(JavaExec) {
