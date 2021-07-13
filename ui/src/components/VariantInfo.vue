@@ -28,18 +28,15 @@
             <span v-else>No VEP consequence</span>
           </td>
         </tr>
-        <!-- <tr>
-          <td>Disease:</td>
-          <td>{{ variant.Disease }}</td>
-        </tr> -->
         <tr>
           <td>MitoMap Status:</td>
-          <td>{{ variant.Status_MitoMap }}</td>
+          <td>{{ variant.diseaseStatus }}</td>
         </tr>
         <tr>
           <td>MitoMap Refs:</td>
           <td>
             <CuratedRefLink
+              v-if="variant.curatedRef"
               :href="variant.curatedRef.url"
               :count="variant.curatedRef.count"
             ></CuratedRefLink>

@@ -42,7 +42,7 @@
       <br />
     </span>
 
-    <span v-if="variant.Disease" class="autoTag" :title="variant.Disease">
+    <span v-if="variant.disease" class="autoTag" :title="variant.disease">
       <v-icon>mdi-biohazard</v-icon>&nbsp;{{ shortDisease }}
     </span>
   </div>
@@ -174,9 +174,9 @@ export default {
     },
 
     shortDisease() {
-      if (!this.variant.Disease) return ''
+      if (!this.variant.disease) return ''
 
-      let result = this.variant.Disease
+      let result = this.variant.disease
       if (result.length > 30) {
         if (result.split(',').length > 2) {
           result =

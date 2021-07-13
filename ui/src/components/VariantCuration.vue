@@ -9,11 +9,11 @@
       dense
     ></v-textarea>
 
-    <table class="curationDetailsTable" v-if="variant.Disease">
+    <table class="curationDetailsTable" v-if="variant.disease">
       <tbody>
         <tr>
           <td><v-icon>mdi-biohazard</v-icon> Disease:</td>
-          <td>{{ variant.Disease }}</td>
+          <td>{{ variant.disease }}</td>
         </tr>
       </tbody>
     </table>
