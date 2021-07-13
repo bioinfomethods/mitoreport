@@ -130,6 +130,10 @@ class MitoMapAnnotation {
         }
     }
 
+    Map getCuratedRef() {
+        return ['count': curatedRefsCount, 'url': curatedRefsUrl]
+    }
+
     String getLocus() {
         Matcher anchorMatcher = locusAnchor =~ HTML_TEXT_ANCHOR_PATTERN
         if (!anchorMatcher.find()) {
