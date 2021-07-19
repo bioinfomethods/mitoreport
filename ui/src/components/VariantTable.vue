@@ -726,21 +726,7 @@
               <IgvLink :position="activeVariant.pos"></IgvLink>
             </li>
             <li>
-              <a
-                target="_blank"
-                :href="
-                  `http://genome.ucsc.edu/cgi-bin/hgTracks?db=hg38&highlight=${encodeURIComponent(
-                    `chrM:${parseInt(activeVariant.pos)}-${parseInt(
-                      activeVariant.pos
-                    )}`
-                  ).replace('-', '%2D')}&position=${encodeURIComponent(
-                    `chrM:${parseInt(activeVariant.pos) - 10}-${parseInt(
-                      activeVariant.pos
-                    ) + 10}`
-                  ).replace('-', '%2D')}`
-                "
-                >UCSC</a
-              >
+              <a target="_blank" :href="ucscLink(activeVariant)">UCSC</a>
             </li>
             <li>
               <a
@@ -1159,6 +1145,63 @@ export default {
   },
 
   methods: {
+    ucscLink(activeVariant) {
+      const queryString = {
+        // Original stuff
+        db: 'hg38',
+        highlight: `chrM:${activeVariant.pos}-${activeVariant.pos}`,
+        position: `chrM:${parseInt(activeVariant.pos) - 10}-${parseInt(
+          activeVariant.pos
+        ) + 10}`,
+
+        // Kat's tracks
+        knownGene: 'pack',
+        refSeqComposite: 'pack',
+        omimAvSnp: 'full',
+        clinvar: 'squish',
+        hgmd: 'squish',
+        lovdComp: 'squish',
+        omimGene2: 'squish',
+        cons100way: 'full',
+        dbSnp153Composite: 'pack',
+        gnomadVariants: 'show',
+        gnomadGenomesVariantsV3_1_1: 'pack',
+        rmsk: 'dense',
+
+        // Tracks shown in Kat's list, that she didn't ask for
+        ruler: 'dense',
+        fixSeqLiftOverPsl: 'pack',
+        umap: 'full',
+        bismap: 'full',
+        wgEncodeGencodeV37: 'pack',
+        tRNAs: 'pack',
+        wgRna: 'pack',
+        lincRNAsTranscripts: 'pack',
+        lincRNAsAllCellTypeTopView: 'dense',
+        transMapRefSeqV5: 'pack',
+        transMapEnsemblV5: 'pack',
+        caddIns: 'dense',
+        caddDel: 'dense',
+        cadd: 'dense',
+        tcgaTranscExpr: 'pack',
+        tcgaGeneExpr: 'pack',
+        mastermind: 'pack',
+        wgEncodeRegMarkH3k27ac: 'full',
+        cpgIslandExt: 'pack',
+        snp151Common: 'pack',
+        dbVar_conflict: 'pack',
+        dbVar_common: 'pack',
+
+        // Remove some defaults
+        altSeqLiftOverPsl: 'hide',
+        encodeCcreCombined: 'hide',
+        wgEncodeReg: 'hide',
+        gtexGeneV8: 'hide',
+      }
+
+      return `http://genome.ucsc.edu/cgi-bin/hgTracks?${$.param(queryString)}`
+    },
+
     toggleAllMasks() {
       this.$nextTick(() => {
         if (this.allMasksSelected) {
