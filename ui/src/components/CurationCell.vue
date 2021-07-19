@@ -19,6 +19,13 @@
       </span>
     </v-tooltip>
 
+    <a
+      v-if="variant.diseaseConfirmedPathogenic"
+      href="https://mitomap.org/MITOMAP/ConfirmedMutations"
+      target="_blank"
+    >
+      MITOMAP Confirmed Pathogenic
+    </a>
     <span
       :class="
         curation &&
