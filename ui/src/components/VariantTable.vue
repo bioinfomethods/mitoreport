@@ -729,14 +729,14 @@
               <a
                 target="_blank"
                 :href="
-                  `http://genome.ucsc.edu/cgi-bin/hgTracks?db=hg38&lastVirtModeType=default&lastVirtModeExtraState=&virtModeType=default&virtMode=0&nonVirtPosition=&highlight=${encodeURIComponent(
+                  `http://genome.ucsc.edu/cgi-bin/hgTracks?db=hg38&highlight=${encodeURIComponent(
                     `chrM:${parseInt(activeVariant.pos)}-${parseInt(
                       activeVariant.pos
                     )}`
                   ).replace('-', '%2D')}&position=${encodeURIComponent(
-                    `chrM:${parseInt(activeVariant.pos) - 5}-${parseInt(
+                    `chrM:${parseInt(activeVariant.pos) - 10}-${parseInt(
                       activeVariant.pos
-                    ) + 5}`
+                    ) + 10}`
                   ).replace('-', '%2D')}`
                 "
                 >UCSC</a
