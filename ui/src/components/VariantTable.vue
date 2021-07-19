@@ -742,6 +742,15 @@
                 >UCSC</a
               >
             </li>
+            <li>
+              <a
+                :href="
+                  `https://mitomap.org/cgi-bin/search_allele?starting=${activeVariant.pos}&ending=${activeVariant.pos}`
+                "
+                target="_blank"
+                >MITOMAP {{ activeVariant.pos }}</a
+              >
+            </li>
           </ul>
         </v-card-text>
       </v-card>
