@@ -267,12 +267,16 @@ export const mutations = {
       existingCurations.push(existing)
     }
 
-    existing.variantId = curationToSave.variantId
+    Vue.set(existing, 'variantId', curationToSave.variantId)
+
     existing.selectedTagNames =
       curationToSave.selectedTags?.map(ct => ct.name) ||
       existing.selectedTagNames
-    existing.variantNote =
-      curationToSave.variantNote || existing.variantNote || ''
+
+    Vue.set(
+      existing,
+      'variantNote',
+      curationToSave.variantNote || existing.variantNote || '')
   },
 }
 
