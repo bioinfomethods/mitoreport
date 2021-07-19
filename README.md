@@ -14,7 +14,8 @@ Mitoreport is an application for Mitochondrial DNA variants analysis.
   used in the gngs submodule.
 * Access to MCRI filesystem group `bioi1.dl`.  If not, please submit request to [MCRI
   ServiceDesk](https://servicedesk.mcri.edu.au/).
-* Access to `bio1` filesystem, preferably mounted locally.  Will refer to this mount as `MCRI_BIO1_MNT`.
+* Access to `/group/bioi1` filesystem on Meerkat, preferably mounted locally.  Will refer to this mount as
+  `MCRI_BIO1_MNT`.
 
 ## TL;DR For Devs
 
@@ -242,3 +243,53 @@ The Gradle task `buildHaplogrepCmd` that runs this Maven build packages up `hapl
 maven repos hence this jar is built locally as part of mitoreport build. Since this jar only requires re-packaging when
 we want to utilise new features of [haplogrep](https://github.com/seppinho/haplogrep-cmd) from upstream, the
 StackOverflow workaround should suffice for now.
+
+### Missing SSL Certificate to MitoMap
+
+When [downloading MitoMap annotations](#downloading-annotations-from-mitomap), you may run into error below:
+
+```text
+MitoMapAnnotationsLoader  [1] SEVERE  |3:17:18 Error downloading page https://mitomap.org/foswiki/bin/view/MITOMAP/PolymorphismsCoding
+Exception:
+javax.net.ssl.SSLHandshakeException: PKIX path building failed: sun.security.provider.certpath.SunCertPathBuilderException: unable to find valid certification path to requested target
+  at sun.security.ssl.Alert.createSSLException(Alert.java:131)
+...
+Caused by: sun.security.validator.ValidatorException: PKIX path building failed: sun.security.provider.certpath.SunCertPathBuilderException: unable to find valid certification path to requested target
+  at sun.security.validator.PKIXValidator.doBuild(PKIXValidator.java:456)
+  at sun.security.validator.PKIXValidator.engineValidate(PKIXValidator.java:323)
+...
+Caused by: sun.security.provider.certpath.SunCertPathBuilderException: unable to find valid certification path to requested target
+  at sun.security.provider.certpath.SunCertPathBuilder.build(SunCertPathBuilder.java:141)
+  at sun.security.provider.certpath.SunCertPathBuilder.engineBuild(SunCertPathBuilder.java:126)
+  at java.security.cert.CertPathBuilder.build(CertPathBuilder.java:280)
+  at sun.security.validator.PKIXValidator.doBuild(PKIXValidator.java:451)
+  ... 66 more
+Exception in thread "main" picocli.CommandLine$ExecutionException: Error while calling command (mitoreport.MitoMapDownloadCommand@655f7ea): java.lang.RuntimeException: javax.net.ssl.SSLHandshakeException: PKIX path building failed: sun.security.provider.certpath.SunCertPathBuilderException: unable to find valid certification path to requested target
+...
+Caused by: java.lang.RuntimeException: javax.net.ssl.SSLHandshakeException: PKIX path building failed: sun.security.provider.certpath.SunCertPathBuilderException: unable to find valid certification path to requested target
+  at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+  at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)
+...
+Caused by: javax.net.ssl.SSLHandshakeException: PKIX path building failed: sun.security.provider.certpath.SunCertPathBuilderException: unable to find valid certification path to requested target
+  at sun.security.ssl.Alert.createSSLException(Alert.java:131)
+  at sun.security.ssl.TransportContext.fatal(TransportContext.java:324)
+...
+Caused by: sun.security.validator.ValidatorException: PKIX path building failed: sun.security.provider.certpath.SunCertPathBuilderException: unable to find valid certification path to requested target
+  at sun.security.validator.PKIXValidator.doBuild(PKIXValidator.java:456)
+  at sun.security.validator.PKIXValidator.engineValidate(PKIXValidator.java:323)
+...
+Caused by: sun.security.provider.certpath.SunCertPathBuilderException: unable to find valid certification path to requested target
+  at sun.security.provider.certpath.SunCertPathBuilder.build(SunCertPathBuilder.java:141)
+  at sun.security.provider.certpath.SunCertPathBuilder.engineBuild(SunCertPathBuilder.java:126)
+```
+
+This is because https://mitomap.org uses an SSL certificate that is not recognised by your JVM installation.  To fix
+this, download and import `https://mitomap.org` SSL certificate to your JVM installation keystore.
+
+```bash
+# Download mitomap.org SSL certificate to file mitomap.org.pem
+openssl s_client -showcerts -connect mitomap.org:443 -servername mitomap.org  </dev/null | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' > mitomap.org.pem
+
+# Import mitomap.org.pem to your Java installation keystore
+keytool -importcert -alias mitomap-chain -file mitomap.org.pem -keystore "$JAVA_HOME/jre/lib/security/cacerts" -storepass changeit -noprompt
+```
