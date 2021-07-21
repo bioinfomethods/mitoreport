@@ -8,6 +8,7 @@ import groovy.util.logging.Slf4j
 import groovyx.net.http.HttpBuilder
 
 import javax.inject.Singleton
+import java.math.RoundingMode
 import java.nio.file.Files
 import java.nio.file.Path
 import java.nio.file.Paths
@@ -78,26 +79,7 @@ class MitoMapAnnotationsLoader {
                     }
 
             String mitoTipsTsv = downloadPage("$mitoMapHost$mitoTipsPagePath")
-            Map<String, Object> mitoTipsAnnotations = mitoTipsTsv.split(/\n/)
-                    .tail()
-                    .collectEntries { String line ->
-//                        Position	rCRS	Alt	MitoTIP_Score	Quartile	Count	Percentage	Mitomap_Status
-//                        577	G	:	20.3833	Q1	0	0.000	Absent
-
-                        // lineItems[7] unused as it is already included in other annotations
-                        def lineItems = line.split(/\t/)
-                        Integer lineItemsSize = lineItems.size()
-                        String pos = lineItemsSize > 0 ? lineItems[0] : null
-                        String ref = lineItemsSize > 1 ? lineItems[1] : null
-                        String alt = lineItemsSize > 2 ? lineItems[2] : null
-                        BigDecimal mitoTipScore = lineItemsSize > 3 && lineItems[3].isNumber() ? new BigDecimal(lineItems[3]) : 0.0
-                        MitoTipQuartile mitoTipQuartile = lineItemsSize > 4 ? MitoTipQuartile.safeValueOf(lineItems[4]) : MitoTipQuartile.UNKNOWN
-                        BigDecimal mitoTipCount = lineItemsSize > 5 && lineItems[5].isNumber() ? new BigDecimal(lineItems[5]) : 0.0
-                        BigDecimal mitoTipFreqPct = lineItemsSize > 6 && lineItems[6].isNumber() ? new BigDecimal(lineItems[6]) : 0.0
-//                        String mitoTipStatus = lineItemsSize > 7 && lineItems[7].isNumber() ? new BigDecimal(lineItems[7]) : 0.0
-                        String compactAllele = "$ref$pos${alt == ':' ? 'del' : alt}"
-                        [(compactAllele): ['mitoTipScore': mitoTipScore, 'mitoTipQuartile': mitoTipQuartile, 'mitoTipCount': mitoTipCount, 'mitoTipFreqPct': mitoTipFreqPct]]
-                    }
+            Map<String, Object> mitoTipsAnnotations = parseMitoTipsTsv(mitoTipsTsv)
 
             allAnnotations.each { MitoMapAnnotation annotation ->
                 def diseaseAnnotation = diseasesAnnotations.getOrDefault(annotation.compactAllele, Collections.emptyMap())
@@ -107,6 +89,7 @@ class MitoMapAnnotationsLoader {
 
                 def mitoTipAnnotation = mitoTipsAnnotations.getOrDefault(annotation.compactAllele, Collections.emptyMap())
                 annotation.mitoTipScore = mitoTipAnnotation.getOrDefault('mitoTipScore', null)
+                annotation.mitoTipScorePercentile = mitoTipAnnotation.getOrDefault('mitoTipScorePercentile', null)
                 annotation.mitoTipQuartile = mitoTipAnnotation.getOrDefault('mitoTipQuartile', MitoTipQuartile.UNKNOWN)
                 annotation.mitoTipCount = mitoTipAnnotation.getOrDefault('mitoTipCount', null)
                 annotation.mitoTipFreqPct = mitoTipAnnotation.getOrDefault('mitoTipFreqPct', null)
@@ -187,5 +170,37 @@ class MitoMapAnnotationsLoader {
         }
 
         Files.move(temp, outputPath, REPLACE_EXISTING)
+    }
+
+    protected static Map<String, Object> parseMitoTipsTsv(String mitoTipsTsv) {
+        Map<String, Object> rawMitoTips = mitoTipsTsv.split(/\n/)
+                .tail()
+                .collectEntries { String line ->
+//                        Position	rCRS	Alt	MitoTIP_Score	Quartile	Count	Percentage	Mitomap_Status
+//                        577	G	:	20.3833	Q1	0	0.000	Absent
+
+                    // lineItems[7] unused as it is already included in other annotations
+                    def lineItems = line.split(/\t/)
+                    Integer lineItemsSize = lineItems.size()
+                    String pos = lineItemsSize > 0 ? lineItems[0] : null
+                    String ref = lineItemsSize > 1 ? lineItems[1] : null
+                    String alt = lineItemsSize > 2 ? lineItems[2] : null
+                    BigDecimal mitoTipScore = lineItemsSize > 3 && lineItems[3].isNumber() ? new BigDecimal(lineItems[3]) : 0.0
+                    MitoTipQuartile mitoTipQuartile = lineItemsSize > 4 ? MitoTipQuartile.safeValueOf(lineItems[4]) : MitoTipQuartile.UNKNOWN
+                    BigDecimal mitoTipCount = lineItemsSize > 5 && lineItems[5].isNumber() ? new BigDecimal(lineItems[5]) : 0.0
+                    BigDecimal mitoTipFreqPct = lineItemsSize > 6 && lineItems[6].isNumber() ? new BigDecimal(lineItems[6]) : 0.0
+//                        String mitoTipStatus = lineItemsSize > 7 && lineItems[7].isNumber() ? new BigDecimal(lineItems[7]) : 0.0
+                    String compactAllele = "$ref$pos${alt == ':' ? 'del' : alt}"
+                    [(compactAllele): ['mitoTipScore': mitoTipScore, 'mitoTipQuartile': mitoTipQuartile, 'mitoTipCount': mitoTipCount, 'mitoTipFreqPct': mitoTipFreqPct]]
+                }
+
+        int totalCount = rawMitoTips.size()
+        Map<String, Object> withPercentileResult = rawMitoTips.sort { a, b -> b.value.mitoTipScore <=> a.value.mitoTipScore ?: a.key <=> b.key }
+        withPercentileResult.eachWithIndex { String allele, def mtAnnotation, int i ->
+            BigDecimal percentile = ((totalCount - i - 1) / totalCount * 100).setScale(2, RoundingMode.HALF_EVEN)
+            mtAnnotation['mitoTipScorePercentile'] = percentile
+        }
+
+        return withPercentileResult
     }
 }

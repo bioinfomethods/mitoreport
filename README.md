@@ -30,7 +30,7 @@ java -jar "$PROJECT_DIR/build/libs/mitoreport-$APP_ARCHIVE_VERSION-all.jar" mito
   -sample "15G002035-GM12878K_20pc_10kb_200" \
   -sample-output "anonymous-sample-id" \
   -vcf "$PROJECT_DIR/test_fixtures/variants/15G002035.unshifted.contamination.filtering.intermediatefilter.norm.dedup.mito_vep.vcf.gz" \
-  -mann "$PROJECT_DIR/test_fixtures/mito_map_annotations_20210713.json" \
+  -mann "$PROJECT_DIR/test_fixtures/mito_map_annotations_20210721.json" \
   -gnomad "$PROJECT_DIR/test_fixtures/gnomad.genomes.v3.1.sites.chrM.vcf.bgz" \
   "$PROJECT_DIR/test_fixtures/align/15G002035-GM12878K_20pc_10kb_200.unshifted.bam" $PROJECT_DIR/test_fixtures/controls/*.bam
 ```
@@ -147,7 +147,7 @@ java -jar "$PROJECT_DIR/build/libs/mitoreport-$APP_ARCHIVE_VERSION-all.jar" mito
   -sample "15G002035-GM12878K_20pc_10kb_200" \
   -sample-output "anonymous-sample-id" \
   -vcf $PROJECT_DIR/test_fixtures/variants/15G002035.unshifted.contamination.filtering.intermediatefilter.norm.dedup.mito_vep.vcf.gz \
-  -mann $PROJECT_DIR/test_fixtures/mito_map_annotations_20210713.json \
+  -mann $PROJECT_DIR/test_fixtures/mito_map_annotations_20210721.json \
   -gnomad $PROJECT_DIR/test_fixtures/gnomad.genomes.v3.1.sites.chrM.vcf.bgz \
   "$PROJECT_DIR/test_fixtures/align/15G002035-GM12878K_20pc_10kb_200.unshifted.bam" $PROJECT_DIR/test_fixtures/controls/*.bam
 ```

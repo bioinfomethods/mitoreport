@@ -62,6 +62,7 @@ class MitoMapAnnotationsLoaderTest extends Specification {
         actualResult1.diseaseStatus == 'Reported'
         !actualResult1.diseaseConfirmedPathogenic
         actualResult1.mitoTipScore == 17.75
+        actualResult1.mitoTipScorePercentile == 82.00
         actualResult1.mitoTipQuartile == MitoTipQuartile.Q1
         actualResult1.mitoTipCount == 0
         actualResult1.mitoTipFreq == 0
@@ -77,6 +78,7 @@ class MitoMapAnnotationsLoaderTest extends Specification {
         actualResult2.diseaseStatus == 'Reported'
         !actualResult2.diseaseConfirmedPathogenic
         actualResult2.mitoTipScore == 20.1973
+        actualResult2.mitoTipScorePercentile == 94.00
         actualResult2.mitoTipQuartile == MitoTipQuartile.Q1
         actualResult2.mitoTipCount == 5
         actualResult2.mitoTipFreq == 0.0001
@@ -93,6 +95,7 @@ class MitoMapAnnotationsLoaderTest extends Specification {
         !actualResult3.diseaseConfirmedPathogenic
         actualResult3.mitoTipScore == null
         actualResult3.mitoTipQuartile == MitoTipQuartile.UNKNOWN
+        actualResult3.mitoTipScorePercentile == null
         actualResult3.mitoTipCount == null
         actualResult3.mitoTipFreq == null
 
@@ -108,7 +111,31 @@ class MitoMapAnnotationsLoaderTest extends Specification {
         !actualResult4.diseaseConfirmedPathogenic
         actualResult4.mitoTipScore == null
         actualResult4.mitoTipQuartile == MitoTipQuartile.UNKNOWN
+        actualResult4.mitoTipScorePercentile == null
         actualResult4.mitoTipCount == null
         actualResult4.mitoTipFreq == null
+    }
+
+    def 'parseMitoTipsTsv() returns correct results'() {
+        given:
+        String mitoTipsTsv = Paths.get(resourceLoader.getResource('classpath:mitotip_scores_small.txt').get().path).text
+
+        when:
+        Map<String, Object> actualResult = MitoMapAnnotationsLoader.parseMitoTipsTsv(mitoTipsTsv)
+
+        then:
+        actualResult.size() == 50
+        def actualResultFirst = actualResult.values().first()
+        assert actualResultFirst.mitoTipScore == 20.3833
+        assert actualResultFirst.mitoTipScorePercentile == 98.00
+        assert actualResultFirst.mitoTipQuartile == MitoTipQuartile.Q1
+        assert actualResultFirst.mitoTipCount == 0.0
+        assert actualResultFirst.mitoTipFreqPct == 0.0
+        def actualResultLast = actualResult.values().last()
+        assert actualResultLast.mitoTipScore == 3.73435
+        assert actualResultLast.mitoTipScorePercentile == 0.0
+        assert actualResultLast.mitoTipQuartile == MitoTipQuartile.Q4
+        assert actualResultLast.mitoTipCount == 0.0
+        assert actualResultLast.mitoTipFreqPct == 0.0
     }
 }

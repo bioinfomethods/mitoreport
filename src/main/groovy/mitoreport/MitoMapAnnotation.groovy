@@ -33,6 +33,7 @@ class MitoMapAnnotation implements ToMap {
     String disease
     String diseaseStatus
     BigDecimal mitoTipScore
+    BigDecimal mitoTipScorePercentile
     MitoTipQuartile mitoTipQuartile
     Integer mitoTipCount
     BigDecimal mitoTipFreqPct

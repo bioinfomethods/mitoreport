@@ -20,12 +20,9 @@ Position	rCRS	Alt	MitoTIP_Score	Quartile	Count	Percentage	Mitomap_Status
 581	A	G	11.6371	Q3	0	0.000	Absent
 16014	C	T	3.73435	Q4	0	0.000	Absent
 16015	T	:	12.6808	Q2	0	0.000	Absent
-16015	T	A	12.6808	Q2	0	0.000	Absent
 16015	T	C	12.6808	Q2	0	0.000	Reported_but_unconfirmed
 16015	T	G	12.6808	Q2	0	0.000	Absent
 16016	A	:	6.21589	Q4	0	0.000	Absent
-16016	A	C	6.21589	Q4	0	0.000	Absent
-16016	A	G	6.21589	Q4	0	0.000	Absent
 16016	A	T	6.21589	Q4	0	0.000	Absent
 16017	T	:	10.0488	Q3	0	0.000	Absent
 16017	T	A	7.4155	Q4	0	0.000	Absent
@@ -37,12 +34,9 @@ Position	rCRS	Alt	MitoTIP_Score	Quartile	Count	Percentage	Mitomap_Status
 16018	T	G	16.014	Q2	0	0.000	Absent
 16019	C	:	10.2121	Q3	0	0.000	Absent
 16019	C	A	8.45652	Q3	0	0.000	Absent
-16019	C	G	8.45652	Q3	0	0.000	Absent
 16019	C	T	8.45652	Q3	0	0.000	Absent
 16020	T	:	9.36532	Q3	0	0.000	Absent
-16020	T	A	7.71949	Q4	0	0.000	Absent
 16020	T	C	7.71949	Q4	0	0.000	Absent
-16020	T	G	7.71949	Q4	0	0.000	Absent
 16021	C	:	10.1663	Q3	0	0.000	Absent
 16021	C	A	8.41071	Q4	0	0.000	Absent
 16021	C	G	8.41071	Q4	0	0.000	Absent
