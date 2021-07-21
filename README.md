@@ -128,11 +128,10 @@ java -jar "$PROJECT_DIR/build/libs/mitoreport-$APP_ARCHIVE_VERSION-all.jar" mito
 
 Mitoreport is a standalone CLI application intended to be run by administrators. A set of input files are required to
 run the report.  A prepared test version of these files can be found at
-`/group/bioi1/simons/broad/mito/test_fixtures.tgz`. Copy this to your project dir as below.
+`/hpc/bpipeLibrary/shared/cpipe-wgs/pipeline/mito_pipeline_resources/mitomap/test_fixtures.tgz`. 
+Copy this to your project dir and extract as below.
 
 ```bash
-cp $MCRI_BIO1_MNT/simons/broad/mito/test_fixtures.tgz $PROJECT_DIR/
-
 tar -zxvf $PROJECT_DIR/test_fixtures.tgz -C $PROJECT_DIR
 ```
 
