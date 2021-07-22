@@ -288,6 +288,9 @@
               </v-select>
             </td>
             <td>
+              mitotip filter goes here
+            </td>
+            <td>
               <v-row class="justify-space-between curation-search">
                 <v-text-field
                   v-model="filterConfig.curationSearch"
@@ -405,6 +408,36 @@
             shortenConsequenceOntology(item.consequence.displayTerm)
           }}</span>
         </template>
+
+        <template v-slot:item.mitotip="{ item }">
+          <span v-if="item.mitoTipScore">
+            <a
+              href="https://mitomap.org/foswiki/bin/view/MITOMAP/MitoTipInfo"
+              target="_blank"
+              >{{ item.mitoTipScore }}</a
+            >
+
+            <v-icon v-if="item.mitoTipQuartile === 'Q1'" style="color: #008001;"
+              >mdi-arrow-down-thick</v-icon
+            >
+            <v-icon v-if="item.mitoTipQuartile === 'Q1'" style="color: #008001;"
+              >mdi-arrow-down-thick</v-icon
+            >
+            <v-icon v-if="item.mitoTipQuartile === 'Q2'" style="color: #008001;"
+              >mdi-arrow-down-thick</v-icon
+            >
+            <v-icon v-if="item.mitoTipQuartile === 'Q3'" style="color: #fca500;"
+              >mdi-arrow-up-thick</v-icon
+            >
+            <v-icon v-if="item.mitoTipQuartile === 'Q4'" style="color: #fa0001;"
+              >mdi-arrow-up-thick</v-icon
+            >
+            <v-icon v-if="item.mitoTipQuartile === 'Q4'" style="color: #fa0001;"
+              >mdi-arrow-up-thick</v-icon
+            >
+          </span>
+        </template>
+
         <template v-slot:item.gbFreq="{ item }">
           <span v-if="item.gbFreq > 0">{{ item.gbFreq | precisionTo }}</span>
         </template>
@@ -658,7 +691,7 @@
         </template>
 
         <template v-slot:expanded-item="{ headers, item }">
-          <td colspan="3" class="expandedVariant">
+          <td colspan="4" class="expandedVariant">
             <v-expand-transition>
               <VariantInfo
                 v-show="transitioned[item.id]"
@@ -726,7 +759,9 @@
               <IgvLink :position="activeVariant.pos"></IgvLink>
             </li>
             <li>
-              <a target="_blank" :href="ucscLink(activeVariant)">UCSC Genome Browser</a>
+              <a target="_blank" :href="ucscLink(activeVariant)"
+                >UCSC Genome Browser</a
+              >
             </li>
             <li>
               <a
@@ -977,6 +1012,14 @@ export default {
           width: '100',
           sort: this.consequenceSort,
           filter: this.consequenceFilter,
+        },
+        {
+          text: 'MitoTIP',
+          // tooltip: 'Sorting is on severity of consequence',
+          value: 'mitotip',
+          width: '100',
+          // sort: this.consequenceSort,
+          // filter: this.consequenceFilter,
         },
         {
           text: 'Curation',
