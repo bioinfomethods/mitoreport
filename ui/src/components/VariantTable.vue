@@ -726,7 +726,7 @@
               <IgvLink :position="activeVariant.pos"></IgvLink>
             </li>
             <li>
-              <a target="_blank" :href="ucscLink(activeVariant)">UCSC</a>
+              <a target="_blank" :href="ucscLink(activeVariant)">UCSC Genome Browser</a>
             </li>
             <li>
               <a
@@ -1155,6 +1155,7 @@ export default {
         ) + 10}`,
 
         // Kat's tracks
+        ruler: 'full',
         knownGene: 'pack',
         refSeqComposite: 'pack',
         omimAvSnp: 'full',
@@ -1169,28 +1170,27 @@ export default {
         rmsk: 'dense',
 
         // Tracks shown in Kat's list, that she didn't ask for
-        ruler: 'dense',
-        fixSeqLiftOverPsl: 'pack',
-        umap: 'full',
-        bismap: 'full',
-        wgEncodeGencodeV37: 'pack',
-        tRNAs: 'pack',
-        wgRna: 'pack',
-        lincRNAsTranscripts: 'pack',
-        lincRNAsAllCellTypeTopView: 'dense',
-        transMapRefSeqV5: 'pack',
-        transMapEnsemblV5: 'pack',
-        caddIns: 'dense',
-        caddDel: 'dense',
-        cadd: 'dense',
-        tcgaTranscExpr: 'pack',
-        tcgaGeneExpr: 'pack',
-        mastermind: 'pack',
-        wgEncodeRegMarkH3k27ac: 'full',
-        cpgIslandExt: 'pack',
-        snp151Common: 'pack',
-        dbVar_conflict: 'pack',
-        dbVar_common: 'pack',
+        fixSeqLiftOverPsl: 'hide',
+        umap: 'hide',
+        bismap: 'hide',
+        wgEncodeGencodeV37: 'hide',
+        tRNAs: 'hide',
+        wgRna: 'hide',
+        lincRNAsTranscripts: 'hide',
+        lincRNAsAllCellTypeTopView: 'hide',
+        transMapRefSeqV5: 'hide',
+        transMapEnsemblV5: 'hide',
+        caddIns: 'hide',
+        caddDel: 'hide',
+        cadd: 'hide',
+        tcgaTranscExpr: 'hide',
+        tcgaGeneExpr: 'hide',
+        mastermind: 'hide',
+        wgEncodeRegMarkH3k27ac: 'hide',
+        cpgIslandExt: 'hide',
+        snp151Common: 'hide',
+        dbVar_conflict: 'hide',
+        dbVar_common: 'hide',
 
         // Remove some defaults
         altSeqLiftOverPsl: 'hide',
