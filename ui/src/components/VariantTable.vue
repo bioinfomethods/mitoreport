@@ -288,7 +288,28 @@
               </v-select>
             </td>
             <td>
-              mitotip filter goes here
+              <v-select
+                v-model="filterConfig.selectedMitoTIP"
+                :items="mitoTipQuartiles"
+                type="text"
+                label="Select Pathegenicity"
+                multiple
+                dense
+              >
+                <template v-slot:selection="{ item, index }">
+                  <v-chip
+                    v-if="index < 1"
+                    close
+                    @click:close="removeSelectedMitoQuartile(item)"
+                    x-small
+                  >
+                    <span>{{ item }}</span>
+                  </v-chip>
+                  <span v-if="index === 1" class="grey--text caption"
+                    >+{{ filterConfig.selectedMitoTIP.length - 1 }} more</span
+                  >
+                </template>
+              </v-select>
             </td>
             <td>
               <v-row class="justify-space-between curation-search">
@@ -908,6 +929,7 @@ export default {
         selectedGenes: [],
         selectedMasks: [],
         selectedConsequences: [],
+        selectedMitoTIP: [],
         gnomADHap: [],
         vafRange: [0, 1],
         gbFreqTickIndex: 6,
@@ -937,6 +959,13 @@ export default {
       vafTicks: [0, 0.01, 0.02, 0.03, 0.05, 0.1, 1],
       vafIndexRange: [1, 5],
       gbFreqTicks: [0.0, 0.001, 0.002, 0.005, 0.01, 0.1, 1.0],
+      mitoTipQuartiles: [
+        'Confirmed pathogenic',
+        'Likely pathogenic',
+        'Possibly pathogenic',
+        'Possibly benign',
+        'Likely benign',
+      ],
       gnomADHetFreqTicks: [
         0.0,
         0.00005,
@@ -1070,11 +1099,10 @@ export default {
         },
         {
           text: 'MitoTIP',
-          // tooltip: 'Sorting is on severity of consequence',
           value: 'mitotip',
           width: '100',
-          // sort: this.consequenceSort,
-          // filter: this.consequenceFilter,
+          sort: this.mitoTIPsort,
+          filter: this.mitoTIPfilter,
         },
         {
           text: 'Curation',
@@ -1585,6 +1613,63 @@ export default {
       )
     },
 
+    removeSelectedMitoQuartile: function(toRemove) {
+      this.filterConfig.selectedMitoTIP = this.filterConfig.selectedMitoTIP.filter(
+        selected => selected !== toRemove
+      )
+    },
+
+    mitoTIPfilter: function(value, filter, variant) {
+      // If no MitoTIP data, don't filter it?
+      // This would be more consistent with the other filters on this page.
+      // if (!variant.mitoTipScorePercentile) {
+      //   return true
+      // }
+
+      // Don't filter any if the filter is not in use
+      if (_.isEmpty(this.filterConfig.selectedMitoTIP)) {
+        return true
+      } else {
+        if (
+          _.includes(
+            this.filterConfig.selectedMitoTIP,
+            'Confirmed pathogenic'
+          ) &&
+          variant.diseaseConfirmedPathogenic
+        ) {
+          return true
+        }
+        if (
+          _.includes(this.filterConfig.selectedMitoTIP, 'Likely pathogenic') &&
+          variant.mitoTipQuartile === 'Q4'
+        ) {
+          return true
+        }
+        if (
+          _.includes(
+            this.filterConfig.selectedMitoTIP,
+            'Possibly pathogenic'
+          ) &&
+          variant.mitoTipQuartile === 'Q3'
+        ) {
+          return true
+        }
+        if (
+          _.includes(this.filterConfig.selectedMitoTIP, 'Possibly benign') &&
+          variant.mitoTipQuartile === 'Q2'
+        ) {
+          return true
+        }
+        if (
+          _.includes(this.filterConfig.selectedMitoTIP, 'Likely benign') &&
+          variant.mitoTipQuartile === 'Q1'
+        ) {
+          return true
+        }
+      }
+      return false
+    },
+
     removeSelectedConsequence: function(toRemove) {
       this.filterConfig.selectedConsequences = this.filterConfig.selectedConsequences.filter(
         selected => selected !== toRemove.displayTerm
@@ -1628,6 +1713,10 @@ export default {
       })
 
       return weight
+    },
+
+    mitoTIPsort: function(l, r) {
+      return l?.mitoTipScorePercentile - r?.mitoTipScorePercentile || -1
     },
 
     consequenceSort: function(l, r) {

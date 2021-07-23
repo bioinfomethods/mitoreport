@@ -43,6 +43,7 @@ export const DEFAULT_VARIANT_SEARCH = {
   filterConfig: {
     posRange: [500, 16569],
     allele: '',
+    selectedMitoTIP: [],
     selectedTypes: [],
     selectedGenes: [],
     selectedMasks: ['MT-HV1', 'MT-HV2', 'MT-HV3', 'MT-OHR', 'MT-CR'],

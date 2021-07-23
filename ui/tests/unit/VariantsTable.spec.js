@@ -60,6 +60,7 @@ describe('VariantTable.vue', () => {
       expect(underTest.vm.$data.filterConfig).toEqual({
         posRange: [0, 16500],
         allele: '',
+        selectedMitoTIP: [],
         selectedTypes: ['SNP', 'DEL'],
         selectedGenes: [],
         selectedMasks: ['MT-HV1', 'MT-HV2', 'MT-HV3', 'MT-OHR', 'MT-CR'],
@@ -128,6 +129,7 @@ describe('VariantTable.vue', () => {
         filterConfig: {
           posRange: [1000, 15000],
           allele: 'A/C',
+          selectedMitoTIP: [],
           selectedTypes: ['SNP', 'INS', 'DEL'],
           selectedGenes: [],
           selectedMasks: ['MT-HV1', 'MT-HV2', 'MT-HV3', 'MT-OHR', 'MT-CR'],
@@ -167,6 +169,7 @@ describe('VariantTable.vue', () => {
         filterConfig: {
           posRange: [1000, 15000],
           allele: 'A/C',
+          selectedMitoTIP: [],
           selectedTypes: ['SNP', 'INS', 'DEL'],
           selectedGenes: [],
           selectedMasks: ['MT-HV1', 'MT-HV2', 'MT-HV3', 'MT-OHR', 'MT-CR'],
