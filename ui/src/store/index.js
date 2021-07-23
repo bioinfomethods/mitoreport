@@ -256,27 +256,27 @@ export const mutations = {
       })
   },
 
+  // Set or create curation
   SET_CURATION(state, curationToSave) {
-    let existingCurations = getters.getSampleSettings(state)?.curations || []
+    let existingCurations = getters.getSampleSettings(state).curations
     let existing = existingCurations.find(
       c => c.variantId === curationToSave.variantId
     )
 
     if (!existing) {
       existing = { id: uuidv4() }
-      existingCurations.push(existing)
     }
 
-    Vue.set(existing, 'variantId', curationToSave.variantId)
+    existing.variantId = curationToSave.variantId
 
     existing.selectedTagNames =
       curationToSave.selectedTags?.map(ct => ct.name) ||
       existing.selectedTagNames
 
-    Vue.set(
-      existing,
-      'variantNote',
-      curationToSave.variantNote || existing.variantNote || '')
+    existing.variantNote =
+      curationToSave.variantNote || existing.variantNote || ''
+
+    existingCurations.push(existing)
   },
 }
 
