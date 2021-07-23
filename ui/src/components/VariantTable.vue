@@ -411,13 +411,9 @@
 
         <template v-slot:item.mitotip="{ item }">
           <span v-if="item.mitoTipScore">
-            <a
-              href="https://mitomap.org/foswiki/bin/view/MITOMAP/MitoTipInfo"
-              target="_blank"
-              >{{ item.mitoTipScore }}</a
-            >
+            <span v-if="item.mitoTipScorePercentile">{{ item.mitoTipScorePercentile }}%</span>
 
-            <v-icon v-if="item.mitoTipQuartile === 'Q1'" style="color: #008001;"
+            <v-icon v-if="item.mitoTipQuartile === 'Q1'" style="color: #008001; margin-right: -8px;"
               >mdi-arrow-down-thick</v-icon
             >
             <v-icon v-if="item.mitoTipQuartile === 'Q1'" style="color: #008001;"
@@ -429,7 +425,7 @@
             <v-icon v-if="item.mitoTipQuartile === 'Q3'" style="color: #fca500;"
               >mdi-arrow-up-thick</v-icon
             >
-            <v-icon v-if="item.mitoTipQuartile === 'Q4'" style="color: #fa0001;"
+            <v-icon v-if="item.mitoTipQuartile === 'Q4'" style="color: #fa0001; margin-right: -8px;"
               >mdi-arrow-up-thick</v-icon
             >
             <v-icon v-if="item.mitoTipQuartile === 'Q4'" style="color: #fa0001;"
