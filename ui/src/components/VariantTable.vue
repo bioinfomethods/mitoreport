@@ -411,26 +411,85 @@
 
         <template v-slot:item.mitotip="{ item }">
           <span v-if="item.mitoTipScore">
-            <span v-if="item.mitoTipScorePercentile">{{ item.mitoTipScorePercentile }}%</span>
+            <v-tooltip top>
+              <template v-slot:activator="{ on, attrs }">
+                <span v-bind="attrs" v-on="on">
+                  <span v-if="item.mitoTipScorePercentile"
+                    >{{ item.mitoTipScorePercentile }}%</span
+                  >
 
-            <v-icon v-if="item.mitoTipQuartile === 'Q1'" style="color: #008001; margin-right: -8px;"
-              >mdi-arrow-down-thick</v-icon
-            >
-            <v-icon v-if="item.mitoTipQuartile === 'Q1'" style="color: #008001;"
-              >mdi-arrow-down-thick</v-icon
-            >
-            <v-icon v-if="item.mitoTipQuartile === 'Q2'" style="color: #008001;"
-              >mdi-arrow-down-thick</v-icon
-            >
-            <v-icon v-if="item.mitoTipQuartile === 'Q3'" style="color: #fca500;"
-              >mdi-arrow-up-thick</v-icon
-            >
-            <v-icon v-if="item.mitoTipQuartile === 'Q4'" style="color: #fa0001; margin-right: -8px;"
-              >mdi-arrow-up-thick</v-icon
-            >
-            <v-icon v-if="item.mitoTipQuartile === 'Q4'" style="color: #fa0001;"
-              >mdi-arrow-up-thick</v-icon
-            >
+                  <v-icon
+                    v-if="item.mitoTipQuartile === 'Q1'"
+                    style="color: #008001; margin-right: -8px;"
+                    >mdi-arrow-down-thick</v-icon
+                  >
+                  <v-icon
+                    v-if="item.mitoTipQuartile === 'Q1'"
+                    style="color: #008001;"
+                    >mdi-arrow-down-thick</v-icon
+                  >
+                  <v-icon
+                    v-if="item.mitoTipQuartile === 'Q2'"
+                    style="color: #008001;"
+                    >mdi-arrow-down-thick</v-icon
+                  >
+                  <v-icon
+                    v-if="item.mitoTipQuartile === 'Q3'"
+                    style="color: #fca500;"
+                    >mdi-arrow-up-thick</v-icon
+                  >
+                  <v-icon
+                    v-if="item.diseaseConfirmedPathogenic"
+                    style="color: #fa0001; margin-right: -8px;"
+                    >mdi-arrow-up-thick</v-icon
+                  >
+                  <v-icon
+                    v-if="item.mitoTipQuartile === 'Q4'"
+                    style="color: #fa0001; margin-right: -8px;"
+                    >mdi-arrow-up-thick</v-icon
+                  >
+                  <v-icon
+                    v-if="item.mitoTipQuartile === 'Q4'"
+                    style="color: #fa0001;"
+                    >mdi-arrow-up-thick</v-icon
+                  >
+                </span>
+              </template>
+              <ul>
+                <li>
+                  <v-icon style="color: #fa0001; margin-right: -8px;"
+                    >mdi-arrow-up-thick</v-icon
+                  >
+                  <v-icon style="color: #fa0001; margin-right: -8px;"
+                    >mdi-arrow-up-thick</v-icon
+                  >
+                  <v-icon style="color: #fa0001;">mdi-arrow-up-thick</v-icon>
+                  Confirmed pathogenic
+                </li>
+                <li>
+                  <v-icon style="color: #fa0001; margin-right: -8px;"
+                    >mdi-arrow-up-thick</v-icon
+                  >
+                  <v-icon style="color: #fa0001;">mdi-arrow-up-thick</v-icon>
+                  Likely pathogenic
+                </li>
+                <li>
+                  <v-icon style="color: #fca500;">mdi-arrow-up-thick</v-icon>
+                  Possibly pathogenic
+                </li>
+                <li>
+                  <v-icon style="color: #008001;">mdi-arrow-down-thick</v-icon>
+                  Possibly benign
+                </li>
+                <li>
+                  <v-icon style="color: #008001; margin-right: -8px;"
+                    >mdi-arrow-down-thick</v-icon
+                  >
+                  <v-icon style="color: #008001;">mdi-arrow-down-thick</v-icon>
+                  Likely benign
+                </li>
+              </ul>
+            </v-tooltip>
           </span>
         </template>
 
@@ -1748,6 +1807,15 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.v-tooltip__content {
+  background: rgba(97, 97, 97, 1) !important;
+  opacity: 1 !important;
+  ul {
+    list-style: none;
+    padding-left: 0;
+  }
+}
+
 .variant-table-v-select {
   font-size: 0.8em;
 }
