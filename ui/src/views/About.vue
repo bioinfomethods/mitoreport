@@ -5,7 +5,7 @@
         <v-card>
           <v-card-title>About</v-card-title>
           <v-card-text>
-            <span>Mitoreport</span>
+            <h3>Mitoreport</h3>
             <p>
               Mitoreport is a tool developed by the Bioinformatics Methods team
               at the MCRI. This tool generates an automated report of variants
@@ -13,7 +13,7 @@
               allows manual curation and annotation of these variants.
             </p>
 
-            <span>gnomAD</span>
+            <h3>gnomAD</h3>
             <p>
               The
               <a href="https://gnomad.broadinstitute.org/about" target="_blank"
@@ -25,7 +25,7 @@
               large-scale sequencing projects, and making summary data available
               for the wider scientific community.
             </p>
-            <span>MITOMAP</span>
+            <h3>MITOMAP</h3>
             <p>
               <a href="https://mitomap.org/MITOMAP" target="_blank">MITOMAP</a>
               reports published data on human mitochondrial DNA variation.
@@ -38,6 +38,35 @@
                 >Children's Hospital of Philadelphia</a
               >.
             </p>
+            <h3>MCRI / VCGS</h3>
+            <span>
+              MitoReport has benefited from expertise, advice and input provided
+              by many contributors at the Murdoch Children's Research Institute
+              (MCRI) and the Victorian Clinical Genetics Services (VCGS). In
+              particular we acknowledge the VCGS Clinical Genomics and Targeted
+              Genomics Diagnostics (TGD) groups for their insight into the
+              process for clinical interpretation and processes for validation
+              of mitochondrial testing. We further acknowledge the VCGS Clinical
+              Bioinformatics Unit and Miriam Fanjul Ferdandez for the initial
+              inspiration and groundwork that provided the basis for MitoReport.
+              Finally, we acknowledge the Brain and Mitochondrial Research Group
+              at MCRI who provided us with significant insight and advice into
+              complex issues in mitochondrial variant interpretation.
+            </span>
+            <h3>AGHA</h3>
+            <span>
+              We thank the Australian Genomics Health Alliance for allowing
+              access to data that to test and validate the operation of
+              MitoReport, as well as the patients and families who allowed their
+              genomic data to be used for research.
+            </span>
+            <h3>How to cite Mitoreport</h3>
+            <span
+              >Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur
+              at voluptatibus, ipsum, sequi porro earum laboriosam dolorem ullam
+              distinctio magnam quod, quidem delectus sunt aliquam cumque
+              quisquam! Autem, ea nisi?</span
+            >
           </v-card-text>
         </v-card>
       </v-col>
@@ -53,7 +82,7 @@
             </table>
           </v-card-text>
         </v-card>
-        <v-card>
+        <v-card v-if="haplogrepClass">
           <v-card-title>Haplogrep Classification</v-card-title>
           <v-card-text>
             <span>
