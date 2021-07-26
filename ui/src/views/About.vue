@@ -142,7 +142,7 @@ export default {
 // Should this stuff always be fresh? Perhaps don't pull it from localstorage mitosettings?
       if (this.getSampleMetadata.buildCommit) {
         _.merge(data, {
-          "Mitoreport Git Hash": this.getSampleMetadata.buildCommit,
+          "Mitoreport Git Hash": this.getSampleMetadata.buildCommit.slice(1),
           "Mitoreport Git Date": new Date(this.getSampleMetadata.buildTimestamp).toLocaleString('en-AU'),
         })
       }
