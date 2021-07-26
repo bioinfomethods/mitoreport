@@ -440,22 +440,22 @@
                   >
 
                   <v-icon
-                    v-if="item.mitoTipQuartile === 'Q1'"
+                    v-if="item.mitoTipQuartile === 'Q4'"
                     style="color: #008001; margin-right: -8px;"
                     >mdi-arrow-down-thick</v-icon
                   >
                   <v-icon
-                    v-if="item.mitoTipQuartile === 'Q1'"
-                    style="color: #008001;"
-                    >mdi-arrow-down-thick</v-icon
-                  >
-                  <v-icon
-                    v-if="item.mitoTipQuartile === 'Q2'"
+                    v-if="item.mitoTipQuartile === 'Q4'"
                     style="color: #008001;"
                     >mdi-arrow-down-thick</v-icon
                   >
                   <v-icon
                     v-if="item.mitoTipQuartile === 'Q3'"
+                    style="color: #008001;"
+                    >mdi-arrow-down-thick</v-icon
+                  >
+                  <v-icon
+                    v-if="item.mitoTipQuartile === 'Q2'"
                     style="color: #fca500;"
                     >mdi-arrow-up-thick</v-icon
                   >
@@ -465,12 +465,12 @@
                     >mdi-arrow-up-thick</v-icon
                   >
                   <v-icon
-                    v-if="item.mitoTipQuartile === 'Q4'"
+                    v-if="item.mitoTipQuartile === 'Q1'"
                     style="color: #fa0001; margin-right: -8px;"
                     >mdi-arrow-up-thick</v-icon
                   >
                   <v-icon
-                    v-if="item.mitoTipQuartile === 'Q4'"
+                    v-if="item.mitoTipQuartile === 'Q1'"
                     style="color: #fa0001;"
                     >mdi-arrow-up-thick</v-icon
                   >
@@ -1641,7 +1641,7 @@ export default {
         }
         if (
           _.includes(this.filterConfig.selectedMitoTIP, 'Likely pathogenic') &&
-          variant.mitoTipQuartile === 'Q4'
+          variant.mitoTipQuartile === 'Q1'
         ) {
           return true
         }
@@ -1650,19 +1650,19 @@ export default {
             this.filterConfig.selectedMitoTIP,
             'Possibly pathogenic'
           ) &&
-          variant.mitoTipQuartile === 'Q3'
-        ) {
-          return true
-        }
-        if (
-          _.includes(this.filterConfig.selectedMitoTIP, 'Possibly benign') &&
           variant.mitoTipQuartile === 'Q2'
         ) {
           return true
         }
         if (
+          _.includes(this.filterConfig.selectedMitoTIP, 'Possibly benign') &&
+          variant.mitoTipQuartile === 'Q3'
+        ) {
+          return true
+        }
+        if (
           _.includes(this.filterConfig.selectedMitoTIP, 'Likely benign') &&
-          variant.mitoTipQuartile === 'Q1'
+          variant.mitoTipQuartile === 'Q4'
         ) {
           return true
         }
