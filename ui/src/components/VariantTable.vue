@@ -1304,34 +1304,11 @@ export default {
         gnomadGenomesVariantsV3_1_1: 'pack',
         rmsk: 'dense',
 
-        // Tracks shown in Kat's list, that she didn't ask for
-        fixSeqLiftOverPsl: 'hide',
-        umap: 'hide',
-        bismap: 'hide',
-        wgEncodeGencodeV37: 'hide',
-        tRNAs: 'hide',
-        wgRna: 'hide',
-        lincRNAsTranscripts: 'hide',
-        lincRNAsAllCellTypeTopView: 'hide',
-        transMapRefSeqV5: 'hide',
-        transMapEnsemblV5: 'hide',
-        caddIns: 'hide',
-        caddDel: 'hide',
-        cadd: 'hide',
-        tcgaTranscExpr: 'hide',
-        tcgaGeneExpr: 'hide',
-        mastermind: 'hide',
-        wgEncodeRegMarkH3k27ac: 'hide',
-        cpgIslandExt: 'hide',
-        snp151Common: 'hide',
-        dbVar_conflict: 'hide',
-        dbVar_common: 'hide',
+        // Hide all other tracks
+        hideTracks: 1,
 
-        // Remove some defaults
-        altSeqLiftOverPsl: 'hide',
-        encodeCcreCombined: 'hide',
-        wgEncodeReg: 'hide',
-        gtexGeneV8: 'hide',
+        // Override the user's previous settings
+        ignoreCookie: 1,
       }
 
       return `http://genome.ucsc.edu/cgi-bin/hgTracks?${$.param(queryString)}`
