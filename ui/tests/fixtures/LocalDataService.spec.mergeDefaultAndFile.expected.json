@@ -6,12 +6,40 @@
     {
       "id": "15G002035-GM12878K_20pc_10kb_200",
       "metadata": {
-        "mitoreportVersion": "0.1.0",
+        "mitoreportVersion": "v00.01.00-43",
+        "modified": "2020-12-07T02:46:18",
+        "vendor": "MCRI",
+        "version": "v00.01.00-43",
         "absolutePath": "/Users/tommyli/Development/mcri/mitoreport/test_fixtures/gnomad.genomes.v3.1.sites.chrM.vcf.bgz",
         "fileName": "gnomad.genomes.v3.1.sites.chrM.vcf.bgz",
         "created": "2020-12-07T02:46:18",
-        "modified": "2020-12-07T02:46:18",
-        "accessed": "2021-01-26T23:32:01"
+        "accessed": "2021-01-26T23:32:01",
+        "applicationName": "MitoReport",
+        "buildCommit": "g1df6150",
+        "buildTimestamp": "2021-07-30T00:41:25.155+10:00",
+        "gnomadSource": {
+          "absolutePath": "/Users/tommyli/Development/mcri/mitoreport/test_fixtures/gnomad.genomes.v3.1.sites.chrM.vcf.bgz",
+          "accessed": "2021-01-26T23:32:01",
+          "created": "2020-12-07T02:46:18",
+          "fileName": "gnomad.genomes.v3.1.sites.chrM.vcf.bgz",
+          "modified": "2020-12-07T02:46:18"
+        }
+      },
+      "qc": {
+        "coverageStats": {
+          "means": {
+            "15G002035-GM12878K_20pc_10kb_200": 4989.796273291918,
+            "VCGS_DLS_FAM2_1_D1": 5761.837888198773,
+            "VCGS_DLS_FAM3_1_D1": 19473.958385093156,
+            "VCGS_DLS_FAM3_2_D1": 4622.262111801239
+          },
+          "medians": {
+            "15G002035-GM12878K_20pc_10kb_200": 5024,
+            "VCGS_DLS_FAM2_1_D1": 5715,
+            "VCGS_DLS_FAM3_1_D1": 19454,
+            "VCGS_DLS_FAM3_2_D1": 4589
+          }
+        }
       },
       "haplogrepClassification": {
         "sampleId": "15G002035-GM12878K_20pc_10kb_200",
@@ -63,7 +91,7 @@
           "filterConfig": {
             "posRange": [
               0,
-              16500
+              16569
             ],
             "selectedTypes": [
               "SNP",
@@ -111,12 +139,13 @@
           "filterConfig": {
             "posRange": [
               0,
-              16500
+              16569
             ],
             "allele": "",
             "selectedTypes": [],
             "selectedGenes": [],
             "selectedMasks": [],
+            "selectedMitoTIP": [],
             "selectedConsequences": [],
             "gnomADHap": [],
             "vafRange": [
@@ -174,7 +203,7 @@
           "custom": false
         }
       ],
-      "curations": []
+      "curations": {}
     },
     {
       "id": "TestSample2",
@@ -192,7 +221,7 @@
           "filterConfig": {
             "posRange": [
               0,
-              16500
+              16569
             ],
             "selectedTypes": [
               "SNP",

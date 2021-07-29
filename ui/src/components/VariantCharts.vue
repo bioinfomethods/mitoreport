@@ -30,7 +30,6 @@ export default {
   },
 
   mounted: function() {
-    console.debug(`VariantCharts mounted for variantId=${this.variantId}`)
     this.drawCharts()
   },
 

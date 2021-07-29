@@ -17,7 +17,7 @@
           "description": "Custom 1 description",
           "custom": true,
           "filterConfig": {
-            "posRange": [0, 16500],
+            "posRange": [0, 16569],
             "selectedTypes": ["SNP", "DEL"],
             "selectedConsequences": [],
             "vafRange": [0.03, 0.1],
@@ -71,20 +71,20 @@
           "custom": false
         }
       ],
-      "curations": [
-        {
+      "curations": {
+        "chrM-152-T-C": {
           "id": "3e90cfac-39ca-4aaa-a3d4-007d697eac5b",
           "variantId": "chrM-152-T-C",
           "selectedTagNames": ["Review", "Excluded"],
           "variantNote": "abc"
         },
-        {
+        "chrM-263-A-G": {
           "id": "9effa51f-1132-4c38-a20c-dc2c94680edb",
           "variantId": "chrM-263-A-G",
           "selectedTagNames": [],
           "variantNote": ""
         }
-      ]
+      }
     },
     {
       "id": "TestSample2",
@@ -100,7 +100,7 @@
           "description": "Custom 1 description",
           "custom": true,
           "filterConfig": {
-            "posRange": [0, 16500],
+            "posRange": [0, 16569],
             "selectedTypes": ["SNP", "DEL"],
             "selectedConsequences": [],
             "vafRange": [0.03, 0.1],

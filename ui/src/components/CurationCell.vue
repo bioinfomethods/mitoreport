@@ -120,7 +120,7 @@ export default {
         event.stopPropagation()
         var el = d3.select(this.$el).select(`.${tag}`)
 
-        if (this.curation?.selectedTagNames.indexOf(tag) >= 0) {
+        if (this.curation?.selectedTagNames?.indexOf(tag) >= 0) {
           this.selectedTags = this.selectedTags.filter(
             selected => selected.name !== tag
           )
@@ -138,7 +138,6 @@ export default {
       this.$store.dispatch('saveCuration', {
         variantId: this.variantId,
         selectedTags: this.selectedTags,
-        // variantNote: this.variantNote,
       })
     }, DEBOUNCE_DELAY.MEDIUM),
   },

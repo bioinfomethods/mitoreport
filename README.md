@@ -28,7 +28,6 @@ APP_ARCHIVE_VERSION=$(git describe --abbrev=0)
 java -jar "$PROJECT_DIR/build/libs/mitoreport-$APP_ARCHIVE_VERSION-all.jar" mito-report \
   -d \
   -sample "15G002035-GM12878K_20pc_10kb_200" \
-  -sample-output "anonymous-sample-id" \
   -vcf "$PROJECT_DIR/test_fixtures/variants/15G002035.unshifted.contamination.filtering.intermediatefilter.norm.dedup.mito_vep.vcf.gz" \
   -mann "$PROJECT_DIR/test_fixtures/mito_map_annotations_20210721.json" \
   -gnomad "$PROJECT_DIR/test_fixtures/gnomad.genomes.v3.1.sites.chrM.vcf.bgz" \
@@ -194,7 +193,7 @@ npm run test:unit
 During development, it's often handy to run tests in watch and verbose mode.
 
 ```bash
-npm run test:unit --verbose -- --watch
+npm run test:unit:watch
 ```
 
 ### Lints and fixes files

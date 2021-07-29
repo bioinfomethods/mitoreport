@@ -8,7 +8,7 @@
       <div class="filteredItemCount" v-if="filterActive">
         <span
           >Active Filter: {{ filteredItemCount }} of
-          {{ filteredVariants.length }}</span
+          {{ tableFilteredVariants.length }}</span
         >
       </div>
     </v-tooltip>
@@ -31,14 +31,17 @@ export default {
   },
   computed: {
     ...mapState(['filteredVariants']),
+    tableFilteredVariants() {
+      return Object.values(this.filteredVariants)
+    },
 
     filterActive() {
-      return this.filteredItemCount !== this.filteredVariants.length
+      return this.filteredItemCount !== this.tableFilteredVariants.length
     },
 
     filteredItemCount() {
       if (this.header.filter) {
-        const filteredList = this.filteredVariants.filter(variant => {
+        const filteredList = this.tableFilteredVariants.filter(variant => {
           if (variant) {
             const value = _.get(variant, this.header.value)
             return this.header.filter(value, null, variant)
@@ -48,7 +51,7 @@ export default {
         })
         return filteredList.length
       } else {
-        return this.filteredVariants.length
+        return this.tableFilteredVariants.length
       }
     },
   },

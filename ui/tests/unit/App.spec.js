@@ -55,11 +55,11 @@ describe('App.vue', () => {
     const variantTable = variantsView.findComponent(VariantTable)
     expect(variantTable.exists()).toBe(true)
 
-    const variantInfo = variantTable.findComponent(VariantInfo)
-    expect(variantInfo.exists()).toBe(true)
+    // const variantInfo = variantTable.findComponent(VariantInfo)
+    // expect(variantInfo.exists()).toBe(true)
 
-    const variantCuration = variantTable.findComponent(VariantCuration)
-    expect(variantCuration.exists()).toBe(true)
+    // const variantCuration = variantTable.findComponent(VariantCuration)
+    // expect(variantCuration.exists()).toBe(true)
   })
 
   describe('navigate to /deletions', () => {

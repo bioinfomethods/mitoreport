@@ -281,7 +281,7 @@ class MitoReportCommand implements Runnable {
                                         ['name': 'Match', important: true, custom: false],
                                         ['name': 'Mismatch', important: false, custom: false],
                                 ],
-                                curations                : [],
+                                curations                : [:],
                         ]
                 ]
         ]

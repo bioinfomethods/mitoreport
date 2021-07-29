@@ -5,10 +5,7 @@
         <tr>
           <td>HGVS.g:</td>
           <td>
-            {{
-              variant.HGVS ||
-                variant.id.replace(/chrM-(\d+)-(\w)-(\w+)/, 'm.$1$2>$3')
-            }}
+            {{ hgvsg }}
           </td>
         </tr>
         <tr>
@@ -87,6 +84,12 @@ export default {
     ...mapGetters(['getVariantById']),
     variant() {
       return this.getVariantById(this.variantId)
+    },
+    hgvsg() {
+      return (
+        this.variant.HGVS ||
+        this.variant.id.replace(/chrM-(\d+)-(\w)-(\w+)/, 'm.$1$2>$3')
+      )
     },
   },
 }

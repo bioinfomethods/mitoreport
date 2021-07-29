@@ -9,6 +9,7 @@ import SETTINGS from '../fixtures/mitoSettings.json'
 
 const VARIANTS = [
   {
+    id: 'chrM-152-T-C',
     chr: 'chrM',
     pos: 152,
     ref: 'T',
@@ -22,6 +23,7 @@ const VARIANTS = [
     DP: 4858,
   },
   {
+    id: 'chrM-263-A-G',
     chr: 'chrM',
     pos: 263,
     ref: 'A',
@@ -99,14 +101,13 @@ describe('root store mutations', () => {
   it('SET_VARIANTS', () => {
     const state = {
       loading: false,
-      variants: [],
+      variants: {},
       deletions: {},
     }
-    let expVariants = _.cloneDeep(VARIANTS)
-    expVariants[0].ref_alt = `${expVariants[0].ref}/${expVariants[0].alt}`
-    expVariants[1].ref_alt = `${expVariants[1].ref}/${expVariants[1].alt}`
-    expVariants[0].consequence.name = 'missense_variant'
-    expVariants[1].consequence.name = 'inframe_deletion'
+    let expVariants = {
+      [VARIANTS[0]['id']]: VARIANTS[0],
+      [VARIANTS[1]['id']]: VARIANTS[1],
+    }
 
     mutations.SET_VARIANTS(state, VARIANTS)
 
@@ -242,16 +243,12 @@ describe('root store actions', () => {
     await flushPromises()
 
     expect(commit).toHaveBeenCalledTimes(6)
-    expect(dispatch).toHaveBeenCalledTimes(1)
-
     expect(commit).toHaveBeenNthCalledWith(1, 'SET_LOADING')
     expect(commit).toHaveBeenNthCalledWith(2, 'SET_SETTINGS', expSettings)
     expect(commit).toHaveBeenNthCalledWith(3, 'SET_VARIANTS', VARIANTS)
     expect(commit).toHaveBeenNthCalledWith(4, 'SET_DELETIONS', DELETIONS)
     expect(commit).toHaveBeenNthCalledWith(5, 'SET_SAMPLE_ID', DELETIONS)
     expect(commit).toHaveBeenNthCalledWith(6, 'UNSET_LOADING')
-
-    expect(dispatch).toHaveBeenNthCalledWith(1, 'saveSettings')
   })
 })
 

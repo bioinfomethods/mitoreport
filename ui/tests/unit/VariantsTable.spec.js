@@ -58,7 +58,7 @@ describe('VariantTable.vue', () => {
       })
 
       expect(underTest.vm.$data.filterConfig).toEqual({
-        posRange: [0, 16500],
+        posRange: [0, 16569],
         allele: '',
         selectedMitoTIP: [],
         selectedTypes: ['SNP', 'DEL'],

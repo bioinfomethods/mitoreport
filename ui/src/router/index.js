@@ -1,6 +1,5 @@
 import Deletions from '@/views/Deletions.vue'
 import Variants from '@/views/Variants.vue'
-import VariantDetails from '@/components/VariantDetails.vue'
 import NotFound from '@/views/NotFound.vue'
 import QC from '@/views/QC.vue'
 import About from '@/views/About.vue'
@@ -22,7 +21,6 @@ const routes = [
       {
         path: ':variantId',
         name: 'variantDetails',
-        component: VariantDetails,
         props: route => ({ variantId: route.params.variantId }),
       },
     ],

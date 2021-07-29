@@ -34,10 +34,6 @@ export default {
   name: 'VariantCuration',
 
   props: {
-    curation: {
-      type: Object,
-      required: false,
-    },
     variantId: {
       type: String,
       required: false,
@@ -59,9 +55,16 @@ export default {
   },
 
   computed: {
-    ...mapGetters(['getVariantTags', 'getVariantById']),
+    ...mapGetters([
+      'getVariantTags',
+      'getVariantById',
+      'getCurationByVariantId',
+    ]),
     variant() {
       return this.getVariantById(this.variantId)
+    },
+    curation() {
+      return this.getCurationByVariantId(this.variantId)
     },
   },
 
@@ -76,7 +79,6 @@ export default {
     debounceSave: _.debounce(function() {
       this.$store.dispatch('saveCuration', {
         variantId: this.variantId,
-        // selectedTags: this.selectedTags,
         variantNote: this.variantNote,
       })
     }, DEBOUNCE_DELAY.MEDIUM),

@@ -27,7 +27,7 @@ describe('LocalDataService', () => {
     )
   })
 
-  it('loadSettings() handles correctly when only default settings exists', async () => {
+  it('loadSettings() handles correctly when local settings exists', async () => {
     window.defaultSettings = DEFAULT_SETTINGS
     window.settings = FILE_SETTINGS
     localStorage.setItem('mitoSettings', JSON.stringify(LOCAL_SETTINGS))

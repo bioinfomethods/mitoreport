@@ -23,8 +23,8 @@ export const state = {
   settings: {},
   loading: false,
   snackbar: { ...DEFAULT_SNACKBAR_OPTS },
-  variants: [],
-  filteredVariants: [],
+  variants: {},
+  filteredVariants: {},
   maxReadDepth: 0,
   deletions: {},
 }
@@ -141,7 +141,7 @@ export const getters = {
   },
 
   getVariantById: state => variantId => {
-    return state.variants.find(v => v.id === variantId) || {}
+    return state.variants[variantId] || {}
   },
 
   getVariantTags: (state, getters) => {
@@ -153,9 +153,9 @@ export const getters = {
   },
 
   getCurationByVariantId: (state, getters) => variantId => {
-    const sampleCurations = getters.getSampleSettings?.curations || []
+    const sampleCurations = getters.getSampleSettings?.curations || {}
 
-    return sampleCurations?.find(c => c.variantId === variantId) || {}
+    return sampleCurations[variantId] || {}
   },
 }
 
@@ -184,19 +184,14 @@ export const mutations = {
   },
 
   SET_VARIANTS(state, variants) {
-    const transformed = variants.map(variant => {
-      let result = {
-        ...variant,
-      }
-
-      result['ref_alt'] = `${result.ref}/${result.alt}`
-
-      return result
+    const variantsObj = {}
+    variants.forEach(v => {
+      variantsObj[v.id] = v
     })
-    state.variants = transformed
-    state.filteredVariants = transformed
+    state.variants = variantsObj
+    state.filteredVariants = variantsObj
 
-    const uniqReadDepths = _.union(state.variants.map(v => _.toNumber(v.DP)))
+    const uniqReadDepths = _.union(variants.map(v => _.toNumber(v.DP)))
     state.maxReadDepth = _.max(uniqReadDepths)
   },
 
@@ -256,32 +251,27 @@ export const mutations = {
       })
   },
 
-  // Set or create curation
   SET_CURATION(state, curationToSave) {
     let existingCurations = getters.getSampleSettings(state).curations
-    let existing = existingCurations.find(
-      c => c.variantId === curationToSave.variantId
-    )
+    let existing = existingCurations[curationToSave.variantId]
 
     if (!existing) {
       existing = { id: uuidv4() }
     }
 
     existing.variantId = curationToSave.variantId
-
     existing.selectedTagNames =
       curationToSave.selectedTags?.map(ct => ct.name) ||
       existing.selectedTagNames
-
     existing.variantNote =
       curationToSave.variantNote || existing.variantNote || ''
 
-    existingCurations.push(existing)
+    Vue.set(existingCurations, curationToSave.variantId, existing)
   },
 }
 
 export const actions = {
-  async fetchData({ state, commit, dispatch }) {
+  async fetchData({ commit }) {
     commit('SET_LOADING')
 
     try {
@@ -293,25 +283,6 @@ export const actions = {
       commit('SET_VARIANTS', varResp.data)
       commit('SET_DELETIONS', delResp.data)
       commit('SET_SAMPLE_ID', delResp.data)
-
-      const sampleSettings = getters.getSampleSettings(state)
-
-      state.variants.forEach(v => {
-        const savedCuration = sampleSettings.curations?.find(
-          c => c.variantId === v.id
-        )
-        if (_.isEmpty(savedCuration)) {
-          const blankCuration = {
-            id: uuidv4(),
-            variantId: v.id,
-            selectedTags: [],
-            variantNote: '',
-          }
-          commit('SET_CURATION', blankCuration)
-        }
-      })
-
-      await dispatch('saveSettings')
     } catch (error) {
       console.error(error)
 
@@ -391,18 +362,20 @@ export const actions = {
   filterImportantVariants({ state, commit, getters }, selectImportant) {
     const importantTagNames = getters.getImportantVariantTags.map(v => v.name)
 
-    const sampleCurations = getters?.getSampleSettings?.curations || []
-    // return sampleCurations?.find(c => c.variantId === variantId) || {}
-    const filteredVariants = state.variants.filter(v => {
-      if (!selectImportant) return true
+    const sampleCurations = getters?.getSampleSettings?.curations || {}
 
-      const curation = sampleCurations?.find(c => c.variantId === v.id) || {}
-      const hasImportantTags = (curation.selectedTagNames || []).some(st =>
-        importantTagNames.includes(st)
-      )
+    const filteredVariants = Object.fromEntries(
+      Object.entries(state.variants).filter(([k]) => {
+        if (!selectImportant) return true
 
-      return hasImportantTags
-    })
+        const curation = sampleCurations[k] || {}
+        const hasImportantTags = (curation.selectedTagNames || []).some(st =>
+          importantTagNames.includes(st)
+        )
+
+        return hasImportantTags
+      })
+    )
 
     commit('SET_FILTERED_VARIANTS', filteredVariants)
   },

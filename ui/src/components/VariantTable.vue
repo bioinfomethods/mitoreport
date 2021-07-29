@@ -8,7 +8,7 @@
             <br />
             <span
               >Filtered to {{ currentVariants.length }} of
-              {{ filteredVariants.length }} variants</span
+              {{ tableFilteredVariants.length }} variants</span
             >
           </v-col>
           <v-col md="2">
@@ -121,7 +121,7 @@
         ref="variantTable"
         id="variantTable"
         :headers="headers"
-        :items="filteredVariants"
+        :items="tableFilteredVariants"
         :options="tableOptions"
         :footer-props="tableFooterProps"
         :expanded.sync="expandedVariants"
@@ -237,7 +237,7 @@
                   </v-list-item>
                 </template>
 
-                <template v-slot:selection="{ item, index }">
+                <template v-slot:selection="{ index }">
                   <span
                     v-if="
                       index === 1 &&
@@ -765,7 +765,6 @@
             :key="item.id"
             :show-quick-tags="showQuickTags"
             :expanded="transitioned[item.id]"
-            :curation="getCurationByVariantId(item.id)"
           ></CurationCell>
         </template>
 
@@ -775,31 +774,15 @@
           </span>
         </template>
 
-        <template v-slot:expanded-item="{ headers, item }">
+        <template v-slot:expanded-item="{ headers }">
           <td colspan="4" class="expandedVariant">
-            <v-expand-transition>
-              <VariantInfo
-                v-show="transitioned[item.id]"
-                :variantId="variantId"
-              ></VariantInfo>
-            </v-expand-transition>
+            <VariantInfo :variantId="variantId"></VariantInfo>
           </td>
           <td class="expandedVariant">
-            <v-expand-transition>
-              <VariantCuration
-                v-show="transitioned[item.id]"
-                :variantId="variantId"
-                :curation="getCurationByVariantId(variantId)"
-              ></VariantCuration>
-            </v-expand-transition>
+            <VariantCuration :variantId="variantId"></VariantCuration>
           </td>
           <td :colspan="headers.length - 4" class="expandedVariant">
-            <v-expand-transition>
-              <VariantCharts
-                v-show="transitioned[item.id]"
-                :variantId="variantId"
-              ></VariantCharts>
-            </v-expand-transition>
+            <VariantCharts :variantId="variantId"></VariantCharts>
           </td>
         </template>
       </v-data-table>
@@ -999,11 +982,11 @@ export default {
       ],
       tableOptions: {
         // page: 1,
-        itemsPerPage: 1000,
+        itemsPerPage: 50,
         multiSort: true,
       },
       tableFooterProps: {
-        itemsPerPageOptions: [5, 10, 20, 50, 1000, -1],
+        itemsPerPageOptions: [10, 20, 50, 100, 200],
       },
       rules: {
         required: value => !!value || 'Required.',
@@ -1023,13 +1006,14 @@ export default {
     ...mapGetters([
       'getSettingsBamFile',
       'getSampleSettings',
-      'getVariantById',
       'getCurationByVariantId',
       'getHaplogroups',
       'getFirstHaplogroup',
       'getFirstFullHaplogroup',
     ]),
-
+    tableFilteredVariants() {
+      return Object.values(this.filteredVariants)
+    },
     allMasksSelected() {
       return this.filterConfig.selectedMasks.length === VARIANT_MASKS.length
     },
@@ -1176,7 +1160,9 @@ export default {
     },
 
     types() {
-      return [...new Set(this.filteredVariants.map(row => row.type))]
+      return [
+        ...new Set(Object.values(this.filteredVariants).map(row => row.type)),
+      ]
     },
 
     // TODO: #31
@@ -1185,7 +1171,7 @@ export default {
     // },
 
     hapRatios() {
-      return this.filteredVariants.reduce((map, variant) => {
+      return Object.values(this.filteredVariants).reduce((map, variant) => {
         if (variant.gnomAD) {
           map[variant.id] = {
             hapWeight: 0,
@@ -1222,7 +1208,7 @@ export default {
     genes() {
       const genes = [
         ...new Set(
-          this.filteredVariants
+          Object.values(this.filteredVariants)
             .filter(row => row.symbols)
             .map(row => row.symbols)
             .flat()
@@ -1235,7 +1221,7 @@ export default {
     consequences() {
       const consequences = [
         ...new Set(
-          this.filteredVariants
+          Object.values(this.filteredVariants)
             .filter(row => row.consequence)
             .map(row => row.consequence)
             .flat()
@@ -1352,7 +1338,7 @@ export default {
     },
 
     toggleVariantById: function(variantId) {
-      const variant = this.getVariantById(variantId)
+      const variant = this.filteredVariants[variantId]
       if (!_.isEmpty(variant)) {
         this.toggleVariantExpansion(variant)
       }
@@ -1364,14 +1350,13 @@ export default {
       if (isExpanded && this.transitioned[id]) {
         this.closeVariantExpansion(variant)
       } else {
-        clearTimeout(this.closeTimeouts[id])
         this.$refs.variantTable.expand(variant, true)
-        this.$nextTick(() => this.$set(this.transitioned, id, true))
-        this.$nextTick(() =>
-          this.expandedVariants.forEach(
-            ev => ev !== variant && this.closeVariantExpansion(ev)
-          )
-        )
+        this.$nextTick(() => {
+          this.$set(this.transitioned, id, true)
+          this.expandedVariants.forEach(ev => {
+            ev !== variant && this.closeVariantExpansion(ev)
+          })
+        })
 
         if (this.$route.params.variantId !== id) {
           this.$router.push({
@@ -1385,10 +1370,7 @@ export default {
     closeVariantExpansion: function(variant) {
       const id = variant.id
       this.$set(this.transitioned, id, false)
-      this.closeTimeouts[id] = setTimeout(
-        () => this.$refs.variantTable.expand(variant, false),
-        300
-      )
+      this.$refs.variantTable.expand(variant, false)
     },
 
     onSavedSearchChange: function(value) {
@@ -1693,12 +1675,12 @@ export default {
     },
 
     curationWeight: function(id) {
-      const variant = this.getVariantById(id)
+      const variant = this.filteredVariants[id]
       const curation = this.getCurationByVariantId(id)
       let weight = 0
 
-      if (variant?.Disease) weight += 2
-      if (curation?.variantNote) weight++
+      if (variant.Disease) weight += 2
+      if (curation.variantNote) weight++
 
       // Should hapWeight be added? Or just be given a floor of 1?
       if (this.displayHaplodata) {
@@ -1822,7 +1804,7 @@ export default {
 
     curationFilter: function(item) {
       const curation = this.getCurationByVariantId(item.id)
-      const disease = this.getVariantById(item.id).Disease
+      const disease = this.filteredVariants[item.id]?.Disease
 
       return filters.curationFilter(
         this.filterConfig.curationSearch,

@@ -17,7 +17,7 @@
           "description": "Custom 1 description",
           "custom": true,
           "filterConfig": {
-            "posRange": [0, 16500],
+            "posRange": [0, 16569],
             "selectedTypes": ["SNP", "DEL"],
             "selectedConsequences": [],
             "vafRange": [0.03, 0.1],
@@ -54,7 +54,7 @@
           "description": "Custom 1 description",
           "custom": true,
           "filterConfig": {
-            "posRange": [0, 16500],
+            "posRange": [0, 16569],
             "selectedTypes": ["SNP", "DEL"],
             "selectedConsequences": [],
             "vafRange": [0.03, 0.1],
