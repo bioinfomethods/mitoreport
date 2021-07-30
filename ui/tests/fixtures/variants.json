@@ -1,6 +1,7 @@
 [
     {
         "id": "chrM-152-T-C",
+        "hgvsg": "m.152T>C",
         "chr": "chrM",
         "pos": 152,
         "ref": "T",
@@ -1280,6 +1281,7 @@
     },
     {
         "id": "chrM-263-A-G",
+        "hgvsg": "m.263A>G",
         "chr": "chrM",
         "pos": 263,
         "ref": "A",
@@ -2559,6 +2561,7 @@
     },
     {
         "id": "chrM-302-A-AC",
+        "hgvsg": "m.302A>AC",
         "chr": "chrM",
         "pos": 302,
         "ref": "A",
@@ -3806,6 +3809,7 @@
     },
     {
         "id": "chrM-302-A-ACC",
+        "hgvsg": "m.302A>ACC",
         "chr": "chrM",
         "pos": 302,
         "ref": "A",
@@ -5090,6 +5094,7 @@
     },
     {
         "id": "chrM-302-A-ACCC",
+        "hgvsg": "m.302A>ACCC",
         "chr": "chrM",
         "pos": 302,
         "ref": "A",
@@ -6374,6 +6379,7 @@
     },
     {
         "id": "chrM-302-A-ACCCCCCCCCCC",
+        "hgvsg": "m.302A>ACCCCCCCCCCC",
         "chr": "chrM",
         "pos": 302,
         "ref": "A",
@@ -7620,6 +7626,7 @@
     },
     {
         "id": "chrM-302-A-ACCCCCCCCCCCCCC",
+        "hgvsg": "m.302A>ACCCCCCCCCCCCCC",
         "chr": "chrM",
         "pos": 302,
         "ref": "A",
@@ -8866,6 +8873,7 @@
     },
     {
         "id": "chrM-310-T-C",
+        "hgvsg": "m.310T>C",
         "chr": "chrM",
         "pos": 310,
         "ref": "T",
@@ -10145,6 +10153,7 @@
     },
     {
         "id": "chrM-310-T-TC",
+        "hgvsg": "m.310T>TC",
         "chr": "chrM",
         "pos": 310,
         "ref": "T",
@@ -11424,6 +11433,7 @@
     },
     {
         "id": "chrM-310-T-TCCCCCCA",
+        "hgvsg": "m.310T>TCCCCCCA",
         "chr": "chrM",
         "pos": 310,
         "ref": "T",
@@ -12664,6 +12674,7 @@
     },
     {
         "id": "chrM-310-T-TCCCCCCAC",
+        "hgvsg": "m.310T>TCCCCCCAC",
         "chr": "chrM",
         "pos": 310,
         "ref": "T",
@@ -13904,6 +13915,7 @@
     },
     {
         "id": "chrM-750-A-G",
+        "hgvsg": "m.750A>G",
         "chr": "chrM",
         "pos": 750,
         "ref": "A",
@@ -15202,6 +15214,7 @@
     },
     {
         "id": "chrM-776-A-G",
+        "hgvsg": "m.776A>G",
         "chr": "chrM",
         "pos": 776,
         "ref": "A",
@@ -16500,6 +16513,7 @@
     },
     {
         "id": "chrM-1419-G-A",
+        "hgvsg": "m.1419G>A",
         "chr": "chrM",
         "pos": 1419,
         "ref": "G",
@@ -17798,6 +17812,7 @@
     },
     {
         "id": "chrM-1438-A-G",
+        "hgvsg": "m.1438A>G",
         "chr": "chrM",
         "pos": 1438,
         "ref": "A",
@@ -19096,6 +19111,7 @@
     },
     {
         "id": "chrM-2224-C-T",
+        "hgvsg": "m.2224C>T",
         "chr": "chrM",
         "pos": 2224,
         "ref": "C",
@@ -19223,6 +19239,7 @@
     },
     {
         "id": "chrM-2259-C-T",
+        "hgvsg": "m.2259C>T",
         "chr": "chrM",
         "pos": 2259,
         "ref": "C",
@@ -20521,6 +20538,7 @@
     },
     {
         "id": "chrM-2465-T-A",
+        "hgvsg": "m.2465T>A",
         "chr": "chrM",
         "pos": 2465,
         "ref": "T",
@@ -21781,6 +21799,7 @@
     },
     {
         "id": "chrM-2479-C-A",
+        "hgvsg": "m.2479C>A",
         "chr": "chrM",
         "pos": 2479,
         "ref": "C",
@@ -21867,6 +21886,7 @@
     },
     {
         "id": "chrM-2487-A-C",
+        "hgvsg": "m.2487A>C",
         "chr": "chrM",
         "pos": 2487,
         "ref": "A",
@@ -23165,6 +23185,7 @@
     },
     {
         "id": "chrM-2645-G-A",
+        "hgvsg": "m.2645G>A",
         "chr": "chrM",
         "pos": 2645,
         "ref": "G",
@@ -24425,6 +24446,7 @@
     },
     {
         "id": "chrM-2982-C-T",
+        "hgvsg": "m.2982C>T",
         "chr": "chrM",
         "pos": 2982,
         "ref": "C",
@@ -24549,6 +24571,7 @@
     },
     {
         "id": "chrM-3447-A-C",
+        "hgvsg": "m.3447A>C",
         "chr": "chrM",
         "pos": 3447,
         "ref": "A",
@@ -25847,6 +25870,7 @@
     },
     {
         "id": "chrM-3464-T-A",
+        "hgvsg": "m.3464T>A",
         "chr": "chrM",
         "pos": 3464,
         "ref": "T",
@@ -25933,6 +25957,7 @@
     },
     {
         "id": "chrM-3468-A-C",
+        "hgvsg": "m.3468A>C",
         "chr": "chrM",
         "pos": 3468,
         "ref": "A",
@@ -27231,6 +27256,7 @@
     },
     {
         "id": "chrM-3473-T-C",
+        "hgvsg": "m.3473T>C",
         "chr": "chrM",
         "pos": 3473,
         "ref": "T",
@@ -28529,6 +28555,7 @@
     },
     {
         "id": "chrM-3475-A-C",
+        "hgvsg": "m.3475A>C",
         "chr": "chrM",
         "pos": 3475,
         "ref": "A",
@@ -28615,6 +28642,7 @@
     },
     {
         "id": "chrM-3483-G-C",
+        "hgvsg": "m.3483G>C",
         "chr": "chrM",
         "pos": 3483,
         "ref": "G",
@@ -29913,6 +29941,7 @@
     },
     {
         "id": "chrM-3488-T-A",
+        "hgvsg": "m.3488T>A",
         "chr": "chrM",
         "pos": 3488,
         "ref": "T",
@@ -31211,6 +31240,7 @@
     },
     {
         "id": "chrM-3492-A-C",
+        "hgvsg": "m.3492A>C",
         "chr": "chrM",
         "pos": 3492,
         "ref": "A",
@@ -32509,6 +32539,7 @@
     },
     {
         "id": "chrM-4745-A-G",
+        "hgvsg": "m.4745A>G",
         "chr": "chrM",
         "pos": 4745,
         "ref": "A",
@@ -33807,6 +33838,7 @@
     },
     {
         "id": "chrM-4769-A-G",
+        "hgvsg": "m.4769A>G",
         "chr": "chrM",
         "pos": 4769,
         "ref": "A",
@@ -35105,6 +35137,7 @@
     },
     {
         "id": "chrM-7212-C-T",
+        "hgvsg": "m.7212C>T",
         "chr": "chrM",
         "pos": 7212,
         "ref": "C",
@@ -36365,6 +36398,7 @@
     },
     {
         "id": "chrM-7337-G-A",
+        "hgvsg": "m.7337G>A",
         "chr": "chrM",
         "pos": 7337,
         "ref": "G",
@@ -37663,6 +37697,7 @@
     },
     {
         "id": "chrM-8512-A-C",
+        "hgvsg": "m.8512A>C",
         "chr": "chrM",
         "pos": 8512,
         "ref": "A",
@@ -38923,6 +38958,7 @@
     },
     {
         "id": "chrM-8557-G-C",
+        "hgvsg": "m.8557G>C",
         "chr": "chrM",
         "pos": 8557,
         "ref": "G",
@@ -40221,6 +40257,7 @@
     },
     {
         "id": "chrM-8567-T-C",
+        "hgvsg": "m.8567T>C",
         "chr": "chrM",
         "pos": 8567,
         "ref": "T",
@@ -41519,6 +41556,7 @@
     },
     {
         "id": "chrM-8577-A-C",
+        "hgvsg": "m.8577A>C",
         "chr": "chrM",
         "pos": 8577,
         "ref": "A",
@@ -42779,6 +42817,7 @@
     },
     {
         "id": "chrM-8860-A-G",
+        "hgvsg": "m.8860A>G",
         "chr": "chrM",
         "pos": 8860,
         "ref": "A",
@@ -44077,6 +44116,7 @@
     },
     {
         "id": "chrM-12417-C-CA",
+        "hgvsg": "m.12417C>CA",
         "chr": "chrM",
         "pos": 12417,
         "ref": "C",
@@ -45381,6 +45421,7 @@
     },
     {
         "id": "chrM-12989-TAGC-T",
+        "hgvsg": "m.12989TAGC>T",
         "chr": "chrM",
         "pos": 12989,
         "ref": "TAGC",
@@ -45473,6 +45514,7 @@
     },
     {
         "id": "chrM-13289-G-A",
+        "hgvsg": "m.13289G>A",
         "chr": "chrM",
         "pos": 13289,
         "ref": "G",
@@ -46736,6 +46778,7 @@
     },
     {
         "id": "chrM-13326-T-C",
+        "hgvsg": "m.13326T>C",
         "chr": "chrM",
         "pos": 13326,
         "ref": "T",
@@ -48037,6 +48080,7 @@
     },
     {
         "id": "chrM-13680-C-T",
+        "hgvsg": "m.13680C>T",
         "chr": "chrM",
         "pos": 13680,
         "ref": "C",
@@ -49338,6 +49382,7 @@
     },
     {
         "id": "chrM-13714-G-A",
+        "hgvsg": "m.13714G>A",
         "chr": "chrM",
         "pos": 13714,
         "ref": "G",
@@ -50601,6 +50646,7 @@
     },
     {
         "id": "chrM-14831-G-A",
+        "hgvsg": "m.14831G>A",
         "chr": "chrM",
         "pos": 14831,
         "ref": "G",
@@ -51899,6 +51945,7 @@
     },
     {
         "id": "chrM-14872-C-T",
+        "hgvsg": "m.14872C>T",
         "chr": "chrM",
         "pos": 14872,
         "ref": "C",
@@ -53197,6 +53244,7 @@
     },
     {
         "id": "chrM-14918-G-A",
+        "hgvsg": "m.14918G>A",
         "chr": "chrM",
         "pos": 14918,
         "ref": "G",
@@ -54495,6 +54543,7 @@
     },
     {
         "id": "chrM-15326-A-G",
+        "hgvsg": "m.15326A>G",
         "chr": "chrM",
         "pos": 15326,
         "ref": "A",
@@ -55793,6 +55842,7 @@
     },
     {
         "id": "chrM-16023-G-A",
+        "hgvsg": "m.16023G>A",
         "chr": "chrM",
         "pos": 16023,
         "ref": "G",

@@ -69,11 +69,12 @@ class Report extends ToolBase {
 
             ++total
 
-            Map<String, String> compacted = getCompactVariantRepresentation(v)
+            Map<String, String> compacted = MitoUtils.getCompactVariantRepresentation(v)
             String compactAllele = compacted.compactAllele
 
             Map variantInfo = [
                     id     : "${v.chr}-${v.pos}-${v.ref}-${v.alt}",
+                    hgvsg  : MitoUtils.extractMitoHgvsg(v),
                     chr    : v.chr,
                     pos    : v.pos,
                     ref    : v.ref,
@@ -202,24 +203,6 @@ class Report extends ToolBase {
             ann 'Annotation file to apply to VCF', args: 1, required: true
             mann 'MitoMap Annotations file in JSON format (see command to download)', args: 1, required: true
             gnomad 'gnomAD mitochondrial VCF file', args: 1, required: true
-        }
-    }
-
-    static Map<String, String> getCompactVariantRepresentation(Variant variant) {
-        if (!variant) {
-            return Collections.emptyMap()
-        }
-
-        if ('DEL' == variant?.type?.toUpperCase()) {
-            return [
-                    'compactAllele': "${variant.ref.toUpperCase()}${variant.pos}del",
-                    'change'       : "${variant.ref.toUpperCase()}-del"
-            ]
-        } else {
-            return [
-                    'compactAllele': "${variant.ref.toUpperCase()}${variant.pos}${variant.alt.toUpperCase()}",
-                    'change'       : "${variant.ref.toUpperCase()}-${variant.alt.toUpperCase()}"
-            ]
         }
     }
 }

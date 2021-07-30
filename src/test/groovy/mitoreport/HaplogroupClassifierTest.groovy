@@ -8,7 +8,7 @@ import spock.lang.Specification
 
 import javax.inject.Inject
 
-import static mitoreport.TestUtils.hr
+import static TestUtils.hr
 
 @MicronautTest
 class HaplogroupClassifierTest extends Specification {
