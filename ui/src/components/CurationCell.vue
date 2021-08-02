@@ -68,7 +68,6 @@ span.tag {
   margin-right: 3px;
   padding: 2px;
   border-radius: 4px;
-  font-size: 10px;
   &.selected {
     border: none;
     display: inline;
