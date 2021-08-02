@@ -23,6 +23,15 @@
           <li>
             <IgvLink :position="variant.pos"></IgvLink>
           </li>
+          <li>
+            <a target="_blank" :href="this.ucscLink(this.variant, 0)">
+              UCSC Genome Browser
+            </a>
+            -
+            <a target="_blank" :href="this.ucscLink(this.variant, 1)">
+              (USCS new session)
+            </a>
+          </li>
         </ul>
       </v-list>
     </v-menu>
@@ -58,10 +67,6 @@ export default {
           link: `https://gnomad.broadinstitute.org/variant/M-${this.variant.pos}-${this.variant.ref}-${this.variant.alt}?dataset=gnomad_r3`,
         },
         {
-          title: 'UCSC Genome Browser',
-          link: this.ucscLink(this.variant),
-        },
-        {
           title: `MITOMAP ${this.variant.pos}`,
           link: `https://mitomap.org/cgi-bin/search_allele?starting=${this.variant.pos}&ending=${this.variant.pos}`,
         },
@@ -83,7 +88,7 @@ export default {
     },
   },
   methods: {
-    ucscLink(variant) {
+    ucscLink(variant, ignoreCookie) {
       const queryString = {
         // Original stuff
         db: 'hg38',
@@ -110,7 +115,7 @@ export default {
         hideTracks: 1,
 
         // Override the user's previous settings
-        ignoreCookie: 1,
+        ignoreCookie: ignoreCookie,
       }
 
       return `http://genome.ucsc.edu/cgi-bin/hgTracks?${$.param(queryString)}`
