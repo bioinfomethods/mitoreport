@@ -1,6 +1,5 @@
 <template>
   <div class="text-center">
-    <!-- <v-switch v-model="closeOnClick" label="Close on click"></v-switch> -->
     <v-menu bottom>
       <template v-slot:activator="{ on, attrs }">
         <a v-bind="attrs" v-on="on">
@@ -48,7 +47,7 @@ export default {
   },
   computed: {
     links() {
-      return [
+      const links = [
         {
           title: 'gnomAD (Region)',
           link: `https://gnomad.broadinstitute.org/region/M-${this.variant.pos -
@@ -67,6 +66,20 @@ export default {
           link: `https://mitomap.org/cgi-bin/search_allele?starting=${this.variant.pos}&ending=${this.variant.pos}`,
         },
       ]
+      if (this.variant.alleleChange) {
+        links.push({
+          title: `MitoVisualize HGVSg`,
+          link: `https://www.mitovisualize.org/variant/m-${this.variant.pos}-${this.variant.alleleChange}`,
+        })
+      }
+      if (this.variant.locus) {
+        // Or use symbol???
+        links.push({
+          title: `MitoVisualize ${this.variant.locus}`,
+          link: `https://www.mitovisualize.org/${this.variant.locus}`,
+        })
+      }
+      return links
     },
   },
   methods: {
@@ -113,7 +126,6 @@ export default {
         })
       )
     },
-    closeOnClick: function() {},
   },
 }
 </script>
