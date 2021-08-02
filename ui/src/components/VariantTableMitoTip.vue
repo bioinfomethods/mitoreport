@@ -113,4 +113,47 @@ export default {
     },
   },
 }
+
+export function mitoTIPsort(l, r) {
+  return l?.mitoTipScorePercentile - r?.mitoTipScorePercentile || -1
+}
+
+export function mitoTIPfilter(selectedMitoTIP, variant) {
+  // Don't filter any if the filter is not in use
+  if (_.isEmpty(selectedMitoTIP)) {
+    return true
+  } else {
+    if (
+      _.includes(selectedMitoTIP, 'Confirmed pathogenic') &&
+      variant.diseaseConfirmedPathogenic
+    ) {
+      return true
+    }
+    if (
+      _.includes(selectedMitoTIP, 'Likely pathogenic') &&
+      variant.mitoTipQuartile === 'Q1'
+    ) {
+      return true
+    }
+    if (
+      _.includes(selectedMitoTIP, 'Possibly pathogenic') &&
+      variant.mitoTipQuartile === 'Q2'
+    ) {
+      return true
+    }
+    if (
+      _.includes(selectedMitoTIP, 'Possibly benign') &&
+      variant.mitoTipQuartile === 'Q3'
+    ) {
+      return true
+    }
+    if (
+      _.includes(selectedMitoTIP, 'Likely benign') &&
+      variant.mitoTipQuartile === 'Q4'
+    ) {
+      return true
+    }
+  }
+  return false
+}
 </script>

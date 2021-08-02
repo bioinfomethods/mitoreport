@@ -703,6 +703,7 @@ import VariantCuration from '@/components/VariantCuration'
 import VariantCharts from '@/components/VariantCharts'
 import VariantLinks from '@/components/VariantLinks'
 import VariantTableMitoTip from '@/components/VariantTableMitoTip'
+import { mitoTIPsort, mitoTIPfilter } from '@/components/VariantTableMitoTip'
 
 import VariantTableHeader from '@/components/VariantTableHeader'
 import * as filters from '@/shared/variantFilters'
@@ -941,8 +942,10 @@ export default {
           text: 'MitoTIP',
           value: 'mitotip',
           width: '100',
-          sort: this.mitoTIPsort,
-          filter: this.mitoTIPfilter,
+          sort: mitoTIPsort,
+          filter: (value, search, item) => {
+            return mitoTIPfilter(this.filterConfig.selectedMitoTIP, item)
+          },
         },
         {
           text: 'Curation',
@@ -1400,57 +1403,6 @@ export default {
       )
     },
 
-    mitoTIPfilter: function(value, filter, variant) {
-      // If no MitoTIP data, don't filter it?
-      // This would be more consistent with the other filters on this page.
-      // if (!variant.mitoTipScorePercentile) {
-      //   return true
-      // }
-
-      // Don't filter any if the filter is not in use
-      if (_.isEmpty(this.filterConfig.selectedMitoTIP)) {
-        return true
-      } else {
-        if (
-          _.includes(
-            this.filterConfig.selectedMitoTIP,
-            'Confirmed pathogenic'
-          ) &&
-          variant.diseaseConfirmedPathogenic
-        ) {
-          return true
-        }
-        if (
-          _.includes(this.filterConfig.selectedMitoTIP, 'Likely pathogenic') &&
-          variant.mitoTipQuartile === 'Q1'
-        ) {
-          return true
-        }
-        if (
-          _.includes(
-            this.filterConfig.selectedMitoTIP,
-            'Possibly pathogenic'
-          ) &&
-          variant.mitoTipQuartile === 'Q2'
-        ) {
-          return true
-        }
-        if (
-          _.includes(this.filterConfig.selectedMitoTIP, 'Possibly benign') &&
-          variant.mitoTipQuartile === 'Q3'
-        ) {
-          return true
-        }
-        if (
-          _.includes(this.filterConfig.selectedMitoTIP, 'Likely benign') &&
-          variant.mitoTipQuartile === 'Q4'
-        ) {
-          return true
-        }
-      }
-      return false
-    },
-
     removeSelectedConsequence: function(toRemove) {
       this.filterConfig.selectedConsequences = this.filterConfig.selectedConsequences.filter(
         selected => selected !== toRemove.displayTerm
@@ -1494,10 +1446,6 @@ export default {
       })
 
       return weight
-    },
-
-    mitoTIPsort: function(l, r) {
-      return l?.mitoTipScorePercentile - r?.mitoTipScorePercentile || -1
     },
 
     consequenceSort: function(l, r) {
