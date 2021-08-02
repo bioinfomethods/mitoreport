@@ -407,14 +407,7 @@
 
         <!-- Override row values where necessary using slot v-slot:item.${header.value} -->
         <template v-slot:item.pos="{ item }">
-          <!-- Todo: test this regex? Also confirm it is a good idea. -->
-          <a
-            :id="`varlink-${item.pos}-${item.ref}-${item.alt}`"
-            @click.stop="activeVariant = item"
-            href="#"
-            :title="convertHGVSg(item)"
-            >{{ convertHGVSg(item, true) }}
-          </a>
+          <VariantLinks :variant="item"></VariantLinks>
         </template>
 
         <template v-slot:item.symbols="{ item }">
@@ -787,10 +780,6 @@
         </template>
       </v-data-table>
     </v-card>
-
-    <v-dialog v-if="activeVariant" v-model="activeVariant" width="400">
-      <VariantLinks :active-variant="activeVariant"></VariantLinks>
-    </v-dialog>
   </div>
 </template>
 
@@ -1211,7 +1200,6 @@ export default {
   },
 
   methods: {
-
     toggleAllMasks() {
       this.$nextTick(() => {
         if (this.allMasksSelected) {
