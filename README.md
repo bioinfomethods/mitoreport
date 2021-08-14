@@ -65,7 +65,7 @@ java -jar mitoreport-1.0.0-beta-1-all.jar mito-report \
     resources/test-sample/mitoreport-test-sample.bam ./resources/controls/*.bam
 ```
 
-A new directory `mitoreport-test-sample` should now be created.  Open `index.html` to run this
+A new directory `mitoreport-MITOREPORT-TEST-SAMPLE` should now be created.  Open `index.html` to run this
 interactive report. For example, on MacOS use:
 
 ```bash
@@ -92,7 +92,6 @@ Bioinformatics Unit and Miriam Fanjul Fernandez for the initial inspiration and
 groundwork that provided the basis for MitoReport. Finally, we acknowledge the
 Brain and Mitochondrial Research Group at MCRI who provided us with significant
 insight and advice into complex issues in mitochondrial variant interpretation.
-AGHA.
 
 We thank the Australian Genomics Health Alliance for allowing access to data
 that to test and validate the operation of MitoReport, as well as the patients
