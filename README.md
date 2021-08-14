@@ -33,7 +33,7 @@ BAM files that are derived from your own data sets.
 Before running MitoReport, run this to download new MitoMap annotations to file: 
 
 ```bash
-mkdir resources
+mkdir -p resources
 java -jar mitoreport-1.0.0-beta-1-all.jar mito-map-download \
   --output resources/mito_map_annotations.json
 ```
@@ -54,7 +54,7 @@ To run MitoReport, you need two inputs:
 A test sample is provided which shows the needed format for these files in the resource file.
 
 Below example commands will generate deletions and variants data including writing out the 
-report into a `mitoreport` directory for the test sample:
+report into a directory for the test sample:
 
 ```bash
 java -jar mitoreport-1.0.0-beta-1-all.jar mito-report \
@@ -72,4 +72,7 @@ interactive report. For example, on MacOS use:
 open ./mitoreport-MITOREPORT-TEST-SAMPLE/index.html
 ```
 
+You can find an online example of this output here:
+
+https://bioinfomethods.github.io/mitoreport/examples/mitoreport-MITOREPORT-TEST-SAMPLE/index.html
 
