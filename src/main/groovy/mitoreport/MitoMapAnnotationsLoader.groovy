@@ -6,6 +6,7 @@ import groovy.transform.MapConstructor
 import groovy.transform.TupleConstructor
 import groovy.util.logging.Slf4j
 import groovyx.net.http.HttpBuilder
+import static groovyx.net.http.util.SslUtils.ignoreSslIssues
 
 import javax.inject.Singleton
 import java.math.RoundingMode
@@ -147,11 +148,14 @@ class MitoMapAnnotationsLoader {
 
     static String downloadPage(String pageUrl) {
         log.info("Downloading MitoMap page from $pageUrl")
-
-        def respBytes = HttpBuilder.configure {
+        
+        HttpBuilder client = HttpBuilder.configure {
             request.uri = pageUrl
             request.headers['User-Agent'] = 'https://www.mcri.edu.au'
-        }.get() {
+            ignoreSslIssues execution
+        }
+
+        def respBytes = client.get() {
             response.exception { Exception e ->
                 log.error("Error downloading page $pageUrl", e)
                 throw new RuntimeException(e)
