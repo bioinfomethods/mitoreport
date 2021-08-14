@@ -2,7 +2,7 @@
 
 Mitoreport is an application for Mitochondrial DNA variants analysis.
 
-## Using mito-cli
+## Setup
 
 Download the release jar:
 
@@ -38,7 +38,7 @@ java -jar mitoreport-1.0.0-beta-1-all.jar mito-map-download \
   --output resources/mito_map_annotations.json
 ```
 
-### Running the Report
+## Creating Reports
 
 Mitoreport is a standalone CLI application that can be run on any computer
 with at least 8gb of RAM and having java installed.
@@ -76,3 +76,31 @@ You can find an online example of this output here:
 
 https://bioinfomethods.github.io/mitoreport/examples/mitoreport-MITOREPORT-TEST-SAMPLE/index.html
 
+
+# Credits
+
+MitoReport is developed by the Bioinformatics Methods group at the Murdoch
+Childrens Research Institute.
+
+MitoReport has benefited from expertise, advice and input provided by many
+contributors at the Murdoch Children's Research Institute (MCRI) and the
+Victorian Clinical Genetics Services (VCGS). In particular we acknowledge the
+VCGS Clinical Genomics and Targeted Genomics Diagnostics (TGD) groups for their
+insight into the process for clinical interpretation and processes for
+validation of mitochondrial testing. We further acknowledge the VCGS Clinical
+Bioinformatics Unit and Miriam Fanjul Fernandez for the initial inspiration and
+groundwork that provided the basis for MitoReport. Finally, we acknowledge the
+Brain and Mitochondrial Research Group at MCRI who provided us with significant
+insight and advice into complex issues in mitochondrial variant interpretation.
+AGHA.
+
+We thank the Australian Genomics Health Alliance for allowing access to data
+that to test and validate the operation of MitoReport, as well as the patients
+and families who allowed their genomic data to be used for research, making 
+tools like MitoReport possible.
+
+Finally, we want to acknowledge the many broader groups who are working to make
+resources available that are used in MitoReport. These include:
+
+- [MitoMap](https://mitomap.org/MITOMAP)
+- [gnomAD](https://gnomad.broadinstitute.org/about)

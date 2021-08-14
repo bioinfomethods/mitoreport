@@ -47,7 +47,7 @@
               Genomics Diagnostics (TGD) groups for their insight into the
               process for clinical interpretation and processes for validation
               of mitochondrial testing. We further acknowledge the VCGS Clinical
-              Bioinformatics Unit and Miriam Fanjul Ferdandez for the initial
+              Bioinformatics Unit and Miriam Fanjul Fernandez for the initial
               inspiration and groundwork that provided the basis for MitoReport.
               Finally, we acknowledge the Brain and Mitochondrial Research Group
               at MCRI who provided us with significant insight and advice into
@@ -61,11 +61,12 @@
               genomic data to be used for research.
             </span>
             <h3>How to cite Mitoreport</h3>
-            <span
-              >Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur
-              at voluptatibus, ipsum, sequi porro earum laboriosam dolorem ullam
-              distinctio magnam quod, quidem delectus sunt aliquam cumque
-              quisquam! Autem, ea nisi?</span
+            <span>
+              We are actively working on a publication about MitoReport. Until we have made 
+              a preprint available, please cite the MitoReport Github page at:
+              <p>
+              <pre>https://github.com/bioinfomethods/mitoreport</pre>
+            </span
             >
           </v-card-text>
         </v-card>
