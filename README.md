@@ -1,64 +1,55 @@
 # MitoReport
 
 Mitoreport is an application for Mitochondrial DNA variants analysis.
+
 ## Using mito-cli
 
 ### Downloading Annotations from MitoMap
 
-Run this to download new MitoMap annotations to file.  The test fixtures data above already includes this so it
-shouldn't be necessary unless you want a new version.
+Before running MitoReport, run this to download new MitoMap annotations to file: 
 
 ```bash
-PROJECT_DIR=$(pwd)
-TODAY=$(date +"%Y%m%d")
-APP_ARCHIVE_VERSION=$(git describe --abbrev=0)
-
-java -jar "$PROJECT_DIR/build/libs/mitoreport-$APP_ARCHIVE_VERSION-all.jar" mito-map-download \
-  --output "$PROJECT_DIR/test_fixtures/mito_map_annotations_$TODAY.json"
+java -jar build/libs/mitoreport-*-all.jar mito-map-download \
+  --output resources/mito_map_annotations.json
 ```
 
 ### Running the Report
 
+Mitoreport is a standalone CLI application that can be run on any computer
+with at least 8gb of RAM and having java installed.
+
+To run, MitoReport needs some resources to annotate variant population frequencies and
+calibrate and normalise its deletion plots.
+
+We provide some basic default usable sets for these in a resources file that you can download:
+
 ```bash
-tar -zxvf $PROJECT_DIR/test_fixtures.tgz -C $PROJECT_DIR
-
-Mitoreport is a standalone CLI application intended to be run by administrators.
-A set of input files are required to run the report.  A prepared version of
-these files can be found in the resources directory.
-
-
-```bash
-tar -zxvf $resoures/resources.tgz 
+wget 'https://bioinfomethods.github.io/mitoreport/resources/resources.tgz'
+tar -zxvf resources.tgz 
 ```
 
-Below example commands will generate deletions and variants data including writing out the Single Page Application UI
-into a `mitoreport` directory ready for distribution.
+Note that these contain control sample bam files that were generated from 1000 genomes 
+WGS samples. If you would like to run MitoReport on other types of data (for example,
+exome data or dedicated assays) then you may wish to replace these with 
+BAM files that are derived from your own data sets.
+
+Below example commands will generate deletions and variants data including writing out the 
+report into a `mitoreport` directory:
 
 ```bash
-PROJECT_DIR=$(pwd)  # project root of mitoreport checkout
-APP_ARCHIVE_VERSION=$(git describe --abbrev=0)
-
-java -jar $PROJECT_DIR/build/libs/mitoreport-v00.01.00-all.jar mito-report \
+java -jar ./build/libs/mitoreport-*-all.jar mito-report \
   -sample test-sample \
-  -vcf test.vcf \
-  -ann $PROJECT_DIR/resources/mtDNAanalysis_annotations_20170501.csv \
-  -mann $PROJECT_DIR/resources/mito_map_annotations_20201207.json \
-  -gnomad $PROJECT_DIR/resources/gnomad.genomes.v3.1.sites.chrM.vcf.bgz \
-  test.bam $PROJECT_DIR/resources/controls/*.bam
+  -vcf test-sample.vcf \
+  -mann ./resources/mito_map_annotations.json \
+  -gnomad ./resources/gnomad.genomes.v3.1.sites.chrM.vcf.bgz \
+  test-sample.bam ./resources/controls/*.bam
 ```
 
 A new directory `mitoreport-test-sample` should now be created.  Open `index.html` to run this
 interactive report.
 
 ```bash
-open $PROJECT_DIR/test-sample/index.html
+open ./test-sample/index.html
 ```
-### Downloading Annotations from MitoMap
 
-Run this to download new MitoMap annotations to file.  The test fixtures data above
-already includes this so it shouldn't be necessary unless you want a new version.
 
-```bash
-java -jar build/libs/mitoreport-*-all.jar mito-map-download \
-  --output resources/mito_map_annotations.json
-```
