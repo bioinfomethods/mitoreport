@@ -13,14 +13,14 @@ def gitDescribeItems = []
 def gitDescProc = "git describe --tags".execute()
 gitDescProc.waitFor()
 if (gitDescProc.exitValue()) {
-    gitDescribeItems = ['v00.00.00', '1', 'gfffffff']
+    gitDescribeItems = ['1.0.0', '1', 'gfffffff']
 } else {
     gitDescribeItems = gitDescProc.text?.trim()?.split(/-/)
 }
 
 project.ext {
-    appVersion = "${gitDescribeItems[0]}-${gitDescribeItems[1]}"
-    appArchiveVersion = "${gitDescribeItems[0]}"
+    appArchiveVersion = "1.0.0-beta-1"
+    appVersion = "$appArchiveVersion-${gitDescribeItems[1]}"
     buildTimestamp = OffsetDateTime.now().toString()
     buildCommit = gitDescribeItems[2]
 }
