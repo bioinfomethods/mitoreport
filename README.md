@@ -43,23 +43,33 @@ java -jar mitoreport-1.0.0-beta-1-all.jar mito-map-download \
 Mitoreport is a standalone CLI application that can be run on any computer
 with at least 8gb of RAM and having java installed.
 
+To run MitoReport, you need two inputs:
+
+- a VEP annotated VCF containing mitochondrial variants
+  - if you have a VCF without VEP annotations and you do not have access  
+    to an annotation pipeline, you may use the [online VEP interface](https://asia.ensembl.org/Tools/VEP)
+    to annotate your VCF.
+- a BAM file containing reads over the mitochondrial chromosome
+
+A test sample is provided which shows the needed format for these files in the resource file.
+
 Below example commands will generate deletions and variants data including writing out the 
-report into a `mitoreport` directory:
+report into a `mitoreport` directory for the test sample:
 
 ```bash
 java -jar mitoreport-1.0.0-beta-1-all.jar mito-report \
-  -sample test-sample \
-  -mann ./resources/mito_map_annotations.json \
-  -gnomad ./resources/gnomad.genomes.v3.1.sites.chrM.vcf.bgz \
-  -vcf test-sample.vcf \
-  test-sample.bam ./resources/controls/*.bam
+    -sample MITOREPORT-TEST-SAMPLE \
+    -mann ./resources/mito_map_annotations.json \
+    -gnomad ./resources/gnomad.genomes.v3.1.sites.chrM.vcf.bgz \
+    -vcf resources/test-sample/mitoreport-test-sample.vep.vcf.gz \
+    resources/test-sample/mitoreport-test-sample.bam ./resources/controls/*.bam
 ```
 
 A new directory `mitoreport-test-sample` should now be created.  Open `index.html` to run this
-interactive report.
+interactive report. For example, on MacOS use:
 
 ```bash
-open ./test-sample/index.html
+open ./mitoreport-MITOREPORT-TEST-SAMPLE/index.html
 ```
 
 
