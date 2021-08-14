@@ -17,13 +17,13 @@ window.defaultSettings = {
                     "fileName": "gnomad.genomes.v3.1.sites.chrM.vcf.bgz",
                     "created": "2021-08-14T01:54:43",
                     "modified": "2021-08-14T01:54:43",
-                    "accessed": "2021-08-14T06:05:11"
+                    "accessed": "2021-08-14T06:42:25"
                 },
                 "absolutePath": "/Volumes/space3/mito/test-mito-report/./resources/gnomad.genomes.v3.1.sites.chrM.vcf.bgz",
                 "fileName": "gnomad.genomes.v3.1.sites.chrM.vcf.bgz",
                 "created": "2021-08-14T01:54:43",
                 "modified": "2021-08-14T01:54:43",
-                "accessed": "2021-08-14T06:05:11"
+                "accessed": "2021-08-14T06:42:25"
             },
             "qc": {
                 "coverageStats": {
