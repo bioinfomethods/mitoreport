@@ -22,7 +22,7 @@ System_Boundary(c1, "mitoreport"){
 
     Container(ui, "Browser Application (SPA)", "Vue.js", "Allows curators to analyse and interpret mitochondria variants")
 
-    Container(mitoreport, "CLI Application", "Java, Groovy, Micronaut", "Annotates VCF with external data sources and generates variants and deletions data")
+    Container(mitoreport, "CLI Application", "Java, Groovy, Micronaut", "Annotates VCF with VEP, MitoMap, Gnomad and Haplogrep annotations and generates variants and deletions data")
 
     ContainerDb(browser_storage, "Browser Storage", "Stores all user settings including tags and curations")
 
@@ -32,7 +32,7 @@ System_Boundary(c1, "mitoreport"){
 
 System_Ext(gnomad, "Gnomad", "https://gnomad.broadinstitute.org")
 System_Ext(mitomap, "MitoMap", "https://mitomap.org")
-System_Ext(mito_pipeline, "MitoPipeline", "/group/bioi1/simons/broad/mito/pipeline")
+System_Ext(mito_pipeline, "MitoPipeline", "MCRI cpipe")
 System_Ext(igv, "IGV", "pre-installed and running on users' computer")
 
 
