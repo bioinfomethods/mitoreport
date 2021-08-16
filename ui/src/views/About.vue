@@ -62,12 +62,11 @@
             </span>
             <h3>How to cite Mitoreport</h3>
             <span>
-              We are actively working on a publication about MitoReport. Until we have made 
-              a preprint available, please cite the MitoReport Github page at:
-              <p>
+              We are actively working on a publication about MitoReport. Until
+              we have made a preprint available, please cite the MitoReport
+              Github page at:
               <pre>https://github.com/bioinfomethods/mitoreport</pre>
-            </span
-            >
+            </span>
           </v-card-text>
         </v-card>
       </v-col>
@@ -169,7 +168,7 @@ export default {
         "Mitoreport Version": this.getSampleMetadata.mitoreportVersion,
       }
 
-// Should this stuff always be fresh? Perhaps don't pull it from localstorage mitosettings?
+      // Should this stuff always be fresh? Perhaps don't pull it from localstorage mitosettings?
       if (this.getSampleMetadata.buildCommit) {
         _.merge(data, {
           "Mitoreport Git Hash": this.getSampleMetadata.buildCommit.slice(1),
