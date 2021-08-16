@@ -240,7 +240,6 @@ export default {
     },
 
     saveAppSettings: function() {
-      console.debug(`AppSettings-saveAppSettings`)
       this.$store.dispatch('saveAppSettings', {
         newBamDir: this.settingsForm.newBamDir,
         userTags: this.settingsForm.userTags,
