@@ -1,5 +1,7 @@
 # MitoReport
 
+![Unit Tests](https://github.com/bioinfomethods/mitoreport/actions/workflows/main.yml/badge.svg)
+
 Mitoreport is an application for Mitochondrial DNA variants analysis.
 
 ## Setup
