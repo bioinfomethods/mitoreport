@@ -2,8 +2,6 @@ import App from '@/App.vue'
 import router from '@/router'
 import Deletions from '@/views/Deletions.vue'
 import Variants from '@/views/Variants.vue'
-import VariantCuration from '@/components/VariantCuration.vue'
-import VariantInfo from '@/components/VariantInfo.vue'
 import VariantTable from '@/components/VariantTable.vue'
 import { createLocalVue, mount } from '@vue/test-utils'
 import Vue from 'vue'
@@ -54,12 +52,6 @@ describe('App.vue', () => {
 
     const variantTable = variantsView.findComponent(VariantTable)
     expect(variantTable.exists()).toBe(true)
-
-    // const variantInfo = variantTable.findComponent(VariantInfo)
-    // expect(variantInfo.exists()).toBe(true)
-
-    // const variantCuration = variantTable.findComponent(VariantCuration)
-    // expect(variantCuration.exists()).toBe(true)
   })
 
   describe('navigate to /deletions', () => {
