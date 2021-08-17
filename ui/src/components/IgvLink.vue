@@ -1,6 +1,10 @@
 <template>
   <span v-if="igvUrl">
-    <a id="igvUrlLink" :href="igvUrl" @click.prevent="loadIGV" target="igv"
+    <a
+      id="igvUrlLink"
+      :href="igvUrl"
+      @click.prevent="loadIGV"
+      :target="createHrefTarget()"
       >IGV Link: {{ position }}</a
     >
     <iframe
@@ -14,7 +18,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapState, mapGetters } from 'vuex'
 import { stringifyUrl } from 'query-string'
 
 export default {
@@ -28,6 +32,7 @@ export default {
   },
 
   computed: {
+    ...mapState(['sampleId']),
     ...mapGetters(['getIgvHost', 'getSettingsBamFile']),
 
     igvUrl() {
@@ -50,6 +55,9 @@ export default {
   methods: {
     loadIGV() {
       this.$refs.igvIframe.src = this.igvUrl
+    },
+    createHrefTarget() {
+      return `mitoreport_${this.sampleId}_igv`
     },
   },
 }

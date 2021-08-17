@@ -11,7 +11,9 @@
         <h3>{{ convertHGVSg(variant, true) }}</h3>
         <ul>
           <li v-for="(item, index) in links" :key="index">
-            <a target="_blank" :href="item.link">{{ item.title }}</a>
+            <a :target="createHrefTarget(item.name)" :href="item.link">{{
+              item.title
+            }}</a>
           </li>
           <li>
             <HmtVarLink
@@ -24,11 +26,17 @@
             <IgvLink :position="variant.pos"></IgvLink>
           </li>
           <li>
-            <a target="_blank" :href="this.ucscLink(this.variant, 0)">
+            <a
+              :target="createHrefTarget('ucsc')"
+              :href="this.ucscLink(this.variant, 0)"
+            >
               UCSC Genome Browser
             </a>
             -
-            <a target="_blank" :href="this.ucscLink(this.variant, 1)">
+            <a
+              :target="createHrefTarget('ucsc_new_session')"
+              :href="this.ucscLink(this.variant, 1)"
+            >
               (USCS new session)
             </a>
           </li>
@@ -39,6 +47,7 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 import HmtVarLink from '@/components/HmtVarLink'
 import IgvLink from '@/components/IgvLink'
 import * as $ from 'jquery'
@@ -55,24 +64,29 @@ export default {
     IgvLink,
   },
   computed: {
+    ...mapState(['sampleId']),
     links() {
       const links = [
         {
+          name: 'gnomad_region',
           title: 'gnomAD (Region)',
           link: `https://gnomad.broadinstitute.org/region/M-${this.variant.pos -
             5}-${this.variant.pos + 5}?dataset=gnomad_r3`,
         },
         {
+          name: 'gnomad_variant',
           title: 'gnomAD (Variant)',
           link: `https://gnomad.broadinstitute.org/variant/M-${this.variant.pos}-${this.variant.ref}-${this.variant.alt}?dataset=gnomad_r3`,
         },
         {
+          name: 'mitomap',
           title: `MITOMAP ${this.variant.pos}`,
           link: `https://mitomap.org/cgi-bin/search_allele?starting=${this.variant.pos}&ending=${this.variant.pos}`,
         },
       ]
       if (this.variant.alleleChange) {
         links.push({
+          name: 'mitoviz_variant',
           title: `MitoVisualize HGVSg`,
           link: `https://www.mitovisualize.org/variant/m-${this.variant.pos}-${this.variant.alleleChange}`,
         })
@@ -80,6 +94,7 @@ export default {
       if (this.variant.locus) {
         // Or use symbol???
         links.push({
+          name: 'mitoviz_gene',
           title: `MitoVisualize ${this.variant.locus}`,
           link: `https://www.mitovisualize.org/${this.variant.locus}`,
         })
@@ -88,6 +103,9 @@ export default {
     },
   },
   methods: {
+    createHrefTarget(name) {
+      return `mitoreport_${this.sampleId}_${name}`
+    },
     ucscLink(variant, ignoreCookie) {
       const queryString = {
         // Original stuff

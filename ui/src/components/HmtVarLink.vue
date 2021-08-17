@@ -3,7 +3,7 @@
     <a
       id="hmtVarSearchResultsUrlLink"
       :href="hmtVarSearchResultsUrl"
-      target="_blank"
+      :target="createHrefTarget()"
     >
       HmtVar</a
     >
@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapState, mapGetters } from 'vuex'
 import { stringifyUrl } from 'query-string'
 
 export default {
@@ -39,6 +39,7 @@ export default {
   },
 
   computed: {
+    ...mapState(['sampleId']),
     ...mapGetters(['getHmtVarUrlPrefix']),
 
     hmtVarSearchResultsUrl() {
@@ -62,6 +63,12 @@ export default {
 
     alleleVariant() {
       return `${this.refAllele}/${this.altAllele}`
+    },
+  },
+
+  methods: {
+    createHrefTarget() {
+      return `mitoreport_${this.sampleId}_hmt`
     },
   },
 }

@@ -1,16 +1,19 @@
 <template>
   <div>
     <span v-if="geneCardsUrl">
-      <a id="geneCardsUrlLink" :href="geneCardsUrl" target="_blank">{{
-        gene
-      }}</a>
+      <a
+        id="geneCardsUrlLink"
+        :href="geneCardsUrl"
+        :target="createHrefTarget()"
+        >{{ gene }}</a
+      >
     </span>
     <span v-else>{{ gene }}</span>
   </div>
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapState, mapGetters } from 'vuex'
 import { stringifyUrl } from 'query-string'
 
 export default {
@@ -24,6 +27,7 @@ export default {
   },
 
   computed: {
+    ...mapState(['sampleId']),
     ...mapGetters(['getGeneCardsUrlPrefix']),
 
     geneCardsUrl() {
@@ -40,6 +44,12 @@ export default {
       })
 
       return result
+    },
+  },
+
+  methods: {
+    createHrefTarget() {
+      return `mitoreport_${this.sampleId}_genecards`
     },
   },
 }
