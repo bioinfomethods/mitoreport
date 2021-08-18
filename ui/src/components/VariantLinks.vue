@@ -63,6 +63,36 @@ export default {
     HmtVarLink,
     IgvLink,
   },
+  data: () => {
+    return {
+      mitovisualize: [
+        'MT-RNR1',
+        'MT-RNR2',
+        'MT-TA',
+        'MT-TC',
+        'MT-TD',
+        'MT-TE',
+        'MT-TF',
+        'MT-TG',
+        'MT-TH',
+        'MT-TI',
+        'MT-TK',
+        'MT-TL1',
+        'MT-TL2',
+        'MT-TM',
+        'MT-TN',
+        'MT-TP',
+        'MT-TQ',
+        'MT-TR',
+        'MT-TS1',
+        'MT-TS2',
+        'MT-TT',
+        'MT-TV',
+        'MT-TW',
+        'MT-TY',
+      ],
+    }
+  },
   computed: {
     ...mapState(['sampleId']),
     links() {
@@ -84,19 +114,11 @@ export default {
           link: `https://mitomap.org/cgi-bin/search_allele?starting=${this.variant.pos}&ending=${this.variant.pos}`,
         },
       ]
-      if (this.variant.alleleChange) {
-        links.push({
-          name: 'mitoviz_variant',
-          title: `MitoVisualize HGVSg`,
-          link: `https://www.mitovisualize.org/variant/m-${this.variant.pos}-${this.variant.alleleChange}`,
-        })
-      }
-      if (this.variant.locus) {
-        // Or use symbol???
+      if (this.mitovisualize.indexOf(this.variant.locus) >= 0 && this.variant.alleleChange) {
         links.push({
           name: 'mitoviz_gene',
           title: `MitoVisualize ${this.variant.locus}`,
-          link: `https://www.mitovisualize.org/${this.variant.locus}`,
+          link: `https://www.mitovisualize.org/variant/m-${this.variant.pos}-${this.variant.alleleChange}`,
         })
       }
       return links
