@@ -114,10 +114,13 @@ export default {
           link: `https://mitomap.org/cgi-bin/search_allele?starting=${this.variant.pos}&ending=${this.variant.pos}`,
         },
       ]
-      if (this.mitovisualize.indexOf(this.variant.locus) >= 0 && this.variant.alleleChange) {
+      if (
+        this.mitovisualize.indexOf(this.variant.locus) >= 0 &&
+        this.variant.alleleChange
+      ) {
         links.push({
           name: 'mitoviz_gene',
-          title: `MitoVisualize ${this.variant.locus}`,
+          title: `MitoVisualize ${this.variant.locus} ${this.convertHGVSg(this.variant)}`,
           link: `https://www.mitovisualize.org/variant/m-${this.variant.pos}-${this.variant.alleleChange}`,
         })
       }
