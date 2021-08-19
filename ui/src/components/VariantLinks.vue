@@ -2,7 +2,7 @@
   <div class="text-center">
     <v-menu bottom>
       <template v-slot:activator="{ on, attrs }">
-        <a v-bind="attrs" v-on="on">
+        <a v-bind="attrs" v-on="on" @click="toggleVariantExpansion(variant)">
           {{ convertHGVSg(variant, true) }}
         </a>
       </template>
@@ -58,6 +58,7 @@ export default {
       type: Object,
       required: true,
     },
+    toggleVariantExpansion: { type: Function },
   },
   components: {
     HmtVarLink,
@@ -93,6 +94,9 @@ export default {
       ],
     }
   },
+  mounted() {
+    this.toggleVariantExpansion
+  },
   computed: {
     ...mapState(['sampleId']),
     links() {
@@ -119,8 +123,9 @@ export default {
         this.variant.alleleChange
       ) {
         links.push({
-          name: 'mitoviz_gene',
-          title: `MitoVisualize ${this.variant.locus} ${this.convertHGVSg(this.variant)}`,
+          title: `MitoVisualize ${this.variant.locus} ${this.convertHGVSg(
+            this.variant
+          )}`,
           link: `https://www.mitovisualize.org/variant/m-${this.variant.pos}-${this.variant.alleleChange}`,
         })
       }

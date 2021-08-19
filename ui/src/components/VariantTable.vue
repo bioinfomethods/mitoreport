@@ -407,7 +407,10 @@
 
         <!-- Override row values where necessary using slot v-slot:item.${header.value} -->
         <template v-slot:item.pos="{ item }">
-          <VariantLinks :variant="item"></VariantLinks>
+          <VariantLinks
+            :toggle-variant-expansion="toggleVariantExpansion"
+            :variant="item"
+          ></VariantLinks>
         </template>
 
         <template v-slot:item.symbols="{ item }">

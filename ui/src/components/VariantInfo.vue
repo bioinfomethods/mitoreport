@@ -128,7 +128,6 @@ export default {
   },
   methods: {
     copyToClipboard(text) {
-      console.log(`copying ${text} to clipboard`)
       navigator.clipboard.writeText(text)
     },
   },
