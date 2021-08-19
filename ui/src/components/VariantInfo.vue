@@ -6,15 +6,42 @@
           <td>HGVS.g:</td>
           <td>
             {{ hgvsg }}
+            <button
+              class="copyHGVS"
+              @click="copyToClipboard(hgvsg)"
+              title="Copy HGVS.g to clipboard"
+            >
+              <v-icon>mdi-clipboard-outline</v-icon>
+            </button>
           </td>
         </tr>
         <tr>
           <td>HGVS.p:</td>
-          <td>{{ variant.hgvsp }}</td>
+          <td>
+            {{ variant.hgvsp }}
+            <button
+              v-if="variant.hgvsp"
+              class="copyHGVS"
+              @click="copyToClipboard(variant.hgvsp)"
+              title="Copy HGVS.p to clipboard"
+            >
+              <v-icon>mdi-clipboard-outline</v-icon>
+            </button>
+          </td>
         </tr>
         <tr>
           <td>HGVS.c:</td>
-          <td>{{ variant.hgvsc }}</td>
+          <td>
+            {{ variant.hgvsc }}
+            <button
+              v-if="variant.hgvsc"
+              class="copyHGVS"
+              @click="copyToClipboard(variant.hgvsc)"
+              title="Copy HGVS.c to clipboard"
+            >
+              <v-icon>mdi-clipboard-outline</v-icon>
+            </button>
+          </td>
         </tr>
         <tr>
           <td>Consequence:</td>
@@ -62,6 +89,14 @@ div.variant-info div.v-data-table__wrapper table tr td {
     width: 50px;
   }
 }
+.copyHGVS {
+  float: right;
+  &:hover i {
+    color: black;
+    background: lightgrey;
+    border-radius: 5px;
+  }
+}
 </style>
 <script>
 import { mapGetters } from 'vuex'
@@ -79,7 +114,6 @@ export default {
   components: {
     CuratedRefLink,
   },
-
   computed: {
     ...mapGetters(['getVariantById']),
     variant() {
@@ -90,6 +124,12 @@ export default {
         this.variant.HGVS ||
         this.variant.id.replace(/chrM-(\d+)-(\w)-(\w+)/, 'm.$1$2>$3')
       )
+    },
+  },
+  methods: {
+    copyToClipboard(text) {
+      console.log(`copying ${text} to clipboard`)
+      navigator.clipboard.writeText(text)
     },
   },
 }

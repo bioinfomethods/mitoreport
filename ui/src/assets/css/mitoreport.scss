@@ -130,7 +130,7 @@ span.filterActive {
   border-right: solid 1px rgb(240, 240, 240);
 }
 
-#variantTable tr {
+#variantTable > div > table > tbody > tr {
   cursor: pointer;
 }
 #variantTable tr.paddedrow,
@@ -146,7 +146,7 @@ td.expandedVariant {
 }
 
 #variantTable tr.v-data-table__expanded.v-data-table__expanded__row td {
-  background-color:  #e5e5e5;
+  background-color: #e5e5e5;
 }
 
 #geneHeader .v-chip {
