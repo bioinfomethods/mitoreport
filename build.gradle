@@ -19,7 +19,7 @@ if (gitDescProc.exitValue()) {
 }
 
 project.ext {
-    appArchiveVersion = "1.0.0-beta-1"
+    appArchiveVersion = "1.0.0-beta-2"
     appVersion = "$appArchiveVersion-${gitDescribeItems[1]}"
     buildTimestamp = OffsetDateTime.now().toString()
     buildCommit = gitDescribeItems[2]
