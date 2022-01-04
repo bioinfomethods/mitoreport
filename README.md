@@ -38,6 +38,14 @@ java -jar mitoreport-1.0.0-beta-1-all.jar mito-map-download \
   --output resources/mito_map_annotations.json
 ```
 
+## CouchDB
+
+```bash
+docker-compose up -d
+
+open http://localhost:5984/_utils/
+```
+
 ## Creating Reports
 
 Mitoreport is a standalone CLI application that can be run on any computer with at least 8gb of RAM and having java

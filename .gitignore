@@ -26,7 +26,6 @@ pnpm-debug.log*
 .project
 .settings
 
-# Build
 build
 out
 mitoreport-*
@@ -47,5 +46,5 @@ ui/public/defaultSettings.js
 ui/public/mitoSettings*.js
 ui/coverage
 /dist/
-
 !HG00097.vcf
+couchdb/data
