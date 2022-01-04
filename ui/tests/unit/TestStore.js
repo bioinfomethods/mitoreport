@@ -1,4 +1,4 @@
-import { settingsAllSamplesMerger } from '@/services/LocalDataService'
+import { settingsSampleMerger } from '@/services/LocalDataService'
 import { DEFAULT_SNACKBAR_OPTS } from '@/shared/constants'
 import * as _ from 'lodash'
 import Vue from 'vue'
@@ -26,11 +26,7 @@ const mapVariant = function(variant) {
 
 export const state = {
   sampleId: '15G002035-GM12878K_20pc_10kb_200',
-  settings: _.mergeWith(
-    defaultSettings,
-    mitoSettings,
-    settingsAllSamplesMerger
-  ),
+  settings: _.mergeWith(defaultSettings, mitoSettings, settingsSampleMerger),
   loading: false,
   snackbar: DEFAULT_SNACKBAR_OPTS,
   variants: variants.map(mapVariant),
@@ -79,9 +75,7 @@ export const getters = {
   },
 
   getSampleSettings: () => {
-    return defaultSettings.samples.find(
-      sample => sample.id === '15G002035-GM12878K_20pc_10kb_200'
-    )
+    return defaultSettings.sample
   },
 
   getSettingsBamDir: state => {

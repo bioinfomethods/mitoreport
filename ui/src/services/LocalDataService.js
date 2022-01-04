@@ -45,26 +45,8 @@ export async function loadSettings() {
     defaultSettings,
     fileSettings,
     localStorageSettings,
-    settingsAllSamplesMerger
+    settingsSampleMerger
   )
-
-  samplesMerged.samples = samplesMerged.samples.map(sam => {
-    const defaultSample = defaultSettings?.samples?.find(s => s.id === sam.id)
-    const fileSample = fileSettings?.samples?.find(s => s.id === sam.id)
-    const localSample = localStorageSettings?.samples?.find(
-      s => s.id === sam.id
-    )
-
-    const mergedSample = _.mergeWith(
-      {},
-      defaultSample,
-      fileSample,
-      localSample,
-      settingsSampleMerger
-    )
-
-    return mergedSample
-  })
 
   return {
     status: 200,

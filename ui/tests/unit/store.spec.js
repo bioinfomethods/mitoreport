@@ -68,12 +68,10 @@ const expSettings = _.merge(DEFAULT_SETTINGS, SETTINGS)
 describe('root store getters', () => {
   describe('sampleSettings', () => {
     it.each`
-      settings                                                      | expResult
-      ${null}                                                       | ${{}}
-      ${undefined}                                                  | ${{}}
-      ${{ samples: [] }}                                            | ${{}}
-      ${{ samples: [{ id: 'TestSample' }] }}                        | ${{ id: 'TestSample' }}
-      ${{ samples: [{ id: 'TestSample' }, { id: 'TestSample2' }] }} | ${{ id: 'TestSample' }}
+      settings                            | expResult
+      ${null}                             | ${{}}
+      ${undefined}                        | ${{}}
+      ${{ sample: { id: 'TestSample' } }} | ${{ id: 'TestSample' }}
     `(
       'Given settings is $settings, expect sampleSettings is $expResult',
       ({ settings, expResult }) => {

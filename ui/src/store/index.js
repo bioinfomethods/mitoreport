@@ -110,10 +110,8 @@ export const getters = {
     if (!state.sampleId) {
       return {}
     }
-    const result = (state.settings?.samples || []).find(
-      sample => sample.id === state.sampleId
-    )
-    return result || {}
+    const result = state.settings?.sample || {}
+    return result
   },
 
   getSampleQc: (state, getters) => {
