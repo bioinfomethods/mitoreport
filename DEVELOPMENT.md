@@ -12,8 +12,7 @@ This document provides setup instructions for developing MitoReport.
 
 ```bash
 PROJECT_DIR=$(pwd)
-# APP_ARCHIVE_VERSION=$(git describe --abbrev=0)
-APP_ARCHIVE_VERSION="1.0.0-beta-1"
+APP_ARCHIVE_VERSION=$(git describe --abbrev=0 --always)
 
 ./gradlew
 
