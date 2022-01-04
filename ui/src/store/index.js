@@ -40,7 +40,9 @@ function triggerDownloadSettings(settings, sampleId = null) {
   const nonBlankCurationPredicate = curation =>
     !_.isEmpty(curation.selectedTagNames) || !_.isEmpty(curation.variantNote)
   settingsToExport.samples.forEach(s => {
-    s.curations = s.curations?.filter(nonBlankCurationPredicate) || []
+    console.debug(`curations=${JSON.stringify(s.curations)}`)
+    s.curations =
+      Object.values(s.curations)?.filter(nonBlankCurationPredicate) || []
   })
 
   let mitoReport = new Blob(
