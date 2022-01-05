@@ -52,7 +52,7 @@ export async function loadSettings() {
     }
   }
 
-  const samplesMerged = _.mergeWith(
+  const mergedSettings = _.mergeWith(
     {},
     defaultSettings,
     fileSettings,
@@ -63,7 +63,7 @@ export async function loadSettings() {
   return {
     status: 200,
     statusText: 'OK',
-    data: samplesMerged,
+    data: mergedSettings,
   }
 }
 
