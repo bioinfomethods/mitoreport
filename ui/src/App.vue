@@ -6,6 +6,18 @@
       </v-toolbar-title>
       <v-progress-circular class="ml-4" v-if="loading" indeterminate />
       <v-spacer></v-spacer>
+      <v-switch
+        id="toggleSync"
+        @change="onToggleSyncChange"
+        v-model="syncEnabled"
+        dark
+        class="pt-4 pr-4"
+        ><template v-slot:label
+          ><span class="white--text"
+            >{{ syncEnabled ? 'Disable' : 'Enable' }} Sync</span
+          ></template
+        ></v-switch
+      >
       <ExportSettings></ExportSettings>
       <AppSettings></AppSettings>
     </v-app-bar>
@@ -50,6 +62,10 @@
 import { mapState } from 'vuex'
 import AppSettings from '@/components/AppSettings'
 import ExportSettings from '@/components/ExportSettings'
+import {
+  syncWithRemote,
+  cancelSyncWithRemote,
+} from '@/services/LocalDataService'
 
 export default {
   name: 'App',
@@ -70,6 +86,7 @@ export default {
       rules: {
         required: value => !!value || 'Required.',
       },
+      syncEnabled: false,
     }
   },
 
@@ -78,6 +95,14 @@ export default {
   },
 
   methods: {
+    onToggleSyncChange: function(value) {
+      if (value) {
+        syncWithRemote()
+      } else {
+        cancelSyncWithRemote()
+      }
+    },
+
     downloadSettings: function() {
       this.$store.dispatch('downloadSettings')
     },

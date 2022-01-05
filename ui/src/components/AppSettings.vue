@@ -28,6 +28,20 @@
       >
         <v-card-title>Settings</v-card-title>
         <v-divider></v-divider>
+        <v-card-subtitle>Couch DB</v-card-subtitle>
+        <v-card-text>
+          <v-text-field
+            id="inputCouchDbUrl"
+            name="inputCouchDbUrl"
+            v-model="settingsForm.newCouchDbUrl"
+            label="Couch DB URL"
+            hint="URL to MCRI Mitoreport Couch DB"
+            persistent-hint
+            maxlength="1000"
+          >
+          </v-text-field>
+        </v-card-text>
+        <v-divider></v-divider>
         <v-card-subtitle>IGV</v-card-subtitle>
         <v-card-text>
           <v-text-field
@@ -180,6 +194,7 @@ export default {
       settingsForm: {
         valid: true,
         dirty: false,
+        newCouchDbUrl: '',
         newBamDir: '',
         newTagName: '',
         newTagImportant: false,
@@ -190,6 +205,7 @@ export default {
 
   computed: {
     ...mapGetters([
+      'getSettingsCouchDbUrl',
       'getSettingsBamDir',
       'getSettingsBamFilename',
       'getVariantTags',
@@ -235,16 +251,18 @@ export default {
       this.$store.dispatch('saveSettings')
     },
 
-    onBamDirChange: function(newBamDir) {
-      this.settingsForm.newBamDir = newBamDir
-    },
+    // onBamDirChange: function(newBamDir) {
+    //   this.settingsForm.newBamDir = newBamDir
+    // },
 
     saveAppSettings: function() {
       this.$store.dispatch('saveAppSettings', {
+        newCouchDbUrl: this.settingsForm.newCouchDbUrl,
         newBamDir: this.settingsForm.newBamDir,
         userTags: this.settingsForm.userTags,
       })
       this.settingsMenu = false
+      this.settingsForm.newCouchDbUrl = this.getSettingsCouchDbUrl
       this.settingsForm.newBamDir = this.getSettingsBamDir
       this.settingsForm.userTags = this.getVariantTags.filter(t => t.custom)
     },
@@ -284,6 +302,9 @@ export default {
   },
 
   watch: {
+    getSettingsCouchDbUrl: function(value) {
+      this.settingsForm.newCouchDbUrl = value
+    },
     getSettingsBamDir: function(value) {
       this.settingsForm.newBamDir = value
     },
@@ -293,13 +314,16 @@ export default {
     settingsForm: {
       deep: true,
       handler: function() {
+        const couchDbUrlMatchInitial =
+          this.settingsForm.newCouchDbUrl === this.getSettingsCouchDbUrl
         const bamMatchInitial =
           this.settingsForm.newBamDir === this.getSettingsBamDir
         const userTagsMatchInitial = _.isEqual(
           this.settingsForm.userTags,
           this.customTags
         )
-        const matchInitial = bamMatchInitial && userTagsMatchInitial
+        const matchInitial =
+          couchDbUrlMatchInitial && bamMatchInitial && userTagsMatchInitial
 
         if (matchInitial) {
           this.settingsForm.dirty = false

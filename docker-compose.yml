@@ -10,3 +10,4 @@ services:
             - '5984:5984'
         volumes:
             - ./couchdb:/bitnami/couchdb
+            - ./couchdb/config.ini:/opt/bitnami/couchdb/etc/local.d/config.ini

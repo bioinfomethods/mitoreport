@@ -4,12 +4,11 @@ import {
   saveSettingsToLocal,
 } from '@/services/LocalDataService.js'
 import { DEFAULT_SNACKBAR_OPTS } from '@/shared/constants'
-import { saveAs } from 'file-saver'
 import * as _ from 'lodash'
 import { v4 as uuidv4 } from 'uuid'
 import Vue from 'vue'
 import Vuex from 'vuex'
-import { loadSettings } from '../services/LocalDataService'
+import { loadLocalDbSettings, loadSettings } from '../services/LocalDataService'
 import {
   DEFAULT_GENECARDS_URL_PREFIX,
   DEFAULT_HMT_VAR_URL_PREFIX,
@@ -122,6 +121,10 @@ export const getters = {
     return getters.getSampleSettings?.metadata || {}
   },
 
+  getSettingsCouchDbUrl: (state, getters) => {
+    return getters.getSampleSettings?.couchDbUrl
+  },
+
   getSettingsBamDir: (state, getters) => {
     return getters.getSampleSettings?.bamDir
   },
@@ -201,6 +204,10 @@ export const mutations = {
 
   SET_DELETIONS(state, deletions) {
     state.deletions = deletions
+  },
+
+  SET_COUCH_DB_URL(state, newCouchDbUrl) {
+    getters.getSampleSettings(state).couchDbUrl = newCouchDbUrl
   },
 
   SET_BAM_DIR(state, newBamDir) {
@@ -297,8 +304,21 @@ export const actions = {
     console.debug('Finished action fetchData')
   },
 
-  saveAppSettings({ dispatch, commit, getters }, { newBamDir, userTags }) {
+  setSettings({ commit }, settings) {
+    commit('SET_SETTINGS', settings)
+  },
+
+  async loadLocalSettings({ commit }, sampleId) {
+    const settings = await loadLocalDbSettings(sampleId)
+    commit('SET_SETTINGS', settings)
+  },
+
+  saveAppSettings(
+    { dispatch, commit, getters },
+    { newCouchDbUrl, newBamDir, userTags }
+  ) {
     const currentTags = getters.getVariantTags
+    commit('SET_COUCH_DB_URL', newCouchDbUrl)
     commit('SET_BAM_DIR', newBamDir)
     commit('SET_USER_TAGS', { userTags, currentTags })
     dispatch('removeVariantTags', userTags)

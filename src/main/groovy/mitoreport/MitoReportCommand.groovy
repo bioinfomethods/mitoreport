@@ -232,6 +232,7 @@ class MitoReportCommand implements Runnable {
                         'metadata'               : metadata,
                         'qc'                     : qc,
                         'haplogrepClassification': new HaplogrepClassification(sampleOutput, haplogrepClassification.haplogrepResults),
+                        'couchDbUrl'             : 'http://localhost:5984/mitoreport',
                         'bamDir'                 : bamDir,
                         'bamFilename'            : bamFileName,
                         'vcfDir'                 : sampleVcfDir,

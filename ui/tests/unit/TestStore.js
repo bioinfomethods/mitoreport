@@ -78,6 +78,10 @@ export const getters = {
     return defaultSettings.sample
   },
 
+  getSettingsCouchDbUrl: state => {
+    return getters.getSampleSettings(state).couchDbUrl
+  },
+
   getSettingsBamDir: state => {
     return getters.getSampleSettings(state).bamDir
   },
