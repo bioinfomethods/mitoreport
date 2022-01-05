@@ -1,4 +1,4 @@
-import { loadSettings } from '@/services/LocalDataService'
+import { loadSettings, LOCAL_DB } from '@/services/LocalDataService'
 import flushPromises from 'flush-promises'
 import DEFAULT_SETTINGS from '../fixtures/defaultSettings.json'
 import LOCAL_SETTINGS from '../fixtures/localStorage.json'
@@ -30,12 +30,16 @@ describe('LocalDataService', () => {
   it('loadSettings() handles correctly when local settings exists', async () => {
     window.defaultSettings = DEFAULT_SETTINGS
     window.settings = FILE_SETTINGS
-    localStorage.setItem('mitoSettings', JSON.stringify(LOCAL_SETTINGS))
+    let localSettings = LOCAL_SETTINGS
+    localSettings._id = '15G002035-GM12878K_20pc_10kb_200'
+    LOCAL_DB.put(localSettings)
+    // localStorage.setItem('mitoSettings', JSON.stringify(LOCAL_SETTINGS))
 
     const actualResult = await loadSettings()
     await flushPromises()
 
-    expect(actualResult.data).toStrictEqual(EXP_MERGED_ALL_SETTINGS)
+    const { _id, _rev, ...actual } = actualResult.data
+    expect(actual).toStrictEqual(EXP_MERGED_ALL_SETTINGS)
   })
 })
 
