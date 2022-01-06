@@ -44,7 +44,6 @@ export const actions = {
   deleteSearch() {},
   saveCuration() {},
   saveSettings() {},
-  downloadSettings() {},
   closeSnackbar() {},
   filterImportantVariants() {},
 }

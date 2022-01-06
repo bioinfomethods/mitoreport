@@ -18,7 +18,6 @@
           ></template
         ></v-switch
       >
-      <ExportSettings></ExportSettings>
       <AppSettings></AppSettings>
     </v-app-bar>
 
@@ -61,7 +60,6 @@
 <script>
 import { mapState } from 'vuex'
 import AppSettings from '@/components/AppSettings'
-import ExportSettings from '@/components/ExportSettings'
 import {
   syncWithRemote,
   cancelSyncWithRemote,
@@ -72,7 +70,6 @@ export default {
 
   components: {
     AppSettings,
-    ExportSettings,
   },
 
   async created() {
@@ -101,10 +98,6 @@ export default {
       } else {
         cancelSyncWithRemote()
       }
-    },
-
-    downloadSettings: function() {
-      this.$store.dispatch('downloadSettings')
     },
 
     closeSnackbar: function() {

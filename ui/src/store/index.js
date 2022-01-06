@@ -28,34 +28,6 @@ export const state = {
   deletions: {},
 }
 
-function triggerDownloadSettings(settings, sampleId = null) {
-  const settingsToExport = _.cloneDeep(settings)
-  if (sampleId !== null) {
-    settingsToExport.samples = settingsToExport.samples.filter(
-      s => s.id === sampleId
-    )
-  }
-
-  const nonBlankCurationPredicate = curation =>
-    !_.isEmpty(curation.selectedTagNames) || !_.isEmpty(curation.variantNote)
-  settingsToExport.samples.forEach(s => {
-    console.debug(`curations=${JSON.stringify(s.curations)}`)
-    s.curations =
-      Object.values(s.curations)?.filter(nonBlankCurationPredicate) || []
-  })
-
-  let mitoReport = new Blob(
-    ['window.settings = ' + JSON.stringify(settingsToExport, null, 2)],
-    {
-      type: 'text/json;charset=utf-8',
-    }
-  )
-
-  const fileName =
-    sampleId === null ? 'mitoSettings.js' : `mitoSettings_${state.sampleId}.js`
-  saveAs(mitoReport, fileName)
-}
-
 export const getters = {
   getIgvHost: state => {
     return state.settings.igvHost || DEFAULT_IGV_HOST
@@ -365,14 +337,6 @@ export const actions = {
         message: `There was a problem saving settings: ${error.message}`,
       })
     })
-  },
-
-  downloadSettings({ state }) {
-    triggerDownloadSettings(state.settings)
-  },
-
-  downloadSettingsSample({ state }) {
-    triggerDownloadSettings(state.settings, state.sampleId)
   },
 
   closeSnackbar({ commit }) {
