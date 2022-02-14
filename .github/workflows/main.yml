@@ -21,7 +21,7 @@ jobs:
         uses: gradle/gradle-build-action@v1.3.3
         with:
           gradle-version: 6.9
-          distributions-cache-enabled: true
+          wrapper-cache-enabled: true
           dependencies-cache-enabled: true
           configuration-cache-enabled: true
           arguments: clean build --build-cache --info
