@@ -26,6 +26,7 @@ export const state = {
   filteredVariants: {},
   maxReadDepth: 0,
   deletions: {},
+  syncFeature: false,
 }
 
 export const getters = {
@@ -139,6 +140,10 @@ export const mutations = {
     state.settings = settings
   },
 
+  SET_SYNC_FEATURE(state, enabled) {
+    state.syncFeature = enabled
+  },
+
   SET_LOADING(state) {
     state.loading = true
   },
@@ -250,6 +255,10 @@ export const mutations = {
 }
 
 export const actions = {
+  setSyncFeature({ commit }, enabled) {
+    commit('SET_SYNC_FEATURE', enabled)
+  },
+
   async fetchData({ commit }) {
     commit('SET_LOADING')
 

@@ -7,6 +7,7 @@
       <v-progress-circular class="ml-4" v-if="loading" indeterminate />
       <v-spacer></v-spacer>
       <v-switch
+        v-if="syncFeature"
         id="toggleSync"
         @change="onToggleSyncChange"
         v-model="syncEnabled"
@@ -88,7 +89,13 @@ export default {
   },
 
   computed: {
-    ...mapState(['loading', 'snackbar', 'initialFetchDataLoaded', 'sampleId']),
+    ...mapState([
+      'loading',
+      'snackbar',
+      'initialFetchDataLoaded',
+      'sampleId',
+      'syncFeature',
+    ]),
   },
 
   methods: {

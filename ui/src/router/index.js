@@ -24,7 +24,10 @@ const routes = [
         props: route => ({ variantId: route.params.variantId }),
       },
     ],
-    props: route => ({ variantId: route.params.variantId }),
+    props: route => ({
+      variantId: route.params.variantId,
+      syncFeature: route.query.syncFeature === 'true',
+    }),
   },
   {
     path: '/deletions',

@@ -27,20 +27,22 @@
         @submit.prevent="saveAppSettings"
       >
         <v-card-title>Settings</v-card-title>
-        <v-divider></v-divider>
-        <v-card-subtitle>Couch DB</v-card-subtitle>
-        <v-card-text>
-          <v-text-field
-            id="inputCouchDbUrl"
-            name="inputCouchDbUrl"
-            v-model="settingsForm.newCouchDbUrl"
-            label="Couch DB URL"
-            hint="URL to MCRI Mitoreport Couch DB"
-            persistent-hint
-            maxlength="1000"
-          >
-          </v-text-field>
-        </v-card-text>
+        <div v-if="syncFeature">
+          <v-divider></v-divider>
+          <v-card-subtitle>Couch DB</v-card-subtitle>
+          <v-card-text>
+            <v-text-field
+              id="inputCouchDbUrl"
+              name="inputCouchDbUrl"
+              v-model="settingsForm.newCouchDbUrl"
+              label="Couch DB URL"
+              hint="URL to MCRI Mitoreport Couch DB"
+              persistent-hint
+              maxlength="1000"
+            >
+            </v-text-field>
+          </v-card-text>
+        </div>
         <v-divider></v-divider>
         <v-card-subtitle>IGV</v-card-subtitle>
         <v-card-text>
@@ -174,7 +176,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapState } from 'vuex'
 import * as _ from 'lodash'
 
 export default {
@@ -204,6 +206,7 @@ export default {
   },
 
   computed: {
+    ...mapState(['syncFeature']),
     ...mapGetters([
       'getSettingsCouchDbUrl',
       'getSettingsBamDir',
