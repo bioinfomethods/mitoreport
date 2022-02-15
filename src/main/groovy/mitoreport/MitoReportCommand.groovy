@@ -194,7 +194,8 @@ class MitoReportCommand implements Runnable {
             assert sampleId in vcf.samples, "${maternal.sample} not in VCF"
             Integer sampleIdIndex = vcf.samples.indexOf(sampleId)
             def maternalVariants = VCF.parse(maternal.vcfFile).collect { Variant v ->
-                [
+                Map<String, Object> infoField = v.parsedInfo
+                Map<String, Object> res = [
                         id       : "${v.chr}-${v.pos}-${v.ref}-${v.alt}",
                         hgvsg    : MitoUtils.extractMitoHgvsg(v),
                         chr      : v.chr,
@@ -206,6 +207,7 @@ class MitoReportCommand implements Runnable {
                         dosages  : v.getDosages(),
                         genotypes: [v.parsedGenotypes[sampleIdIndex]],
                 ]
+                res << infoField
             }
 
             String maternalVariantsJson = JsonOutput.prettyPrint(JsonOutput.toJson(maternalVariants))
@@ -382,7 +384,8 @@ class MitoReportCommand implements Runnable {
                     'defaultSettings.js',
                     mitoSettingsFileName,
                     'deletions.js',
-                    'variants.js'
+                    'variants.js',
+                    'maternalVariants.js',
             ]
 
             fileNamesToCopy.each { fileName ->
