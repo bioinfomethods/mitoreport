@@ -1,6 +1,7 @@
 import {
   getDeletions,
   getVariants,
+  getMaternalVariants,
   saveSettingsToLocal,
 } from '@/services/LocalDataService.js'
 import { DEFAULT_SNACKBAR_OPTS } from '@/shared/constants'
@@ -23,6 +24,7 @@ export const state = {
   loading: false,
   snackbar: { ...DEFAULT_SNACKBAR_OPTS },
   variants: {},
+  maternalVariants: {},
   filteredVariants: {},
   maxReadDepth: 0,
   deletions: {},
@@ -166,13 +168,31 @@ export const mutations = {
   SET_VARIANTS(state, variants) {
     const variantsObj = {}
     variants.forEach(v => {
-      variantsObj[v.id] = v
+      const matchingVariant = state.maternalVariants[v.id]
+      const withMum = matchingVariant
+        ? {
+            ...v,
+            maternal: {
+              heteroplasmy: matchingVariant.genotypes[0].AF,
+              readDepth: matchingVariant.DP,
+            },
+          }
+        : { ...v, maternal: null }
+      variantsObj[v.id] = withMum
     })
     state.variants = variantsObj
     state.filteredVariants = variantsObj
 
     const uniqReadDepths = _.union(variants.map(v => _.toNumber(v.DP)))
     state.maxReadDepth = _.max(uniqReadDepths)
+  },
+
+  SET_MATERNAL_VARIANTS(state, variants) {
+    const variantsObj = {}
+    variants.forEach(v => {
+      variantsObj[v.id] = v
+    })
+    state.maternalVariants = variantsObj
   },
 
   SET_FILTERED_VARIANTS(state, filteredVariants) {
@@ -265,6 +285,9 @@ export const actions = {
     try {
       const settResp = await loadSettings()
       commit('SET_SETTINGS', settResp.data)
+
+      const maternalVarResp = await getMaternalVariants()
+      commit('SET_MATERNAL_VARIANTS', maternalVarResp.data)
 
       const varResp = await getVariants()
       const delResp = await getDeletions()

@@ -30,6 +30,7 @@ export const state = {
   loading: false,
   snackbar: DEFAULT_SNACKBAR_OPTS,
   variants: variants.map(mapVariant),
+  maternalVariants: {},
   filteredVariants: variants.map(mapVariant),
   deletions: deletions,
   maxReadDepth: 99999,

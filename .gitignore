@@ -42,6 +42,7 @@ src/main/resources/mitoui/*
 !src/main/resources/mitoui/README.md
 ui/public/deletions.js
 ui/public/variants.js
+ui/public/maternalVariants.js
 ui/public/defaultSettings.js
 ui/public/mitoSettings*.js
 ui/coverage

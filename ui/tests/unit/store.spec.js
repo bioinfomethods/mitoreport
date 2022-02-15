@@ -100,11 +100,12 @@ describe('root store mutations', () => {
     const state = {
       loading: false,
       variants: {},
+      maternalVariants: {},
       deletions: {},
     }
     let expVariants = {
-      [VARIANTS[0]['id']]: VARIANTS[0],
-      [VARIANTS[1]['id']]: VARIANTS[1],
+      [VARIANTS[0]['id']]: { ...VARIANTS[0], maternal: null },
+      [VARIANTS[1]['id']]: { ...VARIANTS[1], maternal: null },
     }
 
     mutations.SET_VARIANTS(state, VARIANTS)
@@ -112,6 +113,7 @@ describe('root store mutations', () => {
     expect(state).toEqual({
       loading: false,
       variants: expVariants,
+      maternalVariants: {},
       filteredVariants: expVariants,
       maxReadDepth: 4858,
       deletions: {},
@@ -230,23 +232,27 @@ describe('root store actions', () => {
     dataService.getVariants = jest.fn(() => {
       return Promise.resolve({ data: VARIANTS })
     })
+    dataService.getMaternalVariants = jest.fn(() => {
+      return Promise.resolve({ data: [] })
+    })
   })
 
   it('fetchData', async () => {
     const commit = jest.fn()
     const dispatch = jest.fn()
 
-    const state = { variants: [] }
+    const state = { variants: {}, maternalVariants: {} }
     await actions.fetchData({ state, commit, dispatch })
     await flushPromises()
 
-    expect(commit).toHaveBeenCalledTimes(6)
+    expect(commit).toHaveBeenCalledTimes(7)
     expect(commit).toHaveBeenNthCalledWith(1, 'SET_LOADING')
     expect(commit).toHaveBeenNthCalledWith(2, 'SET_SETTINGS', expSettings)
-    expect(commit).toHaveBeenNthCalledWith(3, 'SET_VARIANTS', VARIANTS)
-    expect(commit).toHaveBeenNthCalledWith(4, 'SET_DELETIONS', DELETIONS)
-    expect(commit).toHaveBeenNthCalledWith(5, 'SET_SAMPLE_ID', DELETIONS)
-    expect(commit).toHaveBeenNthCalledWith(6, 'UNSET_LOADING')
+    expect(commit).toHaveBeenNthCalledWith(3, 'SET_MATERNAL_VARIANTS', [])
+    expect(commit).toHaveBeenNthCalledWith(4, 'SET_VARIANTS', VARIANTS)
+    expect(commit).toHaveBeenNthCalledWith(5, 'SET_DELETIONS', DELETIONS)
+    expect(commit).toHaveBeenNthCalledWith(6, 'SET_SAMPLE_ID', DELETIONS)
+    expect(commit).toHaveBeenNthCalledWith(7, 'UNSET_LOADING')
   })
 })
 

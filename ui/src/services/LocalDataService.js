@@ -12,6 +12,14 @@ export async function getVariants() {
   }
 }
 
+export async function getMaternalVariants() {
+  return {
+    status: 200,
+    statusText: 'OK',
+    data: window.maternalVariants,
+  }
+}
+
 export async function getDeletions() {
   return {
     status: 200,
