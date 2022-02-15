@@ -80,10 +80,10 @@ class MitoReportCommand implements Runnable {
     MitoMapAnnotationsLoader mitoMapLoader
 
     static class Maternal {
-        @Option(names = ['-w', '--maternal-vcf'], required = true, description = 'VCF file for maternal sample')
+        @Option(names = ['-w', '--maternal-vcf'], required = true, description = 'VCF file with maternal sample')
         File vcfFile
 
-        @Option(names = ['-m', '--maternal-sample'], required = true, description = 'Maternal sample ID')
+        @Option(names = ['-m', '--maternal-sample'], required = false, description = 'Provide maternal sample ID if provided VCF is as multi sample VCF, defaults to use first sample')
         String sample
     }
 
@@ -107,7 +107,7 @@ class MitoReportCommand implements Runnable {
         File coverageStatsJson = deletionsResult.coverageStatsJsonFile
         File variantsJson = runReport(deletionsJson)
 
-        File maternalVariantsJson = createMaternalVariantsJson(mitoReportPathName, maternal)
+        def maternalVariantsResults = createMaternalVariantsResults(mitoReportPathName, maternal)
 
         Map<String, Object> manifestInfo = getManifestInfo()
         BasicFileAttributes gnomadVcfFileAttrs = Files.readAttributes(gnomADVCF, BasicFileAttributes)
@@ -134,8 +134,16 @@ class MitoReportCommand implements Runnable {
         ]
 
         HaplogrepClassification haplogrepClassification = new HaplogroupClassifier(vcfFile, sample).call()
-        HaplogrepClassification maternalHaplogrepClassification = maternal ? new HaplogroupClassifier(maternal.vcfFile, maternal.sample).call() : null
-        writeOutUiDataAndSettings(deletionsJson, deletionsResult.bamFile, variantsJson, haplogrepClassification, coverageStatsJson, metadata, maternalVariantsJson, maternalHaplogrepClassification)
+        writeOutUiDataAndSettings(
+                deletionsJson,
+                deletionsResult.bamFile,
+                variantsJson,
+                haplogrepClassification,
+                coverageStatsJson,
+                metadata,
+                maternalVariantsResults.get('variantsFile') as File,
+                maternalVariantsResults.get('haplogrepClassification') as HaplogrepClassification
+        )
     }
 
     Map<String, File> createDeletionsPlot() {
@@ -178,9 +186,13 @@ class MitoReportCommand implements Runnable {
         return mitoReport.variantsResultJson
     }
 
-    private static File createMaternalVariantsJson(String pathname, Maternal maternal) {
-        File result = null
+    private static def createMaternalVariantsResults(String pathname, Maternal maternal) {
+        def result = Collections.emptyMap()
         if (maternal) {
+            VCF vcf = VCF.parse(maternal.vcfFile)
+            String sampleId = maternal.sample ?: vcf.samples[0]
+            assert sampleId in vcf.samples, "${maternal.sample} not in VCF"
+            Integer sampleIdIndex = vcf.samples.indexOf(sampleId)
             def maternalVariants = VCF.parse(maternal.vcfFile).collect { Variant v ->
                 [
                         id       : "${v.chr}-${v.pos}-${v.ref}-${v.alt}",
@@ -192,7 +204,7 @@ class MitoReportCommand implements Runnable {
                         type     : v.type,
                         qual     : v.qual,
                         dosages  : v.getDosages(),
-                        genotypes: v.parsedGenotypes,
+                        genotypes: [v.parsedGenotypes[sampleIdIndex]],
                 ]
             }
 
@@ -204,8 +216,16 @@ class MitoReportCommand implements Runnable {
                 dirFile.mkdirs()
             }
 
-            result = new File("$pathname/maternalVariants.json")
-            Utils.writer(result).withWriter { it << maternalVariantsJson; it << '\n' }
+            File file = new File("$pathname/maternalVariants.json")
+            Utils.writer(file).withWriter { it << maternalVariantsJson; it << '\n' }
+
+            HaplogrepClassification haplogrepClassification = new HaplogroupClassifier(maternal.vcfFile, sampleId).call()
+
+            result = Collections.unmodifiableMap([
+                    'sampleId'               : sampleId,
+                    'variantsFile'           : file,
+                    'haplogrepClassification': haplogrepClassification,
+            ])
         }
 
         return result
