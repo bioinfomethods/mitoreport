@@ -161,8 +161,8 @@ task buildHaplogrepCmd(type: Exec) {
     outputs.file('haplogrep-cmd/target/haplogrep.jar').withPropertyName('haplogrepJar')
 }
 
-test.dependsOn += ['ui:runTestUnit']
-check.dependsOn += ['ui:runLint']
-compileJava.dependsOn += ['buildGngs', 'buildHaplogrepCmd']
-processResources.dependsOn += ['copyUiBuildToMitoOut']
-assemble.mustRunAfter 'check'
+//test.dependsOn += ['ui:runTestUnit']
+//check.dependsOn += ['ui:runLint']
+//compileJava.dependsOn += ['buildGngs', 'buildHaplogrepCmd']
+//processResources.dependsOn += ['copyUiBuildToMitoOut']
+//assemble.mustRunAfter 'check'
