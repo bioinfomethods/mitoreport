@@ -92,6 +92,10 @@ export const getters = {
     return getters.getSampleSettings?.qc || {}
   },
 
+  hasMaternalVariants: (state, getters) => {
+    return getters.getSampleSettings?.maternalVcfFilename !== null
+  },
+
   getSampleMetadata: (state, getters) => {
     return getters.getSampleSettings?.metadata || {}
   },

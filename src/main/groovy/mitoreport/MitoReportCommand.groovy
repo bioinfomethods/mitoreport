@@ -301,6 +301,8 @@ class MitoReportCommand implements Runnable {
         String bamFileName = FilenameUtils.getName(sampleBamFile.absolutePath)
         String sampleVcfDir = FilenameUtils.getFullPath(vcfFile.absolutePath)
         String sampleVcfFileName = FilenameUtils.getName(vcfFile.absolutePath)
+        String maternalVcfDir = maternal?.vcfFile ? FilenameUtils.getFullPath(maternal.vcfFile.absolutePath) : null
+        String maternalVcfFileName = maternal?.vcfFile ? FilenameUtils.getName(maternal.vcfFile.absolutePath) : null
         def coverageStats = new JsonSlurper().parseText(coverageStatsJson.text)
         def qc = ['coverageStats': coverageStats]
 
@@ -318,8 +320,8 @@ class MitoReportCommand implements Runnable {
                         'bamFilename'            : bamFileName,
                         'vcfDir'                 : sampleVcfDir,
                         'vcfFilename'            : sampleVcfFileName,
-                        'maternalVcfDir'         : null,
-                        'maternalVcfFilename'    : null,
+                        'maternalVcfDir'         : maternalVcfDir,
+                        'maternalVcfFilename'    : maternalVcfFileName,
                         'variantSearches'        : [
                                 [
                                         'name'        : 'All',
