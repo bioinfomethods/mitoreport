@@ -96,3 +96,15 @@ export const VARIANT_MASKS = [
     end: 576,
   },
 ]
+
+export const USER_SETTINGS_APPEND_PROP_NAMES = [
+  'variantSearches',
+  'variantTags',
+]
+
+export const USER_SETTINGS_PROP_NAMES = [
+  'curations',
+  'couchDbUrl',
+  'bamDir',
+  'bamFilename',
+]

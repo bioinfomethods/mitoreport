@@ -1,7 +1,10 @@
 import * as _ from 'lodash'
 import PouchDB from 'pouchdb'
 import getStore from '@/store'
-
+import {
+  USER_SETTINGS_APPEND_PROP_NAMES,
+  USER_SETTINGS_PROP_NAMES,
+} from '@/shared/constants'
 export const LOCAL_DB = new PouchDB('mitoreport')
 
 export async function getVariants() {
@@ -28,19 +31,11 @@ export async function getDeletions() {
   }
 }
 
-export function settingsAllSamplesMerger(objValue, srcValue, key) {
-  if (key === 'samples') {
-    return _.unionBy((srcValue || []).concat(objValue || []), 'id')
-  } else {
-    return undefined
-  }
-}
-
 export function settingsSampleMerger(objValue, srcValue, key) {
-  if (key === 'variantSearches' || key === 'variantTags') {
+  if (USER_SETTINGS_APPEND_PROP_NAMES.includes(key)) {
     return _.unionBy((srcValue || []).concat(objValue || []), 'name')
-  } else if (key === 'curations') {
-    return srcValue
+  } else if (USER_SETTINGS_PROP_NAMES.includes(key)) {
+    return objValue
   } else {
     return undefined
   }
@@ -48,7 +43,6 @@ export function settingsSampleMerger(objValue, srcValue, key) {
 
 export async function loadSettings() {
   const defaultSettings = _.cloneDeep(window.defaultSettings)
-  const fileSettings = _.cloneDeep(window.settings)
   const sampleId = defaultSettings?.sample?.id
   let localDbSettings = {}
   try {
@@ -62,10 +56,8 @@ export async function loadSettings() {
   }
 
   const mergedSettings = _.mergeWith(
-    {},
-    defaultSettings,
-    fileSettings,
     localDbSettings,
+    defaultSettings,
     settingsSampleMerger
   )
 
