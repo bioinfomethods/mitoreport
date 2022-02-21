@@ -347,6 +347,8 @@
               >
               </v-range-slider>
             </td>
+            <!-- Maternal Variant Header -->
+            <td></td>
             <td>
               <v-row class="px-4 justify-center">
                 <span class="grey--text text--darken-1">
@@ -438,6 +440,20 @@
           <span v-if="hapRatios[item.id] && hapRatios[item.id].hapWeight">
             {{ hapRatios[item.id].hapWeight | precisionTo }}</span
           >
+        </template>
+
+        <!-- Maternal Variant -->
+        <template v-slot:item.maternal="{ item }">
+          <span v-if="maternalVariants[item.id]">
+            <v-tooltip top>
+              <template v-slot:activator="{ on, attrs }">
+                <span v-bind="attrs" v-on="on">
+                  {{ maternalVariants[item.id].genotypes[0].AF }}
+                </span>
+              </template>
+              <span> Read depth: {{ maternalVariants[item.id].DP }} </span>
+            </v-tooltip>
+          </span>
         </template>
 
         <!-- gnomAD Het -->
@@ -853,7 +869,12 @@ export default {
   },
 
   computed: {
-    ...mapState(['filteredVariants', 'maxReadDepth', 'settings']),
+    ...mapState([
+      'filteredVariants',
+      'maternalVariants',
+      'maxReadDepth',
+      'settings',
+    ]),
     ...mapGetters([
       'getSettingsBamFile',
       'getSampleSettings',
@@ -963,6 +984,12 @@ export default {
           value: 'genotypes[0].AF',
           width: '80',
           filter: this.vafFilter,
+        },
+        {
+          text: 'Maternal Variant',
+          tooltip: 'Maternal Info',
+          value: 'maternal',
+          width: '80',
         },
         {
           text: 'Genbank Freq',
