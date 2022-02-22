@@ -348,7 +348,23 @@
               </v-range-slider>
             </td>
             <!-- Maternal Variant Header -->
-            <td></td>
+            <td>
+              <v-row class="px-4 justify-space-between">
+                <span class="grey--text text--darken-1">{{
+                  mafTicks[mafIndexRange[0]]
+                }}</span>
+                <span class="grey--text text--darken-1">{{
+                  mafTicks[mafIndexRange[1]]
+                }}</span>
+              </v-row>
+              <v-range-slider
+                v-model="mafIndexRange"
+                :value="mafTicks"
+                min="0"
+                :max="mafLastTickIndex"
+                hide-details
+              />
+            </td>
             <td>
               <v-row class="px-4 justify-center">
                 <span class="grey--text text--darken-1">
@@ -817,6 +833,8 @@ export default {
       selectedSavedSearch: DEFAULT_VARIANT_SEARCH,
       vafTicks: [0, 0.01, 0.02, 0.03, 0.05, 0.1, 1],
       vafIndexRange: [1, 5],
+      mafTicks: [0, 0.01, 0.02, 0.03, 0.05, 0.1, 1],
+      mafIndexRange: [0, 6],
       gbFreqTicks: [0.0, 0.001, 0.002, 0.005, 0.01, 0.1, 1.0],
       mitoTipQuartiles: [
         'Confirmed pathogenic',
@@ -986,10 +1004,11 @@ export default {
           filter: this.vafFilter,
         },
         {
-          text: 'Maternal Variant',
+          text: 'Maternal Heteroplasmy',
           tooltip: 'Maternal Info',
           value: 'maternal',
           width: '80',
+          filter: this.mafFilter,
         },
         {
           text: 'Genbank Freq',
@@ -1109,6 +1128,10 @@ export default {
       ]
 
       return consequences
+    },
+
+    mafLastTickIndex() {
+      return this.mafTicks.length - 1
     },
 
     vafLastTickIndex() {
@@ -1278,10 +1301,21 @@ export default {
     },
 
     vafFilter: function(value) {
+      // console.log("VAF filter", value)
       let lower = this.vafTicks[this.vafIndexRange[0]]
       let upper = this.vafTicks[this.vafIndexRange[1]]
 
       return filters.rangeTextFilter(`${lower}-${upper}`, value)
+    },
+
+    // TODO: Where is this filter getting the value from?
+    // Check that it is filtering on the Maternal Variant
+    mafFilter: function(value) {
+      console.log('Maf filter: ', value)
+      let lower = this.mafTicks[this.mafIndexRange[0]]
+      let upper = this.mafTicks[this.mafIndexRange[1]]
+
+      return filters.rangeTextFilter(`${lower}-${upper}`, value.heteroplasmy)
     },
 
     gbFreqFilter: function(value) {
