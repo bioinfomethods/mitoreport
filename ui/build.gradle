@@ -7,7 +7,7 @@ description = 'Mito Report UI'
 defaultTasks 'runTestUnit', 'runLint', 'runBuild'
 
 node {
-  download = true
+  download = Boolean.valueOf(property('nodeDownload'))
 }
 
 task runServe(type: NpmTask, dependsOn: 'npmInstall') {
