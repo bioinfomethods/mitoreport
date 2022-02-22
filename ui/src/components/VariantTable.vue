@@ -777,6 +777,11 @@ export default {
   mounted() {
     this.toggleVariantById(this.variantId)
 
+    // Hide maternal column if there are no maternal variants
+    if (!this.hasMaternalVariants) {
+      document.getElementById('app').classList.toggle('hideMaternal')
+    }
+
     if (this?.allSavedSearches) {
       const found = this.allSavedSearches.find(
         ss => ss && ss.name === 'Current'
