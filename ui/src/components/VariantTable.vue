@@ -779,7 +779,7 @@ export default {
 
     // Hide maternal column if there are no maternal variants
     if (!this.hasMaternalVariants) {
-      document.getElementById('app').classList.toggle('hideMaternal')
+      document.getElementById('app')?.classList?.toggle('hideMaternal')
     }
 
     if (this?.allSavedSearches) {
@@ -1318,10 +1318,14 @@ export default {
     // Check that it is filtering on the Maternal Variant
     mafFilter: function(value) {
       // console.log('Maf filter: ', value)
-      let lower = this.mafTicks[this.mafIndexRange[0]]
-      let upper = this.mafTicks[this.mafIndexRange[1]]
+      if (value) {
+        let lower = this.mafTicks[this.mafIndexRange[0]]
+        let upper = this.mafTicks[this.mafIndexRange[1]]
 
-      return filters.rangeTextFilter(`${lower}-${upper}`, value.heteroplasmy)
+        return filters.rangeTextFilter(`${lower}-${upper}`, value.heteroplasmy)
+      } else {
+        return true
+      }
     },
 
     gbFreqFilter: function(value) {
