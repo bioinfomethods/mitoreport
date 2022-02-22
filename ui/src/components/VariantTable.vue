@@ -905,6 +905,7 @@ export default {
       'getHaplogroups',
       'getFirstHaplogroup',
       'getFirstFullHaplogroup',
+      'hasMaternalVariants',
     ]),
     tableFilteredVariants() {
       return Object.values(this.filteredVariants)
