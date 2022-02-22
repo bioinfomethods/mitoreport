@@ -1316,7 +1316,7 @@ export default {
     // TODO: Where is this filter getting the value from?
     // Check that it is filtering on the Maternal Variant
     mafFilter: function(value) {
-      console.log('Maf filter: ', value)
+      // console.log('Maf filter: ', value)
       let lower = this.mafTicks[this.mafIndexRange[0]]
       let upper = this.mafTicks[this.mafIndexRange[1]]
 
