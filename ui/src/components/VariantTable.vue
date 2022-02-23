@@ -363,7 +363,8 @@
                 min="0"
                 :max="mafLastTickIndex"
                 hide-details
-              />
+              >
+              </v-range-slider>
             </td>
             <td>
               <v-row class="px-4 justify-center">
