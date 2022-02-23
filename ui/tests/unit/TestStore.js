@@ -9,6 +9,7 @@ import {
   DEFAULT_FIRST_HAPLOGROUP,
   DEFAULT_HMT_VAR_URL_PREFIX,
   DEFAULT_IGV_HOST,
+  DEFAULT_HAS_MATERNAL_VARIANTS,
 } from '../../src/shared/constants'
 import { getters as realGetters } from '@/store'
 import defaultSettings from '../fixtures/defaultSettings.json'
@@ -70,6 +71,10 @@ export const getters = {
 
   getFirstFullHaplogroup: () => {
     return DEFAULT_FIRST_HAPLOGROUP
+  },
+
+  hasMaternalVariants: () => {
+    return DEFAULT_HAS_MATERNAL_VARIANTS
   },
 
   getHmtVarUrlPrefix: () => {

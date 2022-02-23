@@ -152,3 +152,11 @@ td.expandedVariant {
 #geneHeader .v-chip {
   padding: 0px 4px;
 }
+
+div#app.hideMaternal th:nth-child(7) {
+  display: none;
+}
+
+div#app.hideMaternal td:nth-child(7) {
+  display: none;
+}

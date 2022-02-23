@@ -777,6 +777,11 @@ export default {
   mounted() {
     this.toggleVariantById(this.variantId)
 
+    // Hide maternal column if there are no maternal variants
+    if (!this.hasMaternalVariants) {
+      document.getElementById('app')?.classList?.toggle('hideMaternal')
+    }
+
     if (this?.allSavedSearches) {
       const found = this.allSavedSearches.find(
         ss => ss && ss.name === 'Current'
@@ -900,6 +905,7 @@ export default {
       'getHaplogroups',
       'getFirstHaplogroup',
       'getFirstFullHaplogroup',
+      'hasMaternalVariants',
     ]),
     tableFilteredVariants() {
       return Object.values(this.filteredVariants)
@@ -1311,11 +1317,15 @@ export default {
     // TODO: Where is this filter getting the value from?
     // Check that it is filtering on the Maternal Variant
     mafFilter: function(value) {
-      console.log('Maf filter: ', value)
-      let lower = this.mafTicks[this.mafIndexRange[0]]
-      let upper = this.mafTicks[this.mafIndexRange[1]]
+      // console.log('Maf filter: ', value)
+      if (value) {
+        let lower = this.mafTicks[this.mafIndexRange[0]]
+        let upper = this.mafTicks[this.mafIndexRange[1]]
 
-      return filters.rangeTextFilter(`${lower}-${upper}`, value.heteroplasmy)
+        return filters.rangeTextFilter(`${lower}-${upper}`, value.heteroplasmy)
+      } else {
+        return true
+      }
     },
 
     gbFreqFilter: function(value) {
