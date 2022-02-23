@@ -1004,7 +1004,7 @@ export default {
           filter: (value, search, item) => this.curationFilter(item),
         },
         {
-          text: 'Heteroplasmy of Sample',
+          text: 'Heteroplasmy of Sample\n',
           tooltip: 'Heteroplasmy freq of variant in sample',
           value: 'genotypes[0].AF',
           width: '80',
@@ -1018,7 +1018,7 @@ export default {
           filter: this.mafFilter,
         },
         {
-          text: 'Genbank Freq',
+          text: 'Genbank Frequency\n',
           // tooltip: 'Genbank % tooltip',
           value: 'gbFreq',
           width: '80',
@@ -1057,7 +1057,7 @@ export default {
           width: '120',
         },
         {
-          text: 'Read Depth',
+          text: 'Read Depth\n',
           value: 'DP',
           sortable: true,
           width: '60',
