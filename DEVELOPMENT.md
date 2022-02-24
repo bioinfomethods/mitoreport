@@ -5,8 +5,6 @@ This document provides setup instructions for developing MitoReport.
 ## Prerequisites
 
 * Java 8 installed, see [SdkMan](https://sdkman.io/) for managing different Java versions.
-* Java 8 AdoptOpenJDK "Hotspot" is recommended, e.g. 8.0.275.hs-adpt. j9 is too strict to allow the deprecated functions
-  used in the gngs submodule.
 
 ## TL;DR For Devs
 
@@ -30,11 +28,8 @@ java -jar "$PROJECT_DIR/build/libs/mitoreport-$APP_ARCHIVE_VERSION-all.jar" mito
 
 ```bash
 # Git clone repo and cd into it then set PROJECT_DIR env
+# Use git clone --recursive <repo> to recursively fetch all Git submodules
 PROJECT_DIR=$(pwd)
-
-# Clone submodules
-git submodule init
-git submodule update --init --recursive
 
 # Run tests, linting and coverage.  Detailed coverage reports can be found in `$PROJECT_DIR/ui/coverage/`
 ./gradlew check

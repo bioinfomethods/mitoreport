@@ -73,6 +73,8 @@ java -jar mitoreport-1.0.0-beta-1-all.jar mito-report \
     resources/test-sample/mitoreport-test-sample.bam ./resources/controls/*.bam
 ```
 
+Note: Use `--maternal-vcf` option to show any maternal variants within report.
+
 A new directory `mitoreport-MITOREPORT-TEST-SAMPLE` should now be created.  Open `index.html` to run this interactive
 report. For example, on MacOS use:
 
