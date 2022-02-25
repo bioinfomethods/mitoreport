@@ -348,7 +348,7 @@
               </v-range-slider>
             </td>
             <!-- Maternal Variant Header -->
-            <td>
+            <td v-if="hasMaternalVariants">
               <v-row class="px-4 justify-space-between">
                 <span class="grey--text text--darken-1">{{
                   mafTicks[mafIndexRange[0]]
@@ -778,11 +778,6 @@ export default {
   mounted() {
     this.toggleVariantById(this.variantId)
 
-    // Hide maternal column if there are no maternal variants
-    if (!this.hasMaternalVariants) {
-      document.getElementById('app')?.classList?.toggle('hideMaternal')
-    }
-
     if (this?.allSavedSearches) {
       const found = this.allSavedSearches.find(
         ss => ss && ss.name === 'Current'
@@ -965,7 +960,7 @@ export default {
       return COLORS
     },
     headers() {
-      return [
+      const allHeaders = [
         {
           text: 'HGVS.g',
           value: 'pos',
@@ -1063,6 +1058,9 @@ export default {
           width: '60',
         },
       ]
+      const withoutMaternal = allHeaders.filter(h => h.value !== 'maternal')
+
+      return this.hasMaternalVariants ? allHeaders : withoutMaternal
     },
 
     types() {
@@ -1070,11 +1068,6 @@ export default {
         ...new Set(Object.values(this.filteredVariants).map(row => row.type)),
       ]
     },
-
-    // TODO: #31
-    // hapOptions() {
-    //   return [...new Set(['true', 'false'])]
-    // },
 
     hapRatios() {
       return Object.values(this.filteredVariants).reduce((map, variant) => {
