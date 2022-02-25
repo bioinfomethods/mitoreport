@@ -25,6 +25,7 @@ pnpm-debug.log*
 .classpath
 .project
 .settings
+.run
 
 build
 out
