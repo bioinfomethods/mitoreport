@@ -183,6 +183,24 @@
                     >+{{ filterConfig.selectedGenes.length - 4 }} more</span
                   >
                 </template>
+
+                <template v-slot:item="{ item, attrs, on }">
+                  <v-list-item
+                    v-on="on"
+                    v-bind="attrs"
+                    #default="{ active }"
+                    style="min-width: 180px"
+                  >
+                    <v-list-item-action>
+                      <v-checkbox :input-value="active"></v-checkbox>
+                    </v-list-item-action>
+                    <v-list-item-content>
+                      <v-list-item-title>
+                        <span>{{ item }}</span>
+                      </v-list-item-title>
+                    </v-list-item-content>
+                  </v-list-item>
+                </template>
               </v-select>
 
               <v-select
