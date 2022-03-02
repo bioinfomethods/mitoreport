@@ -183,6 +183,24 @@
                     >+{{ filterConfig.selectedGenes.length - 4 }} more</span
                   >
                 </template>
+
+                <template v-slot:item="{ item, attrs, on }">
+                  <v-list-item
+                    v-on="on"
+                    v-bind="attrs"
+                    #default="{ active }"
+                    style="min-width: 180px"
+                  >
+                    <v-list-item-action>
+                      <v-checkbox :input-value="active"></v-checkbox>
+                    </v-list-item-action>
+                    <v-list-item-content>
+                      <v-list-item-title>
+                        <span>{{ item }}</span>
+                      </v-list-item-title>
+                    </v-list-item-content>
+                  </v-list-item>
+                </template>
               </v-select>
 
               <v-select
@@ -999,7 +1017,7 @@ export default {
           filter: (value, search, item) => this.curationFilter(item),
         },
         {
-          text: 'Heteroplasmy of Sample',
+          text: 'Heteroplasmy of Sample\n',
           tooltip: 'Heteroplasmy freq of variant in sample',
           value: 'genotypes[0].AF',
           width: '80',
@@ -1013,7 +1031,7 @@ export default {
           filter: this.mafFilter,
         },
         {
-          text: 'Genbank Freq',
+          text: 'Genbank Frequency\n',
           // tooltip: 'Genbank % tooltip',
           value: 'gbFreq',
           width: '80',
@@ -1052,7 +1070,7 @@ export default {
           width: '120',
         },
         {
-          text: 'Read Depth',
+          text: 'Read Depth\n',
           value: 'DP',
           sortable: true,
           width: '60',
