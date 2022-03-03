@@ -29,6 +29,7 @@ pnpm-debug.log*
 
 build
 out
+controls
 mitoreport-*
 tmp
 tmp2
