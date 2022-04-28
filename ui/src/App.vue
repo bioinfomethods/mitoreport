@@ -77,6 +77,7 @@ export default {
     console.info(`MitoReport version=${process.env.VUE_APP_VERSION}`)
     await this.$store.dispatch('fetchData')
     await this.$store.dispatch('saveSettings')
+    document.title = this.sampleId || 'MitoReport'
   },
 
   data: () => {
