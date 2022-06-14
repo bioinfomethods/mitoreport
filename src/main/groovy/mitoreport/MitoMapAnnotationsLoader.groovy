@@ -40,8 +40,8 @@ class MitoMapAnnotationsLoader {
     ])
 
     String mitoMapHost = 'https://mitomap.org'
-    String codingsPagePath = '/foswiki/bin/view/MITOMAP/PolymorphismsCoding'
-    String controlsPagePath = '/foswiki/bin/view/MITOMAP/PolymorphismsControl'
+    String codingsPagePath = '/foswiki/bin/view/MITOMAP/VariantsCoding'
+    String controlsPagePath = '/foswiki/bin/view/MITOMAP/VariantsControl'
     String diseasesPagePath = '/cgi-bin/disease.cgi'
     String mitoTipsPagePath = '/downloads/mitotip_scores.txt'
 
@@ -49,8 +49,8 @@ class MitoMapAnnotationsLoader {
         if (Files.notExists(outputPath) || outputPath.toFile().text.empty) {
             String codingsHtml = downloadPage("$mitoMapHost$codingsPagePath")
             String controlsHtml = downloadPage("$mitoMapHost$controlsPagePath")
-            List<MitoMapAnnotation> codings = parsePolymorphismsHtmlPage(codingsHtml, 'CODING')
-            List<MitoMapAnnotation> controls = parsePolymorphismsHtmlPage(controlsHtml, 'CONTROL')
+            List<MitoMapAnnotation> codings = parseVariantsHtmlPage(codingsHtml, 'CODING')
+            List<MitoMapAnnotation> controls = parseVariantsHtmlPage(controlsHtml, 'CONTROL')
             List<MitoMapAnnotation> allAnnotations = codings + controls
 
             String diseasesTsv = downloadPage("$mitoMapHost$diseasesPagePath")
@@ -103,7 +103,7 @@ class MitoMapAnnotationsLoader {
         }
     }
 
-    private List<MitoMapAnnotation> parsePolymorphismsHtmlPage(String htmlText, String regionType) {
+    private List<MitoMapAnnotation> parseVariantsHtmlPage(String htmlText, String regionType) {
         Pattern matchData = Pattern.compile(/"data":(\[\s*?\[.*?\]\])/, Pattern.DOTALL)
         Pattern matchColumns = Pattern.compile(/"columns": (.*?}])/, Pattern.DOTALL)
         def dataMatcher = htmlText =~ matchData
