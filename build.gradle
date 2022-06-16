@@ -7,22 +7,22 @@ plugins {
 }
 
 group "mitoreport"
-defaultTasks 'clean', 'build'
+defaultTasks 'clean', 'installShadowDist'
 
-def gitDescribeItems = []
-def gitDescProc = "git describe --tags".execute()
+def gitDescribeItems = ['0.1.0', '1', 'gfffffff']
+def gitDescProc = "git describe --tags --always --long".execute()
 gitDescProc.waitFor()
-if (gitDescProc.exitValue()) {
-    gitDescribeItems = ['1.0.0', '1', 'gfffffff']
-} else {
+def gitExitValue = gitDescProc.exitValue()
+if (!gitExitValue && !(System.env.CI)) {
     gitDescribeItems = gitDescProc.text?.trim()?.split(/-/)
 }
 
 project.ext {
-    appArchiveVersion = "1.0.0-beta-2"
-    appVersion = "$appArchiveVersion-${gitDescribeItems[1]}"
+    appArchiveVersion = gitDescribeItems[0]
+    appVersion = gitDescribeItems[1]
+    appVersionLong = gitDescribeItems.join('-')
     buildTimestamp = OffsetDateTime.now().toString()
-    buildCommit = gitDescribeItems[2]
+    buildCommit = gitDescribeItems[-1]
 }
 
 repositories {
@@ -100,11 +100,11 @@ tasks.withType(GroovyCompile) {
 jar {
     manifest {
         attributes(
-                'Name': 'MitoReport',
-                'Main-Class': mainClassName,
-                'Implementation-Title': 'MitoReport',
-                'Implementation-Version': appVersion,
-                'Implementation-Vendor': 'MCRI',
+                'Name': 'mitoreport',
+                'Main-Class': application.mainClass,
+                'Implementation-Title': 'mitoreport',
+                'Implementation-Version': appVersionLong,
+                'Implementation-Vendor': 'MCRI Bioinfomethods Groups',
                 'Build-Timestamp': buildTimestamp,
                 'Build-Commit': buildCommit,
         )
@@ -139,6 +139,11 @@ task copyUiBuildToMitoOut(type: Copy, dependsOn: ['cleanMitoOut', ':ui:runBuild'
 
     from project(':ui').getTasksByName('runBuild', false).first().outputs
     into mitoOut
+}
+
+application {
+    mainClass.set("mitoreport.MitoCli")
+    applicationName = 'mitoreport'
 }
 
 shadowJar.configure {

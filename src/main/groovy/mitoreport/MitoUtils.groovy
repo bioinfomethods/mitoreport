@@ -2,6 +2,9 @@ package mitoreport
 
 import gngs.Variant
 
+import java.util.jar.Attributes
+import java.util.jar.Manifest
+
 class MitoUtils {
 
     static Map<String, String> getCompactVariantRepresentation(Variant variant) {
@@ -32,6 +35,17 @@ class MitoUtils {
             return null
         } else {
             alt == 'del' ? "m.${pos}${ref}del" : "m.${pos}${ref}>${alt}"
+        }
+    }
+
+    static Map<String, String> getManifestInfo(Optional<URL> maybeManifestUrl) {
+        if (maybeManifestUrl.isPresent()) {
+            Manifest manifest = new Manifest(maybeManifestUrl.get().openStream())
+            Attributes manifestAttribtues = manifest.getMainAttributes()
+
+            return Collections.unmodifiableMap(manifestAttribtues.collectEntries { k, v -> [(k.name): v] } as Map<String, String>)
+        } else {
+            return Collections.emptyMap()
         }
     }
 }

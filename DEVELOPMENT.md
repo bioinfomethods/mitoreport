@@ -12,7 +12,7 @@ This document provides setup instructions for developing MitoReport.
 PROJECT_DIR=$(pwd)
 APP_ARCHIVE_VERSION=$(git describe --abbrev=0 --always)
 
-./gradlew
+./gradlew build
 
 java -jar "$PROJECT_DIR/build/libs/mitoreport-$APP_ARCHIVE_VERSION-all.jar" mito-report \
   -d \
@@ -34,11 +34,11 @@ PROJECT_DIR=$(pwd)
 # Run tests, linting and coverage.  Detailed coverage reports can be found in `$PROJECT_DIR/ui/coverage/`
 ./gradlew check
 
-# Create project output artifacts in `$PROJECT_DIR/build/libs/`
-./gradlew assemble
+# Create project output artifacts in `$PROJECT_DIR/build/libs/` and binaries in `$PROJECT_DIR/build/install/
+./gradlew installShadowDist
 
 # Run build, i.e. everything
-./gradlew
+./gradlew build
 ```
 
 ## UI Development

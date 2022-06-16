@@ -23,11 +23,10 @@ import java.nio.file.*
 import java.nio.file.attribute.BasicFileAttributes
 import java.time.ZoneOffset
 import java.time.format.DateTimeFormatter
-import java.util.jar.Attributes
-import java.util.jar.Manifest
 import java.util.stream.Collectors
 
 import static java.time.LocalDateTime.parse as ld
+import static mitoreport.MitoUtils.getManifestInfo
 
 @Slf4j
 @Command(name = 'mito-report', description = 'Mito Report', mixinStandardHelpOptions = true)
@@ -109,7 +108,8 @@ class MitoReportCommand implements Runnable {
 
         def maternalVariantsResults = createMaternalVariantsResults(mitoReportPathName, maternal)
 
-        Map<String, Object> manifestInfo = getManifestInfo()
+        Optional<URL> maybeManifestUrl = resourceLoader.getResource('classpath:META-INF/MANIFEST.MF')
+        Map<String, Object> manifestInfo = getManifestInfo(maybeManifestUrl)
         BasicFileAttributes gnomadVcfFileAttrs = Files.readAttributes(gnomADVCF, BasicFileAttributes)
 
         Map<String, Object> metadata = [
@@ -407,17 +407,5 @@ class MitoReportCommand implements Runnable {
                 .toString()
 
         return result
-    }
-
-    private Map<String, String> getManifestInfo() {
-        Optional<URL> maybeManifestUrl = resourceLoader.getResource('classpath:META-INF/MANIFEST.MF')
-        if (maybeManifestUrl.isPresent()) {
-            Manifest manifest = new Manifest(maybeManifestUrl.get().openStream())
-            Attributes manifestAttribtues = manifest.getMainAttributes()
-
-            return Collections.unmodifiableMap(manifestAttribtues.collectEntries { k, v -> [(k.name): v] } as Map<String, String>)
-        } else {
-            return Collections.emptyMap()
-        }
     }
 }
