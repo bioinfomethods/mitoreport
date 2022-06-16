@@ -10,7 +10,7 @@ class MitoMapAnnotationTest extends Specification {
     @Unroll
     def 'Given position=#positionStr, alleleChange=#alleleChange then ref=#expRef, alt=#expAlt, compactAllele=#expCompactAllele'() {
         given:
-        underTest = new MitoMapAnnotation(positionStr: positionStr, alleleChange: alleleChange)
+        underTest = new MitoMapAnnotation(positionStr: positionStr, alleleChange: alleleChange, alleleStr: alleleStr)
 
         expect:
         underTest.refAllele == expRef
@@ -19,18 +19,30 @@ class MitoMapAnnotationTest extends Specification {
         underTest.hgvs == expHgvs
 
         where:
-        positionStr | alleleChange | expRef | expAlt | expCompactAllele | expHgvs
-        8888        | null         | null   | null   | null             | null
-        8888        | ''           | null   | null   | null             | null
-        null        | 'T-C'        | 'T'    | 'C'    | null             | null
-        ''          | 'T-C'        | 'T'    | 'C'    | null             | null
-        8888        | 'A-G'        | 'A'    | 'G'    | 'A8888G'         | 'm.8888A>G'
-        8888        | 'T-TT'       | 'T'    | 'TT'   | 'T8888TT'        | 'm.8888T>TT'
-        8888        | 'GAA-G'      | 'GAA'  | 'G'    | 'GAA8888G'       | 'm.8888GAA>G'
-        8888        | 'A-del'      | 'A'    | 'del'  | 'A8888del'       | 'm.8888Adel'
-        8888        | 'A-'         | 'A'    | null   | 'A8888'          | null
-        8888        | 'B-D'        | null   | null   | null             | null
-        8888        | '-A'         | null   | null   | null             | null
+        positionStr | alleleChange | alleleStr  | expRef | expAlt | expCompactAllele | expHgvs
+        8888        | null         | null       | null   | null   | null             | null
+        8888        | ''           | null       | null   | null   | null             | null
+        null        | 'T-C'        | null       | 'T'    | 'C'    | null             | null
+        ''          | 'T-C'        | null       | 'T'    | 'C'    | null             | null
+        8888        | 'A-G'        | null       | 'A'    | 'G'    | 'A8888G'         | 'm.8888A>G'
+        8888        | 'T-TT'       | null       | 'T'    | 'TT'   | 'T8888TT'        | 'm.8888T>TT'
+        8888        | 'GAA-G'      | null       | 'GAA'  | 'G'    | 'GAA8888G'       | 'm.8888GAA>G'
+        8888        | 'A-del'      | null       | 'A'    | 'del'  | 'A8888del'       | 'm.8888Adel'
+        8888        | 'A-'         | null       | 'A'    | null   | 'A8888'          | null
+        8888        | 'B-D'        | null       | null   | null   | null             | null
+        8888        | '-A'         | null       | null   | null   | null             | null
+        8888        | null         | ''         | null   | null   | null             | null
+        8888        | null         | 'TC'       | null   | null   | null             | null
+        null        | null         | 'T8888C'   | 'T'    | 'C'    | null             | null
+        ''          | null         | 'T8888C'   | 'T'    | 'C'    | null             | null
+        8888        | null         | 'A8888G'   | 'A'    | 'G'    | 'A8888G'         | 'm.8888A>G'
+        8888        | null         | 'A8888GG'  | 'A'    | 'GG'   | 'A8888GG'        | 'm.8888A>GG'
+        8888        | null         | 'GAA8888G' | 'GAA'  | 'G'    | 'GAA8888G'       | 'm.8888GAA>G'
+        8888        | null         | 'A8888del' | 'A'    | 'del'  | 'A8888del'       | 'm.8888Adel'
+        8888        | null         | 'A8888'    | 'A'    | null   | 'A8888'          | null
+        8888        | null         | 'B8888D'   | null   | null   | null             | null
+        8888        | null         | '8888A'    | null   | null   | null             | null
+        8888        | null         | 'A3G'      | 'A'    | 'G'    | 'A8888G'         | 'm.8888A>G'  // position in alleleStr is ignored
     }
 
     @Unroll

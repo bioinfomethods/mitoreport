@@ -80,7 +80,11 @@ dependencies {
     implementation "commons-io:commons-io:$commonsIoVersion"
 }
 
-test.classpath += configurations.developmentOnly
+test {
+    classpath += configurations.developmentOnly
+    minHeapSize = '128m'
+    maxHeapSize = '2048m'
+}
 
 mainClassName = "mitoreport.MitoCli"
 

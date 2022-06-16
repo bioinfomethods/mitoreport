@@ -37,7 +37,7 @@ mkdir -p resources
 java -jar mitoreport-1.0.0-beta-1-all.jar mito-map-download \
   --output resources/mito_map_annotations.json
 ```
-
+java -jar build/libs/mitoreport-1.0.0-beta-2-all.jar mito-map-download -o /Users/tommy.li/Development/mcri/mitoreport/test_fixtures/mito_map_annotations_20220614.json
 ## CouchDB
 
 ```bash

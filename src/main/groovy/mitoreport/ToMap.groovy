@@ -4,7 +4,7 @@ trait ToMap {
 
     def toMap() {
         def result = [:]
-        def properties = this.metaClass.getProperties().findAll { it.name != "class" }
+        def properties = this.metaClass.getProperties().findAll { it.name != "class" && it.type != Closure }
 
         properties.each {
             def propValue = this.metaClass.getProperty(this, it.name)

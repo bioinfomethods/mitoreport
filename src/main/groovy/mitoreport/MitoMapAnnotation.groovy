@@ -1,5 +1,6 @@
 package mitoreport
 
+import groovy.transform.EqualsAndHashCode
 import groovy.transform.MapConstructor
 import groovy.util.logging.Slf4j
 
@@ -7,6 +8,7 @@ import java.util.regex.Matcher
 import java.util.regex.Pattern
 
 @Slf4j
+@EqualsAndHashCode(includes = 'positionStr, alleleChange, alleleStr')
 @MapConstructor
 class MitoMapAnnotation implements ToMap {
 
@@ -14,15 +16,16 @@ class MitoMapAnnotation implements ToMap {
 
     private static final Pattern HTML_ANCHOR_PATTERN = Pattern.compile(/<a.*?href='(.*?)'.*?>(\d+?\.?\d*?%*)<\/a>/)
     private static final Pattern HTML_TEXT_ANCHOR_PATTERN = Pattern.compile(/<a.*?href=['"](.*?)["'].*?>(.*?)<\/a>/)
-//    private static final Pattern CONTROL_GB_FREQ_PATTERN = Pattern.compile(/(\d+\.\d*%)<br>\((\d+\.\d*%)\)/)
     private static final Pattern CONTROL_GB_FREQ_PATTERN = Pattern.compile(/\(.*?(\d+\.\d*?)%.*?\)/)
     private static final Pattern ALLELE_CHANGE_PATTERN = Pattern.compile(/([ATCGU]+?)-([ATCGU|del]*)/)
+    private static final Pattern ALLELE_STR_PATTERN = Pattern.compile(/([ATCGU]+?)(\d+)([ATCGU|del]*)/)
 
     String mitoMapHost
     String regionType = 'CODING'
     String positionStr
     String locusAnchor
     String alleleChange
+    String alleleStr
     String codonNumber
     String codonPosition
     String aminoAcidChange
@@ -42,22 +45,32 @@ class MitoMapAnnotation implements ToMap {
         positionStr && positionStr.isLong() ? Long.valueOf(positionStr) : 0L
     }
 
-    String getRefAllele() {
-        Matcher alleleChangeMatcher = alleleChange =~ ALLELE_CHANGE_PATTERN
-        if (!alleleChangeMatcher.find()) {
-            return null
-        } else {
-            return alleleChangeMatcher[0][1]
+    @Lazy
+    private def parsedAllele = {
+        if (alleleChange) {
+            Matcher alleleChangeMatcher = alleleChange =~ ALLELE_CHANGE_PATTERN
+            if (alleleChangeMatcher.find()) {
+                String alt = alleleChangeMatcher[0][2] == '' ? null : alleleChangeMatcher[0][2]
+                return ['ref': alleleChangeMatcher[0][1], 'alt': alt]
+            }
         }
+        if (alleleStr) {
+            Matcher alleleStrMatcher = alleleStr =~ ALLELE_STR_PATTERN
+            if (alleleStrMatcher.find()) {
+                String alt = alleleStrMatcher[0][3] == '' ? null : alleleStrMatcher[0][3]
+                return ['ref': alleleStrMatcher[0][1], 'alt': alt]
+            }
+        }
+
+        return [:]
+    }
+
+    String getRefAllele() {
+        return parsedAllele().get('ref')
     }
 
     String getAltAllele() {
-        Matcher alleleChangeMatcher = alleleChange =~ ALLELE_CHANGE_PATTERN
-        if (!alleleChangeMatcher.find() || alleleChangeMatcher[0][2] == '') {
-            return null
-        } else {
-            return alleleChangeMatcher[0][2]
-        }
+        return parsedAllele().get('alt')
     }
 
     String getCompactAllele() {
@@ -95,7 +108,7 @@ class MitoMapAnnotation implements ToMap {
                     return numberStr && numberStr.isBigDecimal() ? new BigDecimal(numberStr) : 0.0
                 }
             }
-        } else if (regionType == 'CONTROL') {
+        } else if (regionType in ['CONTROL', 'RNA_MUTATIONS']) {
             Matcher controlMatcher = gbFreqStr =~ CONTROL_GB_FREQ_PATTERN
             if (!controlMatcher.find()) {
                 return 0.0

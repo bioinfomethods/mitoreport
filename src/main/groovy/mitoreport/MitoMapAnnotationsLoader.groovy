@@ -1,12 +1,12 @@
 package mitoreport
 
+import groovy.json.JsonGenerator
 import groovy.json.JsonOutput
 import groovy.json.JsonSlurper
 import groovy.transform.MapConstructor
 import groovy.transform.TupleConstructor
 import groovy.util.logging.Slf4j
 import groovyx.net.http.HttpBuilder
-import static groovyx.net.http.util.SslUtils.ignoreSslIssues
 
 import javax.inject.Singleton
 import java.math.RoundingMode
@@ -17,6 +17,7 @@ import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import java.util.regex.Pattern
 
+import static groovyx.net.http.util.SslUtils.ignoreSslIssues
 import static java.nio.file.StandardCopyOption.REPLACE_EXISTING
 
 @Slf4j
@@ -26,22 +27,28 @@ import static java.nio.file.StandardCopyOption.REPLACE_EXISTING
 class MitoMapAnnotationsLoader {
 
     static final Map<String, String> TITLE_TO_PROPERTY_NAMES = Collections.unmodifiableMap([
-            'Position'                                                                                               : 'positionStr',
-            'Locus'                                                                                                  : 'locusAnchor',
-            'Nucleotide Change'                                                                                      : 'alleleChange',
-            'Codon Number'                                                                                           : 'codonNumber',
-            'Codon Position'                                                                                         : 'codonPosition',
-            'Amino Acid Change'                                                                                      : 'aminoAcidChange',
-            "GB Freq<span class='mark'>&Dagger;</span>"                                                              : 'gbFreqStr',
-            "GB Freq<br><span style='white-space:nowrap;'>FL&nbsp;(CR)<span class='mark'>&ast;&Dagger;</span></span>": 'gbFreqStr',
-            'GB Seqs'                                                                                                : 'gbSeqsAnchor',
-            "GB Seqs<br><span style='white-space:nowrap;'>total&nbsp;(FL/CR)<span class='mark'>&ast;</span></span>"  : 'gbSeqsAnchor',
-            'Curated References'                                                                                     : 'curatedRefsAnchor',
+            'Position'                                                                                                                : 'positionStr',
+            'Locus'                                                                                                                   : 'locusAnchor',
+            'Nucleotide Change'                                                                                                       : 'alleleChange',
+            'Allele'                                                                                                                  : 'alleleStr',
+            'Codon Number'                                                                                                            : 'codonNumber',
+            'Codon Position'                                                                                                          : 'codonPosition',
+            'Amino Acid Change'                                                                                                       : 'aminoAcidChange',
+            "GB Freq<span class='mark'>&Dagger;</span>"                                                                               : 'gbFreqStr',
+            "GB Freq<br><span style='white-space:nowrap;'>FL&nbsp;(CR)<span class='mark'>&ast;&Dagger;</span></span>"                 : 'gbFreqStr',
+            "GB&nbsp;Freq&nbsp;&nbsp;<br><span style='white-space:nowrap;'>FL&nbsp;(CR)<span class='mark'>&ast;&Dagger;</span></span>": 'gbFreqStr',
+            'GB Seqs'                                                                                                                 : 'gbSeqsAnchor',
+            "GB Seqs<br><span style='white-space:nowrap;'>total&nbsp;(FL/CR)<span class='mark'>&ast;</span></span>"                   : 'gbSeqsAnchor',
+            "GB&nbsp;Seqs&nbsp;<br><span style='white-space:nowrap;'>FL&nbsp;(CR)<span class='mark'>&ast;</span></span>"              : 'gbSeqsAnchor',
+            'Curated References'                                                                                                      : 'curatedRefsAnchor',
+            'References'                                                                                                              : 'curatedRefsAnchor',
+            'Disease'                                                                                                                 : 'disease',
     ])
 
     String mitoMapHost = 'https://mitomap.org'
     String codingsPagePath = '/foswiki/bin/view/MITOMAP/VariantsCoding'
     String controlsPagePath = '/foswiki/bin/view/MITOMAP/VariantsControl'
+    String rnaMutationsPagePath = '/foswiki/bin/view/MITOMAP/MutationsRNA'
     String diseasesPagePath = '/cgi-bin/disease.cgi'
     String mitoTipsPagePath = '/downloads/mitotip_scores.txt'
 
@@ -49,9 +56,11 @@ class MitoMapAnnotationsLoader {
         if (Files.notExists(outputPath) || outputPath.toFile().text.empty) {
             String codingsHtml = downloadPage("$mitoMapHost$codingsPagePath")
             String controlsHtml = downloadPage("$mitoMapHost$controlsPagePath")
+            String rnaMutationsHtml = downloadPage("$mitoMapHost$rnaMutationsPagePath")
             List<MitoMapAnnotation> codings = parseVariantsHtmlPage(codingsHtml, 'CODING')
             List<MitoMapAnnotation> controls = parseVariantsHtmlPage(controlsHtml, 'CONTROL')
-            List<MitoMapAnnotation> allAnnotations = codings + controls
+            List<MitoMapAnnotation> rnaMutations = parseVariantsHtmlPage(rnaMutationsHtml, 'RNA_MUTATIONS')
+            Set<MitoMapAnnotation> allAnnotations = new HashSet<>(rnaMutations + codings + controls)
 
             String diseasesTsv = downloadPage("$mitoMapHost$diseasesPagePath")
             Map<String, Object> diseasesAnnotations = diseasesTsv.split(/\n/)
@@ -96,10 +105,13 @@ class MitoMapAnnotationsLoader {
                 annotation.mitoTipFreqPct = mitoTipAnnotation.getOrDefault('mitoTipFreqPct', null)
             }
 
-            String json = JsonOutput.prettyPrint(JsonOutput.toJson(allAnnotations))
+            JsonGenerator generator = new JsonGenerator.Options()
+                    .excludeFieldsByName('parsedAllele')
+                    .build()
+            String json = JsonOutput.prettyPrint(generator.toJson(allAnnotations))
             writeToFile(outputPath, json)
         } else {
-            log.info("Skipping download, MitoMap Polymorphisms already exists at ${outputPath.toString()}")
+            log.info("Skipping download, MitoMap Variants already exists at ${outputPath.toString()}")
         }
     }
 
@@ -112,7 +124,8 @@ class MitoMapAnnotationsLoader {
         String columnsJson = columnsMatcher[0][1]
 
         def data = new JsonSlurper().parse(dataJson.bytes)
-        def columns = new JsonSlurper().parse(columnsJson.bytes)
+        String singleQuoteFixedColumns = new String(columnsJson.bytes).replaceAll(/\\'/, '\'')
+        def columns = new JsonSlurper().parse(singleQuoteFixedColumns.bytes)
 
         List<MitoMapAnnotation> result = data.collect { def row ->
             Map<String, String> transformedRow = ['mitoMapHost': mitoMapHost, 'regionType': regionType]
@@ -120,11 +133,12 @@ class MitoMapAnnotationsLoader {
                 String title = column.title?.trim() ?: ''
                 String propertyName = TITLE_TO_PROPERTY_NAMES.get(title)
                 String propertyValue = row[index]
-                transformedRow["$propertyName".toString()] = propertyValue
+                if (propertyName) {
+                    transformedRow["$propertyName".toString()] = propertyValue?.trim()
+                }
             }
-
             new MitoMapAnnotation(transformedRow)
-        }
+        }.findAll()
 
         return result
     }
@@ -148,7 +162,7 @@ class MitoMapAnnotationsLoader {
 
     static String downloadPage(String pageUrl) {
         log.info("Downloading MitoMap page from $pageUrl")
-        
+
         HttpBuilder client = HttpBuilder.configure {
             request.uri = pageUrl
             request.headers['User-Agent'] = 'https://www.mcri.edu.au'

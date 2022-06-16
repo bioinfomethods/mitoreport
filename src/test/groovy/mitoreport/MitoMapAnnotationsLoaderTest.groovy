@@ -22,12 +22,14 @@ class MitoMapAnnotationsLoaderTest extends Specification {
     def 'downloadAnnotations() saves annotations to JSON file correctly'() {
         given: 'Downloaded annotations from MitoMap'
         underTest = GroovySpy(global: true)
-        String codingsHtml = resourceLoader.getResourceAsStream('classpath:mito_map_polymorphisms_codings_small.html').get().text
-        String controlsHtml = resourceLoader.getResourceAsStream('classpath:mito_map_polymorphisms_controls_small.html').get().text
+        String codingsHtml = resourceLoader.getResourceAsStream('classpath:mito_map_variants_codings_small.html').get().text
+        String controlsHtml = resourceLoader.getResourceAsStream('classpath:mito_map_variants_controls_small.html').get().text
+        String rnaMutationsHtml = resourceLoader.getResourceAsStream('classpath:mito_map_variants_rna-mutations_small.html').get().text
         String diseasesTsv = resourceLoader.getResourceAsStream('classpath:mito_map_diseases_small.tsv').get().text
         String mitoTipsTsv = resourceLoader.getResourceAsStream('classpath:mitotip_scores_small.txt').get().text
-        1 * MitoMapAnnotationsLoader.downloadPage('https://mitomap.org/foswiki/bin/view/MITOMAP/PolymorphismsCoding') >> codingsHtml
-        1 * MitoMapAnnotationsLoader.downloadPage('https://mitomap.org/foswiki/bin/view/MITOMAP/PolymorphismsControl') >> controlsHtml
+        1 * MitoMapAnnotationsLoader.downloadPage('https://mitomap.org/foswiki/bin/view/MITOMAP/VariantsCoding') >> codingsHtml
+        1 * MitoMapAnnotationsLoader.downloadPage('https://mitomap.org/foswiki/bin/view/MITOMAP/VariantsControl') >> controlsHtml
+        1 * MitoMapAnnotationsLoader.downloadPage('https://mitomap.org/foswiki/bin/view/MITOMAP/MutationsRNA') >> rnaMutationsHtml
         1 * MitoMapAnnotationsLoader.downloadPage('https://mitomap.org/cgi-bin/disease.cgi') >> diseasesTsv
         1 * MitoMapAnnotationsLoader.downloadPage('https://mitomap.org/downloads/mitotip_scores.txt') >> mitoTipsTsv
 
@@ -49,7 +51,7 @@ class MitoMapAnnotationsLoaderTest extends Specification {
         Map<String, MitoMapAnnotation> actualResult = MitoMapAnnotationsLoader.getAnnotations(annotationsJsonFile)
 
         then:
-        actualResult.size() == 4
+        actualResult.size() == 6
 
         MitoMapAnnotation actualResult1 = actualResult.get('G577A')
         actualResult1.mitoMapHost == 'https://mitomap.org'
@@ -114,6 +116,20 @@ class MitoMapAnnotationsLoaderTest extends Specification {
         actualResult4.mitoTipScorePercentile == null
         actualResult4.mitoTipCount == null
         actualResult4.mitoTipFreq == null
+
+        MitoMapAnnotation actualResult5 = actualResult.get('A3243G')
+        actualResult5.mitoMapHost == 'https://mitomap.org'
+        actualResult5.regionType == 'RNA_MUTATIONS'
+        actualResult5.positionStr == '3243'
+        actualResult5.alleleChange == null
+        actualResult5.alleleStr == 'A3243G'
+
+        MitoMapAnnotation actualResult6 = actualResult.get('T16032TTCTCTGTTCTTTCAT')
+        actualResult6.mitoMapHost == 'https://mitomap.org'
+        actualResult6.regionType == 'RNA_MUTATIONS'
+        actualResult6.positionStr == '16032'
+        actualResult6.alleleChange == null
+        actualResult6.alleleStr == 'T16032TTCTCTGTTCTTTCAT'
     }
 
     def 'parseMitoTipsTsv() returns correct results'() {
