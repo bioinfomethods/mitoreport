@@ -20,8 +20,8 @@ jobs:
       - name: Build with Gradle
         uses: gradle/gradle-build-action@v1.3.3
         with:
-          gradle-version: 6.9
+          gradle-version: 7.4.2
           wrapper-cache-enabled: true
           dependencies-cache-enabled: true
           configuration-cache-enabled: true
-          arguments: clean build --build-cache --info
+          arguments: clean build installShadowDist --build-cache --info
