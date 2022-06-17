@@ -57,7 +57,7 @@ dependencies {
     testImplementation "io.micronaut:micronaut-inject-groovy"
     testImplementation "io.micronaut.test:micronaut-test-spock"
     testImplementation "io.micronaut.test:micronaut-test-junit5"
-    testRuntime "cglib:cglib-nodep:$cglibNoDepVersion"
+    testImplementation "cglib:cglib-nodep:$cglibNoDepVersion"
 
     implementation files('gngs/build/libs/groovy-ngs-utils.jar')
     implementation files('haplogrep-cmd/target/haplogrep.jar')
@@ -170,7 +170,7 @@ task buildHaplogrepCmd(type: Exec) {
     outputs.file('haplogrep-cmd/target/haplogrep.jar').withPropertyName('haplogrepJar')
 }
 
-test.dependsOn += ['ui:runTestUnit']
+//test.dependsOn += ['ui:runTestUnit']
 check.dependsOn += ['ui:runLint']
 compileJava.dependsOn += ['buildGngs', 'buildHaplogrepCmd']
 processResources.dependsOn += ['copyUiBuildToMitoOut']
