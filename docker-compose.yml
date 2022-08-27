@@ -1,13 +1,15 @@
-version: '3'
+version: "3"
 
 services:
-    couchdb:
-        image: docker.io/bitnami/couchdb:3
-        environment:
-            - COUCHDB_USER=${COUCHDB_USER:-admin}
-            - COUCHDB_PASSWORD=${COUCHDB_PASSWORD:-admin_password}
-        ports:
-            - '5984:5984'
-        volumes:
-            - ./couchdb:/bitnami/couchdb
-            - ./couchdb/config.ini:/opt/bitnami/couchdb/etc/local.d/config.ini
+  couchdb:
+    image: apache/couchdb:3.2
+    environment:
+      - COUCHDB_USER=${COUCHDB_USER:-couchdb}
+      - COUCHDB_PASSWORD=${COUCHDB_PASSWORD:-couchdb_password}
+    ports:
+      - "${COUCHDB_PORT:-5984}:5984"
+    volumes:
+      - ${COUCHDB_DATA_HOST_PATH:-./couchdb/data}:/opt/couchdb/data
+      - ${COUCHDB_CONFIG_PATH:-./couchdb/local.d}:/opt/couchdb/etc/local.d
+    healthcheck:
+        test: [ "CMD-SHELL", "curl -L -s http://localhost:${COUCHDB_PORT:-5984}/_up | grep -q 'ok'" ]

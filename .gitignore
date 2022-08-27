@@ -52,3 +52,4 @@ ui/mitoreport
 /dist/
 !HG00097.vcf
 couchdb/data
+couchdb/local.d/docker.ini
