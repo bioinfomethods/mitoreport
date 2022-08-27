@@ -9,9 +9,7 @@ import { mapActions } from 'vuex'
 export default {
   name: 'Variants',
 
-  created() {
-    this.setSyncFeature(this.syncFeature)
-  },
+  created() {},
 
   components: {
     VariantTable,
@@ -22,14 +20,8 @@ export default {
       type: String,
       required: false,
     },
-    syncFeature: {
-      type: Boolean,
-      required: false,
-    },
   },
 
-  methods: {
-    ...mapActions(['setSyncFeature']),
-  },
+  methods: {},
 }
 </script>

@@ -1,20 +1,44 @@
 # Configuring CouchDB
 
 CouchDB is an optional component of Mitoreport.  This document describes how it can be configured with Okta, MCRI's IDP
-provider.  When integrated with Okta and CouchDB, Mitoreport cannot be run as a local 
+provider.  When integrated with Okta and CouchDB, Mitoreport cannot be run as a standalone local HTML application
+because CORS requires an origin server.  This can be overcome by serving mitoreport from a local web server.  A simple
+way to do this is to use the Python http.server module.
+
+```bash
+# cd to mitoreport HTML directory
+python3 -m http.server --bind 127.0.0.1 9001
+```
 
 ## Getting Started
 
-Start CouchDB, ENV vars `COUCHDB_USER` and `COUCHDB_PASSWORD` should be overriden to set a custom admin password. Create
-own copy of `.env` from `env.template`.
+Start CouchDB, ENV vars `COUCHDB_USER` and `COUCHDB_PASSWORD` should be overriden to set a custom admin
+username/password. Create own copy of `.env` from `env.template`.
 
 ```bash
 # cd to mitoreport root directory
+
+cp couchdb/env.template .env
+source .env
+
 docker-compose up -d
 ```
 
 Login to CouchDB admin console at `http://127.0.0.1:5984/_utils/#/setup` with credentials
 `$COUCHDB_USER:$COUCHDB_PASSWORD` to complete setup.
+
+### Use curl and Admin Credentials to Configure CouchDB
+
+```bash
+BASIC_AUTH=$(echo -n "$COUCHDB_USER:$COUCHDB_PASSWORD" | openssl base64)
+curl -H 'content-type: application/json; charset=utf-8' -H "Authorization: Basic $BASIC_AUTH" "http://localhost:5984/_all_dbs"
+
+# Create mitoreport DB
+curl -X PUT -H 'content-type: application/json; charset=utf-8' -H "Authorization: Basic $BASIC_AUTH" "http://localhost:5984/mitoreport"
+
+# Add Bioinfomethods as member role
+curl -X PUT -H 'content-type: application/json; charset=utf-8' --data '{"members":{"roles":["_admin","Bioinfomethods"]},"admins":{"roles":["_admin"]}}' -H "Authorization: Basic $BASIC_AUTH" "http://localhost:5984/mitoreport/_security"
+```
 
 ## Appendix
 
@@ -65,11 +89,4 @@ step oauth \
 ```bash
 OKTA_ISSUER_URL="https://dev-740515.okta.com/oauth2/default"
 curl -L "$OKTA_ISSUER_URL/.well-known/openid-configuration" | jq '.'
-```
-
-### Use curl and Admin Credentials to Query CouchDB
-
-```bash
-BASIC_AUTH=$(echo -n "$COUCHDB_USER:$COUCHDB_PASSWORD" | openssl base64)
-curl -H 'content-type: application/json; charset=utf-8' -H "Authorization: Basic $BASIC_AUTH" "http://localhost:5984/_all_dbs"
 ```

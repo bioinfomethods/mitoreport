@@ -107,10 +107,13 @@ export async function saveSettingsToLocal(settings) {
 
 export let SYNC_HANDLER = null
 
-export async function syncWithRemote() {
+export async function syncWithRemote(authState) {
+  console.debug('Start syncing with remote CouchDB', authState)
   const couchDbUrl = getStore.getters.getSettingsCouchDbUrl
-  // TODO - Need security
-  let remoteDB = new PouchDB(couchDbUrl)
+  const idToken = authState?.idToken?.idToken
+  let remoteDB = new PouchDB(couchDbUrl, {
+    headers: { Authorization: `Bearer ${idToken}` },
+  })
 
   SYNC_HANDLER = LOCAL_DB.sync(remoteDB, {
     live: true,
@@ -129,6 +132,7 @@ export async function syncWithRemote() {
 }
 
 export function cancelSyncWithRemote() {
+  console.debug('Stop syncing with remote CouchDB')
   SYNC_HANDLER?.cancel()
   SYNC_HANDLER = null
 }

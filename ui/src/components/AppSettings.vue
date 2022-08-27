@@ -27,7 +27,7 @@
         @submit.prevent="saveAppSettings"
       >
         <v-card-title>Settings</v-card-title>
-        <div v-if="syncFeature">
+        <div v-if="authState.isAuthenticated">
           <v-divider></v-divider>
           <v-card-subtitle>Couch DB</v-card-subtitle>
           <v-card-text>
@@ -184,6 +184,7 @@ export default {
 
   mounted() {
     this.settingsForm.newBamDir = this.getSettingsBamDir
+    this.settingsForm.newCouchDbUrl = this.getSettingsCouchDbUrl
     this.settingsForm.userTags = _.cloneDeep(
       this.getVariantTags.filter(t => t.custom)
     )
@@ -206,7 +207,7 @@ export default {
   },
 
   computed: {
-    ...mapState(['syncFeature']),
+    ...mapState(['authState']),
     ...mapGetters([
       'getSettingsCouchDbUrl',
       'getSettingsBamDir',
@@ -253,10 +254,6 @@ export default {
     saveSettings: function() {
       this.$store.dispatch('saveSettings')
     },
-
-    // onBamDirChange: function(newBamDir) {
-    //   this.settingsForm.newBamDir = newBamDir
-    // },
 
     saveAppSettings: function() {
       this.$store.dispatch('saveAppSettings', {

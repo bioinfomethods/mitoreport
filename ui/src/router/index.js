@@ -5,8 +5,20 @@ import QC from '@/views/QC.vue'
 import About from '@/views/About.vue'
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import { OktaAuth } from '@okta/okta-auth-js'
+import OktaVue from '@okta/okta-vue'
+import LoginComponent from '@/components/Login'
+import sampleConfig from '@/config'
+
+const oktaAuth = new OktaAuth(sampleConfig.oidc)
 
 Vue.use(VueRouter)
+Vue.use(OktaVue, {
+  oktaAuth,
+  onAuthRequired: () => {
+    router.push('/login')
+  },
+})
 
 const routes = [
   {
@@ -26,8 +38,15 @@ const routes = [
     ],
     props: route => ({
       variantId: route.params.variantId,
-      syncFeature: route.query.syncFeature === 'true',
     }),
+  },
+  {
+    path: '/login',
+    component: LoginComponent,
+  },
+  {
+    path: '/login/callback',
+    component: LoginComponent,
   },
   {
     path: '/deletions',
