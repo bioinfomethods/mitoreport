@@ -3,8 +3,7 @@
 </template>
 
 <script>
-import VariantTable from '@/components/VariantTable.vue'
-import { mapActions } from 'vuex'
+import VariantTable from "@/components/VariantTable.vue";
 
 export default {
   name: 'Variants',
