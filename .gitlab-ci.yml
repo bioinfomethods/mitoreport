@@ -16,7 +16,7 @@ build:
     - docker
     - mcri
   script:
-    - ./gradlew clean build --build-cache --info
+    - ./gradlew clean build installShadowDist --build-cache --info
   artifacts:
     paths:
       - build/libs/*.jar

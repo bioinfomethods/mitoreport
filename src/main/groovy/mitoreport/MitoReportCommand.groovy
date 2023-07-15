@@ -1,29 +1,32 @@
 package mitoreport
 
 import gngs.CliOptions
+import gngs.Utils
+import gngs.VCF
+import gngs.Variant
 import gngs.tools.DeletionPlot
 import groovy.json.JsonOutput
 import groovy.json.JsonSlurper
 import groovy.util.logging.Slf4j
 import io.micronaut.core.io.ResourceLoader
+import jakarta.inject.Inject
 import mitoreport.haplogrep.HaplogrepClassification
 import mitoreport.haplogrep.HaplogroupClassifier
 import org.apache.commons.io.FileUtils
 import org.apache.commons.io.FilenameUtils
+import picocli.CommandLine.ArgGroup
 import picocli.CommandLine.Command
 import picocli.CommandLine.Option
 import picocli.CommandLine.Parameters
 
-import javax.inject.Inject
 import java.nio.file.*
 import java.nio.file.attribute.BasicFileAttributes
 import java.time.ZoneOffset
 import java.time.format.DateTimeFormatter
-import java.util.jar.Attributes
-import java.util.jar.Manifest
 import java.util.stream.Collectors
 
 import static java.time.LocalDateTime.parse as ld
+import static mitoreport.MitoUtils.getManifestInfo
 
 @Slf4j
 @Command(name = 'mito-report', description = 'Mito Report', mixinStandardHelpOptions = true)
@@ -36,11 +39,17 @@ class MitoReportCommand implements Runnable {
     private static final String DEFAULT_HMT_VAR_URL_PREFIX = 'https://www.hmtvar.uniba.it/results'
     private static final String JAR_UI_DIR = 'mitoui'
 
+    @Option(names = ['-v', '-vcf', '--vcf'], required = true, description = 'VCF file for sample')
+    File vcfFile
+
     @Option(names = ['-s', '-sample', '--sample'], required = true, description = 'Sample ID')
     String sample
 
     @Option(names = ['-so', '-sample-output', '--sample-output'], required = false, description = 'Provide replacement Sample ID')
     String sampleOutput
+
+    @ArgGroup(exclusive = false, multiplicity = "0..1")
+    Maternal maternal
 
     @Option(names = ['-ann', '-annotations', '--annotations'], required = false, description = 'DEPRECATED, -mann replaces this.  Annnotation file to apply to VCF')
     String annotations
@@ -50,9 +59,6 @@ class MitoReportCommand implements Runnable {
 
     @Option(names = ['-gnomad', '--gnomad-vcf'], required = true, description = 'gnomAD mtDNA sites VCF')
     Path gnomADVCF
-
-    @Option(names = ['-vcf'], required = true, description = 'VCF file for sample')
-    File vcfFile
 
     @Option(names = ['-r', '-region', '--region'], defaultValue = 'chrM:200-16300', required = true, description = 'Chromosome region, defaults to chrM:200-16300')
     String region
@@ -72,10 +78,18 @@ class MitoReportCommand implements Runnable {
     @Inject
     MitoMapAnnotationsLoader mitoMapLoader
 
+    static class Maternal {
+        @Option(names = ['-w', '--maternal-vcf'], required = true, description = 'VCF file with maternal sample')
+        File vcfFile
+
+        @Option(names = ['-m', '--maternal-sample'], required = false, description = 'Provide maternal sample ID if provided VCF is as multi sample VCF, defaults to use first sample')
+        String sample
+    }
+
     void run() {
         this.sampleOutput = this.sampleOutput ?: sample
 
-        (bamFiles + [vcfFile, mitoMapAnnotations.toFile(), gnomADVCF.toFile()])
+        (bamFiles + [vcfFile, mitoMapAnnotations.toFile(), gnomADVCF.toFile()] + (maternal ? [maternal.vcfFile] : []))
                 .each { assert it.exists(), "${it.absolutePath} does not exist." }
 
         // Default to a directory named after the sample
@@ -92,7 +106,10 @@ class MitoReportCommand implements Runnable {
         File coverageStatsJson = deletionsResult.coverageStatsJsonFile
         File variantsJson = runReport(deletionsJson)
 
-        Map<String, Object> manifestInfo = getManifestInfo()
+        def maternalVariantsResults = createMaternalVariantsResults(mitoReportPathName, maternal)
+
+        Optional<URL> maybeManifestUrl = resourceLoader.getResource('classpath:META-INF/MANIFEST.MF')
+        Map<String, Object> manifestInfo = getManifestInfo(maybeManifestUrl)
         BasicFileAttributes gnomadVcfFileAttrs = Files.readAttributes(gnomADVCF, BasicFileAttributes)
 
         Map<String, Object> metadata = [
@@ -116,8 +133,17 @@ class MitoReportCommand implements Runnable {
                 accessed         : timestampStrToLocal(gnomadVcfFileAttrs.lastAccessTime().toString())
         ]
 
-        HaplogrepClassification haplogrepClassification = new HaplogroupClassifier(vcfFile, sample).call()
-        writeOutUiDataAndSettings(deletionsJson, deletionsResult.bamFile, variantsJson, haplogrepClassification, coverageStatsJson, metadata)
+        HaplogrepClassification haplogrepClassification = new HaplogroupClassifier(vcfFile: vcfFile, sampleId: sample).call()
+        writeOutUiDataAndSettings(
+                deletionsJson,
+                deletionsResult.bamFile,
+                variantsJson,
+                haplogrepClassification,
+                coverageStatsJson,
+                metadata,
+                maternalVariantsResults.get('variantsFile') as File,
+                maternalVariantsResults.get('haplogrepClassification') as HaplogrepClassification
+        )
     }
 
     Map<String, File> createDeletionsPlot() {
@@ -158,6 +184,53 @@ class MitoReportCommand implements Runnable {
         mitoReport.run()
 
         return mitoReport.variantsResultJson
+    }
+
+    private static def createMaternalVariantsResults(String pathname, Maternal maternal) {
+        def result = Collections.emptyMap()
+        if (maternal) {
+            VCF vcf = VCF.parse(maternal.vcfFile)
+            String sampleId = maternal.sample ?: vcf.samples[0]
+            assert sampleId in vcf.samples, "${maternal.sample} not in VCF"
+            Integer sampleIdIndex = vcf.samples.indexOf(sampleId)
+            def maternalVariants = VCF.parse(maternal.vcfFile).collect { Variant v ->
+                Map<String, Object> infoField = v.parsedInfo
+                Map<String, Object> res = [
+                        id       : "${v.chr}-${v.pos}-${v.ref}-${v.alt}",
+                        hgvsg    : MitoUtils.extractMitoHgvsg(v),
+                        chr      : v.chr,
+                        pos      : v.pos,
+                        ref      : v.ref,
+                        alt      : v.alt,
+                        type     : v.type,
+                        qual     : v.qual,
+                        dosages  : v.getDosages(),
+                        genotypes: [v.parsedGenotypes[sampleIdIndex]],
+                ]
+                res << infoField
+            }
+
+            String maternalVariantsJson = JsonOutput.prettyPrint(JsonOutput.toJson(maternalVariants))
+
+            File dirFile = new File(pathname)
+            if (!dirFile.exists()) {
+                log.info "Creating directory $pathname"
+                dirFile.mkdirs()
+            }
+
+            File file = new File("$pathname/maternalVariants.json")
+            Utils.writer(file).withWriter { it << maternalVariantsJson; it << '\n' }
+
+            HaplogrepClassification haplogrepClassification = new HaplogroupClassifier(vcfFile: maternal.vcfFile, sampleId: sampleId).call()
+
+            result = Collections.unmodifiableMap([
+                    'sampleId'               : sampleId,
+                    'variantsFile'           : file,
+                    'haplogrepClassification': haplogrepClassification,
+            ])
+        }
+
+        return result
     }
 
     private void writeOutUiAssets() {
@@ -209,17 +282,27 @@ class MitoReportCommand implements Runnable {
         indexHtml.text = indexHtml.text.replaceFirst('mitoSettings.js', "mitoSettings_${sampleOutput}.js")
     }
 
-    private void writeOutUiDataAndSettings(File deletionsJson, File sampleBamFile, File variantsJson, HaplogrepClassification haplogrepClassification, File coverageStatsJson, Map metadata) {
+    private void writeOutUiDataAndSettings(File deletionsJson, File sampleBamFile, File variantsJson, HaplogrepClassification haplogrepClassification, File coverageStatsJson, Map metadata, File maternalVariantsJson = null, HaplogrepClassification maternalHaplogrepClassification = null) {
         new File(Paths.get(mitoReportPathName, 'deletions.js').toUri())
                 .withWriter { it << 'window.deletions = ' + deletionsJson.text }
 
         new File(Paths.get(mitoReportPathName, 'variants.js').toUri())
                 .withWriter { it << 'window.variants = ' + variantsJson.text }
 
+        if (maternalVariantsJson && maternalVariantsJson.exists()) {
+            new File(Paths.get(mitoReportPathName, 'maternalVariants.js').toUri())
+                    .withWriter { it << 'window.maternalVariants = ' + maternalVariantsJson.text }
+        } else {
+            new File(Paths.get(mitoReportPathName, 'maternalVariants.js').toUri())
+                    .withWriter { it << 'window.maternalVariants = []' }
+        }
+
         String bamDir = FilenameUtils.getFullPath(sampleBamFile.absolutePath)
         String bamFileName = FilenameUtils.getName(sampleBamFile.absolutePath)
         String sampleVcfDir = FilenameUtils.getFullPath(vcfFile.absolutePath)
         String sampleVcfFileName = FilenameUtils.getName(vcfFile.absolutePath)
+        String maternalVcfDir = maternal?.vcfFile ? FilenameUtils.getFullPath(maternal.vcfFile.absolutePath) : null
+        String maternalVcfFileName = maternal?.vcfFile ? FilenameUtils.getName(maternal.vcfFile.absolutePath) : null
         def coverageStats = new JsonSlurper().parseText(coverageStatsJson.text)
         def qc = ['coverageStats': coverageStats]
 
@@ -227,65 +310,68 @@ class MitoReportCommand implements Runnable {
                 'igvHost'           : DEFAULT_IGV_HOST,
                 'geneCardsUrlPrefix': DEFAULT_GENE_CARDS_URL_PREFIX,
                 'hmtVarUrlPrefix'   : DEFAULT_HMT_VAR_URL_PREFIX,
-                'samples'           : [
-                        [
-                                'id'                     : sampleOutput,
-                                'metadata'               : metadata,
-                                'qc'                     : qc,
-                                'haplogrepClassification': new HaplogrepClassification(sampleOutput, haplogrepClassification.haplogrepResults),
-                                'bamDir'                 : bamDir,
-                                'bamFilename'            : bamFileName,
-                                'vcfDir'                 : sampleVcfDir,
-                                'vcfFilename'            : sampleVcfFileName,
-                                'maternalVcfDir'         : null,
-                                'maternalVcfFilename'    : null,
-                                'variantSearches'        : [
-                                        [
-                                                'name'        : 'All',
-                                                'description' : 'No filters applied',
-                                                'custom'      : false,
-                                                'filterConfig': [
-                                                        posRange              : [0, 16569],
-                                                        allele                : '',
-                                                        selectedMitoTIP       : [],
-                                                        selectedTypes         : [],
-                                                        selectedGenes         : [],
-                                                        selectedMasks         : [],
-                                                        selectedConsequences  : [],
-                                                        gnomADHap             : [],
-                                                        vafRange              : [0, 1],
-                                                        gbFreqTickIndex       : 6,
-                                                        gnomADHetFreqTickIndex: 8,
-                                                        gnomADHomFreqTickIndex: 8,
-                                                        disease               : '',
-                                                        diseaseShowBlank      : false,
-                                                        curationSearch        : '',
-                                                        importantCuration     : false,
-                                                        mitoMap               : '',
-                                                        mitoMapShowBlank      : false,
-                                                        selectedCuratedRefName: '',
-                                                        hgvsp                 : '',
-                                                        hgvspShowBlank        : false,
-                                                        hgvsc                 : '',
-                                                        hgvscShowBlank        : false,
-                                                        hgvs                  : '',
-                                                        hgvsShowBlank         : false,
-                                                ]
-                                        ],
+                'sample'            : [
+                        'id'                     : sampleOutput,
+                        'metadata'               : metadata,
+                        'qc'                     : qc,
+                        'haplogrepClassification': new HaplogrepClassification(sampleOutput, haplogrepClassification.haplogrepResults),
+                        'couchDbUrl'             : 'http://localhost:5984/mitoreport',
+                        'couchDbUsername'        : 'admin',
+                        'bamDir'                 : bamDir,
+                        'bamFilename'            : bamFileName,
+                        'vcfDir'                 : sampleVcfDir,
+                        'vcfFilename'            : sampleVcfFileName,
+                        'maternalVcfDir'         : maternalVcfDir,
+                        'maternalVcfFilename'    : maternalVcfFileName,
+                        'variantSearches'        : [
+                                [
+                                        'name'        : 'All',
+                                        'description' : 'No filters applied',
+                                        'custom'      : false,
+                                        'filterConfig': [
+                                                posRange              : [0, 16569],
+                                                allele                : '',
+                                                selectedMitoTIP       : [],
+                                                selectedTypes         : [],
+                                                selectedGenes         : [],
+                                                selectedMasks         : [],
+                                                selectedConsequences  : [],
+                                                gnomADHap             : [],
+                                                vafRange              : [0, 1],
+                                                gbFreqTickIndex       : 6,
+                                                gnomADHetFreqTickIndex: 8,
+                                                gnomADHomFreqTickIndex: 8,
+                                                disease               : '',
+                                                diseaseShowBlank      : false,
+                                                curationSearch        : '',
+                                                importantCuration     : false,
+                                                mitoMap               : '',
+                                                mitoMapShowBlank      : false,
+                                                selectedCuratedRefName: '',
+                                                hgvsp                 : '',
+                                                hgvspShowBlank        : false,
+                                                hgvsc                 : '',
+                                                hgvscShowBlank        : false,
+                                                hgvs                  : '',
+                                                hgvsShowBlank         : false,
+                                        ]
                                 ],
-                                variantTags              : [
-                                        ['name': 'Review', important: true, custom: false],
-                                        ['name': 'Excluded', important: false, custom: false],
-                                        ['name': 'FalsePositive', important: false, custom: false],
-                                        ['name': 'Likely', important: true, custom: false],
-                                        ['name': 'Match', important: true, custom: false],
-                                        ['name': 'Mismatch', important: false, custom: false],
-                                ],
-                                curations                : [:],
-                        ]
-                ]
+                        ],
+                        variantTags              : [
+                                ['name': 'Review', important: true, custom: false],
+                                ['name': 'Excluded', important: false, custom: false],
+                                ['name': 'FalsePositive', important: false, custom: false],
+                                ['name': 'Likely', important: true, custom: false],
+                                ['name': 'Match', important: true, custom: false],
+                                ['name': 'Mismatch', important: false, custom: false],
+                        ],
+                        curations                : [:],
+                ],
         ]
 
+        if (maternalVariantsJson && maternalHaplogrepClassification) {
+            defaultSettings['sample']['maternalHaplogrepClassification'] = new HaplogrepClassification(maternal.sample, maternalHaplogrepClassification.haplogrepResults)
+        }
         String defaultSettingsJson = JsonOutput.prettyPrint(JsonOutput.toJson(defaultSettings))
         String settingsJson = JsonOutput.prettyPrint(JsonOutput.toJson([:]))
 
@@ -301,7 +387,8 @@ class MitoReportCommand implements Runnable {
                     'defaultSettings.js',
                     mitoSettingsFileName,
                     'deletions.js',
-                    'variants.js'
+                    'variants.js',
+                    'maternalVariants.js',
             ]
 
             fileNamesToCopy.each { fileName ->
@@ -321,17 +408,5 @@ class MitoReportCommand implements Runnable {
                 .toString()
 
         return result
-    }
-
-    private Map<String, String> getManifestInfo() {
-        Optional<URL> maybeManifestUrl = resourceLoader.getResource('classpath:META-INF/MANIFEST.MF')
-        if (maybeManifestUrl.isPresent()) {
-            Manifest manifest = new Manifest(maybeManifestUrl.get().openStream())
-            Attributes manifestAttribtues = manifest.getMainAttributes()
-
-            return Collections.unmodifiableMap(manifestAttribtues.collectEntries { k, v -> [(k.name): v] } as Map<String, String>)
-        } else {
-            return Collections.emptyMap()
-        }
     }
 }

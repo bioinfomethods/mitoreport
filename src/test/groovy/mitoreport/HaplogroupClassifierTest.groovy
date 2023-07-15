@@ -1,12 +1,12 @@
 package mitoreport
 
 import io.micronaut.core.io.ResourceLoader
-import io.micronaut.test.annotation.MicronautTest
+import io.micronaut.test.extensions.spock.annotation.MicronautTest
+import jakarta.inject.Inject
 import mitoreport.haplogrep.HaplogrepClassification
 import mitoreport.haplogrep.HaplogroupClassifier
 import spock.lang.Specification
 
-import javax.inject.Inject
 
 import static TestUtils.hr
 

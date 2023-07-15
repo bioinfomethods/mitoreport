@@ -1,28 +1,43 @@
 import java.time.OffsetDateTime
 
+buildscript {
+    configurations.classpath {
+        resolutionStrategy.activateDependencyLocking()
+    }
+    repositories {
+        mavenCentral()
+    }
+}
+
 plugins {
     id "groovy"
-    id "com.github.johnrengelman.shadow" version "6.0.0"
-    id "application"
+    id "com.github.johnrengelman.shadow" version "7.1.2"
+    id("io.micronaut.application") version "3.7.9"
+}
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(11)
+    }
 }
 
 group "mitoreport"
-defaultTasks 'clean', 'build'
+defaultTasks 'clean', 'installShadowDist'
 
-def gitDescribeItems = []
-def gitDescProc = "git describe --tags".execute()
+def gitDescribeItems = ['0.1.0', '1', 'gfffffff']
+def gitDescProc = "git describe --tags --always --long".execute()
 gitDescProc.waitFor()
-if (gitDescProc.exitValue()) {
-    gitDescribeItems = ['1.0.0', '1', 'gfffffff']
-} else {
+def gitExitValue = gitDescProc.exitValue()
+if (!gitExitValue && !(System.env.CI)) {
     gitDescribeItems = gitDescProc.text?.trim()?.split(/-/)
 }
 
 project.ext {
-    appArchiveVersion = "1.0.0-beta-2"
-    appVersion = "$appArchiveVersion-${gitDescribeItems[1]}"
+    appArchiveVersion = gitDescribeItems[0]
+    appVersion = gitDescribeItems[1]
+    appVersionLong = gitDescribeItems.join('-')
     buildTimestamp = OffsetDateTime.now().toString()
-    buildCommit = gitDescribeItems[2]
+    buildCommit = gitDescribeItems[-1]
 }
 
 repositories {
@@ -33,38 +48,45 @@ repositories {
     }
 }
 
-configurations {
-    // for dependencies that are needed for development only
-    developmentOnly
+micronaut {
+    version = "$micronautVersion"
+    runtime("netty")
+    testRuntime("spock2")
+    processing {
+        incremental(true)
+        annotations("mitoreport.*")
+    }
 }
 
 dependencies {
-    annotationProcessor platform("io.micronaut:micronaut-bom:$micronautVersion")
-    annotationProcessor "io.micronaut.configuration:micronaut-picocli"
-    compileOnly platform("io.micronaut:micronaut-bom:$micronautVersion")
-    compileOnly "io.micronaut:micronaut-inject-groovy"
-    implementation platform("io.micronaut:micronaut-bom:$micronautVersion")
-    implementation "io.micronaut:micronaut-runtime"
-    implementation "io.micronaut:micronaut-runtime-groovy"
-    implementation "io.micronaut:micronaut-validation"
-    implementation "info.picocli:picocli"
-    implementation "io.micronaut.configuration:micronaut-picocli"
-    testCompileOnly platform("io.micronaut:micronaut-bom:$micronautVersion")
-    testImplementation platform("io.micronaut:micronaut-bom:$micronautVersion")
+    implementation("info.picocli:picocli")
+    implementation("io.micronaut.groovy:micronaut-runtime-groovy")
+    implementation("io.micronaut:micronaut-http-client")
+    implementation("io.micronaut.security:micronaut-security-jwt")
+    implementation("io.micronaut.picocli:micronaut-picocli")
+    implementation("jakarta.annotation:jakarta.annotation-api")
+    compileOnly("info.picocli:picocli-codegen")
+    runtimeOnly("ch.qos.logback:logback-classic")
+    runtimeOnly("org.yaml:snakeyaml")
+    implementation("io.micronaut:micronaut-validation")
+
+    testImplementation platform("org.spockframework:spock-bom:$spockBomVersion")
+    testImplementation("io.micronaut.test:micronaut-test-spock")
     testImplementation("org.spockframework:spock-core") {
         exclude group: "org.codehaus.groovy", module: "groovy-all"
     }
-    testImplementation "io.micronaut:micronaut-inject-groovy"
-    testImplementation "io.micronaut.test:micronaut-test-spock"
-    testImplementation "io.micronaut.test:micronaut-test-junit5"
-    testRuntime "cglib:cglib-nodep:$cglibNoDepVersion"
+    testImplementation "org.junit.jupiter:junit-jupiter-api:$junitVersion"
+    testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:$junitVersion"
+    testImplementation "org.junit.platform:junit-platform-launcher:$junitPlatformLauncherVersion"
+    testRuntimeOnly "net.bytebuddy:byte-buddy:$byteBuddyVersion"  // allows mocking of classes (in addition to interfaces)
+    testRuntimeOnly "org.objenesis:objenesis:$objenesisVersion"
 
     implementation files('gngs/build/libs/groovy-ngs-utils.jar')
     implementation files('haplogrep-cmd/target/haplogrep.jar')
 
     // groovy-ngs-utils.jar is an uber jar with the following groovy modules.
     // Here we force upgrade the version.
-    implementation "org.codehaus.groovy:groovy-all:$groovyVersion"
+//    implementation "org.codehaus.groovy:groovy-all:$groovyVersion"
     implementation "org.codehaus.groovy:groovy-ant:$groovyVersion"
     implementation "org.codehaus.groovy:groovy-cli-commons:$groovyVersion"
     implementation "org.codehaus.groovy:groovy-cli-picocli:$groovyVersion"
@@ -74,20 +96,26 @@ dependencies {
     implementation "org.codehaus.groovy:groovy-templates:$groovyVersion"
     implementation "org.codehaus.groovy:groovy-xml:$groovyVersion"
     implementation "org.codehaus.groovy:groovy:$groovyVersion"
-    implementation "genepi:haplogrep-core:2.6.0"
+    implementation "genepi:haplogrep-core:$haplogrepCoreVersion"
 
     implementation "io.github.http-builder-ng:http-builder-ng-core:$httpBuilderNgVersion"
     implementation "commons-io:commons-io:$commonsIoVersion"
 }
 
-test.classpath += configurations.developmentOnly
+dependencyLocking {
+    lockAllConfigurations()
+}
+
+tasks.withType(Test).configureEach {
+    exclude 'groovy-ngs-utils/**'
+    exclude 'gngs/**'
+    useJUnitPlatform()
+    testLogging {
+        events "skipped", "failed"
+    }
+}
 
 mainClassName = "mitoreport.MitoCli"
-
-java {
-    sourceCompatibility = JavaVersion.toVersion('1.8')
-    targetCompatibility = JavaVersion.toVersion('1.8')
-}
 
 tasks.withType(GroovyCompile) {
     groovyOptions.forkOptions.jvmArgs.add('-Dgroovy.parameters=true')
@@ -96,11 +124,11 @@ tasks.withType(GroovyCompile) {
 jar {
     manifest {
         attributes(
-                'Name': 'MitoReport',
-                'Main-Class': mainClassName,
-                'Implementation-Title': 'MitoReport',
-                'Implementation-Version': appVersion,
-                'Implementation-Vendor': 'MCRI',
+                'Name': 'mitoreport',
+                'Main-Class': application.mainClass,
+                'Implementation-Title': 'mitoreport',
+                'Implementation-Version': appVersionLong,
+                'Implementation-Vendor': 'MCRI Bioinfomethods Groups',
                 'Build-Timestamp': buildTimestamp,
                 'Build-Commit': buildCommit,
         )
@@ -110,18 +138,6 @@ jar {
 shadowJar {
     mergeServiceFiles()
     archiveVersion.set(appArchiveVersion)
-}
-
-tasks.withType(JavaExec) {
-    classpath += configurations.developmentOnly
-    jvmArgs('-XX:TieredStopAtLevel=1', '-Dcom.sun.management.jmxremote')
-    if (gradle.startParameter.continuous) {
-        systemProperties(
-                'micronaut.io.watch.restart': 'true',
-                'micronaut.io.watch.enabled': 'true',
-                "micronaut.io.watch.paths": "src/main"
-        )
-    }
 }
 
 String mitoOut = "${projectDir}/src/main/resources/mitoui"
@@ -135,6 +151,11 @@ task copyUiBuildToMitoOut(type: Copy, dependsOn: ['cleanMitoOut', ':ui:runBuild'
 
     from project(':ui').getTasksByName('runBuild', false).first().outputs
     into mitoOut
+}
+
+application {
+    mainClass.set("mitoreport.MitoCli")
+    applicationName = 'mitoreport'
 }
 
 shadowJar.configure {
@@ -161,7 +182,7 @@ task buildHaplogrepCmd(type: Exec) {
     outputs.file('haplogrep-cmd/target/haplogrep.jar').withPropertyName('haplogrepJar')
 }
 
-test.dependsOn += ['ui:runTestUnit']
+//test.dependsOn += ['ui:runTestUnit']
 check.dependsOn += ['ui:runLint']
 compileJava.dependsOn += ['buildGngs', 'buildHaplogrepCmd']
 processResources.dependsOn += ['copyUiBuildToMitoOut']

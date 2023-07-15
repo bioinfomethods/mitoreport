@@ -6,7 +6,19 @@
       </v-toolbar-title>
       <v-progress-circular class="ml-4" v-if="loading" indeterminate />
       <v-spacer></v-spacer>
-      <ExportSettings></ExportSettings>
+      <v-switch
+        v-if="syncFeature"
+        id="toggleSync"
+        @change="onToggleSyncChange"
+        v-model="syncEnabled"
+        dark
+        class="pt-4 pr-4"
+        ><template v-slot:label
+          ><span class="white--text"
+            >{{ syncEnabled ? 'Disable' : 'Enable' }} Sync</span
+          ></template
+        ></v-switch
+      >
       <AppSettings></AppSettings>
     </v-app-bar>
 
@@ -49,19 +61,23 @@
 <script>
 import { mapState } from 'vuex'
 import AppSettings from '@/components/AppSettings'
-import ExportSettings from '@/components/ExportSettings'
+import {
+  syncWithRemote,
+  cancelSyncWithRemote,
+} from '@/services/LocalDataService'
 
 export default {
   name: 'App',
 
   components: {
     AppSettings,
-    ExportSettings,
   },
 
   async created() {
     console.info(`MitoReport version=${process.env.VUE_APP_VERSION}`)
     await this.$store.dispatch('fetchData')
+    await this.$store.dispatch('saveSettings')
+    document.title = this.sampleId || 'MitoReport'
   },
 
   data: () => {
@@ -69,16 +85,27 @@ export default {
       rules: {
         required: value => !!value || 'Required.',
       },
+      syncEnabled: false,
     }
   },
 
   computed: {
-    ...mapState(['loading', 'snackbar', 'initialFetchDataLoaded', 'sampleId']),
+    ...mapState([
+      'loading',
+      'snackbar',
+      'initialFetchDataLoaded',
+      'sampleId',
+      'syncFeature',
+    ]),
   },
 
   methods: {
-    downloadSettings: function() {
-      this.$store.dispatch('downloadSettings')
+    onToggleSyncChange: function(value) {
+      if (value) {
+        syncWithRemote()
+      } else {
+        cancelSyncWithRemote()
+      }
     },
 
     closeSnackbar: function() {

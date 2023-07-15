@@ -4,25 +4,24 @@ This document provides setup instructions for developing MitoReport.
 
 ## Prerequisites
 
-* Java 8 installed, see [SdkMan](https://sdkman.io/) for managing different Java versions.
-* Java 8 AdoptOpenJDK "Hotspot" is recommended, e.g. 8.0.275.hs-adpt. j9 is too strict to allow the deprecated functions
-  used in the gngs submodule.
+* Java 11 installed, see [SdkMan](https://sdkman.io/) for managing different Java versions.
 
 ## TL;DR For Devs
 
 ```bash
 PROJECT_DIR=$(pwd)
-# APP_ARCHIVE_VERSION=$(git describe --abbrev=0)
-APP_ARCHIVE_VERSION="1.0.0-beta-1"
+APP_ARCHIVE_VERSION=$(git describe --abbrev=0 --always)
+APP_ARCHIVE_VERSION=1.0.0
 
-./gradlew
+./gradlew build
 
 java -jar "$PROJECT_DIR/build/libs/mitoreport-$APP_ARCHIVE_VERSION-all.jar" mito-report \
   -d \
-  -sample "15G002035-GM12878K_20pc_10kb_200" \
   -vcf "$PROJECT_DIR/test_fixtures/variants/15G002035.unshifted.contamination.filtering.intermediatefilter.norm.dedup.mito_vep.vcf.gz" \
-  -mann "$PROJECT_DIR/test_fixtures/mito_map_annotations_20210721.json" \
+  -sample "15G002035-GM12878K_20pc_10kb_200" \
+  -mann "$PROJECT_DIR/test_fixtures/mito_map_annotations_20230715.json" \
   -gnomad "$PROJECT_DIR/test_fixtures/gnomad.genomes.v3.1.sites.chrM.vcf.bgz" \
+  --maternal-vcf "$PROJECT_DIR/test_fixtures/variants/15G002035.unshifted.contamination.filtering.intermediatefilter.norm.dedup.mito_vep.vcf.gz" \
   "$PROJECT_DIR/test_fixtures/align/15G002035-GM12878K_20pc_10kb_200.unshifted.bam" $PROJECT_DIR/test_fixtures/controls/*.bam
 ```
 
@@ -30,20 +29,17 @@ java -jar "$PROJECT_DIR/build/libs/mitoreport-$APP_ARCHIVE_VERSION-all.jar" mito
 
 ```bash
 # Git clone repo and cd into it then set PROJECT_DIR env
+# Use git clone --recursive <repo> to recursively fetch all Git submodules
 PROJECT_DIR=$(pwd)
-
-# Clone submodules
-git submodule init
-git submodule update --init --recursive
 
 # Run tests, linting and coverage.  Detailed coverage reports can be found in `$PROJECT_DIR/ui/coverage/`
 ./gradlew check
 
-# Create project output artifacts in `$PROJECT_DIR/build/libs/`
-./gradlew assemble
+# Create project output artifacts in `$PROJECT_DIR/build/libs/` and binaries in `$PROJECT_DIR/build/install/
+./gradlew installShadowDist
 
 # Run build, i.e. everything
-./gradlew
+./gradlew build
 ```
 
 ## UI Development

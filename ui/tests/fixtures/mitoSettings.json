@@ -2,80 +2,41 @@
   "igvHost": "http://localhost:60151",
   "geneCardsUrlPrefix": "https://www.genecards.org/cgi-bin/carddisp.pl",
   "hmtVarUrlPrefix": "https://www.hmtvar.uniba.it/results",
-  "samples": [
-    {
-      "id": "15G002035-GM12878K_20pc_10kb_200",
-      "bamDir": "/tmp/bamDir/",
-      "bamFilename": "TestSample.bam",
-      "vcfDir": "/tmp/vcfDir/",
-      "vcfFilename": "TestSample.vcf.gz",
-      "maternalVcfDir": null,
-      "maternalVcfFilename": null,
-      "variantSearches": [
-        {
-          "name": "Custom Filter 1",
-          "description": "Custom 1 description",
-          "custom": true,
-          "filterConfig": {
-            "posRange": [0, 16569],
-            "selectedTypes": ["SNP", "DEL"],
-            "selectedConsequences": [],
-            "vafRange": [0.03, 0.1],
-            "depthRange": [500, 12000],
-            "importantCuration": false
-          }
-        },
-        {
-          "name": "Custom Filter 2",
-          "description": "Custom 2 description",
-          "custom": true,
-          "filterConfig": {
-            "posRange": [200, 16300],
-            "allele": "A/C",
-            "selectedTypes": ["SNP", "INS", "DEL"],
-            "selectedConsequences": [],
-            "vafRange": [0.03, 0.1],
-            "importantCuration": false
-          }
+  "sample": {
+    "id": "15G002035-GM12878K_20pc_10kb_200",
+    "bamDir": "/tmp/bamDir/",
+    "bamFilename": "TestSample.bam",
+    "vcfDir": "/tmp/vcfDir/",
+    "vcfFilename": "TestSample.vcf.gz",
+    "maternalVcfDir": null,
+    "maternalVcfFilename": null,
+    "variantSearches": [
+      {
+        "name": "Custom Filter 1",
+        "description": "Custom 1 description",
+        "custom": true,
+        "filterConfig": {
+          "posRange": [0, 16569],
+          "selectedTypes": ["SNP", "DEL"],
+          "selectedConsequences": [],
+          "vafRange": [0.03, 0.1],
+          "depthRange": [500, 12000],
+          "importantCuration": false
         }
-      ]
-    },
-    {
-      "id": "TestSample2",
-      "bamDir": "/tmp/bamDir/",
-      "bamFilename": "TestSample2.bam",
-      "vcfDir": "/tmp/vcfDir/",
-      "vcfFilename": "TestSample2.vcf.gz",
-      "maternalVcfDir": null,
-      "maternalVcfFilename": null,
-      "variantSearches": [
-        {
-          "name": "Custom Filter 1",
-          "description": "Custom 1 description",
-          "custom": true,
-          "filterConfig": {
-            "posRange": [0, 16569],
-            "selectedTypes": ["SNP", "DEL"],
-            "selectedConsequences": [],
-            "vafRange": [0.03, 0.1],
-            "depthRange": [500, 12000],
-            "importantCuration": false
-          }
-        },
-        {
-          "name": "Custom Filter 2",
-          "description": "Custom 2 description",
-          "custom": true,
-          "filterConfig": {
-            "posRange": [200, 16300],
-            "allele": "A/C",
-            "selectedTypes": ["SNP", "INS", "DEL"],
-            "selectedConsequences": [],
-            "vafRange": [0.03, 0.1],
-            "importantCuration": false
-          }
+      },
+      {
+        "name": "Custom Filter 2",
+        "description": "Custom 2 description",
+        "custom": true,
+        "filterConfig": {
+          "posRange": [200, 16300],
+          "allele": "A/C",
+          "selectedTypes": ["SNP", "INS", "DEL"],
+          "selectedConsequences": [],
+          "vafRange": [0.03, 0.1],
+          "importantCuration": false
         }
-      ]
-    }
-  ]
+      }
+    ]
+  }
 }

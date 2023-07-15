@@ -1,15 +1,15 @@
 import {
   getDeletions,
   getVariants,
+  getMaternalVariants,
   saveSettingsToLocal,
 } from '@/services/LocalDataService.js'
 import { DEFAULT_SNACKBAR_OPTS } from '@/shared/constants'
-import { saveAs } from 'file-saver'
 import * as _ from 'lodash'
 import { v4 as uuidv4 } from 'uuid'
 import Vue from 'vue'
 import Vuex from 'vuex'
-import { loadSettings } from '../services/LocalDataService'
+import { loadLocalDbSettings, loadSettings } from '../services/LocalDataService'
 import {
   DEFAULT_GENECARDS_URL_PREFIX,
   DEFAULT_HMT_VAR_URL_PREFIX,
@@ -21,38 +21,15 @@ Vue.use(Vuex)
 export const state = {
   sampleId: '',
   settings: {},
+  couchDbPassword: '',
   loading: false,
   snackbar: { ...DEFAULT_SNACKBAR_OPTS },
   variants: {},
+  maternalVariants: {},
   filteredVariants: {},
   maxReadDepth: 0,
   deletions: {},
-}
-
-function triggerDownloadSettings(settings, sampleId = null) {
-  const settingsToExport = _.cloneDeep(settings)
-  if (sampleId !== null) {
-    settingsToExport.samples = settingsToExport.samples.filter(
-      s => s.id === sampleId
-    )
-  }
-
-  const nonBlankCurationPredicate = curation =>
-    !_.isEmpty(curation.selectedTagNames) || !_.isEmpty(curation.variantNote)
-  settingsToExport.samples.forEach(s => {
-    s.curations = s.curations?.filter(nonBlankCurationPredicate) || []
-  })
-
-  let mitoReport = new Blob(
-    ['window.settings = ' + JSON.stringify(settingsToExport, null, 2)],
-    {
-      type: 'text/json;charset=utf-8',
-    }
-  )
-
-  const fileName =
-    sampleId === null ? 'mitoSettings.js' : `mitoSettings_${state.sampleId}.js`
-  saveAs(mitoReport, fileName)
+  syncFeature: false,
 }
 
 export const getters = {
@@ -108,18 +85,28 @@ export const getters = {
     if (!state.sampleId) {
       return {}
     }
-    const result = (state.settings?.samples || []).find(
-      sample => sample.id === state.sampleId
-    )
-    return result || {}
+    const result = state.settings?.sample || {}
+    return result
   },
 
   getSampleQc: (state, getters) => {
     return getters.getSampleSettings?.qc || {}
   },
 
+  hasMaternalVariants: (state, getters) => {
+    return getters.getSampleSettings?.maternalVcfFilename !== null
+  },
+
   getSampleMetadata: (state, getters) => {
     return getters.getSampleSettings?.metadata || {}
+  },
+
+  getSettingsCouchDbUrl: (state, getters) => {
+    return getters.getSampleSettings?.couchDbUrl
+  },
+
+  getSettingsCouchDbUsername: (state, getters) => {
+    return getters.getSampleSettings?.couchDbUsername
   },
 
   getSettingsBamDir: (state, getters) => {
@@ -164,6 +151,10 @@ export const mutations = {
     state.settings = settings
   },
 
+  SET_SYNC_FEATURE(state, enabled) {
+    state.syncFeature = enabled
+  },
+
   SET_LOADING(state) {
     state.loading = true
   },
@@ -186,7 +177,17 @@ export const mutations = {
   SET_VARIANTS(state, variants) {
     const variantsObj = {}
     variants.forEach(v => {
-      variantsObj[v.id] = v
+      const matchingVariant = state.maternalVariants[v.id]
+      const withMum = matchingVariant
+        ? {
+            ...v,
+            maternal: {
+              heteroplasmy: matchingVariant.genotypes[0].AF,
+              readDepth: matchingVariant.DP,
+            },
+          }
+        : { ...v, maternal: null }
+      variantsObj[v.id] = withMum
     })
     state.variants = variantsObj
     state.filteredVariants = variantsObj
@@ -195,12 +196,32 @@ export const mutations = {
     state.maxReadDepth = _.max(uniqReadDepths)
   },
 
+  SET_MATERNAL_VARIANTS(state, variants) {
+    const variantsObj = {}
+    variants.forEach(v => {
+      variantsObj[v.id] = v
+    })
+    state.maternalVariants = variantsObj
+  },
+
   SET_FILTERED_VARIANTS(state, filteredVariants) {
     state.filteredVariants = filteredVariants
   },
 
   SET_DELETIONS(state, deletions) {
     state.deletions = deletions
+  },
+
+  SET_COUCH_DB_URL(state, newCouchDbUrl) {
+    getters.getSampleSettings(state).couchDbUrl = newCouchDbUrl
+  },
+
+  SET_COUCH_DB_USERNAME(state, newCouchDbUsername) {
+    getters.getSampleSettings(state).couchDbUsername = newCouchDbUsername
+  },
+
+  SET_COUCH_DB_PASSWORD(state, newCouchDbPassword) {
+    state.couchDbPassword = newCouchDbPassword
   },
 
   SET_BAM_DIR(state, newBamDir) {
@@ -271,12 +292,19 @@ export const mutations = {
 }
 
 export const actions = {
+  setSyncFeature({ commit }, enabled) {
+    commit('SET_SYNC_FEATURE', enabled)
+  },
+
   async fetchData({ commit }) {
     commit('SET_LOADING')
 
     try {
       const settResp = await loadSettings()
       commit('SET_SETTINGS', settResp.data)
+
+      const maternalVarResp = await getMaternalVariants()
+      commit('SET_MATERNAL_VARIANTS', maternalVarResp.data)
 
       const varResp = await getVariants()
       const delResp = await getDeletions()
@@ -297,12 +325,30 @@ export const actions = {
     console.debug('Finished action fetchData')
   },
 
-  saveAppSettings({ dispatch, commit, getters }, { newBamDir, userTags }) {
+  setSettings({ commit }, settings) {
+    commit('SET_SETTINGS', settings)
+  },
+
+  async loadLocalSettings({ commit }, sampleId) {
+    const settings = await loadLocalDbSettings(sampleId)
+    commit('SET_SETTINGS', settings)
+  },
+
+  saveAppSettings(
+    { dispatch, commit, getters },
+    { newCouchDbUrl, newCouchDbUsername, newBamDir, userTags }
+  ) {
     const currentTags = getters.getVariantTags
+    commit('SET_COUCH_DB_URL', newCouchDbUrl)
+    commit('SET_COUCH_DB_USERNAME', newCouchDbUsername)
     commit('SET_BAM_DIR', newBamDir)
     commit('SET_USER_TAGS', { userTags, currentTags })
     dispatch('removeVariantTags', userTags)
     dispatch('saveSettings')
+  },
+
+  storeCouchDbPassword({ commit }, newCouchDbPassword) {
+    commit('SET_COUCH_DB_PASSWORD', newCouchDbPassword)
   },
 
   removeVariantTags({ state, commit }, userTags) {
@@ -345,14 +391,6 @@ export const actions = {
         message: `There was a problem saving settings: ${error.message}`,
       })
     })
-  },
-
-  downloadSettings({ state }) {
-    triggerDownloadSettings(state.settings)
-  },
-
-  downloadSettingsSample({ state }) {
-    triggerDownloadSettings(state.settings, state.sampleId)
   },
 
   closeSnackbar({ commit }) {

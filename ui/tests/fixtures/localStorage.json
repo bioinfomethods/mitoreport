@@ -2,126 +2,87 @@
   "igvHost": "http://localhost:60151",
   "geneCardsUrlPrefix": "https://www.genecards.org/cgi-bin/carddisp.pl",
   "hmtVarUrlPrefix": "https://www.hmtvar.uniba.it/results",
-  "samples": [
-    {
-      "id": "15G002035-GM12878K_20pc_10kb_200",
-      "bamDir": "/tmp/bamDir/",
-      "bamFilename": "TestSample.bam",
-      "vcfDir": "/tmp/vcfDir/",
-      "vcfFilename": "TestSample.vcf.gz",
-      "maternalVcfDir": null,
-      "maternalVcfFilename": null,
-      "variantSearches": [
-        {
-          "name": "Custom Filter 1",
-          "description": "Custom 1 description",
-          "custom": true,
-          "filterConfig": {
-            "posRange": [0, 16569],
-            "selectedTypes": ["SNP", "DEL"],
-            "selectedConsequences": [],
-            "vafRange": [0.03, 0.1],
-            "depthRange": [500, 12000],
-            "importantCuration": false
-          }
-        },
-        {
-          "name": "Local Filter 2",
-          "description": "Local 2 description",
-          "custom": true,
-          "filterConfig": {
-            "posRange": [200, 16300],
-            "allele": "A/C",
-            "selectedTypes": ["SNP", "INS", "DEL"],
-            "selectedConsequences": [],
-            "vafRange": [0.03, 0.1],
-            "importantCuration": false
-          }
+  "sample": {
+    "id": "15G002035-GM12878K_20pc_10kb_200",
+    "bamDir": "/tmp/bamDir/",
+    "bamFilename": "TestSample.bam",
+    "vcfDir": "/tmp/vcfDir/",
+    "vcfFilename": "TestSample.vcf.gz",
+    "maternalVcfDir": null,
+    "maternalVcfFilename": null,
+    "variantSearches": [
+      {
+        "name": "Custom Filter 1",
+        "description": "Custom 1 description",
+        "custom": true,
+        "filterConfig": {
+          "posRange": [0, 16569],
+          "selectedTypes": ["SNP", "DEL"],
+          "selectedConsequences": [],
+          "vafRange": [0.03, 0.1],
+          "depthRange": [500, 12000],
+          "importantCuration": false
         }
-      ],
-      "variantTags": [
-        {
-          "name": "Review",
-          "important": true,
-          "custom": false
-        },
-        {
-          "name": "Excluded",
-          "important": false,
-          "custom": false
-        },
-        {
-          "name": "FalsePositive",
-          "important": false,
-          "custom": false
-        },
-        {
-          "name": "Likely",
-          "important": true,
-          "custom": false
-        },
-        {
-          "name": "Match",
-          "important": true,
-          "custom": false
-        },
-        {
-          "name": "Mismatch",
-          "important": false,
-          "custom": false
-        }
-      ],
-      "curations": {
-        "chrM-152-T-C": {
-          "id": "3e90cfac-39ca-4aaa-a3d4-007d697eac5b",
-          "variantId": "chrM-152-T-C",
-          "selectedTagNames": ["Review", "Excluded"],
-          "variantNote": "abc"
-        },
-        "chrM-263-A-G": {
-          "id": "9effa51f-1132-4c38-a20c-dc2c94680edb",
-          "variantId": "chrM-263-A-G",
-          "selectedTagNames": [],
-          "variantNote": ""
+      },
+      {
+        "name": "Local Filter 2",
+        "description": "Local 2 description",
+        "custom": true,
+        "filterConfig": {
+          "posRange": [200, 16300],
+          "allele": "A/C",
+          "selectedTypes": ["SNP", "INS", "DEL"],
+          "selectedConsequences": [],
+          "vafRange": [0.03, 0.1],
+          "importantCuration": false
         }
       }
-    },
-    {
-      "id": "TestSample2",
-      "bamDir": "/tmp/bamDir/",
-      "bamFilename": "TestSample2.bam",
-      "vcfDir": "/tmp/vcfDir/",
-      "vcfFilename": "TestSample2.vcf.gz",
-      "maternalVcfDir": null,
-      "maternalVcfFilename": null,
-      "variantSearches": [
-        {
-          "name": "Custom Filter 1",
-          "description": "Custom 1 description",
-          "custom": true,
-          "filterConfig": {
-            "posRange": [0, 16569],
-            "selectedTypes": ["SNP", "DEL"],
-            "selectedConsequences": [],
-            "vafRange": [0.03, 0.1],
-            "depthRange": [500, 12000],
-            "importantCuration": false
-          }
-        },
-        {
-          "name": "Custom Filter 2",
-          "description": "Custom 2 description",
-          "custom": true,
-          "filterConfig": {
-            "posRange": [200, 16300],
-            "allele": "A/C",
-            "selectedTypes": ["SNP", "INS", "DEL"],
-            "selectedConsequences": [],
-            "vafRange": [0.03, 0.1],
-            "importantCuration": false
-          }
-        }
-      ]
+    ],
+    "variantTags": [
+      {
+        "name": "Review",
+        "important": true,
+        "custom": false
+      },
+      {
+        "name": "Excluded",
+        "important": false,
+        "custom": false
+      },
+      {
+        "name": "FalsePositive",
+        "important": false,
+        "custom": false
+      },
+      {
+        "name": "Likely",
+        "important": true,
+        "custom": false
+      },
+      {
+        "name": "Match",
+        "important": true,
+        "custom": false
+      },
+      {
+        "name": "Mismatch",
+        "important": false,
+        "custom": false
+      }
+    ],
+    "curations": {
+      "chrM-152-T-C": {
+        "id": "3e90cfac-39ca-4aaa-a3d4-007d697eac5b",
+        "variantId": "chrM-152-T-C",
+        "selectedTagNames": ["Review", "Excluded"],
+        "variantNote": "abc"
+      },
+      "chrM-263-A-G": {
+        "id": "9effa51f-1132-4c38-a20c-dc2c94680edb",
+        "variantId": "chrM-263-A-G",
+        "selectedTagNames": [],
+        "variantNote": ""
+      }
     }
-  ]
+  }
 }

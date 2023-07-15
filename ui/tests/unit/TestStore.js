@@ -1,4 +1,4 @@
-import { settingsAllSamplesMerger } from '@/services/LocalDataService'
+import { settingsSampleMerger } from '@/services/LocalDataService'
 import { DEFAULT_SNACKBAR_OPTS } from '@/shared/constants'
 import * as _ from 'lodash'
 import Vue from 'vue'
@@ -9,6 +9,7 @@ import {
   DEFAULT_FIRST_HAPLOGROUP,
   DEFAULT_HMT_VAR_URL_PREFIX,
   DEFAULT_IGV_HOST,
+  DEFAULT_HAS_MATERNAL_VARIANTS,
 } from '../../src/shared/constants'
 import { getters as realGetters } from '@/store'
 import defaultSettings from '../fixtures/defaultSettings.json'
@@ -26,29 +27,27 @@ const mapVariant = function(variant) {
 
 export const state = {
   sampleId: '15G002035-GM12878K_20pc_10kb_200',
-  settings: _.mergeWith(
-    defaultSettings,
-    mitoSettings,
-    settingsAllSamplesMerger
-  ),
+  settings: _.mergeWith(defaultSettings, mitoSettings, settingsSampleMerger),
   loading: false,
   snackbar: DEFAULT_SNACKBAR_OPTS,
   variants: variants.map(mapVariant),
+  maternalVariants: {},
   filteredVariants: variants.map(mapVariant),
   deletions: deletions,
   maxReadDepth: 99999,
+  syncFeature: false,
 }
 
 export const mutations = {}
 
 export const actions = {
+  setSyncFeature() {},
   fetchData() {},
   saveAppSettings() {},
   saveSearch() {},
   deleteSearch() {},
   saveCuration() {},
   saveSettings() {},
-  downloadSettings() {},
   closeSnackbar() {},
   filterImportantVariants() {},
 }
@@ -74,14 +73,20 @@ export const getters = {
     return DEFAULT_FIRST_HAPLOGROUP
   },
 
+  hasMaternalVariants: () => {
+    return DEFAULT_HAS_MATERNAL_VARIANTS
+  },
+
   getHmtVarUrlPrefix: () => {
     return DEFAULT_HMT_VAR_URL_PREFIX
   },
 
   getSampleSettings: () => {
-    return defaultSettings.samples.find(
-      sample => sample.id === '15G002035-GM12878K_20pc_10kb_200'
-    )
+    return defaultSettings.sample
+  },
+
+  getSettingsCouchDbUrl: state => {
+    return getters.getSampleSettings(state).couchDbUrl
   },
 
   getSettingsBamDir: state => {

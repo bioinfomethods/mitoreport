@@ -105,6 +105,7 @@ describe('App.vue', () => {
         1,
         expect.anything(),
         {
+          newCouchDbUrl: '',
           newBamDir: '/tmp/newBamDir/',
           userTags: [],
         }

@@ -1,10 +1,25 @@
 import * as _ from 'lodash'
+import PouchDB from 'pouchdb'
+import getStore from '@/store'
+import {
+  USER_SETTINGS_APPEND_PROP_NAMES,
+  USER_SETTINGS_PROP_NAMES,
+} from '@/shared/constants'
+export const LOCAL_DB = new PouchDB('mitoreport')
 
 export async function getVariants() {
   return {
     status: 200,
     statusText: 'OK',
     data: window.variants,
+  }
+}
+
+export async function getMaternalVariants() {
+  return {
+    status: 200,
+    statusText: 'OK',
+    data: window.maternalVariants,
   }
 }
 
@@ -16,19 +31,11 @@ export async function getDeletions() {
   }
 }
 
-export function settingsAllSamplesMerger(objValue, srcValue, key) {
-  if (key === 'samples') {
-    return _.unionBy((srcValue || []).concat(objValue || []), 'id')
-  } else {
-    return undefined
-  }
-}
-
 export function settingsSampleMerger(objValue, srcValue, key) {
-  if (key === 'variantSearches' || key === 'variantTags') {
+  if (USER_SETTINGS_APPEND_PROP_NAMES.includes(key)) {
     return _.unionBy((srcValue || []).concat(objValue || []), 'name')
-  } else if (key === 'curations') {
-    return srcValue
+  } else if (USER_SETTINGS_PROP_NAMES.includes(key)) {
+    return objValue
   } else {
     return undefined
   }
@@ -36,48 +43,97 @@ export function settingsSampleMerger(objValue, srcValue, key) {
 
 export async function loadSettings() {
   const defaultSettings = _.cloneDeep(window.defaultSettings)
-  const fileSettings = _.cloneDeep(window.settings)
-  const localStorageSettings =
-    JSON.parse(localStorage.getItem('mitoSettings')) || {}
+  const sampleId = defaultSettings?.sample?.id
+  let localDbSettings = {}
+  try {
+    localDbSettings = await loadLocalDbSettings(sampleId)
+  } catch (err) {
+    if (err.status !== 404) {
+      throw new Error(
+        `Unexpected error=${err} trying to load settings for sample=${sampleId}`
+      )
+    }
+  }
 
-  const samplesMerged = _.mergeWith(
-    {},
+  const mergedSettings = _.mergeWith(
+    localDbSettings,
     defaultSettings,
-    fileSettings,
-    localStorageSettings,
-    settingsAllSamplesMerger
+    settingsSampleMerger
   )
-
-  samplesMerged.samples = samplesMerged.samples.map(sam => {
-    const defaultSample = defaultSettings?.samples?.find(s => s.id === sam.id)
-    const fileSample = fileSettings?.samples?.find(s => s.id === sam.id)
-    const localSample = localStorageSettings?.samples?.find(
-      s => s.id === sam.id
-    )
-
-    const mergedSample = _.mergeWith(
-      {},
-      defaultSample,
-      fileSample,
-      localSample,
-      settingsSampleMerger
-    )
-
-    return mergedSample
-  })
 
   return {
     status: 200,
     statusText: 'OK',
-    data: samplesMerged,
+    data: mergedSettings,
+  }
+}
+
+export async function loadLocalDbSettings(sampleId) {
+  try {
+    return LOCAL_DB.get(sampleId)
+  } catch (err) {
+    if (err.status !== 404) {
+      throw new Error(
+        `Unexpected error=${err} trying to load settings for sample=${sampleId}`
+      )
+    }
   }
 }
 
 export async function saveSettingsToLocal(settings) {
-  localStorage.setItem('mitoSettings', JSON.stringify(settings))
-
-  return {
-    status: 200,
-    statusText: 'OK',
+  const sampleId = settings.sample.id
+  try {
+    const existing = await LOCAL_DB.get(sampleId)
+    const toSave = {
+      ...settings,
+      _id: existing._id,
+      _rev: existing._rev,
+    }
+    return LOCAL_DB.put(toSave)
+  } catch (err) {
+    if (err.status === 404) {
+      const toSave = {
+        ...settings,
+        _id: settings.sample.id,
+      }
+      return LOCAL_DB.put(toSave)
+    } else {
+      throw new Error(
+        `Unexpected error=${err} trying to save settings for sample=${sampleId}`
+      )
+    }
   }
+}
+
+export let SYNC_HANDLER = null
+
+export async function syncWithRemote() {
+  const couchDbUrl =
+    getStore.getters.getSettingsCouchDbUrl || 'http://localhost:5984'
+  const [scheme, hostAndPath] = couchDbUrl.split('://')
+  const username = getStore.getters.getSettingsCouchDbUsername
+  const password = getStore.state.couchDbPassword
+  const connectionUrl = `${scheme}://${username}:${password}@${hostAndPath}`
+
+  let remoteDB = new PouchDB(connectionUrl)
+
+  SYNC_HANDLER = LOCAL_DB.sync(remoteDB, {
+    live: true,
+    retry: true,
+  })
+    .on('change', function(change) {
+      const sampleId = change.change.docs[0].sample.id
+      getStore.dispatch('loadLocalSettings', sampleId)
+    })
+    .on('error', function(err) {
+      console.error(
+        `Unexpected error occured while trying to sync: ${JSON.stringify(err)}`
+      )
+      SYNC_HANDLER = null
+    })
+}
+
+export function cancelSyncWithRemote() {
+  SYNC_HANDLER?.cancel()
+  SYNC_HANDLER = null
 }

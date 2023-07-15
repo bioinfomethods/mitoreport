@@ -4,12 +4,16 @@
 
 Mitoreport is an application for Mitochondrial DNA variants analysis.
 
+## Prerequisites
+
+* Java 11 installed, see [SdkMan](https://sdkman.io/) for installing and managing different Java versions.
+
 ## Setup
 
 Download the release jar:
 
 ```bash
-wget 'https://github.com/bioinfomethods/mitoreport/releases/download/1.0.0-beta-1/mitoreport-1.0.0-beta-1-all.jar'
+wget 'https://github.com/bioinfomethods/mitoreport/releases/download/1.0.0-beta-3/mitoreport-1.0.0-beta-3-all.jar'
 ```
 
 ### Download Fixed Resources
@@ -34,7 +38,7 @@ Before running MitoReport, run this to download new MitoMap annotations to file:
 
 ```bash
 mkdir -p resources
-java -jar mitoreport-1.0.0-beta-1-all.jar mito-map-download \
+java -jar mitoreport-1.0.0-beta-3-all.jar mito-map-download \
   --output resources/mito_map_annotations.json
 ```
 
@@ -57,13 +61,18 @@ Below example commands will generate deletions and variants data including writi
 the test sample:
 
 ```bash
-java -jar mitoreport-1.0.0-beta-1-all.jar mito-report \
-    -sample MITOREPORT-TEST-SAMPLE \
-    -mann ./resources/mito_map_annotations.json \
-    -gnomad ./resources/gnomad.genomes.v3.1.sites.chrM.vcf.bgz \
+java -jar mitoreport-1.0.0-beta-3-all.jar mito-report \
     -vcf resources/test-sample/mitoreport-test-sample.vep.vcf.gz \
+    -sample MITOREPORT-TEST-SAMPLE \
+    -mann resources/mito_map_annotations.json \
+    -gnomad resources/gnomad.genomes.v3.1.sites.chrM.vcf.bgz \
+    --maternal-vcf resources/test-sample/mitoreport-test-sample.vep.vcf.gz \
+    --maternal-sample MITOREPORT-TEST-SAMPLE \
     resources/test-sample/mitoreport-test-sample.bam ./resources/controls/*.bam
 ```
+
+**Note: The `--maternal-vcf` using the same VCF as proband is for demonstration purposes only.  The results from this
+would mean the Maternal Heteroplasmy column will show the same results as proband.**
 
 A new directory `mitoreport-MITOREPORT-TEST-SAMPLE` should now be created.  Open `index.html` to run this interactive
 report. For example, on MacOS use:
@@ -76,12 +85,51 @@ You can find an online example of this output here:
 
 [https://bioinfomethods.github.io/mitoreport/examples/mitoreport-MITOREPORT-TEST-SAMPLE/index.html](https://bioinfomethods.github.io/mitoreport/examples/mitoreport-MITOREPORT-TEST-SAMPLE/index.html)
 
+## CouchDB and PouchDB (feature in alpha)
+
+### Additional Prerequisites
+
+* [Docker](https://www.docker.com/products/docker-desktop/) installed
+
+This Git repo also includes a docker-compose.yml file where you can start up a CouchDB instance.  This can serve
+as a persistent store for Mitoreport where curation notes and tags can be saved persisted.
+
+**Note: This feature is in alpha and is not meant for production use.**
+**Note: Security of CouchDB and PouchDB is fairly basic and should be reviewed before use.**
+
+### Getting Started
+
+Override default username and password by setting ENV vars COUCHDB_USER and COUCHDB_PASSWORD before starting up
+docker compose.
+
+```bash
+docker compose up -d
+
+# Open CouchDB admin page
+open http://localhost:5984/_utils/
+```
+
+By default, this feature is off.  To switch it on, provide `syncFeature=true` as a query parameter in the URL of the
+mitoreport page.  For example:
+
+```bash
+# No sync, this is default
+file:///tmp/resources/mcri/mitoreport/mitoreport-MITOREPORT-TEST-SAMPLE/index.html#/variants
+
+# With sync, make sure you force refresh the browser
+file:///tmp/resources/mcri/mitoreport/mitoreport-MITOREPORT-TEST-SAMPLE/index.html#/variants?syncFeature=true
+```
+
+After enabling feature the Mitoreport settings page (top-right cogwheel icon) will show a new CouchDB settings section
+where you can enter username and password with the above `COUCHDB_USER` and `COUCHDB_PASSWORD` values.
+```bash
+
 ## Credits
 
 MitoReport is developed by the Bioinformatics Methods group at the Murdoch Childrens Research Institute.
 
 MitoReport has benefited from expertise, advice and input provided by many contributors at the Murdoch Children's
-Research Institute (MCRI) and the Victorian Clinical Genetics Services (VCGS). In particular we acknowledge the VCGS
+Research Institute (MCRI) and the Victorian Clinical Genetics Services (VCGS). In particular, we acknowledge the VCGS
 Clinical Genomics and Targeted Genomics Diagnostics (TGD) groups for their insight into the process for clinical
 interpretation and processes for validation of mitochondrial testing. We further acknowledge the VCGS Clinical
 Bioinformatics Unit and Miriam Fanjul Fernandez for the initial inspiration and groundwork that provided the basis for

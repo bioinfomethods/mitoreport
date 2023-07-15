@@ -25,10 +25,11 @@ pnpm-debug.log*
 .classpath
 .project
 .settings
+.run
 
-# Build
 build
 out
+controls
 mitoreport-*
 tmp
 tmp2
@@ -43,9 +44,13 @@ src/main/resources/mitoui/*
 !src/main/resources/mitoui/README.md
 ui/public/deletions.js
 ui/public/variants.js
+ui/public/maternalVariants.js
 ui/public/defaultSettings.js
 ui/public/mitoSettings*.js
 ui/coverage
+ui/mitoreport
 /dist/
-
 !HG00097.vcf
+couchdb/data
+resources
+bin

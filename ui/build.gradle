@@ -1,5 +1,5 @@
 plugins {
-  id 'com.github.node-gradle.node' version '3.1.0'
+  id 'com.github.node-gradle.node' version '3.3.0'
 }
 
 description = 'Mito Report UI'
@@ -7,7 +7,7 @@ description = 'Mito Report UI'
 defaultTasks 'runTestUnit', 'runLint', 'runBuild'
 
 node {
-  download = true
+  download = Boolean.valueOf(property('nodeDownload'))
 }
 
 task runServe(type: NpmTask, dependsOn: 'npmInstall') {

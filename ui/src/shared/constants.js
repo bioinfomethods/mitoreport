@@ -28,6 +28,8 @@ export const MAX_POS = 16569
 
 export const DEFAULT_IGV_HOST = 'http://localhost:60151'
 
+export const DEFAULT_HAS_MATERNAL_VARIANTS = false
+
 export const DEFAULT_GENECARDS_URL_PREFIX =
   'https://www.genecards.org/cgi-bin/carddisp.pl'
 
@@ -95,4 +97,16 @@ export const VARIANT_MASKS = [
     start: 16024,
     end: 576,
   },
+]
+
+export const USER_SETTINGS_APPEND_PROP_NAMES = [
+  'variantSearches',
+  'variantTags',
+]
+
+export const USER_SETTINGS_PROP_NAMES = [
+  'curations',
+  'couchDbUrl',
+  'bamDir',
+  'bamFilename',
 ]

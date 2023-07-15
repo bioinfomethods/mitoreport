@@ -2,160 +2,158 @@
   "igvHost": "http://localhost:60151",
   "geneCardsUrlPrefix": "https://www.genecards.org/cgi-bin/carddisp.pl",
   "hmtVarUrlPrefix": "https://www.hmtvar.uniba.it/results",
-  "samples": [
-    {
-      "id": "15G002035-GM12878K_20pc_10kb_200",
-      "metadata": {
-        "applicationName": "MitoReport",
-        "version": "v00.01.00-43",
-        "vendor": "MCRI",
-        "buildTimestamp": "2021-07-30T00:41:25.155+10:00",
-        "buildCommit": "g1df6150",
-        "mitoreportVersion": "v00.01.00-43",
-        "gnomadSource": {
-          "absolutePath": "/Users/tommyli/Development/mcri/mitoreport/test_fixtures/gnomad.genomes.v3.1.sites.chrM.vcf.bgz",
-          "fileName": "gnomad.genomes.v3.1.sites.chrM.vcf.bgz",
-          "created": "2020-12-07T02:46:18",
-          "modified": "2020-12-07T02:46:18",
-          "accessed": "2021-01-26T23:32:01"
-        },
+  "sample": {
+    "id": "15G002035-GM12878K_20pc_10kb_200",
+    "metadata": {
+      "applicationName": "MitoReport",
+      "version": "v00.01.00-43",
+      "vendor": "MCRI",
+      "buildTimestamp": "2021-07-30T00:41:25.155+10:00",
+      "buildCommit": "g1df6150",
+      "mitoreportVersion": "v00.01.00-43",
+      "gnomadSource": {
         "absolutePath": "/Users/tommyli/Development/mcri/mitoreport/test_fixtures/gnomad.genomes.v3.1.sites.chrM.vcf.bgz",
         "fileName": "gnomad.genomes.v3.1.sites.chrM.vcf.bgz",
         "created": "2020-12-07T02:46:18",
         "modified": "2020-12-07T02:46:18",
         "accessed": "2021-01-26T23:32:01"
       },
-      "qc": {
-        "coverageStats": {
-          "means": {
-            "15G002035-GM12878K_20pc_10kb_200": 4989.796273291918,
-            "VCGS_DLS_FAM2_1_D1": 5761.837888198773,
-            "VCGS_DLS_FAM3_1_D1": 19473.958385093156,
-            "VCGS_DLS_FAM3_2_D1": 4622.262111801239
-          },
-          "medians": {
-            "15G002035-GM12878K_20pc_10kb_200": 5024,
-            "VCGS_DLS_FAM2_1_D1": 5715,
-            "VCGS_DLS_FAM3_1_D1": 19454,
-            "VCGS_DLS_FAM3_2_D1": 4589
-          }
+      "absolutePath": "/Users/tommyli/Development/mcri/mitoreport/test_fixtures/gnomad.genomes.v3.1.sites.chrM.vcf.bgz",
+      "fileName": "gnomad.genomes.v3.1.sites.chrM.vcf.bgz",
+      "created": "2020-12-07T02:46:18",
+      "modified": "2020-12-07T02:46:18",
+      "accessed": "2021-01-26T23:32:01"
+    },
+    "qc": {
+      "coverageStats": {
+        "means": {
+          "15G002035-GM12878K_20pc_10kb_200": 4989.796273291918,
+          "VCGS_DLS_FAM2_1_D1": 5761.837888198773,
+          "VCGS_DLS_FAM3_1_D1": 19473.958385093156,
+          "VCGS_DLS_FAM3_2_D1": 4622.262111801239
+        },
+        "medians": {
+          "15G002035-GM12878K_20pc_10kb_200": 5024,
+          "VCGS_DLS_FAM2_1_D1": 5715,
+          "VCGS_DLS_FAM3_1_D1": 19454,
+          "VCGS_DLS_FAM3_2_D1": 4589
         }
+      }
+    },
+    "haplogrepClassification": {
+      "sampleId": "15G002035-GM12878K_20pc_10kb_200",
+      "hasMultipleBaseHaplogroups": false,
+      "haplogrepResults": {
+        "1": {
+          "baseHaplogroup": "H",
+          "rank": 1,
+          "haplogroup": "H13a1a1a",
+          "quality": 0.9957
+        },
+        "2": {
+          "baseHaplogroup": "H",
+          "rank": 2,
+          "haplogroup": "H13a1a1",
+          "quality": 0.9646
+        },
+        "3": {
+          "baseHaplogroup": "H",
+          "rank": 3,
+          "haplogroup": "H13a1a1c",
+          "quality": 0.9331
+        },
+        "4": {
+          "baseHaplogroup": "H",
+          "rank": 4,
+          "haplogroup": "H13a1a1e",
+          "quality": 0.9319
+        },
+        "5": {
+          "baseHaplogroup": "H",
+          "rank": 5,
+          "haplogroup": "H13a1a1b",
+          "quality": 0.9271
+        }
+      }
+    },
+    "bamDir": "/Users/tommyli/Development/mcri/mitoreport/test_fixtures/align/",
+    "bamFilename": "15G002035-GM12878K_20pc_10kb_200.unshifted.bam",
+    "vcfDir": "/Users/tommyli/Development/mcri/mitoreport/test_fixtures/variants/",
+    "vcfFilename": "15G002035.unshifted.contamination.filtering.intermediatefilter.norm.dedup.mito_vep.vcf.gz",
+    "maternalVcfDir": null,
+    "maternalVcfFilename": null,
+    "variantSearches": [
+      {
+        "name": "All",
+        "description": "No filters applied",
+        "custom": false,
+        "filterConfig": {
+          "posRange": [
+            0,
+            16569
+          ],
+          "allele": "",
+          "selectedMitoTIP": [],
+          "selectedTypes": [],
+          "selectedGenes": [],
+          "selectedMasks": [],
+          "selectedConsequences": [],
+          "gnomADHap": [],
+          "vafRange": [
+            0,
+            1
+          ],
+          "gbFreqTickIndex": 6,
+          "gnomADHetFreqTickIndex": 8,
+          "gnomADHomFreqTickIndex": 8,
+          "disease": "",
+          "diseaseShowBlank": false,
+          "curationSearch": "",
+          "importantCuration": false,
+          "mitoMap": "",
+          "mitoMapShowBlank": false,
+          "selectedCuratedRefName": "",
+          "hgvsp": "",
+          "hgvspShowBlank": false,
+          "hgvsc": "",
+          "hgvscShowBlank": false,
+          "hgvs": "",
+          "hgvsShowBlank": false
+        }
+      }
+    ],
+    "variantTags": [
+      {
+        "name": "Review",
+        "important": true,
+        "custom": false
       },
-      "haplogrepClassification": {
-        "sampleId": "15G002035-GM12878K_20pc_10kb_200",
-        "hasMultipleBaseHaplogroups": false,
-        "haplogrepResults": {
-          "1": {
-            "baseHaplogroup": "H",
-            "rank": 1,
-            "haplogroup": "H13a1a1a",
-            "quality": 0.9957
-          },
-          "2": {
-            "baseHaplogroup": "H",
-            "rank": 2,
-            "haplogroup": "H13a1a1",
-            "quality": 0.9646
-          },
-          "3": {
-            "baseHaplogroup": "H",
-            "rank": 3,
-            "haplogroup": "H13a1a1c",
-            "quality": 0.9331
-          },
-          "4": {
-            "baseHaplogroup": "H",
-            "rank": 4,
-            "haplogroup": "H13a1a1e",
-            "quality": 0.9319
-          },
-          "5": {
-            "baseHaplogroup": "H",
-            "rank": 5,
-            "haplogroup": "H13a1a1b",
-            "quality": 0.9271
-          }
-        }
+      {
+        "name": "Excluded",
+        "important": false,
+        "custom": false
       },
-      "bamDir": "/Users/tommyli/Development/mcri/mitoreport/test_fixtures/align/",
-      "bamFilename": "15G002035-GM12878K_20pc_10kb_200.unshifted.bam",
-      "vcfDir": "/Users/tommyli/Development/mcri/mitoreport/test_fixtures/variants/",
-      "vcfFilename": "15G002035.unshifted.contamination.filtering.intermediatefilter.norm.dedup.mito_vep.vcf.gz",
-      "maternalVcfDir": null,
-      "maternalVcfFilename": null,
-      "variantSearches": [
-        {
-          "name": "All",
-          "description": "No filters applied",
-          "custom": false,
-          "filterConfig": {
-            "posRange": [
-              0,
-              16569
-            ],
-            "allele": "",
-            "selectedMitoTIP": [],
-            "selectedTypes": [],
-            "selectedGenes": [],
-            "selectedMasks": [],
-            "selectedConsequences": [],
-            "gnomADHap": [],
-            "vafRange": [
-              0,
-              1
-            ],
-            "gbFreqTickIndex": 6,
-            "gnomADHetFreqTickIndex": 8,
-            "gnomADHomFreqTickIndex": 8,
-            "disease": "",
-            "diseaseShowBlank": false,
-            "curationSearch": "",
-            "importantCuration": false,
-            "mitoMap": "",
-            "mitoMapShowBlank": false,
-            "selectedCuratedRefName": "",
-            "hgvsp": "",
-            "hgvspShowBlank": false,
-            "hgvsc": "",
-            "hgvscShowBlank": false,
-            "hgvs": "",
-            "hgvsShowBlank": false
-          }
-        }
-      ],
-      "variantTags": [
-        {
-          "name": "Review",
-          "important": true,
-          "custom": false
-        },
-        {
-          "name": "Excluded",
-          "important": false,
-          "custom": false
-        },
-        {
-          "name": "FalsePositive",
-          "important": false,
-          "custom": false
-        },
-        {
-          "name": "Likely",
-          "important": true,
-          "custom": false
-        },
-        {
-          "name": "Match",
-          "important": true,
-          "custom": false
-        },
-        {
-          "name": "Mismatch",
-          "important": false,
-          "custom": false
-        }
-      ],
-      "curations": {}
-    }
-  ]
+      {
+        "name": "FalsePositive",
+        "important": false,
+        "custom": false
+      },
+      {
+        "name": "Likely",
+        "important": true,
+        "custom": false
+      },
+      {
+        "name": "Match",
+        "important": true,
+        "custom": false
+      },
+      {
+        "name": "Mismatch",
+        "important": false,
+        "custom": false
+      }
+    ],
+    "curations": {}
+  }
 }

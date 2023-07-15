@@ -183,6 +183,24 @@
                     >+{{ filterConfig.selectedGenes.length - 4 }} more</span
                   >
                 </template>
+
+                <template v-slot:item="{ item, attrs, on }">
+                  <v-list-item
+                    v-on="on"
+                    v-bind="attrs"
+                    #default="{ active }"
+                    style="min-width: 180px"
+                  >
+                    <v-list-item-action>
+                      <v-checkbox :input-value="active"></v-checkbox>
+                    </v-list-item-action>
+                    <v-list-item-content>
+                      <v-list-item-title>
+                        <span>{{ item }}</span>
+                      </v-list-item-title>
+                    </v-list-item-content>
+                  </v-list-item>
+                </template>
               </v-select>
 
               <v-select
@@ -347,6 +365,25 @@
               >
               </v-range-slider>
             </td>
+            <!-- Maternal Variant Header -->
+            <td v-if="hasMaternalVariants">
+              <v-row class="px-4 justify-space-between">
+                <span class="grey--text text--darken-1">{{
+                  mafTicks[mafIndexRange[0]]
+                }}</span>
+                <span class="grey--text text--darken-1">{{
+                  mafTicks[mafIndexRange[1]]
+                }}</span>
+              </v-row>
+              <v-range-slider
+                v-model="mafIndexRange"
+                :value="mafTicks"
+                min="0"
+                :max="mafLastTickIndex"
+                hide-details
+              >
+              </v-range-slider>
+            </td>
             <td>
               <v-row class="px-4 justify-center">
                 <span class="grey--text text--darken-1">
@@ -438,6 +475,20 @@
           <span v-if="hapRatios[item.id] && hapRatios[item.id].hapWeight">
             {{ hapRatios[item.id].hapWeight | precisionTo }}</span
           >
+        </template>
+
+        <!-- Maternal Variant -->
+        <template v-slot:item.maternal="{ item }">
+          <span v-if="maternalVariants[item.id]">
+            <v-tooltip top>
+              <template v-slot:activator="{ on, attrs }">
+                <span v-bind="attrs" v-on="on">
+                  {{ maternalVariants[item.id].genotypes[0].AF }}
+                </span>
+              </template>
+              <span> Read depth: {{ maternalVariants[item.id].DP }} </span>
+            </v-tooltip>
+          </span>
         </template>
 
         <!-- gnomAD Het -->
@@ -801,6 +852,8 @@ export default {
       selectedSavedSearch: DEFAULT_VARIANT_SEARCH,
       vafTicks: [0, 0.01, 0.02, 0.03, 0.05, 0.1, 1],
       vafIndexRange: [1, 5],
+      mafTicks: [0, 0.01, 0.02, 0.03, 0.05, 0.1, 1],
+      mafIndexRange: [0, 6],
       gbFreqTicks: [0.0, 0.001, 0.002, 0.005, 0.01, 0.1, 1.0],
       mitoTipQuartiles: [
         'Confirmed pathogenic',
@@ -853,7 +906,12 @@ export default {
   },
 
   computed: {
-    ...mapState(['filteredVariants', 'maxReadDepth', 'settings']),
+    ...mapState([
+      'filteredVariants',
+      'maternalVariants',
+      'maxReadDepth',
+      'settings',
+    ]),
     ...mapGetters([
       'getSettingsBamFile',
       'getSampleSettings',
@@ -861,6 +919,7 @@ export default {
       'getHaplogroups',
       'getFirstHaplogroup',
       'getFirstFullHaplogroup',
+      'hasMaternalVariants',
     ]),
     tableFilteredVariants() {
       return Object.values(this.filteredVariants)
@@ -919,7 +978,7 @@ export default {
       return COLORS
     },
     headers() {
-      return [
+      const allHeaders = [
         {
           text: 'HGVS.g',
           value: 'pos',
@@ -958,14 +1017,21 @@ export default {
           filter: (value, search, item) => this.curationFilter(item),
         },
         {
-          text: 'Heteroplasmy of Sample',
+          text: 'Heteroplasmy of Sample\n',
           tooltip: 'Heteroplasmy freq of variant in sample',
           value: 'genotypes[0].AF',
           width: '80',
           filter: this.vafFilter,
         },
         {
-          text: 'Genbank Freq',
+          text: 'Maternal Heteroplasmy',
+          tooltip: 'Maternal Info',
+          value: 'maternal',
+          width: '80',
+          filter: this.mafFilter,
+        },
+        {
+          text: 'Genbank Frequency\n',
           // tooltip: 'Genbank % tooltip',
           value: 'gbFreq',
           width: '80',
@@ -1004,12 +1070,15 @@ export default {
           width: '120',
         },
         {
-          text: 'Read Depth',
+          text: 'Read Depth\n',
           value: 'DP',
           sortable: true,
           width: '60',
         },
       ]
+      const withoutMaternal = allHeaders.filter(h => h.value !== 'maternal')
+
+      return this.hasMaternalVariants ? allHeaders : withoutMaternal
     },
 
     types() {
@@ -1017,11 +1086,6 @@ export default {
         ...new Set(Object.values(this.filteredVariants).map(row => row.type)),
       ]
     },
-
-    // TODO: #31
-    // hapOptions() {
-    //   return [...new Set(['true', 'false'])]
-    // },
 
     hapRatios() {
       return Object.values(this.filteredVariants).reduce((map, variant) => {
@@ -1082,6 +1146,10 @@ export default {
       ]
 
       return consequences
+    },
+
+    mafLastTickIndex() {
+      return this.mafTicks.length - 1
     },
 
     vafLastTickIndex() {
@@ -1251,10 +1319,25 @@ export default {
     },
 
     vafFilter: function(value) {
+      // console.log("VAF filter", value)
       let lower = this.vafTicks[this.vafIndexRange[0]]
       let upper = this.vafTicks[this.vafIndexRange[1]]
 
       return filters.rangeTextFilter(`${lower}-${upper}`, value)
+    },
+
+    // TODO: Where is this filter getting the value from?
+    // Check that it is filtering on the Maternal Variant
+    mafFilter: function(value) {
+      // console.log('Maf filter: ', value)
+      if (value) {
+        let lower = this.mafTicks[this.mafIndexRange[0]]
+        let upper = this.mafTicks[this.mafIndexRange[1]]
+
+        return filters.rangeTextFilter(`${lower}-${upper}`, value.heteroplasmy)
+      } else {
+        return true
+      }
     },
 
     gbFreqFilter: function(value) {
