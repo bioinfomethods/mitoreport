@@ -108,7 +108,8 @@ export async function saveSettingsToLocal(settings) {
 export let SYNC_HANDLER = null
 
 export async function syncWithRemote() {
-  const couchDbUrl = getStore.getters.getSettingsCouchDbUrl || 'http://localhost:5984'
+  const couchDbUrl =
+    getStore.getters.getSettingsCouchDbUrl || 'http://localhost:5984'
   const [scheme, hostAndPath] = couchDbUrl.split('://')
   const username = getStore.getters.getSettingsCouchDbUsername
   const password = getStore.state.couchDbPassword
