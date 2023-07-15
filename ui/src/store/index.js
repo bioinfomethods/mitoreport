@@ -21,6 +21,7 @@ Vue.use(Vuex)
 export const state = {
   sampleId: '',
   settings: {},
+  couchDbPassword: '',
   loading: false,
   snackbar: { ...DEFAULT_SNACKBAR_OPTS },
   variants: {},
@@ -102,6 +103,10 @@ export const getters = {
 
   getSettingsCouchDbUrl: (state, getters) => {
     return getters.getSampleSettings?.couchDbUrl
+  },
+
+  getSettingsCouchDbUsername: (state, getters) => {
+    return getters.getSampleSettings?.couchDbUsername
   },
 
   getSettingsBamDir: (state, getters) => {
@@ -209,6 +214,14 @@ export const mutations = {
 
   SET_COUCH_DB_URL(state, newCouchDbUrl) {
     getters.getSampleSettings(state).couchDbUrl = newCouchDbUrl
+  },
+
+  SET_COUCH_DB_USERNAME(state, newCouchDbUsername) {
+    getters.getSampleSettings(state).couchDbUsername = newCouchDbUsername
+  },
+
+  SET_COUCH_DB_PASSWORD(state, newCouchDbPassword) {
+    state.couchDbPassword = newCouchDbPassword
   },
 
   SET_BAM_DIR(state, newBamDir) {
@@ -323,14 +336,19 @@ export const actions = {
 
   saveAppSettings(
     { dispatch, commit, getters },
-    { newCouchDbUrl, newBamDir, userTags }
+    { newCouchDbUrl, newCouchDbUsername, newBamDir, userTags }
   ) {
     const currentTags = getters.getVariantTags
     commit('SET_COUCH_DB_URL', newCouchDbUrl)
+    commit('SET_COUCH_DB_USERNAME', newCouchDbUsername)
     commit('SET_BAM_DIR', newBamDir)
     commit('SET_USER_TAGS', { userTags, currentTags })
     dispatch('removeVariantTags', userTags)
     dispatch('saveSettings')
+  },
+
+  storeCouchDbPassword({ commit }, newCouchDbPassword) {
+    commit('SET_COUCH_DB_PASSWORD', newCouchDbPassword)
   },
 
   removeVariantTags({ state, commit }, userTags) {

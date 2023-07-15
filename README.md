@@ -85,6 +85,45 @@ You can find an online example of this output here:
 
 [https://bioinfomethods.github.io/mitoreport/examples/mitoreport-MITOREPORT-TEST-SAMPLE/index.html](https://bioinfomethods.github.io/mitoreport/examples/mitoreport-MITOREPORT-TEST-SAMPLE/index.html)
 
+## CouchDB and PouchDB (feature in alpha)
+
+### Additional Prerequisites
+
+* [Docker](https://www.docker.com/products/docker-desktop/) installed
+
+This Git repo also includes a docker-compose.yml file where you can start up a CouchDB instance.  This can serve
+as a persistent store for Mitoreport where curation notes and tags can be saved persisted.
+
+**Note: This feature is in alpha and is not meant for production use.**
+**Note: Security of CouchDB and PouchDB is fairly basic and should be reviewed before use.**
+
+### Getting Started
+
+Override default username and password by setting ENV vars COUCHDB_USER and COUCHDB_PASSWORD before starting up
+docker compose.
+
+```bash
+docker compose up -d
+
+# Open CouchDB admin page
+open http://localhost:5984/_utils/
+```
+
+By default, this feature is off.  To switch it on, provide `syncFeature=true` as a query parameter in the URL of the
+mitoreport page.  For example:
+
+```bash
+# No sync, this is default
+file:///tmp/resources/mcri/mitoreport/mitoreport-MITOREPORT-TEST-SAMPLE/index.html#/variants
+
+# With sync, make sure you force refresh the browser
+file:///tmp/resources/mcri/mitoreport/mitoreport-MITOREPORT-TEST-SAMPLE/index.html#/variants?syncFeature=true
+```
+
+After enabling feature the Mitoreport settings page (top-right cogwheel icon) will show a new CouchDB settings section
+where you can enter username and password with the above `COUCHDB_USER` and `COUCHDB_PASSWORD` values.
+```bash
+
 ## Credits
 
 MitoReport is developed by the Bioinformatics Methods group at the Murdoch Childrens Research Institute.
