@@ -48,11 +48,6 @@ repositories {
     }
 }
 
-configurations {
-    // for dependencies that are needed for development only
-    developmentOnly
-}
-
 micronaut {
     version = "$micronautVersion"
     runtime("netty")
@@ -115,7 +110,6 @@ tasks.withType(Test).configureEach {
     exclude 'groovy-ngs-utils/**'
     exclude 'gngs/**'
     useJUnitPlatform()
-    classpath += configurations.developmentOnly
     testLogging {
         events "skipped", "failed"
     }
@@ -144,18 +138,6 @@ jar {
 shadowJar {
     mergeServiceFiles()
     archiveVersion.set(appArchiveVersion)
-}
-
-tasks.withType(JavaExec) {
-    classpath += configurations.developmentOnly
-    jvmArgs('-XX:TieredStopAtLevel=1', '-Dcom.sun.management.jmxremote')
-    if (gradle.startParameter.continuous) {
-        systemProperties(
-                'micronaut.io.watch.restart': 'true',
-                'micronaut.io.watch.enabled': 'true',
-                "micronaut.io.watch.paths": "src/main"
-        )
-    }
 }
 
 String mitoOut = "${projectDir}/src/main/resources/mitoui"
