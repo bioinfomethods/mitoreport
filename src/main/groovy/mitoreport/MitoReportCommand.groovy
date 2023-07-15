@@ -9,6 +9,7 @@ import groovy.json.JsonOutput
 import groovy.json.JsonSlurper
 import groovy.util.logging.Slf4j
 import io.micronaut.core.io.ResourceLoader
+import jakarta.inject.Inject
 import mitoreport.haplogrep.HaplogrepClassification
 import mitoreport.haplogrep.HaplogroupClassifier
 import org.apache.commons.io.FileUtils
@@ -18,7 +19,6 @@ import picocli.CommandLine.Command
 import picocli.CommandLine.Option
 import picocli.CommandLine.Parameters
 
-import javax.inject.Inject
 import java.nio.file.*
 import java.nio.file.attribute.BasicFileAttributes
 import java.time.ZoneOffset
@@ -133,7 +133,7 @@ class MitoReportCommand implements Runnable {
                 accessed         : timestampStrToLocal(gnomadVcfFileAttrs.lastAccessTime().toString())
         ]
 
-        HaplogrepClassification haplogrepClassification = new HaplogroupClassifier(vcfFile, sample).call()
+        HaplogrepClassification haplogrepClassification = new HaplogroupClassifier(vcfFile: vcfFile, sampleId: sample).call()
         writeOutUiDataAndSettings(
                 deletionsJson,
                 deletionsResult.bamFile,
@@ -221,7 +221,7 @@ class MitoReportCommand implements Runnable {
             File file = new File("$pathname/maternalVariants.json")
             Utils.writer(file).withWriter { it << maternalVariantsJson; it << '\n' }
 
-            HaplogrepClassification haplogrepClassification = new HaplogroupClassifier(maternal.vcfFile, sampleId).call()
+            HaplogrepClassification haplogrepClassification = new HaplogroupClassifier(vcfFile: maternal.vcfFile, sampleId: sampleId).call()
 
             result = Collections.unmodifiableMap([
                     'sampleId'               : sampleId,

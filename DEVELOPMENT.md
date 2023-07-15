@@ -4,23 +4,24 @@ This document provides setup instructions for developing MitoReport.
 
 ## Prerequisites
 
-* Java 8 installed, see [SdkMan](https://sdkman.io/) for managing different Java versions.
+* Java 11 installed, see [SdkMan](https://sdkman.io/) for managing different Java versions.
 
 ## TL;DR For Devs
 
 ```bash
 PROJECT_DIR=$(pwd)
 APP_ARCHIVE_VERSION=$(git describe --abbrev=0 --always)
+APP_ARCHIVE_VERSION=1.0.0
 
 ./gradlew build
 
 java -jar "$PROJECT_DIR/build/libs/mitoreport-$APP_ARCHIVE_VERSION-all.jar" mito-report \
   -d \
-  -sample "15G002035-GM12878K_20pc_10kb_200" \
   -vcf "$PROJECT_DIR/test_fixtures/variants/15G002035.unshifted.contamination.filtering.intermediatefilter.norm.dedup.mito_vep.vcf.gz" \
-  --maternal-vcf "$PROJECT_DIR/test_fixtures/variants/15G002035.unshifted.contamination.filtering.intermediatefilter.norm.dedup.mito_vep.vcf.gz" \
-  -mann "$PROJECT_DIR/test_fixtures/mito_map_annotations_20220614.json" \
+  -sample "15G002035-GM12878K_20pc_10kb_200" \
+  -mann "$PROJECT_DIR/test_fixtures/mito_map_annotations_20230715.json" \
   -gnomad "$PROJECT_DIR/test_fixtures/gnomad.genomes.v3.1.sites.chrM.vcf.bgz" \
+  --maternal-vcf "$PROJECT_DIR/test_fixtures/variants/15G002035.unshifted.contamination.filtering.intermediatefilter.norm.dedup.mito_vep.vcf.gz" \
   "$PROJECT_DIR/test_fixtures/align/15G002035-GM12878K_20pc_10kb_200.unshifted.bam" $PROJECT_DIR/test_fixtures/controls/*.bam
 ```
 

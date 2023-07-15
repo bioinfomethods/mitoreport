@@ -7,8 +7,8 @@ import groovy.transform.MapConstructor
 import groovy.transform.TupleConstructor
 import groovy.util.logging.Slf4j
 import groovyx.net.http.HttpBuilder
+import jakarta.inject.Singleton
 
-import javax.inject.Singleton
 import java.math.RoundingMode
 import java.nio.file.Files
 import java.nio.file.Path

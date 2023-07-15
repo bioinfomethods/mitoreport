@@ -20,7 +20,7 @@ import static java.math.RoundingMode.HALF_EVEN
  * Note that only results of given sampleId are returned for multi-sample VCFs.
  */
 @Slf4j
-@Canonical(includes = 'vcfFile, sampleId')
+//@Canonical(includes = 'vcfFile, sampleId')
 @MapConstructor
 class HaplogroupClassifier implements Callable<HaplogrepClassification> {
 

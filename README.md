@@ -4,12 +4,16 @@
 
 Mitoreport is an application for Mitochondrial DNA variants analysis.
 
+## Prerequisites
+
+* Java 11 installed, see [SdkMan](https://sdkman.io/) for installing and managing different Java versions.
+
 ## Setup
 
 Download the release jar:
 
 ```bash
-wget 'https://github.com/bioinfomethods/mitoreport/releases/download/1.0.0-beta-1/mitoreport-1.0.0-beta-1-all.jar'
+wget 'https://github.com/bioinfomethods/mitoreport/releases/download/1.0.0-beta-3/mitoreport-1.0.0-beta-3-all.jar'
 ```
 
 ### Download Fixed Resources
@@ -34,16 +38,8 @@ Before running MitoReport, run this to download new MitoMap annotations to file:
 
 ```bash
 mkdir -p resources
-java -jar mitoreport-1.0.0-beta-1-all.jar mito-map-download \
+java -jar mitoreport-1.0.0-beta-3-all.jar mito-map-download \
   --output resources/mito_map_annotations.json
-```
-java -jar build/libs/mitoreport-1.0.0-beta-2-all.jar mito-map-download -o /Users/tommy.li/Development/mcri/mitoreport/test_fixtures/mito_map_annotations_20220614.json
-## CouchDB
-
-```bash
-docker-compose up -d
-
-open http://localhost:5984/_utils/
 ```
 
 ## Creating Reports
@@ -65,15 +61,18 @@ Below example commands will generate deletions and variants data including writi
 the test sample:
 
 ```bash
-java -jar mitoreport-1.0.0-beta-1-all.jar mito-report \
-    -sample MITOREPORT-TEST-SAMPLE \
-    -mann ./resources/mito_map_annotations.json \
-    -gnomad ./resources/gnomad.genomes.v3.1.sites.chrM.vcf.bgz \
+java -jar mitoreport-1.0.0-beta-3-all.jar mito-report \
     -vcf resources/test-sample/mitoreport-test-sample.vep.vcf.gz \
+    -sample MITOREPORT-TEST-SAMPLE \
+    -mann resources/mito_map_annotations.json \
+    -gnomad resources/gnomad.genomes.v3.1.sites.chrM.vcf.bgz \
+    --maternal-vcf resources/test-sample/mitoreport-test-sample.vep.vcf.gz \
+    --maternal-sample MITOREPORT-TEST-SAMPLE \
     resources/test-sample/mitoreport-test-sample.bam ./resources/controls/*.bam
 ```
 
-Note: Use `--maternal-vcf` option to show any maternal variants within report.
+**Note: The `--maternal-vcf` using the same VCF as proband is for demonstration purposes only.  The results from this
+would mean the Maternal Heteroplasmy column will show the same results as proband.**
 
 A new directory `mitoreport-MITOREPORT-TEST-SAMPLE` should now be created.  Open `index.html` to run this interactive
 report. For example, on MacOS use:
@@ -91,7 +90,7 @@ You can find an online example of this output here:
 MitoReport is developed by the Bioinformatics Methods group at the Murdoch Childrens Research Institute.
 
 MitoReport has benefited from expertise, advice and input provided by many contributors at the Murdoch Children's
-Research Institute (MCRI) and the Victorian Clinical Genetics Services (VCGS). In particular we acknowledge the VCGS
+Research Institute (MCRI) and the Victorian Clinical Genetics Services (VCGS). In particular, we acknowledge the VCGS
 Clinical Genomics and Targeted Genomics Diagnostics (TGD) groups for their insight into the process for clinical
 interpretation and processes for validation of mitochondrial testing. We further acknowledge the VCGS Clinical
 Bioinformatics Unit and Miriam Fanjul Fernandez for the initial inspiration and groundwork that provided the basis for

@@ -2,10 +2,10 @@ package mitoreport
 
 import groovy.json.JsonSlurper
 import io.micronaut.core.io.ResourceLoader
-import io.micronaut.test.annotation.MicronautTest
+import io.micronaut.test.extensions.spock.annotation.MicronautTest
+import jakarta.inject.Inject
 import spock.lang.Specification
 
-import javax.inject.Inject
 import java.nio.file.Files
 import java.nio.file.Path
 import java.nio.file.Paths
@@ -134,7 +134,7 @@ class MitoMapAnnotationsLoaderTest extends Specification {
 
     def 'parseMitoTipsTsv() returns correct results'() {
         given:
-        String mitoTipsTsv = Paths.get(resourceLoader.getResource('classpath:mitotip_scores_small.txt').get().path).text
+        String mitoTipsTsv = resourceLoader.getResource('classpath:mitotip_scores_small.txt').get().text
 
         when:
         Map<String, Object> actualResult = MitoMapAnnotationsLoader.parseMitoTipsTsv(mitoTipsTsv)

@@ -1,9 +1,24 @@
 import java.time.OffsetDateTime
 
+buildscript {
+    configurations.classpath {
+        resolutionStrategy.activateDependencyLocking()
+    }
+    repositories {
+        mavenCentral()
+    }
+}
+
 plugins {
     id "groovy"
-    id "com.github.johnrengelman.shadow" version "6.0.0"
-    id "application"
+    id "com.github.johnrengelman.shadow" version "7.1.2"
+    id("io.micronaut.application") version "3.7.9"
+}
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(11)
+    }
 }
 
 group "mitoreport"
@@ -38,33 +53,45 @@ configurations {
     developmentOnly
 }
 
+micronaut {
+    version = "$micronautVersion"
+    runtime("netty")
+    testRuntime("spock2")
+    processing {
+        incremental(true)
+        annotations("mitoreport.*")
+    }
+}
+
 dependencies {
-    annotationProcessor platform("io.micronaut:micronaut-bom:$micronautVersion")
-    annotationProcessor "io.micronaut.configuration:micronaut-picocli"
-    compileOnly platform("io.micronaut:micronaut-bom:$micronautVersion")
-    compileOnly "io.micronaut:micronaut-inject-groovy"
-    implementation platform("io.micronaut:micronaut-bom:$micronautVersion")
-    implementation "io.micronaut:micronaut-runtime"
-    implementation "io.micronaut:micronaut-runtime-groovy"
-    implementation "io.micronaut:micronaut-validation"
-    implementation "info.picocli:picocli"
-    implementation "io.micronaut.configuration:micronaut-picocli"
-    testCompileOnly platform("io.micronaut:micronaut-bom:$micronautVersion")
-    testImplementation platform("io.micronaut:micronaut-bom:$micronautVersion")
+    implementation("info.picocli:picocli")
+    implementation("io.micronaut.groovy:micronaut-runtime-groovy")
+    implementation("io.micronaut:micronaut-http-client")
+    implementation("io.micronaut.security:micronaut-security-jwt")
+    implementation("io.micronaut.picocli:micronaut-picocli")
+    implementation("jakarta.annotation:jakarta.annotation-api")
+    compileOnly("info.picocli:picocli-codegen")
+    runtimeOnly("ch.qos.logback:logback-classic")
+    runtimeOnly("org.yaml:snakeyaml")
+    implementation("io.micronaut:micronaut-validation")
+
+    testImplementation platform("org.spockframework:spock-bom:$spockBomVersion")
+    testImplementation("io.micronaut.test:micronaut-test-spock")
     testImplementation("org.spockframework:spock-core") {
         exclude group: "org.codehaus.groovy", module: "groovy-all"
     }
-    testImplementation "io.micronaut:micronaut-inject-groovy"
-    testImplementation "io.micronaut.test:micronaut-test-spock"
-    testImplementation "io.micronaut.test:micronaut-test-junit5"
-    testImplementation "cglib:cglib-nodep:$cglibNoDepVersion"
+    testImplementation "org.junit.jupiter:junit-jupiter-api:$junitVersion"
+    testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:$junitVersion"
+    testImplementation "org.junit.platform:junit-platform-launcher:$junitPlatformLauncherVersion"
+    testRuntimeOnly "net.bytebuddy:byte-buddy:$byteBuddyVersion"  // allows mocking of classes (in addition to interfaces)
+    testRuntimeOnly "org.objenesis:objenesis:$objenesisVersion"
 
     implementation files('gngs/build/libs/groovy-ngs-utils.jar')
     implementation files('haplogrep-cmd/target/haplogrep.jar')
 
     // groovy-ngs-utils.jar is an uber jar with the following groovy modules.
     // Here we force upgrade the version.
-    implementation "org.codehaus.groovy:groovy-all:$groovyVersion"
+//    implementation "org.codehaus.groovy:groovy-all:$groovyVersion"
     implementation "org.codehaus.groovy:groovy-ant:$groovyVersion"
     implementation "org.codehaus.groovy:groovy-cli-commons:$groovyVersion"
     implementation "org.codehaus.groovy:groovy-cli-picocli:$groovyVersion"
@@ -74,24 +101,27 @@ dependencies {
     implementation "org.codehaus.groovy:groovy-templates:$groovyVersion"
     implementation "org.codehaus.groovy:groovy-xml:$groovyVersion"
     implementation "org.codehaus.groovy:groovy:$groovyVersion"
-    implementation "genepi:haplogrep-core:2.6.0"
+    implementation "genepi:haplogrep-core:$haplogrepCoreVersion"
 
     implementation "io.github.http-builder-ng:http-builder-ng-core:$httpBuilderNgVersion"
     implementation "commons-io:commons-io:$commonsIoVersion"
 }
 
-test {
+dependencyLocking {
+    lockAllConfigurations()
+}
+
+tasks.withType(Test).configureEach {
+    exclude 'groovy-ngs-utils/**'
+    exclude 'gngs/**'
+    useJUnitPlatform()
     classpath += configurations.developmentOnly
-    minHeapSize = '128m'
-    maxHeapSize = '2048m'
+    testLogging {
+        events "skipped", "failed"
+    }
 }
 
 mainClassName = "mitoreport.MitoCli"
-
-java {
-    sourceCompatibility = JavaVersion.toVersion('1.8')
-    targetCompatibility = JavaVersion.toVersion('1.8')
-}
 
 tasks.withType(GroovyCompile) {
     groovyOptions.forkOptions.jvmArgs.add('-Dgroovy.parameters=true')

@@ -4,16 +4,18 @@ import gngs.Utils
 import groovy.util.logging.Slf4j
 import io.micronaut.configuration.picocli.PicocliRunner
 import io.micronaut.core.io.ResourceLoader
+import jakarta.inject.Inject
 import picocli.CommandLine
 import picocli.CommandLine.Command
 import picocli.CommandLine.Model.CommandSpec
 import picocli.CommandLine.ParameterException
 import picocli.CommandLine.Spec
 
-import javax.inject.Inject
-
 import static mitoreport.MitoUtils.getManifestInfo
 
+// Set below ENV to configure logging levels
+// export LOGGER_LEVELS_IO_MICRONAUT=INFO
+// export LOGGER_LEVELS_MITOREPORT=DEBUG
 @Slf4j
 @Command(name = 'mito-cli',
         description = 'Mito CLI',

@@ -1,10 +1,10 @@
 package mitoreport
 
 import groovy.util.logging.Slf4j
+import jakarta.inject.Inject
 import picocli.CommandLine.Command
 import picocli.CommandLine.Option
 
-import javax.inject.Inject
 import java.nio.file.Path
 import java.nio.file.Paths
 import java.time.LocalDate

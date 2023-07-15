@@ -52,3 +52,5 @@ ui/mitoreport
 /dist/
 !HG00097.vcf
 couchdb/data
+resources
+bin
