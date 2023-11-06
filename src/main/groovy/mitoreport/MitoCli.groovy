@@ -27,7 +27,8 @@ class MitoCli implements Runnable {
 
     static void main(String[] args) throws Exception {
         Utils.configureSimpleLogging()
-        PicocliRunner.run(MitoCli.class, args)
+        int exitCode = PicocliRunner.execute(MitoCli.class, args)
+        System.exit(exitCode)
     }
 
     @Spec
