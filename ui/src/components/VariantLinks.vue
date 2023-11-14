@@ -115,7 +115,7 @@ export default {
         {
           name: 'mitomap',
           title: `MITOMAP ${this.variant.pos}`,
-          link: `https://mitomap.org/cgi-bin/search_allele?starting=${this.variant.pos}&ending=${this.variant.pos}`,
+          link: `https://mitomap.org/cgi-bin/search_allele?pstns=${this.variant.pos}`,
         },
       ]
       if (
