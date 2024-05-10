@@ -45,6 +45,8 @@
     <span v-if="variant.disease" class="autoTag" :title="variant.disease">
       <v-icon>mdi-biohazard</v-icon>&nbsp;{{ shortDisease }}
     </span>
+    
+    <AnnotationEditor :entity="variantId" type="variant" :tags="tags"></AnnotationEditor>
   </div>
 </template>
 <style lang="scss">
@@ -91,11 +93,14 @@ tr.v-data-table__expanded.v-data-table__expanded__row .autoTag {
 }
 </style>
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapState } from 'vuex'
 import * as _ from 'lodash'
 import * as vueFilters from '@/shared/vueFilters'
 import { DEBOUNCE_DELAY } from '@/shared/constants'
 import d3 from 'd3'
+
+import { AnnotationEditor } from 'tagmesh-vue2'
+
 
 export default {
   name: 'CurationCell',
@@ -113,6 +118,11 @@ export default {
       selectedTags: [],
     }
   },
+  
+  components: {
+    AnnotationEditor  
+  },
+  
   methods: {
     toggleTag: function(tag) {
       if (this.showQuickTags || this.expanded) {
@@ -154,6 +164,11 @@ export default {
       'getFirstHaplogroup',
       'getVariantTags',
     ]),
+    
+    ...mapState([
+      'tags',
+      'sampleId',
+    ]),    
 
     variant() {
       return this.getVariantById(this.variantId)

@@ -750,6 +750,8 @@
 
 <script>
 import { mapGetters, mapState } from 'vuex'
+import { AnnotationEditor } from 'tagmesh-vue2'
+
 import GeneCardsLink from '@/components/GeneCardsLink'
 import CurationCell from '@/components/CurationCell'
 import VariantInfo from '@/components/VariantInfo'
@@ -911,6 +913,8 @@ export default {
       'maternalVariants',
       'maxReadDepth',
       'settings',
+      'tags',
+      'sampleId',
     ]),
     ...mapGetters([
       'getSettingsBamFile',

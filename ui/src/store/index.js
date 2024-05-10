@@ -15,8 +15,11 @@ import {
   DEFAULT_HMT_VAR_URL_PREFIX,
   DEFAULT_IGV_HOST,
 } from '../shared/constants'
+import { TagRepository } from 'tagmesh'
 
 Vue.use(Vuex)
+
+const tag_store = {}
 
 export const state = {
   sampleId: '',
@@ -29,10 +32,16 @@ export const state = {
   filteredVariants: {},
   maxReadDepth: 0,
   deletions: {},
-  syncFeature: false,
+  syncFeature: true,
+  tag_store: tag_store,
+  tags: null,
 }
 
 export const getters = {
+  getTags: state => {
+    return state.tags
+  },
+
   getIgvHost: state => {
     return state.settings.igvHost || DEFAULT_IGV_HOST
   },
@@ -174,6 +183,10 @@ export const mutations = {
     state.sampleId = sampleId
   },
 
+  SET_TAGREPOSITORY(state, tags) {
+    state.tags = tags
+  },
+
   SET_VARIANTS(state, variants) {
     const variantsObj = {}
     variants.forEach(v => {
@@ -296,7 +309,7 @@ export const actions = {
     commit('SET_SYNC_FEATURE', enabled)
   },
 
-  async fetchData({ commit }) {
+  async fetchData({ commit, dispatch }) {
     commit('SET_LOADING')
 
     try {
@@ -311,6 +324,8 @@ export const actions = {
       commit('SET_VARIANTS', varResp.data)
       commit('SET_DELETIONS', delResp.data)
       commit('SET_SAMPLE_ID', delResp.data)
+
+      dispatch('createTagRepository')
     } catch (error) {
       console.error(error)
 
@@ -416,6 +431,12 @@ export const actions = {
     )
 
     commit('SET_FILTERED_VARIANTS', filteredVariants)
+  },
+
+  async createTagRepository({ commit, state }) {
+    let tags = await TagRepository.create(state.sampleId, state.tag_store, { serverURL: "http://localhost:5288/db"})
+    console.log('Created tag repository', tags)
+    commit('SET_TAGREPOSITORY', tags)
   },
 }
 
