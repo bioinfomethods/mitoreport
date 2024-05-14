@@ -11,7 +11,7 @@
 <script>
 import VariantTable from '@/components/VariantTable.vue'
 import { mapActions, mapState } from 'vuex'
-
+import * as _ from 'lodash'
 import { TagRepository } from 'tagmesh'
 import Vue from 'vue'
 

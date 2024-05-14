@@ -49,7 +49,6 @@ export const actions = {
   saveCuration() {},
   saveSettings() {},
   closeSnackbar() {},
-  filterImportantVariants() {},
 }
 
 export const getters = {

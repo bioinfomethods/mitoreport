@@ -396,27 +396,6 @@ export const actions = {
   closeSnackbar({ commit }) {
     commit('DEACTIVATE_SNACKBAR')
   },
-
-  filterImportantVariants({ state, commit, getters }, selectImportant) {
-    const importantTagNames = getters.getImportantVariantTags.map(v => v.name)
-
-    const sampleCurations = getters?.getSampleSettings?.curations || {}
-
-    const filteredVariants = Object.fromEntries(
-      Object.entries(state.variants).filter(([k]) => {
-        if (!selectImportant) return true
-
-        const curation = sampleCurations[k] || {}
-        const hasImportantTags = (curation.selectedTagNames || []).some(st =>
-          importantTagNames.includes(st)
-        )
-
-        return hasImportantTags
-      })
-    )
-
-    commit('SET_FILTERED_VARIANTS', filteredVariants)
-  },
 }
 
 export default new Vuex.Store({

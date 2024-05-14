@@ -94,7 +94,6 @@ import * as _ from 'lodash'
 import * as vueFilters from '@/shared/vueFilters'
 import { DEBOUNCE_DELAY } from '@/shared/constants'
 import d3 from 'd3'
-import '@/assets/css/tagmesh.css'
 
 export default {
   name: 'CurationCell',
@@ -143,6 +142,15 @@ export default {
           el.classed('selected', true)
         }
         this.debounceSave()
+        this.$emit(
+          'tags-updated',
+          this.variantId,
+          [...this.selectedTags, ...this.readOnlyTags].reduce((acc, t) => {
+            const tagId = t.tag || t.name
+            acc[tagId] = { tag: tagId, notes: t.notes }
+            return acc
+          }, {})
+        )
       }
     },
 

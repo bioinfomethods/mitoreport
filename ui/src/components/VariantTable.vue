@@ -337,14 +337,6 @@
                   label="Search notes or tag names"
                   dense
                 ></v-text-field>
-                <v-checkbox
-                  v-model="filterConfig.importantCuration"
-                  on-icon="mdi-tag-multiple"
-                  off-icon="mdi-tag-multiple-outline"
-                  @click="toggleImportantCuration"
-                  style="margin-top: 4px;"
-                  color="red"
-                ></v-checkbox>
               </v-row>
             </td>
             <td>
@@ -725,6 +717,7 @@
             :expanded="transitioned[item.id]"
             :tag-repo="tagRepo"
             :tag-store="tagStore"
+            v-on:tags-updated="onTagsUpdated"
           ></CurationCell>
         </template>
 
@@ -771,6 +764,7 @@ import * as filters from '@/shared/variantFilters'
 import * as vueFilters from '@/shared/vueFilters'
 import * as _ from 'lodash'
 import * as $ from 'jquery'
+import Vue from 'vue'
 import {
   DEFAULT_VARIANT_SEARCH,
   VARIANT_MASKS,
@@ -847,7 +841,6 @@ export default {
         disease: '',
         diseaseShowBlank: false,
         curationSearch: '',
-        importantCuration: false,
         mitoMap: '',
         mitoMapShowBlank: false,
         selectedCuratedRefName: '',
@@ -917,6 +910,7 @@ export default {
       displayHaplodata: false,
       showQuickTags: false,
       currentVariants: [],
+      variantTagsForSearch: {},
     }
   },
 
@@ -1283,7 +1277,6 @@ export default {
         this.searchForm.name = ''
         this.searchForm.description = ''
       }
-      this.toggleImportantCuration()
     },
 
     saveCurrentSearch: function() {
@@ -1518,6 +1511,11 @@ export default {
       )
     },
 
+    onTagsUpdated: function(variantId, tags) {
+      console.debug('VariantTable: onTagsUpdated', variantId, tags)
+      Vue.set(this.variantTagsForSearch, variantId, tags)
+    },
+
     curationSort: function(l, r) {
       return this.curationWeight(l) - this.curationWeight(r)
     },
@@ -1647,20 +1645,15 @@ export default {
     },
 
     curationFilter: function(item) {
-      const curation = this.getCurationByVariantId(item.id)
+      const variantTags = this.variantTagsForSearch[item.id]
+        ? Object.values(this.variantTagsForSearch[item.id])
+        : []
       const disease = this.filteredVariants[item.id]?.Disease
 
       return filters.curationFilter(
         this.filterConfig.curationSearch,
-        curation,
+        variantTags,
         disease
-      )
-    },
-
-    toggleImportantCuration: function() {
-      this.$store.dispatch(
-        'filterImportantVariants',
-        this.filterConfig.importantCuration
       )
     },
 
@@ -1695,6 +1688,18 @@ export default {
         this.filterConfig.hgvsShowBlank
       )
     },
+
+    initTagsFromTagRepo: function(tagRepo) {
+      if (tagRepo && typeof tagRepo.get === 'function') {
+        for (const item of Object.values(this.filteredVariants)) {
+          const entity = tagRepo.get(item.id)
+          const variantTags = entity?.tags
+          if (!_.isEmpty(variantTags)) {
+            Vue.set(this.variantTagsForSearch, item.id, variantTags)
+          }
+        }
+      }
+    },
   },
 
   watch: {
@@ -1717,6 +1722,10 @@ export default {
           .click()
         $('th.text-start.sortable.active.desc').click()
       }
+    },
+
+    tagRepo: function(updatedTagRepo) {
+      this.initTagsFromTagRepo(updatedTagRepo)
     },
   },
 

@@ -12,23 +12,27 @@ export function consequenceFilter(selectedConsequences, consequenceValue) {
   return selectedConsequences.indexOf(consequenceValue.displayTerm) >= 0
 }
 
-export function curationFilter(curationSearch, curation, disease) {
+export function curationFilter(curationSearch, variantTags, disease) {
   if (!curationSearch) {
     return true
   }
 
-  if (curationSearch && _.isEmpty(curation)) {
+  if (curationSearch && _.isEmpty(variantTags)) {
     return false
   }
 
-  const matchesTagNames = (curation.selectedTagNames || []).some(t =>
+  const matchesTagNames = (variantTags.map(t => t.tag) || []).some(t =>
     iContainsFilter(curationSearch, t, false)
+  )
+
+  const matchesNotes = (variantTags.map(t => t.notes) || []).some(n =>
+    iContainsFilter(curationSearch, n, false)
   )
 
   return (
     matchesTagNames ||
     iContainsFilter(curationSearch, disease, false) ||
-    iContainsFilter(curationSearch, curation.variantNote, false)
+    matchesNotes
   )
 }
 
