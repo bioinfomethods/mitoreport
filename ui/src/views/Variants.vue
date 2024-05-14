@@ -1,6 +1,10 @@
 <template>
   <div>
-    <VariantTable :variantId="variantId" />
+    <VariantTable
+      :variantId="variantId"
+      :tag-repo="this.tagRepo"
+      :tag-store="this.tagStore"
+    />
   </div>
 </template>
 
@@ -8,13 +12,19 @@
 import VariantTable from '@/components/VariantTable.vue'
 import { mapActions, mapState } from 'vuex'
 
-import 'tagmesh-vue2/dist/style.css'
+import { TagRepository } from 'tagmesh'
+import Vue from 'vue'
 
 export default {
   name: 'Variants',
 
-  created() {
+  async mounted() {
     this.setSyncFeature(this.syncFeature)
+    const tagRepo = await TagRepository.create(this.sampleId, this.tagStore, {
+      serverURL: 'http://localhost:5288/db',
+    })
+    tagRepo.connect()
+    Vue.set(this, 'tagRepo', tagRepo)
   },
 
   components: {
@@ -32,8 +42,15 @@ export default {
     },
   },
 
+  data: () => {
+    return {
+      tagRepo: {},
+      tagStore: {},
+    }
+  },
+
   computed: {
-    ...mapState(['tags', 'sampleId']),
+    ...mapState(['sampleId']),
   },
 
   methods: {

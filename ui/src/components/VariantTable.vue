@@ -723,6 +723,8 @@
             :key="item.id"
             :show-quick-tags="showQuickTags"
             :expanded="transitioned[item.id]"
+            :tag-repo="tagRepo"
+            :tag-store="tagStore"
           ></CurationCell>
         </template>
 
@@ -737,7 +739,11 @@
             <VariantInfo :variantId="variantId"></VariantInfo>
           </td>
           <td class="expandedVariant">
-            <VariantCuration :variantId="variantId"></VariantCuration>
+            <VariantCuration
+              :variantId="variantId"
+              :tag-repo="tagRepo"
+              :tag-store="tagStore"
+            ></VariantCuration>
           </td>
           <td :colspan="headers.length - 4" class="expandedVariant">
             <VariantCharts :variantId="variantId"></VariantCharts>
@@ -750,7 +756,6 @@
 
 <script>
 import { mapGetters, mapState } from 'vuex'
-import { AnnotationEditor } from 'tagmesh-vue2'
 
 import GeneCardsLink from '@/components/GeneCardsLink'
 import CurationCell from '@/components/CurationCell'
@@ -781,6 +786,14 @@ export default {
     variantId: {
       type: String,
       required: false,
+    },
+    tagRepo: {
+      type: Object,
+      required: true,
+    },
+    tagStore: {
+      type: Object,
+      required: true,
     },
   },
 
@@ -913,7 +926,6 @@ export default {
       'maternalVariants',
       'maxReadDepth',
       'settings',
-      'tags',
       'sampleId',
     ]),
     ...mapGetters([

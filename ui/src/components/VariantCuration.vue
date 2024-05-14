@@ -38,50 +38,109 @@ export default {
       type: String,
       required: false,
     },
+    tagRepo: {
+      type: Object,
+      required: true,
+    },
+    tagStore: {
+      type: Object,
+      required: true,
+    },
   },
 
   mounted() {
-    this.selectedTags = this.getVariantTags.filter(vt => {
-      return this.curation?.selectedTagNames?.includes(vt.name)
-    })
-    this.variantNote = this.curation.variantNote
+    this.initTagsFromTagRepo(this.tagRepo)
   },
 
   data: () => {
     return {
       selectedTags: [],
+      readOnlyTags: [],
       variantNote: '',
     }
   },
 
   computed: {
-    ...mapGetters([
-      'getVariantTags',
-      'getVariantById',
-      'getCurationByVariantId',
-    ]),
+    ...mapGetters(['getVariantTags', 'getVariantById']),
     variant() {
       return this.getVariantById(this.variantId)
     },
-    curation() {
-      return this.getCurationByVariantId(this.variantId)
+    allMitoTagNames() {
+      return this.getVariantTags.map(t => t.name)
+    },
+    mergedNotes() {
+      return this.selectedTags
+        .filter(t => t.notes)
+        .map(t => t.notes.trim())
+        .concat(this.readOnlyTags.filter(t => t.notes).map(t => t.notes.trim()))
+        .join('\n')
+    },
+    hasNote() {
+      return !_.isEmpty(this.mergedNotes)
     },
   },
 
   methods: {
-    removeSelectedTag: function(toRemove) {
-      this.selectedTags = this.selectedTags.filter(
-        selected => selected !== toRemove
-      )
-      this.debounceSave()
-    },
-
     debounceSave: _.debounce(function() {
-      this.$store.dispatch('saveCuration', {
-        variantId: this.variantId,
-        variantNote: this.variantNote,
+      let existingReviewTag = this.selectedTags.find(t => t.name === 'Review')
+      if (existingReviewTag) {
+        existingReviewTag.notes = this.variantNote
+      } else {
+        existingReviewTag = {
+          name: 'Review',
+          color: 'purple',
+          notes: this.variantNote,
+          type: 'variant',
+        }
+        this.selectedTags.push(existingReviewTag)
+      }
+      this.tagRepo.saveTag({
+        entityName: this.variantId,
+        tag: existingReviewTag.name,
+        notes: existingReviewTag.notes ? existingReviewTag.notes.trim() : '',
+        color: existingReviewTag.color ? existingReviewTag.color : 'purple',
+        type: 'variant',
       })
-    }, DEBOUNCE_DELAY.MEDIUM),
+    }, DEBOUNCE_DELAY.LONG),
+
+    initTagsFromTagRepo: function(tagRepo) {
+      if (tagRepo && typeof tagRepo.get === 'function') {
+        const entity = tagRepo.get(this.variantId)
+        const repoTags = entity?.tags
+        if (!_.isEmpty(repoTags)) {
+          for (const repoTag of Object.values(repoTags)) {
+            if (repoTag.tag === 'Review') {
+              this.variantNote = repoTag.notes
+            }
+            if (this.allMitoTagNames.includes(repoTag.tag)) {
+              this.selectedTags = _.uniqBy(
+                this.selectedTags.concat({
+                  name: repoTag.tag,
+                  color: repoTag.color,
+                  notes: repoTag.notes,
+                }),
+                'name'
+              )
+            } else {
+              this.readOnlyTags = _.uniqBy(
+                this.readOnlyTags.concat({
+                  name: repoTag.tag,
+                  color: repoTag.color,
+                  notes: repoTag.notes,
+                }),
+                'name'
+              )
+            }
+          }
+        }
+      }
+    },
+  },
+
+  watch: {
+    tagRepo: function(updatedTagRepo) {
+      this.initTagsFromTagRepo(updatedTagRepo)
+    },
   },
 }
 </script>

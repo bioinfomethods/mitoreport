@@ -21,9 +21,7 @@
 
     <span
       :class="
-        curation &&
-        curation.selectedTagNames &&
-        curation.selectedTagNames.indexOf(tag) >= 0
+        selectedTagNames && selectedTagNames.indexOf(tag) >= 0
           ? `selected tag ${tag}`
           : `tag ${tag}`
       "
@@ -33,20 +31,18 @@
     >
       {{ tag }}
     </span>
-
-    <span class="curationCellVariantNote" v-if="hasNote">
-      {{
-        curation.variantNote.substring(0, 100) +
-          (curation.variantNote.length > 100 ? '…' : '')
-      }}
-      <br />
+    <span
+      v-for="tag in readOnlyTags"
+      v-bind:key="tag.name"
+      :class="`tag ${tag.name}`"
+      :style="{ backgroundColor: tag.color }"
+    >
+      {{ tag.name }}
     </span>
 
     <span v-if="variant.disease" class="autoTag" :title="variant.disease">
       <v-icon>mdi-biohazard</v-icon>&nbsp;{{ shortDisease }}
     </span>
-    
-    <AnnotationEditor :entity="variantId" type="variant" :tags="tags"></AnnotationEditor>
   </div>
 </template>
 <style lang="scss">
@@ -98,9 +94,7 @@ import * as _ from 'lodash'
 import * as vueFilters from '@/shared/vueFilters'
 import { DEBOUNCE_DELAY } from '@/shared/constants'
 import d3 from 'd3'
-
-import { AnnotationEditor } from 'tagmesh-vue2'
-
+import '@/assets/css/tagmesh.css'
 
 export default {
   name: 'CurationCell',
@@ -110,80 +104,121 @@ export default {
       type: String,
       required: false,
     },
+    tagRepo: {
+      type: Object,
+      required: true,
+    },
+    tagStore: {
+      type: Object,
+      required: true,
+    },
+    notesMaxLength: {
+      type: Number,
+      default: 80,
+    },
     showQuickTags: Boolean,
     expanded: Boolean,
   },
+
   data: () => {
     return {
       selectedTags: [],
+      readOnlyTags: [],
     }
   },
-  
-  components: {
-    AnnotationEditor  
-  },
-  
+
   methods: {
     toggleTag: function(tag) {
       if (this.showQuickTags || this.expanded) {
         event.stopPropagation()
         var el = d3.select(this.$el).select(`.${tag}`)
 
-        if (this.curation?.selectedTagNames?.indexOf(tag) >= 0) {
+        if (this.selectedTagNames?.indexOf(tag) >= 0) {
           this.selectedTags = this.selectedTags.filter(
             selected => selected.name !== tag
           )
           el.classed('selected', false)
-          this.debounceSave()
         } else {
           this.selectedTags.push(this.getVariantTags.find(d => d.name == tag))
           el.classed('selected', true)
-          this.debounceSave()
         }
+        this.debounceSave()
       }
     },
 
-    debounceSave: _.debounce(function() {
-      this.$store.dispatch('saveCuration', {
-        variantId: this.variantId,
-        selectedTags: this.selectedTags,
-      })
-    }, DEBOUNCE_DELAY.MEDIUM),
+    debounceSave: _.debounce(async function() {
+      for (const tagName of this.allMitoTagNames) {
+        await this.tagRepo.removeTag(this.variantId, tagName)
+      }
+
+      for (const tag of this.selectedTags) {
+        await this.tagRepo.saveTag({
+          entityName: this.variantId,
+          tag: tag.name,
+          notes: tag.notes ? tag.notes.trim() : '',
+          color: tag.color ? tag.color : 'purple',
+          type: 'variant',
+        })
+      }
+    }, DEBOUNCE_DELAY.LONG),
+
+    initTagsFromTagRepo: function(tagRepo) {
+      if (tagRepo && typeof tagRepo.get === 'function') {
+        const entity = tagRepo.get(this.variantId)
+        const repoTags = entity?.tags
+        if (!_.isEmpty(repoTags)) {
+          for (const repoTag of Object.values(repoTags)) {
+            if (repoTag.tag === 'Review') {
+              this.variantNote = repoTag.notes
+            }
+            if (this.allMitoTagNames.includes(repoTag.tag)) {
+              this.selectedTags = _.uniqBy(
+                this.selectedTags.concat({
+                  name: repoTag.tag,
+                  color: repoTag.color,
+                  notes: repoTag.notes,
+                }),
+                'name'
+              )
+            } else {
+              this.readOnlyTags = _.uniqBy(
+                this.readOnlyTags.concat({
+                  name: repoTag.tag,
+                  color: repoTag.color,
+                  notes: repoTag.notes,
+                }),
+                'name'
+              )
+            }
+          }
+        }
+      }
+    },
   },
+
   mounted() {
-    this.selectedTags = this.getVariantTags.filter(vt => {
-      return this.curation?.selectedTagNames?.includes(vt.name)
-    })
+    this.initTagsFromTagRepo(this.tagRepo)
   },
+
   computed: {
-    ...mapGetters([
-      'getCurationByVariantId',
-      'getImportantVariantTags',
-      'getSampleSettings',
-      'getVariantById',
-      'getFirstHaplogroup',
-      'getVariantTags',
-    ]),
-    
-    ...mapState([
-      'tags',
-      'sampleId',
-    ]),    
+    ...mapGetters(['getVariantById', 'getFirstHaplogroup', 'getVariantTags']),
+
+    ...mapState(['sampleId']),
 
     variant() {
       return this.getVariantById(this.variantId)
     },
 
-    curation() {
-      return this.getCurationByVariantId(this.variantId)
+    allMitoTagNames() {
+      return this.getVariantTags.map(t => t.name)
     },
 
-    hasNote() {
-      return !_.isEmpty(this.curation.variantNote)
+    selectedTagNames() {
+      return this.selectedTags.map(t => t.name)
     },
 
-    hasSelectedTags() {
-      return !_.isEmpty(this.curation.selectedTagNames)
+    readOnlyTagNames() {
+      return this.readOnlyTags.map(t => t.name)
     },
 
     shortDisease() {
@@ -199,14 +234,6 @@ export default {
         }
       }
       return result
-    },
-
-    tagColor() {
-      const hasImportantTag = this.getImportantVariantTags.some(impTag =>
-        (this.curation.selectedTagNames || []).includes(impTag.name)
-      )
-
-      return hasImportantTag ? 'red' : ''
     },
 
     hapRatio() {
@@ -242,6 +269,12 @@ export default {
 
   filters: {
     precisionTo: vueFilters.precisionTo,
+  },
+
+  watch: {
+    tagRepo: function(updatedTagRepo) {
+      this.initTagsFromTagRepo(updatedTagRepo)
+    },
   },
 }
 </script>
