@@ -112,9 +112,9 @@
 </template>
 
 <script>
-import { mapGetters, mapState } from 'vuex'
 import { DEBOUNCE_DELAY } from '@/shared/constants'
 import * as _ from 'lodash'
+import { mapGetters } from 'vuex'
 
 export default {
   name: 'AppSettings',
