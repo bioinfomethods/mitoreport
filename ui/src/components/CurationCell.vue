@@ -150,7 +150,7 @@ export default {
 
     debounceSave: _.debounce(async function() {
       for (const tagName of this.allMitoTagNames) {
-        await this.tagRepo.removeTag(this.variantId, tagName)
+        this.tagRepo.removeTag(this.variantId, tagName)
       }
 
       for (const tag of this.selectedTags) {
@@ -168,6 +168,9 @@ export default {
       if (tagRepo && typeof tagRepo.get === 'function') {
         const entity = tagRepo.get(this.variantId)
         const repoTags = entity?.tags
+        this.selectedTags = []
+        this.readOnlyTags = []
+
         if (!_.isEmpty(repoTags)) {
           for (const repoTag of Object.values(repoTags)) {
             if (this.allMitoTagNames.includes(repoTag.tag)) {
