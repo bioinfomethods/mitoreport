@@ -4,3 +4,6 @@
 [submodule "haplogrep-cmd"]
 	path = haplogrep-cmd
 	url = https://github.com/tommyli/haplogrep-cmd.git
+[submodule "ui/tagmesh"]
+	path = ui/tagmesh
+	url = https://gitlab.com/tommy.li/tagmesh.git
