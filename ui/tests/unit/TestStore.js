@@ -35,13 +35,11 @@ export const state = {
   filteredVariants: variants.map(mapVariant),
   deletions: deletions,
   maxReadDepth: 99999,
-  syncFeature: false,
 }
 
 export const mutations = {}
 
 export const actions = {
-  setSyncFeature() {},
   fetchData() {},
   saveAppSettings() {},
   saveSearch() {},

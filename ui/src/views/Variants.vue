@@ -10,20 +10,17 @@
 
 <script>
 import VariantTable from '@/components/VariantTable.vue'
-import { mapActions, mapState } from 'vuex'
-import * as _ from 'lodash'
 import { TagRepository } from 'tagmesh'
 import Vue from 'vue'
+import { mapGetters, mapState } from 'vuex'
 
 export default {
   name: 'Variants',
 
   async mounted() {
-    this.setSyncFeature(this.syncFeature)
     const tagRepo = await TagRepository.create(this.sampleId, this.tagStore, {
-      serverURL: 'http://localhost:5288/db',
+      serverURL: this.getSettingsCouchDbUrl,
     })
-    tagRepo.connect()
     Vue.set(this, 'tagRepo', tagRepo)
   },
 
@@ -36,10 +33,6 @@ export default {
       type: String,
       required: false,
     },
-    syncFeature: {
-      type: Boolean,
-      required: false,
-    },
   },
 
   data: () => {
@@ -50,11 +43,36 @@ export default {
   },
 
   computed: {
-    ...mapState(['sampleId']),
+    ...mapState(['sampleId', 'syncEnabled', 'couchDbPassword']),
+    ...mapGetters([
+      'getSyncFeatureEnabled',
+      'getSettingsCouchDbUrl',
+      'getSettingsCouchDbUsername',
+    ]),
   },
 
-  methods: {
-    ...mapActions(['setSyncFeature']),
+  watch: {
+    syncEnabled: async function(value) {
+      if (this.getSyncFeatureEnabled) {
+        if (value) {
+          try {
+            await this.tagRepo.connect(
+              this.getSettingsCouchDbUrl,
+              this.getSettingsCouchDbUsername,
+              this.couchDbPassword
+            )
+          } catch (error) {
+            this.$store.dispatch('openSnackbar', {
+              message: `Failed to connect to CouchDB: ${error?.message}`,
+              color: 'error',
+            })
+            this.$store.dispatch('toggleSync', false)
+          }
+        } else {
+          await this.tagRepo.disconnect()
+        }
+      }
+    },
   },
 }
 </script>

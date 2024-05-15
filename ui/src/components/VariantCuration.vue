@@ -49,7 +49,7 @@ export default {
   },
 
   mounted() {
-    this.initTagsFromTagRepo(this.tagRepo)
+    this.updateTagsFromTagRepo(this.tagRepo)
   },
 
   data: () => {
@@ -68,6 +68,7 @@ export default {
     allMitoTagNames() {
       return this.getVariantTags.map(t => t.name)
     },
+
     mergedNotes() {
       return this.selectedTags
         .filter(t => t.notes)
@@ -75,6 +76,7 @@ export default {
         .concat(this.readOnlyTags.filter(t => t.notes).map(t => t.notes.trim()))
         .join('\n')
     },
+
     hasNote() {
       return !_.isEmpty(this.mergedNotes)
     },
@@ -82,12 +84,12 @@ export default {
 
   methods: {
     debounceSave: _.debounce(function() {
-      let existingReviewTag = this.selectedTags.find(t => t.name === 'Review')
+      let existingReviewTag = this.selectedTags.find(t => t.tag === 'Review')
       if (existingReviewTag) {
         existingReviewTag.notes = this.variantNote
       } else {
         existingReviewTag = {
-          name: 'Review',
+          tag: 'Review',
           color: 'purple',
           notes: this.variantNote,
           type: 'variant',
@@ -96,14 +98,14 @@ export default {
       }
       this.tagRepo.saveTag({
         entityName: this.variantId,
-        tag: existingReviewTag.name,
+        tag: existingReviewTag.tag || existingReviewTag.name,
         notes: existingReviewTag.notes ? existingReviewTag.notes.trim() : '',
         color: existingReviewTag.color ? existingReviewTag.color : 'purple',
         type: 'variant',
       })
     }, DEBOUNCE_DELAY.LONG),
 
-    initTagsFromTagRepo: function(tagRepo) {
+    updateTagsFromTagRepo: function(tagRepo) {
       if (tagRepo && typeof tagRepo.get === 'function') {
         const entity = tagRepo.get(this.variantId)
         const repoTags = entity?.tags
@@ -115,20 +117,20 @@ export default {
             if (this.allMitoTagNames.includes(repoTag.tag)) {
               this.selectedTags = _.uniqBy(
                 this.selectedTags.concat({
-                  name: repoTag.tag,
+                  tag: repoTag.tag,
                   color: repoTag.color,
                   notes: repoTag.notes,
                 }),
-                'name'
+                'tag'
               )
             } else {
               this.readOnlyTags = _.uniqBy(
                 this.readOnlyTags.concat({
-                  name: repoTag.tag,
+                  tag: repoTag.tag,
                   color: repoTag.color,
                   notes: repoTag.notes,
                 }),
-                'name'
+                'tag'
               )
             }
           }
@@ -138,8 +140,11 @@ export default {
   },
 
   watch: {
-    tagRepo: function(updatedTagRepo) {
-      this.initTagsFromTagRepo(updatedTagRepo)
+    tagRepo: {
+      handler(updatedTagRepo) {
+        this.updateTagsFromTagRepo(updatedTagRepo)
+      },
+      deep: true,
     },
   },
 }

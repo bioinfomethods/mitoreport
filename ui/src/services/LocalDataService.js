@@ -1,10 +1,9 @@
-import * as _ from 'lodash'
-import PouchDB from 'pouchdb'
-import getStore from '@/store'
 import {
   USER_SETTINGS_APPEND_PROP_NAMES,
   USER_SETTINGS_PROP_NAMES,
 } from '@/shared/constants'
+import * as _ from 'lodash'
+import PouchDB from 'pouchdb'
 export const LOCAL_DB = new PouchDB('mitoreport')
 
 export async function getVariants() {
@@ -103,37 +102,4 @@ export async function saveSettingsToLocal(settings) {
       )
     }
   }
-}
-
-export let SYNC_HANDLER = null
-
-export async function syncWithRemote() {
-  const couchDbUrl =
-    getStore.getters.getSettingsCouchDbUrl || 'http://localhost:5984'
-  const [scheme, hostAndPath] = couchDbUrl.split('://')
-  const username = getStore.getters.getSettingsCouchDbUsername
-  const password = getStore.state.couchDbPassword
-  const connectionUrl = `${scheme}://${username}:${password}@${hostAndPath}`
-
-  let remoteDB = new PouchDB(connectionUrl)
-
-  SYNC_HANDLER = LOCAL_DB.sync(remoteDB, {
-    live: true,
-    retry: true,
-  })
-    .on('change', function(change) {
-      const sampleId = change.change.docs[0].sample.id
-      getStore.dispatch('loadLocalSettings', sampleId)
-    })
-    .on('error', function(err) {
-      console.error(
-        `Unexpected error occured while trying to sync: ${JSON.stringify(err)}`
-      )
-      SYNC_HANDLER = null
-    })
-}
-
-export function cancelSyncWithRemote() {
-  SYNC_HANDLER?.cancel()
-  SYNC_HANDLER = null
 }

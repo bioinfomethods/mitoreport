@@ -1,7 +1,7 @@
 import {
   getDeletions,
-  getVariants,
   getMaternalVariants,
+  getVariants,
   saveSettingsToLocal,
 } from '@/services/LocalDataService.js'
 import { DEFAULT_SNACKBAR_OPTS } from '@/shared/constants'
@@ -29,7 +29,7 @@ export const state = {
   filteredVariants: {},
   maxReadDepth: 0,
   deletions: {},
-  syncFeature: true,
+  syncEnabled: false,
 }
 
 export const getters = {
@@ -101,6 +101,10 @@ export const getters = {
     return getters.getSampleSettings?.metadata || {}
   },
 
+  getSyncFeatureEnabled: (state, getters) => {
+    return !_.isEmpty(getters.getSettingsCouchDbUrl)
+  },
+
   getSettingsCouchDbUrl: (state, getters) => {
     return getters.getSampleSettings?.couchDbUrl
   },
@@ -151,8 +155,8 @@ export const mutations = {
     state.settings = settings
   },
 
-  SET_SYNC_FEATURE(state, enabled) {
-    state.syncFeature = enabled
+  SET_SYNC_VALUE(state, value) {
+    state.syncEnabled = value
   },
 
   SET_LOADING(state) {
@@ -292,11 +296,7 @@ export const mutations = {
 }
 
 export const actions = {
-  setSyncFeature({ commit }, enabled) {
-    commit('SET_SYNC_FEATURE', enabled)
-  },
-
-  async fetchData({ commit, dispatch }) {
+  async fetchData({ commit }) {
     commit('SET_LOADING')
 
     try {
@@ -391,6 +391,14 @@ export const actions = {
         message: `There was a problem saving settings: ${error.message}`,
       })
     })
+  },
+
+  toggleSync({ commit }, value) {
+    commit('SET_SYNC_VALUE', value)
+  },
+
+  openSnackbar({ commit }, options) {
+    commit('ACTIVATE_SNACKBAR', options)
   },
 
   closeSnackbar({ commit }) {

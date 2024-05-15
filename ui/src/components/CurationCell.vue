@@ -21,23 +21,23 @@
 
     <span
       :class="
-        selectedTagNames && selectedTagNames.indexOf(tag) >= 0
-          ? `selected tag ${tag}`
-          : `tag ${tag}`
+        selectedTagNames && selectedTagNames.indexOf(tagName) >= 0
+          ? `selected tag ${tagName}`
+          : `tag ${tagName}`
       "
-      v-for="tag in getVariantTags.map(d => d.name)"
-      v-bind:key="tag"
-      @click="toggleTag(tag)"
+      v-for="tagName in getVariantTags.map(d => d.name || d.tag)"
+      v-bind:key="tagName"
+      @click="toggleTag(tagName)"
     >
-      {{ tag }}
+      {{ tagName }}
     </span>
     <span
       v-for="tag in readOnlyTags"
-      v-bind:key="tag.name"
-      :class="`tag ${tag.name}`"
+      v-bind:key="tag.tag"
+      :class="`tag ${tag.tag}`"
       :style="{ backgroundColor: tag.color }"
     >
-      {{ tag.name }}
+      {{ tag.tag }}
     </span>
 
     <span v-if="variant.disease" class="autoTag" :title="variant.disease">
@@ -83,7 +83,6 @@ tr.v-data-table__expanded.v-data-table__expanded__row span.tag,
     background-color: rgba(128, 0, 128, 0.5);
   }
 }
-tr.v-data-table__expanded.v-data-table__expanded__row .curationCellVariantNote,
 tr.v-data-table__expanded.v-data-table__expanded__row .autoTag {
   display: none;
 }
@@ -127,30 +126,25 @@ export default {
   },
 
   methods: {
-    toggleTag: function(tag) {
+    toggleTag: function(tagName) {
       if (this.showQuickTags || this.expanded) {
         event.stopPropagation()
-        var el = d3.select(this.$el).select(`.${tag}`)
+        var el = d3.select(this.$el).select(`.${tagName}`)
 
-        if (this.selectedTagNames?.indexOf(tag) >= 0) {
+        if (this.selectedTagNames?.indexOf(tagName) >= 0) {
           this.selectedTags = this.selectedTags.filter(
-            selected => selected.name !== tag
+            selected => selected.tag !== tagName
           )
           el.classed('selected', false)
         } else {
-          this.selectedTags.push(this.getVariantTags.find(d => d.name == tag))
+          this.selectedTags.push({
+            tag: tagName,
+            color: 'purple',
+            notes: '',
+          })
           el.classed('selected', true)
         }
         this.debounceSave()
-        this.$emit(
-          'tags-updated',
-          this.variantId,
-          [...this.selectedTags, ...this.readOnlyTags].reduce((acc, t) => {
-            const tagId = t.tag || t.name
-            acc[tagId] = { tag: tagId, notes: t.notes }
-            return acc
-          }, {})
-        )
       }
     },
 
@@ -162,7 +156,7 @@ export default {
       for (const tag of this.selectedTags) {
         await this.tagRepo.saveTag({
           entityName: this.variantId,
-          tag: tag.name,
+          tag: tag.tag || tag.name,
           notes: tag.notes ? tag.notes.trim() : '',
           color: tag.color ? tag.color : 'purple',
           type: 'variant',
@@ -170,32 +164,29 @@ export default {
       }
     }, DEBOUNCE_DELAY.LONG),
 
-    initTagsFromTagRepo: function(tagRepo) {
+    updateTagsFromTagRepo: function(tagRepo) {
       if (tagRepo && typeof tagRepo.get === 'function') {
         const entity = tagRepo.get(this.variantId)
         const repoTags = entity?.tags
         if (!_.isEmpty(repoTags)) {
           for (const repoTag of Object.values(repoTags)) {
-            if (repoTag.tag === 'Review') {
-              this.variantNote = repoTag.notes
-            }
             if (this.allMitoTagNames.includes(repoTag.tag)) {
               this.selectedTags = _.uniqBy(
                 this.selectedTags.concat({
-                  name: repoTag.tag,
+                  tag: repoTag.tag,
                   color: repoTag.color,
                   notes: repoTag.notes,
                 }),
-                'name'
+                'tag'
               )
             } else {
               this.readOnlyTags = _.uniqBy(
                 this.readOnlyTags.concat({
-                  name: repoTag.tag,
+                  tag: repoTag.tag,
                   color: repoTag.color,
                   notes: repoTag.notes,
                 }),
-                'name'
+                'tag'
               )
             }
           }
@@ -205,7 +196,7 @@ export default {
   },
 
   mounted() {
-    this.initTagsFromTagRepo(this.tagRepo)
+    this.updateTagsFromTagRepo(this.tagRepo)
   },
 
   computed: {
@@ -222,11 +213,11 @@ export default {
     },
 
     selectedTagNames() {
-      return this.selectedTags.map(t => t.name)
+      return this.selectedTags.map(t => t.tag)
     },
 
     readOnlyTagNames() {
-      return this.readOnlyTags.map(t => t.name)
+      return this.readOnlyTags.map(t => t.tag)
     },
 
     shortDisease() {
@@ -280,8 +271,11 @@ export default {
   },
 
   watch: {
-    tagRepo: function(updatedTagRepo) {
-      this.initTagsFromTagRepo(updatedTagRepo)
+    tagRepo: {
+      handler(updatedTagRepo) {
+        this.updateTagsFromTagRepo(updatedTagRepo)
+      },
+      deep: true,
     },
   },
 }

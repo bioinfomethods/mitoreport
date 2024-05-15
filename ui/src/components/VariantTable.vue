@@ -910,7 +910,6 @@ export default {
       displayHaplodata: false,
       showQuickTags: false,
       currentVariants: [],
-      variantTagsForSearch: {},
     }
   },
 
@@ -1194,6 +1193,29 @@ export default {
         },
       ]
     },
+
+    variantTagsForSearch() {
+      let result = []
+      for (const entity of Object.values(this.tagStore || {})) {
+        const variantTags = entity?.tags
+        if (!_.isEmpty(variantTags)) {
+          result[entity.id] = variantTags
+        }
+      }
+
+      return result
+    },
+    // initTagsFromTagRepo: function(tagRepo) {
+    //   if (tagRepo && typeof tagRepo.get === 'function') {
+    //     for (const item of Object.values(this.filteredVariants)) {
+    //       const entity = tagRepo.get(item.id)
+    //       const variantTags = entity?.tags
+    //       if (!_.isEmpty(variantTags)) {
+    //         Vue.set(this.variantTagsForSearch, item.id, variantTags)
+    //       }
+    //     }
+    //   }
+    // },
   },
 
   methods: {
@@ -1328,17 +1350,13 @@ export default {
     },
 
     vafFilter: function(value) {
-      // console.log("VAF filter", value)
       let lower = this.vafTicks[this.vafIndexRange[0]]
       let upper = this.vafTicks[this.vafIndexRange[1]]
 
       return filters.rangeTextFilter(`${lower}-${upper}`, value)
     },
 
-    // TODO: Where is this filter getting the value from?
-    // Check that it is filtering on the Maternal Variant
     mafFilter: function(value) {
-      // console.log('Maf filter: ', value)
       if (value) {
         let lower = this.mafTicks[this.mafIndexRange[0]]
         let upper = this.mafTicks[this.mafIndexRange[1]]
@@ -1513,7 +1531,7 @@ export default {
 
     onTagsUpdated: function(variantId, tags) {
       console.debug('VariantTable: onTagsUpdated', variantId, tags)
-      Vue.set(this.variantTagsForSearch, variantId, tags)
+      // Vue.set(this.variantTagsForSearch, variantId, tags)
     },
 
     curationSort: function(l, r) {
@@ -1689,7 +1707,7 @@ export default {
       )
     },
 
-    initTagsFromTagRepo: function(tagRepo) {
+    updateVariantTagsForSearch: function(tagRepo) {
       if (tagRepo && typeof tagRepo.get === 'function') {
         for (const item of Object.values(this.filteredVariants)) {
           const entity = tagRepo.get(item.id)
@@ -1724,8 +1742,11 @@ export default {
       }
     },
 
-    tagRepo: function(updatedTagRepo) {
-      this.initTagsFromTagRepo(updatedTagRepo)
+    tagRepo: {
+      handler(updatedTagRepo) {
+        this.updateVariantTagsForSearch(updatedTagRepo)
+      },
+      deep: true,
     },
   },
 

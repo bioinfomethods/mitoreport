@@ -27,7 +27,7 @@
         @submit.prevent="saveAppSettings"
       >
         <v-card-title>Settings</v-card-title>
-        <div v-if="syncFeature">
+        <div>
           <v-divider></v-divider>
           <v-card-subtitle>Couch DB</v-card-subtitle>
           <v-card-text>
@@ -36,7 +36,7 @@
               name="inputCouchDbUrl"
               v-model="settingsForm.newCouchDbUrl"
               label="Couch DB URL"
-              hint="URL to MCRI Mitoreport Couch DB"
+              hint="URL to MCRI Couch DB"
               persistent-hint
               maxlength="1000"
             >
@@ -56,6 +56,7 @@
             <v-text-field
               id="inputCouchDbPassword"
               name="inputCouchDbPassword"
+              :type="showCouchDbPassword ? 'text' : 'password'"
               @input="onPasswordChange"
               label="Couch DB password"
               hint="Couch DB password, should be same value as ENV var COUCHDB_PASSWORD on server"
@@ -63,6 +64,8 @@
               maxlength="50"
               width="150px"
               max-width="150px"
+              :append-icon="showCouchDbPassword ? 'mdi-eye-off' : 'mdi-eye'"
+              @click:append="showCouchDbPassword = !showCouchDbPassword"
             >
             </v-text-field>
           </v-card-text>
@@ -127,6 +130,7 @@ export default {
     return {
       settingsMenu: false,
       deleteTagMenus: {},
+      showCouchDbPassword: false,
       settingsForm: {
         valid: true,
         dirty: false,
@@ -142,7 +146,6 @@ export default {
   },
 
   computed: {
-    ...mapState(['syncFeature']),
     ...mapGetters([
       'getSettingsCouchDbUrl',
       'getSettingsCouchDbUsername',
@@ -167,9 +170,6 @@ export default {
       if (!this.settingsForm.valid) {
         return true
       }
-      if (!this.settingsForm.dirty) {
-        return true
-      }
 
       return false
     },
@@ -181,7 +181,6 @@ export default {
     validationRules() {
       return {
         required: value => !!value || 'Required.',
-        newTagNameUnique: this.newTagNameUnique,
       }
     },
   },
@@ -229,17 +228,6 @@ export default {
       this.settingsForm.newTagImportant = false
     },
 
-    newTagNameUnique: function(value) {
-      ''.toUpperCase
-      return (
-        !this.getVariantTags.some(
-          t => t.name?.toUpperCase() === value?.toUpperCase()
-        ) &&
-        !this.settingsForm.userTags.some(
-          t => t.name?.toUpperCase() === value?.toUpperCase()
-        )
-      )
-    },
     onPasswordChange: _.debounce(function(newCouchDbPassword) {
       this.$store.dispatch('storeCouchDbPassword', newCouchDbPassword)
     }, DEBOUNCE_DELAY.MEDIUM),

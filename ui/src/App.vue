@@ -7,10 +7,10 @@
       <v-progress-circular class="ml-4" v-if="loading" indeterminate />
       <v-spacer></v-spacer>
       <v-switch
-        v-if="syncFeature"
+        v-if="getSyncFeatureEnabled"
         id="toggleSync"
         @change="onToggleSyncChange"
-        v-model="syncEnabled"
+        :value="syncEnabled"
         dark
         class="pt-4 pr-4"
         ><template v-slot:label
@@ -59,12 +59,8 @@
 </style>
 
 <script>
-import { mapState } from 'vuex'
+import { mapState, mapGetters } from 'vuex'
 import AppSettings from '@/components/AppSettings'
-import {
-  syncWithRemote,
-  cancelSyncWithRemote,
-} from '@/services/LocalDataService'
 
 export default {
   name: 'App',
@@ -85,7 +81,6 @@ export default {
       rules: {
         required: value => !!value || 'Required.',
       },
-      syncEnabled: false,
     }
   },
 
@@ -95,17 +90,14 @@ export default {
       'snackbar',
       'initialFetchDataLoaded',
       'sampleId',
-      'syncFeature',
+      'syncEnabled',
     ]),
+    ...mapGetters(['getSyncFeatureEnabled']),
   },
 
   methods: {
     onToggleSyncChange: function(value) {
-      if (value) {
-        syncWithRemote()
-      } else {
-        cancelSyncWithRemote()
-      }
+      this.$store.dispatch('toggleSync', value)
     },
 
     closeSnackbar: function() {
