@@ -17,12 +17,12 @@ jobs:
           distribution: 'zulu'
       - name: Validate Gradle wrapper
         uses: gradle/wrapper-validation-action@v1
-      - name: Build with Gradle
-        uses: gradle/gradle-build-action@v1.3.3
       - name: Clear Gradle Cache
         if: ${{ github.event.inputs.clearCache == 'true' }}
         run: |
           rm -rf ~/.gradle/caches
+      - name: Build with Gradle
+        uses: gradle/gradle-build-action@v1.3.3
         with:
           gradle-version: 7.5.1
           wrapper-cache-enabled: true
