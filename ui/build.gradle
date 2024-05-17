@@ -8,6 +8,7 @@ defaultTasks 'runTestUnit', 'runLint', 'runBuild'
 
 node {
   download = Boolean.valueOf(property('nodeDownload'))
+  version = "14.21.3"
 }
 
 task runServe(type: NpmTask, dependsOn: 'npmInstall') {
