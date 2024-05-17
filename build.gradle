@@ -42,10 +42,6 @@ project.ext {
 
 repositories {
     mavenCentral()
-    maven {
-        name 'jfrog-genepi-maven'
-        url 'https://genepi.jfrog.io/artifactory/maven'
-    }
 }
 
 micronaut {
