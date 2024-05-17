@@ -97,11 +97,13 @@ export default {
         Cookies.set('syncEnabled', value)
         this.$store.dispatch('toggleSync', value)
 
-        if (value && !this.$keycloak?.authenticated) {
-          this.$keycloak.login()
-        }
-        if (!value && this.$keycloak?.authenticated) {
-          this.$keycloak.logout()
+        if (window.location.protocol !== 'file:') {
+          if (value && !this.$keycloak?.authenticated) {
+            this.$keycloak.login()
+          }
+          if (!value && this.$keycloak?.authenticated) {
+            this.$keycloak.logout()
+          }
         }
       },
     },
