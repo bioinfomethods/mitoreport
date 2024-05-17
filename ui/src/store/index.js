@@ -37,7 +37,7 @@ export const state = {
   },
   sampleId: '',
   settings: {},
-  couchDbPassword: 'supersecret',
+  couchDbPassword: '',
   loading: false,
   snackbar: { ...DEFAULT_SNACKBAR_OPTS },
   variants: {},

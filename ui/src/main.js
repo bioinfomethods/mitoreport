@@ -15,16 +15,21 @@ if (window.location.protocol === 'file:') {
     render: h => h(App),
   }).$mount('#app')
 } else {
-  keycloak.init({ onLoad: 'login-required' }).then(() => {
-    new Vue({
-      store,
-      router,
-      vuetify,
-      render: h => h(App),
-    }).$mount('#app')
+  keycloak
+    .init({
+      onLoad: 'login-required',
+      scope: 'openid email profile groups ad_groups offline_access',
+    })
+    .then(() => {
+      new Vue({
+        store,
+        router,
+        vuetify,
+        render: h => h(App),
+      }).$mount('#app')
 
-    Vue.prototype.$keycloak = keycloak
-  })
+      Vue.prototype.$keycloak = keycloak
+    })
 
   keycloak.onReady = () => {
     store.dispatch('keycloakOnReady', keycloak)
