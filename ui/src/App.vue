@@ -9,17 +9,19 @@
       <v-switch
         v-if="getSyncFeatureEnabled"
         id="toggleSync"
-        @change="onToggleSyncChange"
-        :value="syncEnabled"
+        v-model="localSyncEnabled"
         dark
         class="pt-4 pr-4"
         ><template v-slot:label
           ><span class="white--text"
-            >{{ syncEnabled ? 'Disable' : 'Enable' }} Sync</span
+            >{{ localSyncEnabled ? 'Disable' : 'Enable' }} Sync</span
           ></template
         ></v-switch
       >
       <AppSettings></AppSettings>
+      <v-avatar class="mx-2" color="white" size="30">
+        {{ auth.initials }}
+      </v-avatar>
     </v-app-bar>
 
     <v-main>
@@ -59,8 +61,9 @@
 </style>
 
 <script>
-import { mapState, mapGetters } from 'vuex'
 import AppSettings from '@/components/AppSettings'
+import Cookies from 'js-cookie'
+import { mapGetters, mapState } from 'vuex'
 
 export default {
   name: 'App',
@@ -85,21 +88,35 @@ export default {
   },
 
   computed: {
+    localSyncEnabled: {
+      get() {
+        return this.syncEnabled
+      },
+      set(value) {
+        console.debug('localSyncEnabled', value)
+        Cookies.set('syncEnabled', value)
+        this.$store.dispatch('toggleSync', value)
+
+        if (value && !this.$keycloak?.authenticated) {
+          this.$keycloak.login()
+        }
+        if (!value && this.$keycloak?.authenticated) {
+          this.$keycloak.logout()
+        }
+      },
+    },
     ...mapState([
+      'auth',
+      'syncEnabled',
       'loading',
       'snackbar',
       'initialFetchDataLoaded',
       'sampleId',
-      'syncEnabled',
     ]),
     ...mapGetters(['getSyncFeatureEnabled']),
   },
 
   methods: {
-    onToggleSyncChange: function(value) {
-      this.$store.dispatch('toggleSync', value)
-    },
-
     closeSnackbar: function() {
       this.$store.dispatch('closeSnackbar')
     },

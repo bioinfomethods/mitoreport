@@ -5,6 +5,7 @@ import {
   saveSettingsToLocal,
 } from '@/services/LocalDataService.js'
 import { DEFAULT_SNACKBAR_OPTS } from '@/shared/constants'
+import Cookies from 'js-cookie'
 import * as _ from 'lodash'
 import { v4 as uuidv4 } from 'uuid'
 import Vue from 'vue'
@@ -18,10 +19,25 @@ import {
 
 Vue.use(Vuex)
 
+const boolFromCookie = name => {
+  return Cookies.get(name) === 'true' ? true : false
+}
+
 export const state = {
+  auth: {
+    sub: 'oauth.sub',
+    authenticated: false,
+    preferred_username: 'anonymous',
+    email: 'anonymous@mcri.edu.au',
+    given_name: 'Anonymous',
+    family_name: 'User',
+    initials: 'AA',
+    groups: [],
+    ad_groups: [],
+  },
   sampleId: '',
   settings: {},
-  couchDbPassword: '',
+  couchDbPassword: 'supersecret',
   loading: false,
   snackbar: { ...DEFAULT_SNACKBAR_OPTS },
   variants: {},
@@ -29,7 +45,7 @@ export const state = {
   filteredVariants: {},
   maxReadDepth: 0,
   deletions: {},
-  syncEnabled: false,
+  syncEnabled: boolFromCookie('syncEnabled'),
 }
 
 export const getters = {
@@ -151,6 +167,10 @@ export const getters = {
 }
 
 export const mutations = {
+  SET_AUTH(state, auth) {
+    state.auth = auth
+  },
+
   SET_SETTINGS(state, settings) {
     state.settings = settings
   },
@@ -296,6 +316,49 @@ export const mutations = {
 }
 
 export const actions = {
+  async keycloakOnReady({ commit }, keycloak) {
+    const result = {
+      authenticated: keycloak.authenticated,
+      sub: keycloak.sub(),
+      preferred_username: keycloak.preferred_username(),
+      email: keycloak.email(),
+      given_name: keycloak.given_name(),
+      family_name: keycloak.family_name(),
+      initials: keycloak.initials(),
+      groups: keycloak.groups(),
+      ad_groups: keycloak.ad_groups(),
+    }
+    commit('SET_AUTH', result)
+  },
+
+  async keycloakOnAuthSuccess(_, keycloak) {
+    console.debug('store.onAuthRefreshSuccess', keycloak)
+  },
+
+  async keycloakOnAuthError(_, keycloak) {
+    console.debug('store.onAuthError', keycloak)
+  },
+
+  async keycloakOnAuthRefreshSuccess(_, keycloak) {
+    console.debug('store.onAuthRefreshSuccess', keycloak)
+  },
+
+  async keycloakOnAuthRefreshError(_, keycloak) {
+    console.debug('store.onAuthRefreshError', keycloak)
+  },
+
+  async keycloakOnAuthLogout(_, keycloak) {
+    console.debug('store.onAuthLogout', keycloak)
+  },
+
+  async keycloakOnTokenExpired(_, keycloak) {
+    console.debug('store.onTokenExpired', keycloak)
+  },
+
+  async keycloakOnActionUpdate(_, keycloak, status) {
+    console.debug('store.onActionUpdate', keycloak, status)
+  },
+
   async fetchData({ commit }) {
     commit('SET_LOADING')
 

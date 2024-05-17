@@ -22,6 +22,7 @@ export default {
       serverURL: this.getSettingsCouchDbUrl,
     })
     Vue.set(this, 'tagRepo', tagRepo)
+    this.sync(this.syncEnabled)
   },
 
   components: {
@@ -51,8 +52,8 @@ export default {
     ]),
   },
 
-  watch: {
-    syncEnabled: async function(value) {
+  methods: {
+    sync: async function(value) {
       if (this.getSyncFeatureEnabled) {
         if (value) {
           try {
@@ -72,6 +73,12 @@ export default {
           await this.tagRepo.disconnect()
         }
       }
+    },
+  },
+
+  watch: {
+    syncEnabled: async function(value) {
+      this.sync(value)
     },
   },
 }
