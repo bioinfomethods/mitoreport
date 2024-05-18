@@ -57,11 +57,22 @@ export default {
       if (this.getSyncFeatureEnabled) {
         if (value) {
           try {
-            await this.tagRepo.connect(
-              this.getSettingsCouchDbUrl,
-              this.getSettingsCouchDbUsername,
-              this.couchDbPassword
-            )
+            if (this.$keycloak?.authenticated) {
+              const idToken = this.$keycloak.idToken
+              await this.tagRepo.connect({
+                couchBaseURL: this.getSettingsCouchDbUrl,
+                headers: {
+                  'Content-Type': 'application/json',
+                  Authorization: `Bearer ${idToken}`,
+                },
+              })
+            } else {
+              await this.tagRepo.connect({
+                couchBaseURL: this.getSettingsCouchDbUrl,
+                username: this.getSettingsCouchDbUsername,
+                password: this.couchDbPassword,
+              })
+            }
           } catch (error) {
             this.$store.dispatch('openSnackbar', {
               message: `Failed to connect to CouchDB: ${error?.message}`,
