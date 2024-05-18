@@ -22,7 +22,7 @@
     "nvd3": "^1.8.6",
     "pouchdb": "^7.2.2",
     "query-string": "^7.0.0",
-    "tagmesh": "file:tagmesh/tagmesh-1.0.0.tgz",
+    "tagmesh": "https://gitlab.com/tommy.li/tagmesh.git#main",
     "uuid": "^8.3.2",
     "vue": "^2.6.11",
     "vue-router": "^3.5.1",
