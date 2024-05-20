@@ -18,6 +18,7 @@ if (window.location.protocol === 'file:') {
   keycloak
     .init({
       onLoad: 'login-required',
+      pkceMethod: 'S256', // By default, this is on but making this explicit
       scope: 'openid email profile groups ad_groups offline_access',
     })
     .then(() => {
