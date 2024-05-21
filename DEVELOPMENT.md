@@ -10,7 +10,7 @@ This document provides setup instructions for developing MitoReport.
 
 ```bash
 PROJECT_DIR=$(pwd)
-APP_ARCHIVE_VERSION=1.1.0
+APP_ARCHIVE_VERSION=1.2.0
 
 ./gradlew build
 

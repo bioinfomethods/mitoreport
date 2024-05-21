@@ -13,7 +13,7 @@ Mitoreport is an application for Mitochondrial DNA variants analysis.
 Download the release jar:
 
 ```bash
-curl -L -O "https://github.com/bioinfomethods/mitoreport/releases/download/1.1.0/mitoreport-1.1.0-all.jar"
+curl -L -O "https://github.com/bioinfomethods/mitoreport/releases/download/1.2.0/mitoreport-1.2.0-all.jar"
 ```
 
 ### Download Fixed Resources
@@ -24,7 +24,7 @@ deletion plots.
 We provide some basic default usable sets for these in a resources file that you can download:
 
 ```bash
-curl -L -O "https://github.com/bioinfomethods/mitoreport/releases/download/1.1.0/resources.tgz"
+curl -L -O "https://github.com/bioinfomethods/mitoreport/releases/download/1.2.0/resources.tgz"
 tar -zxvf resources.tgz 
 ```
 
@@ -38,7 +38,7 @@ Before running MitoReport, run this to download new MitoMap annotations to file:
 
 ```bash
 mkdir -p resources
-java -jar build/libs/mitoreport-1.1.0-all.jar mito-map-download \
+java -jar build/libs/mitoreport-1.2.0-all.jar mito-map-download \
   --output resources/mito_map_annotations.json
 ```
 
@@ -61,7 +61,7 @@ Below example commands will generate deletions and variants data including writi
 the test sample:
 
 ```bash
-java -jar mitoreport-1.1.0-all.jar mito-report \
+java -jar mitoreport-1.2.0-all.jar mito-report \
     -vcf resources/test-sample/mitoreport-test-sample.vep.vcf.gz \
     -sample MITOREPORT-TEST-SAMPLE \
     -mann resources/mito_map_annotations.json \
