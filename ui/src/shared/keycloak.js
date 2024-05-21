@@ -1,18 +1,18 @@
 import Keycloak from 'keycloak-js'
 
 console.log(
-  'MITOREPORT_OIDC_ENDPOINT:',
-  process.env.MITOREPORT_OIDC_ENDPOINT,
-  'MITOREPORT_OIDC_REALM:',
-  process.env.MITOREPORT_OIDC_REALM,
-  'MITOREPORT_OIDC_CLIENT_ID:',
-  process.env.MITOREPORT_OIDC_CLIENT_ID
+  'VUE_APP_MITOREPORT_OIDC_ENDPOINT:',
+  process.env.VUE_APP_MITOREPORT_OIDC_ENDPOINT,
+  'VUE_APP_MITOREPORT_OIDC_REALM:',
+  process.env.VUE_APP_MITOREPORT_OIDC_REALM,
+  'VUE_APP_MITOREPORT_OIDC_CLIENT_ID:',
+  process.env.VUE_APP_MITOREPORT_OIDC_CLIENT_ID
 )
 
 const keycloak = new Keycloak({
-  url: process.env.MITOREPORT_OIDC_ENDPOINT,
-  realm: process.env.MITOREPORT_OIDC_REALM,
-  clientId: process.env.MITOREPORT_OIDC_CLIENT_ID,
+  url: process.env.VUE_APP_MITOREPORT_OIDC_ENDPOINT,
+  realm: process.env.VUE_APP_MITOREPORT_OIDC_REALM,
+  clientId: process.env.VUE_APP_MITOREPORT_OIDC_CLIENT_ID,
 })
 
 keycloak.sub = () => {
