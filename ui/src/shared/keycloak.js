@@ -1,9 +1,18 @@
 import Keycloak from 'keycloak-js'
 
+console.log(
+  'MITOREPORT_OIDC_ENDPOINT:',
+  process.env.MITOREPORT_OIDC_ENDPOINT,
+  'MITOREPORT_OIDC_REALM:',
+  process.env.MITOREPORT_OIDC_REALM,
+  'MITOREPORT_OIDC_CLIENT_ID:',
+  process.env.MITOREPORT_OIDC_CLIENT_ID
+)
+
 const keycloak = new Keycloak({
-  url: 'https://keycloak.mcri.edu.au:8888',
-  realm: 'bioinfomethods-test',
-  clientId: 'archie-native-test',
+  url: process.env.MITOREPORT_OIDC_ENDPOINT,
+  realm: process.env.MITOREPORT_OIDC_REALM,
+  clientId: process.env.MITOREPORT_OIDC_CLIENT_ID,
 })
 
 keycloak.sub = () => {

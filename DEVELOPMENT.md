@@ -10,7 +10,11 @@ This document provides setup instructions for developing MitoReport.
 
 ```bash
 PROJECT_DIR=$(pwd)
-APP_ARCHIVE_VERSION=1.2.0
+APP_ARCHIVE_VERSION=1.2.1
+
+export MITOREPORT_OIDC_ENDPOINT=https://keycloak.mcri.edu.au:8888
+export MITOREPORT_OIDC_REALM-bioinfomethods-test
+export MITOREPORT_OIDC_CLIENT_ID=archie-native-test
 
 ./gradlew build
 
