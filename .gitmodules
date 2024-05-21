@@ -6,4 +6,4 @@
 	url = https://github.com/tommyli/haplogrep-cmd.git
 [submodule "ui/tagmesh"]
 	path = ui/tagmesh
-	url = https://gitlab.com/tommy.li/tagmesh.git
+	url = https://github.com/bioinfomethods/tagmesh.git
