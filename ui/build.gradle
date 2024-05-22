@@ -20,11 +20,6 @@ task runServe(type: NpmTask, dependsOn: 'npmInstall') {
 task runBuild(type: NpmTask, dependsOn: 'npmInstall') {
   group = 'build'
   description = 'npm run build'
-  environment = [
-          'MITOREPORT_OIDC_ENDPOINT' : System.getenv().MITOREPORT_OIDC_ENDPOINT,
-          'MITOREPORT_OIDC_REALM'    : System.getenv().MITOREPORT_OIDC_REALM,
-          'MITOREPORT_OIDC_CLIENT_ID': System.getenv().MITOREPORT_OIDC_CLIENT_ID,
-  ]
   args = ['run', 'build']
 
   inputs.dir('.').withPropertyName('ui')
