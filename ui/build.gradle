@@ -6,6 +6,8 @@ description = 'Mito Report UI'
 
 defaultTasks 'runTestUnit', 'runLint', 'runBuild'
 
+String vueAppBuildMode = System.getenv('VUE_APP_BUILD_MODE') ?: 'production'
+
 node {
   download = Boolean.valueOf(property('nodeDownload'))
   version = "14.21.3"
@@ -19,8 +21,8 @@ task runServe(type: NpmTask, dependsOn: 'npmInstall') {
 
 task runBuild(type: NpmTask, dependsOn: 'npmInstall') {
   group = 'build'
-  description = 'npm run build'
-  args = ['run', 'build']
+  description = "npm run build --mode $vueAppBuildMode"
+  args = System.getenv().'VUE_APP_BUILD_MODE' ['run', 'build']
 
   inputs.dir('.').withPropertyName('ui')
   outputs.dir('dist').withPropertyName('dist')
