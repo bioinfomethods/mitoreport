@@ -22,7 +22,7 @@ task runServe(type: NpmTask, dependsOn: 'npmInstall') {
 task runBuild(type: NpmTask, dependsOn: 'npmInstall') {
   group = 'build'
   description = "npm run build --mode $vueAppBuildMode"
-  args = ['run', 'build', '--mode', vueAppBuildMode]
+  args = ['run', 'build']
 
   inputs.dir('.').withPropertyName('ui')
   outputs.dir('dist').withPropertyName('dist')

@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
+    "build": "vue-cli-service build --mode ${VUE_APP_BUILD_MODE:-production}",
     "test:unit": "vue-cli-service test:unit --verbose",
     "test:unit:watch": "vue-cli-service test:unit --watch",
     "lint": "vue-cli-service lint --fix"
