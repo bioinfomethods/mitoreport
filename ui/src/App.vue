@@ -2,7 +2,7 @@
   <v-app mitoreport>
     <v-app-bar app color="primary">
       <v-toolbar-title>
-        <span class="white--text text-h6">Mito Report for {{ sampleId }}</span>
+        <span class="white--text text-h6">Mito Report for {{ state.sampleId }}</span>
       </v-toolbar-title>
       <v-progress-circular class="ml-4" v-if="loading" indeterminate />
       <v-spacer></v-spacer>
@@ -65,6 +65,7 @@ import {
   syncWithRemote,
   cancelSyncWithRemote,
 } from '@/services/LocalDataService'
+import { state } from './store'
 
 export default {
   name: 'App',
@@ -75,6 +76,7 @@ export default {
 
   async created() {
     console.info(`MitoReport version=${process.env.VUE_APP_VERSION}`)
+    console.log('State is: ', state)
     await this.$store.dispatch('fetchData')
     await this.$store.dispatch('saveSettings')
     document.title = this.sampleId || 'MitoReport'
@@ -86,6 +88,8 @@ export default {
         required: value => !!value || 'Required.',
       },
       syncEnabled: false,
+      
+      state : state
     }
   },
 

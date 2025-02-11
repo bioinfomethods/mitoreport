@@ -16,23 +16,55 @@ import {
   DEFAULT_IGV_HOST,
 } from '../shared/constants'
 
+import { TagRepository } from 'tagmesh'
+
 Vue.use(Vuex)
 
+export const tag_state = {
+  /**
+   * Plain javascript object that contains tag entries
+   */
+  tag_store: {},
+
+  /**
+   * The tag repository that connects the actual tags to Pouch/CouchDb
+   *
+   * @type {TagRepository}
+   **/
+  tags: null,
+}
+
 export const state = {
+
   sampleId: '',
+
   settings: {},
+
   couchDbPassword: '',
+
   loading: false,
+
   snackbar: { ...DEFAULT_SNACKBAR_OPTS },
+
   variants: {},
+
   maternalVariants: {},
+
   filteredVariants: {},
+
   maxReadDepth: 0,
+
   deletions: {},
-  syncFeature: false,
+
+  syncFeature: true,
+
 }
 
 export const getters = {
+  getTags: state => {
+    return state.tags
+  },
+
   getIgvHost: state => {
     return state.settings.igvHost || DEFAULT_IGV_HOST
   },
@@ -152,6 +184,7 @@ export const mutations = {
   },
 
   SET_SYNC_FEATURE(state, enabled) {
+    console.log('Setting sync feature: ' + enabled)
     state.syncFeature = enabled
   },
 
@@ -296,7 +329,7 @@ export const actions = {
     commit('SET_SYNC_FEATURE', enabled)
   },
 
-  async fetchData({ commit }) {
+  async fetchData({ commit, dispatch }) {
     commit('SET_LOADING')
 
     try {
@@ -311,6 +344,8 @@ export const actions = {
       commit('SET_VARIANTS', varResp.data)
       commit('SET_DELETIONS', delResp.data)
       commit('SET_SAMPLE_ID', delResp.data)
+
+      dispatch('createTagRepository')
     } catch (error) {
       console.error(error)
 
@@ -417,12 +452,24 @@ export const actions = {
 
     commit('SET_FILTERED_VARIANTS', filteredVariants)
   },
+
+  async createTagRepository({ commit, state }) {
+    let tags = await TagRepository.create(state.sampleId, tag_state.tag_store)
+    const serverURL = "http://localhost:5288/db"
+    console.log('Created tag repository', tags)
+    tags.connect(serverURL, "john", "password")
+    let ts_clone = { ...tag_state.tag_store }
+    Vue.set(tag_state, 'tags', tags)
+  },
 }
 
-export default new Vuex.Store({
-  state,
-  getters,
-  mutations,
-  actions,
-  strict: process.env.NODE_ENV !== 'production',
-})
+export default {
+  tag_state,
+  store: new Vuex.Store({
+    state,
+    getters,
+    mutations,
+    actions,
+    strict: process.env.NODE_ENV !== 'production',
+  }),
+}
