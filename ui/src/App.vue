@@ -139,7 +139,9 @@ export default {
     setAuthCookie(token, days) {
         const date = new Date();
         date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
-        document.cookie = `mitoreport_auth_token=${token}; Path=/; Secure; Expires=${date.toUTCString()}; SameSite=Strict`;
+        
+        const secure = (window.location.protocol == 'https' ? "Secure;" : "")
+        document.cookie = `mitoreport_auth_token=${token}; Path=/; ${secure} Expires=${date.toUTCString()}; SameSite=Strict`;
     },
     
     async authenticate() {
