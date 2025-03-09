@@ -2,10 +2,18 @@ process.env.VUE_APP_VERSION = require('./package.json').version
 
 module.exports = {
   publicPath: './',
+
   transpileDependencies: ['vuetify'],
+
   configureWebpack: {
     devtool: 'source-map',
+    optimization: {
+        minimize: false
+    }
   },
+
+  productionSourceMap: true,
+
   chainWebpack: config => {
     if (process.env.NODE_ENV === 'test') {
       config.merge({
@@ -13,7 +21,11 @@ module.exports = {
       })
     }
   },
+
   devServer: {
     disableHostCheck: true,
   },
+  transpileDependencies: [
+    'keycloak-js'
+  ]
 }

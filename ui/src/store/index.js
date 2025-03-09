@@ -133,6 +133,10 @@ export const getters = {
     return getters.getSampleSettings?.metadata || {}
   },
 
+  getSettingsAuthUrl: (state, getters) => {
+    return getters.getSampleSettings?.authUrl
+  },
+
   getSettingsCouchDbUrl: (state, getters) => {
     return getters.getSampleSettings?.couchDbUrl
   },
@@ -345,7 +349,7 @@ export const actions = {
       commit('SET_DELETIONS', delResp.data)
       commit('SET_SAMPLE_ID', delResp.data)
 
-      dispatch('createTagRepository')
+      // dispatch('createTagRepository')
     } catch (error) {
       console.error(error)
 
@@ -455,10 +459,34 @@ export const actions = {
 
   async createTagRepository({ commit, state }) {
     let tags = await TagRepository.create(state.sampleId, tag_state.tag_store)
-    const serverURL = "http://localhost:5288/db"
+
+    //const serverURL = "http://localhost:5288/db"
+    // const serverURL = 'http://localhost:8000/tagdb'
+    const serverURL = state.settings.sample?.couchDbUrl
+    if(!serverURL) {
+      console.log('No CouchDB URL configured: not attempting to connect to tag repository')
+      return
+    }
+
     console.log('Created tag repository', tags)
-    tags.connect(serverURL, "john", "password")
-    let ts_clone = { ...tag_state.tag_store }
+
+    // tags.connect(serverURL, "john", "password")
+    // await tags.connectWithOptions(serverURL, { auth: { username: "john", password: "password"}} )
+
+    const fetchWithHeaders = (url, opts) => {
+      let headers = {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${window.keycloak.idToken}`
+      }
+
+      opts.headers = new Headers(headers);
+      return fetch(url, opts);
+    }
+
+    await tags.connectWithOptions(serverURL, { fetch: fetchWithHeaders })
+
+    console.log('Connected to ' + serverURL)
+
     Vue.set(tag_state, 'tags', tags)
   },
 }

@@ -68,6 +68,12 @@ class MitoReportCommand implements Runnable {
 
     @Option(names = ['-d', '-dev', '--dev'], required = false, description = 'Developer Mode, copies .js files to ui folder')
     Boolean devMode
+    
+    @Option(names = ['-a', '--auth-url'], required = false, description = 'URL to authentication server to use (Keycloak)')
+    String authURL 
+
+    @Option(names = ['-t', '--tagmesh-url'], required = false, description = 'URL to TagMesh to set up a default URL for MitoReport to connect to')
+    String tagMeshURL 
 
     @Parameters(paramLabel = "BAMS", arity = '1..*', description = "One or more BAM files, one of them must be the sample BAM and the rest are control BAMs")
     List<File> bamFiles
@@ -315,8 +321,9 @@ class MitoReportCommand implements Runnable {
                         'metadata'               : metadata,
                         'qc'                     : qc,
                         'haplogrepClassification': new HaplogrepClassification(sampleOutput, haplogrepClassification.haplogrepResults),
-                        'couchDbUrl'             : 'http://localhost:5984/mitoreport',
+                        'couchDbUrl'             : this.tagMeshURL,
                         'couchDbUsername'        : 'admin',
+                        'authUrl'                : this.authURL,
                         'bamDir'                 : bamDir,
                         'bamFilename'            : bamFileName,
                         'vcfDir'                 : sampleVcfDir,
