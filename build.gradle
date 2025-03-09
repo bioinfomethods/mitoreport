@@ -96,7 +96,7 @@ dependencies {
     implementation "org.codehaus.groovy:groovy-templates:$groovyVersion"
     implementation "org.codehaus.groovy:groovy-xml:$groovyVersion"
     implementation "org.codehaus.groovy:groovy:$groovyVersion"
-    implementation "genepi:haplogrep-core:$haplogrepCoreVersion"
+    // implementation "genepi:haplogrep-core:$haplogrepCoreVersion"
 
     implementation "io.github.http-builder-ng:http-builder-ng-core:$httpBuilderNgVersion"
     implementation "commons-io:commons-io:$commonsIoVersion"
