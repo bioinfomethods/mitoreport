@@ -63,7 +63,6 @@ dependencies {
     implementation("jakarta.annotation:jakarta.annotation-api")
     compileOnly("info.picocli:picocli-codegen")
     runtimeOnly("ch.qos.logback:logback-classic")
-    runtimeOnly("org.yaml:snakeyaml")
     implementation("io.micronaut:micronaut-validation")
 
     testImplementation platform("org.spockframework:spock-bom:$spockBomVersion")
@@ -78,8 +77,9 @@ dependencies {
     testRuntimeOnly "org.objenesis:objenesis:$objenesisVersion"
 
     implementation files('gngs/build/libs/groovy-ngs-utils.jar')
-    implementation files('libs/haplogrep.jar')
-    implementation files('libs/haplogrep-core-2.6.0.jar')
+
+    implementation files('libs/haplogrep-htsjdk3.jar')
+    implementation files('libs/haplogrep-core-3.0.1.jar')
 
     // groovy-ngs-utils.jar is an uber jar with the following groovy modules.
     // Here we force upgrade the version.
@@ -162,7 +162,7 @@ task buildGngs(type: Exec) {
     group = 'build'
     description 'Build groovy-ngs-utils module dependency'
     workingDir './gngs'
-    commandLine './gradlew', 'jar'
+    commandLine './gradlew', 'shadowJar'
 
     inputs.dir('gngs').withPropertyName('gngs')
     outputs.file('gngs/build/libs/groovy-ngs-utils.jar').withPropertyName('gngsJar')
