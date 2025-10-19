@@ -1,6 +1,3 @@
 [submodule "gngs"]
 	path = gngs
 	url = https://github.com/ssadedin/groovy-ngs-utils.git
-[submodule "haplogrep-cmd"]
-	path = haplogrep-cmd
-	url = https://github.com/tommyli/haplogrep-cmd.git
