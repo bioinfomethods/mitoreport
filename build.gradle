@@ -146,6 +146,9 @@ task copyUiBuildToMitoOut(type: Copy, dependsOn: ['cleanMitoOut', ':ui:runBuild'
     description 'Copy UI build output into application resources'
 
     from project(':ui').getTasksByName('runBuild', false).first().outputs
+
+    from('src/main/resources/checksso.html')
+
     into mitoOut
 }
 
