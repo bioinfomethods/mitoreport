@@ -476,19 +476,15 @@ export const actions = {
 
   async createTagRepository({ commit, state }) {
     let tags = await TagRepository.create(state.sampleId, tag_state.tag_store)
+    Vue.set(tag_state, 'tags', tags)
+    console.log('Created tag repository', tags)
 
-    //const serverURL = "http://localhost:5288/db"
-    // const serverURL = 'http://localhost:8000/tagdb'
     const serverURL = state.settings.sample?.couchDbUrl
     if(!serverURL) {
       console.log('No CouchDB URL configured: not attempting to connect to tag repository')
+      Vue.set(tag_state, 'tags', tags)
       return
     }
-
-    console.log('Created tag repository', tags)
-
-    // tags.connect(serverURL, "john", "password")
-    // await tags.connectWithOptions(serverURL, { auth: { username: "john", password: "password"}} )
 
     const fetchWithHeaders = (url, opts) => {
       let headers = {
@@ -499,17 +495,13 @@ export const actions = {
       opts.headers = new Headers(headers);
       return fetch(url, opts);
     }
-
     await tags.connectWithOptions(serverURL, { fetch: fetchWithHeaders })
-
-    console.log('Connected to ' + serverURL)
-
-    Vue.set(tag_state, 'tags', tags)
   },
 }
 
 export default {
   tag_state,
+  raw_state: state,
   store: new Vuex.Store({
     state,
     getters,
