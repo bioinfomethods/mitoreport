@@ -17,6 +17,7 @@ import {
 } from '../shared/constants'
 
 import { TagRepository } from 'tagmesh'
+import User from '@/shared/User'
 
 Vue.use(Vuex)
 
@@ -58,6 +59,12 @@ export const state = {
 
   syncFeature: true,
 
+  /**
+   * Currently authenticated user - if any
+   *
+   * @type {User}
+   */
+  user: null,
 }
 
 export const getters = {

@@ -66,6 +66,7 @@ import {
   cancelSyncWithRemote,
 } from '@/services/LocalDataService'
 import { state } from './store'
+import User from '@/shared/User'
 import Keycloak from 'keycloak-js'
         
 let keycloak = null
@@ -195,14 +196,13 @@ export default {
             else {
                 console.log(`=================================================\nUser Authenticated as ${keycloak.idTokenParsed.email}\n=================================================`)
 
-                // Set the token as a cookie so that it can be verified by the server to protect
+                const user = new User(keycloak.idTokenParsed)
+                this.state.user = user
+            
+                 // Set the token as a cookie so that it can be verified by the server to protect
                 // the assets served back from here (eg: nginx)
                 console.log('Setting cookie with keycloak token')
-
                 this.setAuthCookie(keycloak.token)
-                
-                console.log("Reloading scripts after auth success")
-
             }
 
         } catch (error) {
