@@ -89,16 +89,13 @@ export default {
     console.log('State is: ', state)
     await this.$store.dispatch('fetchData')
     await this.$store.dispatch('saveSettings')
-    
     await this.authenticate()
     
     let number_of_scripts_loaded = await loadScripts()
-    
     console.log("Successfully loaded " + number_of_scripts_loaded + " scripts")
 
     await this.$store.dispatch('fetchData')
-
-    this.$store.dispatch('createTagRepository')
+    await this.$store.dispatch('createTagRepository')
     
     document.title = this.sampleId || 'MitoReport'
   },
@@ -137,8 +134,7 @@ export default {
 
         return `${protocol}//${host}${basePath}`;
     },
-    
-    
+
     setAuthCookie(token, days) {
         const date = new Date();
         date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
@@ -171,11 +167,9 @@ export default {
                 console.log("Message received from iframe:", event.data);
             });
             
-            console.log("Checking authentication to set cookie")
-
             window.Keycloak = Keycloak;
             
-            console.log("My base path is: ", this.getBasePath())
+            console.log("Logging in to keycloak with base path: ", this.getBasePath())
 
             const authenticated =
                 await keycloak.init({
@@ -191,8 +185,6 @@ export default {
             
             if(!authenticated) {
                 console.log('User is not authenticated: attempting authentication')
-                // keycloak.login({redirectUri: 'http://localhost:8081/#/authenticated'})
-
                 keycloak.login({redirectUri: window.location.href})
             }
             else {
