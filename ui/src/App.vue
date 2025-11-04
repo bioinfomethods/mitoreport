@@ -20,11 +20,10 @@
         ></v-switch
       >
       <AppSettings></AppSettings>
-      <v-tooltip bottom>
+      <v-tooltip v-if="model && model.user" bottom>
         <template v-slot:activator="{ on, attrs }">
           <v-avatar 
-            v-if="model.user != null" 
-            size=32 
+            size=32
             color="white"
             v-bind="attrs"
             v-on="on"
@@ -32,7 +31,7 @@
             <span class='text-highlight'>{{model.user.givenName[0]}}{{model.user.familyName[0]}}</span>
           </v-avatar>
         </template>
-        <div v-if="model.user">
+        <div>
           <div>{{model.user.getFullName()}}</div>
           <div>{{model.user.email}}</div>
         </div>
@@ -76,6 +75,7 @@
 </style>
 
 <script>
+import Vue from 'vue';
 import { mapState } from 'vuex'
 import AppSettings from '@/components/AppSettings'
 import {
@@ -85,7 +85,7 @@ import {
 import { state } from './store'
 import User from '@/shared/User'
 import Keycloak from 'keycloak-js'
-import model from '@/store'
+import { model } from '@/store'
         
 let keycloak = null
 
@@ -207,7 +207,7 @@ export default {
                 console.log(`=================================================\nUser Authenticated as ${keycloak.idTokenParsed.email}\n=================================================`)
 
                 const user = new User(keycloak.idTokenParsed)
-                this.model.user = user
+                Vue.set(this.model, 'user', user)
             
                  // Set the token as a cookie so that it can be verified by the server to protect
                 // the assets served back from here (eg: nginx)
