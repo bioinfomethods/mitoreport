@@ -72,6 +72,9 @@ class MitoReportCommand implements Runnable {
     @Option(names = ['-a', '--auth-url'], required = false, description = 'URL to authentication server to use (Keycloak)')
     String authURL 
 
+    @Option(names = ['-a', '--auth-realm'], required = false, description = 'Realm to authenticate to (default: "mitoreport")')
+    String authRealm
+
     @Option(names = ['-t', '--tagmesh-url'], required = false, description = 'URL to TagMesh to set up a default URL for MitoReport to connect to')
     String tagMeshURL 
 
@@ -324,6 +327,7 @@ class MitoReportCommand implements Runnable {
                         'couchDbUrl'             : this.tagMeshURL,
                         'couchDbUsername'        : 'admin',
                         'authUrl'                : this.authURL,
+                        'authRealm'              : this.authRealm,
                         'bamDir'                 : bamDir,
                         'bamFilename'            : bamFileName,
                         'vcfDir'                 : sampleVcfDir,

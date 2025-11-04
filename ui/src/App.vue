@@ -148,6 +148,8 @@ export default {
         try {
             
             const authUrl = this.state.settings?.sample?.authUrl
+            const authRealm = this.state.settings?.sample?.authRealm || 'mitoreport'
+
             console.info(`Creating new keycloak instance at ${authUrl}`)
             if(!authUrl) {
                 console.info("No auth URL configured, not attempting OIDC authentication")
@@ -156,7 +158,7 @@ export default {
             
             keycloak = new Keycloak({
               url: authUrl,
-              realm: 'giphub',
+              realm: authRealm,
               clientId: 'mitoreport',
             })
 
