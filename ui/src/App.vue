@@ -20,6 +20,7 @@
         ></v-switch
       >
       <AppSettings></AppSettings>
+      <v-avatar v-if="model.user != null" size=32 color="white"><span class='text-highlight'>{{model.user.givenName[0]}}{{model.user.familyName[0]}}</span></v-avatar>
     </v-app-bar>
 
     <v-main>
@@ -68,6 +69,7 @@ import {
 import { state } from './store'
 import User from '@/shared/User'
 import Keycloak from 'keycloak-js'
+import model from '@/store'
         
 let keycloak = null
 
@@ -107,8 +109,8 @@ export default {
         required: value => !!value || 'Required.',
       },
       syncEnabled: false,
-      
-      state : state
+      state : state,
+      model : model
     }
   },
 
@@ -197,7 +199,7 @@ export default {
                 console.log(`=================================================\nUser Authenticated as ${keycloak.idTokenParsed.email}\n=================================================`)
 
                 const user = new User(keycloak.idTokenParsed)
-                this.state.user = user
+                this.model.user = user
             
                  // Set the token as a cookie so that it can be verified by the server to protect
                 // the assets served back from here (eg: nginx)

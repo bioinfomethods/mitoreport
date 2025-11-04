@@ -35,6 +35,16 @@ export const tag_state = {
   tags: null,
 }
 
+export const model = {
+
+  /**
+   * Currently authenticated user - if any
+   *
+   * @type {User}
+   */
+  user: null,
+}
+
 export const state = {
 
   sampleId: '',
