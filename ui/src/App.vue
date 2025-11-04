@@ -20,7 +20,23 @@
         ></v-switch
       >
       <AppSettings></AppSettings>
-      <v-avatar v-if="model.user != null" size=32 color="white"><span class='text-highlight'>{{model.user.givenName[0]}}{{model.user.familyName[0]}}</span></v-avatar>
+      <v-tooltip bottom>
+        <template v-slot:activator="{ on, attrs }">
+          <v-avatar 
+            v-if="model.user != null" 
+            size=32 
+            color="white"
+            v-bind="attrs"
+            v-on="on"
+          >
+            <span class='text-highlight'>{{model.user.givenName[0]}}{{model.user.familyName[0]}}</span>
+          </v-avatar>
+        </template>
+        <div v-if="model.user">
+          <div>{{model.user.getFullName()}}</div>
+          <div>{{model.user.email}}</div>
+        </div>
+      </v-tooltip>
     </v-app-bar>
 
     <v-main>
