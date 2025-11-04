@@ -19,23 +19,24 @@
       </span>
     </v-tooltip>
 
-    <span
-      :class="
-          selectedTags.includes(tag)? `selected tag ${tag}` : `tag ${tag}`
-      "
-      v-for="tag in variantTags.map(d => d.name)"
-      v-bind:key="tag"
-      @click.stop="toggleTag(tag)"
+    <span v-for="tag in variantTags"
+      :class="selectedTags.includes(tag.name)? `selected tag ${tag.name}` : `tag ${tag.name}`"
+      v-bind:key="tag.name"
+      @click.stop="toggleTag(tag.name)"
     >
-      {{ tag }}
+      <v-tooltip top>
+        <template v-slot:activator="{ on, attrs }">
+          <span v-bind="attrs" v-on="on">{{ tag.name }}</span>
+        </template>
+        <span>Added by {{ storedTags[tag.name]?.username || 'unknown user' }}</span>
+      </v-tooltip>
     </span>
 
     <span class="curationCellVariantNote" v-if="hasNote">
-      WORLD
       {{
         curation.variantNote.substring(0, 100) +
           (curation.variantNote.length > 100 ? '…' : '')
-      }} HELLO
+      }}
       <br />
     </span>
 

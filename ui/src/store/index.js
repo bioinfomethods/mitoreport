@@ -476,6 +476,10 @@ export const actions = {
 
   async createTagRepository({ commit, state }) {
     let tags = await TagRepository.create(state.sampleId, tag_state.tag_store)
+
+    // Note: this should really be a TagMash User class but it is not currently exported
+    if(model.user)
+      tags.user = { username: model.user.username, email: model.user.email }
     Vue.set(tag_state, 'tags', tags)
     console.log('Created tag repository', tags)
 
@@ -495,13 +499,12 @@ export const actions = {
       opts.headers = new Headers(headers);
       return fetch(url, opts);
     }
-    await tags.connectWithOptions(serverURL, { fetch: fetchWithHeaders })
+    await tags.connectWithOptions(serverURL, { fetch: fetchWithHeaders, username: model.user.username })
   },
 }
 
 export default {
   tag_state,
-  raw_state: state,
   store: new Vuex.Store({
     state,
     getters,
