@@ -13,6 +13,7 @@ module.exports = {
   rules: {
     'arrow-parens': [0, 'as-needed'],
     'space-before-function-paren': [0, 'never'],
+    'indent' : "off",
     'vue/attribute-hyphenation': [
       'error',
       'always',
