@@ -14,7 +14,7 @@
             v-on="{ ...tooltip, ...menu }"
             v-bind="attrs"
           >
-            <v-icon class="white--text" large>mdi-cog</v-icon>
+            <v-icon class="white--text">mdi-cog</v-icon>
           </v-btn>
         </template>
         <span>Application Settings</span>
