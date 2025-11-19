@@ -145,6 +145,8 @@ task cleanMitoOut(type: Delete) {
 task copyUiBuildToMitoOut(type: Copy, dependsOn: ['cleanMitoOut', ':ui:runBuild']) {
     group = 'build'
     description 'Copy UI build output into application resources'
+    
+    duplicatesStrategy = DuplicatesStrategy.INCLUDE
 
     from project(':ui').getTasksByName('runBuild', false).first().outputs
 
