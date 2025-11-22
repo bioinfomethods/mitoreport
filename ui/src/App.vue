@@ -86,6 +86,7 @@ import { state } from './store'
 import User from '@/shared/User'
 import Keycloak from 'keycloak-js'
 import { model } from '@/store'
+import router from './router/router.js'
         
 let keycloak = null
 
@@ -194,6 +195,13 @@ export default {
                     //silentCheckSsoRedirectUri: 'http://localhost:8081/checksso.html'
                     silentCheckSsoRedirectUri: this.getBasePath() + '/checksso.html',
                 });
+                
+            // At this point Keycloak may have modified the URL fragment,
+            // so we have to sync up what page the router thinks it's on
+            const path = window.location.hash.replace(/^#/, '') || '/';
+            if(router.currentRoute.fullPath !== path) {
+              router.replace(path);
+            }
 
             window.keycloak = keycloak
 
